@@ -383,7 +383,7 @@ let MT=0,MB=0;
 function insets(){const v=document.getElementById('view');MT=0;MB=0;v.style.setProperty('--mt',MT+'px');v.style.setProperty('--mb',MB+'px');v.style.setProperty('--fs',Math.min(VW/640,Math.max(160,VH-MT-MB)/360,1.8));}
 function fit(){const v=document.getElementById('view');if(!v.clientWidth)return;VW=v.clientWidth;VH=v.clientHeight;scale=Math.max(VW/1376,VH/768);insets();place();}
 const doorOpen=()=>!!(M[S.m]&&M[S.m].walk);
-function nearest(){let best=null,bd=1e9;for(const k in L.spots){const [sx,sy]=L.spots[k],d=Math.hypot(sx-S.x,sy-(S.y-30));if(d<bd){bd=d;best=k;}}return bd<=REACH?best:null;}
+function nearest(){let best=null,bd=1e9;const gw=M&&M[S.m]&&M[S.m].goWith;for(const k in L.spots){if(k===gw)continue;const [sx,sy]=L.spots[k],d=Math.hypot(sx-S.x,sy-(S.y-30));if(d<bd){bd=d;best=k;}}return bd<=REACH?best:null;}
 function place(){if(!S)return;
   camX=Math.min(Math.max(S.x*scale-VW/2,0),Math.max(0,1376*scale-VW));
   camY=Math.min(Math.max((S.y-40)*scale-(MT+(VH-MT-MB)/2),0),Math.max(0,768*scale-VH));
@@ -400,7 +400,7 @@ function renderTags(){if(!S)return;let h='';
     else if(S.near===k&&!S.sit&&S.sel!==k)h+=`<div class="tag q" data-k="${k}" style="left:${x}px;top:${y-34}px">?</div>`;}
   if(S.sel&&L.focus&&L.focus[S.sel]){const [fx,fy,fr]=L.focus[S.sel];h+=`<div class="exit focus" style="left:${fx}px;top:${fy}px;width:${fr*2}px;height:${fr*2}px;margin:-${fr}px 0 0 -${fr}px"></div>`;}
   if(doorOpen()){const [x,y]=L.spots.door;h+=`<div class="exit" style="left:${x}px;top:${y}px"></div><div class="arrow" style="left:${x}px;top:${y-110}px"></div>`;}
-  document.getElementById('tags').innerHTML=h;S.popTag=null;renderOk();}
+  const tl=document.getElementById('tags');if(tl.dataset.h!==h){tl.innerHTML=h;tl.dataset.h=h;}S.popTag=null;renderOk();}
 function faceStyle(el,w){const f=L.faces[w];if(!f){el.style.backgroundImage='none';return;}const [img,iw,ih,x,y,sz]=f,k=56/sz;el.style.backgroundImage=`url(${img})`;el.style.backgroundSize=`${iw*k}px ${ih*k}px`;el.style.backgroundPosition=`${-x*k}px ${-y*k}px`;}
 function heartsText(){const h=G.hearts;return Object.keys(h).map(k=>`${W[k]} ${'♥'.repeat(h[k])}`).join(' · ');}
 
@@ -422,12 +422,14 @@ function closePop(now){if(!fov)return;const el=fov;fov=null;fovName=null;clearTi
 function updPop(){if(fov)fov.querySelectorAll('.food').forEach(f=>{const id=f.dataset.food,kn=G.known.has(id);f.classList.toggle('known',kn);f.classList.toggle('sel',S.sel===id);f.querySelector('.t2').textContent=fovName==='quiz'?'?':kn?W[id]:'?';});renderOk();}
 function okLabel(m){return m.btn?m.btn():`This is ${K(m.t)}!`;}
 function renderOk(){
+  {const ob=document.querySelector('.okb'),key=S?[S.m,S.sel,S.done,fovName,M[S.m]&&okLabel(M[S.m])].join('|'):'';
+   if(ob&&ob.dataset.key===key&&ob.isConnected)return;}
   document.querySelectorAll('.okb,.peek').forEach(b=>b.remove());
   let peekH=0;
   if(S&&S.sel&&!fov&&L.spots&&L.spots[S.sel]&&IMG[S.sel]&&!S.done){const [px,py]=L.spots[S.sel];const pk=document.createElement('div');pk.className='peek';pk.innerHTML=`<img src="${IMG[S.sel]}" alt="">`;pk.style.left=px+'px';pk.style.top=(py-34)+'px';document.getElementById('okLayer').appendChild(pk);peekH=150;}
   if(!S)return;const m=M[S.m];if(!S.sel||S.done||!m||m.walk||m.phrase||m.quiz)return;
   if(m.choose&&!m.choose.includes(S.sel))return;
-  const b=document.createElement('button');b.className='okb';b.id='confirm';b.innerHTML='✓ '+okLabel(m);
+  const b=document.createElement('button');b.className='okb';b.id='confirm';b.innerHTML='✓ '+okLabel(m);b.dataset.key=[S.m,S.sel,S.done,fovName,okLabel(m)].join('|');
   const it=fov&&fov.querySelector(`.food[data-food="${S.sel}"]`);
   if(it){b.style.left=(it.offsetLeft+it.offsetWidth/2)+'px';b.style.top=(it.offsetTop+it.offsetHeight+6)+'px';fov.querySelector('.fstage').appendChild(b);return;}
   if(fov)return;
