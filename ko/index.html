@@ -32,6 +32,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--f-vi);font-size:15p
 button:focus-visible{outline:3px solid var(--leaf);outline-offset:2px}
 .chip[data-say]::after{content:'';display:inline-block;width:.8em;height:.8em;margin-left:.3em;vertical-align:-.05em;background:currentColor;opacity:.75;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 9v6h4l5 4V5L7 9H3z'/%3E%3Cpath d='M15.5 8.5a5 5 0 0 1 0 7' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M18 6a8.5 8.5 0 0 1 0 12' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center/contain;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 9v6h4l5 4V5L7 9H3z'/%3E%3Cpath d='M15.5 8.5a5 5 0 0 1 0 7' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M18 6a8.5 8.5 0 0 1 0 12' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center/contain}
 .qsay{width:52px;height:52px;border-radius:50%;border:3px solid var(--leaf);background:#fff;cursor:pointer;position:relative}.qsay::after{content:'';position:absolute;inset:11px;background:var(--leaf-ink);-webkit-mask:var(--spk) no-repeat center/contain;mask:var(--spk) no-repeat center/contain}
+.rpicb{padding:6px 14px!important;background:#fff!important;border:3px solid var(--leaf)!important}.rpic{height:84px;width:auto;display:block}
 .talk{display:flex;gap:10px;align-items:center;background:var(--leaf-soft);border-radius:14px;padding:8px 12px}
 .face{width:56px;height:56px;border-radius:50%;flex:none;background-repeat:no-repeat;background-color:#fffdf6;border:2px solid var(--panel)}
 .talk .line{font-family:var(--f-ko);font-size:20px;color:var(--leaf-ink);flex:1;min-width:0}
@@ -312,12 +313,12 @@ const TL='ko';const HN={f:{ko:"린",vi:"Linh"},m:{ko:"민",vi:"Minh"}};
 const NM=()=>HN[hero][TL==='ko'?'vi':'ko'];
 const CHAT={
   steps:[
-   {from:'sua',msg:()=>`${NM()}! Hôm nay cảm ơn vì đã cho mình mượn ${K('pen')} nhé!`,st:'thanks',replies:[{txt:()=>`Có gì đâu, chỉ là cái ${K('pen')} thôi mà!`,ok:1},{txt:()=>`${K('book')} đó hả?`}]},
-   {from:'sua',msg:()=>`Mai mình cùng ăn ${K('rice')} nhé?`,replies:[{txt:()=>`Được, mai đá ${K('ball')} nhé!`},{txt:()=>`Được, mai ăn ${K('rice')} cùng nhé!`,ok:1}]},
+   {from:'sua',msg:()=>`${NM()}! Hôm nay cảm ơn vì đã cho mình mượn ${K('pen')} nhé!`,st:'thanks',replies:[{pic:'pen',txt:()=>`Có gì đâu, chỉ là cái ${K('pen')} thôi mà!`,ok:1},{pic:'book',txt:()=>`${K('book')} đó hả?`}]},
+   {from:'sua',msg:()=>`Mai mình cùng ăn ${K('rice')} nhé?`,replies:[{pic:'ball',txt:()=>`Được, mai đá ${K('ball')} nhé!`},{pic:'rice',txt:()=>`Được, mai ăn ${K('rice')} cùng nhé!`,ok:1}]},
    {from:'sua',msg:()=>`${K('gn')}! Mai gặp nhau ở ${K('school')} nhé!`,st:'sleep',replies:[{txt:()=>`Chào buổi sáng!`},{txt:()=>`${K('gn')}! Mai gặp ở ${K('school')}!`,ok:1}],heart:'sua'}],
-  friend:{junho:{from:'junho',msg:()=>`Mai mình cùng đá ${K('ball')} nhé!`,replies:[{txt:()=>`Được, mai đá ${K('ball')} nhé!`,ok:1},{txt:()=>`Được, mai ăn ${K('rice')} cùng nhé!`}],heart:'junho'},
-          doyun:{from:'doyun',msg:()=>`…Cảm ơn vì ${K('bluebook')}.`,st:'thanks',replies:[{txt:()=>`Uống ${K('milk')} ngon nhé!`},{txt:()=>`Đọc ${K('bluebook')} vui nhé!`,ok:1}],heart:'doyun'},
-          haeun:{from:'haeun',msg:()=>`Uống ${K('milk')} ngon nhé!`,replies:[{txt:()=>`Cảm ơn vì ${K('milk')}!`,ok:1},{txt:()=>`Cảm ơn vì ${K('ball')}!`}],heart:'haeun'}},
+  friend:{junho:{from:'junho',msg:()=>`Mai mình cùng đá ${K('ball')} nhé!`,replies:[{pic:'ball',txt:()=>`Được, mai đá ${K('ball')} nhé!`,ok:1},{pic:'rice',txt:()=>`Được, mai ăn ${K('rice')} cùng nhé!`}],heart:'junho'},
+          doyun:{from:'doyun',msg:()=>`…Cảm ơn vì ${K('bluebook')}.`,st:'thanks',replies:[{pic:'milk',txt:()=>`Uống ${K('milk')} ngon nhé!`},{pic:'bluebook',txt:()=>`Đọc ${K('bluebook')} vui nhé!`,ok:1}],heart:'doyun'},
+          haeun:{from:'haeun',msg:()=>`Uống ${K('milk')} ngon nhé!`,replies:[{pic:'milk',txt:()=>`Cảm ơn vì ${K('milk')}!`,ok:1},{pic:'ball',txt:()=>`Cảm ơn vì ${K('ball')}!`}],heart:'haeun'}},
   hint:'Sua nhắn tin cho bạn. Chạm vào tin nhắn để nghe, rồi chọn câu trả lời.'
 };
 const GIFTS={cookie:{to:'sua',say:{w:'sua',html:()=>`Oa! ${K('cookie')}! Cảm ơn nhé!`},heart:'sua'},snack:{to:'dog',note:'Bé cún vẫy đuôi rối rít!',heart:'dog'}};
@@ -467,7 +468,7 @@ function startChat(){
   let k=0,cur=null;
   const ask=()=>{if(k>=steps.length){rp.innerHTML=`<button class="btn" id="chatEnd">${'Ngủ ngon →'}</button>`;return;}
     cur=steps[k++];const sp=cur.say?TX(cur.say):null;add(cur.from,cur.msg?cur.msg():sp,cur.st,cur.from,sp);
-    setTimeout(()=>{rp.innerHTML=cur.replies.map((r,i)=>`<button class="btn rbtn" data-reply="${i}"><span>${r.txt()}</span></button>`).join('');},1400);};
+    setTimeout(()=>{rp.innerHTML=cur.replies.map((r,i)=>`<button class="btn rbtn${r.pic?' rpicb':''}" data-reply="${i}">${r.pic?`<img class="rpic" src="${IMG[r.pic]}" alt="">`:`<span>${r.txt()}</span>`}</button>`).join('');},1400);};
   setTimeout(ask,400);
   w.onclick=e=>{const ch=e.target.closest('.chip[data-say]');if(ch&&!e.target.closest('[data-reply]')){say(ch.dataset.say);return;}
     const bub=e.target.closest('.bub[data-line]');if(bub){sayLine(bub.dataset.line);return;}

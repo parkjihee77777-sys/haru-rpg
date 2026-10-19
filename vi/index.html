@@ -32,6 +32,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--f-vi);font-size:15p
 button:focus-visible{outline:3px solid var(--leaf);outline-offset:2px}
 .chip[data-say]::after{content:'';display:inline-block;width:.8em;height:.8em;margin-left:.3em;vertical-align:-.05em;background:currentColor;opacity:.75;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 9v6h4l5 4V5L7 9H3z'/%3E%3Cpath d='M15.5 8.5a5 5 0 0 1 0 7' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M18 6a8.5 8.5 0 0 1 0 12' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center/contain;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 9v6h4l5 4V5L7 9H3z'/%3E%3Cpath d='M15.5 8.5a5 5 0 0 1 0 7' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M18 6a8.5 8.5 0 0 1 0 12' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center/contain}
 .qsay{width:52px;height:52px;border-radius:50%;border:3px solid var(--leaf);background:#fff;cursor:pointer;position:relative}.qsay::after{content:'';position:absolute;inset:11px;background:var(--leaf-ink);-webkit-mask:var(--spk) no-repeat center/contain;mask:var(--spk) no-repeat center/contain}
+.rpicb{padding:6px 14px!important;background:#fff!important;border:3px solid var(--leaf)!important}.rpic{height:84px;width:auto;display:block}
 .talk{display:flex;gap:10px;align-items:center;background:var(--leaf-soft);border-radius:14px;padding:8px 12px}
 .face{width:56px;height:56px;border-radius:50%;flex:none;background-repeat:no-repeat;background-color:#fffdf6;border:2px solid var(--panel)}
 .talk .line{font-family:var(--f-ko);font-size:20px;color:var(--leaf-ink);flex:1;min-width:0}
@@ -312,12 +313,12 @@ const TL='vi';const HN={f:{ko:"린",vi:"Linh"},m:{ko:"민",vi:"Minh"}};
 const NM=()=>HN[hero][TL==='ko'?'vi':'ko'];
 const CHAT={
   steps:[
-   {from:'sua',msg:()=>`${NM()}! 오늘 ${K('pen')} 빌려줘서 고마웠어!`,st:'thanks',replies:[{txt:()=>`${K('pen')}쯤이야, 천만에!`,ok:1},{txt:()=>`그 ${K('book')} 말이야?`}]},
-   {from:'sua',msg:()=>`내일 같이 ${K('rice')} 먹을래?`,replies:[{txt:()=>`좋아, 내일 ${K('ball')} 차자!`},{txt:()=>`좋아, 내일 같이 ${K('rice')} 먹자!`,ok:1}]},
+   {from:'sua',msg:()=>`${NM()}! 오늘 ${K('pen')} 빌려줘서 고마웠어!`,st:'thanks',replies:[{pic:'pen',txt:()=>`${K('pen')}쯤이야, 천만에!`,ok:1},{pic:'book',txt:()=>`그 ${K('book')} 말이야?`}]},
+   {from:'sua',msg:()=>`내일 같이 ${K('rice')} 먹을래?`,replies:[{pic:'ball',txt:()=>`좋아, 내일 ${K('ball')} 차자!`},{pic:'rice',txt:()=>`좋아, 내일 같이 ${K('rice')} 먹자!`,ok:1}]},
    {from:'sua',msg:()=>`${K('gn')}! 내일 ${K('school')}에서 봐!`,st:'sleep',replies:[{txt:()=>`좋은 아침!`},{txt:()=>`${K('gn')}! 내일 ${K('school')}에서 봐!`,ok:1}],heart:'sua'}],
-  friend:{junho:{from:'junho',msg:()=>`내일 같이 ${K('ball')} 차자!`,replies:[{txt:()=>`좋아, 내일 ${K('ball')} 차자!`,ok:1},{txt:()=>`좋아, 내일 같이 ${K('rice')} 먹자!`}],heart:'junho'},
-          doyun:{from:'doyun',msg:()=>`…${K('bluebook')} 고마워요.`,st:'thanks',replies:[{txt:()=>`${K('milk')} 맛있게 먹어요!`},{txt:()=>`${K('bluebook')} 재밌게 읽어요!`,ok:1}],heart:'doyun'},
-          haeun:{from:'haeun',msg:()=>`${K('milk')} 맛있게 먹어요!`,replies:[{txt:()=>`${K('milk')} 고마워요!`,ok:1},{txt:()=>`${K('ball')} 고마워요!`}],heart:'haeun'}},
+  friend:{junho:{from:'junho',msg:()=>`내일 같이 ${K('ball')} 차자!`,replies:[{pic:'ball',txt:()=>`좋아, 내일 ${K('ball')} 차자!`,ok:1},{pic:'rice',txt:()=>`좋아, 내일 같이 ${K('rice')} 먹자!`}],heart:'junho'},
+          doyun:{from:'doyun',msg:()=>`…${K('bluebook')} 고마워요.`,st:'thanks',replies:[{pic:'milk',txt:()=>`${K('milk')} 맛있게 먹어요!`},{pic:'bluebook',txt:()=>`${K('bluebook')} 재밌게 읽어요!`,ok:1}],heart:'doyun'},
+          haeun:{from:'haeun',msg:()=>`${K('milk')} 맛있게 먹어요!`,replies:[{pic:'milk',txt:()=>`${K('milk')} 고마워요!`,ok:1},{pic:'ball',txt:()=>`${K('ball')} 고마워요!`}],heart:'haeun'}},
   hint:'수아가 문자를 보냈어요. 말풍선을 누르면 들려요. 답장을 골라 보세요.'
 };
 const GIFTS={cookie:{to:'sua',say:{w:'sua',html:()=>`와! ${K('cookie')}! 고마워!`},heart:'sua'},snack:{to:'dog',note:'강아지가 꼬리를 마구 흔들어요!',heart:'dog'}};
@@ -467,7 +468,7 @@ function startChat(){
   let k=0,cur=null;
   const ask=()=>{if(k>=steps.length){rp.innerHTML=`<button class="btn" id="chatEnd">${'잘 자 →'}</button>`;return;}
     cur=steps[k++];const sp=cur.say?TX(cur.say):null;add(cur.from,cur.msg?cur.msg():sp,cur.st,cur.from,sp);
-    setTimeout(()=>{rp.innerHTML=cur.replies.map((r,i)=>`<button class="btn rbtn" data-reply="${i}"><span>${r.txt()}</span></button>`).join('');},1400);};
+    setTimeout(()=>{rp.innerHTML=cur.replies.map((r,i)=>`<button class="btn rbtn${r.pic?' rpicb':''}" data-reply="${i}">${r.pic?`<img class="rpic" src="${IMG[r.pic]}" alt="">`:`<span>${r.txt()}</span>`}</button>`).join('');},1400);};
   setTimeout(ask,400);
   w.onclick=e=>{const ch=e.target.closest('.chip[data-say]');if(ch&&!e.target.closest('[data-reply]')){say(ch.dataset.say);return;}
     const bub=e.target.closest('.bub[data-line]');if(bub){sayLine(bub.dataset.line);return;}
