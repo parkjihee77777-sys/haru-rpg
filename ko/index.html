@@ -190,7 +190,7 @@ button:focus-visible{outline:3px solid var(--leaf);outline-offset:2px}
 /* ---------- words & pictures ---------- */
 const W={mom:'엄마',dad:'아빠',grandma:'할머니',sib:'동생',dog:'강아지',fridge:'냉장고',water:'물',tv:'텔레비전',bag:'가방',shoes:'신발',book:'책',door:'문',kimchi:'김치',mandu:'만두',ramen:'라면',rice:'밥',school:'학교',
   teacher:'선생님',seat:'의자',board:'칠판',shelf:'책장',trash:'쓰레기통',notebook:'공책',pcase:'필통',pen:'펜',pencil:'연필',eraser:'지우개',sua:'수아',
-  junho:'준호',doyun:'도윤',haeun:'하은',ball:'공',bottle:'물병',towel:'수건',redbook:'빨간 책',yellowbook:'노란 책',bluebook:'파란 책',milk:'우유',juice:'주스',bread:'빵',library:'도서관',kiosk:'매점',field:'운동장',mybed:'침대',cookie:'쿠키',snack:'간식',mate:'친구'};
+  junho:'준호',doyun:'도윤',haeun:'하은',ball:'공',bottle:'물병',towel:'수건',redbook:'빨간 책',yellowbook:'노란 책',bluebook:'파란 책',milk:'우유',juice:'주스',bread:'빵',library:'도서관',kiosk:'매점',field:'운동장',mybed:'침대',cookie:'쿠키',snack:'간식',mate:'친구',gn:'잘 자'};
 const IMG={kimchi:'food_kimchi.png',mandu:'food_mandu.png',ramen:'food_ramen.png',rice:'food_rice.png',book:'it_book.png',notebook:'it_notebook.png',pcase:'it_pcase.png',pen:'it_pen.png',pencil:'it_pencil.png',eraser:'it_eraser.png',water:'water.png',ball:'it_ball.png',bottle:'it_bottle.png',towel:'it_towel.png',redbook:'it_redbook.png',yellowbook:'it_yellowbook.png',bluebook:'it_bluebook.png',milk:'it_milk.png',juice:'it_juice.png',bread:'it_bread.png',bag:'it_backpack.png',shoes:'it_shoes.png',tv:'it_tv.png',dog:'it_dog.png',board:'it_board.png',shelf:'it_shelf.png',trash:'it_trash.png',fridge:'fridge_closed.png',cookie:'it_cookie.png',snack:'it_snack.png',seat:'it_chair.png'};
 const K=id=>`<button class="chip" data-say="${W[id]}">${W[id]}</button>`;
 const KS=t=>`<button class="chip" data-say="${t}">${t}</button>`;
@@ -211,15 +211,15 @@ const SCENES={
   label:'Buổi sáng ở nhà',
   missions:[
    {t:'mom',vi:()=>`Hãy tìm ${K('mom')} trong nhà.`,say:{w:'mom',html:()=>`Dậy rồi à! Ăn ${K('rice')} rồi hãy đi.`}},
-   {t:'rice',reward:['rw_rice.jpg','rice'],vi:()=>`Mẹ muốn bạn ăn ${K('rice')} rồi mới đi.`,say:{w:'mom',html:()=>`Ăn ngon nhé. Gọi ${K('dad')} dậy giúp mẹ nhé?`}},
-   {t:'dad',vi:()=>`Mẹ nhờ bạn đánh thức ${K('dad')}.`,say:{w:'dad',html:()=>`Ưm… năm phút nữa thôi… Con chào ${K('grandma')} chưa?`}},
+   {t:'rice',reward:['rw_rice.jpg','rice'],vi:()=>`${K('mom')} muốn bạn ăn ${K('rice')} rồi mới đi.`,say:{w:'mom',html:()=>`Ăn ngon nhé. Gọi ${K('dad')} dậy giúp mẹ nhé?`}},
+   {t:'dad',vi:()=>`${K('mom')} nhờ bạn đánh thức ${K('dad')}.`,say:{w:'dad',html:()=>`Ưm… năm phút nữa thôi… Con chào ${K('grandma')} chưa?`}},
    {t:'grandma',vi:()=>`Hãy chào ${K('grandma')}.`,say:{w:'grandma',html:()=>`Ngủ ngon không cháu? Gọi ${K('sib')} dậy luôn nhé.`}},
    {t:'sib',vi:()=>`Hãy gọi ${K('sib')}.`,say:{w:'sib',html:()=>`Chờ chút, em đang livestream! …${K('grandma')} muốn uống ${K('water')} đấy.`}},
    {t:'water',take:'water',vi:()=>`Hãy mang ${K('water')} đến cho ${K('grandma')}.`},
    {t:'grandma',give:'water',reward:['rw_water.jpg','water'],vi:()=>`Hãy mang ${K('water')} đến cho ${K('grandma')}.`,btn:()=>`Đưa ${K('water')} cho người này`,say:{w:'grandma',html:()=>`Cảm ơn cháu. Đừng quên ${K('bag')} nhé!`}},
    {t:'bag',wear:true,vi:()=>`Đừng quên ${K('bag')} nhé.`,btn:()=>`Đeo ${K('bag')} lên`,say:{w:'mom',html:()=>`Xong chưa? Chào ${K('mom')} rồi đi học nhé.`}},
    {t:'mom',vi:()=>`Hãy chào ${K('mom')} rồi đi học.`,btn:()=>`Chào ${K('mom')}`,say:{w:'mom',html:()=>`Đi ${K('school')} vui nhé! Mở ${K('door')} ra mà đi.`}},
-   {t:'door',vi:()=>`Mẹ bảo mở ${K('door')} ra rồi đi.`,btn:()=>`Mở ${K('door')} này`,openPop:'doorview'},
+   {t:'door',vi:()=>`${K('mom')} bảo mở ${K('door')} ra rồi đi.`,btn:()=>`Mở ${K('door')} này`,openPop:'doorview'},
    {t:'school',end:true,vi:()=>`Bên ngoài cửa có gì vậy? Hãy đi đến ${K('school')}!`,btn:()=>`Đi đến ${K('school')}`}
   ],
   next:'class'},
@@ -229,7 +229,7 @@ const SCENES={
   spots:{teacher:[935,150],seat:[645,520],board:[680,70],shelf:[180,380],trash:[300,165],door:[120,630],mate:[350,330]},
   treasures:{shelf:{item:'cookie'}},
   focus:{seat:[645,528,30]},
-  gossip:{mate:{line:()=>`Sua rất thích ${K('cookie')} đấy.`}},
+  gossip:{mate:{line:()=>`${K('sua')} rất thích ${K('cookie')} đấy.`}},
   start:[170,640],
   faces:{teacher:['class.jpg',1376,768,900,62,72],sua:['sua.png',75,220,4,0,68],mate:['class.jpg',1376,768,320,318,62]},
   pops:{desk:{board:true,items:['book','notebook','pcase'],from:[320,330]},
@@ -239,7 +239,7 @@ const SCENES={
    {t:'seat',sit:true,vi:()=>`Lớp học sắp bắt đầu. Hãy tìm một ${K('seat')} trống.`,btn:()=>`Ngồi ở ${K('seat')} này`,say:{w:'teacher',html:()=>`Nào, các em. Mở ${K('book')} ra.`},openPop:'desk'},
    {t:'book',vi:()=>`Cô giáo bảo mở ${K('book')} ra.`,after:'suaEnter'},
    {t:'pen',give:'pen',reward:['rw_pen.jpg','pen'],vi:()=>`Bạn bên cạnh cần ${K('pen')}.`,btn:()=>`Đưa ${K('pen')} cho bạn ấy`,say:{w:'sua',html:()=>`Cảm ơn! Mình là ${K('sua')}. Còn bạn?`}},
-   {phrase:true,vi:()=>`Hãy nói tên của bạn với Sua.`,btn:()=>`<span class="ko">저는 ${heroName()}이에요.</span>`,say:{w:'sua',html:()=>`${NM()}! Trời ơi, tên ${hero==='f'?'đẹp':'hay'} quá!`},heart:'sua',stand:true},
+   {phrase:true,vi:()=>`Hãy nói tên của bạn với ${K('sua')}.`,btn:()=>`<span class="ko">Mình là ${NM()}!</span>`,say:{w:'sua',html:()=>`${NM()}! Trời ơi, tên ${hero==='f'?'đẹp':'hay'} quá!`},heart:'sua',stand:true},
    {walk:true,bell:true,vi:()=>`Tan học rồi! Cửa đang sáng lên — hãy ra ${K('door')}.`}
   ],
   doneMsg:()=>`Tan học! Bây giờ ra sân trường.`,nextBtn:()=>`Ra sân trường →`,
@@ -272,7 +272,7 @@ const SCENES={
   label:'Buổi tối ở nhà',
   missions:[
    {t:'mom',vi:()=>`Bạn về nhà rồi! Hãy chào ${K('mom')}.`,say:{w:'mom',html:()=>`Về rồi à? Ăn ${K('rice')} chưa? Hôm nay thế nào?`},after:'quizStart'},
-   {quiz:3,vi:()=>`Nghe mẹ nói rồi chạm vào đúng hình đó. <button class="chip" id="qplay" aria-label="Nghe lại">▶</button> (${(S.quiz?S.quiz.round:0)+1}/3)`,say:{w:'mom',html:()=>`Giỏi lắm! Giờ đi chào ${K('grandma')} đi.`}},
+   {quiz:3,vi:()=>`Nghe ${K('mom')} nói rồi chạm vào đúng hình đó. <button class="chip" id="qplay" aria-label="Nghe lại">▶</button> (${(S.quiz?S.quiz.round:0)+1}/3)`,say:{w:'mom',html:()=>`Giỏi lắm! Giờ đi chào ${K('grandma')} đi.`}},
    {t:'grandma',vi:()=>`Hãy chào ${K('grandma')}.`,say:{w:'grandma',html:()=>`Hả? ${K('pen')}? …${K('kimchi')} à?`}},
    {t:'mybed',end:true,reward:['rw_bed.jpg','mybed'],vi:()=>`Muộn rồi. Hãy về ${K('mybed')} đi ngủ.`,btn:()=>`Đi ngủ`}
   ],
@@ -288,16 +288,16 @@ const TL='ko';const HN={f:{ko:"린",vi:"Linh"},m:{ko:"민",vi:"Minh"}};
 const NM=()=>HN[hero][TL==='ko'?'vi':'ko'];
 const CHAT={
   steps:[
-   {from:'sua',msg:()=>`${NM()}! Hôm nay cảm ơn vì đã cho mình mượn ${K('pen')} nhé!`,st:'thanks',replies:[{txt:'Có gì đâu, chỉ là cây bút thôi mà!',ok:1},{txt:'Quyển sách đó hả?'}]},
-   {from:'sua',msg:()=>`Mai mình cùng ăn ${K('rice')} nhé?`,replies:[{txt:'Được, mai đá bóng nhé!'},{txt:'Được, mai ăn cơm cùng nhé!',ok:1}]},
-   {from:'sua',say:{ko:"잘 자!",vi:"Ngủ ngon!"},st:'sleep',replies:[{txt:'Chào buổi sáng!'},{txt:'Bạn cũng ngủ ngon nhé!',ok:1}],heart:'sua'}],
-  friend:{junho:{from:'junho',msg:()=>`Mai mình cùng đá ${K('ball')} nhé!`,replies:[{txt:'Được, mai đá bóng nhé!',ok:1},{txt:'Được, mai ăn cơm cùng nhé!'}],heart:'junho'},
-          doyun:{from:'doyun',msg:()=>`…Cảm ơn vì ${K('bluebook')}.`,st:'thanks',replies:[{txt:'Uống sữa ngon nhé!'},{txt:'Đọc sách vui nhé!',ok:1}],heart:'doyun'},
-          haeun:{from:'haeun',msg:()=>`Uống ${K('milk')} ngon nhé!`,replies:[{txt:'Cảm ơn vì hộp sữa!',ok:1},{txt:'Cảm ơn vì quả bóng!'}],heart:'haeun'}},
+   {from:'sua',msg:()=>`${NM()}! Hôm nay cảm ơn vì đã cho mình mượn ${K('pen')} nhé!`,st:'thanks',replies:[{txt:()=>`Có gì đâu, chỉ là cái ${K('pen')} thôi mà!`,ok:1},{txt:()=>`${K('book')} đó hả?`}]},
+   {from:'sua',msg:()=>`Mai mình cùng ăn ${K('rice')} nhé?`,replies:[{txt:()=>`Được, mai đá ${K('ball')} nhé!`},{txt:()=>`Được, mai ăn ${K('rice')} cùng nhé!`,ok:1}]},
+   {from:'sua',msg:()=>`${K('gn')}! Mai gặp nhau ở ${K('school')} nhé!`,st:'sleep',replies:[{txt:()=>`Chào buổi sáng!`},{txt:()=>`${K('gn')}! Mai gặp ở ${K('school')}!`,ok:1}],heart:'sua'}],
+  friend:{junho:{from:'junho',msg:()=>`Mai mình cùng đá ${K('ball')} nhé!`,replies:[{txt:()=>`Được, mai đá ${K('ball')} nhé!`,ok:1},{txt:()=>`Được, mai ăn ${K('rice')} cùng nhé!`}],heart:'junho'},
+          doyun:{from:'doyun',msg:()=>`…Cảm ơn vì ${K('bluebook')}.`,st:'thanks',replies:[{txt:()=>`Uống ${K('milk')} ngon nhé!`},{txt:()=>`Đọc ${K('bluebook')} vui nhé!`,ok:1}],heart:'doyun'},
+          haeun:{from:'haeun',msg:()=>`Uống ${K('milk')} ngon nhé!`,replies:[{txt:()=>`Cảm ơn vì ${K('milk')}!`,ok:1},{txt:()=>`Cảm ơn vì ${K('ball')}!`}],heart:'haeun'}},
   hint:'Sua nhắn tin cho bạn. Chạm vào tin nhắn để nghe, rồi chọn câu trả lời.'
 };
 const GIFTS={cookie:{to:'sua',say:{w:'sua',html:()=>`Oa! ${K('cookie')}! Cảm ơn nhé!`},heart:'sua'},snack:{to:'dog',note:'Bé cún vẫy đuôi rối rít!',heart:'dog'}};
-const FINDS={cookie:{keep:'Để dành cho Sua',eat:'Mình ăn luôn',ate:'Ngon quá!'},snack:{keep:'Để dành cho bé cún',eat:'Mình ăn thử',ate:'Ư… đây là đồ ăn của chó mà!'}};
+const FINDS={cookie:{keep:'Để dành cho Sua',eat:'Mình ăn luôn',ate:'Ngon quá!'},snack:{keep:'Để dành cho bé cún',eat:'Mình ăn thử',ate:()=>`Ư… đây là ${K('snack')} của chó mà!`}};
 const STK={thanks:'st_thanks.png',ok:'st_ok.png',sleep:'st_sleep.png'};
 const TX=e=>typeof e[TL]==='function'?e[TL]():e[TL],TR=e=>{const k=TL==='ko'?'vi':'ko';return typeof e[k]==='function'?e[k]():e[k];};
 
@@ -323,7 +323,7 @@ function loadScene(name){
 }
 
 /* ---------- sound ---------- */
-const SND={"엄마": "snd/k00.mp3", "아빠": "snd/k01.mp3", "할머니": "snd/k02.mp3", "동생": "snd/k03.mp3", "강아지": "snd/k04.mp3", "냉장고": "snd/k05.mp3", "물": "snd/k06.mp3", "텔레비전": "snd/k07.mp3", "가방": "snd/k08.mp3", "신발": "snd/k09.mp3", "책": "snd/k10.mp3", "문": "snd/k11.mp3", "김치": "snd/k12.mp3", "만두": "snd/k13.mp3", "라면": "snd/k14.mp3", "밥": "snd/k15.mp3", "학교": "snd/k16.mp3", "선생님": "snd/k17.mp3", "의자": "snd/k99.mp3", "칠판": "snd/k19.mp3", "책장": "snd/k20.mp3", "쓰레기통": "snd/k21.mp3", "공책": "snd/k22.mp3", "필통": "snd/k23.mp3", "펜": "snd/k24.mp3", "연필": "snd/k25.mp3", "지우개": "snd/k26.mp3", "수아": "snd/k27.mp3", "준호": "snd/k43.mp3", "도윤": "snd/k44.mp3", "하은": "snd/k45.mp3", "공": "snd/k46.mp3", "물병": "snd/k47.mp3", "수건": "snd/k48.mp3", "빨간 책": "snd/k49.mp3", "노란 책": "snd/k50.mp3", "파란 책": "snd/k51.mp3", "우유": "snd/k52.mp3", "주스": "snd/k53.mp3", "빵": "snd/k54.mp3", "도서관": "snd/k55.mp3", "매점": "snd/k56.mp3", "운동장": "snd/k57.mp3", "침대": "snd/k58.mp3", "쿠키": "snd/k95.mp3", "간식": "snd/k96.mp3", "친구": "snd/k97.mp3", "Jua": "snd/k59.mp3", "나도 고마워!": "snd/k84.mp3", "잘 자!": "snd/k85.mp3", "좋아!": "snd/k70.mp3", "좋아요!": "snd/k93.mp3", "나도 고마워요!": "snd/k94.mp3", "고마워요!": "snd/k90.mp3", "잘 자요!": "snd/k89.mp3", "저는 린이에요.": "snd/k41.mp3", "저는 민이에요.": "snd/k42.mp3"};
+const SND={"엄마": "snd/k00.mp3", "아빠": "snd/k01.mp3", "할머니": "snd/k02.mp3", "동생": "snd/k03.mp3", "강아지": "snd/k04.mp3", "냉장고": "snd/k05.mp3", "물": "snd/k06.mp3", "텔레비전": "snd/k07.mp3", "가방": "snd/k08.mp3", "신발": "snd/k09.mp3", "책": "snd/k10.mp3", "문": "snd/k11.mp3", "김치": "snd/k12.mp3", "만두": "snd/k13.mp3", "라면": "snd/k14.mp3", "밥": "snd/k15.mp3", "학교": "snd/k16.mp3", "선생님": "snd/k17.mp3", "의자": "snd/k99.mp3", "칠판": "snd/k19.mp3", "책장": "snd/k20.mp3", "쓰레기통": "snd/k21.mp3", "공책": "snd/k22.mp3", "필통": "snd/k23.mp3", "펜": "snd/k24.mp3", "연필": "snd/k25.mp3", "지우개": "snd/k26.mp3", "수아": "snd/k27.mp3", "준호": "snd/k43.mp3", "도윤": "snd/k44.mp3", "하은": "snd/k45.mp3", "공": "snd/k46.mp3", "물병": "snd/k47.mp3", "수건": "snd/k48.mp3", "빨간 책": "snd/k49.mp3", "노란 책": "snd/k50.mp3", "파란 책": "snd/k51.mp3", "우유": "snd/k52.mp3", "주스": "snd/k53.mp3", "빵": "snd/k54.mp3", "도서관": "snd/k55.mp3", "매점": "snd/k56.mp3", "운동장": "snd/k57.mp3", "침대": "snd/k58.mp3", "쿠키": "snd/k95.mp3", "간식": "snd/k96.mp3", "친구": "snd/k97.mp3", "잘 자": "snd/k100.mp3", "Jua": "snd/k59.mp3"};
 const auL=new Audio(),auW=new Audio();auL.preload=auW.preload='auto';let auOk=false,waitWord=null;
 function unlockAudio(){if(auOk)return;auOk=true;const f=Object.values(SND)[0];
   [auL,auW].forEach(a=>{try{a.src=f;a.muted=true;const p=a.play();if(p)p.then(()=>{a.pause();a.muted=false;a.currentTime=0;}).catch(()=>{a.muted=false;auOk=false;});}catch(e){a.muted=false;}});
@@ -415,7 +415,7 @@ function renderUI(){
   const tk=document.getElementById('talk');
   if(S.talk){tk.hidden=false;faceStyle(document.getElementById('tface'),S.talk.w);document.getElementById('tline').innerHTML=talkHTML(S.talk);}else tk.hidden=true;
   const mid=document.getElementById('mid');
-  if(m.phrase&&!S.done)mid.innerHTML=`<button class="btn" id="phrase">🔊 ${m.btn()}</button>`;
+  if(m.phrase&&!S.done)mid.innerHTML=`<button class="btn" id="phrase">${m.btn()}</button>`;
   else mid.innerHTML='';
   const words=[...G.known].filter(id=>id!=='seat'||true).map(id=>K(id)).join('');
   document.getElementById('learned').innerHTML=words?`<span>Từ đã biết</span>${words}`:'';
@@ -426,7 +426,7 @@ function showDone(){
   const words=[...G.known].map(id=>K(id)).join('');
   const d=document.getElementById('done');
   if(L.next){d.innerHTML=`<div class="pics"><img src="hero_${hero}${G.wear?'_bag':''}.png" alt=""></div><div class="mtext">${L.doneMsg()}</div><div class="learned"><span>Đã biết ${G.known.size} từ</span>${words}</div><button class="btn" id="goNext">${L.nextBtn()}</button>`;}
-  else{d.innerHTML=`<div class="pics"><img src="hero_${hero}${G.wear?'_bag':''}.png" alt=""><img src="sua_wave.png" alt="">${G.pick?`<img src="${G.pick}.png" alt="">`:''}</div><div class="mtext">Hết tập 1 · Ngày đầu tiên đi học</div><div class="hearts" style="font-size:20px">${heartsText()}</div><div class="learned"><span>Hôm nay bạn biết ${G.known.size} từ, đã nghe ${G.heard.size} từ.</span>${words}</div><div class="hint">Tập 2: ngày mai đi ăn tteokbokki với Sua?</div><button class="btn" id="again">Chơi lại</button>`;}
+  else{d.innerHTML=`<div class="pics"><img src="hero_${hero}${G.wear?'_bag':''}.png" alt=""><img src="sua_wave.png" alt="">${G.pick?`<img src="${G.pick}.png" alt="">`:''}</div><div class="mtext">Hết tập 1 · Ngày đầu tiên đi học</div><div class="hearts" style="font-size:20px">${heartsText()}</div><div class="learned"><span>Hôm nay bạn biết ${G.known.size} từ, đã nghe ${G.heard.size} từ.</span>${words}</div><div class="hint">Tập 2: ngày mai đi ăn tteokbokki với ${K('sua')}?</div><button class="btn" id="again">Chơi lại</button>`;}
   document.getElementById('doneWrap').hidden=false;document.getElementById('mission').hidden=true;
 }
 function startChat(){
@@ -440,13 +440,13 @@ function startChat(){
   let k=0,cur=null;
   const ask=()=>{if(k>=steps.length){rp.innerHTML=`<button class="btn" id="chatEnd">${'Ngủ ngon →'}</button>`;return;}
     cur=steps[k++];const sp=cur.say?TX(cur.say):null;add(cur.from,cur.msg?cur.msg():sp,cur.st,cur.from,sp);
-    setTimeout(()=>{rp.innerHTML=cur.replies.map((r,i)=>`<button class="btn rbtn" data-reply="${i}"><span>${r.txt}</span></button>`).join('');},1400);};
+    setTimeout(()=>{rp.innerHTML=cur.replies.map((r,i)=>`<button class="btn rbtn" data-reply="${i}"><span>${r.txt()}</span></button>`).join('');},1400);};
   setTimeout(ask,400);
-  w.onclick=e=>{const ch=e.target.closest('.chip[data-say]');if(ch){say(ch.dataset.say);return;}
+  w.onclick=e=>{const ch=e.target.closest('.chip[data-say]');if(ch&&!e.target.closest('[data-reply]')){say(ch.dataset.say);return;}
     const bub=e.target.closest('.bub[data-line]');if(bub){sayLine(bub.dataset.line);return;}
     const r=e.target.closest('[data-reply]');if(!r||!cur)return;const c=cur.replies[+r.dataset.reply];
     if(!c.ok){tone('no');r.classList.remove('shake');void r.offsetWidth;r.classList.add('shake');return;}
-    rp.innerHTML='';add('me',c.txt,null,null,null);tone('ok');
+    rp.innerHTML='';const mt=c.txt();add('me',mt,null,null,null);tone('ok');{const mm=mt.match(/data-say="([^"]+)"/);if(mm)setTimeout(()=>say(mm[1]),350);}
     if(cur.heart){G.hearts[cur.heart]=(G.hearts[cur.heart]||0)+1;}
     setTimeout(ask,2000);};
 }
@@ -607,7 +607,7 @@ document.addEventListener('click',e=>{
     renderUI();return;}
   if(food){const id=food.dataset.food;say(W[id]);G.heard.add(id);S.sel=id;
     if(L.pops[id])setTimeout(()=>openPop(id),350);renderUI();return;}
-  if(e.target.closest('#phrase')){const m=M[S.m];const t=document.querySelector('#phrase .ko').textContent;sayLine(t);setTimeout(()=>success(m),1400);document.getElementById('phrase').disabled=true;return;}
+  if(e.target.closest('#phrase')){const m=M[S.m];setTimeout(()=>success(m),500);document.getElementById('phrase').disabled=true;return;}
   if(e.target.closest('#confirm')){
     const m=M[S.m];
     if(m.choose?m.choose.includes(S.sel):S.sel===m.t)success(m);
