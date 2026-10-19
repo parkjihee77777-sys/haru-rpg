@@ -135,6 +135,28 @@ button:focus-visible{outline:3px solid var(--leaf);outline-offset:2px}
 .spark i{position:absolute;font-style:normal;font-size:22px;color:#f2c14e;text-shadow:0 0 6px #fff6c8;opacity:0;animation:sp 1.1s ease-out var(--d) forwards}
 @keyframes sp{0%{opacity:0;transform:rotate(var(--a)) translateY(0) scale(.4)}25%{opacity:1}100%{opacity:0;transform:rotate(var(--a)) translateY(calc(var(--r) * -1)) scale(1.1)}}
 @media (prefers-reduced-motion:reduce){.reward.go .rcard,.spark i{animation:none}}
+.eatst{position:relative;width:min(420px,84vw);height:min(300px,40vh);display:flex;align-items:flex-end;justify-content:center}
+.eatst .eh{width:auto!important;height:100%;max-height:none!important;border-radius:0;transform-origin:50% 90%}
+.eatst .ei{position:absolute;width:64px!important;left:72%;top:45%;transform:translate(-50%,-50%);border-radius:0}
+.eshout{position:absolute;left:78%;top:4%;transform:translateX(-50%);background:#fff;border:3px solid var(--leaf);border-radius:16px;padding:2px 12px;font:800 30px var(--f-ko);color:var(--leaf-ink);white-space:nowrap;opacity:0;animation:shout .4s .55s forwards}
+.efx{position:absolute;left:53%;top:20%;width:0;height:0}
+.efx i{position:absolute;width:10px;height:10px;border-radius:50%;background:#9a6a3a;opacity:0}
+.yuck .ei{animation:bite .5s forwards,back2 .5s 1.1s forwards}
+@keyframes back2{from{left:53%;top:19%;transform:translate(-50%,-50%) scale(.7) rotate(0)}to{left:80%;top:85%;transform:translate(-50%,-50%) scale(.8) rotate(160deg)}}
+.yuck .eh{animation:yk .7s .5s 2}
+.yuck .efx i{animation:spit .7s var(--d) .6s forwards}
+.yuck .eshout{color:#7a8a2a}
+.yum .ei{animation:bite .5s forwards,gone .2s .5s forwards}
+.yum .eh{animation:hop .45s .5s 2}
+.yum .efx i{background:#f28b9a;width:14px;height:14px;animation:heart 1s var(--d) .6s forwards}
+@keyframes bite{0%{left:72%;top:45%}100%{left:53%;top:19%;transform:translate(-50%,-50%) scale(.7)}}
+@keyframes gone{to{opacity:0}}
+@keyframes yk{0%,100%{transform:rotate(0)}20%{transform:rotate(-7deg) translateX(-6px)}40%{transform:rotate(6deg)}60%{transform:rotate(-5deg)}80%{transform:rotate(3deg)}}
+@keyframes hop{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+@keyframes spit{0%{opacity:1;transform:translate(0,0)}100%{opacity:0;transform:translate(var(--x),var(--y))}}
+@keyframes heart{0%{opacity:0;transform:translate(0,0) scale(.4)}30%{opacity:1}100%{opacity:0;transform:translate(var(--x),calc(var(--y) - 60px)) scale(1)}}
+@keyframes shout{0%{opacity:0;transform:translateX(-50%) scale(.5)}100%{opacity:1;transform:translateX(-50%) scale(1)}}
+@media (prefers-reduced-motion:reduce){.eatst *{animation:none!important;opacity:1}}
 .prop{position:absolute;transform:translate(-50%,-100%);pointer-events:none;z-index:3;filter:drop-shadow(0 2px 0 rgba(60,40,20,.25))}
 .peek{position:absolute;transform:translate(-50%,-100%);z-index:8;pointer-events:none;background:#fffdf6;border:3px solid #6f9a4f;border-radius:16px;padding:6px;width:130px;height:130px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(40,30,10,.25);animation:okin .3s cubic-bezier(.3,1.5,.5,1)}
 .peek img{max-width:100%;max-height:100%;object-fit:contain}
@@ -180,6 +202,7 @@ button:focus-visible{outline:3px solid var(--leaf);outline-offset:2px}
       <div class="mid" id="mid"></div>
     </section>
     <div class="center reward" id="rewardWrap" hidden><section class="card rcard"><div class="spark" aria-hidden="true"></div><img id="rwImg" alt=""><div class="rword" id="rwWord"></div><button class="btn" id="rwNext">계속 →</button></section></div>
+    <div class="center reward" id="eatWrap" hidden><section class="card rcard eatc"><div class="eatst" id="eatSt"><img class="eh" id="eatHero" alt=""><img class="ei" id="eatItem" alt=""><div class="efx" id="eatFx"></div><div class="eshout" id="eatShout"></div></div><div class="mtext" id="eatTxt"></div><button class="btn" id="eatOk">계속 →</button></section></div>
     <div class="center reward" id="findWrap" hidden><section class="card rcard find"><img id="fdImg" alt=""><div class="mtext" id="fdTitle"></div><div class="mid" id="fdBtns"></div></section></div>
     <div class="center" id="doneWrap" hidden><section class="card done" id="done"></section></div>
     <div class="center" id="chatWrap" hidden><section class="card chat"><div class="mlabel">문자 · 우리 반<button class="mus" aria-pressed="true" aria-label="배경 음악">♪</button></div><div class="hint" id="chatHint"></div><div class="chatlog" id="chatLog"></div><div class="mid" id="chatReply"></div></section></div>
@@ -298,7 +321,7 @@ const CHAT={
   hint:'수아가 문자를 보냈어요. 말풍선을 누르면 들려요. 답장을 골라 보세요.'
 };
 const GIFTS={cookie:{to:'sua',say:{w:'sua',html:()=>`와! ${K('cookie')}! 고마워!`},heart:'sua'},snack:{to:'dog',note:'강아지가 꼬리를 마구 흔들어요!',heart:'dog'}};
-const FINDS={cookie:{keep:'수아 주려고 챙기기',eat:'내가 먹기',ate:'맛있다!'},snack:{keep:'강아지 주려고 챙기기',eat:'내가 먹어 보기',ate:()=>`으… 이건 강아지 ${K('snack')}이잖아!`}};
+const FINDS={cookie:{keep:'수아 주려고 챙기기',eat:'내가 먹기',mood:'yum',shout:'맛있다!',ate:()=>`${K('cookie')} 달콤해!`},snack:{keep:'강아지 주려고 챙기기',eat:'내가 먹어 보기',mood:'yuck',shout:'으엑! 퉤퉤!',ate:()=>`이건 강아지 ${K('snack')}이잖아!`}};
 const STK={thanks:'st_thanks.png',ok:'st_ok.png',sleep:'st_sleep.png'};
 const TX=e=>typeof e[TL]==='function'?e[TL]():e[TL],TR=e=>{const k=TL==='ko'?'vi':'ko';return typeof e[k]==='function'?e[k]():e[k];};
 
@@ -342,7 +365,10 @@ const lineBusy=()=>!auL.paused&&!auL.ended;
 function playOn(a,t,done){const f=SND[t];if(!f){speak(t);return;}try{a.muted=false;a.pause();a.src=f;a.currentTime=0;a.onended=done||null;const p=a.play();if(p)p.catch(()=>speak(t));}catch(e){speak(t);}}
 function sayLine(t){auW.pause();waitWord=null;playOn(auL,t,()=>{if(waitWord){const w=waitWord;waitWord=null;playOn(auW,w);}});}
 function say(t){if(lineBusy()){waitWord=t;return;}playOn(auW,t);}
-let ac;function tone(kind){try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();if(kind==='sparkle'){[1047,1319,1568,2093,2637].forEach((f,i)=>{const o=ac.createOscillator(),g=ac.createGain();o.type='triangle';o.frequency.value=f;const t=ac.currentTime+i*.08;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.18,t+.015);g.gain.exponentialRampToValueAtTime(.0001,t+.6);o.connect(g).connect(ac.destination);o.start(t);o.stop(t+.65);});
+let ac;function tone(kind){try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();
+if(kind==='spit'){const t0=ac.currentTime;const o=ac.createOscillator(),g=ac.createGain();o.type='sawtooth';o.frequency.setValueAtTime(260,t0);o.frequency.exponentialRampToValueAtTime(120,t0+.45);g.gain.setValueAtTime(.0001,t0);g.gain.exponentialRampToValueAtTime(.12,t0+.04);g.gain.exponentialRampToValueAtTime(.0001,t0+.5);o.connect(g).connect(ac.destination);o.start(t0);o.stop(t0+.55);
+  [.6,.85].forEach(d=>{const n=ac.createBufferSource(),b=ac.createBuffer(1,ac.sampleRate*.12,ac.sampleRate),c=b.getChannelData(0);for(let i=0;i<c.length;i++)c[i]=(Math.random()*2-1)*(1-i/c.length);n.buffer=b;const f=ac.createBiquadFilter();f.type='bandpass';f.frequency.value=2200;const g2=ac.createGain();g2.gain.value=.5;n.connect(f).connect(g2).connect(ac.destination);n.start(t0+d);});return;}
+if(kind==='yum'){[784,1175].forEach((fr,i)=>{const o=ac.createOscillator(),g=ac.createGain();o.type='sine';o.frequency.value=fr;const t=ac.currentTime+i*.14;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.2,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+.35);o.connect(g).connect(ac.destination);o.start(t);o.stop(t+.4);});return;}if(kind==='sparkle'){[1047,1319,1568,2093,2637].forEach((f,i)=>{const o=ac.createOscillator(),g=ac.createGain();o.type='triangle';o.frequency.value=f;const t=ac.currentTime+i*.08;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.18,t+.015);g.gain.exponentialRampToValueAtTime(.0001,t+.6);o.connect(g).connect(ac.destination);o.start(t);o.stop(t+.65);});
   for(let i=0;i<6;i++){const o=ac.createOscillator(),g=ac.createGain();o.type='sine';o.frequency.value=3000+Math.random()*1800;const t=ac.currentTime+.42+i*.07;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.05,t+.01);g.gain.exponentialRampToValueAtTime(.0001,t+.25);o.connect(g).connect(ac.destination);o.start(t);o.stop(t+.3);}return;}
   const seq=kind==='ok'?[880,1320]:kind==='bell'?[784,659,523]:[220];seq.forEach((f,i)=>{const o=ac.createOscillator(),g=ac.createGain();o.type=kind==='no'?'triangle':'sine';o.frequency.value=f;const t=ac.currentTime+i*(kind==='bell'?.35:.12);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.25,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+(kind==='bell'?.6:.35));o.connect(g).connect(ac.destination);o.start(t);o.stop(t+.7);});}catch(e){}}
 const lineText=s=>typeof s.ko==='function'?s.ko():s.ko;
@@ -462,8 +488,14 @@ function foundItem(it){const f=FINDS[it],w=document.getElementById('findWrap');
   document.getElementById('fdBtns').innerHTML=`<button class="btn" data-find="keep" data-it="${it}">${f.keep}</button><button class="btn alt" data-find="eat" data-it="${it}">${f.eat}</button>`;
   w.hidden=false;w.classList.remove('go');void w.offsetWidth;w.classList.add('go');tone('sparkle');setTimeout(()=>say(W[it]),700);}
 function findChoice(kind,it){document.getElementById('findWrap').hidden=true;G.found.add(it);G.known.add(it);
-  if(kind==='keep'){G.inv.push(it);tone('ok');}else{tone('no');S.talk={w:null,html:FINDS[it].ate};}
+  if(kind==='keep'){G.inv.push(it);tone('ok');}else showEat(it);
   renderUI();renderTags();}
+function showEat(it){const f=FINDS[it],w=document.getElementById('eatWrap'),st=document.getElementById('eatSt');
+  document.getElementById('eatHero').src=`hero_${hero}${G.wear?'_bag':''}.png`;document.getElementById('eatItem').src=IMG[it];
+  document.getElementById('eatShout').textContent=f.shout;document.getElementById('eatTxt').innerHTML=typeof f.ate==='function'?f.ate():f.ate;
+  document.getElementById('eatFx').innerHTML=Array.from({length:9},(_,i)=>`<i style="--d:${(i%3)*.05}s;--x:${60+i*14}px;--y:${-30+(i%4)*22}px"></i>`).join('');
+  st.className='eatst '+f.mood;w.hidden=false;void st.offsetWidth;
+  setTimeout(()=>tone(f.mood==='yuck'?'spit':'yum'),550);}
 function giveGift(it){const g=GIFTS[it];G.inv=G.inv.filter(x=>x!==it);G.hearts[g.heart]=(G.hearts[g.heart]||0)+1;
   const sp=L.spots[g.to];if(sp)heartPop(sp[0],sp[1]+40);
   if(g.say){S.talk=g.say;setTimeout(()=>speakTalk(g.say),300);}else S.talk={w:null,html:g.note};
@@ -591,6 +623,7 @@ document.addEventListener('click',e=>{
   if(e.target.closest('.mus')){bgmToggle();return;}
   const pk=e.target.closest('[data-hero]');if(pk){hero=pk.dataset.hero;startGame();return;}
   const fc=e.target.closest('[data-find]');if(fc){findChoice(fc.dataset.find,fc.dataset.it);return;}
+  if(e.target.closest('#eatOk')){document.getElementById('eatWrap').hidden=true;return;}
   if(e.target.closest('#rwNext')||e.target.closest('#rewardWrap')&&!e.target.closest('.chip')){closeReward();return;}
   if(e.target.closest('#goNext')){hideDone();loadScene(L.next);return;}
   if(e.target.closest('#chatEnd')){document.getElementById('chatWrap').hidden=true;showDone();return;}
