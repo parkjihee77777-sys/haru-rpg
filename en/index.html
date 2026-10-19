@@ -548,7 +548,7 @@ function interact(forced){
   const cm4=M[S.m];if(!fov&&S.popFor&&S.popFor.m===S.m&&cm4&&(n===cm4.giveTo||n===S.popFor.at)){openPop(S.popFor.pop);renderUI();return;}
   if(n==='mate'){G.heard.add(n);say(W[n]);return;}
   say(W[n]);G.heard.add(n);S.sel=n;S.msg='';
-  {const cg=M[S.m];if(L.pops[n]&&!(cg&&cg.goWith&&cg.t===n))openPop(n);}
+  {const cg=M[S.m];const need=!(L.areas&&L.areas[n])||(cg&&!cg.goWith&&L.pops[n]&&(L.pops[n].items||[]).includes(cg.t));if(L.pops[n]&&need)openPop(n);}
   renderUI();renderTags();
 }
 function tryMove(dx,dy){let moved=false;const nx=S.x+dx,ny=S.y+dy;
@@ -639,7 +639,7 @@ function bfs(goalFn){
 function goTo(wx,wy){
   if(S.sit){let g=null;if(L.gossip)for(const k in L.gossip){const sp=L.spots[k];if(sp&&Math.hypot(sp[0]-wx,sp[1]-wy)<Math.max(70,50/scale))g=k;}interact(g||undefined);return;}
   const hitR=Math.max(60,46/scale);let spot=null,bd=1e9;for(const k in L.spots){const [x,y]=L.spots[k],d=Math.min(Math.hypot(x-wx,y-wy),Math.hypot(x-wx,y-50-wy));if(d<hitR&&d<bd){bd=d;spot=k;}}   // 손가락 크기만큼, 「?」·이름표를 눌러도
-  if(!spot&&L.areas)for(const k in L.areas){const [x0,y0,x1,y1]=L.areas[k];if(wx>=x0&&wx<=x1&&wy>=y0&&wy<=y1&&L.spots[k]){spot=k;break;}}
+  {const ca=M[S.m];if(!spot&&L.areas&&ca)for(const k in L.areas){const want=(ca.goWith&&ca.t===k)||(!ca.goWith&&L.pops[k]&&(L.pops[k].items||[]).includes(ca.t));if(!want)continue;const [x0,y0,x1,y1]=L.areas[k];if(wx>=x0&&wx<=x1&&wy>=y0&&wy<=y1){spot=k;break;}}}
   if(spot){const [x,y]=L.spots[spot];
     const p=bfs((gx,gy)=>Math.hypot(gx*CELL+5-x,gy*CELL+5-30-y)<REACH-20);
     if(p){path=p;after=()=>{S.flip=x<S.x;interact(spot);};if(!p.length){path=null;after();}}
