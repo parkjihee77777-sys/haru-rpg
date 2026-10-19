@@ -1,0 +1,530 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>하루 한국어 RPG 1화</title><style>:root{color-scheme:light}[hidden]{display:none!important}body{margin:0}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html,body{height:100%}</style></head><body><title>하루 한국어 RPG 1화</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600&family=Jua&display=swap">
+<style>
+/* layout: picker → mission strip, painted scene map with camera, action bar; scenes: home → class */
+:root{
+  --bg:#f1f3ea; --panel:#fffdf6; --line:#dcdcc8; --ink:#33402f; --muted:#7a8470;
+  --leaf:#6f9a4f; --leaf-ink:#2f4a1f; --leaf-soft:#e3eed3; --wood:#c98a52; --heart:#d8667a;
+  --f-ko:'Jua','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+  --f-vi:'Be Vietnam Pro','Segoe UI',Roboto,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#1a1f17; --panel:#252b21; --line:#3a4334; --ink:#e7ecdf; --muted:#a4ae98;
+  --leaf:#8fbf6a; --leaf-ink:#dff0cc; --leaf-soft:#34452a; --wood:#d9a06c; --heart:#f08a9c; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#1a1f17; --panel:#252b21; --line:#3a4334; --ink:#e7ecdf; --muted:#a4ae98;
+  --leaf:#8fbf6a; --leaf-ink:#dff0cc; --leaf-soft:#34452a; --wood:#d9a06c; --heart:#f08a9c; color-scheme:dark}
+html,body{height:100%;overflow:hidden}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-vi);font-size:15px}
+.wrap{position:relative;height:100%;overflow:hidden}
+#game{position:absolute;inset:0;display:flex;flex-direction:column}
+.float{position:absolute;left:max(8px,env(safe-area-inset-left,0px));right:max(8px,env(safe-area-inset-right,0px));z-index:10;max-width:760px;margin:0 auto;background:color-mix(in srgb,var(--panel) 92%,transparent);box-shadow:0 4px 14px rgba(40,30,10,.18)}
+#mission{order:-1;flex:none;margin:calc(env(safe-area-inset-top,0px) + 6px) max(8px,env(safe-area-inset-right,0px)) 6px max(8px,env(safe-area-inset-left,0px));padding:8px 12px;gap:4px}
+.center{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:16px max(16px,env(safe-area-inset-right,0px)) 16px max(16px,env(safe-area-inset-left,0px));overflow:auto;z-index:12}
+.center>.card{max-width:560px;width:100%}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:10px 14px}
+.mission{display:flex;flex-direction:column;gap:6px}
+.mlabel{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600;display:flex;gap:10px;align-items:center}
+.hearts{color:var(--heart);font-family:var(--f-ko);letter-spacing:0;font-size:14px;text-transform:none}
+.mtext{font-size:17px;line-height:1.5;font-weight:600}
+.chip{font-family:var(--f-ko);font-size:19px;background:var(--leaf-soft);color:var(--leaf-ink);border:2px solid var(--leaf);border-radius:10px;padding:0 8px;margin:0 2px;cursor:pointer;line-height:1.4}
+button:focus-visible{outline:3px solid var(--leaf);outline-offset:2px}
+.talk{display:flex;gap:10px;align-items:center;background:var(--leaf-soft);border-radius:14px;padding:8px 12px}
+.face{width:56px;height:56px;border-radius:50%;flex:none;background-repeat:no-repeat;background-color:#fffdf6;border:2px solid var(--panel)}
+.talk .line{font-family:var(--f-ko);font-size:20px;color:var(--leaf-ink);flex:1;min-width:0}
+.view{position:relative;flex:1;min-height:0;overflow:hidden;background:#efe9d8;touch-action:none;user-select:none;-webkit-user-select:none}
+.world{position:absolute;left:0;top:0;width:1376px;height:768px;transform-origin:0 0;background-size:1376px 768px;background-repeat:no-repeat;cursor:pointer}
+.spr{position:absolute;background-size:contain;background-repeat:no-repeat;background-position:bottom center;pointer-events:none;filter:drop-shadow(0 3px 0 rgba(60,40,20,.25))}
+.hero{width:34px;height:94px;margin-left:-17px;margin-top:-90px;z-index:5}
+.npc{width:36px;height:100px;margin-left:-18px;margin-top:-96px;z-index:5}
+.spr.flip{transform:scaleX(-1)}
+.spr.walk{animation:bob .32s infinite}
+.spr.flip.walk{animation:bobf .32s infinite}
+@keyframes bob{50%{transform:translateY(-4px)}}
+@keyframes bobf{0%,100%{transform:scaleX(-1)}50%{transform:scaleX(-1) translateY(-4px)}}
+.tag{position:absolute;transform:translate(-50%,-100%);font-family:var(--f-ko);font-size:22px;line-height:1.2;padding:1px 8px;border-radius:9px;background:#fffdf6;color:#2f4a1f;border:2px solid #6f9a4f;white-space:nowrap;pointer-events:none;z-index:6}
+.tag.q{border-color:#c98a52;color:#7a4a1c;font-size:24px}
+.tag.pop{animation:pop .5s}
+@keyframes pop{40%{transform:translate(-50%,-100%) scale(1.4)}}
+.exit{position:absolute;width:110px;height:110px;margin:-55px 0 0 -55px;border-radius:50%;border:5px solid #f2c14e;background:rgba(255,224,130,.28);pointer-events:none;z-index:3;animation:ring 1.4s ease-out infinite}
+@keyframes ring{0%{transform:scale(.7);opacity:1}100%{transform:scale(1.25);opacity:.25}}
+.arrow{position:absolute;width:0;height:0;margin-left:-22px;border-left:22px solid transparent;border-right:22px solid transparent;border-top:30px solid #f2a93b;pointer-events:none;z-index:6;filter:drop-shadow(0 2px 0 rgba(90,60,20,.35));animation:arr .8s ease-in-out infinite}
+@keyframes arr{50%{transform:translateY(12px)}}
+@media (prefers-reduced-motion:reduce){.exit,.arrow{animation:none}}
+.carry{position:absolute;pointer-events:none;z-index:6}
+.given{position:absolute;pointer-events:none;z-index:4;animation:give .6s cubic-bezier(.3,1.4,.5,1)}
+@keyframes give{from{transform:translate(-60px,-40px) scale(.4);opacity:0}}
+.heartpop{position:absolute;z-index:7;font-family:var(--f-ko);font-size:30px;color:#d8667a;pointer-events:none;animation:hp 1.6s ease-out forwards}
+@keyframes hp{0%{opacity:0;transform:translate(-50%,0) scale(.5)}20%{opacity:1;transform:translate(-50%,-20px) scale(1.2)}100%{opacity:0;transform:translate(-50%,-70px)}}
+.fov{position:absolute;inset:0;z-index:8;background:rgba(48,36,18,.42);display:flex;align-items:center;justify-content:center;overflow:hidden;padding:var(--mt,0) 0 var(--mb,0);animation:fin .25s ease-out}
+.fov.closing{animation:fout .35s ease-in forwards}
+@keyframes fin{from{opacity:0}}@keyframes fout{to{opacity:0}}
+.fstage{position:relative;width:640px;height:360px;flex:none;transform:scale(var(--fs,1))}
+.fr{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);pointer-events:none}
+.fr.closed{animation:frpop .32s cubic-bezier(.3,1.5,.5,1) both}
+.fr.open{opacity:0}
+.fov.open .fr.closed{opacity:0;transition:opacity .1s}
+.fov.open .fr.open{opacity:1;animation:door .4s cubic-bezier(.3,1.4,.5,1)}
+@keyframes frpop{from{transform:translateX(-50%) scale(.5);opacity:0}}
+@keyframes door{0%{transform:translateX(-50%) scaleX(.62)}100%{transform:translateX(-50%)}}
+.board{position:absolute;left:40px;right:40px;bottom:18px;height:120px;background:#d9a066;border:3px solid #8a5a32;border-radius:18px;pointer-events:none;animation:frpop .32s cubic-bezier(.3,1.5,.5,1) both}
+.glow{position:absolute;left:50%;bottom:60px;width:300px;height:260px;margin-left:-150px;background:radial-gradient(closest-side,rgba(255,226,140,.8),rgba(255,226,140,0));opacity:0;pointer-events:none}
+.fov.open .glow{animation:glow 1s ease-out .05s both}
+@keyframes glow{0%{opacity:0}35%{opacity:1}100%{opacity:.4}}
+.food{position:absolute;left:var(--x);top:var(--y);width:128px;margin-left:-64px;opacity:0;background:none;border:3px solid transparent;border-radius:20px;padding:4px 2px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;pointer-events:none}
+.fov.open .food{animation:fly .7s cubic-bezier(.25,1.2,.45,1) var(--d) forwards;pointer-events:auto}
+@keyframes fly{0%{opacity:0;transform:translate(var(--fx),var(--fy)) scale(.15)}45%{opacity:1;transform:translate(calc(var(--fx)*.45),calc(var(--fy)*.45 - 90px)) scale(.8)}100%{opacity:1;transform:none}}
+.fov.closing .food{animation:back .3s ease-in forwards}
+@keyframes back{from{opacity:1}to{opacity:0;transform:translate(var(--fx),var(--fy)) scale(.15)}}
+.food img{width:var(--iw,112px);max-height:120px;object-fit:contain;animation:float 2.6s ease-in-out infinite;animation-delay:var(--d)}
+@keyframes float{50%{transform:translateY(-6px)}}
+.food .t2{font-family:var(--f-ko);font-size:20px;line-height:1.2;padding:0 10px;border-radius:9px;background:#fffdf6;color:#7a4a1c;border:2px solid #c98a52}
+.food.known .t2{color:#2f4a1f;border-color:#6f9a4f}
+.food.sel{border-color:#6f9a4f;background:rgba(239,246,228,.88)}
+.food.shake img{animation:shake .35s}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.vw{position:absolute;left:50%;bottom:15px;transform:translateX(-50%);border-radius:14px;border:3px solid #fffdf6;pointer-events:none;animation:frpop .32s cubic-bezier(.3,1.5,.5,1) both}
+.vw.open{opacity:0;animation:none;transition:opacity .6s}
+.fov.open .vw.open{opacity:1}
+.food.hot{width:var(--hw);height:var(--hh);margin-left:calc(var(--hw) / -2);padding:0;border:3px dashed rgba(255,253,246,.9);border-radius:16px;justify-content:flex-start}
+.fov.open .food.hot{animation:hotin .5s ease-out .6s forwards}
+@keyframes hotin{from{opacity:0}to{opacity:1}}
+.food.hot .t2{margin-top:-30px}
+.food.hot.sel{border-style:solid;border-color:#6f9a4f;background:rgba(239,246,228,.25)}
+.fov .x{position:absolute;right:max(12px,env(safe-area-inset-right,0px));top:calc(var(--mt,0px) + 4px);width:44px;height:44px;border-radius:50%;border:none;background:#fffdf6;color:#33402f;font-size:20px;cursor:pointer}
+@media (prefers-reduced-motion:reduce){.fov,.fr,.glow,.food,.food img,.board,.spr.walk,.heartpop{animation:none!important;opacity:1}}
+.bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.pad{display:grid;grid-template-columns:repeat(3,44px);grid-template-rows:repeat(3,44px);gap:3px;touch-action:none}
+.pad button,.abtn{background:var(--leaf-soft);color:var(--leaf-ink);border:2px solid var(--line);border-bottom-width:4px;border-radius:10px;font-size:18px;cursor:pointer}
+.pad button:active,.abtn:active{transform:translateY(2px);border-bottom-width:2px}
+.pad.off{opacity:.35;pointer-events:none}
+.mid{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.mid:empty{display:none}
+.hint{color:var(--muted)}
+.okb{position:absolute;transform:translate(-50%,0);z-index:9;white-space:nowrap;font-family:var(--f-vi);font-weight:600;font-size:17px;background:#6f9a4f;color:#fff;border:none;border-bottom:4px solid #3f5f2a;border-radius:14px;padding:8px 14px;cursor:pointer;box-shadow:0 3px 10px rgba(40,30,10,.25);animation:okin .3s cubic-bezier(.3,1.5,.5,1)}
+.okb.up{transform:translate(-50%,-100%)}
+.okb:active{border-bottom-width:2px;margin-top:2px}
+.okb .chip{background:#fff;color:#2f4a1f;border-color:#fff;font-size:17px}
+@keyframes okin{from{transform:translate(-50%,-8px) scale(.6);opacity:0}}
+.world.night{filter:brightness(.78) saturate(.85) hue-rotate(-8deg)}
+.chat{display:flex;flex-direction:column;gap:8px;max-height:100%}
+.chatlog{display:flex;flex-direction:column;gap:8px;min-height:200px;max-height:55vh;overflow:auto;padding:4px}
+.msg{display:flex;gap:6px;align-items:flex-end}
+.msg.me{justify-content:flex-end}
+.face.sm{width:40px;height:40px}
+.bub{font-family:var(--f-ko);font-size:19px;line-height:1.35;text-align:left;border:none;border-radius:16px;padding:8px 12px;cursor:pointer;max-width:75%;background:var(--leaf-soft);color:var(--leaf-ink);animation:okin .3s ease-out}
+.msg.me .bub{background:#6f9a4f;color:#fff}
+.btn{font-family:var(--f-vi);font-weight:600;font-size:16px;background:var(--leaf);color:#fff;border:none;border-bottom:4px solid #3f5f2a;border-radius:14px;padding:10px 16px;cursor:pointer}
+.btn:active{transform:translateY(2px);border-bottom-width:2px}
+.btn .chip{background:#fff;color:#2f4a1f;border-color:#fff}
+.btn .ko{font-family:var(--f-ko);font-size:20px;font-weight:400}
+.abtn{width:66px;height:66px;border-radius:50%;font-size:26px}
+.learned{display:flex;justify-content:center;flex-wrap:wrap;gap:6px;align-items:center;color:var(--muted);font-size:13px}
+.pick{display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;padding:22px 14px}
+.pick .row{display:flex;gap:18px;flex-wrap:wrap;justify-content:center}
+.who{background:var(--leaf-soft);border:3px solid var(--line);border-bottom-width:6px;border-radius:20px;padding:14px 22px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--ink);font-family:var(--f-vi);font-weight:600}
+.who img{height:150px}
+.who:hover{border-color:var(--leaf)}
+.done{display:flex;flex-direction:column;gap:10px;align-items:center;text-align:center;padding:18px}
+.done .pics{display:flex;gap:10px;align-items:flex-end;justify-content:center}
+.done .pics img{height:120px}
+.note{font-size:12px;color:var(--muted);text-align:center;margin:0}
+#learned{display:none}
+</style>
+
+<div class="wrap">
+  <div class="center" id="pickWrap">
+  <section class="card pick" id="pick">
+    <div class="mtext">Chọn nhân vật của bạn</div>
+    <div class="row">
+      <button class="who" data-hero="f"><img src="hero_f.png" alt="">Linh</button>
+      <button class="who" data-hero="m"><img src="hero_m.png" alt="">Minh</button>
+    </div>
+    <p class="note">시험판 1화 · 집 아침 → 첫 수업 · 지도나 사람을 누르면 그쪽으로 걸어가요 (PC·TV는 화살표 키와 스페이스·엔터)</p>
+  </section>
+  </div>
+  <div id="game" hidden>
+    <div class="view" id="view"><div class="world" id="world"><div class="spr hero" id="hero"></div><div class="spr npc" id="npc" hidden></div><img class="carry" id="carry" alt="" hidden><img class="given" id="given" alt="" hidden><div id="npcs"></div><div id="tags"></div><div id="okLayer"></div><div id="fx"></div></div><div id="popBox"></div></div>
+    <section class="card mission" id="mission" aria-live="polite">
+      <div class="mlabel"><span id="mcount"></span><span class="hearts" id="hearts"></span></div>
+      <div class="mtext" id="mtext"></div>
+      <div class="talk" id="talk" hidden><span class="face" id="tface"></span><span class="line" id="tline"></span><button class="chip" id="treplay" aria-label="Nghe lại">▶</button></div>
+      <div class="mid" id="mid"></div>
+    </section>
+    <div class="center" id="doneWrap" hidden><section class="card done" id="done"></section></div>
+    <div class="center" id="chatWrap" hidden><section class="card chat"><div class="mlabel">Tin nhắn · Lớp mình</div><div class="hint" id="chatHint"></div><div class="chatlog" id="chatLog"></div><div class="mid" id="chatReply"></div></section></div>
+    <div class="learned" id="learned"></div>
+  </div>
+</div>
+
+<script>
+/* ---------- words & pictures ---------- */
+const W={mom:'엄마',dad:'아빠',grandma:'할머니',sib:'동생',dog:'강아지',fridge:'냉장고',water:'물',tv:'텔레비전',bag:'가방',shoes:'신발',book:'책',door:'문',kimchi:'김치',mandu:'만두',ramen:'라면',rice:'밥',school:'학교',
+  teacher:'선생님',seat:'자리',board:'칠판',shelf:'책장',trash:'쓰레기통',notebook:'공책',pcase:'필통',pen:'펜',pencil:'연필',eraser:'지우개',sua:'수아',
+  junho:'준호',doyun:'도윤',haeun:'하은',ball:'공',bottle:'물병',towel:'수건',redbook:'빨간 책',yellowbook:'노란 책',bluebook:'파란 책',milk:'우유',juice:'주스',bread:'빵',library:'도서관',kiosk:'매점',field:'운동장',mybed:'침대'};
+const IMG={kimchi:'food_kimchi.png',mandu:'food_mandu.png',ramen:'food_ramen.png',rice:'food_rice.png',book:'it_book.png',notebook:'it_notebook.png',pcase:'it_pcase.png',pen:'it_pen.png',pencil:'it_pencil.png',eraser:'it_eraser.png',water:'water.png',ball:'it_ball.png',bottle:'it_bottle.png',towel:'it_towel.png',redbook:'it_redbook.png',yellowbook:'it_yellowbook.png',bluebook:'it_bluebook.png',milk:'it_milk.png',juice:'it_juice.png',bread:'it_bread.png'};
+const K=id=>`<button class="chip" data-say="${W[id]}">${W[id]}</button>`;
+const KS=t=>`<button class="chip" data-say="${t}">${t}</button>`;
+
+/* ---------- scenes ---------- */
+const SCENES={
+ home:{map:'map.jpg',
+  walk:[[130,200,480,440],[470,180,540,290],[520,200,930,665],[150,545,530,665],[395,500,530,700],[1000,220,1330,375],[920,300,1010,380],[1000,450,1330,720],[920,400,1010,470]],
+  block:[[195,115,340,340],[85,300,205,410],[85,405,250,445],[260,410,385,445],[440,235,490,295],[805,225,920,340],[530,260,575,310],[515,360,585,515],[525,315,585,370],[740,495,810,605],[835,470,930,645],[850,400,920,470],[720,150,775,250],[585,570,640,615],[615,650,675,700],[105,480,305,550],[370,660,520,725],[1050,140,1165,230],[1160,120,1280,320],[1210,280,1285,375],[1110,340,1200,380],[1080,410,1280,490],[1195,490,1260,600],[1150,510,1210,580],[955,505,1000,600],[1075,605,1295,705]],
+  spots:{mom:[748,195],fridge:[883,135],water:[905,262],dad:[268,175],grandma:[858,553],dog:[612,592],tv:[548,440],sib:[1110,190],bag:[975,550],shoes:[362,610],book:[1160,450],door:[100,610]},
+  start:[1040,560],
+  faces:{mom:['map.jpg',1376,768,715,140,72],dad:['map.jpg',1376,768,233,140,72],grandma:['map.jpg',1376,768,823,518,72],sib:['map.jpg',1376,768,1075,152,72]},
+  pops:{fridge:{closed:['fridge_closed.png',300],open:['fridge_open.png',322],items:['kimchi','mandu','ramen','rice'],pos:{kimchi:[92,150],mandu:[200,236],ramen:[440,236],rice:[548,150]},from:[320,200]},
+        doorview:{view:['door_closed.jpg','door_open.jpg',590,702,330],items:[],hot:{school:[222,190,200,195]}}},
+  label:'Buổi sáng ở nhà',
+  missions:[
+   {t:'mom',vi:()=>`Hãy tìm ${K('mom')} trong nhà.`,say:{w:'mom',ko:'일어났구나! 밥 먹고 가.'}},
+   {t:'rice',vi:()=>`Mẹ muốn bạn ăn ${K('rice')} rồi mới đi.`,say:{w:'mom',ko:'맛있게 먹어. 아빠 좀 깨워 줄래?'}},
+   {t:'dad',vi:()=>`Mẹ nhờ bạn đánh thức ${K('dad')}.`,say:{w:'dad',ko:'으음… 5분만… 할머니께 인사드렸니?'}},
+   {t:'grandma',vi:()=>`Hãy chào ${K('grandma')}.`,say:{w:'grandma',ko:'잘 잤니? 동생도 깨워 주렴.'}},
+   {t:'sib',vi:()=>`Hãy gọi ${K('sib')}.`,say:{w:'sib',ko:'잠깐, 방송 중! …할머니가 물 드시고 싶으시대.'}},
+   {t:'water',take:'water',vi:()=>`Hãy mang ${K('water')} đến cho ${K('grandma')}.`},
+   {t:'grandma',give:'water',vi:()=>`Hãy mang ${K('water')} đến cho ${K('grandma')}.`,btn:()=>`Đưa ${K('water')} cho người này`,say:{w:'grandma',ko:'고마워. 가방 잊지 말고!'}},
+   {t:'bag',wear:true,vi:()=>`Đừng quên ${K('bag')} nhé.`,btn:()=>`Đeo ${K('bag')} lên`,say:{w:'mom',ko:'다 챙겼니? 엄마한테 인사하고 가야지.'}},
+   {t:'mom',vi:()=>`Hãy chào ${K('mom')} rồi đi học.`,btn:()=>`Chào ${K('mom')}`,say:{w:'mom',ko:'학교 잘 다녀와! 문 열고 나가렴.'}},
+   {t:'door',vi:()=>`Mẹ bảo mở ${K('door')} ra rồi đi.`,btn:()=>`Mở ${K('door')} này`,openPop:'doorview'},
+   {t:'school',end:true,vi:()=>`Bên ngoài cửa có gì vậy? Hãy đi đến ${K('school')}!`,btn:()=>`Đi đến ${K('school')}`}
+  ],
+  next:'class'},
+ class:{map:'class.jpg',
+  walk:[[215,165,1135,690],[70,560,215,700]],
+  block:[[890,60,1205,300],[215,120,390,200],[300,305,525,425],[590,305,805,425],[870,305,1090,425],[300,430,525,505],[590,430,805,505],[870,430,1090,545],[300,550,525,672],[590,550,805,672],[870,550,1090,672],[1125,470,1210,630]],
+  spots:{teacher:[935,150],seat:[645,520],board:[680,70],shelf:[180,380],trash:[300,165],door:[120,630]},
+  start:[170,640],
+  faces:{teacher:['class.jpg',1376,768,900,62,72],sua:['sua.png',75,220,4,0,68]},
+  pops:{desk:{board:true,items:['book','notebook','pcase'],from:[320,330]},
+        pcase:{closed:['it_pcase.png',120],open:['it_pcase_open.png',118],items:['pen','pencil','eraser'],pos:{pen:[150,170],pencil:[320,120],eraser:[490,170]},from:[320,300]}},
+  label:'Lớp học đầu tiên',
+  missions:[
+   {t:'seat',sit:true,vi:()=>`Lớp học sắp bắt đầu. Hãy tìm một ${K('seat')} trống.`,btn:()=>`Ngồi ở ${K('seat')} này`,say:{w:'teacher',ko:'자, 여러분. 책 펴세요.'},openPop:'desk'},
+   {t:'book',vi:()=>`Cô giáo bảo mở ${K('book')} ra.`,after:'suaEnter'},
+   {t:'pen',give:'pen',vi:()=>`Bạn bên cạnh cần ${K('pen')}.`,btn:()=>`Đưa ${K('pen')} cho bạn ấy`,say:{w:'sua',ko:'고마워! 나 수아야. 너는?'}},
+   {phrase:true,vi:()=>`Hãy nói tên của bạn với Sua.`,btn:()=>`<span class="ko">저는 ${heroName()}이에요.</span>`,say:{w:'sua',ko:()=>`${heroName()}! 대박, 이름 ${hero==='f'?'예쁘다':'멋지다'}!`},heart:'sua',stand:true},
+   {walk:true,bell:true,vi:()=>`Tan học rồi! Cửa đang sáng lên — hãy ra ${K('door')}.`}
+  ],
+  doneMsg:()=>`Tan học! Bây giờ ra sân trường.`,nextBtn:()=>`Ra sân trường →`,
+  next:'campus'},
+ campus:{map:'campus.jpg',
+  walk:[[480,315,1280,660],[745,185,885,330],[600,172,1110,214],[70,100,418,640],[418,370,520,440],[740,620,890,745]],
+  block:[[745,405,880,525],[935,300,1085,465],[620,300,720,405],[1120,200,1310,380],[1140,440,1255,590],[1245,320,1345,425],[910,470,1145,640],[540,525,640,640],[195,140,300,200]],
+  spots:{junho:[260,390],doyun:[690,165],haeun:[1150,378],library:[815,150],kiosk:[1215,330],field:[250,260],door:[815,700]},
+  npcs:[{id:'junho',img:'junho.png',x:260,y:430},{id:'doyun',img:'doyun.png',x:690,y:205},{id:'haeun',img:'haeun.png',x:1150,y:418}],
+  start:[815,340],
+  faces:{junho:['junho.png',73,220,0,0,73],doyun:['doyun.png',71,220,0,0,71],haeun:['haeun.png',80,220,4,0,72]},
+  pops:{field:{items:['ball','bottle','towel'],from:[320,380]},
+        shelf:{board:true,items:['redbook','yellowbook','bluebook'],from:[320,330]},
+        box:{board:true,items:['milk','juice','bread'],from:[320,330]}},
+  label:'Sau giờ học',
+  branches:{
+   junho:{say:{w:'junho',ko:'어이! 공! 공 좀 줘!'},pop:'field',missions:[{t:'ball',give:'ball',giveTo:'junho',vi:()=>`Junho gọi: ${K('ball')}! Hãy tìm ${K('ball')} cho Junho.`,btn:()=>`Đưa ${K('ball')} cho Junho`,say:{w:'junho',ko:'오, 고마워! 축구 좋아해? 내일 같이 하자!'},heart:'junho'}]},
+   doyun:{say:{w:'doyun',ko:'…저기, 파란 책.'},pop:'shelf',missions:[{t:'bluebook',give:'bluebook',giveTo:'doyun',vi:()=>`Doyun đang tìm một cuốn sách. Hãy chọn ${K('bluebook')}.`,btn:()=>`Đưa ${K('bluebook')} cho Doyun`,say:{w:'doyun',ko:'…고마워요.'},heart:'doyun'}]},
+   haeun:{say:{w:'haeun',ko:'잠깐만요! 아, 우유가 떨어졌어요!'},pop:'box',missions:[{t:'milk',give:'milk',giveTo:'haeun',vi:()=>`Haeun làm rơi đồ. Hãy nhặt ${K('milk')} giúp.`,btn:()=>`Đưa ${K('milk')} cho Haeun`,say:{w:'haeun',ko:'어머, 고마워요! 이거 하나 가져가요.'},heart:'haeun'}]}},
+  missions:[
+   {choose:['junho','doyun','haeun'],vi:()=>`Tan học rồi! Chiều nay bạn muốn đi với ai? Hãy đến gần một người.`,btn:()=>`Đi với bạn này`},
+   {walk:true,vi:()=>`Trời tối rồi. Cổng trường đang sáng lên — hãy ra ${K('door')} để về nhà.`}
+  ],
+  doneMsg:()=>`Một buổi chiều vui! Về nhà thôi.`,nextBtn:()=>`Về nhà →`,
+  next:'evening'},
+ evening:{map:'map.jpg',tint:true,
+  walk:null,block:null,spots:null,faces:null,pops:null,
+  start:[200,610],
+  label:'Buổi tối ở nhà',
+  missions:[
+   {t:'mom',vi:()=>`Bạn về nhà rồi! Hãy chào ${K('mom')}.`,say:{w:'mom',ko:'왔니? 밥은? 오늘 어땠어?'},after:'quizStart'},
+   {quiz:3,vi:()=>`Mẹ hỏi về hôm nay. Nghe rồi chọn đúng hình. <button class="chip" id="qplay" aria-label="Nghe lại">▶</button> (${(S.quiz?S.quiz.round:0)+1}/3)`,say:{w:'mom',ko:'잘했네! 이제 할머니께 인사하렴.'}},
+   {t:'grandma',vi:()=>`Hãy chào ${K('grandma')}.`,say:{w:'grandma',ko:'뭐? 펜? …김치?'}},
+   {t:'mybed',end:true,vi:()=>`Muộn rồi. Hãy về ${K('mybed')} đi ngủ.`,btn:()=>`Đi ngủ`}
+  ],
+  doneMsg:()=>`Chúc ngủ ngon! …Ồ, có tin nhắn.`,nextBtn:()=>`Xem tin nhắn →`,
+  next:'chat'},
+ chat:{chat:true,label:'Tin nhắn',missions:[{vi:()=>''}]}
+};
+['walk','block','faces','pops'].forEach(k=>{SCENES.evening[k]=SCENES.home[k];});
+SCENES.evening.spots=Object.assign({},SCENES.home.spots,{mybed:[1110,640]});
+SCENES.home.doneMsg=()=>`Xong buổi sáng! Bây giờ đi ${K('school')}.`;SCENES.home.nextBtn=()=>`Đi ${K('school')} →`;
+/* night chat (Mystic-Messenger style): Sua, then the friend picked after school */
+const CHAT={
+  sua1:()=>`${heroName()}! 오늘 펜 고마워`,sua2:'내일 떡볶이 먹을래?',
+  replies:[{me:'좋아!',back:'대박! 내일 봐!'},{me:'떡볶이가 뭐야?',back:'대박ㅋㅋ 내일 보여 줄게!'}],
+  friend:{junho:'내일 축구! 가자!',doyun:'…책 고마워요. 잘 자요.',haeun:'우유 맛있게 먹어요!'},
+  hint:'Sua nhắn tin cho bạn. Chạm vào tin nhắn để nghe, rồi chọn câu trả lời.'
+};
+
+/* ---------- state ---------- */
+let SC,L,M,S,hero='f',keys={},path=null,after=null,last=0;
+const G={known:new Set(),heard:new Set(),hearts:{}};
+const heroName=()=>hero==='f'?'린':'민';
+const REACH=110,SPEED=320,CELL=10,GW=Math.ceil(1376/CELL),GH=Math.ceil(768/CELL);
+const inR=(r,x,y)=>x>=r[0]&&x<=r[2]&&y>=r[1]&&y<=r[3];
+let GRID;
+function freeAt(x,y){return L.walk.some(r=>inR(r,x,y))&&!L.block.some(r=>inR(r,x,y));}
+function loadScene(name){
+  SC=name;L=SCENES[name];M=L.missions.slice();
+  if(L.chat){closePop(true);S={m:0,done:true,sel:null,talk:null};document.getElementById('mission').hidden=true;startChat();return;}
+  GRID=new Uint8Array(GW*GH);for(let gy=0;gy<GH;gy++)for(let gx=0;gx<GW;gx++)GRID[gy*GW+gx]=freeAt(gx*CELL+5,gy*CELL+5)?1:0;
+  closePop(true);path=null;after=null;keys={};
+  S={m:0,sel:null,x:L.start[0],y:L.start[1],flip:false,moving:false,pop:null,talk:null,done:false,msg:'',near:null,popTag:null,carry:null,given:null,sit:false,npc:null};
+  document.getElementById('world').style.backgroundImage=`url(${L.map})`;
+  document.getElementById('world').classList.toggle('night',!!L.tint);
+  document.getElementById('npcs').innerHTML=(L.npcs||[]).map(n=>`<div class="spr npc" data-npc="${n.id}" style="left:${n.x}px;top:${n.y}px;background-image:url(${n.img})"></div>`).join('');
+  document.getElementById('npc').hidden=true;document.getElementById('given').hidden=true;document.getElementById('carry').hidden=true;
+  renderUI();renderTags();fit();
+}
+
+/* ---------- sound ---------- */
+const SND={"엄마": "snd/k00.mp3", "아빠": "snd/k01.mp3", "할머니": "snd/k02.mp3", "동생": "snd/k03.mp3", "강아지": "snd/k04.mp3", "냉장고": "snd/k05.mp3", "물": "snd/k06.mp3", "텔레비전": "snd/k07.mp3", "가방": "snd/k08.mp3", "신발": "snd/k09.mp3", "책": "snd/k10.mp3", "문": "snd/k11.mp3", "김치": "snd/k12.mp3", "만두": "snd/k13.mp3", "라면": "snd/k14.mp3", "밥": "snd/k15.mp3", "학교": "snd/k16.mp3", "선생님": "snd/k17.mp3", "자리": "snd/k18.mp3", "칠판": "snd/k19.mp3", "책장": "snd/k20.mp3", "쓰레기통": "snd/k21.mp3", "공책": "snd/k22.mp3", "필통": "snd/k23.mp3", "펜": "snd/k24.mp3", "연필": "snd/k25.mp3", "지우개": "snd/k26.mp3", "수아": "snd/k27.mp3", "준호": "snd/k43.mp3", "도윤": "snd/k44.mp3", "하은": "snd/k45.mp3", "공": "snd/k46.mp3", "물병": "snd/k47.mp3", "수건": "snd/k48.mp3", "빨간 책": "snd/k49.mp3", "노란 책": "snd/k50.mp3", "파란 책": "snd/k51.mp3", "우유": "snd/k52.mp3", "주스": "snd/k53.mp3", "빵": "snd/k54.mp3", "도서관": "snd/k55.mp3", "매점": "snd/k56.mp3", "운동장": "snd/k57.mp3", "침대": "snd/k58.mp3", "Jua": "snd/k59.mp3", "일어났구나! 밥 먹고 가.": "snd/k28.mp3", "맛있게 먹어. 아빠 좀 깨워 줄래?": "snd/k29.mp3", "으음… 5분만… 할머니께 인사드렸니?": "snd/k30.mp3", "잘 잤니? 동생도 깨워 주렴.": "snd/k31.mp3", "잠깐, 방송 중! …할머니가 물 드시고 싶으시대.": "snd/k32.mp3", "고마워. 가방 잊지 말고!": "snd/k33.mp3", "다 챙겼니? 엄마한테 인사하고 가야지.": "snd/k34.mp3", "학교 잘 다녀와! 문 열고 나가렴.": "snd/k35.mp3", "자, 여러분. 책 펴세요.": "snd/k36.mp3", "고마워! 나 수아야. 너는?": "snd/k38.mp3", "어이! 공! 공 좀 줘!": "snd/k60.mp3", "오, 고마워! 축구 좋아해? 내일 같이 하자!": "snd/k61.mp3", "…저기, 파란 책.": "snd/k62.mp3", "…고마워요.": "snd/k63.mp3", "잠깐만요! 아, 우유가 떨어졌어요!": "snd/k64.mp3", "어머, 고마워요! 이거 하나 가져가요.": "snd/k65.mp3", "왔니? 밥은? 오늘 어땠어?": "snd/k66.mp3", "잘했네! 이제 할머니께 인사하렴.": "snd/k67.mp3", "뭐? 펜? …김치?": "snd/k68.mp3", "대박, 늦었다! 저기, 펜 있어? 펜, 펜!": "snd/k37.mp3", "내일 떡볶이 먹을래?": "snd/k69.mp3", "좋아!": "snd/k70.mp3", "대박! 내일 봐!": "snd/k71.mp3", "떡볶이가 뭐야?": "snd/k72.mp3", "대박ㅋㅋ 내일 보여 줄게!": "snd/k73.mp3", "내일 축구! 가자!": "snd/k74.mp3", "…책 고마워요. 잘 자요.": "snd/k75.mp3", "우유 맛있게 먹어요!": "snd/k76.mp3", "린! 대박, 이름 예쁘다!": "snd/k39.mp3", "민! 대박, 이름 멋지다!": "snd/k40.mp3", "저는 린이에요.": "snd/k41.mp3", "저는 민이에요.": "snd/k42.mp3", "린! 오늘 펜 고마워": "snd/k77.mp3", "민! 오늘 펜 고마워": "snd/k78.mp3"};
+const auL=new Audio(),auW=new Audio();auL.preload=auW.preload='auto';let auOk=false,waitWord=null;
+function unlockAudio(){if(auOk)return;auOk=true;const f=Object.values(SND)[0];
+  [auL,auW].forEach(a=>{try{a.src=f;a.muted=true;const p=a.play();if(p)p.then(()=>{a.pause();a.muted=false;a.currentTime=0;}).catch(()=>{a.muted=false;auOk=false;});}catch(e){a.muted=false;}});
+  try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();if(ac.state==='suspended')ac.resume();}catch(e){}}
+['pointerdown','touchstart','keydown'].forEach(ev=>document.addEventListener(ev,unlockAudio,{capture:true,passive:true}));
+let voices=[];function loadVoices(){try{voices=speechSynthesis.getVoices()||[];}catch(e){}}
+try{loadVoices();speechSynthesis.onvoiceschanged=loadVoices;}catch(e){}
+function speak(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='ko-KR';const v=voices.find(v=>(v.lang||'').toLowerCase().startsWith('ko'));if(v)u.voice=v;u.rate=.85;speechSynthesis.speak(u);}catch(e){}}
+const lineBusy=()=>!auL.paused&&!auL.ended;
+function playOn(a,t,done){const f=SND[t];if(!f){speak(t);return;}try{a.muted=false;a.pause();a.src=f;a.currentTime=0;a.onended=done||null;const p=a.play();if(p)p.catch(()=>speak(t));}catch(e){speak(t);}}
+function sayLine(t){auW.pause();waitWord=null;playOn(auL,t,()=>{if(waitWord){const w=waitWord;waitWord=null;playOn(auW,w);}});}
+function say(t){if(lineBusy()){waitWord=t;return;}playOn(auW,t);}
+let ac;function tone(kind){try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();const seq=kind==='ok'?[880,1320]:kind==='bell'?[784,659,523]:[220];seq.forEach((f,i)=>{const o=ac.createOscillator(),g=ac.createGain();o.type=kind==='no'?'triangle':'sine';o.frequency.value=f;const t=ac.currentTime+i*(kind==='bell'?.35:.12);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.25,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+(kind==='bell'?.6:.35));o.connect(g).connect(ac.destination);o.start(t);o.stop(t+.7);});}catch(e){}}
+const lineText=s=>typeof s.ko==='function'?s.ko():s.ko;
+
+/* ---------- camera & drawing ---------- */
+let scale=1,camX=0,camY=0,VW=0,VH=0;
+let MT=0,MB=0;
+function insets(){const v=document.getElementById('view');MT=0;MB=0;v.style.setProperty('--mt',MT+'px');v.style.setProperty('--mb',MB+'px');v.style.setProperty('--fs',Math.min(VW/640,Math.max(160,VH-MT-MB)/360,1.8));}
+function fit(){const v=document.getElementById('view');if(!v.clientWidth)return;VW=v.clientWidth;VH=v.clientHeight;scale=Math.max(VW/1376,VH/768);insets();place();}
+const doorOpen=()=>!!(M[S.m]&&M[S.m].walk);
+function nearest(){let best=null,bd=1e9;for(const k in L.spots){const [sx,sy]=L.spots[k],d=Math.hypot(sx-S.x,sy-(S.y-30));if(d<bd){bd=d;best=k;}}return bd<=REACH?best:null;}
+function place(){if(!S)return;
+  camX=Math.min(Math.max(S.x*scale-VW/2,0),Math.max(0,1376*scale-VW));
+  camY=Math.min(Math.max((S.y-40)*scale-(MT+(VH-MT-MB)/2),0),Math.max(0,768*scale-VH));
+  document.getElementById('world').style.transform=`translate(${-camX}px,${-camY}px) scale(${scale})`;
+  const h=document.getElementById('hero');h.style.left=S.x+'px';h.style.top=S.y+'px';
+  h.classList.toggle('flip',S.flip);h.classList.toggle('walk',S.moving);
+  const c=document.getElementById('carry');c.hidden=!S.carry;if(S.carry){c.src=IMG[S.carry];c.style.width='30px';c.style.left=(S.x+(S.flip?-28:6))+'px';c.style.top=(S.y-62+(S.moving&&(performance.now()/160|0)%2?-3:0))+'px';}
+  const n=document.getElementById('npc');if(S.npc){n.hidden=false;n.style.left=S.npc.x+'px';n.style.top=S.npc.y+'px';n.style.backgroundImage=`url(${S.npc.img})`;n.classList.toggle('walk',!!S.npc.path);n.classList.toggle('flip',!!S.npc.flip);}
+  const nr=nearest();if(nr!==S.near){S.near=nr;renderTags();}
+}
+function renderTags(){if(!S)return;let h='';
+  for(const k in L.spots){const [x,y]=L.spots[k];
+    if(G.known.has(k)&&k!=='seat')h+=`<div class="tag ${S.popTag===k?'pop':''}" style="left:${x}px;top:${y-34}px">${W[k]}</div>`;
+    else if(S.near===k&&!S.sit&&S.sel!==k)h+=`<div class="tag q" style="left:${x}px;top:${y-34}px">?</div>`;}
+  if(doorOpen()){const [x,y]=L.spots.door;h+=`<div class="exit" style="left:${x}px;top:${y}px"></div><div class="arrow" style="left:${x}px;top:${y-110}px"></div>`;}
+  document.getElementById('tags').innerHTML=h;S.popTag=null;renderOk();}
+function faceStyle(el,w){const f=L.faces[w];if(!f){el.style.backgroundImage='none';return;}const [img,iw,ih,x,y,sz]=f,k=56/sz;el.style.backgroundImage=`url(${img})`;el.style.backgroundSize=`${iw*k}px ${ih*k}px`;el.style.backgroundPosition=`${-x*k}px ${-y*k}px`;}
+function heartsText(){const h=G.hearts;return Object.keys(h).map(k=>`${W[k]} ${'♥'.repeat(h[k])}`).join(' · ');}
+
+/* ---------- popups (fridge, desk, pencil case) ---------- */
+let fov=null,fovName=null,fovT=0;
+function openPop(name){
+  if(fov&&fovName===name)return;closePop(true);
+  const d=L.pops[name],b=document.getElementById('popBox'),n=d.items.length;
+  const pos=id=>d.pos&&d.pos[id]?d.pos[id]:[320+(d.items.indexOf(id)-(n-1)/2)*170,d.board?150:180];
+  if(d.view){const [ci,oi,iw,ih,vh]=d.view,k=vh/ih,vw=iw*k,x0=320-vw/2,y0=360-15-vh;
+    b.innerHTML=`<div class="fov" role="dialog"><div class="fstage"><img class="vw" src="${ci}" style="height:${vh}px" alt=""><img class="vw open" src="${oi}" style="height:${vh}px" alt="">${Object.keys(d.hot).map(id=>{const [hx,hy,hw,hh]=d.hot[id];return `<button class="food hot" data-food="${id}" style="--x:${x0+(hx+hw/2)*k}px;--y:${y0+hy*k}px;--hw:${hw*k}px;--hh:${hh*k}px;--d:0s"><span class="t2"></span></button>`;}).join('')}</div><button class="x" id="fxbtn" aria-label="Đóng">✕</button></div>`;
+    fov=b.firstChild;fovName=name;clearTimeout(fovT);fovT=setTimeout(()=>{if(fov)fov.classList.add('open');},450);updPop();return;}
+  const cont=d.closed?`<div class="glow"></div><img class="fr closed" src="${d.closed[0]}" style="height:${d.closed[1]}px" alt=""><img class="fr open" src="${d.open[0]}" style="height:${d.open[1]}px" alt="">`:d.board?'<div class="board"></div>':'';
+  b.innerHTML=`<div class="fov" role="dialog"><div class="fstage">${cont}${d.items.map((id,i)=>{const [x,y]=pos(id);return `<button class="food" data-food="${id}" style="--x:${x}px;--y:${y}px;--fx:${d.from[0]-x}px;--fy:${d.from[1]-y}px;--d:${i*.13}s;--iw:${id==='pen'||id==='pencil'?'80px':'112px'}"><img src="${IMG[id]}" alt=""><span class="t2"></span></button>`;}).join('')}</div><button class="x" id="fxbtn" aria-label="Đóng">✕</button></div>`;
+  fov=b.firstChild;fovName=name;clearTimeout(fovT);fovT=setTimeout(()=>{if(fov){fov.classList.add('open');setTimeout(renderOk,750);}},d.closed?380:60);
+  updPop();
+}
+function closePop(now){if(!fov)return;const el=fov;fov=null;fovName=null;clearTimeout(fovT);if(now){el.remove();return;}el.classList.add('closing');setTimeout(()=>el.remove(),380);}
+function updPop(){if(fov)fov.querySelectorAll('.food').forEach(f=>{const id=f.dataset.food,kn=G.known.has(id);f.classList.toggle('known',kn);f.classList.toggle('sel',S.sel===id);f.querySelector('.t2').textContent=kn?W[id]:'?';});renderOk();}
+function okLabel(m){return m.btn?m.btn():`Đây là ${K(m.t)}!`;}
+function renderOk(){
+  document.querySelectorAll('.okb').forEach(b=>b.remove());
+  if(!S)return;const m=M[S.m];if(!S.sel||S.done||!m||m.walk||m.phrase||m.quiz)return;
+  if(m.choose&&!m.choose.includes(S.sel))return;
+  const b=document.createElement('button');b.className='okb';b.id='confirm';b.innerHTML='✓ '+okLabel(m);
+  const it=fov&&fov.querySelector(`.food[data-food="${S.sel}"]`);
+  if(it){b.style.left=(it.offsetLeft+it.offsetWidth/2)+'px';b.style.top=(it.offsetTop+it.offsetHeight+6)+'px';fov.querySelector('.fstage').appendChild(b);return;}
+  if(fov)return;
+  const sp=L.spots[S.sel];if(!sp)return;b.classList.add('up');b.style.left=sp[0]+'px';b.style.top=(sp[1]-30)+'px';document.getElementById('okLayer').appendChild(b);
+}
+
+/* ---------- UI ---------- */
+function renderUI(){
+  const m=M[Math.min(S.m,M.length-1)];
+  document.getElementById('mcount').textContent=`${L.label} · ${Math.min(S.m+1,M.length)} / ${M.length}`;
+  document.getElementById('hearts').textContent=heartsText();
+  document.getElementById('mtext').innerHTML=m.vi();
+  const tk=document.getElementById('talk');
+  if(S.talk){tk.hidden=false;faceStyle(document.getElementById('tface'),S.talk.w);document.getElementById('tline').textContent=lineText(S.talk);}else tk.hidden=true;
+  const mid=document.getElementById('mid');
+  if(m.phrase&&!S.done)mid.innerHTML=`<button class="btn" id="phrase">🔊 ${m.btn()}</button>`;
+  else mid.innerHTML='';
+  const words=[...G.known].filter(id=>id!=='seat'||true).map(id=>K(id)).join('');
+  document.getElementById('learned').innerHTML=words?`<span>Từ đã biết</span>${words}`:'';
+  updPop();if(VW)fit();
+}
+function showDone(){
+  S.done=true;S.moving=false;closePop(true);document.getElementById('mission').hidden=true;
+  const words=[...G.known].map(id=>K(id)).join('');
+  const d=document.getElementById('done');
+  if(L.next){d.innerHTML=`<div class="pics"><img src="hero_${hero}${G.wear?'_bag':''}.png" alt=""></div><div class="mtext">${L.doneMsg()}</div><div class="learned"><span>Đã biết ${G.known.size} từ</span>${words}</div><button class="btn" id="goNext">${L.nextBtn()}</button>`;}
+  else{d.innerHTML=`<div class="pics"><img src="hero_${hero}${G.wear?'_bag':''}.png" alt=""><img src="sua_wave.png" alt="">${G.pick?`<img src="${G.pick}.png" alt="">`:''}</div><div class="mtext">Hết tập 1 · Ngày đầu tiên đi học</div><div class="hearts" style="font-size:20px">${heartsText()}</div><div class="learned"><span>Hôm nay bạn biết ${G.known.size} từ, đã nghe ${G.heard.size} từ.</span>${words}</div><div class="hint">Tập 2: ngày mai đi ăn tteokbokki với Sua?</div><button class="btn" id="again">Chơi lại</button>`;}
+  document.getElementById('doneWrap').hidden=false;document.getElementById('mission').hidden=true;
+}
+function startChat(){
+  const w=document.getElementById('chatWrap'),log=document.getElementById('chatLog'),rp=document.getElementById('chatReply');
+  w.hidden=false;log.innerHTML='';rp.innerHTML='';document.getElementById('chatHint').textContent=CHAT.hint;
+  const add=(who,t,face)=>{const b=document.createElement('div');b.className='msg '+(who==='me'?'me':'them');b.innerHTML=(who==='me'?'':`<span class="face sm" data-face="${face}"></span>`)+`<button class="bub" data-line="${t}">${t}</button>`;log.appendChild(b);
+    const f=b.querySelector('.face');if(f){const fx=SCENES[face==='sua'?'class':'campus'].faces[face];const [img,iw,ih,x,y,sz]=fx,k=40/sz;f.style.backgroundImage=`url(${img})`;f.style.backgroundSize=`${iw*k}px ${ih*k}px`;f.style.backgroundPosition=`${-x*k}px ${-y*k}px`;}
+    log.scrollTop=log.scrollHeight;sayLine(t);};
+  const seq=[()=>add('sua',CHAT.sua1(),'sua'),()=>add('sua',CHAT.sua2,'sua'),()=>{rp.innerHTML=CHAT.replies.map((r,i)=>`<button class="btn" data-reply="${i}"><span class="ko">${r.me}</span></button>`).join('');}];
+  let i=0;const next=()=>{if(i<seq.length){seq[i++]();setTimeout(next,2600);}};next();
+  w.onclick=e=>{const bub=e.target.closest('.bub');if(bub){sayLine(bub.dataset.line);return;}
+    const r=e.target.closest('[data-reply]');if(!r)return;const c=CHAT.replies[+r.dataset.reply];rp.innerHTML='';add('me',c.me);
+    setTimeout(()=>{add('sua',c.back,'sua');G.hearts.sua=(G.hearts.sua||0)+1;},2200);
+    if(G.pick)setTimeout(()=>add(G.pick,CHAT.friend[G.pick],G.pick),5000);
+    setTimeout(()=>{rp.innerHTML=`<button class="btn" id="chatEnd">${'Ngủ ngon →'}</button>`;},G.pick?7600:4800);};
+}
+function hideDone(){document.getElementById('doneWrap').hidden=true;document.getElementById('mission').hidden=false;}
+
+/* ---------- actions ---------- */
+function interact(forced){
+  if(S.sit){if(L.pops.desk&&!fov)openPop('desk');return;}
+  const n=forced||nearest();
+  if(!n){S.msg='…';renderUI();return;}
+  if(n==='door'){if(doorOpen()){showDone();return;}const cm=M[S.m];if(cm&&cm.t==='school'&&L.pops.doorview){openPop('doorview');return;}}
+  say(W[n]);G.heard.add(n);S.sel=n;S.msg='';
+  if(L.pops[n])openPop(n);
+  renderUI();
+}
+function tryMove(dx,dy){let moved=false;const nx=S.x+dx,ny=S.y+dy;
+  if(freeAt(nx,S.y)){S.x=nx;moved=true;}if(freeAt(S.x,ny)){S.y=ny;moved=true;}
+  if(dx<-.01)S.flip=true;else if(dx>.01)S.flip=false;return moved;}
+function clearSel(){if(S.sel){S.sel=null;S.msg='';if(fov)closePop();renderUI();}}
+function heartPop(x,y,k){const fx=document.getElementById('fx');const e=document.createElement('div');e.className='heartpop';e.style.left=x+'px';e.style.top=(y-110)+'px';e.textContent='♥ +1';fx.appendChild(e);setTimeout(()=>e.remove(),1700);}
+function npcWalk(points,img,done){S.npc=S.npc||{x:points[0][0],y:points[0][1]};S.npc.img=img;S.npc.path=points.slice(1);S.npc.done=done;}
+function quizRound(){
+  const pool=[...G.known].filter(k=>IMG[k]),all=Object.keys(IMG);
+  const used=S.quiz.used,cand=pool.filter(k=>!used.includes(k));const target=(cand.length?cand:pool)[Math.floor(Math.random()*(cand.length?cand:pool).length)];used.push(target);
+  const others=[...pool,...all].filter((k,i,a)=>k!==target&&a.indexOf(k)===i).sort(()=>Math.random()-.5).slice(0,2);
+  const opts=[target,...others].sort(()=>Math.random()-.5);
+  S.quiz.target=target;L.pops.quiz={board:true,items:opts,from:[320,330]};
+  closePop(true);openPop('quiz');renderUI();setTimeout(()=>say(W[target]),900);
+}
+const events={
+  quizStart(){S.quiz={round:0,used:[]};setTimeout(quizRound,2600);},
+  suaEnter(){
+    S.npc={x:SCENES.class.spots.door[0]+40,y:640,img:'sua.png'};
+    npcWalk([[160,640],[250,685],[560,685],[560,525],[750,525]],'sua.png',()=>{S.npc.flip=true;S.talk={w:'sua',ko:'대박, 늦었다! 저기, 펜 있어? 펜, 펜!'};renderUI();sayLine(S.talk.ko);setTimeout(()=>openPop('desk'),900);});
+  }
+};
+function success(m){
+  tone('ok');
+  const picked=S.sel;
+  if(m.t){G.known.add(m.t);S.popTag=m.t;}
+  if(m.choose){G.pick=picked;G.known.add(picked);S.popTag=picked;const br=L.branches[picked];M.splice(S.m+1,0,...br.missions);S.talk=br.say;
+    renderTags();setTimeout(()=>sayLine(lineText(br.say)),450);setTimeout(()=>openPop(br.pop),1300);}
+  S.sel=null;S.m++;
+  if(m.take)S.carry=m.take;
+  if(m.give){S.carry=null;const g=document.getElementById('given');g.src=IMG[m.give];g.style.width='30px';
+    const nn=m.giveTo&&(L.npcs||[]).find(n=>n.id===m.giveTo);const to=nn?[nn.x+14,nn.y-62]:SC==='class'?[750-48,470]:[L.spots.grandma[0]-58,L.spots.grandma[1]-20];g.style.left=to[0]+'px';g.style.top=to[1]+'px';g.hidden=false;g.style.animation='none';void g.offsetWidth;g.style.animation='';}
+  if(m.wear){G.wear=true;setHeroImg();}
+  if(m.end){setTimeout(showDone,1300);}
+  if(m.sit){S.sit=true;path=null;S.x=L.spots.seat[0];S.y=L.spots.seat[1]+20;S.flip=false;}
+  if(m.stand){S.sit=false;S.x=560;S.y=525;}
+  if(m.heart){G.hearts[m.heart]=(G.hearts[m.heart]||0)+1;const hn=(L.npcs||[]).find(n=>n.id===m.heart);if(hn)heartPop(hn.x,hn.y);if(S.npc){S.npc.img='sua_wave.png';heartPop(S.npc.x,S.npc.y);setTimeout(()=>{if(S.npc)S.npc.img='sua.png';},2500);}}
+  const nm=M[S.m];if(nm&&nm.bell)setTimeout(()=>tone('bell'),300);
+  if(fov){const el=fov;setTimeout(()=>{if(fov===el)closePop();},800);}
+  S.talk=m.say||S.talk;
+  renderUI();renderTags();place();
+  if(m.say)setTimeout(()=>sayLine(lineText(m.say)),450);
+  if(m.openPop)setTimeout(()=>openPop(m.openPop),1100);
+  if(m.after)setTimeout(()=>events[m.after](),900);
+}
+
+/* ---------- loop ---------- */
+function tick(t){
+  const dt=Math.min(.25,(t-last)/1000||0);last=t;
+  if(S&&!S.done){
+    if(S.npc&&S.npc.path&&S.npc.path.length){let st=260*dt;while(st>0&&S.npc.path.length){const [tx,ty]=S.npc.path[0],dx=tx-S.npc.x,dy=ty-S.npc.y,d=Math.hypot(dx,dy);if(Math.abs(dx)>1)S.npc.flip=dx<0;if(d<=st){S.npc.x=tx;S.npc.y=ty;S.npc.path.shift();st-=d;}else{S.npc.x+=dx/d*st;S.npc.y+=dy/d*st;st=0;}}
+      if(!S.npc.path.length){S.npc.path=null;const f=S.npc.done;S.npc.done=null;if(f)f();}}
+    if(!S.sit){
+      let dx=0,dy=0;if(keys.left)dx--;if(keys.right)dx++;if(keys.up)dy--;if(keys.down)dy++;
+      if(dx||dy){path=null;after=null;const l=Math.hypot(dx,dy);let ok=false;for(let r=dt;r>0;r-=.02){const h=Math.min(.02,r);if(tryMove(dx/l*SPEED*h,dy/l*SPEED*h))ok=true;}S.moving=ok;if(ok)clearSel();}
+      else if(path&&path.length){let st=SPEED*dt;
+        while(st>0&&path.length){const [tx,ty]=path[0],ddx=tx-S.x,ddy=ty-S.y,d=Math.hypot(ddx,ddy);if(Math.abs(ddx)>1)S.flip=ddx<0;
+          if(d<=st){S.x=tx;S.y=ty;path.shift();st-=d;}else{S.x+=ddx/d*st;S.y+=ddy/d*st;st=0;}}
+        S.moving=true;clearSel();
+        if(!path.length){path=null;S.moving=false;const a=after;after=null;if(a)a();}}
+      else S.moving=false;
+      if(doorOpen()&&Math.hypot(L.spots.door[0]-S.x,L.spots.door[1]-S.y)<75){showDone();}
+    }else S.moving=false;
+    place();
+  }
+  requestAnimationFrame(tick);
+}
+function bfs(goalFn){
+  const sx=Math.floor(S.x/CELL),sy=Math.floor(S.y/CELL),start=sy*GW+sx;
+  if(goalFn(sx,sy))return [];
+  const prev=new Int32Array(GW*GH).fill(-2);prev[start]=-1;const q=[start];let qi=0;
+  while(qi<q.length){const c=q[qi++],cx=c%GW,cy=(c/GW)|0;
+    for(const [ox,oy] of [[1,0],[-1,0],[0,1],[0,-1]]){const nx=cx+ox,ny=cy+oy;if(nx<0||ny<0||nx>=GW||ny>=GH)continue;const n=ny*GW+nx;if(prev[n]!==-2||!GRID[n])continue;prev[n]=c;
+      if(goalFn(nx,ny)){const out=[];let p=n;while(p!==start&&p>=0){out.unshift([(p%GW)*CELL+5,((p/GW)|0)*CELL+5]);p=prev[p];}
+        const s=[];for(let i=0;i<out.length;i++){if(i===out.length-1||i%3===2)s.push(out[i]);}return s;}
+      q.push(n);}}
+  return null;
+}
+function goTo(wx,wy){
+  if(S.sit){interact();return;}
+  const hitR=Math.max(60,46/scale);let spot=null,bd=1e9;for(const k in L.spots){const [x,y]=L.spots[k],d=Math.min(Math.hypot(x-wx,y-wy),Math.hypot(x-wx,y-50-wy));if(d<hitR&&d<bd){bd=d;spot=k;}}   // 손가락 크기만큼, 「?」·이름표를 눌러도
+  if(spot){const [x,y]=L.spots[spot];
+    const p=bfs((gx,gy)=>Math.hypot(gx*CELL+5-x,gy*CELL+5-30-y)<REACH-20);
+    if(p){path=p;after=()=>{S.flip=x<S.x;interact(spot);};if(!p.length){path=null;after();}}
+    return;}
+  const p=bfs((gx,gy)=>Math.hypot(gx*CELL+5-wx,gy*CELL+5-wy)<18);if(p&&p.length)path=p;
+}
+
+/* ---------- input ---------- */
+document.getElementById('view').addEventListener('pointerdown',e=>{
+  if(e.target.closest('.fov')||e.target.closest('.okb'))return;
+  const r=document.getElementById('view').getBoundingClientRect();
+  goTo((e.clientX-r.left+camX)/scale,(e.clientY-r.top+camY)/scale);
+});
+function setHeroImg(){document.getElementById('hero').style.backgroundImage=`url(hero_${hero}${G.wear?'_bag':''}.png)`;}
+function startGame(){G.known=new Set();G.heard=new Set();G.hearts={};G.wear=false;G.pick=null;document.getElementById('chatWrap').hidden=true;document.getElementById('pickWrap').hidden=true;document.getElementById('game').hidden=false;
+  setHeroImg();hideDone();loadScene('home');}
+document.addEventListener('click',e=>{
+  const pk=e.target.closest('[data-hero]');if(pk){hero=pk.dataset.hero;startGame();return;}
+  if(e.target.closest('#goNext')){hideDone();loadScene(L.next);return;}
+  if(e.target.closest('#chatEnd')){document.getElementById('chatWrap').hidden=true;showDone();return;}
+  if(e.target.closest('#again')){document.getElementById('game').hidden=true;document.getElementById('pickWrap').hidden=false;return;}
+  const chip=e.target.closest('.chip[data-say]');
+  if(chip&&!e.target.closest('#confirm')&&!e.target.closest('#goNext')){say(chip.dataset.say);return;}
+  if(e.target.closest('#treplay')){if(S.talk)sayLine(lineText(S.talk));return;}
+  if(e.target.closest('#fxbtn')){if(fovName==='quiz'){openPop('quiz');return;}if(fovName==='pcase'&&L.pops.desk&&S.sit){openPop('desk');return;}closePop();if(S.sel&&!L.spots[S.sel])S.sel=null;renderUI();return;}
+  if(e.target.closest('#qplay')){if(S.quiz&&S.quiz.target)say(W[S.quiz.target]);return;}
+  const food=e.target.closest('[data-food]');
+  if(food&&fovName==='quiz'){const id=food.dataset.food;
+    if(id===S.quiz.target){tone('ok');G.known.add(id);food.classList.add('sel');S.quiz.round++;
+      if(S.quiz.round>=M[S.m].quiz){S.quiz.target=null;setTimeout(()=>{closePop();success(M[S.m]);},700);}else setTimeout(quizRound,800);}
+    else{tone('no');food.classList.remove('shake');void food.offsetWidth;food.classList.add('shake');say(W[S.quiz.target]);}
+    renderUI();return;}
+  if(food){const id=food.dataset.food;say(W[id]);G.heard.add(id);S.sel=id;
+    if(L.pops[id])setTimeout(()=>openPop(id),350);renderUI();return;}
+  if(e.target.closest('#phrase')){const m=M[S.m];const t=document.querySelector('#phrase .ko').textContent;sayLine(t);setTimeout(()=>success(m),1400);document.getElementById('phrase').disabled=true;return;}
+  if(e.target.closest('#confirm')){
+    const m=M[S.m];
+    if(m.choose?m.choose.includes(S.sel):S.sel===m.t)success(m);
+    else{tone('no');const el=document.querySelector(`.food[data-food="${S.sel}"]`);if(el){el.classList.remove('shake');void el.offsetWidth;el.classList.add('shake');}}
+  }
+});
+const KEYMAP={ArrowUp:'up',ArrowDown:'down',ArrowLeft:'left',ArrowRight:'right',w:'up',s:'down',a:'left',d:'right'};
+document.addEventListener('keydown',e=>{if(!S||S.done)return;const k=KEYMAP[e.key];if(k){e.preventDefault();keys[k]=true;return;}
+  if(e.key===' '){e.preventDefault();interact();return;}
+  if(e.key==='Enter'){const c=document.getElementById('confirm')||document.getElementById('phrase');if(c){e.preventDefault();c.click();}}});
+document.addEventListener('keyup',e=>{const k=KEYMAP[e.key];if(k)keys[k]=false;});
+window.addEventListener('blur',()=>{keys={};});
+window.addEventListener('resize',fit);
+requestAnimationFrame(tick);
+</script>
+</body></html>
