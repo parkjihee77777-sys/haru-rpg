@@ -1,4 +1,4 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>하루 한국어 RPG 1화</title><style>:root{color-scheme:light}[hidden]{display:none!important}body{margin:0}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html,body{height:100%}</style></head><body><title>하루 한국어 RPG 1화</title>
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>하루 한국어 RPG 1화</title><style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}[hidden]{display:none!important}body{margin:0}html,body{height:100%}</style></head><body><title>하루 한국어 RPG 1화</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600&family=Jua&display=swap">
 <style>
@@ -115,6 +115,27 @@ button:focus-visible{outline:3px solid var(--leaf);outline-offset:2px}
 .face.sm{width:40px;height:40px}
 .bub{font-family:var(--f-ko);font-size:19px;line-height:1.35;text-align:left;border:none;border-radius:16px;padding:8px 12px;cursor:pointer;max-width:75%;background:var(--leaf-soft);color:var(--leaf-ink);animation:okin .3s ease-out}
 .msg.me .bub{background:#6f9a4f;color:#fff}
+.bwrap{display:flex;flex-direction:column;gap:2px;max-width:78%}.msg.me .bwrap{align-items:flex-end}.bwrap .bub{max-width:100%}
+.tr{font-size:13px;color:var(--muted);padding:0 6px;font-family:var(--f-vi)}
+.rbtn.shake{animation:shake .35s}
+.rbtn{display:flex;align-items:center;gap:8px;background:#fffdf6;color:#2f4a1f;border:2px solid #6f9a4f;border-bottom-width:4px}.rbtn img{width:52px;height:52px;object-fit:contain}.rbtn .ko{font-size:19px}
+.stk{width:64px;height:64px;object-fit:contain;margin-top:2px}
+.bub .chip{font-size:17px}
+.mus{margin-left:auto;border:2px solid var(--line);background:var(--leaf-soft);color:var(--leaf-ink);border-radius:50%;width:30px;height:30px;font-size:15px;line-height:1;cursor:pointer;padding:0}
+.mus.off{opacity:.45;text-decoration:line-through}
+.reward{background:rgba(40,32,16,.45);z-index:20}
+.rcard{position:relative;display:flex;flex-direction:column;align-items:center;gap:10px;max-width:min(720px,94vw)!important;padding:12px;background:#fff;overflow:visible}
+.rcard img{width:100%;max-height:62vh;object-fit:contain;border-radius:12px}
+.reward.go .rcard{animation:rin .5s cubic-bezier(.3,1.5,.5,1)}
+@keyframes rin{from{transform:scale(.6);opacity:0}}
+.rword .chip{font-size:30px;padding:2px 16px}
+.spark{position:absolute;left:50%;top:45%;width:0;height:0;pointer-events:none;z-index:2}
+.spark i{position:absolute;font-style:normal;font-size:22px;color:#f2c14e;text-shadow:0 0 6px #fff6c8;opacity:0;animation:sp 1.1s ease-out var(--d) forwards}
+@keyframes sp{0%{opacity:0;transform:rotate(var(--a)) translateY(0) scale(.4)}25%{opacity:1}100%{opacity:0;transform:rotate(var(--a)) translateY(calc(var(--r) * -1)) scale(1.1)}}
+@media (prefers-reduced-motion:reduce){.reward.go .rcard,.spark i{animation:none}}
+.prop{position:absolute;transform:translate(-50%,-100%);pointer-events:none;z-index:3;filter:drop-shadow(0 2px 0 rgba(60,40,20,.25))}
+.peek{position:absolute;transform:translate(-50%,-100%);z-index:8;pointer-events:none;background:#fffdf6;border:3px solid #6f9a4f;border-radius:16px;padding:6px;width:130px;height:130px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(40,30,10,.25);animation:okin .3s cubic-bezier(.3,1.5,.5,1)}
+.peek img{max-width:100%;max-height:100%;object-fit:contain}
 .btn{font-family:var(--f-vi);font-weight:600;font-size:16px;background:var(--leaf);color:#fff;border:none;border-bottom:4px solid #3f5f2a;border-radius:14px;padding:10px 16px;cursor:pointer}
 .btn:active{transform:translateY(2px);border-bottom-width:2px}
 .btn .chip{background:#fff;color:#2f4a1f;border-color:#fff}
@@ -147,13 +168,14 @@ button:focus-visible{outline:3px solid var(--leaf);outline-offset:2px}
   <div id="game" hidden>
     <div class="view" id="view"><div class="world" id="world"><div class="spr hero" id="hero"></div><div class="spr npc" id="npc" hidden></div><img class="carry" id="carry" alt="" hidden><img class="given" id="given" alt="" hidden><div id="npcs"></div><div id="tags"></div><div id="okLayer"></div><div id="fx"></div></div><div id="popBox"></div></div>
     <section class="card mission" id="mission" aria-live="polite">
-      <div class="mlabel"><span id="mcount"></span><span class="hearts" id="hearts"></span></div>
+      <div class="mlabel"><span id="mcount"></span><span class="hearts" id="hearts"></span><button class="mus" aria-pressed="true" aria-label="Nhạc nền">♪</button></div>
       <div class="mtext" id="mtext"></div>
       <div class="talk" id="talk" hidden><span class="face" id="tface"></span><span class="line" id="tline"></span><button class="chip" id="treplay" aria-label="Nghe lại">▶</button></div>
       <div class="mid" id="mid"></div>
     </section>
+    <div class="center reward" id="rewardWrap" hidden><section class="card rcard"><div class="spark" aria-hidden="true"></div><img id="rwImg" alt=""><div class="rword" id="rwWord"></div><button class="btn" id="rwNext">Tiếp tục →</button></section></div>
     <div class="center" id="doneWrap" hidden><section class="card done" id="done"></section></div>
-    <div class="center" id="chatWrap" hidden><section class="card chat"><div class="mlabel">Tin nhắn · Lớp mình</div><div class="hint" id="chatHint"></div><div class="chatlog" id="chatLog"></div><div class="mid" id="chatReply"></div></section></div>
+    <div class="center" id="chatWrap" hidden><section class="card chat"><div class="mlabel">Tin nhắn · Lớp mình<button class="mus" aria-pressed="true" aria-label="Nhạc nền">♪</button></div><div class="hint" id="chatHint"></div><div class="chatlog" id="chatLog"></div><div class="mid" id="chatReply"></div></section></div>
     <div class="learned" id="learned"></div>
   </div>
 </div>
@@ -163,7 +185,7 @@ button:focus-visible{outline:3px solid var(--leaf);outline-offset:2px}
 const W={mom:'엄마',dad:'아빠',grandma:'할머니',sib:'동생',dog:'강아지',fridge:'냉장고',water:'물',tv:'텔레비전',bag:'가방',shoes:'신발',book:'책',door:'문',kimchi:'김치',mandu:'만두',ramen:'라면',rice:'밥',school:'학교',
   teacher:'선생님',seat:'자리',board:'칠판',shelf:'책장',trash:'쓰레기통',notebook:'공책',pcase:'필통',pen:'펜',pencil:'연필',eraser:'지우개',sua:'수아',
   junho:'준호',doyun:'도윤',haeun:'하은',ball:'공',bottle:'물병',towel:'수건',redbook:'빨간 책',yellowbook:'노란 책',bluebook:'파란 책',milk:'우유',juice:'주스',bread:'빵',library:'도서관',kiosk:'매점',field:'운동장',mybed:'침대'};
-const IMG={kimchi:'food_kimchi.png',mandu:'food_mandu.png',ramen:'food_ramen.png',rice:'food_rice.png',book:'it_book.png',notebook:'it_notebook.png',pcase:'it_pcase.png',pen:'it_pen.png',pencil:'it_pencil.png',eraser:'it_eraser.png',water:'water.png',ball:'it_ball.png',bottle:'it_bottle.png',towel:'it_towel.png',redbook:'it_redbook.png',yellowbook:'it_yellowbook.png',bluebook:'it_bluebook.png',milk:'it_milk.png',juice:'it_juice.png',bread:'it_bread.png'};
+const IMG={kimchi:'food_kimchi.png',mandu:'food_mandu.png',ramen:'food_ramen.png',rice:'food_rice.png',book:'it_book.png',notebook:'it_notebook.png',pcase:'it_pcase.png',pen:'it_pen.png',pencil:'it_pencil.png',eraser:'it_eraser.png',water:'water.png',ball:'it_ball.png',bottle:'it_bottle.png',towel:'it_towel.png',redbook:'it_redbook.png',yellowbook:'it_yellowbook.png',bluebook:'it_bluebook.png',milk:'it_milk.png',juice:'it_juice.png',bread:'it_bread.png',bag:'it_backpack.png',shoes:'it_shoes.png',tv:'it_tv.png',dog:'it_dog.png',board:'it_board.png',shelf:'it_shelf.png',trash:'it_trash.png',fridge:'fridge_closed.png'};
 const K=id=>`<button class="chip" data-say="${W[id]}">${W[id]}</button>`;
 const KS=t=>`<button class="chip" data-say="${t}">${t}</button>`;
 
@@ -174,18 +196,19 @@ const SCENES={
   block:[[195,115,340,340],[85,300,205,410],[85,405,250,445],[260,410,385,445],[440,235,490,295],[805,225,920,340],[530,260,575,310],[515,360,585,515],[525,315,585,370],[740,495,810,605],[835,470,930,645],[850,400,920,470],[720,150,775,250],[585,570,640,615],[615,650,675,700],[105,480,305,550],[370,660,520,725],[1050,140,1165,230],[1160,120,1280,320],[1210,280,1285,375],[1110,340,1200,380],[1080,410,1280,490],[1195,490,1260,600],[1150,510,1210,580],[955,505,1000,600],[1075,605,1295,705]],
   spots:{mom:[748,195],fridge:[883,135],water:[905,262],dad:[268,175],grandma:[858,553],dog:[612,592],tv:[548,440],sib:[1110,190],bag:[975,550],shoes:[362,610],book:[1160,450],door:[100,610]},
   start:[1040,560],
+  props:[{id:'bag',img:'it_backpack.png',x:975,y:575,w:58,gone:()=>G.wear}],
   faces:{mom:['map.jpg',1376,768,715,140,72],dad:['map.jpg',1376,768,233,140,72],grandma:['map.jpg',1376,768,823,518,72],sib:['map.jpg',1376,768,1075,152,72]},
   pops:{fridge:{closed:['fridge_closed.png',300],open:['fridge_open.png',322],items:['kimchi','mandu','ramen','rice'],pos:{kimchi:[92,150],mandu:[200,236],ramen:[440,236],rice:[548,150]},from:[320,200]},
         doorview:{view:['door_closed.jpg','door_open.jpg',590,702,330],items:[],hot:{school:[222,190,200,195]}}},
   label:'Buổi sáng ở nhà',
   missions:[
    {t:'mom',vi:()=>`Hãy tìm ${K('mom')} trong nhà.`,say:{w:'mom',ko:'일어났구나! 밥 먹고 가.'}},
-   {t:'rice',vi:()=>`Mẹ muốn bạn ăn ${K('rice')} rồi mới đi.`,say:{w:'mom',ko:'맛있게 먹어. 아빠 좀 깨워 줄래?'}},
+   {t:'rice',reward:['rw_rice.jpg','rice'],vi:()=>`Mẹ muốn bạn ăn ${K('rice')} rồi mới đi.`,say:{w:'mom',ko:'맛있게 먹어. 아빠 좀 깨워 줄래?'}},
    {t:'dad',vi:()=>`Mẹ nhờ bạn đánh thức ${K('dad')}.`,say:{w:'dad',ko:'으음… 5분만… 할머니께 인사드렸니?'}},
    {t:'grandma',vi:()=>`Hãy chào ${K('grandma')}.`,say:{w:'grandma',ko:'잘 잤니? 동생도 깨워 주렴.'}},
    {t:'sib',vi:()=>`Hãy gọi ${K('sib')}.`,say:{w:'sib',ko:'잠깐, 방송 중! …할머니가 물 드시고 싶으시대.'}},
    {t:'water',take:'water',vi:()=>`Hãy mang ${K('water')} đến cho ${K('grandma')}.`},
-   {t:'grandma',give:'water',vi:()=>`Hãy mang ${K('water')} đến cho ${K('grandma')}.`,btn:()=>`Đưa ${K('water')} cho người này`,say:{w:'grandma',ko:'고마워. 가방 잊지 말고!'}},
+   {t:'grandma',give:'water',reward:['rw_water.jpg','water'],vi:()=>`Hãy mang ${K('water')} đến cho ${K('grandma')}.`,btn:()=>`Đưa ${K('water')} cho người này`,say:{w:'grandma',ko:'고마워. 가방 잊지 말고!'}},
    {t:'bag',wear:true,vi:()=>`Đừng quên ${K('bag')} nhé.`,btn:()=>`Đeo ${K('bag')} lên`,say:{w:'mom',ko:'다 챙겼니? 엄마한테 인사하고 가야지.'}},
    {t:'mom',vi:()=>`Hãy chào ${K('mom')} rồi đi học.`,btn:()=>`Chào ${K('mom')}`,say:{w:'mom',ko:'학교 잘 다녀와! 문 열고 나가렴.'}},
    {t:'door',vi:()=>`Mẹ bảo mở ${K('door')} ra rồi đi.`,btn:()=>`Mở ${K('door')} này`,openPop:'doorview'},
@@ -204,7 +227,7 @@ const SCENES={
   missions:[
    {t:'seat',sit:true,vi:()=>`Lớp học sắp bắt đầu. Hãy tìm một ${K('seat')} trống.`,btn:()=>`Ngồi ở ${K('seat')} này`,say:{w:'teacher',ko:'자, 여러분. 책 펴세요.'},openPop:'desk'},
    {t:'book',vi:()=>`Cô giáo bảo mở ${K('book')} ra.`,after:'suaEnter'},
-   {t:'pen',give:'pen',vi:()=>`Bạn bên cạnh cần ${K('pen')}.`,btn:()=>`Đưa ${K('pen')} cho bạn ấy`,say:{w:'sua',ko:'고마워! 나 수아야. 너는?'}},
+   {t:'pen',give:'pen',reward:['rw_pen.jpg','pen'],vi:()=>`Bạn bên cạnh cần ${K('pen')}.`,btn:()=>`Đưa ${K('pen')} cho bạn ấy`,say:{w:'sua',ko:'고마워! 나 수아야. 너는?'}},
    {phrase:true,vi:()=>`Hãy nói tên của bạn với Sua.`,btn:()=>`<span class="ko">저는 ${heroName()}이에요.</span>`,say:{w:'sua',ko:()=>`${heroName()}! 대박, 이름 ${hero==='f'?'예쁘다':'멋지다'}!`},heart:'sua',stand:true},
    {walk:true,bell:true,vi:()=>`Tan học rồi! Cửa đang sáng lên — hãy ra ${K('door')}.`}
   ],
@@ -222,9 +245,10 @@ const SCENES={
         box:{board:true,items:['milk','juice','bread'],from:[320,330]}},
   label:'Sau giờ học',
   branches:{
-   junho:{say:{w:'junho',ko:'어이! 공! 공 좀 줘!'},pop:'field',missions:[{t:'ball',give:'ball',giveTo:'junho',vi:()=>`Junho gọi: ${K('ball')}! Hãy tìm ${K('ball')} cho Junho.`,btn:()=>`Đưa ${K('ball')} cho Junho`,say:{w:'junho',ko:'오, 고마워! 축구 좋아해? 내일 같이 하자!'},heart:'junho'}]},
-   doyun:{say:{w:'doyun',ko:'…저기, 파란 책.'},pop:'shelf',missions:[{t:'bluebook',give:'bluebook',giveTo:'doyun',vi:()=>`Doyun đang tìm một cuốn sách. Hãy chọn ${K('bluebook')}.`,btn:()=>`Đưa ${K('bluebook')} cho Doyun`,say:{w:'doyun',ko:'…고마워요.'},heart:'doyun'}]},
-   haeun:{say:{w:'haeun',ko:'잠깐만요! 아, 우유가 떨어졌어요!'},pop:'box',missions:[{t:'milk',give:'milk',giveTo:'haeun',vi:()=>`Haeun làm rơi đồ. Hãy nhặt ${K('milk')} giúp.`,btn:()=>`Đưa ${K('milk')} cho Haeun`,say:{w:'haeun',ko:'어머, 고마워요! 이거 하나 가져가요.'},heart:'haeun'}]}},
+   junho:{say:{w:'junho',ko:'어이! 공! 공 좀 줘!'},pop:'field',missions:[{t:'ball',give:'ball',reward:['rw_ball.jpg','ball'],giveTo:'junho',vi:()=>`Junho gọi: ${K('ball')}! Hãy tìm ${K('ball')} cho Junho.`,btn:()=>`Đưa ${K('ball')} cho Junho`,say:{w:'junho',ko:'오, 고마워! 축구 좋아해? 내일 같이 하자!'},heart:'junho'}]},
+   doyun:{say:{w:'doyun',ko:'…저기, 파란 책.'},pop:'shelf',missions:[{t:'bluebook',give:'bluebook',reward:['rw_book.jpg','bluebook'],giveTo:'doyun',vi:()=>`Doyun đang tìm một cuốn sách. Hãy chọn ${K('bluebook')}.`,btn:()=>`Đưa ${K('bluebook')} cho Doyun`,say:{w:'doyun',ko:'…고마워요.'},heart:'doyun'}]},
+   haeun:{say:{w:'haeun',ko:'잠깐만요! 아, 우유가 떨어졌어요!'},pop:'box',missions:[{t:'milk',give:'milk',reward:['rw_milk.jpg','milk'],giveTo:'haeun',vi:()=>`Haeun làm rơi đồ. Hãy nhặt ${K('milk')} giúp.`,btn:()=>`Đưa ${K('milk')} cho Haeun`,say:{w:'haeun',ko:'어머, 고마워요! 이거 하나 가져가요.'},heart:'haeun'}]}},
+  invites:{junho:{ko:'축구 한 판 할래? 내가 공 차는 법 알려 줄게!'},doyun:{ko:'…도서관 갈래요? 조용하고 좋아요.'},haeun:{ko:'매점 와요! 오늘 딸기우유 맛있어요!'}},
   missions:[
    {choose:['junho','doyun','haeun'],vi:()=>`Tan học rồi! Chiều nay bạn muốn đi với ai? Hãy đến gần một người.`,btn:()=>`Đi với bạn này`},
    {walk:true,vi:()=>`Trời tối rồi. Cổng trường đang sáng lên — hãy ra ${K('door')} để về nhà.`}
@@ -237,24 +261,32 @@ const SCENES={
   label:'Buổi tối ở nhà',
   missions:[
    {t:'mom',vi:()=>`Bạn về nhà rồi! Hãy chào ${K('mom')}.`,say:{w:'mom',ko:'왔니? 밥은? 오늘 어땠어?'},after:'quizStart'},
-   {quiz:3,vi:()=>`Mẹ hỏi về hôm nay. Nghe rồi chọn đúng hình. <button class="chip" id="qplay" aria-label="Nghe lại">▶</button> (${(S.quiz?S.quiz.round:0)+1}/3)`,say:{w:'mom',ko:'잘했네! 이제 할머니께 인사하렴.'}},
+   {quiz:3,vi:()=>`Nghe mẹ nói rồi chạm vào đúng hình đó. <button class="chip" id="qplay" aria-label="Nghe lại">▶</button> (${(S.quiz?S.quiz.round:0)+1}/3)`,say:{w:'mom',ko:'잘했네! 이제 할머니께 인사하렴.'}},
    {t:'grandma',vi:()=>`Hãy chào ${K('grandma')}.`,say:{w:'grandma',ko:'뭐? 펜? …김치?'}},
-   {t:'mybed',end:true,vi:()=>`Muộn rồi. Hãy về ${K('mybed')} đi ngủ.`,btn:()=>`Đi ngủ`}
+   {t:'mybed',end:true,reward:['rw_bed.jpg','mybed'],vi:()=>`Muộn rồi. Hãy về ${K('mybed')} đi ngủ.`,btn:()=>`Đi ngủ`}
   ],
   doneMsg:()=>`Chúc ngủ ngon! …Ồ, có tin nhắn.`,nextBtn:()=>`Xem tin nhắn →`,
   next:'chat'},
  chat:{chat:true,label:'Tin nhắn',missions:[{vi:()=>''}]}
 };
-['walk','block','faces','pops'].forEach(k=>{SCENES.evening[k]=SCENES.home[k];});
+['walk','block','faces','pops','props'].forEach(k=>{SCENES.evening[k]=SCENES.home[k];});
 SCENES.evening.spots=Object.assign({},SCENES.home.spots,{mybed:[1110,640]});
 SCENES.home.doneMsg=()=>`Xong buổi sáng! Bây giờ đi ${K('school')}.`;SCENES.home.nextBtn=()=>`Đi ${K('school')} →`;
 /* night chat (Mystic-Messenger style): Sua, then the friend picked after school */
+const TL='ko';const HN={f:{ko:"린",vi:"Linh"},m:{ko:"민",vi:"Minh"}};
+const NM=()=>HN[hero][TL==='ko'?'vi':'ko'];
 const CHAT={
-  sua1:()=>`${heroName()}! 오늘 펜 고마워`,sua2:'내일 떡볶이 먹을래?',
-  replies:[{me:'좋아!',back:'대박! 내일 봐!'},{me:'떡볶이가 뭐야?',back:'대박ㅋㅋ 내일 보여 줄게!'}],
-  friend:{junho:'내일 축구! 가자!',doyun:'…책 고마워요. 잘 자요.',haeun:'우유 맛있게 먹어요!'},
+  steps:[
+   {from:'sua',msg:()=>`${NM()}! Hôm nay cảm ơn vì đã cho mình mượn ${K('pen')} nhé!`,st:'thanks',replies:[{t:{ko:"나도 고마워!",vi:"Mình cũng cảm ơn!"},st:'thanks',ok:1},{t:{ko:"잘 자!",vi:"Ngủ ngon!"},st:'sleep'}]},
+   {from:'sua',msg:()=>`Mai mình cùng ăn ${K('rice')} nhé?`,replies:[{t:{ko:"잘 자!",vi:"Ngủ ngon!"},st:'sleep'},{t:{ko:"좋아!",vi:"Được đó!"},st:'ok',ok:1}]},
+   {from:'sua',say:{ko:"잘 자!",vi:"Ngủ ngon!"},st:'sleep',replies:[{t:{ko:"좋아!",vi:"Được đó!"},st:'ok'},{t:{ko:"잘 자!",vi:"Ngủ ngon!"},st:'sleep',ok:1}],heart:'sua'}],
+  friend:{junho:{from:'junho',msg:()=>`Mai mình cùng đá ${K('ball')} nhé!`,replies:[{t:{ko:"좋아!",vi:"Được đó!"},st:'ok',ok:1},{t:{ko:"잘 자!",vi:"Ngủ ngon!"},st:'sleep'}],heart:'junho'},
+          doyun:{from:'doyun',msg:()=>`…Cảm ơn vì ${K('bluebook')}.`,st:'thanks',replies:[{t:{ko:"좋아요!",vi:"Được ạ!"},st:'ok'},{t:{ko:"나도 고마워요!",vi:"Mình cũng cảm ơn nhé!"},st:'thanks',ok:1}],heart:'doyun'},
+          haeun:{from:'haeun',msg:()=>`Uống ${K('milk')} ngon nhé!`,replies:[{t:{ko:"고마워요!",vi:"Cảm ơn nhé!"},st:'thanks',ok:1},{t:{ko:"잘 자요!",vi:"Ngủ ngon nhé!"},st:'sleep'}],heart:'haeun'}},
   hint:'Sua nhắn tin cho bạn. Chạm vào tin nhắn để nghe, rồi chọn câu trả lời.'
 };
+const STK={thanks:'st_thanks.png',ok:'st_ok.png',sleep:'st_sleep.png'};
+const TX=e=>typeof e[TL]==='function'?e[TL]():e[TL],TR=e=>{const k=TL==='ko'?'vi':'ko';return typeof e[k]==='function'?e[k]():e[k];};
 
 /* ---------- state ---------- */
 let SC,L,M,S,hero='f',keys={},path=null,after=null,last=0;
@@ -265,20 +297,20 @@ const inR=(r,x,y)=>x>=r[0]&&x<=r[2]&&y>=r[1]&&y<=r[3];
 let GRID;
 function freeAt(x,y){return L.walk.some(r=>inR(r,x,y))&&!L.block.some(r=>inR(r,x,y));}
 function loadScene(name){
-  SC=name;L=SCENES[name];M=L.missions.slice();
+  SC=name;L=SCENES[name];M=L.missions.slice();bgmPlay(name);
   if(L.chat){closePop(true);S={m:0,done:true,sel:null,talk:null};document.getElementById('mission').hidden=true;startChat();return;}
   GRID=new Uint8Array(GW*GH);for(let gy=0;gy<GH;gy++)for(let gx=0;gx<GW;gx++)GRID[gy*GW+gx]=freeAt(gx*CELL+5,gy*CELL+5)?1:0;
   closePop(true);path=null;after=null;keys={};
   S={m:0,sel:null,x:L.start[0],y:L.start[1],flip:false,moving:false,pop:null,talk:null,done:false,msg:'',near:null,popTag:null,carry:null,given:null,sit:false,npc:null};
   document.getElementById('world').style.backgroundImage=`url(${L.map})`;
   document.getElementById('world').classList.toggle('night',!!L.tint);
-  document.getElementById('npcs').innerHTML=(L.npcs||[]).map(n=>`<div class="spr npc" data-npc="${n.id}" style="left:${n.x}px;top:${n.y}px;background-image:url(${n.img})"></div>`).join('');
+  renderProps();
   document.getElementById('npc').hidden=true;document.getElementById('given').hidden=true;document.getElementById('carry').hidden=true;
   renderUI();renderTags();fit();
 }
 
 /* ---------- sound ---------- */
-const SND={"엄마": "snd/k00.mp3", "아빠": "snd/k01.mp3", "할머니": "snd/k02.mp3", "동생": "snd/k03.mp3", "강아지": "snd/k04.mp3", "냉장고": "snd/k05.mp3", "물": "snd/k06.mp3", "텔레비전": "snd/k07.mp3", "가방": "snd/k08.mp3", "신발": "snd/k09.mp3", "책": "snd/k10.mp3", "문": "snd/k11.mp3", "김치": "snd/k12.mp3", "만두": "snd/k13.mp3", "라면": "snd/k14.mp3", "밥": "snd/k15.mp3", "학교": "snd/k16.mp3", "선생님": "snd/k17.mp3", "자리": "snd/k18.mp3", "칠판": "snd/k19.mp3", "책장": "snd/k20.mp3", "쓰레기통": "snd/k21.mp3", "공책": "snd/k22.mp3", "필통": "snd/k23.mp3", "펜": "snd/k24.mp3", "연필": "snd/k25.mp3", "지우개": "snd/k26.mp3", "수아": "snd/k27.mp3", "준호": "snd/k43.mp3", "도윤": "snd/k44.mp3", "하은": "snd/k45.mp3", "공": "snd/k46.mp3", "물병": "snd/k47.mp3", "수건": "snd/k48.mp3", "빨간 책": "snd/k49.mp3", "노란 책": "snd/k50.mp3", "파란 책": "snd/k51.mp3", "우유": "snd/k52.mp3", "주스": "snd/k53.mp3", "빵": "snd/k54.mp3", "도서관": "snd/k55.mp3", "매점": "snd/k56.mp3", "운동장": "snd/k57.mp3", "침대": "snd/k58.mp3", "Jua": "snd/k59.mp3", "일어났구나! 밥 먹고 가.": "snd/k28.mp3", "맛있게 먹어. 아빠 좀 깨워 줄래?": "snd/k29.mp3", "으음… 5분만… 할머니께 인사드렸니?": "snd/k30.mp3", "잘 잤니? 동생도 깨워 주렴.": "snd/k31.mp3", "잠깐, 방송 중! …할머니가 물 드시고 싶으시대.": "snd/k32.mp3", "고마워. 가방 잊지 말고!": "snd/k33.mp3", "다 챙겼니? 엄마한테 인사하고 가야지.": "snd/k34.mp3", "학교 잘 다녀와! 문 열고 나가렴.": "snd/k35.mp3", "자, 여러분. 책 펴세요.": "snd/k36.mp3", "고마워! 나 수아야. 너는?": "snd/k38.mp3", "어이! 공! 공 좀 줘!": "snd/k60.mp3", "오, 고마워! 축구 좋아해? 내일 같이 하자!": "snd/k61.mp3", "…저기, 파란 책.": "snd/k62.mp3", "…고마워요.": "snd/k63.mp3", "잠깐만요! 아, 우유가 떨어졌어요!": "snd/k64.mp3", "어머, 고마워요! 이거 하나 가져가요.": "snd/k65.mp3", "왔니? 밥은? 오늘 어땠어?": "snd/k66.mp3", "잘했네! 이제 할머니께 인사하렴.": "snd/k67.mp3", "뭐? 펜? …김치?": "snd/k68.mp3", "대박, 늦었다! 저기, 펜 있어? 펜, 펜!": "snd/k37.mp3", "내일 떡볶이 먹을래?": "snd/k69.mp3", "좋아!": "snd/k70.mp3", "대박! 내일 봐!": "snd/k71.mp3", "떡볶이가 뭐야?": "snd/k72.mp3", "대박ㅋㅋ 내일 보여 줄게!": "snd/k73.mp3", "내일 축구! 가자!": "snd/k74.mp3", "…책 고마워요. 잘 자요.": "snd/k75.mp3", "우유 맛있게 먹어요!": "snd/k76.mp3", "린! 대박, 이름 예쁘다!": "snd/k39.mp3", "민! 대박, 이름 멋지다!": "snd/k40.mp3", "저는 린이에요.": "snd/k41.mp3", "저는 민이에요.": "snd/k42.mp3", "린! 오늘 펜 고마워": "snd/k77.mp3", "민! 오늘 펜 고마워": "snd/k78.mp3"};
+const SND={"엄마": "snd/k00.mp3", "아빠": "snd/k01.mp3", "할머니": "snd/k02.mp3", "동생": "snd/k03.mp3", "강아지": "snd/k04.mp3", "냉장고": "snd/k05.mp3", "물": "snd/k06.mp3", "텔레비전": "snd/k07.mp3", "가방": "snd/k08.mp3", "신발": "snd/k09.mp3", "책": "snd/k10.mp3", "문": "snd/k11.mp3", "김치": "snd/k12.mp3", "만두": "snd/k13.mp3", "라면": "snd/k14.mp3", "밥": "snd/k15.mp3", "학교": "snd/k16.mp3", "선생님": "snd/k17.mp3", "자리": "snd/k18.mp3", "칠판": "snd/k19.mp3", "책장": "snd/k20.mp3", "쓰레기통": "snd/k21.mp3", "공책": "snd/k22.mp3", "필통": "snd/k23.mp3", "펜": "snd/k24.mp3", "연필": "snd/k25.mp3", "지우개": "snd/k26.mp3", "수아": "snd/k27.mp3", "준호": "snd/k43.mp3", "도윤": "snd/k44.mp3", "하은": "snd/k45.mp3", "공": "snd/k46.mp3", "물병": "snd/k47.mp3", "수건": "snd/k48.mp3", "빨간 책": "snd/k49.mp3", "노란 책": "snd/k50.mp3", "파란 책": "snd/k51.mp3", "우유": "snd/k52.mp3", "주스": "snd/k53.mp3", "빵": "snd/k54.mp3", "도서관": "snd/k55.mp3", "매점": "snd/k56.mp3", "운동장": "snd/k57.mp3", "침대": "snd/k58.mp3", "Jua": "snd/k59.mp3", "일어났구나! 밥 먹고 가.": "snd/k28.mp3", "맛있게 먹어. 아빠 좀 깨워 줄래?": "snd/k29.mp3", "으음… 5분만… 할머니께 인사드렸니?": "snd/k30.mp3", "잘 잤니? 동생도 깨워 주렴.": "snd/k31.mp3", "잠깐, 방송 중! …할머니가 물 드시고 싶으시대.": "snd/k32.mp3", "고마워. 가방 잊지 말고!": "snd/k33.mp3", "다 챙겼니? 엄마한테 인사하고 가야지.": "snd/k34.mp3", "학교 잘 다녀와! 문 열고 나가렴.": "snd/k35.mp3", "자, 여러분. 책 펴세요.": "snd/k36.mp3", "고마워! 나 수아야. 너는?": "snd/k38.mp3", "어이! 공! 공 좀 줘!": "snd/k60.mp3", "오, 고마워! 축구 좋아해? 내일 같이 하자!": "snd/k61.mp3", "…저기, 파란 책.": "snd/k62.mp3", "…고마워요.": "snd/k63.mp3", "잠깐만요! 아, 우유가 떨어졌어요!": "snd/k64.mp3", "어머, 고마워요! 이거 하나 가져가요.": "snd/k65.mp3", "축구 한 판 할래? 내가 공 차는 법 알려 줄게!": "snd/k79.mp3", "…도서관 갈래요? 조용하고 좋아요.": "snd/k80.mp3", "매점 와요! 오늘 딸기우유 맛있어요!": "snd/k81.mp3", "왔니? 밥은? 오늘 어땠어?": "snd/k66.mp3", "잘했네! 이제 할머니께 인사하렴.": "snd/k67.mp3", "뭐? 펜? …김치?": "snd/k68.mp3", "대박, 늦었다! 저기, 펜 있어? 펜, 펜!": "snd/k37.mp3", "나도 고마워!": "snd/k84.mp3", "잘 자!": "snd/k85.mp3", "좋아!": "snd/k70.mp3", "좋아요!": "snd/k93.mp3", "나도 고마워요!": "snd/k94.mp3", "고마워요!": "snd/k90.mp3", "잘 자요!": "snd/k89.mp3", "린! 대박, 이름 예쁘다!": "snd/k39.mp3", "민! 대박, 이름 멋지다!": "snd/k40.mp3", "저는 린이에요.": "snd/k41.mp3", "저는 민이에요.": "snd/k42.mp3"};
 const auL=new Audio(),auW=new Audio();auL.preload=auW.preload='auto';let auOk=false,waitWord=null;
 function unlockAudio(){if(auOk)return;auOk=true;const f=Object.values(SND)[0];
   [auL,auW].forEach(a=>{try{a.src=f;a.muted=true;const p=a.play();if(p)p.then(()=>{a.pause();a.muted=false;a.currentTime=0;}).catch(()=>{a.muted=false;auOk=false;});}catch(e){a.muted=false;}});
@@ -287,11 +319,18 @@ function unlockAudio(){if(auOk)return;auOk=true;const f=Object.values(SND)[0];
 let voices=[];function loadVoices(){try{voices=speechSynthesis.getVoices()||[];}catch(e){}}
 try{loadVoices();speechSynthesis.onvoiceschanged=loadVoices;}catch(e){}
 function speak(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='ko-KR';const v=voices.find(v=>(v.lang||'').toLowerCase().startsWith('ko'));if(v)u.voice=v;u.rate=.85;speechSynthesis.speak(u);}catch(e){}}
+const BGM_VOL=.16,BGM_DUCK=.05;const bgm=new Audio();bgm.loop=true;bgm.volume=BGM_VOL;let bgmOn=true,bgmSrc='';
+function bgmFor(name){return (name==='evening'||name==='chat')?'bgm/night.mp3':'bgm/day.mp3';}
+function bgmPlay(name){const f=bgmFor(name);if(f!==bgmSrc){bgmSrc=f;bgm.src=f;}if(bgmOn){const p=bgm.play();if(p)p.catch(()=>{});}}
+function bgmToggle(){bgmOn=!bgmOn;document.querySelectorAll('.mus').forEach(b=>{b.classList.toggle('off',!bgmOn);b.setAttribute('aria-pressed',bgmOn);});if(bgmOn)bgmPlay(SC);else bgm.pause();}
+auL.addEventListener('play',()=>{bgm.volume=BGM_DUCK;});['pause','ended'].forEach(ev=>auL.addEventListener(ev,()=>{bgm.volume=BGM_VOL;}));
 const lineBusy=()=>!auL.paused&&!auL.ended;
 function playOn(a,t,done){const f=SND[t];if(!f){speak(t);return;}try{a.muted=false;a.pause();a.src=f;a.currentTime=0;a.onended=done||null;const p=a.play();if(p)p.catch(()=>speak(t));}catch(e){speak(t);}}
 function sayLine(t){auW.pause();waitWord=null;playOn(auL,t,()=>{if(waitWord){const w=waitWord;waitWord=null;playOn(auW,w);}});}
 function say(t){if(lineBusy()){waitWord=t;return;}playOn(auW,t);}
-let ac;function tone(kind){try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();const seq=kind==='ok'?[880,1320]:kind==='bell'?[784,659,523]:[220];seq.forEach((f,i)=>{const o=ac.createOscillator(),g=ac.createGain();o.type=kind==='no'?'triangle':'sine';o.frequency.value=f;const t=ac.currentTime+i*(kind==='bell'?.35:.12);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.25,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+(kind==='bell'?.6:.35));o.connect(g).connect(ac.destination);o.start(t);o.stop(t+.7);});}catch(e){}}
+let ac;function tone(kind){try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();if(kind==='sparkle'){[1047,1319,1568,2093,2637].forEach((f,i)=>{const o=ac.createOscillator(),g=ac.createGain();o.type='triangle';o.frequency.value=f;const t=ac.currentTime+i*.08;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.18,t+.015);g.gain.exponentialRampToValueAtTime(.0001,t+.6);o.connect(g).connect(ac.destination);o.start(t);o.stop(t+.65);});
+  for(let i=0;i<6;i++){const o=ac.createOscillator(),g=ac.createGain();o.type='sine';o.frequency.value=3000+Math.random()*1800;const t=ac.currentTime+.42+i*.07;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.05,t+.01);g.gain.exponentialRampToValueAtTime(.0001,t+.25);o.connect(g).connect(ac.destination);o.start(t);o.stop(t+.3);}return;}
+  const seq=kind==='ok'?[880,1320]:kind==='bell'?[784,659,523]:[220];seq.forEach((f,i)=>{const o=ac.createOscillator(),g=ac.createGain();o.type=kind==='no'?'triangle':'sine';o.frequency.value=f;const t=ac.currentTime+i*(kind==='bell'?.35:.12);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.25,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+(kind==='bell'?.6:.35));o.connect(g).connect(ac.destination);o.start(t);o.stop(t+.7);});}catch(e){}}
 const lineText=s=>typeof s.ko==='function'?s.ko():s.ko;
 
 /* ---------- camera & drawing ---------- */
@@ -335,17 +374,19 @@ function openPop(name){
   updPop();
 }
 function closePop(now){if(!fov)return;const el=fov;fov=null;fovName=null;clearTimeout(fovT);if(now){el.remove();return;}el.classList.add('closing');setTimeout(()=>el.remove(),380);}
-function updPop(){if(fov)fov.querySelectorAll('.food').forEach(f=>{const id=f.dataset.food,kn=G.known.has(id);f.classList.toggle('known',kn);f.classList.toggle('sel',S.sel===id);f.querySelector('.t2').textContent=kn?W[id]:'?';});renderOk();}
+function updPop(){if(fov)fov.querySelectorAll('.food').forEach(f=>{const id=f.dataset.food,kn=G.known.has(id);f.classList.toggle('known',kn);f.classList.toggle('sel',S.sel===id);f.querySelector('.t2').textContent=fovName==='quiz'?'?':kn?W[id]:'?';});renderOk();}
 function okLabel(m){return m.btn?m.btn():`Đây là ${K(m.t)}!`;}
 function renderOk(){
-  document.querySelectorAll('.okb').forEach(b=>b.remove());
+  document.querySelectorAll('.okb,.peek').forEach(b=>b.remove());
+  let peekH=0;
+  if(S&&S.sel&&!fov&&L.spots&&L.spots[S.sel]&&IMG[S.sel]&&!S.done){const [px,py]=L.spots[S.sel];const pk=document.createElement('div');pk.className='peek';pk.innerHTML=`<img src="${IMG[S.sel]}" alt="">`;pk.style.left=px+'px';pk.style.top=(py-34)+'px';document.getElementById('okLayer').appendChild(pk);peekH=150;}
   if(!S)return;const m=M[S.m];if(!S.sel||S.done||!m||m.walk||m.phrase||m.quiz)return;
   if(m.choose&&!m.choose.includes(S.sel))return;
   const b=document.createElement('button');b.className='okb';b.id='confirm';b.innerHTML='✓ '+okLabel(m);
   const it=fov&&fov.querySelector(`.food[data-food="${S.sel}"]`);
   if(it){b.style.left=(it.offsetLeft+it.offsetWidth/2)+'px';b.style.top=(it.offsetTop+it.offsetHeight+6)+'px';fov.querySelector('.fstage').appendChild(b);return;}
   if(fov)return;
-  const sp=L.spots[S.sel];if(!sp)return;b.classList.add('up');b.style.left=sp[0]+'px';b.style.top=(sp[1]-30)+'px';document.getElementById('okLayer').appendChild(b);
+  const sp=L.spots[S.sel];if(!sp)return;b.classList.add('up');b.style.left=sp[0]+'px';b.style.top=(sp[1]-30-peekH)+'px';document.getElementById('okLayer').appendChild(b);
 }
 
 /* ---------- UI ---------- */
@@ -374,17 +415,33 @@ function showDone(){
 function startChat(){
   const w=document.getElementById('chatWrap'),log=document.getElementById('chatLog'),rp=document.getElementById('chatReply');
   w.hidden=false;log.innerHTML='';rp.innerHTML='';document.getElementById('chatHint').textContent=CHAT.hint;
-  const add=(who,t,face)=>{const b=document.createElement('div');b.className='msg '+(who==='me'?'me':'them');b.innerHTML=(who==='me'?'':`<span class="face sm" data-face="${face}"></span>`)+`<button class="bub" data-line="${t}">${t}</button>`;log.appendChild(b);
+  const add=(who,html,st,face,speak)=>{const b=document.createElement('div');b.className='msg '+(who==='me'?'me':'them');
+    b.innerHTML=(who==='me'?'':`<span class="face sm"></span>`)+`<div class="bwrap"><div class="bub"${speak?` data-line="${speak}"`:''}>${html}</div>${st?`<img class="stk" src="${STK[st]}" alt="">`:''}</div>`;log.appendChild(b);
     const f=b.querySelector('.face');if(f){const fx=SCENES[face==='sua'?'class':'campus'].faces[face];const [img,iw,ih,x,y,sz]=fx,k=40/sz;f.style.backgroundImage=`url(${img})`;f.style.backgroundSize=`${iw*k}px ${ih*k}px`;f.style.backgroundPosition=`${-x*k}px ${-y*k}px`;}
-    log.scrollTop=log.scrollHeight;sayLine(t);};
-  const seq=[()=>add('sua',CHAT.sua1(),'sua'),()=>add('sua',CHAT.sua2,'sua'),()=>{rp.innerHTML=CHAT.replies.map((r,i)=>`<button class="btn" data-reply="${i}"><span class="ko">${r.me}</span></button>`).join('');}];
-  let i=0;const next=()=>{if(i<seq.length){seq[i++]();setTimeout(next,2600);}};next();
-  w.onclick=e=>{const bub=e.target.closest('.bub');if(bub){sayLine(bub.dataset.line);return;}
-    const r=e.target.closest('[data-reply]');if(!r)return;const c=CHAT.replies[+r.dataset.reply];rp.innerHTML='';add('me',c.me);
-    setTimeout(()=>{add('sua',c.back,'sua');G.hearts.sua=(G.hearts.sua||0)+1;},2200);
-    if(G.pick)setTimeout(()=>add(G.pick,CHAT.friend[G.pick],G.pick),5000);
-    setTimeout(()=>{rp.innerHTML=`<button class="btn" id="chatEnd">${'Ngủ ngon →'}</button>`;},G.pick?7600:4800);};
+    log.scrollTop=log.scrollHeight;if(speak)sayLine(speak);};
+  const steps=CHAT.steps.slice();if(G.pick&&CHAT.friend[G.pick])steps.splice(2,0,CHAT.friend[G.pick]);
+  let k=0,cur=null;
+  const ask=()=>{if(k>=steps.length){rp.innerHTML=`<button class="btn" id="chatEnd">${'Ngủ ngon →'}</button>`;return;}
+    cur=steps[k++];const sp=cur.say?TX(cur.say):null;add(cur.from,cur.msg?cur.msg():sp,cur.st,cur.from,sp);
+    setTimeout(()=>{rp.innerHTML=cur.replies.map((r,i)=>`<button class="btn rbtn" data-reply="${i}"><img src="${STK[r.st]}" alt=""><span class="ko">${TX(r.t)}</span></button>`).join('');},1400);};
+  setTimeout(ask,400);
+  w.onclick=e=>{const ch=e.target.closest('.chip[data-say]');if(ch){say(ch.dataset.say);return;}
+    const bub=e.target.closest('.bub[data-line]');if(bub){sayLine(bub.dataset.line);return;}
+    const r=e.target.closest('[data-reply]');if(!r||!cur)return;const c=cur.replies[+r.dataset.reply];
+    if(!c.ok){tone('no');say(TX(c.t));r.classList.remove('shake');void r.offsetWidth;r.classList.add('shake');return;}
+    rp.innerHTML='';add('me',TX(c.t),c.st,null,TX(c.t));tone('ok');
+    if(cur.heart){G.hearts[cur.heart]=(G.hearts[cur.heart]||0)+1;}
+    setTimeout(ask,2000);};
 }
+let rwAfter=null;
+function showReward(r){const [img,word]=r;const w=document.getElementById('rewardWrap');document.getElementById('rwImg').src=img;
+  document.getElementById('rwWord').innerHTML=K(word);w.hidden=false;w.classList.remove('go');void w.offsetWidth;w.classList.add('go');
+  const sp=w.querySelector('.spark');sp.innerHTML=Array.from({length:14},(_,i)=>`<i style="--a:${i*360/14}deg;--d:${(i%5)*.06}s;--r:${120+(i%3)*60}px">✦</i>`).join('');
+  tone('sparkle');setTimeout(()=>say(W[word]),700);}
+function closeReward(){document.getElementById('rewardWrap').hidden=true;const f=rwAfter;rwAfter=null;if(f)f();}
+function renderProps(){
+  document.getElementById('npcs').innerHTML=(L.npcs||[]).map(n=>`<div class="spr npc" data-npc="${n.id}" style="left:${n.x}px;top:${n.y}px;background-image:url(${n.img})"></div>`).join('')
+    +(L.props||[]).filter(p=>!p.gone()).map(p=>`<img class="prop" src="${p.img}" alt="" style="left:${p.x}px;top:${p.y}px;width:${p.w}px">`).join('');}
 function hideDone(){document.getElementById('doneWrap').hidden=true;document.getElementById('mission').hidden=false;}
 
 /* ---------- actions ---------- */
@@ -393,6 +450,7 @@ function interact(forced){
   const n=forced||nearest();
   if(!n){S.msg='…';renderUI();return;}
   if(n==='door'){if(doorOpen()){showDone();return;}const cm=M[S.m];if(cm&&cm.t==='school'&&L.pops.doorview){openPop('doorview');return;}}
+  const cm2=M[S.m];if(cm2&&cm2.choose&&L.invites&&L.invites[n]){G.heard.add(n);S.sel=n;S.talk={w:n,ko:L.invites[n].ko};sayLine(L.invites[n].ko);renderUI();return;}
   say(W[n]);G.heard.add(n);S.sel=n;S.msg='';
   if(L.pops[n])openPop(n);
   renderUI();
@@ -428,8 +486,9 @@ function success(m){
   if(m.take)S.carry=m.take;
   if(m.give){S.carry=null;const g=document.getElementById('given');g.src=IMG[m.give];g.style.width='30px';
     const nn=m.giveTo&&(L.npcs||[]).find(n=>n.id===m.giveTo);const to=nn?[nn.x+14,nn.y-62]:SC==='class'?[750-48,470]:[L.spots.grandma[0]-58,L.spots.grandma[1]-20];g.style.left=to[0]+'px';g.style.top=to[1]+'px';g.hidden=false;g.style.animation='none';void g.offsetWidth;g.style.animation='';}
-  if(m.wear){G.wear=true;setHeroImg();}
-  if(m.end){setTimeout(showDone,1300);}
+  if(m.wear){G.wear=true;setHeroImg();renderProps();}
+  if(m.reward){const r=m.reward;setTimeout(()=>showReward(r),m.give?650:450);if(m.end)rwAfter=showDone;}
+  else if(m.end){setTimeout(showDone,1300);}
   if(m.sit){S.sit=true;path=null;S.x=L.spots.seat[0];S.y=L.spots.seat[1]+20;S.flip=false;}
   if(m.stand){S.sit=false;S.x=560;S.y=525;}
   if(m.heart){G.hearts[m.heart]=(G.hearts[m.heart]||0)+1;const hn=(L.npcs||[]).find(n=>n.id===m.heart);if(hn)heartPop(hn.x,hn.y);if(S.npc){S.npc.img='sua_wave.png';heartPop(S.npc.x,S.npc.y);setTimeout(()=>{if(S.npc)S.npc.img='sua.png';},2500);}}
@@ -494,7 +553,9 @@ function setHeroImg(){document.getElementById('hero').style.backgroundImage=`url
 function startGame(){G.known=new Set();G.heard=new Set();G.hearts={};G.wear=false;G.pick=null;document.getElementById('chatWrap').hidden=true;document.getElementById('pickWrap').hidden=true;document.getElementById('game').hidden=false;
   setHeroImg();hideDone();loadScene('home');}
 document.addEventListener('click',e=>{
+  if(e.target.closest('.mus')){bgmToggle();return;}
   const pk=e.target.closest('[data-hero]');if(pk){hero=pk.dataset.hero;startGame();return;}
+  if(e.target.closest('#rwNext')||e.target.closest('#rewardWrap')&&!e.target.closest('.chip')){closeReward();return;}
   if(e.target.closest('#goNext')){hideDone();loadScene(L.next);return;}
   if(e.target.closest('#chatEnd')){document.getElementById('chatWrap').hidden=true;showDone();return;}
   if(e.target.closest('#again')){document.getElementById('game').hidden=true;document.getElementById('pickWrap').hidden=false;return;}
