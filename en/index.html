@@ -395,8 +395,8 @@ function place(){if(!S)return;
 }
 function renderTags(){if(!S)return;let h='';
   for(const k in L.spots){const [x,y]=L.spots[k];
-    if(G.known.has(k)&&k!=='seat')h+=`<div class="tag ${S.popTag===k?'pop':''}" style="left:${x}px;top:${y-34}px">${W[k]}</div>`;
-    else if(S.near===k&&!S.sit&&S.sel!==k)h+=`<div class="tag q" style="left:${x}px;top:${y-34}px">?</div>`;}
+    if(G.known.has(k)&&k!=='seat')h+=`<div class="tag ${S.popTag===k?'pop':''}" data-k="${k}" style="left:${x}px;top:${y-34}px">${W[k]}</div>`;
+    else if(S.near===k&&!S.sit&&S.sel!==k)h+=`<div class="tag q" data-k="${k}" style="left:${x}px;top:${y-34}px">?</div>`;}
   if(S.sel&&L.focus&&L.focus[S.sel]){const [fx,fy,fr]=L.focus[S.sel];h+=`<div class="exit focus" style="left:${fx}px;top:${fy}px;width:${fr*2}px;height:${fr*2}px;margin:-${fr}px 0 0 -${fr}px"></div>`;}
   if(doorOpen()){const [x,y]=L.spots.door;h+=`<div class="exit" style="left:${x}px;top:${y}px"></div><div class="arrow" style="left:${x}px;top:${y-110}px"></div>`;}
   document.getElementById('tags').innerHTML=h;S.popTag=null;renderOk();}
@@ -598,7 +598,7 @@ function follow(dt){const cm=M[S.m];if(!cm||!cm.goWith){S.trail=null;return;}
   const tgt=tr.length>5?tr[tr.length-6]:tr[0];let st=SPEED*1.05*dt;
   while(st>0){const dx=tgt[0]-nn.x,dy=tgt[1]-nn.y,d=Math.hypot(dx,dy);if(d<1)break;if(Math.abs(dx)>1)nn.flip=dx<0;if(d<=st){nn.x=tgt[0];nn.y=tgt[1];break;}nn.x+=dx/d*st;nn.y+=dy/d*st;st=0;}
   while(tr.length>6&&Math.hypot(tr[0][0]-nn.x,tr[0][1]-nn.y)<10)tr.shift();
-  L.spots[nn.id]=[nn.x,nn.y-40];const now=performance.now();if(!S.tagT||now-S.tagT>150){S.tagT=now;renderTags();}
+  L.spots[nn.id]=[nn.x,nn.y-40];const tg=document.querySelector(`#tags [data-k="${nn.id}"]`);if(tg){tg.style.left=nn.x+'px';tg.style.top=(nn.y-74)+'px';}
   const el=document.querySelector(`[data-npc="${nn.id}"]`);if(el){el.style.left=nn.x+'px';el.style.top=nn.y+'px';el.style.transform=nn.flip?'scaleX(-1)':'';}}
 function bfs(goalFn){
   const sx=Math.floor(S.x/CELL),sy=Math.floor(S.y/CELL),start=sy*GW+sx;
