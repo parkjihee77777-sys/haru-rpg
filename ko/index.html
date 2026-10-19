@@ -30,6 +30,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--f-vi);font-size:15p
 .mtext{font-size:17px;line-height:1.5;font-weight:600}
 .chip{font-family:var(--f-ko);font-size:19px;background:var(--leaf-soft);color:var(--leaf-ink);border:2px solid var(--leaf);border-radius:10px;padding:0 8px;margin:0 2px;cursor:pointer;line-height:1.4}
 button:focus-visible{outline:3px solid var(--leaf);outline-offset:2px}
+.chip[data-say]::after{content:'';display:inline-block;width:.8em;height:.8em;margin-left:.3em;vertical-align:-.05em;background:currentColor;opacity:.75;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 9v6h4l5 4V5L7 9H3z'/%3E%3Cpath d='M15.5 8.5a5 5 0 0 1 0 7' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M18 6a8.5 8.5 0 0 1 0 12' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center/contain;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 9v6h4l5 4V5L7 9H3z'/%3E%3Cpath d='M15.5 8.5a5 5 0 0 1 0 7' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M18 6a8.5 8.5 0 0 1 0 12' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center/contain}
 .talk{display:flex;gap:10px;align-items:center;background:var(--leaf-soft);border-radius:14px;padding:8px 12px}
 .face{width:56px;height:56px;border-radius:50%;flex:none;background-repeat:no-repeat;background-color:#fffdf6;border:2px solid var(--panel)}
 .talk .line{font-family:var(--f-ko);font-size:20px;color:var(--leaf-ink);flex:1;min-width:0}
@@ -136,6 +137,10 @@ button:focus-visible{outline:3px solid var(--leaf);outline-offset:2px}
 .prop{position:absolute;transform:translate(-50%,-100%);pointer-events:none;z-index:3;filter:drop-shadow(0 2px 0 rgba(60,40,20,.25))}
 .peek{position:absolute;transform:translate(-50%,-100%);z-index:8;pointer-events:none;background:#fffdf6;border:3px solid #6f9a4f;border-radius:16px;padding:6px;width:130px;height:130px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(40,30,10,.25);animation:okin .3s cubic-bezier(.3,1.5,.5,1)}
 .peek img{max-width:100%;max-height:100%;object-fit:contain}
+.inv{display:flex;gap:4px}.inv img{height:24px}
+.find img{width:auto!important;height:150px;max-height:30vh}
+.find .mid{justify-content:center}
+.btn.alt{background:#fffdf6;color:#2f4a1f;border:2px solid #6f9a4f;border-bottom-width:4px}
 .btn{font-family:var(--f-vi);font-weight:600;font-size:16px;background:var(--leaf);color:#fff;border:none;border-bottom:4px solid #3f5f2a;border-radius:14px;padding:10px 16px;cursor:pointer}
 .btn:active{transform:translateY(2px);border-bottom-width:2px}
 .btn .chip{background:#fff;color:#2f4a1f;border-color:#fff}
@@ -168,12 +173,13 @@ button:focus-visible{outline:3px solid var(--leaf);outline-offset:2px}
   <div id="game" hidden>
     <div class="view" id="view"><div class="world" id="world"><div class="spr hero" id="hero"></div><div class="spr npc" id="npc" hidden></div><img class="carry" id="carry" alt="" hidden><img class="given" id="given" alt="" hidden><div id="npcs"></div><div id="tags"></div><div id="okLayer"></div><div id="fx"></div></div><div id="popBox"></div></div>
     <section class="card mission" id="mission" aria-live="polite">
-      <div class="mlabel"><span id="mcount"></span><span class="hearts" id="hearts"></span><button class="mus" aria-pressed="true" aria-label="Nhạc nền">♪</button></div>
+      <div class="mlabel"><span id="mcount"></span><span class="hearts" id="hearts"></span><span class="inv" id="inv"></span><button class="mus" aria-pressed="true" aria-label="Nhạc nền">♪</button></div>
       <div class="mtext" id="mtext"></div>
       <div class="talk" id="talk" hidden><span class="face" id="tface"></span><span class="line" id="tline"></span><button class="chip" id="treplay" aria-label="Nghe lại">▶</button></div>
       <div class="mid" id="mid"></div>
     </section>
     <div class="center reward" id="rewardWrap" hidden><section class="card rcard"><div class="spark" aria-hidden="true"></div><img id="rwImg" alt=""><div class="rword" id="rwWord"></div><button class="btn" id="rwNext">Tiếp tục →</button></section></div>
+    <div class="center reward" id="findWrap" hidden><section class="card rcard find"><img id="fdImg" alt=""><div class="mtext" id="fdTitle"></div><div class="mid" id="fdBtns"></div></section></div>
     <div class="center" id="doneWrap" hidden><section class="card done" id="done"></section></div>
     <div class="center" id="chatWrap" hidden><section class="card chat"><div class="mlabel">Tin nhắn · Lớp mình<button class="mus" aria-pressed="true" aria-label="Nhạc nền">♪</button></div><div class="hint" id="chatHint"></div><div class="chatlog" id="chatLog"></div><div class="mid" id="chatReply"></div></section></div>
     <div class="learned" id="learned"></div>
@@ -183,9 +189,9 @@ button:focus-visible{outline:3px solid var(--leaf);outline-offset:2px}
 <script>
 /* ---------- words & pictures ---------- */
 const W={mom:'엄마',dad:'아빠',grandma:'할머니',sib:'동생',dog:'강아지',fridge:'냉장고',water:'물',tv:'텔레비전',bag:'가방',shoes:'신발',book:'책',door:'문',kimchi:'김치',mandu:'만두',ramen:'라면',rice:'밥',school:'학교',
-  teacher:'선생님',seat:'자리',board:'칠판',shelf:'책장',trash:'쓰레기통',notebook:'공책',pcase:'필통',pen:'펜',pencil:'연필',eraser:'지우개',sua:'수아',
-  junho:'준호',doyun:'도윤',haeun:'하은',ball:'공',bottle:'물병',towel:'수건',redbook:'빨간 책',yellowbook:'노란 책',bluebook:'파란 책',milk:'우유',juice:'주스',bread:'빵',library:'도서관',kiosk:'매점',field:'운동장',mybed:'침대'};
-const IMG={kimchi:'food_kimchi.png',mandu:'food_mandu.png',ramen:'food_ramen.png',rice:'food_rice.png',book:'it_book.png',notebook:'it_notebook.png',pcase:'it_pcase.png',pen:'it_pen.png',pencil:'it_pencil.png',eraser:'it_eraser.png',water:'water.png',ball:'it_ball.png',bottle:'it_bottle.png',towel:'it_towel.png',redbook:'it_redbook.png',yellowbook:'it_yellowbook.png',bluebook:'it_bluebook.png',milk:'it_milk.png',juice:'it_juice.png',bread:'it_bread.png',bag:'it_backpack.png',shoes:'it_shoes.png',tv:'it_tv.png',dog:'it_dog.png',board:'it_board.png',shelf:'it_shelf.png',trash:'it_trash.png',fridge:'fridge_closed.png'};
+  teacher:'선생님',seat:'의자',board:'칠판',shelf:'책장',trash:'쓰레기통',notebook:'공책',pcase:'필통',pen:'펜',pencil:'연필',eraser:'지우개',sua:'수아',
+  junho:'준호',doyun:'도윤',haeun:'하은',ball:'공',bottle:'물병',towel:'수건',redbook:'빨간 책',yellowbook:'노란 책',bluebook:'파란 책',milk:'우유',juice:'주스',bread:'빵',library:'도서관',kiosk:'매점',field:'운동장',mybed:'침대',cookie:'쿠키',snack:'간식',mate:'친구'};
+const IMG={kimchi:'food_kimchi.png',mandu:'food_mandu.png',ramen:'food_ramen.png',rice:'food_rice.png',book:'it_book.png',notebook:'it_notebook.png',pcase:'it_pcase.png',pen:'it_pen.png',pencil:'it_pencil.png',eraser:'it_eraser.png',water:'water.png',ball:'it_ball.png',bottle:'it_bottle.png',towel:'it_towel.png',redbook:'it_redbook.png',yellowbook:'it_yellowbook.png',bluebook:'it_bluebook.png',milk:'it_milk.png',juice:'it_juice.png',bread:'it_bread.png',bag:'it_backpack.png',shoes:'it_shoes.png',tv:'it_tv.png',dog:'it_dog.png',board:'it_board.png',shelf:'it_shelf.png',trash:'it_trash.png',fridge:'fridge_closed.png',cookie:'it_cookie.png',snack:'it_snack.png',seat:'it_chair.png'};
 const K=id=>`<button class="chip" data-say="${W[id]}">${W[id]}</button>`;
 const KS=t=>`<button class="chip" data-say="${t}">${t}</button>`;
 
@@ -197,20 +203,22 @@ const SCENES={
   spots:{mom:[748,195],fridge:[883,135],water:[905,262],dad:[268,175],grandma:[858,553],dog:[612,592],tv:[548,440],sib:[1110,190],bag:[975,550],shoes:[362,610],book:[1160,450],door:[100,610]},
   start:[1040,560],
   props:[{id:'bag',img:'it_backpack.png',x:975,y:575,w:58,gone:()=>G.wear}],
+  treasures:{shoes:{item:'snack'}},
+  gossip:{grandma:{line:()=>`Bé cún nhà mình thích ${K('snack')} lắm.`}},
   faces:{mom:['map.jpg',1376,768,715,140,72],dad:['map.jpg',1376,768,233,140,72],grandma:['map.jpg',1376,768,823,518,72],sib:['map.jpg',1376,768,1075,152,72]},
   pops:{fridge:{closed:['fridge_closed.png',300],open:['fridge_open.png',322],items:['kimchi','mandu','ramen','rice'],pos:{kimchi:[92,150],mandu:[200,236],ramen:[440,236],rice:[548,150]},from:[320,200]},
         doorview:{view:['door_closed.jpg','door_open.jpg',590,702,330],items:[],hot:{school:[222,190,200,195]}}},
   label:'Buổi sáng ở nhà',
   missions:[
-   {t:'mom',vi:()=>`Hãy tìm ${K('mom')} trong nhà.`,say:{w:'mom',ko:'일어났구나! 밥 먹고 가.'}},
-   {t:'rice',reward:['rw_rice.jpg','rice'],vi:()=>`Mẹ muốn bạn ăn ${K('rice')} rồi mới đi.`,say:{w:'mom',ko:'맛있게 먹어. 아빠 좀 깨워 줄래?'}},
-   {t:'dad',vi:()=>`Mẹ nhờ bạn đánh thức ${K('dad')}.`,say:{w:'dad',ko:'으음… 5분만… 할머니께 인사드렸니?'}},
-   {t:'grandma',vi:()=>`Hãy chào ${K('grandma')}.`,say:{w:'grandma',ko:'잘 잤니? 동생도 깨워 주렴.'}},
-   {t:'sib',vi:()=>`Hãy gọi ${K('sib')}.`,say:{w:'sib',ko:'잠깐, 방송 중! …할머니가 물 드시고 싶으시대.'}},
+   {t:'mom',vi:()=>`Hãy tìm ${K('mom')} trong nhà.`,say:{w:'mom',html:()=>`Dậy rồi à! Ăn ${K('rice')} rồi hãy đi.`}},
+   {t:'rice',reward:['rw_rice.jpg','rice'],vi:()=>`Mẹ muốn bạn ăn ${K('rice')} rồi mới đi.`,say:{w:'mom',html:()=>`Ăn ngon nhé. Gọi ${K('dad')} dậy giúp mẹ nhé?`}},
+   {t:'dad',vi:()=>`Mẹ nhờ bạn đánh thức ${K('dad')}.`,say:{w:'dad',html:()=>`Ưm… năm phút nữa thôi… Con chào ${K('grandma')} chưa?`}},
+   {t:'grandma',vi:()=>`Hãy chào ${K('grandma')}.`,say:{w:'grandma',html:()=>`Ngủ ngon không cháu? Gọi ${K('sib')} dậy luôn nhé.`}},
+   {t:'sib',vi:()=>`Hãy gọi ${K('sib')}.`,say:{w:'sib',html:()=>`Chờ chút, em đang livestream! …${K('grandma')} muốn uống ${K('water')} đấy.`}},
    {t:'water',take:'water',vi:()=>`Hãy mang ${K('water')} đến cho ${K('grandma')}.`},
-   {t:'grandma',give:'water',reward:['rw_water.jpg','water'],vi:()=>`Hãy mang ${K('water')} đến cho ${K('grandma')}.`,btn:()=>`Đưa ${K('water')} cho người này`,say:{w:'grandma',ko:'고마워. 가방 잊지 말고!'}},
-   {t:'bag',wear:true,vi:()=>`Đừng quên ${K('bag')} nhé.`,btn:()=>`Đeo ${K('bag')} lên`,say:{w:'mom',ko:'다 챙겼니? 엄마한테 인사하고 가야지.'}},
-   {t:'mom',vi:()=>`Hãy chào ${K('mom')} rồi đi học.`,btn:()=>`Chào ${K('mom')}`,say:{w:'mom',ko:'학교 잘 다녀와! 문 열고 나가렴.'}},
+   {t:'grandma',give:'water',reward:['rw_water.jpg','water'],vi:()=>`Hãy mang ${K('water')} đến cho ${K('grandma')}.`,btn:()=>`Đưa ${K('water')} cho người này`,say:{w:'grandma',html:()=>`Cảm ơn cháu. Đừng quên ${K('bag')} nhé!`}},
+   {t:'bag',wear:true,vi:()=>`Đừng quên ${K('bag')} nhé.`,btn:()=>`Đeo ${K('bag')} lên`,say:{w:'mom',html:()=>`Xong chưa? Chào ${K('mom')} rồi đi học nhé.`}},
+   {t:'mom',vi:()=>`Hãy chào ${K('mom')} rồi đi học.`,btn:()=>`Chào ${K('mom')}`,say:{w:'mom',html:()=>`Đi ${K('school')} vui nhé! Mở ${K('door')} ra mà đi.`}},
    {t:'door',vi:()=>`Mẹ bảo mở ${K('door')} ra rồi đi.`,btn:()=>`Mở ${K('door')} này`,openPop:'doorview'},
    {t:'school',end:true,vi:()=>`Bên ngoài cửa có gì vậy? Hãy đi đến ${K('school')}!`,btn:()=>`Đi đến ${K('school')}`}
   ],
@@ -218,17 +226,20 @@ const SCENES={
  class:{map:'class.jpg',
   walk:[[215,165,1135,690],[70,560,215,700]],
   block:[[890,60,1205,300],[215,120,390,200],[300,305,525,425],[590,305,805,425],[870,305,1090,425],[300,430,525,505],[590,430,805,505],[870,430,1090,545],[300,550,525,672],[590,550,805,672],[870,550,1090,672],[1125,470,1210,630]],
-  spots:{teacher:[935,150],seat:[645,520],board:[680,70],shelf:[180,380],trash:[300,165],door:[120,630]},
+  spots:{teacher:[935,150],seat:[645,520],board:[680,70],shelf:[180,380],trash:[300,165],door:[120,630],mate:[350,330]},
+  treasures:{shelf:{item:'cookie'}},
+  focus:{seat:[645,528,30]},
+  gossip:{mate:{line:()=>`Sua rất thích ${K('cookie')} đấy.`}},
   start:[170,640],
-  faces:{teacher:['class.jpg',1376,768,900,62,72],sua:['sua.png',75,220,4,0,68]},
+  faces:{teacher:['class.jpg',1376,768,900,62,72],sua:['sua.png',75,220,4,0,68],mate:['class.jpg',1376,768,320,318,62]},
   pops:{desk:{board:true,items:['book','notebook','pcase'],from:[320,330]},
         pcase:{closed:['it_pcase.png',120],open:['it_pcase_open.png',118],items:['pen','pencil','eraser'],pos:{pen:[150,170],pencil:[320,120],eraser:[490,170]},from:[320,300]}},
   label:'Lớp học đầu tiên',
   missions:[
-   {t:'seat',sit:true,vi:()=>`Lớp học sắp bắt đầu. Hãy tìm một ${K('seat')} trống.`,btn:()=>`Ngồi ở ${K('seat')} này`,say:{w:'teacher',ko:'자, 여러분. 책 펴세요.'},openPop:'desk'},
+   {t:'seat',sit:true,vi:()=>`Lớp học sắp bắt đầu. Hãy tìm một ${K('seat')} trống.`,btn:()=>`Ngồi ở ${K('seat')} này`,say:{w:'teacher',html:()=>`Nào, các em. Mở ${K('book')} ra.`},openPop:'desk'},
    {t:'book',vi:()=>`Cô giáo bảo mở ${K('book')} ra.`,after:'suaEnter'},
-   {t:'pen',give:'pen',reward:['rw_pen.jpg','pen'],vi:()=>`Bạn bên cạnh cần ${K('pen')}.`,btn:()=>`Đưa ${K('pen')} cho bạn ấy`,say:{w:'sua',ko:'고마워! 나 수아야. 너는?'}},
-   {phrase:true,vi:()=>`Hãy nói tên của bạn với Sua.`,btn:()=>`<span class="ko">저는 ${heroName()}이에요.</span>`,say:{w:'sua',ko:()=>`${heroName()}! 대박, 이름 ${hero==='f'?'예쁘다':'멋지다'}!`},heart:'sua',stand:true},
+   {t:'pen',give:'pen',reward:['rw_pen.jpg','pen'],vi:()=>`Bạn bên cạnh cần ${K('pen')}.`,btn:()=>`Đưa ${K('pen')} cho bạn ấy`,say:{w:'sua',html:()=>`Cảm ơn! Mình là ${K('sua')}. Còn bạn?`}},
+   {phrase:true,vi:()=>`Hãy nói tên của bạn với Sua.`,btn:()=>`<span class="ko">저는 ${heroName()}이에요.</span>`,say:{w:'sua',html:()=>`${NM()}! Trời ơi, tên ${hero==='f'?'đẹp':'hay'} quá!`},heart:'sua',stand:true},
    {walk:true,bell:true,vi:()=>`Tan học rồi! Cửa đang sáng lên — hãy ra ${K('door')}.`}
   ],
   doneMsg:()=>`Tan học! Bây giờ ra sân trường.`,nextBtn:()=>`Ra sân trường →`,
@@ -245,10 +256,10 @@ const SCENES={
         box:{board:true,items:['milk','juice','bread'],from:[320,330]}},
   label:'Sau giờ học',
   branches:{
-   junho:{say:{w:'junho',ko:'어이! 공! 공 좀 줘!'},pop:'field',missions:[{t:'ball',give:'ball',reward:['rw_ball.jpg','ball'],giveTo:'junho',vi:()=>`Junho gọi: ${K('ball')}! Hãy tìm ${K('ball')} cho Junho.`,btn:()=>`Đưa ${K('ball')} cho Junho`,say:{w:'junho',ko:'오, 고마워! 축구 좋아해? 내일 같이 하자!'},heart:'junho'}]},
-   doyun:{say:{w:'doyun',ko:'…저기, 파란 책.'},pop:'shelf',missions:[{t:'bluebook',give:'bluebook',reward:['rw_book.jpg','bluebook'],giveTo:'doyun',vi:()=>`Doyun đang tìm một cuốn sách. Hãy chọn ${K('bluebook')}.`,btn:()=>`Đưa ${K('bluebook')} cho Doyun`,say:{w:'doyun',ko:'…고마워요.'},heart:'doyun'}]},
-   haeun:{say:{w:'haeun',ko:'잠깐만요! 아, 우유가 떨어졌어요!'},pop:'box',missions:[{t:'milk',give:'milk',reward:['rw_milk.jpg','milk'],giveTo:'haeun',vi:()=>`Haeun làm rơi đồ. Hãy nhặt ${K('milk')} giúp.`,btn:()=>`Đưa ${K('milk')} cho Haeun`,say:{w:'haeun',ko:'어머, 고마워요! 이거 하나 가져가요.'},heart:'haeun'}]}},
-  invites:{junho:{ko:'축구 한 판 할래? 내가 공 차는 법 알려 줄게!'},doyun:{ko:'…도서관 갈래요? 조용하고 좋아요.'},haeun:{ko:'매점 와요! 오늘 딸기우유 맛있어요!'}},
+   junho:{say:{w:'junho',html:()=>`Ê! ${K('ball')}! ${K('ball')}!`},pop:'field',missions:[{t:'ball',give:'ball',reward:['rw_ball.jpg','ball'],giveTo:'junho',vi:()=>`Junho gọi: ${K('ball')}! Hãy tìm ${K('ball')} cho Junho.`,btn:()=>`Đưa ${K('ball')} cho Junho`,say:{w:'junho',html:()=>`Ồ, cảm ơn! Mai đá ${K('ball')} cùng nhé!`},heart:'junho'}]},
+   doyun:{say:{w:'doyun',html:()=>`…Này, ${K('bluebook')}.`},pop:'shelf',missions:[{t:'bluebook',give:'bluebook',reward:['rw_book.jpg','bluebook'],giveTo:'doyun',vi:()=>`Doyun đang tìm một cuốn sách. Hãy chọn ${K('bluebook')}.`,btn:()=>`Đưa ${K('bluebook')} cho Doyun`,say:{w:'doyun',html:()=>`…Cảm ơn nhé.`},heart:'doyun'}]},
+   haeun:{say:{w:'haeun',html:()=>`Chờ chút! Ôi, rơi mất ${K('milk')} rồi!`},pop:'box',missions:[{t:'milk',give:'milk',reward:['rw_milk.jpg','milk'],giveTo:'haeun',vi:()=>`Haeun làm rơi đồ. Hãy nhặt ${K('milk')} giúp.`,btn:()=>`Đưa ${K('milk')} cho Haeun`,say:{w:'haeun',html:()=>`Ôi, cảm ơn nhé! Cầm một hộp ${K('milk')} đi.`},heart:'haeun'}]}},
+  invites:{junho:{html:()=>`Đá ${K('ball')} một trận không? Mình chỉ cách sút cho!`},doyun:{html:()=>`…Đi ${K('library')} không? Yên tĩnh lắm.`},haeun:{html:()=>`Ra ${K('kiosk')} đi! Hôm nay ${K('milk')} ngon lắm!`}},
   missions:[
    {choose:['junho','doyun','haeun'],vi:()=>`Tan học rồi! Chiều nay bạn muốn đi với ai? Hãy đến gần một người.`,btn:()=>`Đi với bạn này`},
    {walk:true,vi:()=>`Trời tối rồi. Cổng trường đang sáng lên — hãy ra ${K('door')} để về nhà.`}
@@ -260,16 +271,16 @@ const SCENES={
   start:[200,610],
   label:'Buổi tối ở nhà',
   missions:[
-   {t:'mom',vi:()=>`Bạn về nhà rồi! Hãy chào ${K('mom')}.`,say:{w:'mom',ko:'왔니? 밥은? 오늘 어땠어?'},after:'quizStart'},
-   {quiz:3,vi:()=>`Nghe mẹ nói rồi chạm vào đúng hình đó. <button class="chip" id="qplay" aria-label="Nghe lại">▶</button> (${(S.quiz?S.quiz.round:0)+1}/3)`,say:{w:'mom',ko:'잘했네! 이제 할머니께 인사하렴.'}},
-   {t:'grandma',vi:()=>`Hãy chào ${K('grandma')}.`,say:{w:'grandma',ko:'뭐? 펜? …김치?'}},
+   {t:'mom',vi:()=>`Bạn về nhà rồi! Hãy chào ${K('mom')}.`,say:{w:'mom',html:()=>`Về rồi à? Ăn ${K('rice')} chưa? Hôm nay thế nào?`},after:'quizStart'},
+   {quiz:3,vi:()=>`Nghe mẹ nói rồi chạm vào đúng hình đó. <button class="chip" id="qplay" aria-label="Nghe lại">▶</button> (${(S.quiz?S.quiz.round:0)+1}/3)`,say:{w:'mom',html:()=>`Giỏi lắm! Giờ đi chào ${K('grandma')} đi.`}},
+   {t:'grandma',vi:()=>`Hãy chào ${K('grandma')}.`,say:{w:'grandma',html:()=>`Hả? ${K('pen')}? …${K('kimchi')} à?`}},
    {t:'mybed',end:true,reward:['rw_bed.jpg','mybed'],vi:()=>`Muộn rồi. Hãy về ${K('mybed')} đi ngủ.`,btn:()=>`Đi ngủ`}
   ],
   doneMsg:()=>`Chúc ngủ ngon! …Ồ, có tin nhắn.`,nextBtn:()=>`Xem tin nhắn →`,
   next:'chat'},
  chat:{chat:true,label:'Tin nhắn',missions:[{vi:()=>''}]}
 };
-['walk','block','faces','pops','props'].forEach(k=>{SCENES.evening[k]=SCENES.home[k];});
+['walk','block','faces','pops','props','treasures','gossip'].forEach(k=>{SCENES.evening[k]=SCENES.home[k];});
 SCENES.evening.spots=Object.assign({},SCENES.home.spots,{mybed:[1110,640]});
 SCENES.home.doneMsg=()=>`Xong buổi sáng! Bây giờ đi ${K('school')}.`;SCENES.home.nextBtn=()=>`Đi ${K('school')} →`;
 /* night chat (Mystic-Messenger style): Sua, then the friend picked after school */
@@ -277,27 +288,29 @@ const TL='ko';const HN={f:{ko:"린",vi:"Linh"},m:{ko:"민",vi:"Minh"}};
 const NM=()=>HN[hero][TL==='ko'?'vi':'ko'];
 const CHAT={
   steps:[
-   {from:'sua',msg:()=>`${NM()}! Hôm nay cảm ơn vì đã cho mình mượn ${K('pen')} nhé!`,st:'thanks',replies:[{t:{ko:"나도 고마워!",vi:"Mình cũng cảm ơn!"},st:'thanks',ok:1},{t:{ko:"잘 자!",vi:"Ngủ ngon!"},st:'sleep'}]},
-   {from:'sua',msg:()=>`Mai mình cùng ăn ${K('rice')} nhé?`,replies:[{t:{ko:"잘 자!",vi:"Ngủ ngon!"},st:'sleep'},{t:{ko:"좋아!",vi:"Được đó!"},st:'ok',ok:1}]},
-   {from:'sua',say:{ko:"잘 자!",vi:"Ngủ ngon!"},st:'sleep',replies:[{t:{ko:"좋아!",vi:"Được đó!"},st:'ok'},{t:{ko:"잘 자!",vi:"Ngủ ngon!"},st:'sleep',ok:1}],heart:'sua'}],
-  friend:{junho:{from:'junho',msg:()=>`Mai mình cùng đá ${K('ball')} nhé!`,replies:[{t:{ko:"좋아!",vi:"Được đó!"},st:'ok',ok:1},{t:{ko:"잘 자!",vi:"Ngủ ngon!"},st:'sleep'}],heart:'junho'},
-          doyun:{from:'doyun',msg:()=>`…Cảm ơn vì ${K('bluebook')}.`,st:'thanks',replies:[{t:{ko:"좋아요!",vi:"Được ạ!"},st:'ok'},{t:{ko:"나도 고마워요!",vi:"Mình cũng cảm ơn nhé!"},st:'thanks',ok:1}],heart:'doyun'},
-          haeun:{from:'haeun',msg:()=>`Uống ${K('milk')} ngon nhé!`,replies:[{t:{ko:"고마워요!",vi:"Cảm ơn nhé!"},st:'thanks',ok:1},{t:{ko:"잘 자요!",vi:"Ngủ ngon nhé!"},st:'sleep'}],heart:'haeun'}},
+   {from:'sua',msg:()=>`${NM()}! Hôm nay cảm ơn vì đã cho mình mượn ${K('pen')} nhé!`,st:'thanks',replies:[{txt:'Có gì đâu, chỉ là cây bút thôi mà!',ok:1},{txt:'Quyển sách đó hả?'}]},
+   {from:'sua',msg:()=>`Mai mình cùng ăn ${K('rice')} nhé?`,replies:[{txt:'Được, mai đá bóng nhé!'},{txt:'Được, mai ăn cơm cùng nhé!',ok:1}]},
+   {from:'sua',say:{ko:"잘 자!",vi:"Ngủ ngon!"},st:'sleep',replies:[{txt:'Chào buổi sáng!'},{txt:'Bạn cũng ngủ ngon nhé!',ok:1}],heart:'sua'}],
+  friend:{junho:{from:'junho',msg:()=>`Mai mình cùng đá ${K('ball')} nhé!`,replies:[{txt:'Được, mai đá bóng nhé!',ok:1},{txt:'Được, mai ăn cơm cùng nhé!'}],heart:'junho'},
+          doyun:{from:'doyun',msg:()=>`…Cảm ơn vì ${K('bluebook')}.`,st:'thanks',replies:[{txt:'Uống sữa ngon nhé!'},{txt:'Đọc sách vui nhé!',ok:1}],heart:'doyun'},
+          haeun:{from:'haeun',msg:()=>`Uống ${K('milk')} ngon nhé!`,replies:[{txt:'Cảm ơn vì hộp sữa!',ok:1},{txt:'Cảm ơn vì quả bóng!'}],heart:'haeun'}},
   hint:'Sua nhắn tin cho bạn. Chạm vào tin nhắn để nghe, rồi chọn câu trả lời.'
 };
+const GIFTS={cookie:{to:'sua',say:{w:'sua',html:()=>`Oa! ${K('cookie')}! Cảm ơn nhé!`},heart:'sua'},snack:{to:'dog',note:'Bé cún vẫy đuôi rối rít!',heart:'dog'}};
+const FINDS={cookie:{keep:'Để dành cho Sua',eat:'Mình ăn luôn',ate:'Ngon quá!'},snack:{keep:'Để dành cho bé cún',eat:'Mình ăn thử',ate:'Ư… đây là đồ ăn của chó mà!'}};
 const STK={thanks:'st_thanks.png',ok:'st_ok.png',sleep:'st_sleep.png'};
 const TX=e=>typeof e[TL]==='function'?e[TL]():e[TL],TR=e=>{const k=TL==='ko'?'vi':'ko';return typeof e[k]==='function'?e[k]():e[k];};
 
 /* ---------- state ---------- */
 let SC,L,M,S,hero='f',keys={},path=null,after=null,last=0;
-const G={known:new Set(),heard:new Set(),hearts:{}};
+const G={known:new Set(),heard:new Set(),hearts:{},inv:[],found:new Set()};
 const heroName=()=>hero==='f'?'린':'민';
 const REACH=110,SPEED=320,CELL=10,GW=Math.ceil(1376/CELL),GH=Math.ceil(768/CELL);
 const inR=(r,x,y)=>x>=r[0]&&x<=r[2]&&y>=r[1]&&y<=r[3];
 let GRID;
 function freeAt(x,y){return L.walk.some(r=>inR(r,x,y))&&!L.block.some(r=>inR(r,x,y));}
 function loadScene(name){
-  SC=name;L=SCENES[name];M=L.missions.slice();bgmPlay(name);
+  SC=name;L=SCENES[name];M=L.missions.slice();bgmPlay(name);if(name==='class')delete SCENES.class.spots.sua;
   if(L.chat){closePop(true);S={m:0,done:true,sel:null,talk:null};document.getElementById('mission').hidden=true;startChat();return;}
   GRID=new Uint8Array(GW*GH);for(let gy=0;gy<GH;gy++)for(let gx=0;gx<GW;gx++)GRID[gy*GW+gx]=freeAt(gx*CELL+5,gy*CELL+5)?1:0;
   closePop(true);path=null;after=null;keys={};
@@ -310,7 +323,7 @@ function loadScene(name){
 }
 
 /* ---------- sound ---------- */
-const SND={"엄마": "snd/k00.mp3", "아빠": "snd/k01.mp3", "할머니": "snd/k02.mp3", "동생": "snd/k03.mp3", "강아지": "snd/k04.mp3", "냉장고": "snd/k05.mp3", "물": "snd/k06.mp3", "텔레비전": "snd/k07.mp3", "가방": "snd/k08.mp3", "신발": "snd/k09.mp3", "책": "snd/k10.mp3", "문": "snd/k11.mp3", "김치": "snd/k12.mp3", "만두": "snd/k13.mp3", "라면": "snd/k14.mp3", "밥": "snd/k15.mp3", "학교": "snd/k16.mp3", "선생님": "snd/k17.mp3", "자리": "snd/k18.mp3", "칠판": "snd/k19.mp3", "책장": "snd/k20.mp3", "쓰레기통": "snd/k21.mp3", "공책": "snd/k22.mp3", "필통": "snd/k23.mp3", "펜": "snd/k24.mp3", "연필": "snd/k25.mp3", "지우개": "snd/k26.mp3", "수아": "snd/k27.mp3", "준호": "snd/k43.mp3", "도윤": "snd/k44.mp3", "하은": "snd/k45.mp3", "공": "snd/k46.mp3", "물병": "snd/k47.mp3", "수건": "snd/k48.mp3", "빨간 책": "snd/k49.mp3", "노란 책": "snd/k50.mp3", "파란 책": "snd/k51.mp3", "우유": "snd/k52.mp3", "주스": "snd/k53.mp3", "빵": "snd/k54.mp3", "도서관": "snd/k55.mp3", "매점": "snd/k56.mp3", "운동장": "snd/k57.mp3", "침대": "snd/k58.mp3", "Jua": "snd/k59.mp3", "일어났구나! 밥 먹고 가.": "snd/k28.mp3", "맛있게 먹어. 아빠 좀 깨워 줄래?": "snd/k29.mp3", "으음… 5분만… 할머니께 인사드렸니?": "snd/k30.mp3", "잘 잤니? 동생도 깨워 주렴.": "snd/k31.mp3", "잠깐, 방송 중! …할머니가 물 드시고 싶으시대.": "snd/k32.mp3", "고마워. 가방 잊지 말고!": "snd/k33.mp3", "다 챙겼니? 엄마한테 인사하고 가야지.": "snd/k34.mp3", "학교 잘 다녀와! 문 열고 나가렴.": "snd/k35.mp3", "자, 여러분. 책 펴세요.": "snd/k36.mp3", "고마워! 나 수아야. 너는?": "snd/k38.mp3", "어이! 공! 공 좀 줘!": "snd/k60.mp3", "오, 고마워! 축구 좋아해? 내일 같이 하자!": "snd/k61.mp3", "…저기, 파란 책.": "snd/k62.mp3", "…고마워요.": "snd/k63.mp3", "잠깐만요! 아, 우유가 떨어졌어요!": "snd/k64.mp3", "어머, 고마워요! 이거 하나 가져가요.": "snd/k65.mp3", "축구 한 판 할래? 내가 공 차는 법 알려 줄게!": "snd/k79.mp3", "…도서관 갈래요? 조용하고 좋아요.": "snd/k80.mp3", "매점 와요! 오늘 딸기우유 맛있어요!": "snd/k81.mp3", "왔니? 밥은? 오늘 어땠어?": "snd/k66.mp3", "잘했네! 이제 할머니께 인사하렴.": "snd/k67.mp3", "뭐? 펜? …김치?": "snd/k68.mp3", "대박, 늦었다! 저기, 펜 있어? 펜, 펜!": "snd/k37.mp3", "나도 고마워!": "snd/k84.mp3", "잘 자!": "snd/k85.mp3", "좋아!": "snd/k70.mp3", "좋아요!": "snd/k93.mp3", "나도 고마워요!": "snd/k94.mp3", "고마워요!": "snd/k90.mp3", "잘 자요!": "snd/k89.mp3", "린! 대박, 이름 예쁘다!": "snd/k39.mp3", "민! 대박, 이름 멋지다!": "snd/k40.mp3", "저는 린이에요.": "snd/k41.mp3", "저는 민이에요.": "snd/k42.mp3"};
+const SND={"엄마": "snd/k00.mp3", "아빠": "snd/k01.mp3", "할머니": "snd/k02.mp3", "동생": "snd/k03.mp3", "강아지": "snd/k04.mp3", "냉장고": "snd/k05.mp3", "물": "snd/k06.mp3", "텔레비전": "snd/k07.mp3", "가방": "snd/k08.mp3", "신발": "snd/k09.mp3", "책": "snd/k10.mp3", "문": "snd/k11.mp3", "김치": "snd/k12.mp3", "만두": "snd/k13.mp3", "라면": "snd/k14.mp3", "밥": "snd/k15.mp3", "학교": "snd/k16.mp3", "선생님": "snd/k17.mp3", "의자": "snd/k99.mp3", "칠판": "snd/k19.mp3", "책장": "snd/k20.mp3", "쓰레기통": "snd/k21.mp3", "공책": "snd/k22.mp3", "필통": "snd/k23.mp3", "펜": "snd/k24.mp3", "연필": "snd/k25.mp3", "지우개": "snd/k26.mp3", "수아": "snd/k27.mp3", "준호": "snd/k43.mp3", "도윤": "snd/k44.mp3", "하은": "snd/k45.mp3", "공": "snd/k46.mp3", "물병": "snd/k47.mp3", "수건": "snd/k48.mp3", "빨간 책": "snd/k49.mp3", "노란 책": "snd/k50.mp3", "파란 책": "snd/k51.mp3", "우유": "snd/k52.mp3", "주스": "snd/k53.mp3", "빵": "snd/k54.mp3", "도서관": "snd/k55.mp3", "매점": "snd/k56.mp3", "운동장": "snd/k57.mp3", "침대": "snd/k58.mp3", "쿠키": "snd/k95.mp3", "간식": "snd/k96.mp3", "친구": "snd/k97.mp3", "Jua": "snd/k59.mp3", "나도 고마워!": "snd/k84.mp3", "잘 자!": "snd/k85.mp3", "좋아!": "snd/k70.mp3", "좋아요!": "snd/k93.mp3", "나도 고마워요!": "snd/k94.mp3", "고마워요!": "snd/k90.mp3", "잘 자요!": "snd/k89.mp3", "저는 린이에요.": "snd/k41.mp3", "저는 민이에요.": "snd/k42.mp3"};
 const auL=new Audio(),auW=new Audio();auL.preload=auW.preload='auto';let auOk=false,waitWord=null;
 function unlockAudio(){if(auOk)return;auOk=true;const f=Object.values(SND)[0];
   [auL,auW].forEach(a=>{try{a.src=f;a.muted=true;const p=a.play();if(p)p.then(()=>{a.pause();a.muted=false;a.currentTime=0;}).catch(()=>{a.muted=false;auOk=false;});}catch(e){a.muted=false;}});
@@ -332,6 +345,8 @@ let ac;function tone(kind){try{ac=ac||new (window.AudioContext||window.webkitAud
   for(let i=0;i<6;i++){const o=ac.createOscillator(),g=ac.createGain();o.type='sine';o.frequency.value=3000+Math.random()*1800;const t=ac.currentTime+.42+i*.07;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.05,t+.01);g.gain.exponentialRampToValueAtTime(.0001,t+.25);o.connect(g).connect(ac.destination);o.start(t);o.stop(t+.3);}return;}
   const seq=kind==='ok'?[880,1320]:kind==='bell'?[784,659,523]:[220];seq.forEach((f,i)=>{const o=ac.createOscillator(),g=ac.createGain();o.type=kind==='no'?'triangle':'sine';o.frequency.value=f;const t=ac.currentTime+i*(kind==='bell'?.35:.12);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.25,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+(kind==='bell'?.6:.35));o.connect(g).connect(ac.destination);o.start(t);o.stop(t+.7);});}catch(e){}}
 const lineText=s=>typeof s.ko==='function'?s.ko():s.ko;
+const talkHTML=t=>typeof t.html==='function'?t.html():(t.html||lineText(t));
+function speakTalk(t){if(!t)return;if(t.html){const m=talkHTML(t).match(/data-say="([^"]+)"/);if(m)sayLine(m[1]);return;}sayLine(lineText(t));}
 
 /* ---------- camera & drawing ---------- */
 let scale=1,camX=0,camY=0,VW=0,VH=0;
@@ -354,6 +369,7 @@ function renderTags(){if(!S)return;let h='';
   for(const k in L.spots){const [x,y]=L.spots[k];
     if(G.known.has(k)&&k!=='seat')h+=`<div class="tag ${S.popTag===k?'pop':''}" style="left:${x}px;top:${y-34}px">${W[k]}</div>`;
     else if(S.near===k&&!S.sit&&S.sel!==k)h+=`<div class="tag q" style="left:${x}px;top:${y-34}px">?</div>`;}
+  if(S.sel&&L.focus&&L.focus[S.sel]){const [fx,fy,fr]=L.focus[S.sel];h+=`<div class="exit focus" style="left:${fx}px;top:${fy}px;width:${fr*2}px;height:${fr*2}px;margin:-${fr}px 0 0 -${fr}px"></div>`;}
   if(doorOpen()){const [x,y]=L.spots.door;h+=`<div class="exit" style="left:${x}px;top:${y}px"></div><div class="arrow" style="left:${x}px;top:${y-110}px"></div>`;}
   document.getElementById('tags').innerHTML=h;S.popTag=null;renderOk();}
 function faceStyle(el,w){const f=L.faces[w];if(!f){el.style.backgroundImage='none';return;}const [img,iw,ih,x,y,sz]=f,k=56/sz;el.style.backgroundImage=`url(${img})`;el.style.backgroundSize=`${iw*k}px ${ih*k}px`;el.style.backgroundPosition=`${-x*k}px ${-y*k}px`;}
@@ -394,9 +410,10 @@ function renderUI(){
   const m=M[Math.min(S.m,M.length-1)];
   document.getElementById('mcount').textContent=`${L.label} · ${Math.min(S.m+1,M.length)} / ${M.length}`;
   document.getElementById('hearts').textContent=heartsText();
+  document.getElementById('inv').innerHTML=G.inv.map(it=>`<img src="${IMG[it]}" alt="">`).join('');
   document.getElementById('mtext').innerHTML=m.vi();
   const tk=document.getElementById('talk');
-  if(S.talk){tk.hidden=false;faceStyle(document.getElementById('tface'),S.talk.w);document.getElementById('tline').textContent=lineText(S.talk);}else tk.hidden=true;
+  if(S.talk){tk.hidden=false;faceStyle(document.getElementById('tface'),S.talk.w);document.getElementById('tline').innerHTML=talkHTML(S.talk);}else tk.hidden=true;
   const mid=document.getElementById('mid');
   if(m.phrase&&!S.done)mid.innerHTML=`<button class="btn" id="phrase">🔊 ${m.btn()}</button>`;
   else mid.innerHTML='';
@@ -423,13 +440,13 @@ function startChat(){
   let k=0,cur=null;
   const ask=()=>{if(k>=steps.length){rp.innerHTML=`<button class="btn" id="chatEnd">${'Ngủ ngon →'}</button>`;return;}
     cur=steps[k++];const sp=cur.say?TX(cur.say):null;add(cur.from,cur.msg?cur.msg():sp,cur.st,cur.from,sp);
-    setTimeout(()=>{rp.innerHTML=cur.replies.map((r,i)=>`<button class="btn rbtn" data-reply="${i}"><img src="${STK[r.st]}" alt=""><span class="ko">${TX(r.t)}</span></button>`).join('');},1400);};
+    setTimeout(()=>{rp.innerHTML=cur.replies.map((r,i)=>`<button class="btn rbtn" data-reply="${i}"><span>${r.txt}</span></button>`).join('');},1400);};
   setTimeout(ask,400);
   w.onclick=e=>{const ch=e.target.closest('.chip[data-say]');if(ch){say(ch.dataset.say);return;}
     const bub=e.target.closest('.bub[data-line]');if(bub){sayLine(bub.dataset.line);return;}
     const r=e.target.closest('[data-reply]');if(!r||!cur)return;const c=cur.replies[+r.dataset.reply];
-    if(!c.ok){tone('no');say(TX(c.t));r.classList.remove('shake');void r.offsetWidth;r.classList.add('shake');return;}
-    rp.innerHTML='';add('me',TX(c.t),c.st,null,TX(c.t));tone('ok');
+    if(!c.ok){tone('no');r.classList.remove('shake');void r.offsetWidth;r.classList.add('shake');return;}
+    rp.innerHTML='';add('me',c.txt,null,null,null);tone('ok');
     if(cur.heart){G.hearts[cur.heart]=(G.hearts[cur.heart]||0)+1;}
     setTimeout(ask,2000);};
 }
@@ -439,6 +456,18 @@ function showReward(r){const [img,word]=r;const w=document.getElementById('rewar
   const sp=w.querySelector('.spark');sp.innerHTML=Array.from({length:14},(_,i)=>`<i style="--a:${i*360/14}deg;--d:${(i%5)*.06}s;--r:${120+(i%3)*60}px">✦</i>`).join('');
   tone('sparkle');setTimeout(()=>say(W[word]),700);}
 function closeReward(){document.getElementById('rewardWrap').hidden=true;const f=rwAfter;rwAfter=null;if(f)f();}
+function foundItem(it){const f=FINDS[it],w=document.getElementById('findWrap');
+  document.getElementById('fdImg').src=IMG[it];document.getElementById('fdTitle').innerHTML=`Tìm thấy ${K(it)}!`;
+  document.getElementById('fdBtns').innerHTML=`<button class="btn" data-find="keep" data-it="${it}">${f.keep}</button><button class="btn alt" data-find="eat" data-it="${it}">${f.eat}</button>`;
+  w.hidden=false;w.classList.remove('go');void w.offsetWidth;w.classList.add('go');tone('sparkle');setTimeout(()=>say(W[it]),700);}
+function findChoice(kind,it){document.getElementById('findWrap').hidden=true;G.found.add(it);G.known.add(it);
+  if(kind==='keep'){G.inv.push(it);tone('ok');}else{tone('no');S.talk={w:null,html:FINDS[it].ate};}
+  renderUI();renderTags();}
+function giveGift(it){const g=GIFTS[it];G.inv=G.inv.filter(x=>x!==it);G.hearts[g.heart]=(G.hearts[g.heart]||0)+1;
+  const sp=L.spots[g.to];if(sp)heartPop(sp[0],sp[1]+40);
+  if(g.say){S.talk=g.say;setTimeout(()=>speakTalk(g.say),300);}else S.talk={w:null,html:g.note};
+  if(g.to==='sua'&&S.npc){S.npc.img='sua_wave.png';setTimeout(()=>{if(S.npc)S.npc.img='sua.png';},2500);}
+  showReward([IMG[it],it]);renderUI();}
 function renderProps(){
   document.getElementById('npcs').innerHTML=(L.npcs||[]).map(n=>`<div class="spr npc" data-npc="${n.id}" style="left:${n.x}px;top:${n.y}px;background-image:url(${n.img})"></div>`).join('')
     +(L.props||[]).filter(p=>!p.gone()).map(p=>`<img class="prop" src="${p.img}" alt="" style="left:${p.x}px;top:${p.y}px;width:${p.w}px">`).join('');}
@@ -450,15 +479,20 @@ function interact(forced){
   const n=forced||nearest();
   if(!n){S.msg='…';renderUI();return;}
   if(n==='door'){if(doorOpen()){showDone();return;}const cm=M[S.m];if(cm&&cm.t==='school'&&L.pops.doorview){openPop('doorview');return;}}
-  const cm2=M[S.m];if(cm2&&cm2.choose&&L.invites&&L.invites[n]){G.heard.add(n);S.sel=n;S.talk={w:n,ko:L.invites[n].ko};sayLine(L.invites[n].ko);renderUI();return;}
+  const cm2=M[S.m];if(cm2&&cm2.choose&&L.invites&&L.invites[n]){G.heard.add(n);S.sel=n;S.talk={w:n,html:L.invites[n].html};speakTalk(S.talk);renderUI();return;}
+  const gift=G.inv.find(it=>GIFTS[it]&&GIFTS[it].to===n);if(gift){giveGift(gift);return;}
+  const tr=L.treasures&&L.treasures[n];if(tr&&!G.found.has(tr.item)){say(W[n]);G.heard.add(n);setTimeout(()=>foundItem(tr.item),500);return;}
+  const gs=L.gossip&&L.gossip[n],cm3=M[S.m];
+  if(gs&&!(cm3&&(cm3.t===n||(cm3.choose&&cm3.choose.includes(n))))){G.heard.add(n);S.sel=null;S.talk={w:n,html:gs.line()};renderUI();renderTags();return;}
+  if(n==='mate'){G.heard.add(n);return;}
   say(W[n]);G.heard.add(n);S.sel=n;S.msg='';
   if(L.pops[n])openPop(n);
-  renderUI();
+  renderUI();renderTags();
 }
 function tryMove(dx,dy){let moved=false;const nx=S.x+dx,ny=S.y+dy;
   if(freeAt(nx,S.y)){S.x=nx;moved=true;}if(freeAt(S.x,ny)){S.y=ny;moved=true;}
   if(dx<-.01)S.flip=true;else if(dx>.01)S.flip=false;return moved;}
-function clearSel(){if(S.sel){S.sel=null;S.msg='';if(fov)closePop();renderUI();}}
+function clearSel(){if(S.sel){S.sel=null;renderTags();S.msg='';if(fov)closePop();renderUI();}}
 function heartPop(x,y,k){const fx=document.getElementById('fx');const e=document.createElement('div');e.className='heartpop';e.style.left=x+'px';e.style.top=(y-110)+'px';e.textContent='♥ +1';fx.appendChild(e);setTimeout(()=>e.remove(),1700);}
 function npcWalk(points,img,done){S.npc=S.npc||{x:points[0][0],y:points[0][1]};S.npc.img=img;S.npc.path=points.slice(1);S.npc.done=done;}
 function quizRound(){
@@ -473,7 +507,7 @@ const events={
   quizStart(){S.quiz={round:0,used:[]};setTimeout(quizRound,2600);},
   suaEnter(){
     S.npc={x:SCENES.class.spots.door[0]+40,y:640,img:'sua.png'};
-    npcWalk([[160,640],[250,685],[560,685],[560,525],[750,525]],'sua.png',()=>{S.npc.flip=true;S.talk={w:'sua',ko:'대박, 늦었다! 저기, 펜 있어? 펜, 펜!'};renderUI();sayLine(S.talk.ko);setTimeout(()=>openPop('desk'),900);});
+    npcWalk([[160,640],[250,685],[560,685],[560,525],[750,525]],'sua.png',()=>{SCENES.class.spots.sua=[750,485];S.npc.flip=true;S.talk={w:'sua',html:()=>`Trời ơi, muộn rồi! Này, có ${K('pen')} không?`};renderUI();speakTalk(S.talk);setTimeout(()=>openPop('desk'),900);});
   }
 };
 function success(m){
@@ -481,7 +515,7 @@ function success(m){
   const picked=S.sel;
   if(m.t){G.known.add(m.t);S.popTag=m.t;}
   if(m.choose){G.pick=picked;G.known.add(picked);S.popTag=picked;const br=L.branches[picked];M.splice(S.m+1,0,...br.missions);S.talk=br.say;
-    renderTags();setTimeout(()=>sayLine(lineText(br.say)),450);setTimeout(()=>openPop(br.pop),1300);}
+    renderTags();setTimeout(()=>speakTalk(br.say),450);setTimeout(()=>openPop(br.pop),1300);}
   S.sel=null;S.m++;
   if(m.take)S.carry=m.take;
   if(m.give){S.carry=null;const g=document.getElementById('given');g.src=IMG[m.give];g.style.width='30px';
@@ -496,7 +530,7 @@ function success(m){
   if(fov){const el=fov;setTimeout(()=>{if(fov===el)closePop();},800);}
   S.talk=m.say||S.talk;
   renderUI();renderTags();place();
-  if(m.say)setTimeout(()=>sayLine(lineText(m.say)),450);
+  if(m.say)setTimeout(()=>speakTalk(m.say),450);
   if(m.openPop)setTimeout(()=>openPop(m.openPop),1100);
   if(m.after)setTimeout(()=>events[m.after](),900);
 }
@@ -550,18 +584,19 @@ document.getElementById('view').addEventListener('pointerdown',e=>{
   goTo((e.clientX-r.left+camX)/scale,(e.clientY-r.top+camY)/scale);
 });
 function setHeroImg(){document.getElementById('hero').style.backgroundImage=`url(hero_${hero}${G.wear?'_bag':''}.png)`;}
-function startGame(){G.known=new Set();G.heard=new Set();G.hearts={};G.wear=false;G.pick=null;document.getElementById('chatWrap').hidden=true;document.getElementById('pickWrap').hidden=true;document.getElementById('game').hidden=false;
+function startGame(){G.known=new Set();G.heard=new Set();G.hearts={};G.inv=[];G.found=new Set();G.wear=false;G.pick=null;document.getElementById('chatWrap').hidden=true;document.getElementById('pickWrap').hidden=true;document.getElementById('game').hidden=false;
   setHeroImg();hideDone();loadScene('home');}
 document.addEventListener('click',e=>{
   if(e.target.closest('.mus')){bgmToggle();return;}
   const pk=e.target.closest('[data-hero]');if(pk){hero=pk.dataset.hero;startGame();return;}
+  const fc=e.target.closest('[data-find]');if(fc){findChoice(fc.dataset.find,fc.dataset.it);return;}
   if(e.target.closest('#rwNext')||e.target.closest('#rewardWrap')&&!e.target.closest('.chip')){closeReward();return;}
   if(e.target.closest('#goNext')){hideDone();loadScene(L.next);return;}
   if(e.target.closest('#chatEnd')){document.getElementById('chatWrap').hidden=true;showDone();return;}
   if(e.target.closest('#again')){document.getElementById('game').hidden=true;document.getElementById('pickWrap').hidden=false;return;}
   const chip=e.target.closest('.chip[data-say]');
   if(chip&&!e.target.closest('#confirm')&&!e.target.closest('#goNext')){say(chip.dataset.say);return;}
-  if(e.target.closest('#treplay')){if(S.talk)sayLine(lineText(S.talk));return;}
+  if(e.target.closest('#treplay')){speakTalk(S.talk);return;}
   if(e.target.closest('#fxbtn')){if(fovName==='quiz'){openPop('quiz');return;}if(fovName==='pcase'&&L.pops.desk&&S.sit){openPop('desk');return;}closePop();if(S.sel&&!L.spots[S.sel])S.sel=null;renderUI();return;}
   if(e.target.closest('#qplay')){if(S.quiz&&S.quiz.target)say(W[S.quiz.target]);return;}
   const food=e.target.closest('[data-food]');
