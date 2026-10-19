@@ -511,7 +511,7 @@ function hideDone(){document.getElementById('doneWrap').hidden=true;document.get
 /* ---------- actions ---------- */
 function interact(forced){
   {const cg=M[S.m];if(cg&&cg.goWith&&forced===cg.goWith)forced=cg.t;}
-  if(S.sit){if(L.pops.desk&&!fov)openPop('desk');return;}
+  if(S.sit&&!(forced&&L.gossip&&L.gossip[forced])){if(L.pops.desk&&!fov)openPop('desk');return;}
   const n=forced||nearest();
   if(!n){S.msg='…';renderUI();return;}
   if(n==='door'){if(doorOpen()){showDone();return;}const cm=M[S.m];if(cm&&cm.t==='school'&&L.pops.doorview){openPop('doorview');return;}}
@@ -612,7 +612,7 @@ function bfs(goalFn){
   return null;
 }
 function goTo(wx,wy){
-  if(S.sit){interact();return;}
+  if(S.sit){let g=null;if(L.gossip)for(const k in L.gossip){const sp=L.spots[k];if(sp&&Math.hypot(sp[0]-wx,sp[1]-wy)<Math.max(70,50/scale))g=k;}interact(g||undefined);return;}
   const hitR=Math.max(60,46/scale);let spot=null,bd=1e9;for(const k in L.spots){const [x,y]=L.spots[k],d=Math.min(Math.hypot(x-wx,y-wy),Math.hypot(x-wx,y-50-wy));if(d<hitR&&d<bd){bd=d;spot=k;}}   // 손가락 크기만큼, 「?」·이름표를 눌러도
   if(!spot&&L.areas)for(const k in L.areas){const [x0,y0,x1,y1]=L.areas[k];if(wx>=x0&&wx<=x1&&wy>=y0&&wy<=y1&&L.spots[k]){spot=k;break;}}
   if(spot){const [x,y]=L.spots[spot];
