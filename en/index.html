@@ -161,6 +161,10 @@ button:focus-visible{outline:3px solid var(--leaf);outline-offset:2px}
 .wagst{position:relative;width:min(420px,84vw);height:min(300px,40vh);display:flex;align-items:flex-end;justify-content:center}
 .wdog{position:relative;height:88%;aspect-ratio:223/240;transform-origin:50% 100%;animation:whop .5s .7s ease-in-out 6}
 .wdog img{position:absolute;inset:0;width:100%!important;height:100%;max-height:none!important;border-radius:0;object-fit:contain}
+
+.wagst.sua .wdog{aspect-ratio:253/585;height:96%}.wagst .ws,.wagst.sua .wb,.wagst.sua .wt{display:none}.wagst.sua .ws{display:block}
+.wagst.sua .wi{animation:wfeedS .6s forwards}
+@keyframes wfeedS{0%{left:85%;top:40%;opacity:1}100%{left:40%;top:22%;opacity:1;transform:translate(-50%,-50%) scale(.75)}}
 .wdog .wt{transform-origin:86% 87%;animation:wag .16s .7s ease-in-out infinite alternate}
 .wagst .wi{position:absolute;width:64px!important;left:85%;top:40%;transform:translate(-50%,-50%);border-radius:0;animation:wfeed .6s forwards}
 .whearts{position:absolute;left:50%;top:30%;width:0;height:0}
@@ -215,7 +219,7 @@ button:focus-visible{outline:3px solid var(--leaf);outline-offset:2px}
       <div class="mid" id="mid"></div>
     </section>
     <div class="center reward" id="rewardWrap" hidden><section class="card rcard"><div class="spark" aria-hidden="true"></div><img id="rwImg" alt=""><div class="rword" id="rwWord"></div><button class="btn" id="rwNext">Next →</button></section></div>
-    <div class="center reward" id="wagWrap" hidden><section class="card rcard"><div class="wagst" id="wagSt"><div class="wdog"><img class="wb" src="dog_body.png" alt=""><img class="wt" src="dog_tail.png" alt=""></div><img class="wi" id="wagItem" alt=""><div class="whearts" id="wagFx"></div></div><div class="mtext" id="wagTxt"></div><button class="btn" id="wagOk">Next →</button></section></div>
+    <div class="center reward" id="wagWrap" hidden><section class="card rcard"><div class="wagst" id="wagSt"><div class="wdog"><img class="wb" src="dog_body.png" alt=""><img class="wt" src="dog_tail.png" alt=""><img class="ws" src="sua_happy.png" alt=""></div><img class="wi" id="wagItem" alt=""><div class="whearts" id="wagFx"></div></div><div class="mtext" id="wagTxt"></div><button class="btn" id="wagOk">Next →</button></section></div>
     <div class="center reward" id="eatWrap" hidden><section class="card rcard eatc"><div class="eatst" id="eatSt"><img class="eh" id="eatHero" alt=""><img class="ei" id="eatItem" alt=""><div class="efx" id="eatFx"></div><div class="eshout" id="eatShout"></div></div><div class="mtext" id="eatTxt"></div><button class="btn" id="eatOk">Next →</button></section></div>
     <div class="center reward" id="findWrap" hidden><section class="card rcard find"><img id="fdImg" alt=""><div class="mtext" id="fdTitle"></div><div class="mid" id="fdBtns"></div></section></div>
     <div class="center" id="doneWrap" hidden><section class="card done" id="done"></section></div>
@@ -515,14 +519,15 @@ function showEat(it){const f=FINDS[it],w=document.getElementById('eatWrap'),st=d
   setTimeout(()=>tone(f.mood==='yuck'?'spit':'yum'),550);}
 function giveGift(it,to){const g=to==='dog'&&GIFTS[it].to!=='dog'?GIFTS.snack:GIFTS[it];G.inv=G.inv.filter(x=>x!==it);G.hearts[g.heart]=(G.hearts[g.heart]||0)+1;
   const sp=L.spots[g.to];if(sp)heartPop(sp[0],sp[1]+40);
-  if(g.say){S.talk=g.say;setTimeout(()=>speakTalk(g.say),300);}else S.talk={w:null,html:g.note};
+  if(g.say){S.talk=g.say;}else S.talk={w:null,html:g.note};
   if(g.to==='sua'&&S.npc){S.npc.img='sua_wave.png';setTimeout(()=>{if(S.npc)S.npc.img='sua.png';},2500);}
-  if(g.to==='dog')showWag(it);else showReward([IMG[it],it]);renderUI();}
-function showWag(it){const w=document.getElementById('wagWrap'),st=document.getElementById('wagSt');document.getElementById('wagItem').src=IMG[it];
-  document.getElementById('wagTxt').innerHTML=GIFTS.snack.note;
+  if(g.to==='dog')showWag(it);else if(g.to==='sua')showWag(it,'sua',g.say);else showReward([IMG[it],it]);renderUI();}
+function showWag(it,who,line){const w=document.getElementById('wagWrap'),st=document.getElementById('wagSt');document.getElementById('wagItem').src=IMG[it];
+  st.className='wagst'+(who==='sua'?' sua':'');
+  document.getElementById('wagTxt').innerHTML=line?talkHTML(line):GIFTS.snack.note;
   document.getElementById('wagFx').innerHTML=Array.from({length:8},(_,i)=>`<i style="--d:${.7+i*.18}s;--x:${-90+i*26}px">♥</i>`).join('');
   w.hidden=false;st.querySelectorAll('*').forEach(e=>{e.style.animation='none';void e.offsetWidth;e.style.animation='';});
-  setTimeout(()=>tone('yum'),650);setTimeout(()=>tone('sparkle'),1100);setTimeout(()=>say(W.dog),1500);}
+  setTimeout(()=>tone('yum'),650);setTimeout(()=>tone('sparkle'),1100);setTimeout(()=>{if(line)speakTalk(line);else say(W.dog);},1500);}
 function renderProps(){
   document.getElementById('npcs').innerHTML=(L.npcs||[]).map(n=>`<div class="spr npc" data-npc="${n.id}" style="left:${n.x}px;top:${n.y}px;background-image:url(${n.img})"></div>`).join('')
     +(L.props||[]).filter(p=>!p.gone()).map(p=>`<img class="prop" src="${p.img}" alt="" style="left:${p.x}px;top:${p.y}px;width:${p.w}px">`).join('');}
