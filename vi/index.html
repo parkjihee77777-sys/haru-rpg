@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600&family=Jua&display=swap">
 <style>
 /* layout: picker → mission strip, painted scene map with camera, action bar; scenes: home → class */
-:root{
+:root{--spk:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 9v6h4l5 4V5L7 9H3z'/%3E%3Cpath d='M15.5 8.5a5 5 0 0 1 0 7' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M18 6a8.5 8.5 0 0 1 0 12' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
   --bg:#f1f3ea; --panel:#fffdf6; --line:#dcdcc8; --ink:#33402f; --muted:#7a8470;
   --leaf:#6f9a4f; --leaf-ink:#2f4a1f; --leaf-soft:#e3eed3; --wood:#c98a52; --heart:#d8667a;
   --f-ko:'Be Vietnam Pro','Segoe UI',Roboto,sans-serif;
@@ -31,6 +31,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--f-vi);font-size:15p
 .chip{font-family:var(--f-ko);font-size:19px;background:var(--leaf-soft);color:var(--leaf-ink);border:2px solid var(--leaf);border-radius:10px;padding:0 8px;margin:0 2px;cursor:pointer;line-height:1.4}
 button:focus-visible{outline:3px solid var(--leaf);outline-offset:2px}
 .chip[data-say]::after{content:'';display:inline-block;width:.8em;height:.8em;margin-left:.3em;vertical-align:-.05em;background:currentColor;opacity:.75;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 9v6h4l5 4V5L7 9H3z'/%3E%3Cpath d='M15.5 8.5a5 5 0 0 1 0 7' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M18 6a8.5 8.5 0 0 1 0 12' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center/contain;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 9v6h4l5 4V5L7 9H3z'/%3E%3Cpath d='M15.5 8.5a5 5 0 0 1 0 7' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M18 6a8.5 8.5 0 0 1 0 12' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center/contain}
+.qsay{width:52px;height:52px;border-radius:50%;border:3px solid var(--leaf);background:#fff;cursor:pointer;position:relative}.qsay::after{content:'';position:absolute;inset:11px;background:var(--leaf-ink);-webkit-mask:var(--spk) no-repeat center/contain;mask:var(--spk) no-repeat center/contain}
 .talk{display:flex;gap:10px;align-items:center;background:var(--leaf-soft);border-radius:14px;padding:8px 12px}
 .face{width:56px;height:56px;border-radius:50%;flex:none;background-repeat:no-repeat;background-color:#fffdf6;border:2px solid var(--panel)}
 .talk .line{font-family:var(--f-ko);font-size:20px;color:var(--leaf-ink);flex:1;min-width:0}
@@ -175,7 +176,7 @@ button:focus-visible{outline:3px solid var(--leaf);outline-offset:2px}
     <section class="card mission" id="mission" aria-live="polite">
       <div class="mlabel"><span id="mcount"></span><span class="hearts" id="hearts"></span><span class="inv" id="inv"></span><button class="mus" aria-pressed="true" aria-label="배경 음악">♪</button></div>
       <div class="mtext" id="mtext"></div>
-      <div class="talk" id="talk" hidden><span class="face" id="tface"></span><span class="line" id="tline"></span><button class="chip" id="treplay" aria-label="Nghe lại">▶</button></div>
+      <div class="talk" id="talk" hidden><span class="face" id="tface"></span><span class="line" id="tline"></span></div>
       <div class="mid" id="mid"></div>
     </section>
     <div class="center reward" id="rewardWrap" hidden><section class="card rcard"><div class="spark" aria-hidden="true"></div><img id="rwImg" alt=""><div class="rword" id="rwWord"></div><button class="btn" id="rwNext">계속 →</button></section></div>
@@ -256,9 +257,9 @@ const SCENES={
         box:{board:true,items:['milk','juice','bread'],from:[320,330]}},
   label:'방과 후',
   branches:{
-   junho:{say:{w:'junho',html:()=>`어이! ${K('ball')}! ${K('ball')} 좀 줘!`},pop:'field',missions:[{t:'ball',give:'ball',reward:['rw_ball.jpg','ball'],giveTo:'junho',vi:()=>`준호가 「${K('ball')}!」 하고 불러요. 준호에게 ${K('ball')}을 찾아 주세요.`,btn:()=>`준호에게 ${K('ball')} 주기`,say:{w:'junho',html:()=>`오, 고마워! 내일 같이 ${K('ball')} 차자!`},heart:'junho'}]},
-   doyun:{say:{w:'doyun',html:()=>`…저기, ${K('bluebook')}.`},pop:'shelf',missions:[{t:'bluebook',give:'bluebook',reward:['rw_book.jpg','bluebook'],giveTo:'doyun',vi:()=>`도윤이 책을 찾고 있어요. ${K('bluebook')}을 골라 주세요.`,btn:()=>`도윤에게 ${K('bluebook')} 주기`,say:{w:'doyun',html:()=>`…고마워요.`},heart:'doyun'}]},
-   haeun:{say:{w:'haeun',html:()=>`잠깐만요! 아, ${K('milk')}가 떨어졌어요!`},pop:'box',missions:[{t:'milk',give:'milk',reward:['rw_milk.jpg','milk'],giveTo:'haeun',vi:()=>`하은이 물건을 떨어뜨렸어요. ${K('milk')}를 주워 주세요.`,btn:()=>`하은에게 ${K('milk')} 주기`,say:{w:'haeun',html:()=>`어머, 고마워요! ${K('milk')} 하나 가져가요.`},heart:'haeun'}]}},
+   junho:{go:'field',missions:[{t:'field',goWith:'junho',vi:()=>`준호가 ${K('field')}에 가재요. 같이 ${K('field')}으로 가 보세요.`,btn:()=>`${K('field')}으로 가기`,say:{w:'junho',html:()=>`어이! ${K('ball')}! ${K('ball')} 좀 줘!`},openPop:'field'},{t:'ball',give:'ball',reward:['rw_ball.jpg','ball'],giveTo:'junho',vi:()=>`준호가 「${K('ball')}!」 하고 불러요. 준호에게 ${K('ball')}을 찾아 주세요.`,btn:()=>`준호에게 ${K('ball')} 주기`,say:{w:'junho',html:()=>`오, 고마워! 내일 같이 ${K('ball')} 차자!`},heart:'junho'}]},
+   doyun:{go:'library',missions:[{t:'library',goWith:'doyun',vi:()=>`도윤이 ${K('library')}에 가재요. 같이 ${K('library')}으로 가 보세요.`,btn:()=>`${K('library')}으로 가기`,say:{w:'doyun',html:()=>`…저기, ${K('bluebook')}.`},openPop:'shelf'},{t:'bluebook',give:'bluebook',reward:['rw_book.jpg','bluebook'],giveTo:'doyun',vi:()=>`도윤이 책을 찾고 있어요. ${K('bluebook')}을 골라 주세요.`,btn:()=>`도윤에게 ${K('bluebook')} 주기`,say:{w:'doyun',html:()=>`…고마워요.`},heart:'doyun'}]},
+   haeun:{go:'kiosk',missions:[{t:'kiosk',goWith:'haeun',vi:()=>`하은이 ${K('kiosk')}에 가재요. 같이 ${K('kiosk')}으로 가 보세요.`,btn:()=>`${K('kiosk')}으로 가기`,say:{w:'haeun',html:()=>`잠깐만요! 아, ${K('milk')}가 떨어졌어요!`},openPop:'box'},{t:'milk',give:'milk',reward:['rw_milk.jpg','milk'],giveTo:'haeun',vi:()=>`하은이 물건을 떨어뜨렸어요. ${K('milk')}를 주워 주세요.`,btn:()=>`하은에게 ${K('milk')} 주기`,say:{w:'haeun',html:()=>`어머, 고마워요! ${K('milk')} 하나 가져가요.`},heart:'haeun'}]}},
   invites:{junho:{html:()=>`${K('ball')} 차러 갈래? 내가 차는 법 알려 줄게!`},doyun:{html:()=>`…${K('library')} 갈래요? 조용하고 좋아요.`},haeun:{html:()=>`${K('kiosk')} 와요! 오늘 ${K('milk')} 맛있어요!`}},
   missions:[
    {choose:['junho','doyun','haeun'],vi:()=>`수업 끝! 오늘 오후엔 누구랑 놀까요? 한 사람에게 가 보세요.`,btn:()=>`이 친구랑 놀기`},
@@ -272,8 +273,8 @@ const SCENES={
   label:'집, 저녁',
   missions:[
    {t:'mom',vi:()=>`집에 왔어요! ${K('mom')}께 인사하세요.`,say:{w:'mom',html:()=>`왔니? ${K('rice')}은? 오늘 어땠어?`},after:'quizStart'},
-   {quiz:3,vi:()=>`${K('mom')}가 말하는 걸 잘 듣고, 그 그림을 누르세요. <button class="chip" id="qplay" aria-label="Nghe lại">▶</button> (${(S.quiz?S.quiz.round:0)+1}/3)`,say:{w:'mom',html:()=>`잘했네! 이제 ${K('grandma')}께 인사하렴.`}},
-   {t:'grandma',vi:()=>`${K('grandma')}께 인사하세요.`,say:{w:'grandma',html:()=>`뭐? ${K('pen')}? …${K('kimchi')}?`}},
+   {quiz:3,vi:()=>`${K('mom')}가 말하는 걸 잘 듣고, 그 그림을 누르세요.  (${(S.quiz?S.quiz.round:0)+1}/3)`,say:{w:'mom',html:()=>`잘했네! 이제 ${K('grandma')}께 인사하렴.`}},
+   {t:'grandma',vi:()=>`${K('grandma')}께 인사하세요.`,say:{w:'grandma',html:()=>`늦었다, 이제 ${K('mybed')}에 가서 자렴. 잘 자!`}},
    {t:'mybed',end:true,reward:['rw_bed.jpg','mybed'],vi:()=>`늦었어요. ${K('mybed')}에 가서 자요.`,btn:()=>`잠자기`}
   ],
   doneMsg:()=>`잘 자요! …어, 문자가 왔어요.`,nextBtn:()=>`문자 보기 →`,
@@ -500,7 +501,7 @@ function quizRound(){
   const used=S.quiz.used,cand=pool.filter(k=>!used.includes(k));const target=(cand.length?cand:pool)[Math.floor(Math.random()*(cand.length?cand:pool).length)];used.push(target);
   const others=[...pool,...all].filter((k,i,a)=>k!==target&&a.indexOf(k)===i).sort(()=>Math.random()-.5).slice(0,2);
   const opts=[target,...others].sort(()=>Math.random()-.5);
-  S.quiz.target=target;L.pops.quiz={board:true,items:opts,from:[320,330]};
+  S.quiz.target=target;S.talk={w:'mom',html:'<button class="qsay" id="qplay" aria-label="Nghe lại"></button>'};L.pops.quiz={board:true,items:opts,from:[320,330]};
   closePop(true);openPop('quiz');renderUI();setTimeout(()=>say(W[target]),900);
 }
 const events={
@@ -514,9 +515,9 @@ function success(m){
   tone('ok');
   const picked=S.sel;
   if(m.t){G.known.add(m.t);S.popTag=m.t;}
-  if(m.choose){G.pick=picked;G.known.add(picked);S.popTag=picked;const br=L.branches[picked];M.splice(S.m+1,0,...br.missions);S.talk=br.say;
-    renderTags();setTimeout(()=>speakTalk(br.say),450);setTimeout(()=>openPop(br.pop),1300);}
+  if(m.choose){G.pick=picked;G.known.add(picked);S.popTag=picked;const br=L.branches[picked];M.splice(S.m+1,0,...br.missions);renderTags();}
   S.sel=null;S.m++;
+  if(m.goWith){const nn=(L.npcs||[]).find(n=>n.id===m.goWith),sp=L.spots[m.t];if(nn&&sp){nn.x=sp[0]-70;nn.y=sp[1]+60;renderProps();}}
   if(m.take)S.carry=m.take;
   if(m.give){S.carry=null;const g=document.getElementById('given');g.src=IMG[m.give];g.style.width='30px';
     const nn=m.giveTo&&(L.npcs||[]).find(n=>n.id===m.giveTo);const to=nn?[nn.x+14,nn.y-62]:SC==='class'?[750-48,470]:[L.spots.grandma[0]-58,L.spots.grandma[1]-20];g.style.left=to[0]+'px';g.style.top=to[1]+'px';g.hidden=false;g.style.animation='none';void g.offsetWidth;g.style.animation='';}

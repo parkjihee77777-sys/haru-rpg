@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600&family=Jua&display=swap">
 <style>
 /* layout: picker → mission strip, painted scene map with camera, action bar; scenes: home → class */
-:root{
+:root{--spk:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 9v6h4l5 4V5L7 9H3z'/%3E%3Cpath d='M15.5 8.5a5 5 0 0 1 0 7' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M18 6a8.5 8.5 0 0 1 0 12' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
   --bg:#f1f3ea; --panel:#fffdf6; --line:#dcdcc8; --ink:#33402f; --muted:#7a8470;
   --leaf:#6f9a4f; --leaf-ink:#2f4a1f; --leaf-soft:#e3eed3; --wood:#c98a52; --heart:#d8667a;
   --f-ko:'Jua','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
@@ -31,6 +31,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--f-vi);font-size:15p
 .chip{font-family:var(--f-ko);font-size:19px;background:var(--leaf-soft);color:var(--leaf-ink);border:2px solid var(--leaf);border-radius:10px;padding:0 8px;margin:0 2px;cursor:pointer;line-height:1.4}
 button:focus-visible{outline:3px solid var(--leaf);outline-offset:2px}
 .chip[data-say]::after{content:'';display:inline-block;width:.8em;height:.8em;margin-left:.3em;vertical-align:-.05em;background:currentColor;opacity:.75;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 9v6h4l5 4V5L7 9H3z'/%3E%3Cpath d='M15.5 8.5a5 5 0 0 1 0 7' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M18 6a8.5 8.5 0 0 1 0 12' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center/contain;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 9v6h4l5 4V5L7 9H3z'/%3E%3Cpath d='M15.5 8.5a5 5 0 0 1 0 7' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M18 6a8.5 8.5 0 0 1 0 12' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center/contain}
+.qsay{width:52px;height:52px;border-radius:50%;border:3px solid var(--leaf);background:#fff;cursor:pointer;position:relative}.qsay::after{content:'';position:absolute;inset:11px;background:var(--leaf-ink);-webkit-mask:var(--spk) no-repeat center/contain;mask:var(--spk) no-repeat center/contain}
 .talk{display:flex;gap:10px;align-items:center;background:var(--leaf-soft);border-radius:14px;padding:8px 12px}
 .face{width:56px;height:56px;border-radius:50%;flex:none;background-repeat:no-repeat;background-color:#fffdf6;border:2px solid var(--panel)}
 .talk .line{font-family:var(--f-ko);font-size:20px;color:var(--leaf-ink);flex:1;min-width:0}
@@ -175,7 +176,7 @@ button:focus-visible{outline:3px solid var(--leaf);outline-offset:2px}
     <section class="card mission" id="mission" aria-live="polite">
       <div class="mlabel"><span id="mcount"></span><span class="hearts" id="hearts"></span><span class="inv" id="inv"></span><button class="mus" aria-pressed="true" aria-label="Nhạc nền">♪</button></div>
       <div class="mtext" id="mtext"></div>
-      <div class="talk" id="talk" hidden><span class="face" id="tface"></span><span class="line" id="tline"></span><button class="chip" id="treplay" aria-label="Nghe lại">▶</button></div>
+      <div class="talk" id="talk" hidden><span class="face" id="tface"></span><span class="line" id="tline"></span></div>
       <div class="mid" id="mid"></div>
     </section>
     <div class="center reward" id="rewardWrap" hidden><section class="card rcard"><div class="spark" aria-hidden="true"></div><img id="rwImg" alt=""><div class="rword" id="rwWord"></div><button class="btn" id="rwNext">Tiếp tục →</button></section></div>
@@ -256,9 +257,9 @@ const SCENES={
         box:{board:true,items:['milk','juice','bread'],from:[320,330]}},
   label:'Sau giờ học',
   branches:{
-   junho:{say:{w:'junho',html:()=>`Ê! ${K('ball')}! ${K('ball')}!`},pop:'field',missions:[{t:'ball',give:'ball',reward:['rw_ball.jpg','ball'],giveTo:'junho',vi:()=>`Junho gọi: ${K('ball')}! Hãy tìm ${K('ball')} cho Junho.`,btn:()=>`Đưa ${K('ball')} cho Junho`,say:{w:'junho',html:()=>`Ồ, cảm ơn! Mai đá ${K('ball')} cùng nhé!`},heart:'junho'}]},
-   doyun:{say:{w:'doyun',html:()=>`…Này, ${K('bluebook')}.`},pop:'shelf',missions:[{t:'bluebook',give:'bluebook',reward:['rw_book.jpg','bluebook'],giveTo:'doyun',vi:()=>`Doyun đang tìm một cuốn sách. Hãy chọn ${K('bluebook')}.`,btn:()=>`Đưa ${K('bluebook')} cho Doyun`,say:{w:'doyun',html:()=>`…Cảm ơn nhé.`},heart:'doyun'}]},
-   haeun:{say:{w:'haeun',html:()=>`Chờ chút! Ôi, rơi mất ${K('milk')} rồi!`},pop:'box',missions:[{t:'milk',give:'milk',reward:['rw_milk.jpg','milk'],giveTo:'haeun',vi:()=>`Haeun làm rơi đồ. Hãy nhặt ${K('milk')} giúp.`,btn:()=>`Đưa ${K('milk')} cho Haeun`,say:{w:'haeun',html:()=>`Ôi, cảm ơn nhé! Cầm một hộp ${K('milk')} đi.`},heart:'haeun'}]}},
+   junho:{go:'field',missions:[{t:'field',goWith:'junho',vi:()=>`Junho rủ bạn ra ${K('field')}. Hãy cùng đi đến ${K('field')}.`,btn:()=>`Đến ${K('field')}`,say:{w:'junho',html:()=>`Ê! ${K('ball')}! ${K('ball')}!`},openPop:'field'},{t:'ball',give:'ball',reward:['rw_ball.jpg','ball'],giveTo:'junho',vi:()=>`Junho gọi: ${K('ball')}! Hãy tìm ${K('ball')} cho Junho.`,btn:()=>`Đưa ${K('ball')} cho Junho`,say:{w:'junho',html:()=>`Ồ, cảm ơn! Mai đá ${K('ball')} cùng nhé!`},heart:'junho'}]},
+   doyun:{go:'library',missions:[{t:'library',goWith:'doyun',vi:()=>`Doyun rủ bạn đến ${K('library')}. Hãy cùng đi đến ${K('library')}.`,btn:()=>`Đến ${K('library')}`,say:{w:'doyun',html:()=>`…Này, ${K('bluebook')}.`},openPop:'shelf'},{t:'bluebook',give:'bluebook',reward:['rw_book.jpg','bluebook'],giveTo:'doyun',vi:()=>`Doyun đang tìm một cuốn sách. Hãy chọn ${K('bluebook')}.`,btn:()=>`Đưa ${K('bluebook')} cho Doyun`,say:{w:'doyun',html:()=>`…Cảm ơn nhé.`},heart:'doyun'}]},
+   haeun:{go:'kiosk',missions:[{t:'kiosk',goWith:'haeun',vi:()=>`Haeun rủ bạn ra ${K('kiosk')}. Hãy cùng đi đến ${K('kiosk')}.`,btn:()=>`Đến ${K('kiosk')}`,say:{w:'haeun',html:()=>`Chờ chút! Ôi, rơi mất ${K('milk')} rồi!`},openPop:'box'},{t:'milk',give:'milk',reward:['rw_milk.jpg','milk'],giveTo:'haeun',vi:()=>`Haeun làm rơi đồ. Hãy nhặt ${K('milk')} giúp.`,btn:()=>`Đưa ${K('milk')} cho Haeun`,say:{w:'haeun',html:()=>`Ôi, cảm ơn nhé! Cầm một hộp ${K('milk')} đi.`},heart:'haeun'}]}},
   invites:{junho:{html:()=>`Đá ${K('ball')} một trận không? Mình chỉ cách sút cho!`},doyun:{html:()=>`…Đi ${K('library')} không? Yên tĩnh lắm.`},haeun:{html:()=>`Ra ${K('kiosk')} đi! Hôm nay ${K('milk')} ngon lắm!`}},
   missions:[
    {choose:['junho','doyun','haeun'],vi:()=>`Tan học rồi! Chiều nay bạn muốn đi với ai? Hãy đến gần một người.`,btn:()=>`Đi với bạn này`},
@@ -272,8 +273,8 @@ const SCENES={
   label:'Buổi tối ở nhà',
   missions:[
    {t:'mom',vi:()=>`Bạn về nhà rồi! Hãy chào ${K('mom')}.`,say:{w:'mom',html:()=>`Về rồi à? Ăn ${K('rice')} chưa? Hôm nay thế nào?`},after:'quizStart'},
-   {quiz:3,vi:()=>`Nghe ${K('mom')} nói rồi chạm vào đúng hình đó. <button class="chip" id="qplay" aria-label="Nghe lại">▶</button> (${(S.quiz?S.quiz.round:0)+1}/3)`,say:{w:'mom',html:()=>`Giỏi lắm! Giờ đi chào ${K('grandma')} đi.`}},
-   {t:'grandma',vi:()=>`Hãy chào ${K('grandma')}.`,say:{w:'grandma',html:()=>`Hả? ${K('pen')}? …${K('kimchi')} à?`}},
+   {quiz:3,vi:()=>`Nghe ${K('mom')} nói rồi chạm vào đúng hình đó.  (${(S.quiz?S.quiz.round:0)+1}/3)`,say:{w:'mom',html:()=>`Giỏi lắm! Giờ đi chào ${K('grandma')} đi.`}},
+   {t:'grandma',vi:()=>`Hãy chào ${K('grandma')}.`,say:{w:'grandma',html:()=>`Muộn rồi, cháu về ${K('mybed')} ngủ đi. Ngủ ngon nhé!`}},
    {t:'mybed',end:true,reward:['rw_bed.jpg','mybed'],vi:()=>`Muộn rồi. Hãy về ${K('mybed')} đi ngủ.`,btn:()=>`Đi ngủ`}
   ],
   doneMsg:()=>`Chúc ngủ ngon! …Ồ, có tin nhắn.`,nextBtn:()=>`Xem tin nhắn →`,
@@ -500,7 +501,7 @@ function quizRound(){
   const used=S.quiz.used,cand=pool.filter(k=>!used.includes(k));const target=(cand.length?cand:pool)[Math.floor(Math.random()*(cand.length?cand:pool).length)];used.push(target);
   const others=[...pool,...all].filter((k,i,a)=>k!==target&&a.indexOf(k)===i).sort(()=>Math.random()-.5).slice(0,2);
   const opts=[target,...others].sort(()=>Math.random()-.5);
-  S.quiz.target=target;L.pops.quiz={board:true,items:opts,from:[320,330]};
+  S.quiz.target=target;S.talk={w:'mom',html:'<button class="qsay" id="qplay" aria-label="Nghe lại"></button>'};L.pops.quiz={board:true,items:opts,from:[320,330]};
   closePop(true);openPop('quiz');renderUI();setTimeout(()=>say(W[target]),900);
 }
 const events={
@@ -514,9 +515,9 @@ function success(m){
   tone('ok');
   const picked=S.sel;
   if(m.t){G.known.add(m.t);S.popTag=m.t;}
-  if(m.choose){G.pick=picked;G.known.add(picked);S.popTag=picked;const br=L.branches[picked];M.splice(S.m+1,0,...br.missions);S.talk=br.say;
-    renderTags();setTimeout(()=>speakTalk(br.say),450);setTimeout(()=>openPop(br.pop),1300);}
+  if(m.choose){G.pick=picked;G.known.add(picked);S.popTag=picked;const br=L.branches[picked];M.splice(S.m+1,0,...br.missions);renderTags();}
   S.sel=null;S.m++;
+  if(m.goWith){const nn=(L.npcs||[]).find(n=>n.id===m.goWith),sp=L.spots[m.t];if(nn&&sp){nn.x=sp[0]-70;nn.y=sp[1]+60;renderProps();}}
   if(m.take)S.carry=m.take;
   if(m.give){S.carry=null;const g=document.getElementById('given');g.src=IMG[m.give];g.style.width='30px';
     const nn=m.giveTo&&(L.npcs||[]).find(n=>n.id===m.giveTo);const to=nn?[nn.x+14,nn.y-62]:SC==='class'?[750-48,470]:[L.spots.grandma[0]-58,L.spots.grandma[1]-20];g.style.left=to[0]+'px';g.style.top=to[1]+'px';g.hidden=false;g.style.animation='none';void g.offsetWidth;g.style.animation='';}
