@@ -517,9 +517,9 @@ function interact(forced){
   const gift=G.inv.find(it=>GIFTS[it]&&GIFTS[it].to===n);if(gift){giveGift(gift);return;}
   const tr=L.treasures&&L.treasures[n];if(tr&&!G.found.has(tr.item)){say(W[n]);G.heard.add(n);setTimeout(()=>foundItem(tr.item),500);return;}
   const gs=L.gossip&&L.gossip[n],cm3=M[S.m];
-  if(gs&&!(cm3&&(cm3.t===n||(cm3.choose&&cm3.choose.includes(n))))){G.heard.add(n);S.sel=null;S.talk={w:n,html:gs.line()};renderUI();renderTags();return;}
+  if(gs&&!(cm3&&(cm3.t===n||(cm3.choose&&cm3.choose.includes(n))))){G.heard.add(n);S.sel=null;S.talk={w:n,html:gs.line()};say(W[n]);renderUI();renderTags();return;}
   const cm4=M[S.m];if(!fov&&S.popFor&&S.popFor.m===S.m&&cm4&&(n===cm4.giveTo||n===S.popFor.at)){openPop(S.popFor.pop);renderUI();return;}
-  if(n==='mate'){G.heard.add(n);return;}
+  if(n==='mate'){G.heard.add(n);say(W[n]);return;}
   say(W[n]);G.heard.add(n);S.sel=n;S.msg='';
   if(L.pops[n])openPop(n);
   renderUI();renderTags();
