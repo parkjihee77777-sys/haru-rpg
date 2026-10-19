@@ -158,6 +158,18 @@ button:focus-visible{outline:3px solid var(--leaf);outline-offset:2px}
 @keyframes heart{0%{opacity:0;transform:translate(0,0) scale(.4)}30%{opacity:1}100%{opacity:0;transform:translate(var(--x),calc(var(--y) - 60px)) scale(1)}}
 @keyframes shout{0%{opacity:0;transform:translateX(-50%) scale(.5)}100%{opacity:1;transform:translateX(-50%) scale(1)}}
 @media (prefers-reduced-motion:reduce){.eatst *{animation:none!important;opacity:1}}
+.wagst{position:relative;width:min(420px,84vw);height:min(300px,40vh);display:flex;align-items:flex-end;justify-content:center}
+.wdog{position:relative;height:88%;aspect-ratio:223/240;transform-origin:50% 100%;animation:whop .5s .7s ease-in-out 6}
+.wdog img{position:absolute;inset:0;width:100%!important;height:100%;max-height:none!important;border-radius:0;object-fit:contain}
+.wdog .wt{transform-origin:86% 87%;animation:wag .16s .7s ease-in-out infinite alternate}
+.wagst .wi{position:absolute;width:64px!important;left:85%;top:40%;transform:translate(-50%,-50%);border-radius:0;animation:wfeed .6s forwards}
+.whearts{position:absolute;left:50%;top:30%;width:0;height:0}
+.whearts i{position:absolute;font-style:normal;color:#f2788f;font-size:26px;opacity:0;animation:wheart 1.4s var(--d) ease-out forwards}
+@keyframes wag{from{transform:rotate(-26deg)}to{transform:rotate(22deg)}}
+@keyframes whop{0%,100%{transform:translateY(0) rotate(0)}30%{transform:translateY(-14px) rotate(-4deg)}60%{transform:translateY(0) rotate(4deg)}}
+@keyframes wfeed{0%{left:85%;top:40%;opacity:1}80%{left:45%;top:42%;opacity:1;transform:translate(-50%,-50%) scale(.6)}100%{left:45%;top:42%;opacity:0;transform:translate(-50%,-50%) scale(.3)}}
+@keyframes wheart{0%{opacity:0;transform:translate(0,0) scale(.5)}20%{opacity:1}100%{opacity:0;transform:translate(var(--x),-120px) scale(1.2)}}
+@media (prefers-reduced-motion:reduce){.wagst *{animation:none!important}}
 .prop{position:absolute;transform:translate(-50%,-100%);pointer-events:none;z-index:3;filter:drop-shadow(0 2px 0 rgba(60,40,20,.25))}
 .peek{position:absolute;transform:translate(-50%,-100%);z-index:8;pointer-events:none;background:#fffdf6;border:3px solid #6f9a4f;border-radius:16px;padding:6px;width:130px;height:130px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(40,30,10,.25);animation:okin .3s cubic-bezier(.3,1.5,.5,1)}
 .peek img{max-width:100%;max-height:100%;object-fit:contain}
@@ -203,6 +215,7 @@ button:focus-visible{outline:3px solid var(--leaf);outline-offset:2px}
       <div class="mid" id="mid"></div>
     </section>
     <div class="center reward" id="rewardWrap" hidden><section class="card rcard"><div class="spark" aria-hidden="true"></div><img id="rwImg" alt=""><div class="rword" id="rwWord"></div><button class="btn" id="rwNext">Tiếp tục →</button></section></div>
+    <div class="center reward" id="wagWrap" hidden><section class="card rcard"><div class="wagst" id="wagSt"><div class="wdog"><img class="wb" src="dog_body.png" alt=""><img class="wt" src="dog_tail.png" alt=""></div><img class="wi" id="wagItem" alt=""><div class="whearts" id="wagFx"></div></div><div class="mtext" id="wagTxt"></div><button class="btn" id="wagOk">Tiếp tục →</button></section></div>
     <div class="center reward" id="eatWrap" hidden><section class="card rcard eatc"><div class="eatst" id="eatSt"><img class="eh" id="eatHero" alt=""><img class="ei" id="eatItem" alt=""><div class="efx" id="eatFx"></div><div class="eshout" id="eatShout"></div></div><div class="mtext" id="eatTxt"></div><button class="btn" id="eatOk">Tiếp tục →</button></section></div>
     <div class="center reward" id="findWrap" hidden><section class="card rcard find"><img id="fdImg" alt=""><div class="mtext" id="fdTitle"></div><div class="mid" id="fdBtns"></div></section></div>
     <div class="center" id="doneWrap" hidden><section class="card done" id="done"></section></div>
@@ -500,11 +513,16 @@ function showEat(it){const f=FINDS[it],w=document.getElementById('eatWrap'),st=d
   document.getElementById('eatFx').innerHTML=Array.from({length:9},(_,i)=>`<i style="--d:${(i%3)*.05}s;--x:${60+i*14}px;--y:${-30+(i%4)*22}px"></i>`).join('');
   st.className='eatst '+f.mood;w.hidden=false;void st.offsetWidth;
   setTimeout(()=>tone(f.mood==='yuck'?'spit':'yum'),550);}
-function giveGift(it){const g=GIFTS[it];G.inv=G.inv.filter(x=>x!==it);G.hearts[g.heart]=(G.hearts[g.heart]||0)+1;
+function giveGift(it,to){const g=to==='dog'&&GIFTS[it].to!=='dog'?GIFTS.snack:GIFTS[it];G.inv=G.inv.filter(x=>x!==it);G.hearts[g.heart]=(G.hearts[g.heart]||0)+1;
   const sp=L.spots[g.to];if(sp)heartPop(sp[0],sp[1]+40);
   if(g.say){S.talk=g.say;setTimeout(()=>speakTalk(g.say),300);}else S.talk={w:null,html:g.note};
   if(g.to==='sua'&&S.npc){S.npc.img='sua_wave.png';setTimeout(()=>{if(S.npc)S.npc.img='sua.png';},2500);}
-  showReward([IMG[it],it]);renderUI();}
+  if(g.to==='dog')showWag(it);else showReward([IMG[it],it]);renderUI();}
+function showWag(it){const w=document.getElementById('wagWrap'),st=document.getElementById('wagSt');document.getElementById('wagItem').src=IMG[it];
+  document.getElementById('wagTxt').innerHTML=GIFTS.snack.note;
+  document.getElementById('wagFx').innerHTML=Array.from({length:8},(_,i)=>`<i style="--d:${.7+i*.18}s;--x:${-90+i*26}px">♥</i>`).join('');
+  w.hidden=false;st.querySelectorAll('*').forEach(e=>{e.style.animation='none';void e.offsetWidth;e.style.animation='';});
+  setTimeout(()=>tone('yum'),650);setTimeout(()=>tone('sparkle'),1100);setTimeout(()=>say(W.dog),1500);}
 function renderProps(){
   document.getElementById('npcs').innerHTML=(L.npcs||[]).map(n=>`<div class="spr npc" data-npc="${n.id}" style="left:${n.x}px;top:${n.y}px;background-image:url(${n.img})"></div>`).join('')
     +(L.props||[]).filter(p=>!p.gone()).map(p=>`<img class="prop" src="${p.img}" alt="" style="left:${p.x}px;top:${p.y}px;width:${p.w}px">`).join('');}
@@ -518,7 +536,7 @@ function interact(forced){
   if(!n){S.msg='…';renderUI();return;}
   if(n==='door'){if(doorOpen()){showDone();return;}const cm=M[S.m];if(cm&&cm.t==='school'&&L.pops.doorview){openPop('doorview');return;}}
   const cm2=M[S.m];if(cm2&&cm2.choose&&L.invites&&L.invites[n]){G.heard.add(n);S.sel=n;S.talk={w:n,html:L.invites[n].html};speakTalk(S.talk);renderUI();return;}
-  const gift=G.inv.find(it=>GIFTS[it]&&GIFTS[it].to===n);if(gift){giveGift(gift);return;}
+  const gift=G.inv.find(it=>GIFTS[it]&&GIFTS[it].to===n)||(n==='dog'&&G.inv.find(it=>it==='cookie'));if(gift){giveGift(gift,n);return;}
   const tr=L.treasures&&L.treasures[n];if(tr&&!G.found.has(tr.item)){say(W[n]);G.heard.add(n);setTimeout(()=>foundItem(tr.item),500);return;}
   const gs=L.gossip&&L.gossip[n],cm3=M[S.m];
   if(gs&&!(cm3&&(cm3.t===n||(cm3.choose&&cm3.choose.includes(n))))){G.heard.add(n);S.sel=null;S.talk={w:n,html:gs.line()};say(W[n]);renderUI();renderTags();return;}
@@ -637,6 +655,7 @@ document.addEventListener('click',e=>{
   if(e.target.closest('.mus')){bgmToggle();return;}
   const pk=e.target.closest('[data-hero]');if(pk){hero=pk.dataset.hero;startGame();return;}
   const fc=e.target.closest('[data-find]');if(fc){findChoice(fc.dataset.find,fc.dataset.it);return;}
+  if(e.target.closest('#wagOk')){document.getElementById('wagWrap').hidden=true;return;}
   if(e.target.closest('#eatOk')){document.getElementById('eatWrap').hidden=true;return;}
   if(e.target.closest('#rwNext')||e.target.closest('#rewardWrap')&&!e.target.closest('.chip')){closeReward();return;}
   if(e.target.closest('#goNext')){hideDone();loadScene(L.next);return;}
