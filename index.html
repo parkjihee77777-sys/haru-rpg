@@ -108,7 +108,7 @@ const R=(x0,y0,x1,y1)=>({x0,y0,x1,y1});
 const KITCHEN={walk:[[[120,560],[350,505],[640,455],[880,515],[1395,520],[1420,575],[1360,900],[300,900],[270,610],[200,600]]],rects:[],block:[R(650,360,1175,800)]};
 const MAPS={
  home_am:{img:'maps/home_am.jpg',...KITCHEN,start:[520,660]},
- home_pm:{img:'maps/home_pm.jpg',...KITCHEN,start:[260,600]},
+ home_pm:{img:'maps/home_pm.jpg',...KITCHEN,start:[340,640]},
  class:{img:'maps/class.jpg',walk:[],rects:[R(200,230,1460,295),R(552,230,652,830),R(1003,230,1103,830),R(160,800,1100,830),R(552,800,1040,910)],block:[R(720,140,960,280)],start:[1420,262]}
 };
 const EXITS={home_am:{door:[170,550]},class:{door:[1440,262],seat:[770,470]}};
@@ -222,7 +222,7 @@ const keys={};addEventListener('keydown',e=>{keys[e.key]=1;pan=null;if(me)me.pat
 let last=performance.now();
 function loop(now){const dt=Math.min(.05,(now-last)/1000);last=now;if(me&&!busy){let dx=0,dy=0;if(keys.ArrowLeft)dx--;if(keys.ArrowRight)dx++;if(keys.ArrowUp)dy--;if(keys.ArrowDown)dy++;
   if(!dx&&!dy&&me.path&&me.path.length){const[tx,ty]=me.path[0],ex=tx-me.x,ey=ty-me.y,d=Math.hypot(ex,ey);if(d<6){me.path.shift();if(!me.path.length){me.path=null;const cb=me.onArrive;me.onArrive=null;me.frame=0;draw(me);cb&&cb()}}else{dx=ex/d;dy=ey/d}}
-  if(dx||dy){const l=Math.hypot(dx,dy),sp=300*dt,nx=me.x+dx/l*sp,ny=me.y+dy/l*sp;if(walkable(nx,ny)){me.x=nx;me.y=ny}else if(walkable(nx,me.y))me.x=nx;else if(walkable(me.x,ny))me.y=ny;
+  if(dx||dy){const l=Math.hypot(dx,dy),sp=300*dt,nx=me.x+dx/l*sp,ny=me.y+dy/l*sp;if(walkable(nx,ny)||!walkable(me.x,me.y)){me.x=nx;me.y=ny}else if(walkable(nx,me.y))me.x=nx;else if(walkable(me.x,ny))me.y=ny;
    me.dir=Math.abs(dx)>Math.abs(dy)?(dx<0?'left':'right'):(dy<0?'up':'down');me.t+=dt;me.frame=[1,0,2,0][Math.floor(me.t*8)%4]}else{if(!me.path)me.frame=0;me.t=0}
   draw(me);follow()}
  placeHint();requestAnimationFrame(loop)}
@@ -318,7 +318,7 @@ function tour(){touring=true;busy=true;const s=cam.s,W=innerWidth,H=innerHeight,
  function back(){const s0=performance.now(),from={...pan};let tx=me.x*s-W/2,ty=(me.y-80)*s-H/2;tx=Math.max(0,Math.min(maxX,tx));ty=Math.max(0,Math.min(maxY,ty));
   (function step(now){const k=Math.min(1,(now-s0)/900),e=ease(k);pan={x:from.x+(tx-from.x)*e,y:from.y+(ty-from.y)*e};follow();if(k<1)requestAnimationFrame(step);else{pan=null;touring=false;busy=false;follow();while(tourQ.length)tourQ.shift()()}})(s0)}
  (function step(now){const k=Math.max(0,Math.min(1,(now-t0)/sweep)),e=ease(k);pan={x:a.x+(b.x-a.x)*e,y:a.y+(b.y-a.y)*e};follow();if(k<1)requestAnimationFrame(step);else setTimeout(back,350)})(performance.now())}
-let panHinted=false;function load(id,extra){if(!panHinted&&innerWidth<innerHeight){panHinted=true;setTimeout(()=>{if(touring){tourQ.push(()=>setTimeout(()=>{const d=document.createElement('div');d.className='panhint';d.textContent=tr('👆 화면을 끌어서 둘러볼 수 있어요');document.body.appendChild(d);setTimeout(()=>d.remove(),4200)},600));return}const d=document.createElement('div');d.className='panhint';d.textContent=tr('👆 화면을 끌어서 둘러볼 수 있어요');document.body.appendChild(d);setTimeout(()=>d.remove(),4200)},1200)}pan=null;MAP=id;world.querySelectorAll('.sp').forEach(e=>e.remove());mapimg.src=MAPS[id].img;buildGrid();const[sx,sy]=MAPS[id].start;me=sprite(HERO,sx,sy);npcs=(PEOPLE[id]||[]).concat(extra||[]).map(([n,x,y,s])=>sprite(n,x,y,s));
+let panHinted=false;function load(id,extra){setGoal('');closeBubble();if(!panHinted&&innerWidth<innerHeight){panHinted=true;setTimeout(()=>{if(touring){tourQ.push(()=>setTimeout(()=>{const d=document.createElement('div');d.className='panhint';d.textContent=tr('👆 화면을 끌어서 둘러볼 수 있어요');document.body.appendChild(d);setTimeout(()=>d.remove(),4200)},600));return}const d=document.createElement('div');d.className='panhint';d.textContent=tr('👆 화면을 끌어서 둘러볼 수 있어요');document.body.appendChild(d);setTimeout(()=>d.remove(),4200)},1200)}pan=null;MAP=id;world.querySelectorAll('.sp').forEach(e=>e.remove());mapimg.src=MAPS[id].img;buildGrid();const[sx,sy]=MAPS[id].start;me=sprite(HERO,sx,sy);npcs=(PEOPLE[id]||[]).concat(extra||[]).map(([n,x,y,s])=>sprite(n,x,y,s));
  world.querySelectorAll('.item').forEach(e=>e.remove());if(id==='home_am'&&!FOUND.has('notebook')){const it=document.createElement('img');it.className='item';it.src='items/notebook.png';it.style.cssText='position:absolute;width:58px;left:991px;top:478px;transform:rotate(-12deg);z-index:400;pointer-events:none';world.appendChild(it)}
  setTimeout(tagAll,600);placePang();fit();follow();
  const place=PLACE[id]||id;if(!SEEN.has(place)){SEEN.add(place);tour()}}
