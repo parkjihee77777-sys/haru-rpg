@@ -39,7 +39,7 @@ html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family
 #modal{position:fixed;inset:0;background:var(--shade);display:none;justify-content:center;z-index:35;padding:16px;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;touch-action:pan-y}
 #modal.on{display:flex}
 .card{background:var(--paper);border:4px solid var(--line);border-radius:26px;box-shadow:0 6px 0 var(--line);padding:22px;max-width:520px;width:100%;text-align:center;margin:auto 0;flex:none}
-@media (max-height:700px),(max-width:480px){.card{padding:16px}.card h2{font-size:19px}.langs{gap:7px}.langs button{padding:8px 12px}.langs b{font-size:16px}.langs small{font-size:12px}.langs .flag{width:34px;height:23px}}
+@media (max-height:700px),(max-width:480px){.card{padding:16px}.card h2{font-size:19px}}
 .card h2{margin:0 0 10px;font-size:22px}
 .card p{margin:6px 0;font-size:17px;line-height:1.5}
 .big{font:inherit;font-weight:800;font-size:19px;background:var(--mint);color:#fff;border:0;border-radius:18px;box-shadow:0 5px 0 #3f9a7c;padding:13px 26px;margin-top:14px;cursor:pointer}
@@ -51,23 +51,35 @@ html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family
 .pick button.no{animation:shake .4s}
 @keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
 .heroes button{width:min(150px,38vw)}
-.langs{display:flex;flex-direction:column;gap:10px;margin-top:14px}
-.langs button{font:inherit;display:flex;align-items:center;gap:12px;background:#fff;border:4px solid var(--line);border-radius:18px;box-shadow:0 5px 0 var(--line);padding:12px 16px;cursor:pointer;color:var(--ink);text-align:left}
-.langs button.on{border-color:var(--mint);box-shadow:0 5px 0 #3f9a7c}
-.langs .flag{width:42px;height:28px;border-radius:6px;border:2px solid #ddd;flex:none}.langs b{font-size:19px}.langs small{margin-left:auto;color:#8a7a6a;font-size:14px}
 .word{display:inline-block;background:#fff3c4;border:3px solid #e6c15a;border-radius:14px;padding:4px 14px;font-weight:800;font-size:22px;margin:6px}
 .spk{font:inherit;background:#fff;border:3px solid var(--line);border-radius:999px;padding:6px 14px;cursor:pointer;font-weight:700}
+.panhint{position:fixed;left:50%;bottom:150px;transform:translateX(-50%);background:rgba(40,25,10,.7);color:#fff;border-radius:999px;padding:8px 16px;font-size:15px;z-index:24;pointer-events:none;animation:fadeout 4s forwards}
+@keyframes fadeout{0%,75%{opacity:1}100%{opacity:0}}
+.langs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.langs button{font:inherit;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:96px;background:#fff;border:2px solid #eadcc4;border-radius:16px;box-shadow:0 2px 0 #eadcc4;padding:12px 8px;cursor:pointer;color:var(--ink);transition:transform .08s,border-color .15s}
+.langs button:hover{border-color:var(--line)}
+.langs button:active{transform:translateY(2px);box-shadow:none}
+.langs button.on{border-color:var(--mint);box-shadow:0 2px 0 #3f9a7c}
+.langs .flag{width:38px;height:38px;border-radius:50%;border:2px solid #f1e8da;flex:none;background-size:cover}
+.langs b{font-size:16px;line-height:1.25}
+.langs small{color:#9a8a78;font-size:12px;line-height:1.2}
+.lgroup{display:flex;align-items:center;gap:10px;margin:18px 2px 0;color:#9a7a55;font-size:13px;font-weight:700;letter-spacing:.02em}
+.lgroup::after{content:'';flex:1;height:1px;background:#eadcc4}
+.lcard{border-width:2px;box-shadow:0 8px 24px rgba(40,25,10,.25)}.lcard h2{margin-bottom:2px}.lcard .sub{color:#8a7a6a;font-size:14px;margin:0}
 #mute{position:fixed;left:12px;top:10px;z-index:21;font-size:18px;background:var(--paper);border:3px solid var(--line);border-radius:999px;width:42px;height:42px;box-shadow:0 3px 0 var(--line);cursor:pointer;padding:0}
-.bubble{position:absolute;transform:translate(-50%,-110%);z-index:5000;font:inherit;font-weight:800;font-size:22px;white-space:nowrap;background:#fff;color:var(--ink);border:4px solid var(--mint);border-radius:18px;box-shadow:0 5px 0 #3f9a7c;padding:10px 18px;cursor:pointer}
+.bubble{position:absolute;transform:translate(-50%,14px);z-index:5000;font:inherit;font-weight:800;font-size:22px;white-space:nowrap;background:#fff;color:var(--ink);border:4px solid var(--mint);border-radius:18px;box-shadow:0 5px 0 #3f9a7c;padding:10px 18px;cursor:pointer}
 .tag{position:absolute;transform:translate(-50%,-100%);z-index:4000;background:#fff3c4;border:3px solid #e6c15a;border-radius:12px;padding:2px 10px;font-weight:800;font-size:20px;pointer-events:none;white-space:nowrap}
 #goal{cursor:pointer}
 #goal .hint2{display:block;font-size:13px;font-weight:600;color:#8a7a6a;margin-top:2px}
 #goal:has(.hint2){border-radius:22px}
 .say{position:absolute;transform:translate(-50%,-100%);z-index:6000;background:#fff;border:2px solid var(--line);border-radius:20px;padding:10px 16px;font-size:22px;line-height:1.45;max-width:440px;width:max-content;box-shadow:0 2px 6px rgba(80,50,20,.18);pointer-events:none}
+@media (max-width:600px){.langs button{min-height:84px;padding:10px 6px}.langs b{font-size:15px}
+#goal{top:60px;white-space:normal;text-align:center;max-width:calc(100% - 24px)}#toast{top:130px}
+.say{font-size:26px;max-width:min(440px,92vw)}.bubble{font-size:26px}}
 .say.below{transform:translate(-50%,0)}
 .say.below::after{bottom:auto;top:-12px;border-top:0;border-bottom:11px solid var(--line)}
 .say b{display:block;font-size:16px;color:#a0662d;margin-bottom:2px}
-.say::after{content:'';position:absolute;left:50%;bottom:-12px;margin-left:-9px;border:9px solid transparent;border-top:11px solid var(--line);border-bottom:0}
+.say::after{content:'';position:absolute;left:calc(50% + var(--tail,0px));bottom:-12px;margin-left:-9px;border:9px solid transparent;border-top:11px solid var(--line);border-bottom:0}
 .say.thinking{border-radius:999px;padding:12px 24px;color:#6a5a4a}
 /* thought bubble: two small circles trailing down to the head instead of a pointed tail */
 .say.thinking::before,.say.thinking::after{content:'';position:absolute;left:50%;border-radius:50%;background:#fff;border:2px solid var(--line);margin:0}
@@ -122,11 +134,11 @@ const CHAT={
 // Add a language: one LANGS row + snd/<code>/<concept>.mp3, and for a "learn Korean" mode its text table in i18n.js.
 const KR_FLAG='radial-gradient(circle,#cd2e3a 0 22%,#0047a0 23% 34%,#fff 35%)';
 const LANGS={
- ko:{name:'한국어',native:'한국어',flag:KR_FLAG,tts:'ko-KR',words:{"mom": "엄마", "notebook": "공책", "table": "식탁", "chair": "의자", "fridge": "냉장고", "box": "상자", "shoes": "신발", "pcase": "필통", "pencil": "연필"}},
- id:{name:'인도네시아어',native:'Bahasa Indonesia',flag:'linear-gradient(#ce1126 50%,#fff 50%)',tts:'id-ID',words:{"mom": "ibu", "notebook": "buku", "table": "meja", "chair": "kursi", "fridge": "kulkas", "box": "kardus", "shoes": "sepatu", "pcase": "kotak pensil", "pencil": "pensil"},learnKo:'Belajar bahasa Korea'},
- vi:{name:'베트남어',native:'Tiếng Việt',flag:'radial-gradient(circle at 50% 50%,#ffcd00 22%,#da251d 23%)',tts:'vi-VN',words:{"mom": "mẹ", "notebook": "vở", "table": "bàn", "chair": "ghế", "fridge": "tủ lạnh", "box": "thùng", "shoes": "giày", "pcase": "hộp bút", "pencil": "bút chì"},learnKo:'Học tiếng Hàn'},
- en:{name:'영어',native:'English',flag:'linear-gradient(#b22234 0 14%,#fff 14% 28%,#b22234 28% 42%,#fff 42% 57%,#b22234 57% 71%,#fff 71% 85%,#b22234 85%)',tts:'en-US',words:{"mom": "mom", "notebook": "notebook", "table": "table", "chair": "chair", "fridge": "fridge", "box": "box", "shoes": "shoes", "pcase": "pencil case", "pencil": "pencil"},learnKo:'Learn Korean'},
- zh:{name:'중국어',native:'中文',flag:'radial-gradient(circle at 26% 30%,#ffde00 0 9%,transparent 10%),#de2910',tts:'zh-CN',words:{"mom":"妈妈","notebook":"本子","table":"桌子","chair":"椅子","fridge":"冰箱","box":"箱子","shoes":"鞋子","pcase":"笔袋","pencil":"铅笔"},learnKo:'学韩语'}
+ ko:{name:'한국어',native:'한국어',flag:KR_FLAG,tts:'ko-KR',words:{"dog":"강아지","mom": "엄마", "notebook": "공책", "table": "식탁", "chair": "의자", "fridge": "냉장고", "box": "상자", "shoes": "신발", "pcase": "필통", "pencil": "연필"}},
+ id:{name:'인도네시아어',native:'Bahasa Indonesia',flag:'linear-gradient(#ce1126 50%,#fff 50%)',tts:'id-ID',words:{"dog":"anak anjing","mom": "ibu", "notebook": "buku", "table": "meja", "chair": "kursi", "fridge": "kulkas", "box": "kardus", "shoes": "sepatu", "pcase": "kotak pensil", "pencil": "pensil"},learnKo:'Belajar bahasa Korea'},
+ vi:{name:'베트남어',native:'Tiếng Việt',flag:'radial-gradient(circle at 50% 50%,#ffcd00 22%,#da251d 23%)',tts:'vi-VN',words:{"dog":"chó con","mom": "mẹ", "notebook": "vở", "table": "bàn", "chair": "ghế", "fridge": "tủ lạnh", "box": "thùng", "shoes": "giày", "pcase": "hộp bút", "pencil": "bút chì"},learnKo:'Học tiếng Hàn'},
+ en:{name:'영어',native:'English',flag:'linear-gradient(#b22234 0 14%,#fff 14% 28%,#b22234 28% 42%,#fff 42% 57%,#b22234 57% 71%,#fff 71% 85%,#b22234 85%)',tts:'en-US',words:{"dog":"puppy","mom": "mom", "notebook": "notebook", "table": "table", "chair": "chair", "fridge": "fridge", "box": "box", "shoes": "shoes", "pcase": "pencil case", "pencil": "pencil"},learnKo:'Learn Korean'},
+ zh:{name:'중국어',native:'中文',flag:'radial-gradient(circle at 26% 30%,#ffde00 0 9%,transparent 10%),#de2910',tts:'zh-CN',words:{"dog":"小狗","mom":"妈妈","notebook":"本子","table":"桌子","chair":"椅子","fridge":"冰箱","box":"箱子","shoes":"鞋子","pcase":"笔袋","pencil":"铅笔"},learnKo:'学韩语'}
 };
 const MODES=[{ui:'ko',learn:'id'},{ui:'ko',learn:'vi'},{ui:'ko',learn:'en'},{ui:'ko',learn:'zh'},{ui:'id',learn:'ko'},{ui:'vi',learn:'ko'},{ui:'en',learn:'ko'},{ui:'zh',learn:'ko'}];
 let LANG='id',UI='ko',W='';
@@ -164,26 +176,34 @@ function findPath(x0,y0,x1,y1){const{gw,ok}=grid;const a=nearestCell(x0,y0),b=ne
  // smooth: drop points while straight line stays walkable
  const out=[];let cur=[x0,y0];for(let i=0;i<pts.length;i++){if(i===pts.length-1||!clear(cur,pts[i+1])){out.push(pts[i]);cur=pts[i]}}return out}
 function clear(a,b){const d=Math.hypot(b[0]-a[0],b[1]-a[1]),n=Math.ceil(d/8);for(let k=1;k<=n;k++){const x=a[0]+(b[0]-a[0])*k/n,y=a[1]+(b[1]-a[1])*k/n;if(!walkable(x,y))return false}return true}
-function walkTo(x,y,cb){const p=findPath(me.x,me.y,x,y);if(!p){cb&&cb();return}me.path=p;me.onArrive=cb||null}
+function walkTo(x,y,cb){pan=null;const p=findPath(me.x,me.y,x,y);if(!p){cb&&cb();return}me.path=p;me.onArrive=cb||null}
 // ---------- camera / input ----------
 function fit(){const W=innerWidth,H=innerHeight;cam.s=Math.max(W/MW,H/MH)}
-function follow(){const W=innerWidth,H=innerHeight,s=cam.s;let x=me.x*s-W/2,y=(me.y-80)*s-H/2;x=Math.max(0,Math.min(MW*s-W,x));y=Math.max(0,Math.min(MH*s-H,y));cam.x=x;cam.y=y;world.style.transform=`translate(${-x}px,${-y}px) scale(${s})`}
+let pan=null;
+function follow(){const W=innerWidth,H=innerHeight,s=cam.s;let x=me.x*s-W/2,y=(me.y-80)*s-H/2;if(pan){x=pan.x;y=pan.y}x=Math.max(0,Math.min(MW*s-W,x));y=Math.max(0,Math.min(MH*s-H,y));cam.x=x;cam.y=y;world.style.transform=`translate(${-x}px,${-y}px) scale(${s})`}
 addEventListener('resize',()=>{fit();me&&follow()});
-document.getElementById('game').addEventListener('pointerdown',e=>{if(sayEl&&talkOn){advance();return}if(busy||!me)return;const x=(e.clientX+cam.x)/cam.s,y=(e.clientY+cam.y)/cam.s;
+// drag = look around; release without moving = a normal tap
+let drag=null;const gameEl=document.getElementById('game');
+gameEl.addEventListener('pointerdown',e=>{drag={x0:e.clientX,y0:e.clientY,cx:cam.x,cy:cam.y,moved:false,e}});
+gameEl.addEventListener('pointermove',e=>{if(!drag)return;const dx=e.clientX-drag.x0,dy=e.clientY-drag.y0;if(!drag.moved&&Math.hypot(dx,dy)<12)return;drag.moved=true;closeBubble();
+ const s=cam.s;pan={x:Math.max(0,Math.min(MW*s-innerWidth,drag.cx-dx)),y:Math.max(0,Math.min(MH*s-innerHeight,drag.cy-dy))};if(me)follow()});
+gameEl.addEventListener('pointerup',e=>{const d=drag;drag=null;if(d&&!d.moved)onTap(d.e)});
+gameEl.addEventListener('pointercancel',()=>{drag=null});
+function onTap(e){if(sayEl&&talkOn){advance();return}if(busy||!me)return;const x=(e.clientX+cam.x)/cam.s,y=(e.clientY+cam.y)/cam.s;
  // tapped a person?
  closeBubble();
  if(hitPang(x,y)){tapPang();return}
  let hit=null,bd=1e9;for(const n of npcs){if(!n.h)continue;if(x>n.x-n.w*.4&&x<n.x+n.w*.4&&y>n.y-n.h&&y<n.y+10){const d=Math.abs(y-(n.y-n.h/2));if(d<bd){bd=d;hit=n}}}
- if(hit&&FIND&&WORDKEY[hit.id]){tapThing(WORDKEY[hit.id],hit.x,hit.y-hit.h);return}
+ if(hit&&FIND&&WORDKEY[hit.id]){tapThing(WORDKEY[hit.id],hit.x,hit.y);return}
  if(hit){approach(hit);return}
  const objs=(OBJ[MAP]||[]).filter(o=>!(o[0]==='notebook'&&FOUND.has('notebook'))).slice().sort((a,b)=>a[3]-b[3]);
  const oh=objs.find(o=>Math.hypot(x-o[1],y-o[2])<o[3]);
  const ex=goal&&goal.target==='door'&&EXITS[MAP]&&EXITS[MAP].door;if(ex&&Math.hypot(x-ex[0],y-ex[1])<110){walkTo(ex[0],ex[1],()=>useDoor());return}
  const st=goal&&goal.target==='seat'&&EXITS[MAP].seat;if(st&&Math.hypot(x-st[0],y-st[1])<110){walkTo(st[0],st[1],()=>lesson());return}
- if(oh){tapThing(oh[0],oh[1],oh[2]-oh[3]*.6);return}
- walkTo(x,y)});
+ if(oh){tapThing(oh[0],oh[1],oh[2]+oh[3]*.35);return}
+ walkTo(x,y)}
 function approach(n){if(n.seat){for(const dx of [125,-125,160,-160]){const tx=n.x+dx,ty=n.y+15;if(walkable(tx,ty)){walkTo(tx,ty,()=>{me.dir=dx>0?'left':'right';me.frame=0;draw(me);talkTo(n.id)});return}}}const side=me.x<n.x?-1:1;let tx=n.x+side*90,ty=n.y;if(!walkable(tx,ty)){tx=n.x;ty=n.y+60;if(!walkable(tx,ty)){tx=n.x-side*90}}walkTo(tx,ty,()=>{me.dir=Math.abs(n.x-me.x)>Math.abs(n.y-me.y)?(n.x<me.x?'left':'right'):(n.y<me.y?'up':'down');me.frame=0;draw(me);talkTo(n.id)})}
-const keys={};addEventListener('keydown',e=>{keys[e.key]=1;if(me)me.path=null;if((e.key==='Enter'||e.key===' ')&&talkOn)advance()});addEventListener('keyup',e=>keys[e.key]=0);
+const keys={};addEventListener('keydown',e=>{keys[e.key]=1;pan=null;if(me)me.path=null;if((e.key==='Enter'||e.key===' ')&&talkOn)advance()});addEventListener('keyup',e=>keys[e.key]=0);
 // ---------- loop ----------
 let last=performance.now();
 function loop(now){const dt=Math.min(.05,(now-last)/1000);last=now;if(me&&!busy){let dx=0,dy=0;if(keys.ArrowLeft)dx--;if(keys.ArrowRight)dx++;if(keys.ArrowUp)dy--;if(keys.ArrowDown)dy++;
@@ -210,7 +230,8 @@ function find(k,done,goalText){FIND=k;FIND_DONE=done;const g=document.getElement
  g.onclick=()=>speak(k);goal={target:null};setTimeout(()=>speak(k),400)}
 let bubble=null;function closeBubble(){if(bubble){bubble.remove();bubble=null}}
 function tapThing(k,x,y){speak(k);if(!FIND)return;closeBubble();bubble=document.createElement('button');bubble.className='bubble';bubble.textContent=tr('이건 {x}이다').replace('{x}',wordOf(FIND));bubble.style.left=x+'px';bubble.style.top=y+'px';
- bubble.onpointerdown=ev=>ev.stopPropagation();bubble.onclick=ev=>{ev.stopPropagation();closeBubble();if(k===FIND){chime();FOUND.add(k);tagAll();const d=FIND_DONE;FIND=null;FIND_DONE=null;const g=document.getElementById('goal');g.onclick=null;g.textContent='';goal=null;showBag();d&&d()}else{buzz();setTimeout(()=>speak(k),350);setTimeout(()=>speak(FIND),1300)}};world.appendChild(bubble)}
+ bubble.onpointerdown=ev=>ev.stopPropagation();bubble.onclick=ev=>{ev.stopPropagation();closeBubble();if(k===FIND){chime();FOUND.add(k);tagAll();const d=FIND_DONE;FIND=null;FIND_DONE=null;const g=document.getElementById('goal');g.onclick=null;g.textContent='';goal=null;showBag();d&&d()}else{buzz();setTimeout(()=>speak(k),350);setTimeout(()=>speak(FIND),1300)}};world.appendChild(bubble);keepOnScreen(bubble)}
+function keepOnScreen(el){const r=el.getBoundingClientRect();let dx=0,dy=0;if(r.left<8)dx=8-r.left;else if(r.right>innerWidth-8)dx=innerWidth-8-r.right;if(r.bottom>innerHeight-8)dy=innerHeight-8-r.bottom;if(dx)el.style.left=(parseFloat(el.style.left)+dx/cam.s)+'px';if(dy)el.style.top=(parseFloat(el.style.top)+dy/cam.s)+'px'}
 function tagAll(){world.querySelectorAll('.tag').forEach(t=>t.remove());for(const n of npcs){const k=WORDKEY[n.id];if(k&&FOUND.has(k)&&n.h){const t=document.createElement('div');t.className='tag';t.textContent=wordOf(k);t.style.left=n.x+'px';t.style.top=(n.y-n.h-8)+'px';world.appendChild(t)}}}
 function showBag(){const ks=['notebook'].filter(k=>FOUND.has(k));const b=document.getElementById('bag');if(!ks.length){b.style.display='none';return}b.style.display='block';b.textContent='📒 '+ks.map(wordOf).join(' · ')}
 function buzz(){try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();const t=AC.currentTime,o=AC.createOscillator(),g=AC.createGain();o.type='square';o.frequency.value=180;g.gain.setValueAtTime(.12,t);g.gain.exponentialRampToValueAtTime(.0001,t+.35);o.connect(g).connect(AC.destination);o.start(t);o.stop(t+.36)}catch(e){}}
@@ -221,9 +242,9 @@ const PANG_AT=[400,640],PANG_H=105;let pangEl=null,pangI={home_am:0,home_pm:0};
 function placePang(){if(pangEl){pangEl.remove();pangEl=null}if(!PANG[MAP])return;pangEl=document.createElement('img');pangEl.src='pang/sit.png';pangEl.className='pang';pangEl.style.cssText=`position:absolute;height:${PANG_H}px;left:${PANG_AT[0]}px;top:${PANG_AT[1]}px;transform:translate(-50%,-100%);z-index:${PANG_AT[1]};pointer-events:none`;world.appendChild(pangEl)}
 function hitPang(x,y){return pangEl&&Math.abs(x-PANG_AT[0])<70&&y<PANG_AT[1]+10&&y>PANG_AT[1]-PANG_H-10}
 // Pangpang talks only once per scene (first tap); later taps just make him hop
-const pangSaid={};function tapPang(){const ls=PANG[MAP];const first=!pangSaid[MAP];pangSaid[MAP]=true;const t=ls[Math.floor(Math.random()*ls.length)];pangEl.src='pang/happy.png';setTimeout(()=>{if(pangEl)pangEl.src='pang/sit.png'},1400);chime();
- if(FIND){closeBubble();bubble=document.createElement('button');bubble.className='bubble';bubble.textContent=tr('이건 {x}이다').replace('{x}',wordOf(FIND));bubble.style.left=PANG_AT[0]+'px';bubble.style.top=(PANG_AT[1]-PANG_H-70)+'px';
-  bubble.onpointerdown=ev=>ev.stopPropagation();bubble.onclick=ev=>{ev.stopPropagation();closeBubble();buzz();setTimeout(()=>speak(FIND),700)};world.appendChild(bubble)}
+const pangSaid={};function tapPang(){speak('dog');const ls=PANG[MAP];const first=!pangSaid[MAP];pangSaid[MAP]=true;const t=ls[Math.floor(Math.random()*ls.length)];pangEl.src='pang/happy.png';setTimeout(()=>{if(pangEl)pangEl.src='pang/sit.png'},1400);chime();
+ if(FIND){closeBubble();bubble=document.createElement('button');bubble.className='bubble';bubble.textContent=tr('이건 {x}이다').replace('{x}',wordOf(FIND));bubble.style.left=PANG_AT[0]+'px';bubble.style.top=PANG_AT[1]+'px';
+  bubble.onpointerdown=ev=>ev.stopPropagation();bubble.onclick=ev=>{ev.stopPropagation();closeBubble();buzz();setTimeout(()=>speak(FIND),700)};world.appendChild(bubble);keepOnScreen(bubble)}
  if(first&&!FIND)say([['pang','',t]])}
 // ---------- dialogue ----------
 const talk=document.getElementById('talk'),faceEl=document.getElementById('face'),whoEl=document.getElementById('who'),lineEl=document.getElementById('line'),chEl=document.getElementById('choices'),nextEl=document.getElementById('next'),sceneEl=document.getElementById('scene');
@@ -242,11 +263,16 @@ talk.addEventListener('pointerdown',e=>{e.stopPropagation();if(e.target.closest(
 // speech bubble above the speaker on the map; returns false when the speaker is not on the map (then the bottom panel is used)
 let sayEl=null;function hideSay(){if(sayEl){sayEl.remove();sayEl=null}}
 function speakerPos(who){if(who==='pang'&&pangEl)return[PANG_AT[0],PANG_AT[1]-PANG_H,PANG_AT[1]];if((who==='me'||who==='think')&&me&&me.h)return[me.x,me.y-me.h,me.y];const n=npcs.find(n=>n.id===who&&n.h);return n?[n.x,n.y-n.h,n.y]:null}
-function showSay(who,text){const p=speakerPos(who);if(!p)return false;sayEl=document.createElement('div');sayEl.className='say'+(who==='think'?' thinking':'');
+function showSay(who,text){const p=speakerPos(who);if(!p)return false;
+ // speaker outside the visible part of the map (e.g. on a phone held upright): use the bottom panel instead
+ {const sx=p[0]*cam.s-cam.x;if(sx<20||sx>innerWidth-20)return false}sayEl=document.createElement('div');sayEl.className='say'+(who==='think'?' thinking':'');
  const nmEl=document.createElement('b');nmEl.textContent=who==='think'?'':nm(who==='me'?'me':who);const tx=document.createElement('span');tx.textContent=who==='think'?text.replace(/^[(（]\s*/,'').replace(/\s*[)）]$/,''):text;if(nmEl.textContent)sayEl.appendChild(nmEl);sayEl.appendChild(tx);
  sayEl.style.left=Math.max(230,Math.min(MW-230,p[0]))+'px';sayEl.style.top=(p[1]-(who==='think'?44:14))+'px';world.appendChild(sayEl);
  // off the top of the screen (or under the goal bar)? show it below the speaker's feet instead
- if(sayEl.getBoundingClientRect().top<70){sayEl.classList.add('below');sayEl.style.top=(p[2]+14)+'px'}return true}
+ if(sayEl.getBoundingClientRect().top<70){sayEl.classList.add('below');sayEl.style.top=(p[2]+14)+'px'}
+ // keep the bubble inside the screen sideways (the tail stays over the speaker)
+ {const r=sayEl.getBoundingClientRect();let dx=0;if(r.left<8)dx=8-r.left;else if(r.right>innerWidth-8)dx=innerWidth-8-r.right;if(dx){sayEl.style.left=(parseFloat(sayEl.style.left)+dx/cam.s)+'px';sayEl.style.setProperty('--tail',(-dx/cam.s)+'px')}}
+ return true}
 function ask(prompt,opts,cb){busy=true;talkOn=true;talk.classList.add('on');faceEl.className='';faceEl.style.backgroundImage=`url(faces/${HERO}_surprised.jpg)`;whoEl.textContent=nm('me');lineEl.className='';lineEl.textContent=tr(prompt);nextEl.style.display='none';chEl.innerHTML='';chEl.classList.add('on');
  opts.forEach(o=>{const b=document.createElement('button');b.textContent=tr(o.text);b.onclick=ev=>{ev.stopPropagation();chEl.classList.remove('on');chEl.innerHTML='';talk.classList.remove('on');talkOn=false;busy=false;cb(o)};chEl.appendChild(b)})}
 function scene(img,lines,done,keep){busy=true;sceneEl.style.backgroundImage=`url(scenes/${img}.jpg)`;sceneEl.classList.add('on');say(lines,()=>{if(!keep)sceneEl.classList.remove('on');done&&done()})}
@@ -266,7 +292,7 @@ function bgm(name){if(bgmNow===name)return;const old=BGM[bgmNow];bgmNow=name;con
 function toggleMute(){muted=!muted;try{localStorage.setItem('mute',muted?'1':'0')}catch(e){}const a=BGM[bgmNow];if(a){if(muted)a.pause();else{a.volume=BGM_VOL;a.play().catch(()=>{})}}document.getElementById('mute').textContent=muted?'🔇':'🔊'}
 // ---------- maps ----------
 function fade(cb){const f=document.getElementById('fader');f.style.opacity=1;busy=true;setTimeout(()=>{cb();setTimeout(()=>{f.style.opacity=0;busy=false},150)},520)}
-function load(id,extra){MAP=id;world.querySelectorAll('.sp').forEach(e=>e.remove());mapimg.src=MAPS[id].img;buildGrid();const[sx,sy]=MAPS[id].start;me=sprite(HERO,sx,sy);npcs=(PEOPLE[id]||[]).concat(extra||[]).map(([n,x,y,s])=>sprite(n,x,y,s));
+let panHinted=false;function load(id,extra){if(!panHinted&&innerWidth<innerHeight){panHinted=true;setTimeout(()=>{const d=document.createElement('div');d.className='panhint';d.textContent=tr('👆 화면을 끌어서 둘러볼 수 있어요');document.body.appendChild(d);setTimeout(()=>d.remove(),4200)},1200)}pan=null;MAP=id;world.querySelectorAll('.sp').forEach(e=>e.remove());mapimg.src=MAPS[id].img;buildGrid();const[sx,sy]=MAPS[id].start;me=sprite(HERO,sx,sy);npcs=(PEOPLE[id]||[]).concat(extra||[]).map(([n,x,y,s])=>sprite(n,x,y,s));
  world.querySelectorAll('.item').forEach(e=>e.remove());if(id==='home_am'&&!FOUND.has('notebook')){const it=document.createElement('img');it.className='item';it.src='items/notebook.png';it.style.cssText='position:absolute;width:58px;left:991px;top:478px;transform:rotate(-12deg);z-index:400;pointer-events:none';world.appendChild(it)}
  setTimeout(tagAll,600);placePang();fit();follow()}
 // preload every picture so maps, scenes and faces appear at once
@@ -331,11 +357,12 @@ function end(){const m=document.getElementById('modal'),c=document.getElementByI
  c.innerHTML=`<h2>${tr('1일차 끝 — 반장 선거 출마 결심!')}</h2><p>${tr('오늘 배운 낱말')}</p><div class="pick">${['mom','notebook'].map(k=>`<button onclick="speak('${k}')"><img src="${PIC[k]}" alt=""><span class="word" style="display:block;margin:6px 0 0">${wordOf(k)} 🔊</span></button>`).join('')}</div><p>${tr('친해진 친구')}: ${hs}</p><p style="color:#8a7a6a">${tr('2일차부터는 하루에 두 친구를 골라 만나요. (준비 중)')}</p><button class="big" id="re">${tr('처음부터 다시')}</button>`;m.classList.add('on');document.getElementById('re').onclick=()=>location.reload()}
 // ---------- start ----------
 function start(){const m=document.getElementById('modal'),c=document.getElementById('mcard');document.getElementById('mute').textContent=muted?'🔇':'🔊';let last='';try{last=localStorage.getItem('mode')||''}catch(e){}
- const btn=(md,i)=>{const learnKo=md.learn==='ko',l=LANGS[learnKo?md.ui:md.learn];return `<button data-i="${i}" class="${md.ui+'-'+md.learn===last?'on':''}"><span class="flag" style="background:${l.flag}"></span><b>${learnKo?l.learnKo:l.name}</b><small>${l.native}</small></button>`};
- c.innerHTML=`<h2>괴짜교실 반장되기</h2><p>어떤 말을 배울까요?</p><div class="langs">${MODES.map((md,i)=>md.ui==='ko'?btn(md,i):'').join('')}</div><p style="margin-top:18px">Learn Korean · Belajar bahasa Korea · Học tiếng Hàn · 学韩语</p><div class="langs">${MODES.map((md,i)=>md.ui!=='ko'?btn(md,i):'').join('')}</div>`;
- m.classList.add('on');c.querySelectorAll('.langs button').forEach(b=>b.onclick=()=>{const md=MODES[+b.dataset.i];UI=md.ui;LANG=md.learn;W=LANGS[LANG].words.notebook;document.documentElement.lang=UI;try{localStorage.setItem('mode',UI+'-'+LANG)}catch(e){}chime();pickHero()})}
+ const btn=(md,i)=>{const learnKo=md.learn==='ko',l=LANGS[learnKo?md.ui:md.learn];return `<button data-i="${i}" class="${md.ui+'-'+md.learn===last?'on':''}"><span class="flag" style="background:${l.flag}"></span><b>${learnKo?l.learnKo:l.name}</b><small>${learnKo?'':l.native}</small></button>`};
+ c.classList.add('lcard');
+ c.innerHTML=`<h2>괴짜교실 반장되기</h2><p class="sub">어떤 말을 배울까요?</p><div class="lgroup">외국어 배우기</div><div class="langs">${MODES.map((md,i)=>md.ui==='ko'?btn(md,i):'').join('')}</div><div class="lgroup">Learn Korean · 한국어 배우기</div><div class="langs">${MODES.map((md,i)=>md.ui!=='ko'?btn(md,i):'').join('')}</div>`;
+ m.classList.add('on');c.querySelectorAll('.langs button').forEach(b=>b.onclick=()=>{const md=MODES[+b.dataset.i];UI=md.ui;LANG=md.learn;W=LANGS[LANG].words.notebook;document.documentElement.lang=UI;try{localStorage.setItem('mode',UI+'-'+LANG)}catch(e){}chime();c.classList.remove('lcard');pickHero()})}
 function pickHero(){const m=document.getElementById('modal'),c=document.getElementById('mcard');
- c.innerHTML=`<h2>${tr('괴짜교실 반장되기')}</h2><p>${tr('말 한마디 못 하는 전학생, 반장 선거에 나가다')}</p><p style="color:#8a7a6a;font-size:15px">${UI==='ko'?`${LANGS[LANG].name} 배우기 · 말은 한국어, 배우는 낱말만 ${LANGS[LANG].name}`:tr('모드 설명')}</p><p style="margin-top:14px">${tr('누구로 할까요?')}</p><div class="pick heroes"><button data-h="hero_f"><img src="faces/hero_f_smile.jpg" alt="여자 주인공"></button><button data-h="hero_m"><img src="faces/hero_m_smile.jpg" alt="남자 주인공"></button></div>`;
+ c.innerHTML=`<h2>${tr('괴짜교실 반장되기')}</h2><p>${tr('말 한마디 못 하는 전학생,<br>반장 선거에 나가다.')}</p><p style="margin-top:14px">${tr('누구로 할까요?')}</p><div class="pick heroes"><button data-h="hero_f"><img src="faces/hero_f_smile.jpg" alt="여자 주인공"></button><button data-h="hero_m"><img src="faces/hero_m_smile.jpg" alt="남자 주인공"></button></div>`;
  m.classList.add('on');c.querySelectorAll('.pick button').forEach(b=>b.onclick=()=>{HERO=b.dataset.h;m.classList.remove('on');chime();bgm('day');load('home_am');say([['nar','','이사 온 다음 날 아침. 아직 풀지 못한 상자들이 쌓여 있다.'],['think','sad','(오늘부터 새 학교… 여기 말은 하나도 모르는데.)'],['think','smile','({m}한테 인사하고 학교 가야지.)']],morning)})}
 preload();requestAnimationFrame(loop);
 // test shortcuts: #sit (after Sua), #evening (back home) — for checking only

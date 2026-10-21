@@ -594,3 +594,13 @@ Object.assign(window.T.en,{'왔구나! 손 씻고 와. 밥 먹자.':'You’re ho
 Object.assign(window.T.id,{'왔구나! 손 씻고 와. 밥 먹자.':'Sudah pulang! Cuci tangan dulu. Ayo makan.','오늘 일, 잊어버리기 전에 {w}에 적어 두렴.':'Tulis kejadian hari ini di {w} sebelum lupa, ya.','밤. {w}를 펼쳤다.':'Malam. Aku membuka {w}.'});
 Object.assign(window.T.vi,{'왔구나! 손 씻고 와. 밥 먹자.':'Về rồi à! Đi rửa tay đi. Ăn cơm thôi.','오늘 일, 잊어버리기 전에 {w}에 적어 두렴.':'Viết chuyện hôm nay vào {w} trước khi quên nhé.','밤. {w}를 펼쳤다.':'Buổi tối. Tớ mở {w} ra.'});
 Object.assign(window.T.zh,{'왔구나! 손 씻고 와. 밥 먹자.':'回来啦！去洗洗手。我们吃饭吧。','오늘 일, 잊어버리기 전에 {w}에 적어 두렴.':'趁还没忘，把今天的事写在{w}上吧。','밤. {w}를 펼쳤다.':'晚上。我打开了{w}。'});
+
+Object.assign(window.T.en,{'👆 화면을 끌어서 둘러볼 수 있어요':'👆 Drag the screen to look around'});
+Object.assign(window.T.id,{'👆 화면을 끌어서 둘러볼 수 있어요':'👆 Geser layar untuk melihat sekeliling'});
+Object.assign(window.T.vi,{'👆 화면을 끌어서 둘러볼 수 있어요':'👆 Kéo màn hình để nhìn xung quanh'});
+Object.assign(window.T.zh,{'👆 화면을 끌어서 둘러볼 수 있어요':'👆 拖动屏幕可以四处看看'});
+
+Object.assign(window.T.en,{'말 한마디 못 하는 전학생,<br>반장 선거에 나가다.':'A new student who can’t speak a word<br>runs for class president.'});
+Object.assign(window.T.id,{'말 한마디 못 하는 전학생,<br>반장 선거에 나가다.':'Murid baru yang belum bisa bicara sepatah kata pun<br>ikut pemilihan ketua kelas.'});
+Object.assign(window.T.vi,{'말 한마디 못 하는 전학생,<br>반장 선거에 나가다.':'Học sinh mới chưa nói được câu nào<br>ra ứng cử lớp trưởng.'});
+Object.assign(window.T.zh,{'말 한마디 못 하는 전학생,<br>반장 선거에 나가다.':'一句话也说不出的转学生，<br>去竞选班长。'});
