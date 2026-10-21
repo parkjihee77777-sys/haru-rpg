@@ -36,9 +36,10 @@ html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family
 #scene.on{display:block;animation:fade .6s}
 @keyframes fade{from{opacity:0}}
 #fader{position:fixed;inset:0;background:#000;opacity:0;pointer-events:none;transition:opacity .5s;z-index:40}
-#modal{position:fixed;inset:0;background:var(--shade);display:none;align-items:center;justify-content:center;z-index:35;padding:16px}
+#modal{position:fixed;inset:0;background:var(--shade);display:none;justify-content:center;z-index:35;padding:16px;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;touch-action:pan-y}
 #modal.on{display:flex}
-.card{background:var(--paper);border:4px solid var(--line);border-radius:26px;box-shadow:0 6px 0 var(--line);padding:22px;max-width:520px;width:100%;text-align:center}
+.card{background:var(--paper);border:4px solid var(--line);border-radius:26px;box-shadow:0 6px 0 var(--line);padding:22px;max-width:520px;width:100%;text-align:center;margin:auto 0;flex:none}
+@media (max-height:700px),(max-width:480px){.card{padding:16px}.card h2{font-size:19px}.langs{gap:7px}.langs button{padding:8px 12px}.langs b{font-size:16px}.langs small{font-size:12px}.langs .flag{width:34px;height:23px}}
 .card h2{margin:0 0 10px;font-size:22px}
 .card p{margin:6px 0;font-size:17px;line-height:1.5}
 .big{font:inherit;font-weight:800;font-size:19px;background:var(--mint);color:#fff;border:0;border-radius:18px;box-shadow:0 5px 0 #3f9a7c;padding:13px 26px;margin-top:14px;cursor:pointer}
