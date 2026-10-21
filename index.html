@@ -277,7 +277,7 @@ function advance(){if(chEl.classList.contains('on'))return;const l=queue.shift()
  {const raw=(UI==='ko'?text:((T[UI]&&T[UI][text])||text));if(raw.includes('{m}'))setTimeout(()=>speak('mom'),250);else if(raw.includes('{w}'))setTimeout(()=>speak('notebook'),250)}
  if(who!=='nar'&&!sceneEl.classList.contains('on')&&showSay(who,tr(text))){talk.classList.remove('on');return}
  talk.classList.add('on');
- if(who==='nar'){faceEl.className='none';whoEl.textContent=''}else{faceEl.className='';faceEl.style.backgroundImage=`url(faces/${fid}_${expr||'smile'}.jpg)`;whoEl.textContent=who==='think'?tr('나 (속마음)'):nm(who)}
+ if(who==='nar'){faceEl.className='none';whoEl.textContent=''}else{faceEl.className='';faceEl.style.backgroundImage=who==='pang'?'url(pang/happy.png)':`url(faces/${fid}_${expr||'smile'}.jpg)`;faceEl.style.backgroundSize=who==='pang'?'contain':'';faceEl.style.backgroundRepeat='no-repeat';faceEl.style.backgroundPosition='center';whoEl.textContent=who==='think'?tr('나 (속마음)'):nm(who)}
  lineEl.className=who==='think'?'think':'';lineEl.textContent=tr(text);nextEl.style.display='';requestAnimationFrame(fitScene)}
 talk.addEventListener('pointerdown',e=>{e.stopPropagation();if(e.target.closest('#choices'))return;advance()});
 // speech bubble above the speaker on the map; returns false when the speaker is not on the map (then the bottom panel is used)
@@ -336,13 +336,13 @@ const PRE=[];function preload(){const ids=['hero_f','hero_m','mom','siwoo','minh
 function loadMap(id,cb){const im=new Image();im.onload=im.onerror=cb;im.src=MAPS[id].img}
 // ---------- story ----------
 let stage='home_am';
-function talkTo(id){
+let dinnerDone=false;function talkTo(id){
  if(stage==='home_am'&&id==='mom'){say([['mom','smile','학교 갈 때 가져갈 거 하나 놔뒀어. 찾아 봐.']]);return}
  if(stage==='leave'&&id==='mom'){say([AGAIN.mom_am]);return}
  if(stage==='class'&&TALKED.has(id)&&AGAIN[id]){say([AGAIN[id]]);return}
  if(stage==='class'){const lines=CHAT[id]||[];const first=!TALKED.has(id);say(lines,()=>{if(first&&id!=='sua'){TALKED.add(id);heart(id,1)}const n=TALKED.size;if(n>=3){incident()}else setGoal('반 친구들에게 말 걸어 보기',friendsLeft(),id2=>TALKED.has(id2),` (${n}/3)`)});return}
  if(stage==='after'||stage==='sit'){say([AGAIN[id]||['nar','','…']]);return}
- if(stage==='home_pm'&&id==='mom'){say([AGAIN.mom_pm]);return}
+ if(stage==='home_pm'&&id==='mom'){if(!dinnerDone){FIND=null;FIND_DONE=null;const g=document.getElementById('goal');g.onclick=null;g.textContent='';goal=null;dinner();return}say([AGAIN.mom_pm]);return}
  say(CHAT[id]||[])}
 function morning(){find('mom',()=>say([['mom','surprised','어머, {m}를 불렀네? 일어났구나!'],['mom','smile','오늘 새 학교 첫날이지?'],['mom','relieved','말이 잘 안 나와도 괜찮아. 천천히 보고, 천천히 들으면 돼.'],['mom','smile','아, 학교 갈 때 가져갈 거 하나 놔뒀는데. 찾아 볼래?']],()=>
  find('notebook',()=>{world.querySelectorAll('.item').forEach(e=>e.remove());say([['mom','laugh','맞아, 그 {w}! 새 학교에서 써.'],['me','smile','…응. 다녀올게.'],['mom','laugh','다녀와! 저녁에 오늘 이야기 들려줘.']],()=>{stage='leave';setGoal('현관으로 나가 학교 가기','door')})},'「{x}」 찾기')),'「{x}」에게 인사하기')}
@@ -374,7 +374,7 @@ function deskFind(k,done){busy=true;const items=['pcase','notebook','pencil'];co
  m.classList.add('on');setTimeout(()=>speak(k),300);document.getElementById('again').onclick=()=>speak(k);const okb=document.getElementById('okb');okb.textContent=tr('이건 {x}이다').replace('{x}',wordOf(k));
  c.querySelectorAll('.pick button').forEach(b=>b.onclick=()=>{sel=b.dataset.k;speak(sel);c.querySelectorAll('.pick button').forEach(x=>x.classList.toggle('ok',x===b));okb.style.visibility='visible'});
  okb.onclick=()=>{if(sel===k){chime();m.classList.remove('on');busy=false;done&&done()}else{buzz();const b=c.querySelector(`[data-k="${sel}"]`);b.classList.remove('ok');b.classList.add('no');setTimeout(()=>b.classList.remove('no'),400);setTimeout(()=>speak(k),600);okb.style.visibility='hidden'}}}
-function dinner(){scene('dinner'+(HERO==='hero_m'?'_m':''),[['mom','laugh','왔구나! 손 씻고 와. 밥 먹자.'],['mom','smile','첫날 어땠어? 얼굴 보니까 할 말이 많은 것 같은데.'],['me','sad','반에서… 관찰 통이 깨졌어. 시우라는 애 거.']].concat(MOM[CHOICE]||[]).concat([['me','relieved','그런데 민호가 나한테 다가왔을 때… 반장 수아가 막아 줬어.'],['mom','laugh','든든한 친구가 있네. 내일은 수아한테 고맙다고 해 볼까?'],['mom','smile','오늘 일, 잊어버리기 전에 {w}에 적어 두렴.']]),()=>{speak('notebook');night()})}
+function dinner(){scene('dinner'+(HERO==='hero_m'?'_m':''),[['mom','laugh','왔구나! 손 씻고 와. 밥 먹자.'],['mom','smile','첫날 어땠어? 얼굴 보니까 할 말이 많은 것 같은데.'],['me','sad','반에서… 관찰 통이 깨졌어. 시우라는 애 거.']].concat(MOM[CHOICE]||[]).concat([['me','relieved','그런데 민호가 나한테 다가왔을 때… 반장 수아가 막아 줬어.'],['mom','laugh','든든한 친구가 있네. 내일은 수아한테 고맙다고 해 볼까?'],['mom','smile','오늘 일, 잊어버리기 전에 {w}에 적어 두렴.']]),()=>{dinnerDone=true;speak('notebook');night()})}
 const MOM={
  A:[['me','relieved','그래서… 시우 앞을 막아섰어.'],['mom','surprised','무서웠을 텐데 친구 앞을 지켜 줬구나.'],['mom','relieved','소리에 놀란 친구에겐 말보다 조용한 그늘이 먼저란다.']],
  B:[['me','relieved','흙이랑 번데기를… {w}에 모아 줬어.'],['mom','laugh','흙과 번데기를 모아 주었네. 친구가 아끼는 작은 생명을 같이 아껴 준 거야.']],
