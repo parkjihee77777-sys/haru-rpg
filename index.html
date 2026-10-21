@@ -62,13 +62,17 @@ html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family
 #goal{cursor:pointer}
 #goal .hint2{display:block;font-size:13px;font-weight:600;color:#8a7a6a;margin-top:2px}
 #goal:has(.hint2){border-radius:22px}
-.say{position:absolute;transform:translate(-50%,-100%);z-index:6000;background:#fff;border:4px solid var(--line);border-radius:20px;padding:10px 16px;font-size:22px;line-height:1.45;max-width:440px;width:max-content;box-shadow:0 5px 0 var(--line);pointer-events:none}
+.say{position:absolute;transform:translate(-50%,-100%);z-index:6000;background:#fff;border:2px solid var(--line);border-radius:20px;padding:10px 16px;font-size:22px;line-height:1.45;max-width:440px;width:max-content;box-shadow:0 2px 6px rgba(80,50,20,.18);pointer-events:none}
 .say.below{transform:translate(-50%,0)}
-.say.below::after{bottom:auto;top:-16px;border-top:0;border-bottom:14px solid var(--line)}
+.say.below::after{bottom:auto;top:-12px;border-top:0;border-bottom:11px solid var(--line)}
 .say b{display:block;font-size:16px;color:#a0662d;margin-bottom:2px}
-.say::after{content:'';position:absolute;left:50%;bottom:-16px;margin-left:-12px;border:12px solid transparent;border-top:14px solid var(--line);border-bottom:0}
-.say.thinking{border-style:dashed;border-radius:40px;color:#6a5a4a;font-style:italic}
-.say.thinking::after{content:'';border:0;width:14px;height:14px;border-radius:50%;background:#fff;border:3px dashed var(--line);bottom:-22px}
+.say::after{content:'';position:absolute;left:50%;bottom:-12px;margin-left:-9px;border:9px solid transparent;border-top:11px solid var(--line);border-bottom:0}
+.say.thinking{border-radius:999px;padding:12px 24px;color:#6a5a4a}
+/* thought bubble: two small circles trailing down to the head instead of a pointed tail */
+.say.thinking::before,.say.thinking::after{content:'';position:absolute;left:50%;border-radius:50%;background:#fff;border:2px solid var(--line);margin:0}
+.say.thinking::before{width:22px;height:22px;bottom:-30px;margin-left:-18px}
+.say.thinking::after{width:12px;height:12px;bottom:-48px;margin-left:-6px}
+.say.thinking.below::before{bottom:auto;top:-30px}.say.thinking.below::after{bottom:auto;top:-48px;border-bottom:2px solid var(--line)}
 #bag{position:fixed;right:12px;top:10px;z-index:21;background:var(--paper);border:3px solid var(--line);border-radius:999px;padding:6px 12px;font-weight:800;box-shadow:0 3px 0 var(--line);display:none}
 </style></head><body>
 <div id="game"><div id="world"><img class="map" id="mapimg" alt=""></div></div>
@@ -238,8 +242,8 @@ talk.addEventListener('pointerdown',e=>{e.stopPropagation();if(e.target.closest(
 let sayEl=null;function hideSay(){if(sayEl){sayEl.remove();sayEl=null}}
 function speakerPos(who){if(who==='pang'&&pangEl)return[PANG_AT[0],PANG_AT[1]-PANG_H,PANG_AT[1]];if((who==='me'||who==='think')&&me&&me.h)return[me.x,me.y-me.h,me.y];const n=npcs.find(n=>n.id===who&&n.h);return n?[n.x,n.y-n.h,n.y]:null}
 function showSay(who,text){const p=speakerPos(who);if(!p)return false;sayEl=document.createElement('div');sayEl.className='say'+(who==='think'?' thinking':'');
- const nmEl=document.createElement('b');nmEl.textContent=who==='think'?'':nm(who==='me'?'me':who);const tx=document.createElement('span');tx.textContent=text;if(nmEl.textContent)sayEl.appendChild(nmEl);sayEl.appendChild(tx);
- sayEl.style.left=Math.max(230,Math.min(MW-230,p[0]))+'px';sayEl.style.top=(p[1]-14)+'px';world.appendChild(sayEl);
+ const nmEl=document.createElement('b');nmEl.textContent=who==='think'?'':nm(who==='me'?'me':who);const tx=document.createElement('span');tx.textContent=who==='think'?text.replace(/^[(（]\s*/,'').replace(/\s*[)）]$/,''):text;if(nmEl.textContent)sayEl.appendChild(nmEl);sayEl.appendChild(tx);
+ sayEl.style.left=Math.max(230,Math.min(MW-230,p[0]))+'px';sayEl.style.top=(p[1]-(who==='think'?44:14))+'px';world.appendChild(sayEl);
  // off the top of the screen (or under the goal bar)? show it below the speaker's feet instead
  if(sayEl.getBoundingClientRect().top<70){sayEl.classList.add('below');sayEl.style.top=(p[2]+14)+'px'}return true}
 function ask(prompt,opts,cb){busy=true;talkOn=true;talk.classList.add('on');faceEl.className='';faceEl.style.backgroundImage=`url(faces/${HERO}_surprised.jpg)`;whoEl.textContent=nm('me');lineEl.className='';lineEl.textContent=tr(prompt);nextEl.style.display='none';chEl.innerHTML='';chEl.classList.add('on');
