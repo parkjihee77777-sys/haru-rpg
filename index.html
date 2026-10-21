@@ -295,7 +295,7 @@ function showSay(who,text){const p=speakerPos(who);if(!p)return false;
  return true}
 function ask(prompt,opts,cb){busy=true;talkOn=true;talk.classList.add('on');faceEl.className='';faceEl.style.backgroundImage=`url(faces/${HERO}_surprised.jpg)`;whoEl.textContent=nm('me');lineEl.className='';lineEl.textContent=tr(prompt);nextEl.style.display='none';chEl.innerHTML='';chEl.classList.add('on');
  const shownAt=performance.now();// the tap that closed the last line must not also pick a choice
- opts.forEach(o=>{const b=document.createElement('button');b.textContent=tr(o.text);b.onclick=ev=>{ev.stopPropagation();if(performance.now()-shownAt<700)return;chEl.classList.remove('on');chEl.innerHTML='';talk.classList.remove('on');talkOn=false;busy=false;cb(o)};chEl.appendChild(b)});requestAnimationFrame(fitScene)}
+ opts.forEach(o=>{const b=document.createElement('button');b.textContent=tr(o.text);let pressed=false;b.onpointerdown=ev=>{ev.stopPropagation();if(performance.now()-shownAt>=500)pressed=true};b.onclick=ev=>{ev.stopPropagation();if(!pressed||performance.now()-shownAt<700)return;pressed=false;chEl.classList.remove('on');chEl.innerHTML='';talk.classList.remove('on');talkOn=false;busy=false;cb(o)};chEl.appendChild(b)});requestAnimationFrame(fitScene)}
 // the picture fills the space above the talk panel (black behind it), so nothing important hides under the panel
 function fitScene(){if(!sceneEl.classList.contains('on'))return;const r=talk.classList.contains('on')?talk.getBoundingClientRect():null;const availH=r?r.top-6:innerHeight;const w=Math.min(innerWidth,availH*16/9),hh=w*9/16;sceneEl.style.backgroundSize=`${w}px ${hh}px`;sceneEl.style.backgroundPosition=`center ${Math.max(0,(availH-hh)/2)}px`}
 addEventListener('resize',fitScene);
