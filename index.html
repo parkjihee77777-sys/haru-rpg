@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="ko"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>괴짜교실 1일차</title>
+<title>괴짜교실 반장되기</title>
 <style>
 :root{--ink:#4a3424;--paper:#fffaf0;--line:#c9a676;--mint:#5fbf9f;--shade:rgba(40,25,10,.55);--bg:#2a211a}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1d1712}}
@@ -51,6 +51,7 @@ html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family
 .pick button img{width:100%;display:block;border-radius:12px}
 .pick button.ok{border-color:var(--mint);box-shadow:0 5px 0 #3f9a7c}
 .pick button.no{animation:shake .4s}
+.pick.places{gap:10px}.pick.places button{width:min(112px,40vw)}.pick.places .word{font-size:16px;white-space:nowrap;padding:4px 8px}
 @keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
 .heroes button{width:min(150px,38vw)}
 .word{display:inline-block;background:#fff3c4;border:3px solid #e6c15a;border-radius:14px;padding:4px 14px;font-weight:800;font-size:22px;margin:6px}
@@ -72,10 +73,10 @@ html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family
 /* break lines between words, never inside a Korean word; short lines (goal, titles, bubbles) balanced */
 body,button{word-break:keep-all;overflow-wrap:break-word}
 #goal,.card h2,.card p,.say,.bubble,#choices button,.panhint{text-wrap:balance}
-.gauge{position:absolute;transform:translate(-50%,-100%);z-index:3900;display:flex;align-items:center;gap:4px;pointer-events:none}
-.gauge i{color:#ff6f91;font-style:normal;font-size:20px;text-shadow:0 1px 2px rgba(0,0,0,.25)}
-.gauge b{display:block;width:70px;height:12px;background:rgba(255,255,255,.85);border:2px solid #fff;border-radius:999px;box-shadow:0 1px 3px rgba(0,0,0,.25);overflow:hidden}
-.gauge s{display:block;height:100%;background:linear-gradient(90deg,#ff9bb3,#ff6f91);border-radius:999px;transition:width .6s}
+.gauge{position:absolute;transform:translate(-50%,-100%);z-index:3900;display:flex;align-items:center;gap:6px;pointer-events:none;background:#fff;border:3px solid #ff8fab;border-radius:999px;padding:3px 10px 3px 7px;box-shadow:0 3px 0 #e0607f}
+.gauge i{color:#ff4f7b;font-style:normal;font-size:28px;line-height:1}
+.gauge b{display:block;width:96px;height:16px;background:#ffe3ea;border-radius:999px;overflow:hidden}
+.gauge s{display:block;height:100%;background:linear-gradient(90deg,#ff9bb3,#ff4f7b);border-radius:999px;transition:width .6s}
 #mute{position:fixed;left:12px;top:10px;z-index:21;font-size:18px;background:var(--paper);border:3px solid var(--line);border-radius:999px;width:42px;height:42px;box-shadow:0 3px 0 var(--line);cursor:pointer;padding:0}
 .bubble{position:absolute;transform:translate(-50%,14px);z-index:5000;font:inherit;font-weight:800;font-size:22px;white-space:nowrap;background:#fff;color:var(--ink);border:4px solid var(--mint);border-radius:18px;box-shadow:0 5px 0 #3f9a7c;padding:10px 18px;cursor:pointer}
 .tag{position:absolute;transform:translate(-50%,-100%);z-index:4000;background:#fff3c4;border:3px solid #e6c15a;border-radius:12px;padding:2px 10px;font-weight:800;font-size:20px;pointer-events:none;white-space:nowrap}
@@ -105,6 +106,8 @@ body,button{word-break:keep-all;overflow-wrap:break-word}
 <div id="modal"><div class="card" id="mcard"></div></div>
 <div id="fader"></div>
 <script src="i18n.js"></script>
+<script src="day2/i18n_engine.js"></script>
+<script src="day2/data.js"></script>
 <script>
 // ---------- data ----------
 const MW=1672,MH=941,KID=180;
@@ -121,7 +124,7 @@ const EXITS={home_am:{door:[170,550]},class:{door:[1440,262],seat:[770,470]}};
 const SEAT_WALK=[602,500];// aisle next to my chair
 // things you can tap on each map: [word key, x, y, radius] (map px). Tapping one says its name in the language being learned.
 const KITCHEN_OBJ=[['table',911,500,120],['chair',744,568,55],['chair',886,660,55],['fridge',1521,360,110],['box',385,293,90],['box',535,184,70],['shoes',150,502,45]];
-const OBJ={home_am:KITCHEN_OBJ.concat([['notebook',1020,500,42]]),home_pm:KITCHEN_OBJ};
+const OBJ={home_am:KITCHEN_OBJ.concat([['notebook',1020,500,42],['handkerchief',1018,500,42]]),home_pm:KITCHEN_OBJ};
 const PEOPLE={
  home_am:[['mom',1260,600]],
  home_pm:[['mom',1260,600]],
@@ -154,7 +157,7 @@ const LANGS={
 const MODES=[{ui:'ko',learn:'id'},{ui:'ko',learn:'vi'},{ui:'ko',learn:'en'},{ui:'ko',learn:'zh'},{ui:'id',learn:'ko'},{ui:'vi',learn:'ko'},{ui:'en',learn:'ko'},{ui:'zh',learn:'ko'}];
 let LANG='id',UI='ko',W='';
 // tr: Korean source line -> line in the player's language, with {w} (taught word) and {L} (taught language) filled in
-function tr(s){if(s==null)return s;let t=UI==='ko'?s:((window.T&&T[UI]&&T[UI][s])??s);const L=UI==='ko'?LANGS[LANG].name:((T[UI]&&T[UI]['한국어'])||'Korean');return t.replace(/\{w\}/g,W).replace(/\{m\}/g,LANGS[LANG].words.mom).replace(/\{L\}/g,L)}
+function tr(s){if(s==null)return s;let t=UI==='ko'?s:((window.T&&T[UI]&&T[UI][s])??s);const L=UI==='ko'?LANGS[LANG].name:((T[UI]&&T[UI]['한국어'])||'Korean');return t.replace(/\{@([a-z_]+)\}/g,(_,k)=>LANGS[LANG].words[k]||k).replace(/\{w\}/g,W).replace(/\{m\}/g,LANGS[LANG].words.mom).replace(/\{L\}/g,L)}
 // a person whose name is a taught word is labelled with that word (once found), never with its meaning
 function nm(id){if(id==='mom')return (typeof FOUND!=='undefined'&&FOUND.has('mom'))?LANGS[LANG].words.mom:'';return tr(NAME[id]||'')}
 // one line per person for "talked already today" — fits any day
@@ -216,8 +219,9 @@ function onTap(e){if(sayEl&&talkOn){advance();return}if(busy||!me)return;const x
  let hit=null,bd=1e9;for(const n of npcs){if(!n.h)continue;if(x>n.x-n.w*.4&&x<n.x+n.w*.4&&y>n.y-n.h&&y<n.y+10){const d=Math.abs(y-(n.y-n.h/2));if(d<bd){bd=d;hit=n}}}
  if(hit&&FIND&&WORDKEY[hit.id]){tapThing(WORDKEY[hit.id],hit.x,hit.y);walkNear(hit.x,hit.y);return}
  if(hit){approach(hit);return}
- const objs=(OBJ[MAP]||[]).filter(o=>!(o[0]==='notebook'&&FOUND.has('notebook'))).slice().sort((a,b)=>a[3]-b[3]);
+ const objs=(OBJ[MAP]||[]).filter(o=>!(o[0]==='notebook'&&FOUND.has('notebook'))&&!(o[0]==='handkerchief'&&!(DAY===2&&!TODAY.has('handkerchief')))).slice().sort((a,b)=>a[3]-b[3]);
  const oh=objs.find(o=>Math.hypot(x-o[1],y-o[2])<o[3]);
+ if(DAY>=2&&['d2_class','d2_after'].includes(stage)&&OUT[MAP]&&(Math.hypot(x-OUT[MAP][0],y-OUT[MAP][1])<120||Math.abs(x-OUT[MAP][0])<140&&y>OUT[MAP][1]-280&&y<OUT[MAP][1])){walkTo(OUT[MAP][0],OUT[MAP][1],pickPlace);return}
  const ex=goal&&goal.target==='door'&&EXITS[MAP]&&EXITS[MAP].door;if(ex&&Math.hypot(x-ex[0],y-ex[1])<110){walkTo(ex[0],ex[1],()=>useDoor());return}
  const st=goal&&goal.target==='seat'&&EXITS[MAP].seat;if(st&&Math.hypot(x-st[0],y-st[1])<110){walkTo(SEAT_WALK[0],SEAT_WALK[1],()=>lesson());return}
  if(oh){tapThing(oh[0],oh[1],oh[2]+oh[3]*.35);walkNear(oh[1],oh[2]+oh[3]*.5);return}
@@ -235,7 +239,7 @@ function loop(now){const dt=Math.min(.05,(now-last)/1000);last=now;if(me&&!busy)
 // ---------- hint ----------
 const hintEl=document.createElement('div');hintEl.className='hint';hintEl.textContent='▼';
 const ringEl=document.createElement('div');ringEl.className='ring';
-function placeHint(){if(!goal||busy||!goal.target||FIND){hintEl.remove();ringEl.remove();return}let x,y,h=0;if(goal.target==='door'||goal.target==='seat'){[x,y]=EXITS[MAP][goal.target];world.appendChild(ringEl);ringEl.style.left=x+'px';ringEl.style.top=y+'px';ringEl.style.zIndex=2000;h=40}else{const ids=[].concat(goal.target);const ns=npcs.filter(n=>ids.includes(n.id)&&!(goal.skip&&goal.skip(n.id)));if(!ns.length){hintEl.remove();return}ringEl.remove();x=ns[0].x;y=ns[0].y;h=ns[0].h||KID;
+function placeHint(){if(!goal||busy||!goal.target||FIND){hintEl.remove();ringEl.remove();return}let x,y,h=0;if(goal.target==='door'||goal.target==='seat'||goal.target==='out'){[x,y]=goal.target==='out'?OUT[MAP]:EXITS[MAP][goal.target];world.appendChild(ringEl);ringEl.style.left=x+'px';ringEl.style.top=y+'px';ringEl.style.zIndex=2000;h=40}else{const ids=[].concat(goal.target);const ns=npcs.filter(n=>ids.includes(n.id)&&!(goal.skip&&goal.skip(n.id)));if(!ns.length){hintEl.remove();return}ringEl.remove();x=ns[0].x;y=ns[0].y;h=ns[0].h||KID;
   if(ns.length>1){hintEl.remove();ns.forEach(n=>{});}}world.appendChild(hintEl);hintEl.style.left=x+'px';hintEl.style.top=(y-h-6)+'px';hintEl.style.zIndex=3000}
 function setGoal(text,target,skip,suffix){goal=text?{text,target,skip}:null;document.getElementById('goal').textContent=text?tr(text)+(suffix||''):''}
 // ---------- find by sound ----------
@@ -253,7 +257,7 @@ function tapThing(k,x,y){speak(k);if(!FIND)return;closeBubble();bubble=document.
  bubble.onpointerdown=ev=>ev.stopPropagation();const bornAt=performance.now();bubble.onclick=ev=>{ev.stopPropagation();if(performance.now()-bornAt<350)return;closeBubble();if(k===FIND){chime();FOUND.add(k);tagAll();const d=FIND_DONE;FIND=null;FIND_DONE=null;const g=document.getElementById('goal');g.onclick=null;g.textContent='';goal=null;showBag();d&&d()}else{buzz();setTimeout(()=>speak(k),350);setTimeout(()=>speak(FIND),1300)}};world.appendChild(bubble);keepOnScreen(bubble)}
 function keepOnScreen(el){const r=el.getBoundingClientRect();let dx=0,dy=0;if(r.left<8)dx=8-r.left;else if(r.right>innerWidth-8)dx=innerWidth-8-r.right;if(r.bottom>innerHeight-8)dy=innerHeight-8-r.bottom;if(dx)el.style.left=(parseFloat(el.style.left)+dx/cam.s)+'px';if(dy)el.style.top=(parseFloat(el.style.top)+dy/cam.s)+'px'}
 // friendship gauge over the head of every friend you got closer to (full at 10 hearts)
-const GAUGE_MAX=10;function gauges(){world.querySelectorAll('.gauge').forEach(g=>g.remove());for(const n of npcs){const v=HEART[n.id];if(!v||!n.h)continue;const g=document.createElement('div');g.className='gauge';g.innerHTML=`<i>♥</i><b><s style="width:${Math.min(100,v/GAUGE_MAX*100)}%"></s></b>`;g.style.left=n.x+'px';g.style.top=(n.y-n.h-(WORDKEY[n.id]&&FOUND.has(WORDKEY[n.id])?44:10))+'px';world.appendChild(g)}}
+const GAUGE_MAX=10;function gauges(){world.querySelectorAll('.gauge').forEach(g=>g.remove());for(const n of npcs){const v=HEART[n.id];if(!v||!n.h)continue;const g=document.createElement('div');g.className='gauge';g.innerHTML=`<i>♥</i><b><s style="width:${Math.min(100,v/GAUGE_MAX*100)}%"></s></b>`;g.style.left=n.x+'px';{const t=n.y-n.h-(WORDKEY[n.id]&&FOUND.has(WORDKEY[n.id])?48:12);if(t<70){g.style.top=(n.y+(n.foot||0)+8)+'px';g.style.transform='translate(-50%,0)'}else g.style.top=t+'px'};world.appendChild(g)}}
 function tagAll(){gauges();world.querySelectorAll('.tag').forEach(t=>t.remove());for(const n of npcs){const k=WORDKEY[n.id];if(k&&FOUND.has(k)&&n.h){const t=document.createElement('div');t.className='tag';t.textContent=wordOf(k);t.style.left=n.x+'px';t.style.top=(n.y-n.h-8)+'px';world.appendChild(t)}}}
 function showBag(){const ks=['notebook'].filter(k=>FOUND.has(k));const b=document.getElementById('bag');if(!ks.length){b.style.display='none';return}b.style.display='block';b.textContent='📒 '+ks.map(wordOf).join(' · ')}
 function buzz(){try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();const t=AC.currentTime,o=AC.createOscillator(),g=AC.createGain();o.type='square';o.frequency.value=180;g.gain.setValueAtTime(.12,t);g.gain.exponentialRampToValueAtTime(.0001,t+.35);o.connect(g).connect(AC.destination);o.start(t);o.stop(t+.36)}catch(e){}}
@@ -276,7 +280,7 @@ function advance(){if(chEl.classList.contains('on'))return;const l=queue.shift()
  if(typeof l==='function'){l();return advance()}
  const[who,expr,text]=l;const fid=who==='me'||who==='think'?HERO:who;
  // a taught word inside a line is also heard (UI text stays in the player's language)
- {const raw=(UI==='ko'?text:((T[UI]&&T[UI][text])||text));if(raw.includes('{m}'))setTimeout(()=>speak('mom'),250);else if(raw.includes('{w}'))setTimeout(()=>speak('notebook'),250)}
+ {const raw=(UI==='ko'?text:((T[UI]&&T[UI][text])||text));const at=raw.match(/\{@([a-z_]+)\}/);if(at)setTimeout(()=>speak(at[1]),250);else if(raw.includes('{m}'))setTimeout(()=>speak('mom'),250);else if(raw.includes('{w}'))setTimeout(()=>speak('notebook'),250)}
  if(who!=='nar'&&!sceneEl.classList.contains('on')&&showSay(who,tr(text))){talk.classList.remove('on');return}
  talk.classList.add('on');
  if(who==='nar'){faceEl.className='none';whoEl.textContent=''}else{faceEl.className='';faceEl.style.backgroundImage=who==='pang'?'url(pang/happy.png)':`url(faces/${fid}_${expr||'smile'}.jpg)`;faceEl.style.backgroundSize=who==='pang'?'contain':'';faceEl.style.backgroundRepeat='no-repeat';faceEl.style.backgroundPosition='center';whoEl.textContent=who==='think'?tr('나 (속마음)'):nm(who)}
@@ -327,18 +331,21 @@ function tour(){touring=true;busy=true;const s=cam.s,W=innerWidth,H=innerHeight,
  function back(){const s0=performance.now(),from={...pan};let tx=me.x*s-W/2,ty=(me.y-80)*s-H/2;tx=Math.max(0,Math.min(maxX,tx));ty=Math.max(0,Math.min(maxY,ty));
   (function step(now){const k=Math.min(1,(now-s0)/900),e=ease(k);pan={x:from.x+(tx-from.x)*e,y:from.y+(ty-from.y)*e};follow();if(k<1)requestAnimationFrame(step);else{pan=null;touring=false;busy=false;follow();while(tourQ.length)tourQ.shift()()}})(s0)}
  (function step(now){const k=Math.max(0,Math.min(1,(now-t0)/sweep)),e=ease(k);pan={x:a.x+(b.x-a.x)*e,y:a.y+(b.y-a.y)*e};follow();if(k<1)requestAnimationFrame(step);else setTimeout(back,350)})(performance.now())}
-let panHinted=false;function load(id,extra){setGoal('');closeBubble();if(!panHinted&&innerWidth<innerHeight){panHinted=true;setTimeout(()=>{if(touring){tourQ.push(()=>setTimeout(()=>{const d=document.createElement('div');d.className='panhint';d.textContent=tr('👆 화면을 끌어서 둘러볼 수 있어요');document.body.appendChild(d);setTimeout(()=>d.remove(),4200)},600));return}const d=document.createElement('div');d.className='panhint';d.textContent=tr('👆 화면을 끌어서 둘러볼 수 있어요');document.body.appendChild(d);setTimeout(()=>d.remove(),4200)},1200)}pan=null;MAP=id;world.querySelectorAll('.sp').forEach(e=>e.remove());mapimg.src=MAPS[id].img;buildGrid();const[sx,sy]=MAPS[id].start;me=sprite(HERO,sx,sy);npcs=(PEOPLE[id]||[]).concat(extra||[]).map(([n,x,y,s])=>sprite(n,x,y,s));
+let panHinted=false;function load(id,extra){setGoal('');closeBubble();if(!panHinted&&innerWidth<innerHeight){panHinted=true;setTimeout(()=>{if(touring){tourQ.push(()=>setTimeout(()=>{const d=document.createElement('div');d.className='panhint';d.textContent=tr('👆 화면을 끌어서 둘러볼 수 있어요');document.body.appendChild(d);setTimeout(()=>d.remove(),4200)},600));return}const d=document.createElement('div');d.className='panhint';d.textContent=tr('👆 화면을 끌어서 둘러볼 수 있어요');document.body.appendChild(d);setTimeout(()=>d.remove(),4200)},1200)}pan=null;MAP=id;world.querySelectorAll('.sp').forEach(e=>e.remove());mapimg.src=MAPS[id].img;buildGrid();const[sx,sy]=MAPS[id].start;me=sprite(HERO,sx,sy);npcs=((typeof DAY!=='undefined'&&DAY>=2&&D2PLACE[id])?d2People(id):(PEOPLE[id]||[])).concat(extra||[]).map(([n,x,y,s])=>sprite(n,x,y,s));
  world.querySelectorAll('.item').forEach(e=>e.remove());if(id==='home_am'&&!FOUND.has('notebook')){const it=document.createElement('img');it.className='item';it.src='items/notebook.png';it.style.cssText='position:absolute;width:58px;left:991px;top:478px;transform:rotate(-12deg);z-index:400;pointer-events:none';world.appendChild(it)}
- setTimeout(tagAll,600);placePang();fit();follow();
+ if(typeof placeD2Item==='function')placeD2Item();if(DAY>=2&&OUT[id]&&id!=='home_am'&&id!=='home_pm'){const sg=document.createElement('div');sg.className='item exitsign';sg.textContent='🚪 '+tr('나가기');sg.style.cssText=`position:absolute;left:${OUT[id][0]}px;top:${OUT[id][1]-200}px;transform:translate(-50%,-100%);font-size:30px;font-weight:800;background:#fff;border:4px solid var(--line);border-radius:999px;padding:6px 18px;box-shadow:0 4px 0 var(--line);white-space:nowrap;z-index:4500;pointer-events:none`;world.appendChild(sg)}setTimeout(tagAll,600);placePang();fit();follow();
  const place=PLACE[id]||id;if(!SEEN.has(place)){SEEN.add(place);tour()}}
 // preload every picture so maps, scenes and faces appear at once
-const PRE=[];function preload(){const ids=['hero_f','hero_m','mom','siwoo','minho','sua','yuna','junho','haeun','jihoon','yena','hyeeun'];const ex=['smile','laugh','surprised','sad','angry','relieved'];
+const PRE=[];function preload(){const ids=['hero_f','hero_m','mom','siwoo','minho','sua','yuna','junho','haeun','jihoon','yena','hyeeun','jinwoo','haram','doyeon','haneul','boram','youngmin','seah','hangyeol','jiho'];const ex=['smile','laugh','surprised','sad','angry','relieved'];
  const list=['maps/home_am.jpg','maps/class.jpg','maps/home_pm.jpg','items/notebook.png','cards/pcase.jpg','scenes/jar.jpg','scenes/sua2.jpg','scenes/threat_f.jpg','scenes/threat_m.jpg','scenes/intro_f.jpg','scenes/intro_m.jpg','pang/sit.png','pang/happy.png','scenes/dinner.jpg','scenes/night.jpg','scenes/dinner_m.jpg','scenes/night_m.jpg','cards/notebook.jpg','cards/bag.jpg','cards/pencil.jpg'];
  ['yuna','haeun','yena'].forEach(i=>list.push(`seat/${i}.png`));ids.forEach(i=>{list.push(`walk/${i}.png`);ex.forEach(e=>list.push(`faces/${i}_${e}.jpg`))});list.forEach(s=>{const im=new Image();im.src=s;PRE.push(im)})}
 function loadMap(id,cb){const im=new Image();im.onload=im.onerror=cb;im.src=MAPS[id].img}
 // ---------- story ----------
 let stage='home_am';
 let dinnerDone=false;function talkTo(id){
+ if(DAY===2&&D2PLACE[MAP]){d2Talk(id);return}
+ if(DAY===2&&stage==='d2_home'&&id==='mom'){say([['mom','smile','{@handkerchief} 챙겼어?']]);return}
+ if(DAY===2&&stage==='d2_leave'&&id==='mom'){say([AGAIN.mom_am]);return}
  if(stage==='home_am'&&id==='mom'){say([['mom','smile','학교 갈 때 가져갈 거 하나 놔뒀어. 찾아 봐.']]);return}
  if(stage==='leave'&&id==='mom'){say([AGAIN.mom_am]);return}
  if(stage==='class'&&TALKED.has(id)&&AGAIN[id]){say([AGAIN[id]]);return}
@@ -350,6 +357,10 @@ function morning(){find('mom',()=>say([['mom','surprised','어머, {m}를 불렀
  find('notebook',()=>{world.querySelectorAll('.item').forEach(e=>e.remove());say([['mom','laugh','맞아, 그 {w}! 새 학교에서 써.'],['me','smile','…응. 다녀올게.'],['mom','laugh','다녀와! 저녁에 오늘 이야기 들려줘.']],()=>{stage='leave';setGoal('현관으로 나가 학교 가기','door')})},'「{x}」 찾기')),'「{x}」에게 인사하기')}
 function friendsLeft(){return['yuna','junho','haeun','jihoon','yena','hyeeun','siwoo','minho'].filter(i=>!TALKED.has(i))}
 function useDoor(){
+ if(stage==='d2_leave'){fade(d2Class);return}
+ if(stage==='d2_after'){fade(d2Home);return}
+ if(stage==='d2_home'){say([['think','smile','(먼저 {m}가 챙겨 준 걸 가져가자.)']]);return}
+ if(stage==='d2_class'){say([['think','sad','(아직 두 친구랑 이야기 못 했어.)']]);return}
  if(stage==='leave'){fade(()=>{stage='class';load('class');setGoal('반 친구들에게 말 걸어 보기',friendsLeft(),id=>TALKED.has(id),' (0/3)');say([['nar','','새 교실. 낯선 얼굴들이 한꺼번에 나를 본다.'],['think','surprised','(…누구한테 먼저 인사하지?)']])});return}
  if(stage==='after'){fade(()=>{stage='home_pm';load('home_pm');bgm('evening');say([['nar','','저녁. 집 안에 따뜻한 불이 켜져 있다.']],()=>find('mom',dinner,'「{x}」에게 다녀왔다고 인사하기'))});return}
  if(stage==='home_am'){say([['think','smile','(가기 전에 {m}한테 인사하자.)']]);return}
@@ -376,7 +387,7 @@ function deskFind(k,done){busy=true;const items=['pcase','notebook','pencil'];co
  m.classList.add('on');setTimeout(()=>speak(k),300);document.getElementById('again').onclick=()=>speak(k);const okb=document.getElementById('okb');okb.textContent=tr('이건 {x}이다').replace('{x}',wordOf(k));
  c.querySelectorAll('.pick button').forEach(b=>b.onclick=()=>{sel=b.dataset.k;speak(sel);c.querySelectorAll('.pick button').forEach(x=>x.classList.toggle('ok',x===b));okb.style.visibility='visible'});
  okb.onclick=()=>{if(sel===k){chime();m.classList.remove('on');busy=false;done&&done()}else{buzz();const b=c.querySelector(`[data-k="${sel}"]`);b.classList.remove('ok');b.classList.add('no');setTimeout(()=>b.classList.remove('no'),400);setTimeout(()=>speak(k),600);okb.style.visibility='hidden'}}}
-function dinner(){scene('dinner'+(HERO==='hero_m'?'_m':''),[['mom','laugh','왔구나! 손 씻고 와. 밥 먹자.'],['mom','smile','첫날 어땠어? 얼굴 보니까 할 말이 많은 것 같은데.'],['me','sad','반에서… 관찰 통이 깨졌어. 시우라는 애 거.']].concat(MOM[CHOICE]||[]).concat([['me','relieved','그런데 민호가 나한테 다가왔을 때… 반장 수아가 막아 줬어.'],['mom','laugh','든든한 친구가 있네. 내일은 수아한테 고맙다고 해 볼까?'],['mom','smile','오늘 일, 잊어버리기 전에 {w}에 적어 두렴.']]),()=>{dinnerDone=true;speak('notebook');night()})}
+function dinner(){if(DAY===2)return dinner2();scene('dinner'+(HERO==='hero_m'?'_m':''),[['mom','laugh','왔구나! 손 씻고 와. 밥 먹자.'],['mom','smile','첫날 어땠어? 얼굴 보니까 할 말이 많은 것 같은데.'],['me','sad','반에서… 관찰 통이 깨졌어. 시우라는 애 거.']].concat(MOM[CHOICE]||[]).concat([['me','relieved','그런데 민호가 나한테 다가왔을 때… 반장 수아가 막아 줬어.'],['mom','laugh','든든한 친구가 있네. 내일은 수아한테 고맙다고 해 볼까?'],['mom','smile','오늘 일, 잊어버리기 전에 {w}에 적어 두렴.']]),()=>{dinnerDone=true;speak('notebook');night()})}
 const MOM={
  A:[['me','relieved','그래서… 시우 앞을 막아섰어.'],['mom','surprised','무서웠을 텐데 친구 앞을 지켜 줬구나.'],['mom','relieved','소리에 놀란 친구에겐 말보다 조용한 그늘이 먼저란다.']],
  B:[['me','relieved','흙이랑 번데기를… {w}에 모아 줬어.'],['mom','laugh','흙과 번데기를 모아 주었네. 친구가 아끼는 작은 생명을 같이 아껴 준 거야.']],
@@ -391,7 +402,8 @@ function quiz(k,done){busy=true;const cards=QUIZ[k].slice().sort(()=>Math.random
  c.querySelectorAll('.pick button').forEach(b=>b.onclick=()=>{if(b.dataset.k===k){b.classList.add('ok');chime();setTimeout(()=>{m.classList.remove('on');speak(k);busy=false;done&&done()},800)}else{b.classList.add('no');buzz();setTimeout(()=>b.classList.remove('no'),400);setTimeout(()=>speak(k),500)}})}
 function night(){setGoal('');bgm('night');scene('night'+(HERO==='hero_m'?'_m':''),[['nar','','밤. {w}를 펼쳤다.'],['think','relieved','(오늘 수아가 반 규칙으로 나를 지켜줬어. 정말 멋있었어.)'],['think','smile','(그리고 나도 수아처럼 멋있는 사람이 되고 싶다는 생각을 했어.)'],['think','relieved','(나는 한 명 한 명, 각자 속도를 기다려 주는 따뜻한 교실을 만들고 싶어.)'],['think','surprised','(…나, 다음 학기 반장 선거에 나가 볼까?)']],end)}
 function end(){const m=document.getElementById('modal'),c=document.getElementById('mcard');const hs=Object.entries(HEART).map(([i,n])=>`${nm(i)} ♥${n}`).join(' · ')||tr('아직 없음');
- c.innerHTML=`<h2>${tr('1일차 끝 — 반장 선거 출마 결심!')}</h2><p>${tr('오늘 배운 낱말')}</p><div class="pick">${['mom','notebook'].map(k=>`<button onclick="speak('${k}')"><img src="${PIC[k]}" alt=""><span class="word" style="display:block;margin:6px 0 0">${wordOf(k)} 🔊</span></button>`).join('')}</div><p>${tr('친해진 친구')}: ${hs}</p><p style="color:#8a7a6a">${tr('2일차부터는 하루에 두 친구를 골라 만나요. (준비 중)')}</p><button class="big" id="re">${tr('처음부터 다시')}</button>`;m.classList.add('on');document.getElementById('re').onclick=()=>location.reload()}
+ c.innerHTML=`<h2>${tr('1일차 끝 — 반장 선거 출마 결심!')}</h2><p>${tr('오늘 배운 낱말')}</p><div class="pick">${['mom','notebook'].map(k=>`<button onclick="speak('${k}')"><img src="${PIC[k]}" alt=""><span class="word" style="display:block;margin:6px 0 0">${wordOf(k)} 🔊</span></button>`).join('')}</div><p>${tr('친해진 친구')}: ${hs}</p><p style="color:#8a7a6a">${tr('2일차부터는 하루에 두 친구를 골라 만나요.')}</p><button class="big" id="go2">${tr('2일차 시작')}</button> <button class="big" id="re">${tr('처음부터 다시')}</button>`;m.classList.add('on');document.getElementById('re').onclick=()=>location.reload();
+ DAY=1;HEART_D1={...HEART};DAY=2;saveDay();DAY=1;document.getElementById('go2').onclick=()=>startDay2()}
 // ---------- start ----------
 function start(){const m=document.getElementById('modal'),c=document.getElementById('mcard');document.getElementById('mute').textContent=muted?'🔇':'🔊';let last='';try{last=localStorage.getItem('mode')||''}catch(e){}
  const btn=(md,i)=>{const learnKo=md.learn==='ko',l=LANGS[learnKo?md.ui:md.learn];return `<button data-i="${i}" class="${md.ui+'-'+md.learn===last?'on':''}"><span class="flag" style="background:${l.flag}"></span><b>${learnKo?l.learnKo:l.name}</b><small>${learnKo?'':l.native}</small></button>`};
@@ -399,14 +411,20 @@ function start(){const m=document.getElementById('modal'),c=document.getElementB
  c.innerHTML=`<h2>괴짜교실 반장되기</h2><p class="sub">어떤 말을 배울까요?</p><div class="lgroup">외국어 배우기</div><div class="langs">${MODES.map((md,i)=>md.ui==='ko'?btn(md,i):'').join('')}</div><div class="lgroup">Learn Korean · 한국어 배우기</div><div class="langs">${MODES.map((md,i)=>md.ui!=='ko'?btn(md,i):'').join('')}</div>`;
  m.classList.add('on');c.querySelectorAll('.langs button').forEach(b=>b.onclick=()=>{const md=MODES[+b.dataset.i];UI=md.ui;LANG=md.learn;W=LANGS[LANG].words.notebook;document.documentElement.lang=UI;try{localStorage.setItem('mode',UI+'-'+LANG)}catch(e){}chime();c.classList.remove('lcard');pickHero()})}
 function pickHero(){const m=document.getElementById('modal'),c=document.getElementById('mcard');
- c.innerHTML=`<h2>${tr('괴짜교실 반장되기')}</h2><p>${tr('말 한마디 못 하는 전학생,<br>반장 선거에 나가다.')}</p><p style="margin-top:14px">${tr('누구로 할까요?')}</p><div class="pick heroes"><button data-h="hero_f"><img src="faces/hero_f_smile.jpg" alt="여자 주인공"></button><button data-h="hero_m"><img src="faces/hero_m_smile.jpg" alt="남자 주인공"></button></div>`;
- m.classList.add('on');c.querySelectorAll('.pick button').forEach(b=>b.onclick=()=>{HERO=b.dataset.h;m.classList.remove('on');chime();bgm('day');load('home_am');say([['nar','','이사 온 다음 날 아침. 아직 풀지 못한 상자들이 쌓여 있다.'],['think','sad','(오늘부터 새 학교… 여기 말은 아직 서툰데.)'],['think','smile','({m}한테 인사하고 학교 가야지.)']],morning)})}
+ c.innerHTML=`<h2>${tr('괴짜교실 반장되기')}</h2><p>${tr('말 한마디 못 하는 전학생,<br>반장 선거에 나가다.')}</p><p style="margin-top:14px">${tr('누구로 할까요?')}</p>${(()=>{const s=loadSave();return s&&s.day>=2&&s.mode===UI+'-'+LANG?`<p><button class="big" id="cont">${tr('2일차부터 이어 하기')}</button></p>`:''})()}<div class="pick heroes"><button data-h="hero_f"><img src="faces/hero_f_smile.jpg" alt="여자 주인공"></button><button data-h="hero_m"><img src="faces/hero_m_smile.jpg" alt="남자 주인공"></button></div>`;
+ m.classList.add('on');{const cb=document.getElementById('cont');if(cb)cb.onclick=()=>{const s=loadSave();HERO=s.hero;Object.assign(HEART,s.heart||{});(s.found||[]).forEach(k=>FOUND.add(k));HEART_D1={...HEART};chime();startDay2()}}c.querySelectorAll('.pick button').forEach(b=>b.onclick=()=>{HERO=b.dataset.h;m.classList.remove('on');chime();bgm('day');load('home_am');say([['nar','','이사 온 다음 날 아침. 아직 풀지 못한 상자들이 쌓여 있다.'],['think','sad','(오늘부터 새 학교… 여기 말은 아직 서툰데.)'],['think','smile','({m}한테 인사하고 학교 가야지.)']],morning)})}
+</script>
+<script src="day2/engine.js"></script>
+<script>
 preload();requestAnimationFrame(loop);
 // test shortcuts: #sit (after Sua), #evening (back home) — for checking only
 const JUMP=location.hash.slice(1);
 if(JUMP){UI='ko';LANG='id';W=LANGS[LANG].words.notebook;HERO='hero_f';FOUND.add('mom');FOUND.add('notebook');CHOICE='B';bgm('day');
  if(JUMP==='sit'){stage='sit';load('class');npcs.push(sprite('sua',600,262));setGoal('내 자리에 앉기','seat')}
  else if(JUMP==='evening'){stage='after';load('class');useDoor()}
+ else if(JUMP==='day2'){HEART_D1={};startDay2()}
+ else if(JUMP==='d2class'){DAY=2;HEART_D1={};stage='d2_leave';FOUND.add('handkerchief');TODAY.add('handkerchief');useDoor()}
+ else if(JUMP==='d2eve'){DAY=2;PICKS=['siwoo','minho'].filter(i=>window.D2&&D2[i]);PICKS.forEach(i=>D2CHOICE[i]='A');stage='d2_after';load('class');useDoor()}
  else if(JUMP==='incident'){stage='class';load('class');TALKED.add('yuna');TALKED.add('junho');TALKED.add('haeun');incident()}}
 else start();
 </script></body></html>
