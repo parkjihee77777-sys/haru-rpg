@@ -1,3 +1,4 @@
+const ZOOMS={};// map id → [[x0,y0,x1,y1], …] (map px), filled below
 // ---------- Day 2: pick two classmates, each with their own scene (data: day2/<id>.js) ----------
 // Every friend scene runs on the classroom map: open lines → word finds (picture cards, by sound) → the friend's thought → a choice A–D →
 // reaction → hearts. Evening: Mom asks about the day; what I tell her and her answer depend on who I met and what I chose.
@@ -16,23 +17,27 @@ function d2Merge(){for(const id of D2IDS){const d=window.D2&&D2[id];if(!d)contin
  for(const[k,w]of Object.entries(D2WORDS))for(const l of Object.keys(LANGS))if(w[l])LANGS[l].words[k]=w[l]}
 // ---- things to tap on each school map (Day 2+): drawn-in things (hotspots) + things lying around (item pictures) ----
 // every friend's things lie near that friend from the start, so you can tap and hear them before anyone asks for them
-// [key, x, y(bottom), radius] drawn-in things you can tap
-const NATIVE={class:[['blackboard',870,55,110],['bag',697,345,28],['bag',1105,348,28],['bag',265,462,28],['bag',547,468,28],['bag',1137,592,30],['bag',985,600,28],['bag',1490,710,28]],
- hall:[['locker',1240,560,90],['locker',970,195,40],['bench',655,320,55],['bench',715,560,70]],
- field:[['bench',1400,775,55],['bench',60,725,55],['bench',790,150,40],['bench',900,135,40]],
- cafe:[['table',390,600,100],['table',760,470,100],['table',1040,355,80],['table',1350,740,110]]};
-const NATIVE_KEYS=new Set(['blackboard','locker']);
+// Day 2 maps have the things drawn right into the picture (maps/<id>2.jpg); [key, x, y, radius] = where to tap them
+const BAGS=[['bag',697,345,28],['bag',1105,348,28],['bag',265,462,28],['bag',547,468,28],['bag',1137,592,30],['bag',985,600,28],['bag',1490,710,28]];
+const NATIVE={
+ class:[['blackboard',866,53,110],['sketchbook',382,307,26],['sharpener',490,293,18],['eraser',757,302,16],['mechanical_pencil',790,312,18],['pcase',917,310,22],
+  ['sheet_music',1178,312,30],['tape',1320,310,20],['pcase',347,421,22],['pillow',1330,422,30],['pcase',464,545,22],['thread',740,540,15],['highlighter',778,550,17],
+  ['magnifying_glass',915,545,22],['eraser',433,684,16],['pcase',575,655,26],['eraser',590,697,12],['cup',882,678,20],['cocoon',915,692,14],['lid',938,665,20],
+  ['hoodie',1405,675,38],['curtain',1600,230,60]].concat(BAGS),
+ hall:[['bag',645,255,30],['radio',720,548,30],['battery',700,588,12],['umbrella',210,620,40],['ice',1175,585,26],['ice',1130,610,18],['locker',1240,470,80],['locker',970,195,40],['bench',655,320,50],['bench',715,560,60]],
+ field:[['ball',460,540,24],['flag',1595,325,28],['whistle',1385,278,16],['stopwatch',1385,770,16],['bandage',1415,752,16],['cup',78,718,14],['bench',1400,778,50],['bench',60,728,50],['bench',790,150,40],['bench',900,135,40]],
+ cafe:[['tray',440,625,34],['chopsticks',487,660,16],['trash_can',1440,570,40],['milk_carton',1505,500,18],['bread',1655,540,20],['cart',195,775,60],['straw',222,735,14],['milk_carton',175,770,14],
+  ['cup',840,505,16],['apple',1175,355,16],['table',390,600,100],['table',760,470,100],['table',1040,355,80],['table',1350,740,110]]};
+const NATIVE_KEYS=new Set(Object.values(NATIVE).flat().map(o=>o[0]));
 // tapping a person while finding: Hyeeun's wheelchair (upper part) or its wheel (lower part)
 function npcThing(n,y){if(n.id==='hyeeun')return y>n.y-n.h*.42?'wheel':'wheelchair';return null}
 const NPC_THING={hyeeun:'wheelchair'};
-// things lying where they belong: [key, x, y(bottom), width]
-const THINGS={
- class:[['sheet_music',1125,332,56],['tape',1255,332,50],['sketchbook',315,332,60],['sharpener',445,332,46],['pillow',1262,447,70],['curtain',1625,345,92],
-  ['thread',700,567,46],['highlighter',822,567,50],['magnifying_glass',948,567,54],['eraser',250,703,44],['cocoon',1205,703,40],['lid',1335,703,54],['hoodie',1468,707,62],
-  ['pcase',626,655,56],['eraser',577,705,42],['eraser',742,320,42],['mechanical_pencil',806,322,46],['chalk',800,113,34],['notebook',330,447,52],['umbrella',1442,258,66]],
- hall:[['ice',1172,668,50],['radio',690,565,62],['battery',742,612,34],['umbrella',212,648,66],['bag',655,318,56]],
- field:[['stopwatch',1375,765,44],['bandage',1432,752,46],['whistle',1335,262,46],['ball',440,575,52],['flag',1560,335,60],['cup',62,712,36]],
- cafe:[['tray',380,565,70],['chopsticks',452,568,56],['trash_can',1480,598,72],['milk_carton',1545,517,40],['bread',1622,520,46],['cart',185,885,110],['straw',198,792,36],['cup',700,470,40],['apple',1150,368,40],['bread',560,238,44]]};
+// small pictures laid on top of the drawn map only where the drawing needs help (the drawn cocoon looked like a butterfly)
+const THINGS={};
+// tap near a cluster of small things → that part opens big
+Object.assign(ZOOMS,{class:[[290,250,590,335],[680,250,980,335],[1090,250,1400,335],[1090,380,1400,446],[660,500,990,570],[520,625,990,712],[330,640,520,712]],
+ hall:[[590,210,800,340],[610,480,820,640],[1060,530,1260,660]],field:[[1310,700,1480,810],[1330,240,1440,310],[20,680,140,750]],
+ cafe:[[360,580,540,690],[1390,460,1672,620],[110,680,300,820],[790,470,890,530],[1130,320,1220,380]]});
 function placeThings(id){return THINGS[id]||[]}
 function showThings(id){world.querySelectorAll('.thing').forEach(e=>e.remove());const things=placeThings(id);
  for(const[k,x,y,w]of things){const it=document.createElement('img');it.className='item thing';it.src=`items/${k}.png`;
@@ -46,15 +51,16 @@ Object.assign(MAPS,{
  field:{img:'maps/field.jpg',walk:[[[74,372],[372,177],[1040,158],[1598,279],[1598,557],[1486,780],[1115,873],[650,799],[223,613]]],rects:[],block:[],start:[400,470]},
  cafe:{img:'maps/cafe.jpg',walk:[[[37,465],[223,362],[1189,260],[1672,381],[1672,938],[0,938]]],rects:[],block:[R(149,474,632,818),R(530,372,985,650),R(836,288,1245,465),R(1050,595,1672,938),R(641,780,1189,938)],start:[640,390]}});
 Object.assign(PLACE,{hall:'hall',field:'field',cafe:'cafe'});
+for(const m of ['class','hall','field','cafe'])MAPS[m].img2=`maps/${m}2.jpg`;
 // the way out of each place (tap it → "where to?")
 const OUT={class:[1440,262],hall:[1230,560],field:[330,440],cafe:[640,385]};
 const PLACES=[['class','교실'],['hall','복도'],['field','운동장'],['cafe','급식실']];
 // who is where on Day 2 — most kids sit at their desks; seat = {top: chair-back top on the map}
 const D2PLACE={
- class:[['yena',1190,0,{top:333}],['doyeon',380,0,{top:333}],['jinwoo',1325,0,{top:448}],['hangyeol',760,0,{top:572}],['jihoon',885,0,{top:572}],['youngmin',260,0,{top:715}],['siwoo',1270,0,{top:715}],['haneul',1405,0,{top:715}],['minho',600,600],['sua',600,262]],
- hall:[['hyeeun',760,880],['seah',1110,650],['boram',570,640]],
+ class:[['yena',1190,0,{top:333}],['doyeon',380,0,{top:333}],['jinwoo',1325,0,{top:448}],['hangyeol',760,0,{top:572}],['jihoon',885,0,{top:572}],['youngmin',395,0,{top:715}],['siwoo',895,0,{top:715}],['haneul',1405,0,{top:715}],['minho',640,600],['sua',600,262]],
+ hall:[['hyeeun',760,880],['seah',1100,640],['boram',570,640]],
  field:[['junho',1300,745],['jiho',1200,380]],
- cafe:[['haram',300,470],['haeun',1400,565],['yuna',300,870]]};
+ cafe:[['haram',515,470],['haeun',1360,565],['yuna',330,860]]};
 const SEATED_ART=new Set(['yuna','haeun','yena','siwoo','doyeon','haneul','youngmin','jihoon','jinwoo','hangyeol']);// seat/<id>.png exists; others stand at their desk until drawn
 function d2People(id){return(D2PLACE[id]||[]).map(p=>p[3]&&!SEATED_ART.has(p[0])?[p[0],p[1],p[3].top+175]:p)}
 function goPlace(dest){fade(()=>{load(dest);if(stage==='d2_class')d2Goal();else setGoal('방과 후! 나가는 길로 가서 집에 가기','out')})}
@@ -111,3 +117,18 @@ function end2(){DAY=2;saveDay();const m=document.getElementById('modal'),c=docum
  m.classList.add('on');document.getElementById('re').onclick=()=>{try{localStorage.removeItem('haru_save')}catch(e){}location.href=location.pathname};document.getElementById('re2').onclick=()=>{for(const k in HEART)delete HEART[k];Object.assign(HEART,HEART_D1||{});startDay2()}}
 let HEART_D1=null;
 d2Merge();
+// ---- zoom: tap near a cluster of small things → that part of the picture opens big; tap things there to hear them / "This is …" ----
+function zoomAt(x,y){return(ZOOMS[MAP]||[]).find(z=>x>=z[0]&&x<=z[2]&&y>=z[1]&&y<=z[3])}
+function showZoomMarks(){world.querySelectorAll('.zmark').forEach(e=>e.remove());for(const z of ZOOMS[MAP]||[]){const d=document.createElement('div');d.className='item zmark';d.textContent='🔍';d.style.cssText=`position:absolute;left:${z[2]-6}px;top:${z[1]+6}px;transform:translate(-100%,0);font-size:30px;z-index:4400;pointer-events:none;filter:drop-shadow(0 2px 2px rgba(0,0,0,.35));opacity:.9`;world.appendChild(d)}}
+function openZoom(z){const m=document.getElementById('modal'),c=document.getElementById('mcard');busy=true;closeBubble();
+ const zw=z[2]-z[0],zh=z[3]-z[1],W2=Math.min(innerWidth-40,560),k=W2/zw,H2=zh*k;
+ c.innerHTML=`<div class="zoomv" style="position:relative;width:${W2}px;height:${H2}px;margin:0 auto;border-radius:16px;overflow:hidden;background:url(${mapimg.getAttribute('src')}) ${-z[0]*k}px ${-z[1]*k}px/${MW*k}px ${MH*k}px no-repeat"></div><button class="big" id="zclose">✕</button>`;
+ m.classList.add('on');const v=c.querySelector('.zoomv');
+ const objs=(OBJ[MAP]||[]).filter(o=>o[1]>=z[0]&&o[1]<=z[2]&&o[2]>=z[1]&&o[2]<=z[3]);
+ // the things drawn as separate pictures are shown inside the zoom too
+ world.querySelectorAll('.thing').forEach(t=>{const x=parseFloat(t.style.left),y=parseFloat(t.style.top),w=parseFloat(t.style.width);if(x<z[0]||x>z[2]||y<z[1]||y>z[3]+40)return;const i=document.createElement('img');i.src=t.src;i.style.cssText=`position:absolute;width:${w*k}px;left:${(x-z[0])*k}px;top:${(y-z[1])*k}px;transform:translate(-50%,-100%);pointer-events:none`;v.appendChild(i)});
+ let zb=null;
+ v.onclick=ev=>{const r=v.getBoundingClientRect(),mx=z[0]+(ev.clientX-r.left)/k,my=z[1]+(ev.clientY-r.top)/k;let best=null,bd=1e9;for(const o of objs){const d=Math.hypot(mx-o[1],my-o[2]);if(d<Math.max(o[3],34)&&d<bd){bd=d;best=o}}
+  if(!best)return;speak(best[0]);if(zb)zb.remove();if(!FIND)return;zb=document.createElement('button');zb.className='bubble';zb.style.cssText=`position:absolute;left:${(best[1]-z[0])*k}px;top:${Math.min(H2-60,(best[2]-z[1])*k+10)}px;transform:translate(-50%,0);font-size:20px`;zb.textContent=tr('이건 {x}이다').replace('{x}',wordOf(FIND));
+  const kk=best[0],born=performance.now();zb.onclick=e2=>{e2.stopPropagation();if(performance.now()-born<300)return;if(kk===FIND){m.classList.remove('on');busy=false;chime();FOUND.add(kk);tagAll();const d=FIND_DONE;FIND=null;FIND_DONE=null;const g=document.getElementById('goal');g.onclick=null;g.textContent='';goal=null;showBag();d&&d()}else{buzz();zb.remove();zb=null;setTimeout(()=>speak(kk),350);setTimeout(()=>speak(FIND),1300)}};v.appendChild(zb)};
+ document.getElementById('zclose').onclick=()=>{m.classList.remove('on');busy=false}}
