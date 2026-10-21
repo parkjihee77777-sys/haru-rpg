@@ -153,4 +153,4 @@ function openZoom(z){const m=document.getElementById('modal'),c=document.getElem
   const kk=best[0],born=performance.now();zb.onclick=e2=>{e2.stopPropagation();if(performance.now()-born<300)return;if(kk===FIND){m.classList.remove('on');busy=false;chime();FOUND.add(kk);tagAll();const d=FIND_DONE;FIND=null;FIND_DONE=null;const g=document.getElementById('goal');g.onclick=null;g.textContent='';goal=null;showBag();d&&d()}else{buzz();zb.remove();zb=null;setTimeout(()=>speak(kk),350);setTimeout(()=>speak(FIND),1300)}};v.appendChild(zb)};
  document.getElementById('zclose').onclick=()=>{m.classList.remove('on');busy=false}}
 
-setDay(2);DAY=1;
+DAY=1;// Day 1 keeps no Day 2 tables (zooms, drawn maps); startDay() sets them
