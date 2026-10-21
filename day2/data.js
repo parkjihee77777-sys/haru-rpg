@@ -152,16 +152,16 @@ D2.doyeon={
  choices:[
   {"k":"A","text":"뾰족하게 깎아 둔 내 연필 두 자루를 놓고, 일부러 창밖을 본다.","pts":{"doyeon":2},"r":[["me","smile","연필… 뾰족해. 써… 안 봐."],["doyeon","surprised","…너 연필 진짜 잘 깎는다."],["doyeon","smile","안 봐 줘서 고마워. 빌려 쓸게."]]},
   {"k":"B","text":"말랑한 미술용 떡지우개를 떼어 건넨다. 「톡톡 두드리면… 흑연만 빠져.」","pts":{"doyeon":2},"r":[["me","smile","종이… 구겨져. 톡톡 두드리면… 흑연만 빠져."],["doyeon","surprised","…오, 얼룩 싹 빠졌네. 센스 있다."]]},
-  {"k":"C","text":"내 {@sharpener}를 도연이 책상에 말없이 둔다.","pts":{"doyeon":1},"r":[["nar","","도연이가 연필을 직접 깎는다."],["doyeon","smile","…고마워."]]},
+  {"k":"C","text":"「연필 깎아 줄까?」 하고 도연이 옆에 서서 기다린다.","pts":{"doyeon": 1},"r":[["nar", "", "도연이가 {@sketchbook}을 품에 꼭 안는다."], ["doyeon", "angry", "…됐어. 옆에 서 있지 마."]]},
   {"k":"D","text":"도연이 팔을 젖히며 들여다본다. 「뭐 그려? 보여 줘!」","pts":{},"r":[["me","laugh","도연아 뭐 그려? 잘 그린다며! 보여 줘!"],["nar","","도연이가 탁 덮어 품에 안고 쏘아본다."],["doyeon","angry","남의 그림 함부로 보지 마! 진짜 무례하네!"]]}
  ],
  tell:[["me","smile","도연이가 {@sketchbook}을 꼭 안고… 아무한테도 안 보여 줘."],["me","sad","연필도 다 닳았대."]],
- mom:{"A":[["mom","smile","잘 깎은 연필을 주고, 일부러 안 봐 줬구나!"],["mom","relieved","덜 그린 그림을 숨기고 싶은 친구에게 딱 맞는 배려야."]],"B":[["mom","smile","종이가 안 상하게 떡지우개를 줬네."],["mom","relieved","작은 도구 하나로 속상한 마음을 닦아 줬어."]],"C":[["mom","sad","{@sharpener}만 빌려줬니? 나쁘진 않아."],["mom","smile","네가 깎아 둔 연필을 줬으면 더 감동했을 거야."]],"D":[["mom","sad","억지로 들춰 봤구나!"],["mom","sad","그건 친구의 비밀 일기장을 몰래 본 것과 같아."]]},
+ mom:{"A":[["mom","smile","잘 깎은 연필을 주고, 일부러 안 봐 줬구나!"],["mom","relieved","덜 그린 그림을 숨기고 싶은 친구에게 딱 맞는 배려야."]],"B":[["mom","smile","종이가 안 상하게 떡지우개를 줬네."],["mom","relieved","작은 도구 하나로 속상한 마음을 닦아 줬어."]],"C":[["mom", "smile", "깎아 주려던 마음은 좋았어."], ["mom", "sad", "그런데 옆에 서 있으면, 그림 들킬까 봐 불안했을 거야."]],"D":[["mom","sad","억지로 들춰 봤구나!"],["mom","sad","그건 친구의 비밀 일기장을 몰래 본 것과 같아."]]},
  tr:{
-  en:{"도연":"Doyeon","지금 손이 그림 그리고 싶대서… 조금만 이따가.":"My hands want to draw right now… a little later.","아침 자습 시간 전. 교실 구석 창가 자리.":"Before morning study time. A corner seat by the window.","도연이가 무언가를 품에 꼭 안고 있다.":"Doyeon is holding something tight to her chest.","연필로 거칠게 선을 긋는다.":"She scratches rough lines with a pencil.","…뭘 봐? 내 {@sketchbook} 보지 마.":"…What are you looking at? Don't look at my {@sketchbook}.","(보면… 싫어할 거야.)":"(If I look… she'll hate it.)","선이 번지고, 지우다가 종이가 구겨진다.":"The lines smudge, and the paper crumples as she erases.","아, 연필이 또 뭉툭해… {@sharpener}도 없고.":"Ugh, my pencil's blunt again… and no {@sharpener}.","(연필 끝이 뭉툭해서… 선이 번지는구나.)":"(The pencil tip is blunt… that's why the lines smudge.)","선이 또 뭉개졌어… 천재라는 소리 들으면서 이것도 못 하다니…":"The lines got smudged again… they call me a genius, and I can't even do this…","뾰족하게 깎아 둔 내 연필 두 자루를 놓고, 일부러 창밖을 본다.":"Put down two of my sharp pencils and look out the window on purpose.","연필… 뾰족해. 써… 안 봐.":"Pencils… sharp. Use them… I won't look.","…너 연필 진짜 잘 깎는다.":"…You're really good at sharpening pencils.","안 봐 줘서 고마워. 빌려 쓸게.":"Thanks for not looking. I'll borrow them.","말랑한 미술용 떡지우개를 떼어 건넨다. 「톡톡 두드리면… 흑연만 빠져.」":"Tear off a piece of soft kneaded eraser and hand it over. \"Dab it… only the graphite comes off.\"","종이… 구겨져. 톡톡 두드리면… 흑연만 빠져.":"The paper… crumples. Dab it… only the graphite comes off.","…오, 얼룩 싹 빠졌네. 센스 있다.":"…Oh, the smudge is totally gone. Nice.","내 {@sharpener}를 도연이 책상에 말없이 둔다.":"Quietly put my {@sharpener} on Doyeon's desk.","도연이가 연필을 직접 깎는다.":"Doyeon sharpens her pencil herself.","…고마워.":"…Thanks.","도연이 팔을 젖히며 들여다본다. 「뭐 그려? 보여 줘!」":"Push Doyeon's arm aside and peek. \"What are you drawing? Show me!\"","도연아 뭐 그려? 잘 그린다며! 보여 줘!":"Doyeon, what are you drawing? They say you're good! Show me!","도연이가 탁 덮어 품에 안고 쏘아본다.":"Doyeon slams it shut, hugs it, and glares.","남의 그림 함부로 보지 마! 진짜 무례하네!":"Don't look at other people's drawings! That's so rude!","도연이가 {@sketchbook}을 꼭 안고… 아무한테도 안 보여 줘.":"Doyeon hugs her {@sketchbook} tight… and shows no one.","연필도 다 닳았대.":"Her pencils are all worn down, too.","잘 깎은 연필을 주고, 일부러 안 봐 줬구나!":"You gave her sharp pencils and kindly looked away!","덜 그린 그림을 숨기고 싶은 친구에게 딱 맞는 배려야.":"That's just right for a friend who wants to hide an unfinished drawing.","종이가 안 상하게 떡지우개를 줬네.":"You gave her a kneaded eraser so the paper wouldn't tear.","작은 도구 하나로 속상한 마음을 닦아 줬어.":"With one small tool, you wiped away her frustration.","{@sharpener}만 빌려줬니? 나쁘진 않아.":"You only lent her a {@sharpener}? That's not bad.","네가 깎아 둔 연필을 줬으면 더 감동했을 거야.":"If you'd given her pencils you sharpened, she'd have been more touched.","억지로 들춰 봤구나!":"You forced it open to look!","그건 친구의 비밀 일기장을 몰래 본 것과 같아.":"That's like secretly reading a friend's diary."},
-  id:{"도연":"Doyeon","지금 손이 그림 그리고 싶대서… 조금만 이따가.":"Tanganku lagi pengen menggambar… nanti sebentar lagi ya.","아침 자습 시간 전. 교실 구석 창가 자리.":"Sebelum jam belajar pagi. Kursi pojok dekat jendela.","도연이가 무언가를 품에 꼭 안고 있다.":"Doyeon memeluk sesuatu erat-erat.","연필로 거칠게 선을 긋는다.":"Dia menggores garis kasar dengan pensil.","…뭘 봐? 내 {@sketchbook} 보지 마.":"…Lihat apa? Jangan lihat {@sketchbook}-ku.","(보면… 싫어할 거야.)":"(Kalau kulihat… dia pasti nggak suka.)","선이 번지고, 지우다가 종이가 구겨진다.":"Garisnya luntur, dan kertasnya kusut waktu dihapus.","아, 연필이 또 뭉툭해… {@sharpener}도 없고.":"Aduh, pensilku tumpul lagi… {@sharpener} juga nggak ada.","(연필 끝이 뭉툭해서… 선이 번지는구나.)":"(Ujung pensilnya tumpul… makanya garisnya luntur.)","선이 또 뭉개졌어… 천재라는 소리 들으면서 이것도 못 하다니…":"Garisnya rusak lagi… dibilang jenius tapi ini saja nggak bisa…","뾰족하게 깎아 둔 내 연필 두 자루를 놓고, 일부러 창밖을 본다.":"Taruh dua pensilku yang sudah diraut runcing, lalu sengaja lihat ke luar jendela.","연필… 뾰족해. 써… 안 봐.":"Pensil… runcing. Pakai… aku nggak lihat.","…너 연필 진짜 잘 깎는다.":"…Kamu jago banget meraut pensil.","안 봐 줘서 고마워. 빌려 쓸게.":"Makasih nggak ngintip. Aku pinjam ya.","말랑한 미술용 떡지우개를 떼어 건넨다. 「톡톡 두드리면… 흑연만 빠져.」":"Sobek sedikit penghapus lunak dan berikan. \"Tepuk-tepuk… grafitnya saja yang hilang.\"","종이… 구겨져. 톡톡 두드리면… 흑연만 빠져.":"Kertasnya… kusut. Tepuk-tepuk… grafitnya saja yang hilang.","…오, 얼룩 싹 빠졌네. 센스 있다.":"…Oh, nodanya hilang. Peka juga.","내 {@sharpener}를 도연이 책상에 말없이 둔다.":"Diam-diam taruh {@sharpener}-ku di meja Doyeon.","도연이가 연필을 직접 깎는다.":"Doyeon meraut pensilnya sendiri.","…고마워.":"…Makasih.","도연이 팔을 젖히며 들여다본다. 「뭐 그려? 보여 줘!」":"Singkirkan lengan Doyeon dan intip. \"Gambar apa? Lihat dong!\"","도연아 뭐 그려? 잘 그린다며! 보여 줘!":"Doyeon, gambar apa? Katanya kamu jago! Lihat dong!","도연이가 탁 덮어 품에 안고 쏘아본다.":"Doyeon menutupnya keras, memeluknya, dan melotot.","남의 그림 함부로 보지 마! 진짜 무례하네!":"Jangan sembarangan lihat gambar orang! Nggak sopan banget!","도연이가 {@sketchbook}을 꼭 안고… 아무한테도 안 보여 줘.":"Doyeon memeluk {@sketchbook}-nya erat… dan nggak menunjukkannya ke siapa pun.","연필도 다 닳았대.":"Pensilnya juga sudah habis tumpul.","잘 깎은 연필을 주고, 일부러 안 봐 줬구나!":"Kamu kasih pensil runcing dan sengaja nggak melihat!","덜 그린 그림을 숨기고 싶은 친구에게 딱 맞는 배려야.":"Itu pas sekali untuk teman yang ingin menyembunyikan gambar belum jadi.","종이가 안 상하게 떡지우개를 줬네.":"Kamu kasih penghapus lunak supaya kertasnya nggak rusak.","작은 도구 하나로 속상한 마음을 닦아 줬어.":"Dengan satu alat kecil, kamu menghapus kekesalannya.","{@sharpener}만 빌려줬니? 나쁘진 않아.":"Kamu cuma meminjamkan {@sharpener}? Nggak jelek kok.","네가 깎아 둔 연필을 줬으면 더 감동했을 거야.":"Kalau kamu kasih pensil yang sudah kamu raut, dia pasti lebih terharu.","억지로 들춰 봤구나!":"Kamu memaksa membukanya!","그건 친구의 비밀 일기장을 몰래 본 것과 같아.":"Itu sama seperti diam-diam membaca buku harian teman."},
-  vi:{"도연":"Doyeon","지금 손이 그림 그리고 싶대서… 조금만 이따가.":"Tay tớ đang muốn vẽ… lát nữa nhé.","아침 자습 시간 전. 교실 구석 창가 자리.":"Trước giờ tự học. Góc lớp cạnh cửa sổ.","도연이가 무언가를 품에 꼭 안고 있다.":"Doyeon ôm chặt thứ gì đó trước ngực.","연필로 거칠게 선을 긋는다.":"Bạn ấy kẻ những nét thô bằng bút chì.","…뭘 봐? 내 {@sketchbook} 보지 마.":"…Nhìn gì? Đừng nhìn {@sketchbook} của tớ.","(보면… 싫어할 거야.)":"(Nhìn vào… bạn ấy sẽ ghét lắm.)","선이 번지고, 지우다가 종이가 구겨진다.":"Nét vẽ bị nhòe, tẩy mãi giấy nhàu cả.","아, 연필이 또 뭉툭해… {@sharpener}도 없고.":"Trời, bút chì lại cùn rồi… mà không có {@sharpener}.","(연필 끝이 뭉툭해서… 선이 번지는구나.)":"(Đầu bút chì cùn… nên nét bị nhòe.)","선이 또 뭉개졌어… 천재라는 소리 들으면서 이것도 못 하다니…":"Nét lại nhòe rồi… được gọi là thiên tài mà cái này cũng không làm được…","뾰족하게 깎아 둔 내 연필 두 자루를 놓고, 일부러 창밖을 본다.":"Đặt hai cây bút chì đã gọt nhọn của tớ, rồi cố ý nhìn ra cửa sổ.","연필… 뾰족해. 써… 안 봐.":"Bút chì… nhọn đấy. Dùng đi… tớ không nhìn.","…너 연필 진짜 잘 깎는다.":"…Cậu gọt bút chì giỏi thật.","안 봐 줘서 고마워. 빌려 쓸게.":"Cảm ơn vì không nhìn. Tớ mượn nhé.","말랑한 미술용 떡지우개를 떼어 건넨다. 「톡톡 두드리면… 흑연만 빠져.」":"Bứt một miếng tẩy dẻo đưa cho bạn. \"Chấm nhẹ… chỉ than chì bay đi thôi.\"","종이… 구겨져. 톡톡 두드리면… 흑연만 빠져.":"Giấy… nhàu mất. Chấm nhẹ… chỉ than chì bay đi.","…오, 얼룩 싹 빠졌네. 센스 있다.":"…Ồ, vết bẩn sạch trơn. Tinh ý ghê.","내 {@sharpener}를 도연이 책상에 말없이 둔다.":"Lặng lẽ đặt {@sharpener} của tớ lên bàn Doyeon.","도연이가 연필을 직접 깎는다.":"Doyeon tự gọt bút chì.","…고마워.":"…Cảm ơn.","도연이 팔을 젖히며 들여다본다. 「뭐 그려? 보여 줘!」":"Gạt tay Doyeon ra để nhìn trộm. \"Vẽ gì thế? Cho xem với!\"","도연아 뭐 그려? 잘 그린다며! 보여 줘!":"Doyeon vẽ gì thế? Nghe nói cậu vẽ đẹp! Cho xem đi!","도연이가 탁 덮어 품에 안고 쏘아본다.":"Doyeon gập mạnh lại, ôm vào lòng và lườm.","남의 그림 함부로 보지 마! 진짜 무례하네!":"Đừng tự tiện xem tranh người khác! Bất lịch sự quá!","도연이가 {@sketchbook}을 꼭 안고… 아무한테도 안 보여 줘.":"Doyeon ôm chặt {@sketchbook}… chẳng cho ai xem.","연필도 다 닳았대.":"Bút chì cũng mòn hết rồi.","잘 깎은 연필을 주고, 일부러 안 봐 줬구나!":"Con đưa bút chì gọt nhọn và cố ý không nhìn!","덜 그린 그림을 숨기고 싶은 친구에게 딱 맞는 배려야.":"Thật hợp với bạn muốn giấu bức tranh chưa vẽ xong.","종이가 안 상하게 떡지우개를 줬네.":"Con đưa tẩy dẻo để giấy không bị hỏng.","작은 도구 하나로 속상한 마음을 닦아 줬어.":"Chỉ một món đồ nhỏ mà con lau đi nỗi bực của bạn.","{@sharpener}만 빌려줬니? 나쁘진 않아.":"Con chỉ cho mượn {@sharpener} thôi à? Cũng không tệ.","네가 깎아 둔 연필을 줬으면 더 감동했을 거야.":"Nếu con đưa bút chì con gọt sẵn, bạn còn cảm động hơn.","억지로 들춰 봤구나!":"Con cố mở ra xem à!","그건 친구의 비밀 일기장을 몰래 본 것과 같아.":"Như là đọc trộm nhật ký bí mật của bạn vậy."},
-  zh:{"도연":"道妍","지금 손이 그림 그리고 싶대서… 조금만 이따가.":"我的手现在想画画……等一会儿吧。","아침 자습 시간 전. 교실 구석 창가 자리.":"早自习前。教室角落靠窗的座位。","도연이가 무언가를 품에 꼭 안고 있다.":"道妍把什么东西紧紧抱在怀里。","연필로 거칠게 선을 긋는다.":"她用铅笔粗粗地画着线。","…뭘 봐? 내 {@sketchbook} 보지 마.":"……看什么?别看我的{@sketchbook}。","(보면… 싫어할 거야.)":"(要是看了……她会讨厌的。)","선이 번지고, 지우다가 종이가 구겨진다.":"线条糊了,擦着擦着纸都皱了。","아, 연필이 또 뭉툭해… {@sharpener}도 없고.":"啊,铅笔又钝了……也没有{@sharpener}。","(연필 끝이 뭉툭해서… 선이 번지는구나.)":"(铅笔尖钝了……所以线条才会糊。)","선이 또 뭉개졌어… 천재라는 소리 들으면서 이것도 못 하다니…":"线又糊了……被叫天才,连这个都画不好……","뾰족하게 깎아 둔 내 연필 두 자루를 놓고, 일부러 창밖을 본다.":"放下两支我削尖的铅笔,故意看向窗外。","연필… 뾰족해. 써… 안 봐.":"铅笔……很尖。用吧……我不看。","…너 연필 진짜 잘 깎는다.":"……你削铅笔真厉害。","안 봐 줘서 고마워. 빌려 쓸게.":"谢谢你没看。借我用一下。","말랑한 미술용 떡지우개를 떼어 건넨다. 「톡톡 두드리면… 흑연만 빠져.」":"掰一块软软的美术可塑橡皮递过去。「轻轻按……只会粘掉铅粉。」","종이… 구겨져. 톡톡 두드리면… 흑연만 빠져.":"纸……会皱。轻轻按……只粘掉铅粉。","…오, 얼룩 싹 빠졌네. 센스 있다.":"……哦,污渍全没了。挺有一套。","내 {@sharpener}를 도연이 책상에 말없이 둔다.":"悄悄把我的{@sharpener}放在道妍桌上。","도연이가 연필을 직접 깎는다.":"道妍自己削起铅笔。","…고마워.":"……谢谢。","도연이 팔을 젖히며 들여다본다. 「뭐 그려? 보여 줘!」":"扒开道妍的胳膊偷看。「画什么呢?给我看看!」","도연아 뭐 그려? 잘 그린다며! 보여 줘!":"道妍画什么?听说你画得好!给我看!","도연이가 탁 덮어 품에 안고 쏘아본다.":"道妍啪地合上,抱在怀里瞪着我。","남의 그림 함부로 보지 마! 진짜 무례하네!":"别随便看别人的画!真没礼貌!","도연이가 {@sketchbook}을 꼭 안고… 아무한테도 안 보여 줘.":"道妍紧紧抱着{@sketchbook}……谁也不给看。","연필도 다 닳았대.":"铅笔也都磨秃了。","잘 깎은 연필을 주고, 일부러 안 봐 줬구나!":"你给了削好的铅笔,还故意不看!","덜 그린 그림을 숨기고 싶은 친구에게 딱 맞는 배려야.":"对想藏起没画完的画的朋友,这正是最好的体贴。","종이가 안 상하게 떡지우개를 줬네.":"你给了可塑橡皮,纸就不会坏了。","작은 도구 하나로 속상한 마음을 닦아 줬어.":"用一个小工具,就擦掉了她的烦恼。","{@sharpener}만 빌려줬니? 나쁘진 않아.":"只借了{@sharpener}吗?也不坏。","네가 깎아 둔 연필을 줬으면 더 감동했을 거야.":"要是给她你削好的铅笔,她会更感动。","억지로 들춰 봤구나!":"你硬是翻开看了!","그건 친구의 비밀 일기장을 몰래 본 것과 같아.":"那就像偷看朋友的秘密日记一样。"}
+  en:{"「연필 깎아 줄까?」 하고 도연이 옆에 서서 기다린다.":"Stand next to Doyeon and wait. \"Want me to sharpen your pencil?\"","도연이가 {@sketchbook}을 품에 꼭 안는다.":"Doyeon hugs her {@sketchbook} tight to her chest.","…됐어. 옆에 서 있지 마.":"…Never mind. Don't stand next to me.","깎아 주려던 마음은 좋았어.":"It was kind of you to want to sharpen it for her.","그런데 옆에 서 있으면, 그림 들킬까 봐 불안했을 거야.":"But with you standing right there, she was probably worried you'd see her drawing.","도연":"Doyeon","지금 손이 그림 그리고 싶대서… 조금만 이따가.":"My hands want to draw right now… a little later.","아침 자습 시간 전. 교실 구석 창가 자리.":"Before morning study time. A corner seat by the window.","도연이가 무언가를 품에 꼭 안고 있다.":"Doyeon is holding something tight to her chest.","연필로 거칠게 선을 긋는다.":"She scratches rough lines with a pencil.","…뭘 봐? 내 {@sketchbook} 보지 마.":"…What are you looking at? Don't look at my {@sketchbook}.","(보면… 싫어할 거야.)":"(If I look… she'll hate it.)","선이 번지고, 지우다가 종이가 구겨진다.":"The lines smudge, and the paper crumples as she erases.","아, 연필이 또 뭉툭해… {@sharpener}도 없고.":"Ugh, my pencil's blunt again… and no {@sharpener}.","(연필 끝이 뭉툭해서… 선이 번지는구나.)":"(The pencil tip is blunt… that's why the lines smudge.)","선이 또 뭉개졌어… 천재라는 소리 들으면서 이것도 못 하다니…":"The lines got smudged again… they call me a genius, and I can't even do this…","뾰족하게 깎아 둔 내 연필 두 자루를 놓고, 일부러 창밖을 본다.":"Put down two of my sharp pencils and look out the window on purpose.","연필… 뾰족해. 써… 안 봐.":"Pencils… sharp. Use them… I won't look.","…너 연필 진짜 잘 깎는다.":"…You're really good at sharpening pencils.","안 봐 줘서 고마워. 빌려 쓸게.":"Thanks for not looking. I'll borrow them.","말랑한 미술용 떡지우개를 떼어 건넨다. 「톡톡 두드리면… 흑연만 빠져.」":"Tear off a piece of soft kneaded eraser and hand it over. \"Dab it… only the graphite comes off.\"","종이… 구겨져. 톡톡 두드리면… 흑연만 빠져.":"The paper… crumples. Dab it… only the graphite comes off.","…오, 얼룩 싹 빠졌네. 센스 있다.":"…Oh, the smudge is totally gone. Nice.","내 {@sharpener}를 도연이 책상에 말없이 둔다.":"Quietly put my {@sharpener} on Doyeon's desk.","도연이가 연필을 직접 깎는다.":"Doyeon sharpens her pencil herself.","…고마워.":"…Thanks.","도연이 팔을 젖히며 들여다본다. 「뭐 그려? 보여 줘!」":"Push Doyeon's arm aside and peek. \"What are you drawing? Show me!\"","도연아 뭐 그려? 잘 그린다며! 보여 줘!":"Doyeon, what are you drawing? They say you're good! Show me!","도연이가 탁 덮어 품에 안고 쏘아본다.":"Doyeon slams it shut, hugs it, and glares.","남의 그림 함부로 보지 마! 진짜 무례하네!":"Don't look at other people's drawings! That's so rude!","도연이가 {@sketchbook}을 꼭 안고… 아무한테도 안 보여 줘.":"Doyeon hugs her {@sketchbook} tight… and shows no one.","연필도 다 닳았대.":"Her pencils are all worn down, too.","잘 깎은 연필을 주고, 일부러 안 봐 줬구나!":"You gave her sharp pencils and kindly looked away!","덜 그린 그림을 숨기고 싶은 친구에게 딱 맞는 배려야.":"That's just right for a friend who wants to hide an unfinished drawing.","종이가 안 상하게 떡지우개를 줬네.":"You gave her a kneaded eraser so the paper wouldn't tear.","작은 도구 하나로 속상한 마음을 닦아 줬어.":"With one small tool, you wiped away her frustration.","{@sharpener}만 빌려줬니? 나쁘진 않아.":"You only lent her a {@sharpener}? That's not bad.","네가 깎아 둔 연필을 줬으면 더 감동했을 거야.":"If you'd given her pencils you sharpened, she'd have been more touched.","억지로 들춰 봤구나!":"You forced it open to look!","그건 친구의 비밀 일기장을 몰래 본 것과 같아.":"That's like secretly reading a friend's diary."},
+  id:{"「연필 깎아 줄까?」 하고 도연이 옆에 서서 기다린다.":"Berdiri di samping Doyeon dan menunggu. \"Mau aku rautkan pensilmu?\"","도연이가 {@sketchbook}을 품에 꼭 안는다.":"Doyeon memeluk {@sketchbook}-nya erat-erat.","…됐어. 옆에 서 있지 마.":"…Nggak usah. Jangan berdiri di sebelahku.","깎아 주려던 마음은 좋았어.":"Niatmu mau merautkan pensilnya itu baik.","그런데 옆에 서 있으면, 그림 들킬까 봐 불안했을 거야.":"Tapi kalau kamu berdiri di sebelahnya, dia pasti cemas gambarnya ketahuan.","도연":"Doyeon","지금 손이 그림 그리고 싶대서… 조금만 이따가.":"Tanganku lagi pengen menggambar… nanti sebentar lagi ya.","아침 자습 시간 전. 교실 구석 창가 자리.":"Sebelum jam belajar pagi. Kursi pojok dekat jendela.","도연이가 무언가를 품에 꼭 안고 있다.":"Doyeon memeluk sesuatu erat-erat.","연필로 거칠게 선을 긋는다.":"Dia menggores garis kasar dengan pensil.","…뭘 봐? 내 {@sketchbook} 보지 마.":"…Lihat apa? Jangan lihat {@sketchbook}-ku.","(보면… 싫어할 거야.)":"(Kalau kulihat… dia pasti nggak suka.)","선이 번지고, 지우다가 종이가 구겨진다.":"Garisnya luntur, dan kertasnya kusut waktu dihapus.","아, 연필이 또 뭉툭해… {@sharpener}도 없고.":"Aduh, pensilku tumpul lagi… {@sharpener} juga nggak ada.","(연필 끝이 뭉툭해서… 선이 번지는구나.)":"(Ujung pensilnya tumpul… makanya garisnya luntur.)","선이 또 뭉개졌어… 천재라는 소리 들으면서 이것도 못 하다니…":"Garisnya rusak lagi… dibilang jenius tapi ini saja nggak bisa…","뾰족하게 깎아 둔 내 연필 두 자루를 놓고, 일부러 창밖을 본다.":"Taruh dua pensilku yang sudah diraut runcing, lalu sengaja lihat ke luar jendela.","연필… 뾰족해. 써… 안 봐.":"Pensil… runcing. Pakai… aku nggak lihat.","…너 연필 진짜 잘 깎는다.":"…Kamu jago banget meraut pensil.","안 봐 줘서 고마워. 빌려 쓸게.":"Makasih nggak ngintip. Aku pinjam ya.","말랑한 미술용 떡지우개를 떼어 건넨다. 「톡톡 두드리면… 흑연만 빠져.」":"Sobek sedikit penghapus lunak dan berikan. \"Tepuk-tepuk… grafitnya saja yang hilang.\"","종이… 구겨져. 톡톡 두드리면… 흑연만 빠져.":"Kertasnya… kusut. Tepuk-tepuk… grafitnya saja yang hilang.","…오, 얼룩 싹 빠졌네. 센스 있다.":"…Oh, nodanya hilang. Peka juga.","내 {@sharpener}를 도연이 책상에 말없이 둔다.":"Diam-diam taruh {@sharpener}-ku di meja Doyeon.","도연이가 연필을 직접 깎는다.":"Doyeon meraut pensilnya sendiri.","…고마워.":"…Makasih.","도연이 팔을 젖히며 들여다본다. 「뭐 그려? 보여 줘!」":"Singkirkan lengan Doyeon dan intip. \"Gambar apa? Lihat dong!\"","도연아 뭐 그려? 잘 그린다며! 보여 줘!":"Doyeon, gambar apa? Katanya kamu jago! Lihat dong!","도연이가 탁 덮어 품에 안고 쏘아본다.":"Doyeon menutupnya keras, memeluknya, dan melotot.","남의 그림 함부로 보지 마! 진짜 무례하네!":"Jangan sembarangan lihat gambar orang! Nggak sopan banget!","도연이가 {@sketchbook}을 꼭 안고… 아무한테도 안 보여 줘.":"Doyeon memeluk {@sketchbook}-nya erat… dan nggak menunjukkannya ke siapa pun.","연필도 다 닳았대.":"Pensilnya juga sudah habis tumpul.","잘 깎은 연필을 주고, 일부러 안 봐 줬구나!":"Kamu kasih pensil runcing dan sengaja nggak melihat!","덜 그린 그림을 숨기고 싶은 친구에게 딱 맞는 배려야.":"Itu pas sekali untuk teman yang ingin menyembunyikan gambar belum jadi.","종이가 안 상하게 떡지우개를 줬네.":"Kamu kasih penghapus lunak supaya kertasnya nggak rusak.","작은 도구 하나로 속상한 마음을 닦아 줬어.":"Dengan satu alat kecil, kamu menghapus kekesalannya.","{@sharpener}만 빌려줬니? 나쁘진 않아.":"Kamu cuma meminjamkan {@sharpener}? Nggak jelek kok.","네가 깎아 둔 연필을 줬으면 더 감동했을 거야.":"Kalau kamu kasih pensil yang sudah kamu raut, dia pasti lebih terharu.","억지로 들춰 봤구나!":"Kamu memaksa membukanya!","그건 친구의 비밀 일기장을 몰래 본 것과 같아.":"Itu sama seperti diam-diam membaca buku harian teman."},
+  vi:{"「연필 깎아 줄까?」 하고 도연이 옆에 서서 기다린다.":"Đứng cạnh Doyeon chờ. \"Tớ gọt bút chì cho cậu nhé?\"","도연이가 {@sketchbook}을 품에 꼭 안는다.":"Doyeon ôm chặt {@sketchbook} vào lòng.","…됐어. 옆에 서 있지 마.":"…Thôi khỏi. Đừng đứng cạnh tớ.","깎아 주려던 마음은 좋았어.":"Con muốn gọt bút chì giúp bạn, thế là tốt rồi.","그런데 옆에 서 있으면, 그림 들킬까 봐 불안했을 거야.":"Nhưng con đứng ngay cạnh, chắc bạn sợ con nhìn thấy tranh.","도연":"Doyeon","지금 손이 그림 그리고 싶대서… 조금만 이따가.":"Tay tớ đang muốn vẽ… lát nữa nhé.","아침 자습 시간 전. 교실 구석 창가 자리.":"Trước giờ tự học. Góc lớp cạnh cửa sổ.","도연이가 무언가를 품에 꼭 안고 있다.":"Doyeon ôm chặt thứ gì đó trước ngực.","연필로 거칠게 선을 긋는다.":"Bạn ấy kẻ những nét thô bằng bút chì.","…뭘 봐? 내 {@sketchbook} 보지 마.":"…Nhìn gì? Đừng nhìn {@sketchbook} của tớ.","(보면… 싫어할 거야.)":"(Nhìn vào… bạn ấy sẽ ghét lắm.)","선이 번지고, 지우다가 종이가 구겨진다.":"Nét vẽ bị nhòe, tẩy mãi giấy nhàu cả.","아, 연필이 또 뭉툭해… {@sharpener}도 없고.":"Trời, bút chì lại cùn rồi… mà không có {@sharpener}.","(연필 끝이 뭉툭해서… 선이 번지는구나.)":"(Đầu bút chì cùn… nên nét bị nhòe.)","선이 또 뭉개졌어… 천재라는 소리 들으면서 이것도 못 하다니…":"Nét lại nhòe rồi… được gọi là thiên tài mà cái này cũng không làm được…","뾰족하게 깎아 둔 내 연필 두 자루를 놓고, 일부러 창밖을 본다.":"Đặt hai cây bút chì đã gọt nhọn của tớ, rồi cố ý nhìn ra cửa sổ.","연필… 뾰족해. 써… 안 봐.":"Bút chì… nhọn đấy. Dùng đi… tớ không nhìn.","…너 연필 진짜 잘 깎는다.":"…Cậu gọt bút chì giỏi thật.","안 봐 줘서 고마워. 빌려 쓸게.":"Cảm ơn vì không nhìn. Tớ mượn nhé.","말랑한 미술용 떡지우개를 떼어 건넨다. 「톡톡 두드리면… 흑연만 빠져.」":"Bứt một miếng tẩy dẻo đưa cho bạn. \"Chấm nhẹ… chỉ than chì bay đi thôi.\"","종이… 구겨져. 톡톡 두드리면… 흑연만 빠져.":"Giấy… nhàu mất. Chấm nhẹ… chỉ than chì bay đi.","…오, 얼룩 싹 빠졌네. 센스 있다.":"…Ồ, vết bẩn sạch trơn. Tinh ý ghê.","내 {@sharpener}를 도연이 책상에 말없이 둔다.":"Lặng lẽ đặt {@sharpener} của tớ lên bàn Doyeon.","도연이가 연필을 직접 깎는다.":"Doyeon tự gọt bút chì.","…고마워.":"…Cảm ơn.","도연이 팔을 젖히며 들여다본다. 「뭐 그려? 보여 줘!」":"Gạt tay Doyeon ra để nhìn trộm. \"Vẽ gì thế? Cho xem với!\"","도연아 뭐 그려? 잘 그린다며! 보여 줘!":"Doyeon vẽ gì thế? Nghe nói cậu vẽ đẹp! Cho xem đi!","도연이가 탁 덮어 품에 안고 쏘아본다.":"Doyeon gập mạnh lại, ôm vào lòng và lườm.","남의 그림 함부로 보지 마! 진짜 무례하네!":"Đừng tự tiện xem tranh người khác! Bất lịch sự quá!","도연이가 {@sketchbook}을 꼭 안고… 아무한테도 안 보여 줘.":"Doyeon ôm chặt {@sketchbook}… chẳng cho ai xem.","연필도 다 닳았대.":"Bút chì cũng mòn hết rồi.","잘 깎은 연필을 주고, 일부러 안 봐 줬구나!":"Con đưa bút chì gọt nhọn và cố ý không nhìn!","덜 그린 그림을 숨기고 싶은 친구에게 딱 맞는 배려야.":"Thật hợp với bạn muốn giấu bức tranh chưa vẽ xong.","종이가 안 상하게 떡지우개를 줬네.":"Con đưa tẩy dẻo để giấy không bị hỏng.","작은 도구 하나로 속상한 마음을 닦아 줬어.":"Chỉ một món đồ nhỏ mà con lau đi nỗi bực của bạn.","{@sharpener}만 빌려줬니? 나쁘진 않아.":"Con chỉ cho mượn {@sharpener} thôi à? Cũng không tệ.","네가 깎아 둔 연필을 줬으면 더 감동했을 거야.":"Nếu con đưa bút chì con gọt sẵn, bạn còn cảm động hơn.","억지로 들춰 봤구나!":"Con cố mở ra xem à!","그건 친구의 비밀 일기장을 몰래 본 것과 같아.":"Như là đọc trộm nhật ký bí mật của bạn vậy."},
+  zh:{"「연필 깎아 줄까?」 하고 도연이 옆에 서서 기다린다.":"站在道妍旁边等着。「要我帮你削铅笔吗？」","도연이가 {@sketchbook}을 품에 꼭 안는다.":"道妍把{@sketchbook}紧紧抱在怀里。","…됐어. 옆에 서 있지 마.":"……不用了。别站在我旁边。","깎아 주려던 마음은 좋았어.":"你想帮她削铅笔，这份心意很好。","그런데 옆에 서 있으면, 그림 들킬까 봐 불안했을 거야.":"可是你站在旁边，她大概怕画被你看到，心里不安。","도연":"道妍","지금 손이 그림 그리고 싶대서… 조금만 이따가.":"我的手现在想画画……等一会儿吧。","아침 자습 시간 전. 교실 구석 창가 자리.":"早自习前。教室角落靠窗的座位。","도연이가 무언가를 품에 꼭 안고 있다.":"道妍把什么东西紧紧抱在怀里。","연필로 거칠게 선을 긋는다.":"她用铅笔粗粗地画着线。","…뭘 봐? 내 {@sketchbook} 보지 마.":"……看什么?别看我的{@sketchbook}。","(보면… 싫어할 거야.)":"(要是看了……她会讨厌的。)","선이 번지고, 지우다가 종이가 구겨진다.":"线条糊了,擦着擦着纸都皱了。","아, 연필이 또 뭉툭해… {@sharpener}도 없고.":"啊,铅笔又钝了……也没有{@sharpener}。","(연필 끝이 뭉툭해서… 선이 번지는구나.)":"(铅笔尖钝了……所以线条才会糊。)","선이 또 뭉개졌어… 천재라는 소리 들으면서 이것도 못 하다니…":"线又糊了……被叫天才,连这个都画不好……","뾰족하게 깎아 둔 내 연필 두 자루를 놓고, 일부러 창밖을 본다.":"放下两支我削尖的铅笔,故意看向窗外。","연필… 뾰족해. 써… 안 봐.":"铅笔……很尖。用吧……我不看。","…너 연필 진짜 잘 깎는다.":"……你削铅笔真厉害。","안 봐 줘서 고마워. 빌려 쓸게.":"谢谢你没看。借我用一下。","말랑한 미술용 떡지우개를 떼어 건넨다. 「톡톡 두드리면… 흑연만 빠져.」":"掰一块软软的美术可塑橡皮递过去。「轻轻按……只会粘掉铅粉。」","종이… 구겨져. 톡톡 두드리면… 흑연만 빠져.":"纸……会皱。轻轻按……只粘掉铅粉。","…오, 얼룩 싹 빠졌네. 센스 있다.":"……哦,污渍全没了。挺有一套。","내 {@sharpener}를 도연이 책상에 말없이 둔다.":"悄悄把我的{@sharpener}放在道妍桌上。","도연이가 연필을 직접 깎는다.":"道妍自己削起铅笔。","…고마워.":"……谢谢。","도연이 팔을 젖히며 들여다본다. 「뭐 그려? 보여 줘!」":"扒开道妍的胳膊偷看。「画什么呢?给我看看!」","도연아 뭐 그려? 잘 그린다며! 보여 줘!":"道妍画什么?听说你画得好!给我看!","도연이가 탁 덮어 품에 안고 쏘아본다.":"道妍啪地合上,抱在怀里瞪着我。","남의 그림 함부로 보지 마! 진짜 무례하네!":"别随便看别人的画!真没礼貌!","도연이가 {@sketchbook}을 꼭 안고… 아무한테도 안 보여 줘.":"道妍紧紧抱着{@sketchbook}……谁也不给看。","연필도 다 닳았대.":"铅笔也都磨秃了。","잘 깎은 연필을 주고, 일부러 안 봐 줬구나!":"你给了削好的铅笔,还故意不看!","덜 그린 그림을 숨기고 싶은 친구에게 딱 맞는 배려야.":"对想藏起没画完的画的朋友,这正是最好的体贴。","종이가 안 상하게 떡지우개를 줬네.":"你给了可塑橡皮,纸就不会坏了。","작은 도구 하나로 속상한 마음을 닦아 줬어.":"用一个小工具,就擦掉了她的烦恼。","{@sharpener}만 빌려줬니? 나쁘진 않아.":"只借了{@sharpener}吗?也不坏。","네가 깎아 둔 연필을 줬으면 더 감동했을 거야.":"要是给她你削好的铅笔,她会更感动。","억지로 들춰 봤구나!":"你硬是翻开看了!","그건 친구의 비밀 일기장을 몰래 본 것과 같아.":"那就像偷看朋友的秘密日记一样。"}
  }
 };
 
@@ -865,10 +865,7 @@ D2.youngmin={
    ['nar','','영민이가 넓은 칸에 반듯하게 적는다.'],
    ['youngmin','laugh','우와, 글이 칸 안에 쏙 들어가!']
   ]},
-  {k:'C',text:'아무 말 없이, 영민이가 다 쓸 때까지 옆에 앉아 있는다.',pts:{youngmin:1},r:[
-   ['nar','','영민이가 땀을 닦으며 끝까지 쓴다.'],
-   ['youngmin','smile','…다 썼다.']
-  ]},
+  {"k":"C","text":"옆에 앉아 웃으며 말한다. 「빨리 쓰고 같이 놀자! 기다릴게!」","pts":{"youngmin": 1},"r":[["nar", "", "영민이가 서두르다 글자가 삐뚤어진다."], ["youngmin", "sad", "…응. 빨리… 할게."]]},
   {k:'D',text:'연필을 홱 뺏어 대신 써 버린다. 「답답해! 내가 써 줄게!」',pts:{},r:[
    ['nar','','영민이가 고개를 푹 숙인다. 눈에 눈물이 핑 돈다.'],
    ['youngmin','sad','…나도… 쓸 수 있는데…']
@@ -881,11 +878,11 @@ D2.youngmin={
  mom:{
   A:[['mom','laugh','대신 안 써 주고 기다려 줬구나!'],['mom','smile','혼자 끝낼 수 있게 기다려 준 게 제일 큰 선물이야.']],
   B:[['mom','smile','칸 넓은 연습장을 줬구나.'],['mom','laugh','친구가 편하게 쓰게 도와준 다정한 생각이야.']],
-  C:[['mom','smile','옆에서 기다려 줬니? 고마운 일이야.'],['mom','relieved','헷갈리는 칸을 짚어 줬으면 덜 불안했을 거야.']],
+  "C":[["mom", "smile", "같이 놀고 싶은 마음은 예뻐."], ["mom", "sad", "그런데 「빨리」라는 말에 영민이 마음이 더 급해졌을 거야."]],
   D:[['mom','sad','연필을 뺏어서 대신 써 줬구나.'],['mom','sad','친구가 혼자 해낼 기회를 뺏은 거란다.']]
  },
  tr:{
-  en:{
+  en:{"옆에 앉아 웃으며 말한다. 「빨리 쓰고 같이 놀자! 기다릴게!」":"Sit next to Youngmin and say with a smile. \"Write fast and let's play! I'll wait!\"","영민이가 서두르다 글자가 삐뚤어진다.":"Youngmin hurries, and his letters come out crooked.","…응. 빨리… 할게.":"…Okay. I'll… hurry.","같이 놀고 싶은 마음은 예뻐.":"Wanting to play together is sweet.","그런데 「빨리」라는 말에 영민이 마음이 더 급해졌을 거야.":"But hearing \"fast\" probably made Youngmin feel even more rushed.",
    '영민':'Youngmin',
    '어… 아까 한 얘기 또 해야 돼? 천천히 생각해 볼게.':'Um… do we have to talk about that again? I\'ll think about it slowly.',
    '아침 자습 시간. 알림장을 옮겨 써야 한다.':'Morning study time. Everyone has to copy today\'s class notice.',
@@ -923,7 +920,7 @@ D2.youngmin={
    '연필을 뺏어서 대신 써 줬구나.':'You took the pencil and wrote it for him.',
    '친구가 혼자 해낼 기회를 뺏은 거란다.':'You took away his chance to do it himself.'
   },
-  id:{
+  id:{"옆에 앉아 웃으며 말한다. 「빨리 쓰고 같이 놀자! 기다릴게!」":"Duduk di sebelah Youngmin dan berkata sambil tersenyum. \"Cepat tulis, terus kita main! Aku tunggu!\"","영민이가 서두르다 글자가 삐뚤어진다.":"Youngmin terburu-buru, dan hurufnya jadi miring-miring.","…응. 빨리… 할게.":"…Iya. Aku… cepat-cepat.","같이 놀고 싶은 마음은 예뻐.":"Keinginan main bareng itu manis.","그런데 「빨리」라는 말에 영민이 마음이 더 급해졌을 거야.":"Tapi kata \"cepat\" pasti bikin Youngmin makin buru-buru.",
    '영민':'Youngmin',
    '어… 아까 한 얘기 또 해야 돼? 천천히 생각해 볼게.':'Eh… harus bahas yang tadi lagi? Aku pikir pelan-pelan dulu ya.',
    '아침 자습 시간. 알림장을 옮겨 써야 한다.':'Jam belajar pagi. Semua harus menyalin pengumuman kelas.',
@@ -961,7 +958,7 @@ D2.youngmin={
    '연필을 뺏어서 대신 써 줬구나.':'Kamu merebut pensilnya dan menuliskannya, ya.',
    '친구가 혼자 해낼 기회를 뺏은 거란다.':'Kamu mengambil kesempatannya untuk bisa sendiri, Nak.'
   },
-  vi:{
+  vi:{"옆에 앉아 웃으며 말한다. 「빨리 쓰고 같이 놀자! 기다릴게!」":"Ngồi cạnh Youngmin, cười nói. \"Viết nhanh rồi chơi cùng nhé! Tớ chờ!\"","영민이가 서두르다 글자가 삐뚤어진다.":"Youngmin vội quá, chữ viết bị xiêu vẹo.","…응. 빨리… 할게.":"…Ừ. Tớ… làm nhanh đây.","같이 놀고 싶은 마음은 예뻐.":"Con muốn chơi cùng bạn, thật dễ thương.","그런데 「빨리」라는 말에 영민이 마음이 더 급해졌을 거야.":"Nhưng nghe chữ \"nhanh\", Youngmin chắc càng cuống hơn.",
    '영민':'Youngmin',
    '어… 아까 한 얘기 또 해야 돼? 천천히 생각해 볼게.':'Ơ… phải nói lại chuyện lúc nãy hả? Để tớ nghĩ từ từ.',
    '아침 자습 시간. 알림장을 옮겨 써야 한다.':'Giờ tự học buổi sáng. Phải chép thông báo của lớp.',
@@ -999,7 +996,7 @@ D2.youngmin={
    '연필을 뺏어서 대신 써 줬구나.':'Con giật bút và viết thay bạn à.',
    '친구가 혼자 해낼 기회를 뺏은 거란다.':'Con đã lấy mất cơ hội tự làm của bạn đấy.'
   },
-  zh:{
+  zh:{"옆에 앉아 웃으며 말한다. 「빨리 쓰고 같이 놀자! 기다릴게!」":"坐到英民旁边笑着说。「快写完一起玩吧！我等你！」","영민이가 서두르다 글자가 삐뚤어진다.":"英民一着急，字就写歪了。","…응. 빨리… 할게.":"……嗯。我……快点写。","같이 놀고 싶은 마음은 예뻐.":"想一起玩的心意很可爱。","그런데 「빨리」라는 말에 영민이 마음이 더 급해졌을 거야.":"可是听到「快」字，英民心里会更着急。",
    '영민':'英民',
    '어… 아까 한 얘기 또 해야 돼? 천천히 생각해 볼게.':'呃……刚才的话还要再说一遍吗？我慢慢想想。',
    '아침 자습 시간. 알림장을 옮겨 써야 한다.':'早自习时间。要把班级通知抄下来。',
@@ -1474,18 +1471,18 @@ D2.sua={
  choices:[
   {"k":"A","text":"떨어진 {@mechanical_pencil}를 주워 수아 서랍 틈에 조용히 넣어 주고 자리에 앉는다.","pts":{"sua":2},"r":[["nar","","수아가 가슴을 쓸어내린다."],["sua","relieved","…고마워."]]},
   {"k":"B","text":"내 필통에서 똑같은 {@mechanical_pencil}를 꺼내 수아 시험지 옆에 살짝 둔다.","pts":{"sua":2},"r":[["sua","surprised","…이거 써도 돼? 잠깐만 빌릴게."],["nar","","수아가 손을 숨기지 않고 숨을 고른다."]]},
-  {"k":"C","text":"{@mechanical_pencil}를 발끝으로 툭 밀어 수아 쪽으로 보내 준다.","pts":{"sua":1},"r":[["nar","","수아가 얼른 주워 든다."],["sua","sad","…어, 응."]]},
+  {"k":"C","text":"{@mechanical_pencil}를 주워 건네며 작게 묻는다. 「괜찮아? 손… 떨리던데.」","pts":{"sua": 1},"r":[["nar", "", "수아가 손을 얼른 책상 밑에 숨긴다."], ["sua", "sad", "…아니야. 안 떨려."]]},
   {"k":"D","text":"수아의 떨리는 손을 꽉 잡고 크게 묻는다. 「손… 아파? 선생님…?」","pts":{},"r":[["sua","angry","…안 아파! 손 잡지 마."],["sua","sad","애들 다 보잖아…"]]}
  ],
  tell:[["me","sad","수아 {@mechanical_pencil}가… 떨어졌어. 손이 떨려서."]],
  mom:{
   A:[["mom","relieved","잘했네. 조용히 가려 줬구나."],["mom","smile","들키기 싫은 친구한텐 그게 제일 큰 안심이야."]],
   B:[["mom","smile","네 {@mechanical_pencil}를 빌려줬구나."],["mom","relieved","아무것도 안 묻고 건네준 건 참 다정한 배려야."]],
-  C:[["mom","smile","발로 툭 밀어 줬어? 좀 무뚝뚝했지만,"],["mom","relieved","안 보이게 도와주려던 마음은 전해졌을 거야."]],
+  "C":[["mom", "smile", "주워 준 건 고마운 일이야."], ["mom", "sad", "그런데 떨리는 손을 말하면, 숨기고 싶던 수아가 더 신경 쓰였을 거야."]],
   D:[["mom","sad","걱정돼서 손을 잡았구나."],["mom","sad","그런데 크게 걱정하면 친구가 더 부끄러울 수 있어."]]
  },
  tr:{
-  en:{
+  en:{"{@mechanical_pencil}를 주워 건네며 작게 묻는다. 「괜찮아? 손… 떨리던데.」":"I pick up the {@mechanical_pencil}, hand it over, and ask softly. \"Are you okay? Your hand… was shaking.\"","수아가 손을 얼른 책상 밑에 숨긴다.":"Sua quickly hides her hands under the desk.","…아니야. 안 떨려.":"…No. It's not shaking.","주워 준 건 고마운 일이야.":"Picking it up for her was a kind thing to do.","그런데 떨리는 손을 말하면, 숨기고 싶던 수아가 더 신경 쓰였을 거야.":"But when you mentioned her shaking hand, Sua, who wanted to hide it, probably felt even more nervous.",
    "수아":"Sua",
    "용건 있으면 짧게. 나 할 일 많아.":"Make it quick. I have a lot to do.",
    "아침 자습 시간. 칠판에 「시험 D-1」.":"Morning study time. On the board: “Test D-1”.",
@@ -1523,7 +1520,7 @@ D2.sua={
    "걱정돼서 손을 잡았구나.":"You held her hand because you were worried.",
    "그런데 크게 걱정하면 친구가 더 부끄러울 수 있어.":"But worrying out loud can make a friend more embarrassed."
   },
-  id:{
+  id:{"{@mechanical_pencil}를 주워 건네며 작게 묻는다. 「괜찮아? 손… 떨리던데.」":"Aku memungut {@mechanical_pencil} itu, memberikannya, lalu bertanya pelan. \"Kamu nggak apa-apa? Tanganmu… gemetar tadi.\"","수아가 손을 얼른 책상 밑에 숨긴다.":"Sua cepat-cepat menyembunyikan tangannya di bawah meja.","…아니야. 안 떨려.":"…Nggak. Nggak gemetar.","주워 준 건 고마운 일이야.":"Memungutkan pensilnya itu hal yang baik.","그런데 떨리는 손을 말하면, 숨기고 싶던 수아가 더 신경 쓰였을 거야.":"Tapi kalau kamu menyebut tangannya gemetar, Sua yang ingin menyembunyikannya jadi makin gelisah.",
    "수아":"Sua",
    "용건 있으면 짧게. 나 할 일 많아.":"Kalau ada perlu, cepat ya. Aku sibuk.",
    "아침 자습 시간. 칠판에 「시험 D-1」.":"Waktu belajar pagi. Di papan: “Ujian D-1”.",
@@ -1561,7 +1558,7 @@ D2.sua={
    "걱정돼서 손을 잡았구나.":"Kamu memegang tangannya karena khawatir.",
    "그런데 크게 걱정하면 친구가 더 부끄러울 수 있어.":"Tapi khawatir dengan suara keras bisa bikin teman makin malu."
   },
-  vi:{
+  vi:{"{@mechanical_pencil}를 주워 건네며 작게 묻는다. 「괜찮아? 손… 떨리던데.」":"Tớ nhặt {@mechanical_pencil} đưa cho bạn rồi hỏi nhỏ. \"Cậu ổn không? Tay cậu… run run đấy.\"","수아가 손을 얼른 책상 밑에 숨긴다.":"Sua vội giấu tay xuống dưới bàn.","…아니야. 안 떨려.":"…Không có. Tớ không run.","주워 준 건 고마운 일이야.":"Con nhặt giúp bạn là việc tốt.","그런데 떨리는 손을 말하면, 숨기고 싶던 수아가 더 신경 쓰였을 거야.":"Nhưng con nhắc đến bàn tay run, Sua đang muốn giấu lại càng thấy ngại hơn.",
    "수아":"Sua",
    "용건 있으면 짧게. 나 할 일 많아.":"Có gì thì nói nhanh. Tớ bận lắm.",
    "아침 자습 시간. 칠판에 「시험 D-1」.":"Giờ tự học buổi sáng. Trên bảng: “Kiểm tra D-1”.",
@@ -1599,7 +1596,7 @@ D2.sua={
    "걱정돼서 손을 잡았구나.":"Con lo nên mới nắm tay bạn.",
    "그런데 크게 걱정하면 친구가 더 부끄러울 수 있어.":"Nhưng lo lắng to tiếng có thể làm bạn xấu hổ hơn."
   },
-  zh:{
+  zh:{"{@mechanical_pencil}를 주워 건네며 작게 묻는다. 「괜찮아? 손… 떨리던데.」":"我捡起{@mechanical_pencil}递过去，小声问。「没事吧？你的手……刚才在抖。」","수아가 손을 얼른 책상 밑에 숨긴다.":"秀雅赶紧把手藏到桌子底下。","…아니야. 안 떨려.":"……没有。我没抖。","주워 준 건 고마운 일이야.":"你帮她捡起来，这是件好事。","그런데 떨리는 손을 말하면, 숨기고 싶던 수아가 더 신경 쓰였을 거야.":"可是你说出她的手在抖，本来想藏起来的秀雅会更在意。",
    "수아":"秀雅",
    "용건 있으면 짧게. 나 할 일 많아.":"有事快说，我很忙。",
    "아침 자습 시간. 칠판에 「시험 D-1」.":"早自习时间。黑板上写着“考试D-1”。",
@@ -2374,18 +2371,18 @@ D2.jiho={
  choices:[
   {"k":"A","text":"날아온 공을 발로 멈춰 지호 앞에 툭 굴려 준다. 「공… 가져왔어. 무릎… 피나.」","pts":{"jiho":2},"r":[["jiho","angry","…누가 주워 오래?"],["jiho","laugh","…패스는 정확하네. 다음 판에 3골 넣는다."]]},
   {"k":"B","text":"{@handkerchief}을 꺼내 쥐여 준다. 「심판… 못 봤을 수도 있어. 이걸로 털어.」","pts":{"jiho":2},"r":[["nar","","지호가 그걸로 무릎을 툭툭 털며 씩 웃는다."],["jiho","laugh","저건 무조건 옐로카드야. 그래도 이건 쓴다."]]},
-  {"k":"C","text":"구석에 떨어진 공을 주워 라인 안에 조용히 내려놓는다.","pts":{"jiho":1},"r":[["nar","","지호가 흙을 털고 시합을 다시 한다."],["nar","","나를 한 번도 보지 않는다."]]},
+  {"k":"C","text":"「괜찮아, 그냥 져도 돼. 게임일 뿐이잖아.」 하고 달래 준다.","pts":{"jiho": 1},"r":[["jiho", "angry", "…뭐가 괜찮아? 넌 몰라."], ["nar", "", "지호가 고개를 홱 돌린다."]]},
   {"k":"D","text":"지호에게 손가락질한다. 「지호 성격 나빠! 공 뻥 차면 어떡해! 반칙이야!」","pts":{},"r":[["nar","","지호가 성큼성큼 다가와 멱살을 잡으려 한다."],["jiho","angry","네가 축구를 알아?! 껴들지 마!"]]}
  ],
  tell:[["me","sad","지호가 넘어지고… 공을 뻥 찼어."],["me","sad","{@whistle}를 안 불어서… 화났어."]],
  mom:{
   A:[["mom","smile","공을 건네며 다친 무릎부터 챙겼구나."],["mom","relieved","화난 친구를 차분히 경기로 돌려보냈네. 멋져."]],
   B:[["mom","smile","{@handkerchief}으로 억울함을 달래 줬네."],["mom","relieved","흙을 털어 준 손길이 지호 마음에 따뜻하게 남았을 거야."]],
-  C:[["mom","smile","공을 조용히 가져다 놨구나. 싸움을 막은 건 좋지만,"],["mom","sad","억울한 친구 눈을 한 번 봐 줬으면 더 좋았을 텐데."]],
+  "C":[["mom", "smile", "달래 주고 싶었구나."], ["mom", "sad", "하지만 이기고 싶은 마음을 「그냥」이라고 하면 서운할 수 있어."]],
   D:[["mom","sad","성격 나쁘다고 손가락질했구나."],["mom","sad","화난 친구를 더 화나게 해서 싸움이 날 뻔했어."]]
  },
  tr:{
-  en:{
+  en:{"「괜찮아, 그냥 져도 돼. 게임일 뿐이잖아.」 하고 달래 준다.":"I try to comfort him. \"It's okay, you can just lose. It's only a game.\"","…뭐가 괜찮아? 넌 몰라.":"…What's okay about it? You don't get it.","지호가 고개를 홱 돌린다.":"Jiho turns his head away sharply.","달래 주고 싶었구나.":"You wanted to comfort him.","하지만 이기고 싶은 마음을 「그냥」이라고 하면 서운할 수 있어.":"But saying \"just lose\" to someone who really wants to win can hurt his feelings.",
    "지호":"Jiho",
    "왜, 나 보고 싶었어? 하하, 농담!":"What, did you miss me? Haha, just kidding!",
    "아침 조회 전, 운동장. 축구 시합 중이다.":"Before morning assembly, on the field. A soccer game is on.",
@@ -2422,7 +2419,7 @@ D2.jiho={
    "성격 나쁘다고 손가락질했구나.":"You pointed at him and called him mean.",
    "화난 친구를 더 화나게 해서 싸움이 날 뻔했어.":"That made an angry friend angrier. It almost became a fight."
   },
-  id:{
+  id:{"「괜찮아, 그냥 져도 돼. 게임일 뿐이잖아.」 하고 달래 준다.":"Aku menghiburnya. \"Nggak apa-apa, kalah juga boleh. Cuma permainan, kan.\"","…뭐가 괜찮아? 넌 몰라.":"…Apanya yang nggak apa-apa? Kamu nggak ngerti.","지호가 고개를 홱 돌린다.":"Jiho langsung memalingkan muka.","달래 주고 싶었구나.":"Kamu ingin menghiburnya, ya.","하지만 이기고 싶은 마음을 「그냥」이라고 하면 서운할 수 있어.":"Tapi bilang \"kalah saja\" ke orang yang ingin menang bisa bikin dia sedih.",
    "지호":"Jiho",
    "왜, 나 보고 싶었어? 하하, 농담!":"Kenapa, kangen aku ya? Haha, bercanda!",
    "아침 조회 전, 운동장. 축구 시합 중이다.":"Sebelum apel pagi, di lapangan. Ada pertandingan sepak bola.",
@@ -2459,7 +2456,7 @@ D2.jiho={
    "성격 나쁘다고 손가락질했구나.":"Kamu menunjuknya dan bilang dia jahat.",
    "화난 친구를 더 화나게 해서 싸움이 날 뻔했어.":"Itu bikin teman yang marah makin marah. Hampir berkelahi."
   },
-  vi:{
+  vi:{"「괜찮아, 그냥 져도 돼. 게임일 뿐이잖아.」 하고 달래 준다.":"Tớ dỗ bạn. \"Không sao, thua cũng được mà. Chỉ là trò chơi thôi.\"","…뭐가 괜찮아? 넌 몰라.":"…Không sao cái gì? Cậu chẳng hiểu gì cả.","지호가 고개를 홱 돌린다.":"Jiho quay phắt mặt đi.","달래 주고 싶었구나.":"Con muốn an ủi bạn nhỉ.","하지만 이기고 싶은 마음을 「그냥」이라고 하면 서운할 수 있어.":"Nhưng nói \"thua cũng được\" với bạn đang muốn thắng thì bạn có thể tủi thân đấy.",
    "지호":"Jiho",
    "왜, 나 보고 싶었어? 하하, 농담!":"Sao, nhớ tớ à? Haha, đùa thôi!",
    "아침 조회 전, 운동장. 축구 시합 중이다.":"Trước giờ chào cờ, ở sân. Đang có trận bóng đá.",
@@ -2496,7 +2493,7 @@ D2.jiho={
    "성격 나쁘다고 손가락질했구나.":"Con chỉ tay bảo bạn xấu tính à.",
    "화난 친구를 더 화나게 해서 싸움이 날 뻔했어.":"Làm bạn đang giận càng giận hơn, suýt nữa đánh nhau."
   },
-  zh:{
+  zh:{"「괜찮아, 그냥 져도 돼. 게임일 뿐이잖아.」 하고 달래 준다.":"我安慰他。「没关系，输了也没事。只是游戏而已嘛。」","…뭐가 괜찮아? 넌 몰라.":"……哪里没关系？你不懂。","지호가 고개를 홱 돌린다.":"智浩猛地把头扭开。","달래 주고 싶었구나.":"你是想安慰他呀。","하지만 이기고 싶은 마음을 「그냥」이라고 하면 서운할 수 있어.":"可是对很想赢的人说「输了也没事」，他会觉得委屈。",
    "지호":"智浩",
    "왜, 나 보고 싶었어? 하하, 농담!":"怎么，想我了？哈哈，开玩笑的！",
    "아침 조회 전, 운동장. 축구 시합 중이다.":"早会前的操场，正在踢足球比赛。",
