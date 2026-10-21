@@ -218,7 +218,7 @@ function onTap(e){if(sayEl&&talkOn){advance();return}if(busy||!me)return;const x
  closeBubble();
  if(hitPang(x,y)){tapPang();if(FIND)walkNear(PANG_AT[0],PANG_AT[1]);return}
  let hit=null,bd=1e9;for(const n of npcs){if(!n.h)continue;if(x>n.x-n.w*.4&&x<n.x+n.w*.4&&y>n.y-n.h&&y<n.y+10){const d=Math.abs(y-(n.y-n.h/2));if(d<bd){bd=d;hit=n}}}
- {const wk=WORDKEY[hit&&hit.id]||(DAY>=2&&hit&&NPC_THING[hit.id]);if(hit&&FIND&&wk){tapThing(wk,hit.x,hit.y);walkNear(hit.x,hit.y);return}}
+ {const wk=WORDKEY[hit&&hit.id]||(DAY>=2&&hit&&npcThing(hit,y));if(hit&&FIND&&wk){tapThing(wk,hit.x,hit.y);walkNear(hit.x,hit.y);return}}
  if(hit){approach(hit);return}
  const objs=(OBJ[MAP]||[]).filter(o=>!(o[0]==='notebook'&&FOUND.has('notebook'))).slice().sort((a,b)=>a[3]-b[3]);
  const oh=objs.find(o=>Math.hypot(x-o[1],y-o[2])<o[3]);

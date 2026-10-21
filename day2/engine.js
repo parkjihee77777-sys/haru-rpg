@@ -16,19 +16,28 @@ function d2Merge(){for(const id of D2IDS){const d=window.D2&&D2[id];if(!d)contin
  for(const[k,w]of Object.entries(D2WORDS))for(const l of Object.keys(LANGS))if(w[l])LANGS[l].words[k]=w[l]}
 // ---- things to tap on each school map (Day 2+): drawn-in things (hotspots) + things lying around (item pictures) ----
 // every friend's things lie near that friend from the start, so you can tap and hear them before anyone asks for them
-const NATIVE={class:[['blackboard',870,55,110]],hall:[['locker',1215,500,85],['bench',662,300,60],['bench',715,560,70]],field:[['bench',875,140,55]],cafe:[['table',390,650,95],['table',762,520,95],['table',1040,370,80]]};
+// [key, x, y(bottom), radius] drawn-in things you can tap
+const NATIVE={class:[['blackboard',870,55,110],['bag',697,345,28],['bag',1105,348,28],['bag',265,462,28],['bag',547,468,28],['bag',1137,592,30],['bag',985,600,28],['bag',1490,710,28]],
+ hall:[['locker',1240,560,90],['locker',970,195,40],['bench',655,320,55],['bench',715,560,70]],
+ field:[['bench',1400,775,55],['bench',60,725,55],['bench',790,150,40],['bench',900,135,40]],
+ cafe:[['table',390,600,100],['table',760,470,100],['table',1040,355,80],['table',1350,740,110]]};
 const NATIVE_KEYS=new Set(['blackboard','locker']);
-const NPC_THING={hyeeun:'wheelchair'};// tapping Hyeeun while finding = her wheelchair
-const EXTRA={class:[['chalk',955,140],['notebook',300,250],['pcase',1380,300],['umbrella',160,520],['bag',1490,620]],hall:[['umbrella',330,820],['bag',980,700]],field:[['ball',700,460],['flag',1400,300],['cup',560,640]],cafe:[['cup',1180,330],['bread',300,560],['apple',940,720]]};
-function placeThings(id){const out=[];const add=(k,x,y)=>{out.push([k,x,y])};
- (EXTRA[id]||[]).forEach(([k,x,y])=>add(k,x,y));
- for(const p of (D2PLACE[id]||[])){const d=window.D2&&D2[p[0]];if(!d)continue;const ks=(d.finds||[]).map(f=>f.k).filter(k=>!NATIVE_KEYS.has(k)&&!(NPC_THING[p[0]]===k));
-  ks.forEach((k,i)=>{const sx=i?1:-1;if(p[3])add(k,p[1]+sx*48,p[3].top-34);else add(k,p[1]+sx*(i?95:-95)*-1+(i?0:0),p[2]+6)})}
- return out}
+// tapping a person while finding: Hyeeun's wheelchair (upper part) or its wheel (lower part)
+function npcThing(n,y){if(n.id==='hyeeun')return y>n.y-n.h*.42?'wheel':'wheelchair';return null}
+const NPC_THING={hyeeun:'wheelchair'};
+// things lying where they belong: [key, x, y(bottom), width]
+const THINGS={
+ class:[['sheet_music',1125,332,56],['tape',1255,332,50],['sketchbook',315,332,60],['sharpener',445,332,46],['pillow',1262,447,70],['curtain',1625,345,92],
+  ['thread',700,567,46],['highlighter',822,567,50],['magnifying_glass',948,567,54],['eraser',250,703,44],['cocoon',1205,703,40],['lid',1335,703,54],['hoodie',1468,707,62],
+  ['pcase',626,655,56],['eraser',577,705,42],['eraser',742,320,42],['mechanical_pencil',806,322,46],['chalk',800,113,34],['notebook',330,447,52],['umbrella',1442,258,66]],
+ hall:[['ice',1172,668,50],['radio',690,565,62],['battery',742,612,34],['umbrella',212,648,66],['bag',655,318,56]],
+ field:[['stopwatch',1375,765,44],['bandage',1432,752,46],['whistle',1335,262,46],['ball',440,575,52],['flag',1560,335,60],['cup',62,712,36]],
+ cafe:[['tray',380,565,70],['chopsticks',452,568,56],['trash_can',1480,598,72],['milk_carton',1545,517,40],['bread',1622,520,46],['cart',185,885,110],['straw',198,792,36],['cup',700,470,40],['apple',1150,368,40],['bread',560,238,44]]};
+function placeThings(id){return THINGS[id]||[]}
 function showThings(id){world.querySelectorAll('.thing').forEach(e=>e.remove());const things=placeThings(id);
- for(const[k,x,y]of things){const it=document.createElement('img');it.className='item thing';it.src=`items/${k}.png`;const big=['cart','wheelchair','trash_can','locker'].includes(k);
-  it.style.cssText=`position:absolute;width:${big?96:62}px;left:${x}px;top:${y}px;transform:translate(-50%,-100%);z-index:${Math.round(y)+1};pointer-events:none;filter:drop-shadow(0 2px 2px rgba(0,0,0,.25))`;world.appendChild(it)}
- OBJ[id]=(NATIVE[id]||[]).concat(things.map(([k,x,y])=>[k,x,y-28,38]))}
+ for(const[k,x,y,w]of things){const it=document.createElement('img');it.className='item thing';it.src=`items/${k}.png`;
+  it.style.cssText=`position:absolute;width:${w||56}px;left:${x}px;top:${y}px;transform:translate(-50%,-100%);z-index:${Math.round(y)+1};pointer-events:none;filter:drop-shadow(0 2px 2px rgba(0,0,0,.25))`;world.appendChild(it)}
+ OBJ[id]=(NATIVE[id]||[]).concat(things.map(([k,x,y,w])=>[k,x,y-(w||56)*.4,Math.max(30,(w||56)*.55)]))}
 // a picture for every word that can be a card
 function cardOf(k){if(['notebook','pcase','pencil','bag'].includes(k))return `cards/${k}.jpg`;return D2WORDS[k]?`cards/${k}.jpg`:null}
 // ---- places (Day 2+): the classroom door asks where to go; each place has its own people ----
@@ -43,9 +52,9 @@ const PLACES=[['class','교실'],['hall','복도'],['field','운동장'],['cafe'
 // who is where on Day 2 — most kids sit at their desks; seat = {top: chair-back top on the map}
 const D2PLACE={
  class:[['yena',1190,0,{top:333}],['doyeon',380,0,{top:333}],['jinwoo',1325,0,{top:448}],['hangyeol',760,0,{top:572}],['jihoon',885,0,{top:572}],['youngmin',260,0,{top:715}],['siwoo',1270,0,{top:715}],['haneul',1405,0,{top:715}],['minho',600,600],['sua',600,262]],
- hall:[['hyeeun',760,880],['seah',1060,440],['boram',470,700]],
- field:[['junho',900,520],['jiho',1200,380]],
- cafe:[['haram',420,440],['haeun',1010,540],['yuna',300,870]]};
+ hall:[['hyeeun',760,880],['seah',1110,650],['boram',570,640]],
+ field:[['junho',1300,745],['jiho',1200,380]],
+ cafe:[['haram',300,470],['haeun',1400,565],['yuna',300,870]]};
 const SEATED_ART=new Set(['yuna','haeun','yena','siwoo','doyeon','haneul','youngmin','jihoon','jinwoo','hangyeol']);// seat/<id>.png exists; others stand at their desk until drawn
 function d2People(id){return(D2PLACE[id]||[]).map(p=>p[3]&&!SEATED_ART.has(p[0])?[p[0],p[1],p[3].top+175]:p)}
 function goPlace(dest){fade(()=>{load(dest);if(stage==='d2_class')d2Goal();else setGoal('방과 후! 나가는 길로 가서 집에 가기','out')})}
