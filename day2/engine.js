@@ -142,21 +142,16 @@ d2Merge();
 // ---- zoom: tap near a cluster of small things → that part of the picture opens big; tap things there to hear them / "This is …" ----
 function zoomAt(x,y){if(DAY<2)return null;return(ZOOMS[MAP]||[]).find(z=>x>=z[0]&&x<=z[2]&&y>=z[1]&&y<=z[3])}
 function showZoomMarks(){world.querySelectorAll('.zmark').forEach(e=>e.remove());if(DAY<2)return;for(const z of ZOOMS[MAP]||[]){const d=document.createElement('div');d.className='item zmark';d.textContent='🔍';d.style.cssText=`position:absolute;left:${z[2]-6}px;top:${z[1]+6}px;transform:translate(-100%,0);font-size:30px;z-index:4400;pointer-events:none;filter:drop-shadow(0 2px 2px rgba(0,0,0,.35));opacity:.9`;world.appendChild(d)}}
-function openZoom(z0){const m=document.getElementById('modal'),c=document.getElementById('mcard');busy=true;closeBubble();
- // what is shown: the tapped area, made less flat (about 4:3) and narrower so things come out big
- let z=z0.slice();{const cx=(z[0]+z[2])/2,cy=(z[1]+z[3])/2;let w=Math.min(z[2]-z[0],340),h=Math.max(z[3]-z[1],w*.75);z=[cx-w/2,cy-h/2,cx+w/2,cy+h/2];if(z[0]<0){z[2]-=z[0];z[0]=0}if(z[2]>MW){z[0]-=z[2]-MW;z[2]=MW}if(z[1]<0){z[3]-=z[1];z[1]=0}if(z[3]>MH){z[1]-=z[3]-MH;z[3]=MH}}
- const zw=z[2]-z[0],zh=z[3]-z[1];
- c.innerHTML=`<div class="zoomv" style="position:relative;width:100%;margin:0 auto;border-radius:16px;overflow:hidden;background-repeat:no-repeat"></div><button class="big" id="zclose">✕</button>`;
- m.classList.add('on');const v=c.querySelector('.zoomv');
- // fit the close-up inside the card (never wider than the card)
- const W2=Math.min(v.clientWidth||c.clientWidth-40,560),k=W2/zw,H2=zh*k;v.style.width=W2+'px';v.style.height=H2+'px';v.style.backgroundImage=`url(${mapimg.getAttribute('src')})`;v.style.backgroundSize=`${MW*k}px ${MH*k}px`;v.style.backgroundPosition=`${-z[0]*k}px ${-z[1]*k}px`;
- const objs=(OBJ[MAP]||[]).filter(o=>o[1]>=z[0]&&o[1]<=z[2]&&o[2]>=z[1]&&o[2]<=z[3]&&o[3]<80);
- // the things drawn as separate pictures are shown inside the zoom too
- world.querySelectorAll('.thing').forEach(t=>{const x=parseFloat(t.style.left),y=parseFloat(t.style.top),w=parseFloat(t.style.width);if(x<z[0]||x>z[2]||y<z[1]||y>z[3]+40)return;const i=document.createElement('img');i.src=t.src;i.style.cssText=`position:absolute;width:${w*k}px;left:${(x-z[0])*k}px;top:${(y-z[1])*k}px;transform:translate(-50%,-100%);pointer-events:none`;v.appendChild(i)});
- let zb=null;
- v.onclick=ev=>{const r=v.getBoundingClientRect(),mx=z[0]+(ev.clientX-r.left)/k,my=z[1]+(ev.clientY-r.top)/k;let best=null,bd=1e9;for(const o of objs){const d=Math.hypot(mx-o[1],my-o[2]);if(d<Math.max(o[3],34)&&d<bd){bd=d;best=o}}
-  if(!best)return;speak(best[0]);if(zb)zb.remove();if(!FIND)return;zb=document.createElement('button');zb.className='bubble';zb.style.cssText=`position:absolute;left:${(best[1]-z[0])*k}px;top:${Math.min(H2-60,(best[2]-z[1])*k+10)}px;transform:translate(-50%,0);font-size:20px`;zb.textContent=tr('이건 {x}이다').replace('{x}',wordOf(FIND));
-  const kk=best[0],born=performance.now();zb.onclick=e2=>{e2.stopPropagation();if(performance.now()-born<300)return;if(kk===FIND){m.classList.remove('on');busy=false;chime();FOUND.add(kk);tagAll();const d=FIND_DONE;FIND=null;FIND_DONE=null;const g=document.getElementById('goal');g.onclick=null;g.textContent='';goal=null;showBag();d&&d()}else{buzz();zb.remove();zb=null;setTimeout(()=>speak(kk),350);setTimeout(()=>speak(FIND),1300)}};v.appendChild(zb)};
+function openZoom(z){const m=document.getElementById('modal'),c=document.getElementById('mcard');busy=true;closeBubble();
+ // the small things lying in that spot (one of each), left to right as they lie on the map
+ const seen=new Set();const objs=(OBJ[MAP]||[]).filter(o=>o[1]>=z[0]&&o[1]<=z[2]&&o[2]>=z[1]&&o[2]<=z[3]&&o[3]<80&&!seen.has(o[0])&&seen.add(o[0])).sort((p,q)=>p[1]-q[1]);
+ c.innerHTML=`<div class="ztray">${objs.map(o=>`<button class="zit" data-k="${o[0]}"><img src="items/${o[0]}.png" alt="" onerror="this.parentNode.remove()"></button>`).join('')}</div><div class="zok"></div><button class="big" id="zclose">✕</button>`;
+ m.classList.add('on');const okw=c.querySelector('.zok');
+ c.querySelectorAll('.zit').forEach(b=>b.onclick=()=>{const k=b.dataset.k;speak(k);c.querySelectorAll('.zit').forEach(x=>x.classList.toggle('on',x===b));okw.innerHTML='';if(!FIND)return;
+  const zb=document.createElement('button');zb.className='bubble';zb.style.cssText='position:static;transform:none;margin:10px auto 0;display:inline-block';zb.textContent=tr('이건 {x}이다').replace('{x}',wordOf(FIND));okw.appendChild(zb);
+  const born=performance.now();zb.onclick=e2=>{e2.stopPropagation();if(performance.now()-born<300)return;
+   if(k===FIND){m.classList.remove('on');busy=false;chime();FOUND.add(k);tagAll();const d=FIND_DONE;FIND=null;FIND_DONE=null;const g=document.getElementById('goal');g.onclick=null;g.textContent='';goal=null;showBag();d&&d()}
+   else{buzz();okw.innerHTML='';b.classList.remove('on');setTimeout(()=>speak(k),350);setTimeout(()=>speak(FIND),1300)}}});
  document.getElementById('zclose').onclick=()=>{m.classList.remove('on');busy=false}}
 
 DAY=1;// Day 1 keeps no Day 2 tables (zooms, drawn maps); startDay() sets them
