@@ -36,7 +36,7 @@ const NPC_THING={hyeeun:'wheelchair'};
 // small pictures laid on top of the drawn map only where the drawing needs help (the drawn cocoon looked like a butterfly)
 const THINGS={};
 // tap near a cluster of small things → that part opens big
-const ZOOMS_BY={2:{class:[[290,250,590,335],[680,250,980,335],[1090,250,1400,335],[1090,380,1400,446],[660,500,990,570],[520,625,990,712],[330,640,520,712]],
+const ZOOMS_BY={2:{class:[[290,250,590,335],[680,250,980,335],[1090,250,1400,335],[1090,380,1400,446],[660,500,990,570],[520,625,720,712],[790,625,990,712],[330,640,520,712]],
  hall:[[590,210,800,340],[610,480,820,640],[1060,530,1260,660]],field:[[1310,700,1480,810],[1330,240,1440,310],[20,680,140,750]],
  cafe:[[360,580,540,690],[1390,460,1672,620],[110,680,300,820],[790,470,890,530],[1130,320,1220,380]]}};
 function placeThings(id){return THINGS[id]||[]}
@@ -86,6 +86,8 @@ function cardFind(k,goalText,done,others){busy=true;const pool=Object.keys(D2WOR
  c.querySelectorAll('.pick button').forEach(b=>b.onclick=()=>{sel=b.dataset.k;speak(sel);c.querySelectorAll('.pick button').forEach(x=>x.classList.toggle('ok',x===b));okb.style.visibility='visible'});
  okb.onclick=()=>{if(sel===k){chime();FOUND.add(k);TODAY.add(k);m.classList.remove('on');busy=false;done&&done()}else{buzz();const b=c.querySelector(`[data-k="${sel}"]`);b.classList.remove('ok');b.classList.add('no');setTimeout(()=>b.classList.remove('no'),400);setTimeout(()=>speak(k),600);okb.style.visibility='hidden'}}}
 const TODAY=new Set();
+// Pangpang from Day 2 on: no "first day at school?" lines
+const PANG2={home_am:['오늘도 학교 잘 다녀와!','어제보다 더 씩씩해 보여!','친구 이름 하나 더 알아 와. 약속!','모르는 말이 나와도 괜찮아. 하나씩 배우면 돼.','머리 쓰다듬어 주면 하루 종일 힘이 나.','간식 냄새 난다… 아, 아니야. 기분 탓이야.']};
 // ---- morning (per day) ----
 const MORNING={
  2:{k:'handkerchief',open:[['nar','','이튿날 아침.'],['mom','smile','잘 잤어? 오늘은 바람이 차네.'],['mom','smile','{@handkerchief} 하나 챙겨 가.']],
@@ -140,11 +142,15 @@ d2Merge();
 // ---- zoom: tap near a cluster of small things → that part of the picture opens big; tap things there to hear them / "This is …" ----
 function zoomAt(x,y){if(DAY<2)return null;return(ZOOMS[MAP]||[]).find(z=>x>=z[0]&&x<=z[2]&&y>=z[1]&&y<=z[3])}
 function showZoomMarks(){world.querySelectorAll('.zmark').forEach(e=>e.remove());if(DAY<2)return;for(const z of ZOOMS[MAP]||[]){const d=document.createElement('div');d.className='item zmark';d.textContent='🔍';d.style.cssText=`position:absolute;left:${z[2]-6}px;top:${z[1]+6}px;transform:translate(-100%,0);font-size:30px;z-index:4400;pointer-events:none;filter:drop-shadow(0 2px 2px rgba(0,0,0,.35));opacity:.9`;world.appendChild(d)}}
-function openZoom(z){const m=document.getElementById('modal'),c=document.getElementById('mcard');busy=true;closeBubble();
- const zw=z[2]-z[0],zh=z[3]-z[1],W2=Math.min(innerWidth-40,560),k=W2/zw,H2=zh*k;
- c.innerHTML=`<div class="zoomv" style="position:relative;width:${W2}px;height:${H2}px;margin:0 auto;border-radius:16px;overflow:hidden;background:url(${mapimg.getAttribute('src')}) ${-z[0]*k}px ${-z[1]*k}px/${MW*k}px ${MH*k}px no-repeat"></div><button class="big" id="zclose">✕</button>`;
+function openZoom(z0){const m=document.getElementById('modal'),c=document.getElementById('mcard');busy=true;closeBubble();
+ // what is shown: the tapped area, made less flat (about 4:3) and narrower so things come out big
+ let z=z0.slice();{const cx=(z[0]+z[2])/2,cy=(z[1]+z[3])/2;let w=Math.min(z[2]-z[0],340),h=Math.max(z[3]-z[1],w*.75);z=[cx-w/2,cy-h/2,cx+w/2,cy+h/2];if(z[0]<0){z[2]-=z[0];z[0]=0}if(z[2]>MW){z[0]-=z[2]-MW;z[2]=MW}if(z[1]<0){z[3]-=z[1];z[1]=0}if(z[3]>MH){z[1]-=z[3]-MH;z[3]=MH}}
+ const zw=z[2]-z[0],zh=z[3]-z[1];
+ c.innerHTML=`<div class="zoomv" style="position:relative;width:100%;margin:0 auto;border-radius:16px;overflow:hidden;background-repeat:no-repeat"></div><button class="big" id="zclose">✕</button>`;
  m.classList.add('on');const v=c.querySelector('.zoomv');
- const objs=(OBJ[MAP]||[]).filter(o=>o[1]>=z[0]&&o[1]<=z[2]&&o[2]>=z[1]&&o[2]<=z[3]);
+ // fit the close-up inside the card (never wider than the card)
+ const W2=Math.min(v.clientWidth||c.clientWidth-40,560),k=W2/zw,H2=zh*k;v.style.width=W2+'px';v.style.height=H2+'px';v.style.backgroundImage=`url(${mapimg.getAttribute('src')})`;v.style.backgroundSize=`${MW*k}px ${MH*k}px`;v.style.backgroundPosition=`${-z[0]*k}px ${-z[1]*k}px`;
+ const objs=(OBJ[MAP]||[]).filter(o=>o[1]>=z[0]&&o[1]<=z[2]&&o[2]>=z[1]&&o[2]<=z[3]&&o[3]<80);
  // the things drawn as separate pictures are shown inside the zoom too
  world.querySelectorAll('.thing').forEach(t=>{const x=parseFloat(t.style.left),y=parseFloat(t.style.top),w=parseFloat(t.style.width);if(x<z[0]||x>z[2]||y<z[1]||y>z[3]+40)return;const i=document.createElement('img');i.src=t.src;i.style.cssText=`position:absolute;width:${w*k}px;left:${(x-z[0])*k}px;top:${(y-z[1])*k}px;transform:translate(-50%,-100%);pointer-events:none`;v.appendChild(i)});
  let zb=null;

@@ -111,13 +111,13 @@ body,button{word-break:keep-all;overflow-wrap:break-word}
 <div id="fader"></div>
 <script>
 // same address, newest version: if the page this phone has kept is older than the one online, fetch the new one and reopen
-const BUILD='1021171150';
+const BUILD='1021172000';
 try{fetch(location.pathname,{cache:'no-store'}).then(r=>r.text()).then(t=>{const m=t.match(/const BUILD='(\d+)'/);if(m&&m[1]!==BUILD&&sessionStorage.getItem('upd')!==m[1]){sessionStorage.setItem('upd',m[1]);fetch(location.pathname,{cache:'reload'}).then(()=>location.reload())}}).catch(()=>{})}catch(e){}
 </script>
-<script src="i18n.js?v=1021171150"></script>
-<script src="day2/i18n_engine.js?v=1021171150"></script>
-<script src="day2/data.js?v=1021171150"></script>
-<script src="day3/data.js?v=1021171150"></script>
+<script src="i18n.js?v=1021172000"></script>
+<script src="day2/i18n_engine.js?v=1021172000"></script>
+<script src="day2/data.js?v=1021172000"></script>
+<script src="day3/data.js?v=1021172000"></script>
 <script>
 // ---------- data ----------
 const MW=1672,MH=941,KID=180;
@@ -279,7 +279,7 @@ const PANG_AT=[400,640],PANG_H=105;let pangEl=null,pangI={home_am:0,home_pm:0};
 function placePang(){if(pangEl){pangEl.remove();pangEl=null}if(!PANG[MAP])return;pangEl=document.createElement('img');pangEl.src='pang/sit.png';pangEl.className='pang';pangEl.style.cssText=`position:absolute;height:${PANG_H}px;left:${PANG_AT[0]}px;top:${PANG_AT[1]}px;transform:translate(-50%,-100%);z-index:${PANG_AT[1]};pointer-events:none`;world.appendChild(pangEl)}
 function hitPang(x,y){return pangEl&&Math.abs(x-PANG_AT[0])<70&&y<PANG_AT[1]+10&&y>PANG_AT[1]-PANG_H-10}
 // Pangpang talks only once per scene (first tap); later taps just make him hop
-const pangSaid={};function tapPang(){speak('dog');const ls=PANG[MAP];const first=!pangSaid[MAP];pangSaid[MAP]=true;const t=ls[Math.floor(Math.random()*ls.length)];pangEl.src='pang/happy.png';setTimeout(()=>{if(pangEl)pangEl.src='pang/sit.png'},1400);chime();
+const pangSaid={};function tapPang(){speak('dog');const ls=(typeof PANG2!=='undefined'&&DAY>=2&&PANG2[MAP])||PANG[MAP];const first=!pangSaid[MAP];pangSaid[MAP]=true;const t=ls[Math.floor(Math.random()*ls.length)];pangEl.src='pang/happy.png';setTimeout(()=>{if(pangEl)pangEl.src='pang/sit.png'},1400);chime();
  if(FIND){closeBubble();bubble=document.createElement('button');bubble.className='bubble';bubble.textContent=tr('이건 {x}이다').replace('{x}',wordOf(FIND));bubble.style.left=PANG_AT[0]+'px';bubble.style.top=PANG_AT[1]+'px';
   bubble.onpointerdown=ev=>ev.stopPropagation();bubble.onclick=ev=>{ev.stopPropagation();closeBubble();buzz();setTimeout(()=>speak(FIND),700)};world.appendChild(bubble);keepOnScreen(bubble)}
  if(first&&!FIND)say([['pang','',t]])}
@@ -432,7 +432,7 @@ function pickHero(){const m=document.getElementById('modal'),c=document.getEleme
  c.innerHTML=`<h2>${tr('괴짜교실 반장되기')}</h2><p>${tr('말 한마디 못 하는 전학생,<br>반장 선거에 나가다.')}</p><p style="margin-top:14px">${tr('누구로 할까요?')}</p>${(()=>{const s=loadSave();return s&&s.day>=2&&s.mode===UI+'-'+LANG?`<p><button class="big" id="cont">${tr(s.day+'일차부터 이어 하기')}</button></p>`:''})()}<div class="pick heroes"><button data-h="hero_f"><img src="faces/hero_f_smile.jpg" alt="여자 주인공"></button><button data-h="hero_m"><img src="faces/hero_m_smile.jpg" alt="남자 주인공"></button></div>`;
  m.classList.add('on');{const cb=document.getElementById('cont');if(cb)cb.onclick=()=>{const s=loadSave();HERO=s.hero;Object.assign(HEART,s.heart||{});(s.found||[]).forEach(k=>FOUND.add(k));HEART_D1={...HEART};chime();startDay(Math.min(s.day,Object.keys(window.D3||{}).length?3:2))}}c.querySelectorAll('.pick button').forEach(b=>b.onclick=()=>{HERO=b.dataset.h;m.classList.remove('on');chime();bgm('day');load('home_am');say([['nar','','이사 온 다음 날 아침. 아직 풀지 못한 상자들이 쌓여 있다.'],['think','sad','(오늘부터 새 학교… 여기 말은 아직 서툰데.)'],['think','smile','({m}한테 인사하고 학교 가야지.)']],morning)})}
 </script>
-<script src="day2/engine.js?v=1021171150"></script>
+<script src="day2/engine.js?v=1021172000"></script>
 <script>
 // the goal shows big for a few seconds, then folds into a small pill (tap it to open it again)
 {const g=document.getElementById('goal');let t=null;const big=()=>{g.classList.remove('mini');clearTimeout(t);t=setTimeout(()=>g.classList.add('mini'),4000)};
