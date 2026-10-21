@@ -56,14 +56,16 @@ html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family
 .langs .flag{width:42px;height:28px;border-radius:6px;border:2px solid #ddd;flex:none}.langs b{font-size:19px}.langs small{margin-left:auto;color:#8a7a6a;font-size:14px}
 .word{display:inline-block;background:#fff3c4;border:3px solid #e6c15a;border-radius:14px;padding:4px 14px;font-weight:800;font-size:22px;margin:6px}
 .spk{font:inherit;background:#fff;border:3px solid var(--line);border-radius:999px;padding:6px 14px;cursor:pointer;font-weight:700}
+#mute{position:fixed;left:12px;top:10px;z-index:21;font-size:18px;background:var(--paper);border:3px solid var(--line);border-radius:999px;width:42px;height:42px;box-shadow:0 3px 0 var(--line);cursor:pointer;padding:0}
 #bag{position:fixed;right:12px;top:10px;z-index:21;background:var(--paper);border:3px solid var(--line);border-radius:999px;padding:6px 12px;font-weight:800;box-shadow:0 3px 0 var(--line);display:none}
 </style></head><body>
 <div id="game"><div id="world"><img class="map" id="mapimg" alt=""></div></div>
-<div id="goal"></div><div id="bag"></div><div id="toast"></div>
+<button id="mute" onclick="toggleMute()">🔊</button><div id="goal"></div><div id="bag"></div><div id="toast"></div>
 <div id="scene"></div>
 <div id="talk"><div id="face"></div><div style="flex:1;min-width:0"><div id="who"></div><div id="line"></div><div id="choices"></div></div><div id="next">▼</div></div>
 <div id="modal"><div class="card" id="mcard"></div></div>
 <div id="fader"></div>
+<script src="i18n.js"></script>
 <script>
 // ---------- data ----------
 const MW=1672,MH=941,KID=180;
@@ -81,7 +83,7 @@ const PEOPLE={
  home_am:[['mom',1260,600]],
  home_pm:[['mom',1260,600]],
  // [id,x,y,seat] — seated kids sit on chairs facing the blackboard (x,y = chair seat)
- class:[['siwoo',700,860],['minho',600,600],['yuna',886,488,1],['junho',1250,262],['haeun',385,608,1],['jihoon',1050,700],['yena',1204,372,1],['hyeeun',330,262]]
+ class:[['siwoo',700,860],['minho',600,600],['yuna',880,0,{top:448,clip:515}],['junho',1250,262],['haeun',300,0,{top:570,clip:640}],['jihoon',1050,700],['yena',1190,0,{top:333,clip:400}],['hyeeun',330,262]]
 };
 // lines: [who, expr, text] ; who 'nar' = narration, 'think' = my thought
 const CHAT={
@@ -95,19 +97,32 @@ const CHAT={
  minho:[['minho','angry','뭘 봐, 전학생? 여긴 내 구역이야.']],
  sua:[['sua','angry','자리에 앉아. 규칙이야.']]
 };
-// ---------- languages (add a new one here + snd/<code>/<word>.mp3) ----------
+// ---------- languages ----------
+// LANGS: every language the game knows. MODES: what the first screen offers (ui = language of all text, learn = language of the taught words).
+// Add a language: one LANGS row + snd/<code>/<concept>.mp3, and for a "learn Korean" mode its text table in i18n.js.
+const KR_FLAG='radial-gradient(circle,#cd2e3a 0 22%,#0047a0 23% 34%,#fff 35%)';
 const LANGS={
- id:{name:'인도네시아어',native:'Bahasa Indonesia',flag:'linear-gradient(#ce1126 50%,#fff 50%)',tts:'id-ID',words:{notebook:'buku'}}
+ ko:{name:'한국어',native:'한국어',flag:KR_FLAG,tts:'ko-KR',words:{notebook:'공책'}},
+ id:{name:'인도네시아어',native:'Bahasa Indonesia',flag:'linear-gradient(#ce1126 50%,#fff 50%)',tts:'id-ID',words:{notebook:'buku'},learnKo:'Belajar bahasa Korea'},
+ vi:{name:'베트남어',native:'Tiếng Việt',flag:'radial-gradient(circle at 50% 50%,#ffcd00 22%,#da251d 23%)',tts:'vi-VN',words:{notebook:'vở'},learnKo:'Học tiếng Hàn'},
+ en:{name:'영어',native:'English',flag:'linear-gradient(#b22234 0 14%,#fff 14% 28%,#b22234 28% 42%,#fff 42% 57%,#b22234 57% 71%,#fff 71% 85%,#b22234 85%)',tts:'en-US',words:{notebook:'notebook'},learnKo:'Learn Korean'}
 };
-let LANG='id',W='';
+const MODES=[{ui:'ko',learn:'id'},{ui:'ko',learn:'vi'},{ui:'ko',learn:'en'},{ui:'id',learn:'ko'},{ui:'vi',learn:'ko'},{ui:'en',learn:'ko'}];
+let LANG='id',UI='ko',W='';
+// tr: Korean source line -> line in the player's language, with {w} (taught word) and {L} (taught language) filled in
+function tr(s){if(s==null)return s;let t=UI==='ko'?s:((window.T&&T[UI]&&T[UI][s])??s);const L=UI==='ko'?LANGS[LANG].name:((T[UI]&&T[UI]['한국어'])||'Korean');return t.replace(/\{w\}/g,W).replace(/\{L\}/g,L)}
+function nm(id){return tr(NAME[id]||'')}
 const TALKED=new Set();let CHOICE=null;const HEART={};
 // ---------- state ----------
 let HERO='hero_f',MAP=null,me=null,npcs=[],goal=null,busy=false,cam={x:0,y:0,s:1},grid=null;
 const world=document.getElementById('world'),mapimg=document.getElementById('mapimg');
 // ---------- sprites ----------
 const ROW={down:0,left:1,right:2,up:3};
-// seat:true = sitting on a classroom chair, seen from behind (upper body only, legs hidden by the chair)
-function sprite(id,x,y,seat){const el=document.createElement('div');el.className='sp';world.appendChild(el);
+// seat = {top,clip}: drawn from seat/<id>.png (child on a chair, seen from behind); top = chair-back top on the map, clip = front edge of the next desk (hides the legs)
+const SEAT_H=190;
+function seatSprite(id,x,s){const el=document.createElement('div');el.className='sp';world.appendChild(el);const o={id,el,x,y:s.clip,w:0,h:0,seat:true};
+ const im=new Image();im.onload=()=>{const k=SEAT_H/im.height,w=im.width*k,y0=s.top-.44*SEAT_H;o.w=w;o.h=s.clip-y0;el.style.cssText+=`;width:${w}px;height:${o.h}px;left:${x}px;top:${s.clip}px;z-index:${Math.round(s.clip)};background:url(seat/${id}.png) 0 0/${w}px ${SEAT_H}px no-repeat`};im.src=`seat/${id}.png`;return o}
+function sprite(id,x,y,seat){if(seat&&typeof seat==='object')return seatSprite(id,x,seat);const el=document.createElement('div');el.className='sp';world.appendChild(el);
  const o={id,el,x,y,dir:seat?'up':'down',frame:0,t:0,w:0,h:0,path:null,onArrive:null,seat:!!seat};
  const z=SZ[id]||[.95,.98,1];const im=new Image();im.onload=()=>{const ch=im.height/4,cw=im.width/3,dh=KID*z[2]/z[0],k=dh/ch;o.w=cw*k;o.rowH=ch*k;
   if(seat){const top=(1-z[0]-(1-z[1]))*dh;o.h=top+z[0]*dh*.56;o.foot=0}else{o.h=dh;o.foot=(1-z[1])*dh}
@@ -152,7 +167,7 @@ const hintEl=document.createElement('div');hintEl.className='hint';hintEl.textCo
 const ringEl=document.createElement('div');ringEl.className='ring';
 function placeHint(){if(!goal||busy||!goal.target){hintEl.remove();ringEl.remove();return}let x,y,h=0;if(goal.target==='door'){[x,y]=EXITS[MAP].door;world.appendChild(ringEl);ringEl.style.left=x+'px';ringEl.style.top=y+'px';ringEl.style.zIndex=2000;h=40}else{const ids=[].concat(goal.target);const ns=npcs.filter(n=>ids.includes(n.id)&&!(goal.skip&&goal.skip(n.id)));if(!ns.length){hintEl.remove();return}ringEl.remove();x=ns[0].x;y=ns[0].y;h=ns[0].h||KID;
   if(ns.length>1){hintEl.remove();ns.forEach(n=>{});}}world.appendChild(hintEl);hintEl.style.left=x+'px';hintEl.style.top=(y-h-6)+'px';hintEl.style.zIndex=3000}
-function setGoal(text,target,skip){goal=text?{text,target,skip}:null;document.getElementById('goal').textContent=text||''}
+function setGoal(text,target,skip,suffix){goal=text?{text,target,skip}:null;document.getElementById('goal').textContent=text?tr(text)+(suffix||''):''}
 // ---------- dialogue ----------
 const talk=document.getElementById('talk'),faceEl=document.getElementById('face'),whoEl=document.getElementById('who'),lineEl=document.getElementById('line'),chEl=document.getElementById('choices'),nextEl=document.getElementById('next'),sceneEl=document.getElementById('scene');
 let queue=[],talkOn=false,qDone=null;
@@ -160,71 +175,82 @@ function say(lines,done){busy=true;queue=lines.slice();qDone=done;talkOn=true;ta
 function advance(){if(chEl.classList.contains('on'))return;const l=queue.shift();if(!l){talk.classList.remove('on');talkOn=false;busy=false;const d=qDone;qDone=null;d&&d();return}
  if(typeof l==='function'){l();return advance()}
  const[who,expr,text]=l;const fid=who==='me'||who==='think'?HERO:who;
- if(who==='nar'){faceEl.className='none';whoEl.textContent=''}else{faceEl.className='';faceEl.style.backgroundImage=`url(faces/${fid}_${expr||'smile'}.jpg)`;whoEl.textContent=who==='think'?'나 (속마음)':NAME[who]||''}
- lineEl.className=who==='think'?'think':'';lineEl.textContent=text.replace(/\{w\}/g,W);nextEl.style.display=''}
+ if(who==='nar'){faceEl.className='none';whoEl.textContent=''}else{faceEl.className='';faceEl.style.backgroundImage=`url(faces/${fid}_${expr||'smile'}.jpg)`;whoEl.textContent=who==='think'?tr('나 (속마음)'):nm(who)}
+ lineEl.className=who==='think'?'think':'';lineEl.textContent=tr(text);nextEl.style.display=''}
 talk.addEventListener('pointerdown',e=>{e.stopPropagation();if(e.target.closest('#choices'))return;advance()});
-function ask(prompt,opts,cb){busy=true;talkOn=true;talk.classList.add('on');faceEl.className='';faceEl.style.backgroundImage=`url(faces/${HERO}_surprised.jpg)`;whoEl.textContent='나';lineEl.className='';lineEl.textContent=prompt;nextEl.style.display='none';chEl.innerHTML='';chEl.classList.add('on');
- opts.forEach(o=>{const b=document.createElement('button');b.textContent=o.text;b.onclick=ev=>{ev.stopPropagation();chEl.classList.remove('on');chEl.innerHTML='';talk.classList.remove('on');talkOn=false;busy=false;cb(o)};chEl.appendChild(b)})}
+function ask(prompt,opts,cb){busy=true;talkOn=true;talk.classList.add('on');faceEl.className='';faceEl.style.backgroundImage=`url(faces/${HERO}_surprised.jpg)`;whoEl.textContent=nm('me');lineEl.className='';lineEl.textContent=tr(prompt);nextEl.style.display='none';chEl.innerHTML='';chEl.classList.add('on');
+ opts.forEach(o=>{const b=document.createElement('button');b.textContent=tr(o.text);b.onclick=ev=>{ev.stopPropagation();chEl.classList.remove('on');chEl.innerHTML='';talk.classList.remove('on');talkOn=false;busy=false;cb(o)};chEl.appendChild(b)})}
 function scene(img,lines,done,keep){busy=true;sceneEl.style.backgroundImage=`url(scenes/${img}.jpg)`;sceneEl.classList.add('on');say(lines,()=>{if(!keep)sceneEl.classList.remove('on');done&&done()})}
 sceneEl.addEventListener('pointerdown',e=>{e.stopPropagation();advance()});
 function toast(t){const d=document.createElement('div');d.textContent=t;document.getElementById('toast').appendChild(d);setTimeout(()=>d.remove(),1900)}
-function heart(id,n){if(!n)return;HEART[id]=(HEART[id]||0)+n;toast(`${NAME[id]} ♥ +${n}`);chime()}
+function heart(id,n){if(!n)return;HEART[id]=(HEART[id]||0)+n;toast(`${nm(id)} ♥ +${n}`);chime()}
 // ---------- sound ----------
 let AC=null;function chime(){try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();const t=AC.currentTime;[880,1320].forEach((f,i)=>{const o=AC.createOscillator(),g=AC.createGain();o.frequency.value=f;o.type='sine';g.gain.setValueAtTime(.0001,t+i*.12);g.gain.exponentialRampToValueAtTime(.2,t+i*.12+.02);g.gain.exponentialRampToValueAtTime(.0001,t+i*.12+.35);o.connect(g).connect(AC.destination);o.start(t+i*.12);o.stop(t+i*.12+.4)})}catch(e){}}
-const SND={};function speak(w){const key=LANG+'/'+w;const f=SND[key]||(SND[key]=new Audio(`snd/${LANG}/${w}.mp3`));try{f.currentTime=0;f.play();return}catch(e){}try{const u=new SpeechSynthesisUtterance(w);u.lang=LANGS[LANG].tts;u.rate=.85;const v=speechSynthesis.getVoices().find(v=>v.lang.startsWith(LANG));if(v)u.voice=v;speechSynthesis.cancel();speechSynthesis.speak(u)}catch(e){}}
+const SND={};function speak(k){const key=LANG+'/'+k;const f=SND[key]||(SND[key]=new Audio(`snd/${LANG}/${k}.mp3`));try{f.currentTime=0;f.play();return}catch(e){}try{const u=new SpeechSynthesisUtterance(LANGS[LANG].words[k]);u.lang=LANGS[LANG].tts;u.rate=.85;const v=speechSynthesis.getVoices().find(v=>v.lang.startsWith(LANG));if(v)u.voice=v;speechSynthesis.cancel();speechSynthesis.speak(u)}catch(e){}}
+// ---------- music ----------
+const BGM={};let bgmNow=null,muted=false;try{muted=localStorage.getItem('mute')==='1'}catch(e){}
+function bgm(name){if(bgmNow===name)return;const old=BGM[bgmNow];bgmNow=name;const a=BGM[name]||(BGM[name]=Object.assign(new Audio(`bgm/${name}.mp3`),{loop:true}));
+ if(old){let v=old.volume;const t=setInterval(()=>{v-=.05;if(v<=0){clearInterval(t);old.pause()}else old.volume=v},60)}
+ a.volume=0;a.currentTime=0;if(muted)return;a.play().catch(()=>{});let v=0;const t=setInterval(()=>{v+=.03;if(v>=.35){v=.35;clearInterval(t)}a.volume=v},60)}
+function toggleMute(){muted=!muted;try{localStorage.setItem('mute',muted?'1':'0')}catch(e){}const a=BGM[bgmNow];if(a){if(muted)a.pause();else{a.volume=.35;a.play().catch(()=>{})}}document.getElementById('mute').textContent=muted?'🔇':'🔊'}
 // ---------- maps ----------
 function fade(cb){const f=document.getElementById('fader');f.style.opacity=1;busy=true;setTimeout(()=>{cb();setTimeout(()=>{f.style.opacity=0;busy=false},150)},520)}
 function load(id,extra){MAP=id;world.querySelectorAll('.sp').forEach(e=>e.remove());mapimg.src=MAPS[id].img;buildGrid();const[sx,sy]=MAPS[id].start;me=sprite(HERO,sx,sy);npcs=(PEOPLE[id]||[]).concat(extra||[]).map(([n,x,y,s])=>sprite(n,x,y,s));fit();follow()}
 // preload every picture so maps, scenes and faces appear at once
 const PRE=[];function preload(){const ids=['hero_f','hero_m','mom','siwoo','minho','sua','yuna','junho','haeun','jihoon','yena','hyeeun'];const ex=['smile','laugh','surprised','sad','angry','relieved'];
  const list=['maps/home_am.jpg','maps/class.jpg','maps/home_pm.jpg','scenes/jar.jpg','scenes/sua.jpg','scenes/dinner.jpg','scenes/night.jpg','cards/notebook.jpg','cards/bag.jpg','cards/pencil.jpg'];
- ids.forEach(i=>{list.push(`walk/${i}.png`);ex.forEach(e=>list.push(`faces/${i}_${e}.jpg`))});list.forEach(s=>{const im=new Image();im.src=s;PRE.push(im)})}
+ ['yuna','haeun','yena'].forEach(i=>list.push(`seat/${i}.png`));ids.forEach(i=>{list.push(`walk/${i}.png`);ex.forEach(e=>list.push(`faces/${i}_${e}.jpg`))});list.forEach(s=>{const im=new Image();im.src=s;PRE.push(im)})}
 function loadMap(id,cb){const im=new Image();im.onload=im.onerror=cb;im.src=MAPS[id].img}
 // ---------- story ----------
 let stage='home_am';
 function talkTo(id){
  if(stage==='home_am'&&id==='mom'){say([['mom','smile','일어났구나! 오늘 새 학교 첫날이지?'],['mom','relieved','말이 잘 안 나와도 괜찮아. 천천히 보고, 천천히 들으면 돼.'],['me','smile','…응. 다녀올게.'],['mom','laugh','다녀와! 저녁에 오늘 이야기 들려줘.']],()=>{stage='leave';setGoal('현관으로 나가 학교 가기','door')});return}
  if(stage==='leave'&&id==='mom'){say([['mom','smile','신발 신고 가야지~ 현관은 왼쪽이야.']]);return}
- if(stage==='class'){const lines=CHAT[id]||[];const first=!TALKED.has(id);say(lines,()=>{if(first&&id!=='sua'){TALKED.add(id);heart(id,1)}const n=TALKED.size;if(n>=3){incident()}else setGoal(`반 친구들에게 말 걸어 보기 (${n}/3)`,friendsLeft(),id2=>TALKED.has(id2))});return}
+ if(stage==='class'){const lines=CHAT[id]||[];const first=!TALKED.has(id);say(lines,()=>{if(first&&id!=='sua'){TALKED.add(id);heart(id,1)}const n=TALKED.size;if(n>=3){incident()}else setGoal('반 친구들에게 말 걸어 보기',friendsLeft(),id2=>TALKED.has(id2),` (${n}/3)`)});return}
  if(stage==='after'){say(CHAT[id]||[['nar','','…']]);return}
  if(stage==='home_pm'&&id==='mom'){dinner();return}
  say(CHAT[id]||[])}
 function friendsLeft(){return['yuna','junho','haeun','jihoon','yena','hyeeun','siwoo','minho'].filter(i=>!TALKED.has(i))}
 function useDoor(){
- if(stage==='leave'){fade(()=>{stage='class';load('class');setGoal('반 친구들에게 말 걸어 보기 (0/3)',friendsLeft(),id=>TALKED.has(id));say([['nar','','새 교실. 낯선 얼굴들이 한꺼번에 나를 본다.'],['think','surprised','(…누구한테 먼저 인사하지?)']])});return}
- if(stage==='after'){fade(()=>{stage='home_pm';load('home_pm');setGoal('엄마와 저녁 먹기','mom');say([['nar','','저녁. 집 안에 따뜻한 불이 켜져 있다.']])});return}
+ if(stage==='leave'){fade(()=>{stage='class';load('class');setGoal('반 친구들에게 말 걸어 보기',friendsLeft(),id=>TALKED.has(id),' (0/3)');say([['nar','','새 교실. 낯선 얼굴들이 한꺼번에 나를 본다.'],['think','surprised','(…누구한테 먼저 인사하지?)']])});return}
+ if(stage==='after'){fade(()=>{stage='home_pm';load('home_pm');bgm('evening');setGoal('엄마와 저녁 먹기','mom');say([['nar','','저녁. 집 안에 따뜻한 불이 켜져 있다.']])});return}
  if(stage==='home_am'){say([['think','smile','(가기 전에 엄마한테 인사하자.)']]);return}
  if(stage==='class'){say([['think','sad','(아직 아무하고도 제대로 말 못 했어…)']]);return}}
-function incident(){setGoal('');busy=true;
+function incident(){setGoal('');busy=true;bgm('tense');
  setTimeout(()=>scene('jar',[['nar','','쨍그랑!'],['nar','','교실 뒤에서 뛰어가던 민호가 시우의 관찰 통을 쳤다. 흙과 번데기가 바닥에 쏟아졌다.'],['minho','angry','아, 뭐야! 거기다 둔 게 잘못이지!'],['siwoo','sad','…시끄러워… 번데기… 번데기가…'],['think','surprised','(시우가 귀를 막고 떨고 있어. 어떡하지?)']],()=>{busy=true;
   ask('어떻게 할까?',[
-   {k:'A',text:'시우와 민호 사이에 조용히 서서, 깨진 조각 쪽으로 아무도 못 오게 막는다.',pts:{siwoo:2},r:[['me','angry','…다쳐. 가까이… 오지 마.'],['minho','surprised','쳇, 뭐야. 알았어, 알았다고.'],['siwoo','relieved','…고마워.']]},
-   {k:'B',text:'공책 한 장을 찢어, 흩어진 흙과 번데기를 살살 모아 시우 앞에 놓는다.',pts:{siwoo:2},r:[['nar','','종이 위에서 작은 번데기가 꿈틀했다.'],['siwoo','surprised','…살아 있어.'],['siwoo','relieved','숨… 쉬어. 다행이다.']]},
-   {k:'C',text:'멀리서 가만히 지켜본다.',pts:{siwoo:1},r:[['nar','','아무도 움직이지 않았다. 시우는 혼자 흙을 쓸어 모았다.'],['siwoo','sad','……']]},
-   {k:'D',text:'민호에게 크게 소리친다. 「야! 사과해!」',pts:{},r:[['me','angry','야! 사과해!'],['minho','angry','뭐? 전학생 주제에 어디서 소리를 질러?'],['siwoo','sad','…소리… 그만… 제발…']]}
-  ],o=>{CHOICE=o.k;sceneEl.classList.remove('on');say(o.r,()=>{Object.entries(o.pts).forEach(([i,n])=>heart(i,n));setTimeout(suaEnters,500)})},true)}),400)}
-function suaEnters(){scene('sua',[['nar','','그때 앞문이 열리고, 반장 수아가 출석부를 안고 들어왔다.'],['sua','angry','교실에서 뛰지 않기. 규칙 3번이야. 최민호, 벌점.'],['minho','sad','…아, 진짜.'],['sua','smile','다들 자리에 앉아. 1분 남았어.'],['nar','','수아의 말 한마디에 교실이 조용해졌다.'],['think','sad','(규칙으로 끝났어. 그런데… 시우가 괜찮은지는 아무도 묻지 않았어.)']],()=>{
-  stage='after';npcs.push(sprite('sua',840,290));setGoal('수업 끝! 교실 문으로 나가 집에 가기','door')})}
-function dinner(){scene('dinner',[['mom','smile','첫날 어땠어? 얼굴 보니까 할 말이 많은 것 같은데.'],['me','sad','반에… 관찰 통이 깨졌어. 시우라는 애 거.']].concat(MOM[CHOICE]||[]).concat([['mom','smile','새 학교 첫날, 많이 놀랐지? 여기 말로 낱말 하나만 같이 해 볼까?'],['mom','relieved',`엄마가 ${LANGS[LANG].name}로 말할게. 잘 듣고 골라 봐.`]]),()=>quiz())}
+   {k:'A',text:'시우 앞을 막아서서, 민호가 더 다가오지 못하게 한다.',pts:{siwoo:2},r:[['me','angry','…그만. 시우… 무서워해.'],['siwoo','relieved','……'],['minho','angry','뭐? 비켜, 전학생.']]},
+   {k:'B',text:'공책 한 장을 찢어, 흩어진 흙과 번데기를 살살 모아 시우 앞에 놓는다.',pts:{siwoo:2},r:[['nar','','종이 위에서 작은 번데기가 꿈틀했다.'],['siwoo','surprised','…살아 있어.'],['minho','angry','뭘 그렇게 챙겨? 그거 그냥 벌레잖아.']]},
+   {k:'C',text:'선생님께 알리려고 교실 문 쪽으로 걸어간다.',pts:{siwoo:1},r:[['me','sad','…선생님한테… 말할 거야.'],['minho','angry','뭐? 첫날부터 고자질하게?']]},
+   {k:'D',text:'멀리서 가만히 지켜본다.',pts:{},r:[['nar','','아무도 움직이지 않았다. 시우는 혼자 흙을 쓸어 모았다.'],['minho','angry','뭘 봐? 전학생, 너도 한마디 할래?']]}
+  ],o=>{CHOICE=o.k;sceneEl.classList.remove('on');say(o.r.concat([
+   ['nar','','민호가 성큼성큼 나에게 다가왔다.'],
+   ['minho','angry','야, 전학생. 여기선 내 말이 규칙이야. 알아들어?'],
+   ['nar','','민호가 내 책상을 쾅 치고, 어깨를 밀치려 손을 뻗었다.'],
+   ['think','surprised','(…말이 안 나와.)']]),()=>{Object.entries(o.pts).forEach(([i,n])=>heart(i,n));setTimeout(suaEnters,400)})},true)}),400)}
+function suaEnters(){scene('sua',[['nar','','그때, 앞문이 드르륵 열렸다.'],['sua','angry','최민호. 손 내려.'],['sua','angry','교실에서 뛰지 않기, 친구 밀지 않기. 규칙 3번, 5번. 벌점 두 개.'],['minho','sad','…아, 진짜. 알았다고.'],['nar','','민호가 투덜대며 물러났다. 반장 수아였다.'],['sua','smile','넌 전학생이지? 다친 데 없으면 자리에 앉아. 우리 반 규칙은 내일까지 외워 와.'],['think','relieved','(수아가 막아 줬어…)'],['think','sad','(그런데… 시우가 괜찮은지는 아무도 묻지 않았어.)']],()=>{
+  heart('sua',1);bgm('day');stage='after';npcs.push(sprite('sua',840,290));setGoal('수업 끝! 교실 문으로 나가 집에 가기','door')})}
+function dinner(){scene('dinner',[['mom','smile','첫날 어땠어? 얼굴 보니까 할 말이 많은 것 같은데.'],['me','sad','반에서… 관찰 통이 깨졌어. 시우라는 애 거.']].concat(MOM[CHOICE]||[]).concat([['me','relieved','그런데 민호가 나한테 다가왔을 때… 반장 수아가 막아 줬어.'],['mom','laugh','든든한 친구가 있네. 내일은 수아한테 고맙다고 해 볼까?'],['mom','smile','새 학교 첫날, 많이 놀랐지? 여기 말로 낱말 하나만 같이 해 볼까?'],['mom','relieved','엄마가 {L}로 말할게. 잘 듣고 골라 봐.']]),()=>quiz())}
 const MOM={
- A:[['me','relieved','그래서… 둘 사이에 서 있었어.'],['mom','relieved','둘 사이에 서 주었구나. 소리에 놀란 친구에겐 말보다 조용한 그늘이 먼저란다.']],
+ A:[['me','relieved','그래서… 시우 앞을 막아섰어.'],['mom','surprised','무서웠을 텐데 친구 앞을 지켜 줬구나.'],['mom','relieved','소리에 놀란 친구에겐 말보다 조용한 그늘이 먼저란다.']],
  B:[['me','relieved','흙이랑 번데기를… 종이에 모아 줬어.'],['mom','laugh','흙과 번데기를 모아 주었네. 친구가 아끼는 작은 생명을 같이 아껴 준 거야.']],
- C:[['me','sad','나는… 그냥 보고만 있었어.'],['mom','smile','멀리서 지켜봤구나. 처음이라 어려웠지. 다음엔 한 걸음만 다가가 보자.']],
- D:[['me','angry','민호한테 소리쳤어. 사과하라고.'],['mom','sad','대신 화를 내 주었구나. 마음은 알지만, 큰 소리는 시우를 더 놀라게 했을 거야.']]};
+ C:[['me','sad','선생님한테 말하려고 했어.'],['mom','smile','어른에게 알리려 한 건 잘한 거야. 혼자 다 막지 않아도 돼.']],
+ D:[['me','sad','나는… 그냥 보고만 있었어.'],['mom','smile','처음이라 얼어붙었구나. 괜찮아. 다음엔 한 걸음만 다가가 보자.']]};
 function quiz(){busy=true;const cards=[['notebook','공책'],['bag','가방'],['pencil','연필']].sort(()=>Math.random()-.5);const m=document.getElementById('modal'),c=document.getElementById('mcard');
- c.innerHTML=`<h2>엄마가 말한 「${W}」는 어느 거?</h2><p><button class="spk" id="again">🔊 다시 듣기</button></p><div class="pick">${cards.map(([k])=>`<button data-k="${k}"><img src="cards/${k}.jpg" alt=""></button>`).join('')}</div>`;
- m.classList.add('on');setTimeout(()=>speak(W),300);document.getElementById('again').onclick=()=>speak(W);
- c.querySelectorAll('.pick button').forEach(b=>b.onclick=()=>{if(b.dataset.k==='notebook'){b.classList.add('ok');chime();setTimeout(()=>{m.classList.remove('on');document.getElementById('bag').style.display='block';document.getElementById('bag').textContent='📒 '+W;speak(W);
-   say([['mom','laugh','맞아, {w}! 공책을 여기선 {w}라고 해.'],['mom','smile','오늘 생각을 {w}에 적어 보렴.']],night)},700)}else{b.classList.add('no');setTimeout(()=>b.classList.remove('no'),400);speak(W)}})}
-function night(){setGoal('');scene('night',[['nar','','밤. 새 {w}를 펼쳤다.'],['think','sad','(규칙으로 조용해지는 교실 말고…)'],['think','relieved','(한 명 한 명, 각자 속도를 기다려 주는 교실이면 좋겠어.)'],['think','surprised','(…나, 반장 선거에 나가 볼까?)']],end)}
-function end(){const m=document.getElementById('modal'),c=document.getElementById('mcard');const hs=Object.entries(HEART).map(([i,n])=>`${NAME[i]} ♥${n}`).join(' · ')||'아직 없음';
- c.innerHTML=`<h2>1일차 끝 — 반장 선거 출마 결심!</h2><p>오늘 배운 낱말</p><p><span class="word">${W}</span> = 공책 <button class="spk" onclick="speak(W)">🔊</button></p><p>친해진 친구: ${hs}</p><p style="color:#8a7a6a">2일차부터는 하루에 두 친구를 골라 만나요. (준비 중)</p><button class="big" id="re">처음부터 다시</button>`;m.classList.add('on');document.getElementById('re').onclick=()=>location.reload()}
+ c.innerHTML=`<h2>${tr('엄마가 말한 「{w}」는 어느 거?')}</h2><p><button class="spk" id="again">🔊 ${tr('다시 듣기')}</button></p><div class="pick">${cards.map(([k])=>`<button data-k="${k}"><img src="cards/${k}.jpg" alt=""></button>`).join('')}</div>`;
+ m.classList.add('on');setTimeout(()=>speak('notebook'),300);document.getElementById('again').onclick=()=>speak('notebook');
+ c.querySelectorAll('.pick button').forEach(b=>b.onclick=()=>{if(b.dataset.k==='notebook'){b.classList.add('ok');chime();setTimeout(()=>{m.classList.remove('on');document.getElementById('bag').style.display='block';document.getElementById('bag').textContent='📒 '+W;speak('notebook');
+   say([['mom','laugh','맞아, {w}! 공책을 여기선 {w}라고 해.'],['mom','smile','오늘 생각을 {w}에 적어 보렴.']],night)},700)}else{b.classList.add('no');setTimeout(()=>b.classList.remove('no'),400);speak('notebook')}})}
+function night(){setGoal('');bgm('night');scene('night',[['nar','','밤. 새 {w}를 펼쳤다.'],['think','relieved','(수아처럼 규칙으로 지켜 주는 반장도 멋져.)'],['think','sad','(그런데 시우처럼… 규칙보다 먼저 마음을 물어봐 줘야 하는 친구도 있어.)'],['think','relieved','(한 명 한 명, 각자 속도를 기다려 주는 교실이면 좋겠어.)'],['think','surprised','(…나, 반장 선거에 나가 볼까?)']],end)}
+function end(){const m=document.getElementById('modal'),c=document.getElementById('mcard');const hs=Object.entries(HEART).map(([i,n])=>`${nm(i)} ♥${n}`).join(' · ')||tr('아직 없음');
+ c.innerHTML=`<h2>${tr('1일차 끝 — 반장 선거 출마 결심!')}</h2><p>${tr('오늘 배운 낱말')}</p><p><span class="word">${W}</span> = ${tr('공책')} <button class="spk" onclick="speak('notebook')">🔊</button></p><p>${tr('친해진 친구')}: ${hs}</p><p style="color:#8a7a6a">${tr('2일차부터는 하루에 두 친구를 골라 만나요. (준비 중)')}</p><button class="big" id="re">${tr('처음부터 다시')}</button>`;m.classList.add('on');document.getElementById('re').onclick=()=>location.reload()}
 // ---------- start ----------
-function start(){const m=document.getElementById('modal'),c=document.getElementById('mcard');let last='';try{last=localStorage.getItem('lang')||''}catch(e){}
- c.innerHTML=`<h2>괴짜교실 반장되기</h2><p>어떤 말을 배울까요?</p><div class="langs">${Object.entries(LANGS).map(([k,l])=>`<button data-l="${k}" class="${k===last?'on':''}"><span class="flag" style="background:${l.flag}"></span><b>${l.name}</b><small>${l.native}</small></button>`).join('')}</div>`;
- m.classList.add('on');c.querySelectorAll('.langs button').forEach(b=>b.onclick=()=>{LANG=b.dataset.l;W=LANGS[LANG].words.notebook;try{localStorage.setItem('lang',LANG)}catch(e){}chime();pickHero()})}
+function start(){const m=document.getElementById('modal'),c=document.getElementById('mcard');document.getElementById('mute').textContent=muted?'🔇':'🔊';let last='';try{last=localStorage.getItem('mode')||''}catch(e){}
+ const btn=(md,i)=>{const learnKo=md.learn==='ko',l=LANGS[learnKo?md.ui:md.learn];return `<button data-i="${i}" class="${md.ui+'-'+md.learn===last?'on':''}"><span class="flag" style="background:${l.flag}"></span><b>${learnKo?l.learnKo:l.name}</b><small>${l.native}</small></button>`};
+ c.innerHTML=`<h2>괴짜교실 반장되기</h2><p>어떤 말을 배울까요?</p><div class="langs">${MODES.map((md,i)=>md.ui==='ko'?btn(md,i):'').join('')}</div><p style="margin-top:18px">Learn Korean · Belajar bahasa Korea · Học tiếng Hàn</p><div class="langs">${MODES.map((md,i)=>md.ui!=='ko'?btn(md,i):'').join('')}</div>`;
+ m.classList.add('on');c.querySelectorAll('.langs button').forEach(b=>b.onclick=()=>{const md=MODES[+b.dataset.i];UI=md.ui;LANG=md.learn;W=LANGS[LANG].words.notebook;document.documentElement.lang=UI;try{localStorage.setItem('mode',UI+'-'+LANG)}catch(e){}chime();pickHero()})}
 function pickHero(){const m=document.getElementById('modal'),c=document.getElementById('mcard');
- c.innerHTML=`<h2>괴짜교실 반장되기</h2><p>말 한마디 못 하는 전학생, 반장 선거에 나가다</p><p style="color:#8a7a6a;font-size:15px">${LANGS[LANG].name} 배우기 · 말은 한국어, 배우는 낱말만 ${LANGS[LANG].name}</p><p style="margin-top:14px">누구로 할까요?</p><div class="pick heroes"><button data-h="hero_f"><img src="faces/hero_f_smile.jpg" alt="여자 주인공"></button><button data-h="hero_m"><img src="faces/hero_m_smile.jpg" alt="남자 주인공"></button></div>`;
- m.classList.add('on');c.querySelectorAll('.pick button').forEach(b=>b.onclick=()=>{HERO=b.dataset.h;m.classList.remove('on');chime();load('home_am');setGoal('엄마에게 인사하기','mom');say([['nar','','이사 온 다음 날 아침. 아직 풀지 못한 상자들이 쌓여 있다.'],['think','smile','(엄마가 부엌에 있어. 바닥을 눌러 걸어가 보자.)']])})}
+ c.innerHTML=`<h2>${tr('괴짜교실 반장되기')}</h2><p>${tr('말 한마디 못 하는 전학생, 반장 선거에 나가다')}</p><p style="color:#8a7a6a;font-size:15px">${UI==='ko'?`${LANGS[LANG].name} 배우기 · 말은 한국어, 배우는 낱말만 ${LANGS[LANG].name}`:tr('모드 설명')}</p><p style="margin-top:14px">${tr('누구로 할까요?')}</p><div class="pick heroes"><button data-h="hero_f"><img src="faces/hero_f_smile.jpg" alt="여자 주인공"></button><button data-h="hero_m"><img src="faces/hero_m_smile.jpg" alt="남자 주인공"></button></div>`;
+ m.classList.add('on');c.querySelectorAll('.pick button').forEach(b=>b.onclick=()=>{HERO=b.dataset.h;m.classList.remove('on');chime();bgm('day');load('home_am');setGoal('엄마에게 인사하기','mom');say([['nar','','이사 온 다음 날 아침. 아직 풀지 못한 상자들이 쌓여 있다.'],['think','smile','(엄마가 부엌에 있어. 바닥을 눌러 걸어가 보자.)']])})}
 preload();requestAnimationFrame(loop);start();
 </script></body></html>
