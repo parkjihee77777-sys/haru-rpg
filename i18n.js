@@ -348,7 +348,7 @@ Object.assign(window.T.en, {
  '(그리고 나도 수아처럼 멋있는 사람이 되고 싶다는 생각을 했어.)':'(And I thought I want to be someone cool like Sua, too.)',
  '(나는 한 명 한 명, 각자 속도를 기다려 주는 따뜻한 교실을 만들고 싶어.)':'(I want to make a warm class that waits for each person’s own pace.)',
  '(…나, 다음 학기 반장 선거에 나가 볼까?)':'(…Should I run for class president next term?)',
- '(오늘부터 새 학교… 여기 말은 하나도 모르는데.)':'(A new school starting today… and I don’t know a single word here.)'
+ '(오늘부터 새 학교… 여기 말은 아직 서툰데.)':'(A new school starting today… and I’m still not good at the language here.)'
 });
 Object.assign(window.T.id, {
  '팡팡이':'Pangpang','이건 {x}이다':'Ini {x}!',
@@ -389,7 +389,7 @@ Object.assign(window.T.id, {
  '(그리고 나도 수아처럼 멋있는 사람이 되고 싶다는 생각을 했어.)':'(Dan aku ingin jadi orang keren seperti Sua juga.)',
  '(나는 한 명 한 명, 각자 속도를 기다려 주는 따뜻한 교실을 만들고 싶어.)':'(Aku ingin membuat kelas hangat yang mau menunggu kecepatan setiap orang.)',
  '(…나, 다음 학기 반장 선거에 나가 볼까?)':'(…Apa aku ikut pemilihan ketua kelas semester depan, ya?)',
- '(오늘부터 새 학교… 여기 말은 하나도 모르는데.)':'(Mulai hari ini sekolah baru… padahal aku tidak tahu satu kata pun di sini.)'
+ '(오늘부터 새 학교… 여기 말은 아직 서툰데.)':'(Mulai hari ini sekolah baru… padahal bahasa di sini aku masih belum lancar.)'
 });
 
 Object.assign(window.T.vi, {
@@ -431,7 +431,7 @@ Object.assign(window.T.vi, {
  '(그리고 나도 수아처럼 멋있는 사람이 되고 싶다는 생각을 했어.)':'(Và tớ nghĩ mình cũng muốn trở thành người ngầu như Sua.)',
  '(나는 한 명 한 명, 각자 속도를 기다려 주는 따뜻한 교실을 만들고 싶어.)':'(Tớ muốn tạo nên một lớp học ấm áp, biết chờ đợi nhịp độ của từng người.)',
  '(…나, 다음 학기 반장 선거에 나가 볼까?)':'(…Hay học kỳ sau mình ứng cử lớp trưởng nhỉ?)',
- '(오늘부터 새 학교… 여기 말은 하나도 모르는데.)':'(Từ hôm nay là trường mới… mà tớ chẳng biết từ nào ở đây cả.)'
+ '(오늘부터 새 학교… 여기 말은 아직 서툰데.)':'(Từ hôm nay là trường mới… mà tiếng ở đây tớ vẫn còn bập bẹ.)'
 });
 // --- added 2026-10-21: clear find goal (all), Chinese (learn Korean in Chinese). Needs a native-speaker check.
 Object.assign(window.T.en, {'「{x}」 찾기 — 🔊를 듣고 같은 소리가 나는 걸 눌러 봐':'Find “{x}” — listen to 🔊 and tap the thing that sounds the same'});
@@ -529,7 +529,7 @@ window.T.zh = {
  '(그리고 나도 수아처럼 멋있는 사람이 되고 싶다는 생각을 했어.)':'（我也想成为像秀雅一样帅气的人。）',
  '(나는 한 명 한 명, 각자 속도를 기다려 주는 따뜻한 교실을 만들고 싶어.)':'（我想创造一个温暖的班级，耐心等待每个人按自己的节奏前进。）',
  '(…나, 다음 학기 반장 선거에 나가 볼까?)':'（……下学期，我要不要去竞选班长呢？）',
- '(오늘부터 새 학교… 여기 말은 하나도 모르는데.)':'（从今天起是新学校了……可这里的话我一句也听不懂。）',
+ '(오늘부터 새 학교… 여기 말은 아직 서툰데.)':'（从今天起是新学校了……可这里的话我还说不好。）',
  '아직 없음':'还没有',
  '이사 온 다음 날 아침. 아직 풀지 못한 상자들이 쌓여 있다.':'搬家后的第二天早上。还没拆开的箱子堆在一旁。',
  '괴짜교실 반장되기':'怪咖班级：竞选班长',
