@@ -151,6 +151,13 @@ let LANG='id',UI='ko',W='';
 function tr(s){if(s==null)return s;let t=UI==='ko'?s:((window.T&&T[UI]&&T[UI][s])??s);const L=UI==='ko'?LANGS[LANG].name:((T[UI]&&T[UI]['한국어'])||'Korean');return t.replace(/\{w\}/g,W).replace(/\{m\}/g,LANGS[LANG].words.mom).replace(/\{L\}/g,L)}
 // a person whose name is a taught word is labelled with that word (once found), never with its meaning
 function nm(id){if(id==='mom')return (typeof FOUND!=='undefined'&&FOUND.has('mom'))?LANGS[LANG].words.mom:'';return tr(NAME[id]||'')}
+// one line per person for "talked already today" — fits any day
+const AGAIN={mom_am:['mom','smile','얼른 다녀와~ 늦겠다.'],mom_pm:['mom','relieved','오늘 많이 피곤하지? 푹 쉬어.'],
+ sua:['sua','angry','용건 있으면 짧게. 나 할 일 많아.'],minho:['minho','angry','또 뭐야? 볼일 없으면 저리 가.'],siwoo:['siwoo','sad','……'],
+ hyeeun:['hyeeun','smile','왜, 할 말 더 있어? 없으면 나 간다~'],yuna:['yuna','surprised','어, 또 왔네… 혹시 내가 뭐 잘못했어?'],
+ junho:['junho','laugh','왜? 나 지금 몸 풀어야 돼. 이따 보자!'],haeun:['haeun','smile','나 이제 동생 챙기러 가 봐야 해. 다음에 얘기하자~'],
+ yena:['yena','laugh','딴따라… 아, 또 너야? 이 노래 끝나면 얘기하자~'],jihoon:['jihoon','surprised','잠깐, 지금 빛 좋은데… 다음에 얘기해!']};
+const SPOKE=new Set();// who already had their talk in this scene
 const TALKED=new Set();let CHOICE=null;const HEART={};
 // ---------- state ----------
 let HERO='hero_f',MAP=null,me=null,npcs=[],goal=null,busy=false,cam={x:0,y:0,s:1},grid=null;
@@ -256,7 +263,7 @@ const pangSaid={};function tapPang(){speak('dog');const ls=PANG[MAP];const first
 // ---------- dialogue ----------
 const talk=document.getElementById('talk'),faceEl=document.getElementById('face'),whoEl=document.getElementById('who'),lineEl=document.getElementById('line'),chEl=document.getElementById('choices'),nextEl=document.getElementById('next'),sceneEl=document.getElementById('scene');
 let queue=[],talkOn=false,qDone=null;
-function say(lines,done){busy=true;queue=lines.slice();qDone=done;talkOn=true;talk.classList.add('on');advance()}
+function say(lines,done){if(touring){tourQ.push(()=>say(lines,done));return}busy=true;queue=lines.slice();qDone=done;talkOn=true;talk.classList.add('on');advance()}
 function advance(){if(chEl.classList.contains('on'))return;const l=queue.shift();hideSay();if(!l){talk.classList.remove('on');talkOn=false;busy=false;const d=qDone;qDone=null;d&&d();return}
  if(typeof l==='function'){l();return advance()}
  const[who,expr,text]=l;const fid=who==='me'||who==='think'?HERO:who;
@@ -301,10 +308,20 @@ function bgm(name){if(bgmNow===name)return;const old=BGM[bgmNow];bgmNow=name;con
  a.volume=0;a.currentTime=0;if(muted)return;a.play().catch(()=>{});let v=0;const t=setInterval(()=>{v+=.03;if(v>=BGM_VOL){v=BGM_VOL;clearInterval(t)}a.volume=v},60)}
 function toggleMute(){muted=!muted;try{localStorage.setItem('mute',muted?'1':'0')}catch(e){}const a=BGM[bgmNow];if(a){if(muted)a.pause();else{a.volume=BGM_VOL;a.play().catch(()=>{})}}document.getElementById('mute').textContent=muted?'🔇':'🔊'}
 // ---------- maps ----------
-function fade(cb){const f=document.getElementById('fader');f.style.opacity=1;busy=true;setTimeout(()=>{cb();setTimeout(()=>{f.style.opacity=0;busy=false},150)},520)}
-let panHinted=false;function load(id,extra){if(!panHinted&&innerWidth<innerHeight){panHinted=true;setTimeout(()=>{const d=document.createElement('div');d.className='panhint';d.textContent=tr('👆 화면을 끌어서 둘러볼 수 있어요');document.body.appendChild(d);setTimeout(()=>d.remove(),4200)},1200)}pan=null;MAP=id;world.querySelectorAll('.sp').forEach(e=>e.remove());mapimg.src=MAPS[id].img;buildGrid();const[sx,sy]=MAPS[id].start;me=sprite(HERO,sx,sy);npcs=(PEOPLE[id]||[]).concat(extra||[]).map(([n,x,y,s])=>sprite(n,x,y,s));
+function fade(cb){const f=document.getElementById('fader');f.style.opacity=1;busy=true;setTimeout(()=>{cb();setTimeout(()=>{f.style.opacity=0;if(!touring)busy=false},150)},520)}
+// places: the morning and evening kitchen are the same place
+const PLACE={home_am:'home',home_pm:'home',class:'class'};const SEEN=new Set();let touring=false;const tourQ=[];
+function tour(){touring=true;busy=true;const s=cam.s,W=innerWidth,H=innerHeight,maxX=Math.max(0,MW*s-W),maxY=Math.max(0,MH*s-H);
+ const horiz=maxX>=maxY;const a=horiz?{x:0,y:maxY/2}:{x:maxX/2,y:0},b=horiz?{x:maxX,y:maxY/2}:{x:maxX/2,y:maxY};
+ const dist=horiz?maxX:maxY,sweep=dist<40?900:Math.min(4200,1400+dist*2.2);const t0=performance.now()+350;
+ const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;pan={...a};follow();
+ function back(){const s0=performance.now(),from={...pan};let tx=me.x*s-W/2,ty=(me.y-80)*s-H/2;tx=Math.max(0,Math.min(maxX,tx));ty=Math.max(0,Math.min(maxY,ty));
+  (function step(now){const k=Math.min(1,(now-s0)/900),e=ease(k);pan={x:from.x+(tx-from.x)*e,y:from.y+(ty-from.y)*e};follow();if(k<1)requestAnimationFrame(step);else{pan=null;touring=false;busy=false;follow();while(tourQ.length)tourQ.shift()()}})(s0)}
+ (function step(now){const k=Math.max(0,Math.min(1,(now-t0)/sweep)),e=ease(k);pan={x:a.x+(b.x-a.x)*e,y:a.y+(b.y-a.y)*e};follow();if(k<1)requestAnimationFrame(step);else setTimeout(back,350)})(performance.now())}
+let panHinted=false;function load(id,extra){if(!panHinted&&innerWidth<innerHeight){panHinted=true;setTimeout(()=>{if(touring){tourQ.push(()=>setTimeout(()=>{const d=document.createElement('div');d.className='panhint';d.textContent=tr('👆 화면을 끌어서 둘러볼 수 있어요');document.body.appendChild(d);setTimeout(()=>d.remove(),4200)},600));return}const d=document.createElement('div');d.className='panhint';d.textContent=tr('👆 화면을 끌어서 둘러볼 수 있어요');document.body.appendChild(d);setTimeout(()=>d.remove(),4200)},1200)}pan=null;MAP=id;world.querySelectorAll('.sp').forEach(e=>e.remove());mapimg.src=MAPS[id].img;buildGrid();const[sx,sy]=MAPS[id].start;me=sprite(HERO,sx,sy);npcs=(PEOPLE[id]||[]).concat(extra||[]).map(([n,x,y,s])=>sprite(n,x,y,s));
  world.querySelectorAll('.item').forEach(e=>e.remove());if(id==='home_am'&&!FOUND.has('notebook')){const it=document.createElement('img');it.className='item';it.src='items/notebook.png';it.style.cssText='position:absolute;width:58px;left:991px;top:478px;transform:rotate(-12deg);z-index:400;pointer-events:none';world.appendChild(it)}
- setTimeout(tagAll,600);placePang();fit();follow()}
+ setTimeout(tagAll,600);placePang();fit();follow();
+ const place=PLACE[id]||id;if(!SEEN.has(place)){SEEN.add(place);tour()}}
 // preload every picture so maps, scenes and faces appear at once
 const PRE=[];function preload(){const ids=['hero_f','hero_m','mom','siwoo','minho','sua','yuna','junho','haeun','jihoon','yena','hyeeun'];const ex=['smile','laugh','surprised','sad','angry','relieved'];
  const list=['maps/home_am.jpg','maps/class.jpg','maps/home_pm.jpg','items/notebook.png','cards/pcase.jpg','scenes/jar.jpg','scenes/sua2.jpg','scenes/threat_f.jpg','scenes/threat_m.jpg','scenes/intro_f.jpg','scenes/intro_m.jpg','pang/sit.png','pang/happy.png','scenes/dinner.jpg','scenes/night.jpg','cards/notebook.jpg','cards/bag.jpg','cards/pencil.jpg'];
@@ -314,10 +331,11 @@ function loadMap(id,cb){const im=new Image();im.onload=im.onerror=cb;im.src=MAPS
 let stage='home_am';
 function talkTo(id){
  if(stage==='home_am'&&id==='mom'){say([['mom','smile','학교 갈 때 가져갈 거 하나 놔뒀어. 찾아 봐.']]);return}
- if(stage==='leave'&&id==='mom'){say([['mom','smile','신발 신고 가야지~ 현관은 왼쪽이야.']]);return}
+ if(stage==='leave'&&id==='mom'){say([AGAIN.mom_am]);return}
+ if(stage==='class'&&TALKED.has(id)&&AGAIN[id]){say([AGAIN[id]]);return}
  if(stage==='class'){const lines=CHAT[id]||[];const first=!TALKED.has(id);say(lines,()=>{if(first&&id!=='sua'){TALKED.add(id);heart(id,1)}const n=TALKED.size;if(n>=3){incident()}else setGoal('반 친구들에게 말 걸어 보기',friendsLeft(),id2=>TALKED.has(id2),` (${n}/3)`)});return}
- if(stage==='after'){say(CHAT[id]||[['nar','','…']]);return}
- if(stage==='home_pm'&&id==='mom'){say([['mom','smile','손 씻고 와. 밥 먹자.']]);return}
+ if(stage==='after'||stage==='sit'){say([AGAIN[id]||['nar','','…']]);return}
+ if(stage==='home_pm'&&id==='mom'){say([AGAIN.mom_pm]);return}
  say(CHAT[id]||[])}
 function morning(){find('mom',()=>say([['mom','surprised','어머, {m}를 불렀네? 일어났구나!'],['mom','smile','오늘 새 학교 첫날이지?'],['mom','relieved','말이 잘 안 나와도 괜찮아. 천천히 보고, 천천히 들으면 돼.'],['mom','smile','아, 학교 갈 때 가져갈 거 하나 놔뒀는데. 찾아 볼래?']],()=>
  find('notebook',()=>{world.querySelectorAll('.item').forEach(e=>e.remove());say([['mom','laugh','맞아, 그 {w}! 새 학교에서 써.'],['me','smile','…응. 다녀올게.'],['mom','laugh','다녀와! 저녁에 오늘 이야기 들려줘.']],()=>{stage='leave';setGoal('현관으로 나가 학교 가기','door')})},'「{x}」 찾기')),'「{x}」에게 인사하기')}
