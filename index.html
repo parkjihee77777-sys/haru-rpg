@@ -70,6 +70,10 @@ html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family
 /* break lines between words, never inside a Korean word; short lines (goal, titles, bubbles) balanced */
 body,button{word-break:keep-all;overflow-wrap:break-word}
 #goal,.card h2,.card p,.say,.bubble,#choices button,.panhint{text-wrap:balance}
+.gauge{position:absolute;transform:translate(-50%,-100%);z-index:3900;display:flex;align-items:center;gap:4px;pointer-events:none}
+.gauge i{color:#ff6f91;font-style:normal;font-size:20px;text-shadow:0 1px 2px rgba(0,0,0,.25)}
+.gauge b{display:block;width:70px;height:12px;background:rgba(255,255,255,.85);border:2px solid #fff;border-radius:999px;box-shadow:0 1px 3px rgba(0,0,0,.25);overflow:hidden}
+.gauge s{display:block;height:100%;background:linear-gradient(90deg,#ff9bb3,#ff6f91);border-radius:999px;transition:width .6s}
 #mute{position:fixed;left:12px;top:10px;z-index:21;font-size:18px;background:var(--paper);border:3px solid var(--line);border-radius:999px;width:42px;height:42px;box-shadow:0 3px 0 var(--line);cursor:pointer;padding:0}
 .bubble{position:absolute;transform:translate(-50%,14px);z-index:5000;font:inherit;font-weight:800;font-size:22px;white-space:nowrap;background:#fff;color:var(--ink);border:4px solid var(--mint);border-radius:18px;box-shadow:0 5px 0 #3f9a7c;padding:10px 18px;cursor:pointer}
 .tag{position:absolute;transform:translate(-50%,-100%);z-index:4000;background:#fff3c4;border:3px solid #e6c15a;border-radius:12px;padding:2px 10px;font-weight:800;font-size:20px;pointer-events:none;white-space:nowrap}
@@ -244,9 +248,11 @@ function find(k,done,goalText){FIND=k;FIND_DONE=done;const g=document.getElement
  g.onclick=()=>speak(k);goal={target:null};setTimeout(()=>speak(k),400)}
 let bubble=null;function closeBubble(){if(bubble){bubble.remove();bubble=null}}
 function tapThing(k,x,y){speak(k);if(!FIND)return;closeBubble();bubble=document.createElement('button');bubble.className='bubble';bubble.textContent=tr('이건 {x}이다').replace('{x}',wordOf(FIND));bubble.style.left=x+'px';bubble.style.top=y+'px';
- bubble.onpointerdown=ev=>ev.stopPropagation();bubble.onclick=ev=>{ev.stopPropagation();closeBubble();if(k===FIND){chime();FOUND.add(k);tagAll();const d=FIND_DONE;FIND=null;FIND_DONE=null;const g=document.getElementById('goal');g.onclick=null;g.textContent='';goal=null;showBag();d&&d()}else{buzz();setTimeout(()=>speak(k),350);setTimeout(()=>speak(FIND),1300)}};world.appendChild(bubble);keepOnScreen(bubble)}
+ bubble.onpointerdown=ev=>ev.stopPropagation();const bornAt=performance.now();bubble.onclick=ev=>{ev.stopPropagation();if(performance.now()-bornAt<350)return;closeBubble();if(k===FIND){chime();FOUND.add(k);tagAll();const d=FIND_DONE;FIND=null;FIND_DONE=null;const g=document.getElementById('goal');g.onclick=null;g.textContent='';goal=null;showBag();d&&d()}else{buzz();setTimeout(()=>speak(k),350);setTimeout(()=>speak(FIND),1300)}};world.appendChild(bubble);keepOnScreen(bubble)}
 function keepOnScreen(el){const r=el.getBoundingClientRect();let dx=0,dy=0;if(r.left<8)dx=8-r.left;else if(r.right>innerWidth-8)dx=innerWidth-8-r.right;if(r.bottom>innerHeight-8)dy=innerHeight-8-r.bottom;if(dx)el.style.left=(parseFloat(el.style.left)+dx/cam.s)+'px';if(dy)el.style.top=(parseFloat(el.style.top)+dy/cam.s)+'px'}
-function tagAll(){world.querySelectorAll('.tag').forEach(t=>t.remove());for(const n of npcs){const k=WORDKEY[n.id];if(k&&FOUND.has(k)&&n.h){const t=document.createElement('div');t.className='tag';t.textContent=wordOf(k);t.style.left=n.x+'px';t.style.top=(n.y-n.h-8)+'px';world.appendChild(t)}}}
+// friendship gauge over the head of every friend you got closer to (full at 10 hearts)
+const GAUGE_MAX=10;function gauges(){world.querySelectorAll('.gauge').forEach(g=>g.remove());for(const n of npcs){const v=HEART[n.id];if(!v||!n.h)continue;const g=document.createElement('div');g.className='gauge';g.innerHTML=`<i>♥</i><b><s style="width:${Math.min(100,v/GAUGE_MAX*100)}%"></s></b>`;g.style.left=n.x+'px';g.style.top=(n.y-n.h-(WORDKEY[n.id]&&FOUND.has(WORDKEY[n.id])?44:10))+'px';world.appendChild(g)}}
+function tagAll(){gauges();world.querySelectorAll('.tag').forEach(t=>t.remove());for(const n of npcs){const k=WORDKEY[n.id];if(k&&FOUND.has(k)&&n.h){const t=document.createElement('div');t.className='tag';t.textContent=wordOf(k);t.style.left=n.x+'px';t.style.top=(n.y-n.h-8)+'px';world.appendChild(t)}}}
 function showBag(){const ks=['notebook'].filter(k=>FOUND.has(k));const b=document.getElementById('bag');if(!ks.length){b.style.display='none';return}b.style.display='block';b.textContent='📒 '+ks.map(wordOf).join(' · ')}
 function buzz(){try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();const t=AC.currentTime,o=AC.createOscillator(),g=AC.createGain();o.type='square';o.frequency.value=180;g.gain.setValueAtTime(.12,t);g.gain.exponentialRampToValueAtTime(.0001,t+.35);o.connect(g).connect(AC.destination);o.start(t);o.stop(t+.36)}catch(e){}}
 // ---------- Pangpang ----------
@@ -288,14 +294,15 @@ function showSay(who,text){const p=speakerPos(who);if(!p)return false;
  {const r=sayEl.getBoundingClientRect();let dx=0;if(r.left<8)dx=8-r.left;else if(r.right>innerWidth-8)dx=innerWidth-8-r.right;if(dx){sayEl.style.left=(parseFloat(sayEl.style.left)+dx/cam.s)+'px';sayEl.style.setProperty('--tail',(-dx/cam.s)+'px')}}
  return true}
 function ask(prompt,opts,cb){busy=true;talkOn=true;talk.classList.add('on');faceEl.className='';faceEl.style.backgroundImage=`url(faces/${HERO}_surprised.jpg)`;whoEl.textContent=nm('me');lineEl.className='';lineEl.textContent=tr(prompt);nextEl.style.display='none';chEl.innerHTML='';chEl.classList.add('on');
- opts.forEach(o=>{const b=document.createElement('button');b.textContent=tr(o.text);b.onclick=ev=>{ev.stopPropagation();chEl.classList.remove('on');chEl.innerHTML='';talk.classList.remove('on');talkOn=false;busy=false;cb(o)};chEl.appendChild(b)});requestAnimationFrame(fitScene)}
+ const shownAt=performance.now();// the tap that closed the last line must not also pick a choice
+ opts.forEach(o=>{const b=document.createElement('button');b.textContent=tr(o.text);b.onclick=ev=>{ev.stopPropagation();if(performance.now()-shownAt<700)return;chEl.classList.remove('on');chEl.innerHTML='';talk.classList.remove('on');talkOn=false;busy=false;cb(o)};chEl.appendChild(b)});requestAnimationFrame(fitScene)}
 // the picture fills the space above the talk panel (black behind it), so nothing important hides under the panel
 function fitScene(){if(!sceneEl.classList.contains('on'))return;const r=talk.classList.contains('on')?talk.getBoundingClientRect():null;const availH=r?r.top-6:innerHeight;const w=Math.min(innerWidth,availH*16/9),hh=w*9/16;sceneEl.style.backgroundSize=`${w}px ${hh}px`;sceneEl.style.backgroundPosition=`center ${Math.max(0,(availH-hh)/2)}px`}
 addEventListener('resize',fitScene);
 function scene(img,lines,done,keep){busy=true;sceneEl.style.backgroundImage=`url(scenes/${img}.jpg)`;sceneEl.classList.add('on');say(lines,()=>{if(!keep)sceneEl.classList.remove('on');done&&done()})}
 sceneEl.addEventListener('pointerdown',e=>{e.stopPropagation();advance()});
 function toast(t){const d=document.createElement('div');d.textContent=t;document.getElementById('toast').appendChild(d);setTimeout(()=>d.remove(),1900)}
-function heart(id,n){if(!n)return;HEART[id]=(HEART[id]||0)+n;toast(`${nm(id)} ♥ +${n}`);chime()}
+function heart(id,n){if(!n)return;HEART[id]=(HEART[id]||0)+n;setTimeout(gauges,50);toast(`${nm(id)} ♥ +${n}`);chime()}
 // ---------- sound ----------
 let AC=null;function chime(){try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();const t=AC.currentTime;[880,1320].forEach((f,i)=>{const o=AC.createOscillator(),g=AC.createGain();o.frequency.value=f;o.type='sine';g.gain.setValueAtTime(.0001,t+i*.12);g.gain.exponentialRampToValueAtTime(.2,t+i*.12+.02);g.gain.exponentialRampToValueAtTime(.0001,t+i*.12+.35);o.connect(g).connect(AC.destination);o.start(t+i*.12);o.stop(t+i*.12+.4)})}catch(e){}}
 const SND={};function speak(k){duck(1800);const key=LANG+'/'+k;const f=SND[key]||(SND[key]=new Audio(`snd/${LANG}/${k}.mp3`));try{f.currentTime=0;f.play();return}catch(e){}try{const u=new SpeechSynthesisUtterance(LANGS[LANG].words[k]);u.lang=LANGS[LANG].tts;u.rate=.85;const v=speechSynthesis.getVoices().find(v=>v.lang.startsWith(LANG));if(v)u.voice=v;speechSynthesis.cancel();speechSynthesis.speak(u)}catch(e){}}
@@ -324,7 +331,7 @@ let panHinted=false;function load(id,extra){setGoal('');closeBubble();if(!panHin
  const place=PLACE[id]||id;if(!SEEN.has(place)){SEEN.add(place);tour()}}
 // preload every picture so maps, scenes and faces appear at once
 const PRE=[];function preload(){const ids=['hero_f','hero_m','mom','siwoo','minho','sua','yuna','junho','haeun','jihoon','yena','hyeeun'];const ex=['smile','laugh','surprised','sad','angry','relieved'];
- const list=['maps/home_am.jpg','maps/class.jpg','maps/home_pm.jpg','items/notebook.png','cards/pcase.jpg','scenes/jar.jpg','scenes/sua2.jpg','scenes/threat_f.jpg','scenes/threat_m.jpg','scenes/intro_f.jpg','scenes/intro_m.jpg','pang/sit.png','pang/happy.png','scenes/dinner.jpg','scenes/night.jpg','cards/notebook.jpg','cards/bag.jpg','cards/pencil.jpg'];
+ const list=['maps/home_am.jpg','maps/class.jpg','maps/home_pm.jpg','items/notebook.png','cards/pcase.jpg','scenes/jar.jpg','scenes/sua2.jpg','scenes/threat_f.jpg','scenes/threat_m.jpg','scenes/intro_f.jpg','scenes/intro_m.jpg','pang/sit.png','pang/happy.png','scenes/dinner.jpg','scenes/night.jpg','scenes/dinner_m.jpg','scenes/night_m.jpg','cards/notebook.jpg','cards/bag.jpg','cards/pencil.jpg'];
  ['yuna','haeun','yena'].forEach(i=>list.push(`seat/${i}.png`));ids.forEach(i=>{list.push(`walk/${i}.png`);ex.forEach(e=>list.push(`faces/${i}_${e}.jpg`))});list.forEach(s=>{const im=new Image();im.src=s;PRE.push(im)})}
 function loadMap(id,cb){const im=new Image();im.onload=im.onerror=cb;im.src=MAPS[id].img}
 // ---------- story ----------
@@ -367,7 +374,7 @@ function deskFind(k,done){busy=true;const items=['pcase','notebook','pencil'];co
  m.classList.add('on');setTimeout(()=>speak(k),300);document.getElementById('again').onclick=()=>speak(k);const okb=document.getElementById('okb');okb.textContent=tr('이건 {x}이다').replace('{x}',wordOf(k));
  c.querySelectorAll('.pick button').forEach(b=>b.onclick=()=>{sel=b.dataset.k;speak(sel);c.querySelectorAll('.pick button').forEach(x=>x.classList.toggle('ok',x===b));okb.style.visibility='visible'});
  okb.onclick=()=>{if(sel===k){chime();m.classList.remove('on');busy=false;done&&done()}else{buzz();const b=c.querySelector(`[data-k="${sel}"]`);b.classList.remove('ok');b.classList.add('no');setTimeout(()=>b.classList.remove('no'),400);setTimeout(()=>speak(k),600);okb.style.visibility='hidden'}}}
-function dinner(){scene('dinner',[['mom','laugh','왔구나! 손 씻고 와. 밥 먹자.'],['mom','smile','첫날 어땠어? 얼굴 보니까 할 말이 많은 것 같은데.'],['me','sad','반에서… 관찰 통이 깨졌어. 시우라는 애 거.']].concat(MOM[CHOICE]||[]).concat([['me','relieved','그런데 민호가 나한테 다가왔을 때… 반장 수아가 막아 줬어.'],['mom','laugh','든든한 친구가 있네. 내일은 수아한테 고맙다고 해 볼까?'],['mom','smile','오늘 일, 잊어버리기 전에 {w}에 적어 두렴.']]),()=>{speak('notebook');night()})}
+function dinner(){scene('dinner'+(HERO==='hero_m'?'_m':''),[['mom','laugh','왔구나! 손 씻고 와. 밥 먹자.'],['mom','smile','첫날 어땠어? 얼굴 보니까 할 말이 많은 것 같은데.'],['me','sad','반에서… 관찰 통이 깨졌어. 시우라는 애 거.']].concat(MOM[CHOICE]||[]).concat([['me','relieved','그런데 민호가 나한테 다가왔을 때… 반장 수아가 막아 줬어.'],['mom','laugh','든든한 친구가 있네. 내일은 수아한테 고맙다고 해 볼까?'],['mom','smile','오늘 일, 잊어버리기 전에 {w}에 적어 두렴.']]),()=>{speak('notebook');night()})}
 const MOM={
  A:[['me','relieved','그래서… 시우 앞을 막아섰어.'],['mom','surprised','무서웠을 텐데 친구 앞을 지켜 줬구나.'],['mom','relieved','소리에 놀란 친구에겐 말보다 조용한 그늘이 먼저란다.']],
  B:[['me','relieved','흙이랑 번데기를… {w}에 모아 줬어.'],['mom','laugh','흙과 번데기를 모아 주었네. 친구가 아끼는 작은 생명을 같이 아껴 준 거야.']],
@@ -380,7 +387,7 @@ function quiz(k,done){busy=true;const cards=QUIZ[k].slice().sort(()=>Math.random
  c.innerHTML=`<h2>${tr('엄마가 말한 말은 어느 거?')}</h2><p><button class="spk" id="again">🔊 ${tr('다시 듣기')}</button></p><div class="pick">${cards.map(q=>`<button data-k="${q}"><img src="${PIC[q]}" alt=""></button>`).join('')}</div>`;
  m.classList.add('on');setTimeout(()=>speak(k),300);document.getElementById('again').onclick=()=>speak(k);
  c.querySelectorAll('.pick button').forEach(b=>b.onclick=()=>{if(b.dataset.k===k){b.classList.add('ok');chime();setTimeout(()=>{m.classList.remove('on');speak(k);busy=false;done&&done()},800)}else{b.classList.add('no');buzz();setTimeout(()=>b.classList.remove('no'),400);setTimeout(()=>speak(k),500)}})}
-function night(){setGoal('');bgm('night');scene('night',[['nar','','밤. {w}를 펼쳤다.'],['think','relieved','(오늘 수아가 반 규칙으로 나를 지켜줬어. 정말 멋있었어.)'],['think','smile','(그리고 나도 수아처럼 멋있는 사람이 되고 싶다는 생각을 했어.)'],['think','relieved','(나는 한 명 한 명, 각자 속도를 기다려 주는 따뜻한 교실을 만들고 싶어.)'],['think','surprised','(…나, 다음 학기 반장 선거에 나가 볼까?)']],end)}
+function night(){setGoal('');bgm('night');scene('night'+(HERO==='hero_m'?'_m':''),[['nar','','밤. {w}를 펼쳤다.'],['think','relieved','(오늘 수아가 반 규칙으로 나를 지켜줬어. 정말 멋있었어.)'],['think','smile','(그리고 나도 수아처럼 멋있는 사람이 되고 싶다는 생각을 했어.)'],['think','relieved','(나는 한 명 한 명, 각자 속도를 기다려 주는 따뜻한 교실을 만들고 싶어.)'],['think','surprised','(…나, 다음 학기 반장 선거에 나가 볼까?)']],end)}
 function end(){const m=document.getElementById('modal'),c=document.getElementById('mcard');const hs=Object.entries(HEART).map(([i,n])=>`${nm(i)} ♥${n}`).join(' · ')||tr('아직 없음');
  c.innerHTML=`<h2>${tr('1일차 끝 — 반장 선거 출마 결심!')}</h2><p>${tr('오늘 배운 낱말')}</p><div class="pick">${['mom','notebook'].map(k=>`<button onclick="speak('${k}')"><img src="${PIC[k]}" alt=""><span class="word" style="display:block;margin:6px 0 0">${wordOf(k)} 🔊</span></button>`).join('')}</div><p>${tr('친해진 친구')}: ${hs}</p><p style="color:#8a7a6a">${tr('2일차부터는 하루에 두 친구를 골라 만나요. (준비 중)')}</p><button class="big" id="re">${tr('처음부터 다시')}</button>`;m.classList.add('on');document.getElementById('re').onclick=()=>location.reload()}
 // ---------- start ----------
