@@ -138,8 +138,8 @@ function end2(){const n=DAY,next=n+1,hasNext=next===3&&Object.keys(window.D3||{}
 let HEART_D1=null;
 d2Merge();
 // ---- zoom: tap near a cluster of small things → that part of the picture opens big; tap things there to hear them / "This is …" ----
-function zoomAt(x,y){return(ZOOMS[MAP]||[]).find(z=>x>=z[0]&&x<=z[2]&&y>=z[1]&&y<=z[3])}
-function showZoomMarks(){world.querySelectorAll('.zmark').forEach(e=>e.remove());for(const z of ZOOMS[MAP]||[]){const d=document.createElement('div');d.className='item zmark';d.textContent='🔍';d.style.cssText=`position:absolute;left:${z[2]-6}px;top:${z[1]+6}px;transform:translate(-100%,0);font-size:30px;z-index:4400;pointer-events:none;filter:drop-shadow(0 2px 2px rgba(0,0,0,.35));opacity:.9`;world.appendChild(d)}}
+function zoomAt(x,y){if(DAY<2)return null;return(ZOOMS[MAP]||[]).find(z=>x>=z[0]&&x<=z[2]&&y>=z[1]&&y<=z[3])}
+function showZoomMarks(){world.querySelectorAll('.zmark').forEach(e=>e.remove());if(DAY<2)return;for(const z of ZOOMS[MAP]||[]){const d=document.createElement('div');d.className='item zmark';d.textContent='🔍';d.style.cssText=`position:absolute;left:${z[2]-6}px;top:${z[1]+6}px;transform:translate(-100%,0);font-size:30px;z-index:4400;pointer-events:none;filter:drop-shadow(0 2px 2px rgba(0,0,0,.35));opacity:.9`;world.appendChild(d)}}
 function openZoom(z){const m=document.getElementById('modal'),c=document.getElementById('mcard');busy=true;closeBubble();
  const zw=z[2]-z[0],zh=z[3]-z[1],W2=Math.min(innerWidth-40,560),k=W2/zw,H2=zh*k;
  c.innerHTML=`<div class="zoomv" style="position:relative;width:${W2}px;height:${H2}px;margin:0 auto;border-radius:16px;overflow:hidden;background:url(${mapimg.getAttribute('src')}) ${-z[0]*k}px ${-z[1]*k}px/${MW*k}px ${MH*k}px no-repeat"></div><button class="big" id="zclose">✕</button>`;
