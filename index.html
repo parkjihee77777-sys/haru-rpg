@@ -66,6 +66,7 @@ html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family
 .lgroup{display:flex;align-items:center;gap:10px;margin:18px 2px 0;color:#9a7a55;font-size:13px;font-weight:700;letter-spacing:.02em}
 .lgroup::after{content:'';flex:1;height:1px;background:#eadcc4}
 .lcard{border-width:2px;box-shadow:0 8px 24px rgba(40,25,10,.25)}.lcard h2{margin-bottom:2px}.lcard .sub{color:#8a7a6a;font-size:14px;margin:0}
+@media (max-height:520px){#talk{min-height:0;padding:8px 12px;bottom:6px;border-width:3px;box-shadow:0 3px 0 var(--line);gap:10px}#face{width:54px;height:54px;border-radius:12px;border-width:2px}#line{font-size:16px;line-height:1.4}#who{font-size:13px;margin-bottom:1px}#next{bottom:4px;font-size:15px}#choices button{padding:7px 12px;font-size:14px}#choices{gap:6px;margin-top:6px}}
 #mute{position:fixed;left:12px;top:10px;z-index:21;font-size:18px;background:var(--paper);border:3px solid var(--line);border-radius:999px;width:42px;height:42px;box-shadow:0 3px 0 var(--line);cursor:pointer;padding:0}
 .bubble{position:absolute;transform:translate(-50%,14px);z-index:5000;font:inherit;font-weight:800;font-size:22px;white-space:nowrap;background:#fff;color:var(--ink);border:4px solid var(--mint);border-radius:18px;box-shadow:0 5px 0 #3f9a7c;padding:10px 18px;cursor:pointer}
 .tag{position:absolute;transform:translate(-50%,-100%);z-index:4000;background:#fff3c4;border:3px solid #e6c15a;border-radius:12px;padding:2px 10px;font-weight:800;font-size:20px;pointer-events:none;white-space:nowrap}
@@ -107,7 +108,8 @@ const MAPS={
  home_pm:{img:'maps/home_pm.jpg',...KITCHEN,start:[260,600]},
  class:{img:'maps/class.jpg',walk:[],rects:[R(200,230,1460,295),R(552,230,652,830),R(1003,230,1103,830),R(160,800,1100,830),R(552,800,1040,910)],block:[R(720,140,960,280)],start:[1420,262]}
 };
-const EXITS={home_am:{door:[170,550]},class:{door:[1440,262],seat:[1055,590]}};
+const EXITS={home_am:{door:[170,550]},class:{door:[1440,262],seat:[770,470]}};
+const SEAT_WALK=[602,500];// aisle next to my chair
 // things you can tap on each map: [word key, x, y, radius] (map px). Tapping one says its name in the language being learned.
 const KITCHEN_OBJ=[['table',911,500,120],['chair',744,568,55],['chair',886,660,55],['fridge',1521,360,110],['box',385,293,90],['box',535,184,70],['shoes',150,502,45]];
 const OBJ={home_am:KITCHEN_OBJ.concat([['notebook',1020,500,42]]),home_pm:KITCHEN_OBJ};
@@ -199,7 +201,7 @@ function onTap(e){if(sayEl&&talkOn){advance();return}if(busy||!me)return;const x
  const objs=(OBJ[MAP]||[]).filter(o=>!(o[0]==='notebook'&&FOUND.has('notebook'))).slice().sort((a,b)=>a[3]-b[3]);
  const oh=objs.find(o=>Math.hypot(x-o[1],y-o[2])<o[3]);
  const ex=goal&&goal.target==='door'&&EXITS[MAP]&&EXITS[MAP].door;if(ex&&Math.hypot(x-ex[0],y-ex[1])<110){walkTo(ex[0],ex[1],()=>useDoor());return}
- const st=goal&&goal.target==='seat'&&EXITS[MAP].seat;if(st&&Math.hypot(x-st[0],y-st[1])<110){walkTo(st[0],st[1],()=>lesson());return}
+ const st=goal&&goal.target==='seat'&&EXITS[MAP].seat;if(st&&Math.hypot(x-st[0],y-st[1])<110){walkTo(SEAT_WALK[0],SEAT_WALK[1],()=>lesson());return}
  if(oh){tapThing(oh[0],oh[1],oh[2]+oh[3]*.35);return}
  walkTo(x,y)}
 function approach(n){if(n.seat){for(const dx of [125,-125,160,-160]){const tx=n.x+dx,ty=n.y+15;if(walkable(tx,ty)){walkTo(tx,ty,()=>{me.dir=dx>0?'left':'right';me.frame=0;draw(me);talkTo(n.id)});return}}}const side=me.x<n.x?-1:1;let tx=n.x+side*90,ty=n.y;if(!walkable(tx,ty)){tx=n.x;ty=n.y+60;if(!walkable(tx,ty)){tx=n.x-side*90}}walkTo(tx,ty,()=>{me.dir=Math.abs(n.x-me.x)>Math.abs(n.y-me.y)?(n.x<me.x?'left':'right'):(n.y<me.y?'up':'down');me.frame=0;draw(me);talkTo(n.id)})}
@@ -258,7 +260,7 @@ function advance(){if(chEl.classList.contains('on'))return;const l=queue.shift()
  if(who!=='nar'&&!sceneEl.classList.contains('on')&&showSay(who,tr(text))){talk.classList.remove('on');return}
  talk.classList.add('on');
  if(who==='nar'){faceEl.className='none';whoEl.textContent=''}else{faceEl.className='';faceEl.style.backgroundImage=`url(faces/${fid}_${expr||'smile'}.jpg)`;whoEl.textContent=who==='think'?tr('나 (속마음)'):nm(who)}
- lineEl.className=who==='think'?'think':'';lineEl.textContent=tr(text);nextEl.style.display=''}
+ lineEl.className=who==='think'?'think':'';lineEl.textContent=tr(text);nextEl.style.display='';requestAnimationFrame(fitScene)}
 talk.addEventListener('pointerdown',e=>{e.stopPropagation();if(e.target.closest('#choices'))return;advance()});
 // speech bubble above the speaker on the map; returns false when the speaker is not on the map (then the bottom panel is used)
 let sayEl=null;function hideSay(){if(sayEl){sayEl.remove();sayEl=null}}
@@ -274,7 +276,10 @@ function showSay(who,text){const p=speakerPos(who);if(!p)return false;
  {const r=sayEl.getBoundingClientRect();let dx=0;if(r.left<8)dx=8-r.left;else if(r.right>innerWidth-8)dx=innerWidth-8-r.right;if(dx){sayEl.style.left=(parseFloat(sayEl.style.left)+dx/cam.s)+'px';sayEl.style.setProperty('--tail',(-dx/cam.s)+'px')}}
  return true}
 function ask(prompt,opts,cb){busy=true;talkOn=true;talk.classList.add('on');faceEl.className='';faceEl.style.backgroundImage=`url(faces/${HERO}_surprised.jpg)`;whoEl.textContent=nm('me');lineEl.className='';lineEl.textContent=tr(prompt);nextEl.style.display='none';chEl.innerHTML='';chEl.classList.add('on');
- opts.forEach(o=>{const b=document.createElement('button');b.textContent=tr(o.text);b.onclick=ev=>{ev.stopPropagation();chEl.classList.remove('on');chEl.innerHTML='';talk.classList.remove('on');talkOn=false;busy=false;cb(o)};chEl.appendChild(b)})}
+ opts.forEach(o=>{const b=document.createElement('button');b.textContent=tr(o.text);b.onclick=ev=>{ev.stopPropagation();chEl.classList.remove('on');chEl.innerHTML='';talk.classList.remove('on');talkOn=false;busy=false;cb(o)};chEl.appendChild(b)});requestAnimationFrame(fitScene)}
+// the picture fills the space above the talk panel (black behind it), so nothing important hides under the panel
+function fitScene(){if(!sceneEl.classList.contains('on'))return;const r=talk.classList.contains('on')?talk.getBoundingClientRect():null;const availH=r?r.top-6:innerHeight;const w=Math.min(innerWidth,availH*16/9),hh=w*9/16;sceneEl.style.backgroundSize=`${w}px ${hh}px`;sceneEl.style.backgroundPosition=`center ${Math.max(0,(availH-hh)/2)}px`}
+addEventListener('resize',fitScene);
 function scene(img,lines,done,keep){busy=true;sceneEl.style.backgroundImage=`url(scenes/${img}.jpg)`;sceneEl.classList.add('on');say(lines,()=>{if(!keep)sceneEl.classList.remove('on');done&&done()})}
 sceneEl.addEventListener('pointerdown',e=>{e.stopPropagation();advance()});
 function toast(t){const d=document.createElement('div');d.textContent=t;document.getElementById('toast').appendChild(d);setTimeout(()=>d.remove(),1900)}
@@ -328,9 +333,9 @@ function incident(){setGoal('');busy=true;bgm('tense');
    ['nar','','민호가 성큼성큼 나에게 다가왔다.'],
    ['minho','angry','야, 전학생. 여기선 내 말이 규칙이야. 알아들어?'],
    ['nar','','민호가 내 책상을 쾅 치고, 어깨를 밀치려 손을 뻗었다.'],
-   ['think','surprised','(…말이 안 나와.)']],()=>{Object.entries(o.pts).forEach(([i,n])=>heart(i,n));setTimeout(suaEnters,300)}))},true)}),400)}
+   ['think','surprised','(…말이 안 나와.)']],()=>{Object.entries(o.pts).forEach(([i,n])=>heart(i,n));setTimeout(suaEnters,300)}))})},true),400)}
 function suaEnters(){scene('sua2',[['nar','','그때, 앞문이 드르륵 열렸다.'],['sua','angry','최민호. 손 내려.'],['sua','angry','교실에서 뛰지 않기, 친구 밀지 않기. 규칙 3번, 5번. 벌점 두 개.'],['minho','sad','…아, 진짜. 알았다고.'],['nar','','민호가 투덜대며 물러났다. 반장 수아였다.'],['sua','smile','넌 전학생이지? 다친 데 없으면 자리에 앉아. 우리 반 규칙은 내일까지 외워 와.'],['think','relieved','(수아가 막아 줬어…)'],['think','sad','(그런데… 시우가 괜찮은지는 아무도 묻지 않았어.)']],()=>{
-  heart('sua',1);bgm('day');stage='sit';npcs.push(sprite('sua',840,290));setGoal('내 자리에 앉기','seat')})}
+  heart('sua',1);bgm('day');stage='sit';npcs.push(sprite('sua',600,262));setGoal('내 자리에 앉기','seat')})}
 function lesson(){setGoal('');busy=true;fade(()=>{});setTimeout(()=>scene('intro_'+(HERO==='hero_m'?'m':'f'),[['nar','','1교시가 시작됐다. 선생님이 칠판에 내 이름을 쓰셨다.'],['nar','','선생님: 「오늘 새 친구가 왔어요. 자기소개 해 볼까요?」'],['me','sad','…아, 안녕… 나는…'],['nar','','말이 목에 걸려 나오지 않았다. 몇몇 아이들이 킥킥 웃었다.'],['hyeeun','smile','괜찮아, 천천히 해~'],['me','relieved','…잘 부탁해.'],['nar','','선생님: 「자, 다들 {w} 꺼내세요.」']],()=>deskFind('notebook',()=>{sceneEl.classList.remove('on');
   say([['nar','','나는 {w}에 오늘 시간표를 또박또박 적었다.'],['nar','','수업 내내, 시우는 깨진 관찰 통 조각만 만지작거렸다.'],['nar','','딩동댕— 마지막 종이 울렸다.']],()=>{stage='after';setGoal('수업 끝! 교실 문으로 나가 집에 가기','door')})}),true),700)}
 // desk: the things on my desk; tap one to hear its name, "This is {word}" under the tapped one
@@ -368,7 +373,8 @@ preload();requestAnimationFrame(loop);
 // test shortcuts: #sit (after Sua), #evening (back home) — for checking only
 const JUMP=location.hash.slice(1);
 if(JUMP){UI='ko';LANG='id';W=LANGS[LANG].words.notebook;HERO='hero_f';FOUND.add('mom');FOUND.add('notebook');CHOICE='B';bgm('day');
- if(JUMP==='sit'){stage='sit';load('class');npcs.push(sprite('sua',840,290));setGoal('내 자리에 앉기','seat')}
- else if(JUMP==='evening'){stage='after';load('class');useDoor()}}
+ if(JUMP==='sit'){stage='sit';load('class');npcs.push(sprite('sua',600,262));setGoal('내 자리에 앉기','seat')}
+ else if(JUMP==='evening'){stage='after';load('class');useDoor()}
+ else if(JUMP==='incident'){stage='class';load('class');TALKED.add('yuna');TALKED.add('junho');TALKED.add('haeun');incident()}}
 else start();
 </script></body></html>
