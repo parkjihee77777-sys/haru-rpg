@@ -17,6 +17,7 @@ html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family
 @keyframes bob{50%{margin-top:-14px}}@keyframes pulse{50%{opacity:.35}}
 #goal{position:fixed;left:50%;top:10px;transform:translateX(-50%);background:var(--paper);border:3px solid var(--line);border-radius:999px;padding:8px 18px;font-weight:700;font-size:16px;box-shadow:0 3px 0 var(--line);white-space:nowrap;max-width:calc(100% - 32px);overflow:hidden;text-overflow:ellipsis;z-index:20}
 #goal:empty{display:none}
+#goal.mini{font-size:13px;padding:4px 12px;opacity:.92;max-width:min(62vw,420px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border-width:2px;box-shadow:0 2px 0 var(--line)}#goal.mini .hint2{display:none}
 #toast{position:fixed;left:50%;top:60px;transform:translateX(-50%);z-index:30;display:flex;flex-direction:column;gap:6px;align-items:center;pointer-events:none}
 #toast div{background:#ff7aa2;color:#fff;font-weight:800;border-radius:999px;padding:6px 14px;animation:up 1.8s forwards}
 @keyframes up{0%{opacity:0;transform:translateY(8px)}15%{opacity:1;transform:none}80%{opacity:1}100%{opacity:0;transform:translateY(-10px)}}
@@ -85,7 +86,7 @@ body,button{word-break:keep-all;overflow-wrap:break-word}
 #goal:has(.hint2){border-radius:22px}
 .say{position:absolute;transform:translate(-50%,-100%);z-index:6000;background:#fff;border:2px solid var(--line);border-radius:20px;padding:10px 16px;font-size:22px;line-height:1.45;max-width:440px;width:max-content;box-shadow:0 2px 6px rgba(80,50,20,.18);pointer-events:none}
 @media (max-width:600px){.langs button{min-height:84px;padding:10px 6px}.langs b{font-size:15px}
-#goal{top:60px;white-space:normal;text-align:center;max-width:calc(100% - 24px)}#toast{top:130px}
+#goal{top:60px;white-space:normal;text-align:center;max-width:calc(100% - 24px)}#goal.mini{top:14px;white-space:nowrap}#toast{top:130px}
 .say{font-size:26px;max-width:min(440px,92vw)}.bubble{font-size:26px}}
 .say.below{transform:translate(-50%,0)}
 .say.below::after{bottom:auto;top:-12px;border-top:0;border-bottom:11px solid var(--line)}
@@ -124,7 +125,7 @@ const EXITS={home_am:{door:[170,550]},class:{door:[1440,262],seat:[770,470]}};
 const SEAT_WALK=[602,500];// aisle next to my chair
 // things you can tap on each map: [word key, x, y, radius] (map px). Tapping one says its name in the language being learned.
 const KITCHEN_OBJ=[['table',911,500,120],['chair',744,568,55],['chair',886,660,55],['fridge',1521,360,110],['box',385,293,90],['box',535,184,70],['shoes',150,502,45]];
-const OBJ={home_am:KITCHEN_OBJ.concat([['notebook',1020,500,42],['handkerchief',1018,500,42]]),home_pm:KITCHEN_OBJ};
+const OBJ={home_am:KITCHEN_OBJ.concat([['notebook',1020,500,42]]),home_pm:KITCHEN_OBJ};
 const PEOPLE={
  home_am:[['mom',1260,600]],
  home_pm:[['mom',1260,600]],
@@ -217,9 +218,9 @@ function onTap(e){if(sayEl&&talkOn){advance();return}if(busy||!me)return;const x
  closeBubble();
  if(hitPang(x,y)){tapPang();if(FIND)walkNear(PANG_AT[0],PANG_AT[1]);return}
  let hit=null,bd=1e9;for(const n of npcs){if(!n.h)continue;if(x>n.x-n.w*.4&&x<n.x+n.w*.4&&y>n.y-n.h&&y<n.y+10){const d=Math.abs(y-(n.y-n.h/2));if(d<bd){bd=d;hit=n}}}
- if(hit&&FIND&&WORDKEY[hit.id]){tapThing(WORDKEY[hit.id],hit.x,hit.y);walkNear(hit.x,hit.y);return}
+ {const wk=WORDKEY[hit&&hit.id]||(DAY>=2&&hit&&NPC_THING[hit.id]);if(hit&&FIND&&wk){tapThing(wk,hit.x,hit.y);walkNear(hit.x,hit.y);return}}
  if(hit){approach(hit);return}
- const objs=(OBJ[MAP]||[]).filter(o=>!(o[0]==='notebook'&&FOUND.has('notebook'))&&!(o[0]==='handkerchief'&&!(DAY===2&&!TODAY.has('handkerchief')))).slice().sort((a,b)=>a[3]-b[3]);
+ const objs=(OBJ[MAP]||[]).filter(o=>!(o[0]==='notebook'&&FOUND.has('notebook'))).slice().sort((a,b)=>a[3]-b[3]);
  const oh=objs.find(o=>Math.hypot(x-o[1],y-o[2])<o[3]);
  if(DAY>=2&&['d2_class','d2_after'].includes(stage)&&OUT[MAP]&&(Math.hypot(x-OUT[MAP][0],y-OUT[MAP][1])<120||Math.abs(x-OUT[MAP][0])<140&&y>OUT[MAP][1]-280&&y<OUT[MAP][1])){walkTo(OUT[MAP][0],OUT[MAP][1],pickPlace);return}
  const ex=goal&&goal.target==='door'&&EXITS[MAP]&&EXITS[MAP].door;if(ex&&Math.hypot(x-ex[0],y-ex[1])<110){walkTo(ex[0],ex[1],()=>useDoor());return}
@@ -333,7 +334,7 @@ function tour(){touring=true;busy=true;const s=cam.s,W=innerWidth,H=innerHeight,
  (function step(now){const k=Math.max(0,Math.min(1,(now-t0)/sweep)),e=ease(k);pan={x:a.x+(b.x-a.x)*e,y:a.y+(b.y-a.y)*e};follow();if(k<1)requestAnimationFrame(step);else setTimeout(back,350)})(performance.now())}
 let panHinted=false;function load(id,extra){setGoal('');closeBubble();if(!panHinted&&innerWidth<innerHeight){panHinted=true;setTimeout(()=>{if(touring){tourQ.push(()=>setTimeout(()=>{const d=document.createElement('div');d.className='panhint';d.textContent=tr('👆 화면을 끌어서 둘러볼 수 있어요');document.body.appendChild(d);setTimeout(()=>d.remove(),4200)},600));return}const d=document.createElement('div');d.className='panhint';d.textContent=tr('👆 화면을 끌어서 둘러볼 수 있어요');document.body.appendChild(d);setTimeout(()=>d.remove(),4200)},1200)}pan=null;MAP=id;world.querySelectorAll('.sp').forEach(e=>e.remove());mapimg.src=MAPS[id].img;buildGrid();const[sx,sy]=MAPS[id].start;me=sprite(HERO,sx,sy);npcs=((typeof DAY!=='undefined'&&DAY>=2&&D2PLACE[id])?d2People(id):(PEOPLE[id]||[])).concat(extra||[]).map(([n,x,y,s])=>sprite(n,x,y,s));
  world.querySelectorAll('.item').forEach(e=>e.remove());if(id==='home_am'&&!FOUND.has('notebook')){const it=document.createElement('img');it.className='item';it.src='items/notebook.png';it.style.cssText='position:absolute;width:58px;left:991px;top:478px;transform:rotate(-12deg);z-index:400;pointer-events:none';world.appendChild(it)}
- if(typeof placeD2Item==='function')placeD2Item();if(DAY>=2&&OUT[id]&&id!=='home_am'&&id!=='home_pm'){const sg=document.createElement('div');sg.className='item exitsign';sg.textContent='🚪 '+tr('나가기');sg.style.cssText=`position:absolute;left:${OUT[id][0]}px;top:${OUT[id][1]-200}px;transform:translate(-50%,-100%);font-size:30px;font-weight:800;background:#fff;border:4px solid var(--line);border-radius:999px;padding:6px 18px;box-shadow:0 4px 0 var(--line);white-space:nowrap;z-index:4500;pointer-events:none`;world.appendChild(sg)}setTimeout(tagAll,600);placePang();fit();follow();
+ if(typeof placeD2Item==='function')placeD2Item();if(DAY>=2&&D2PLACE[id])showThings(id);if(DAY>=2&&OUT[id]&&id!=='home_am'&&id!=='home_pm'){const sg=document.createElement('div');sg.className='item exitsign';sg.textContent='🚪 '+tr('나가기');sg.style.cssText=`position:absolute;left:${OUT[id][0]}px;top:${Math.max(OUT[id][1]-200,170)}px;transform:translate(-50%,-100%);font-size:30px;font-weight:800;background:#fff;border:4px solid var(--line);border-radius:999px;padding:6px 18px;box-shadow:0 4px 0 var(--line);white-space:nowrap;z-index:4500;pointer-events:none`;world.appendChild(sg)}setTimeout(tagAll,600);placePang();fit();follow();
  const place=PLACE[id]||id;if(!SEEN.has(place)){SEEN.add(place);tour()}}
 // preload every picture so maps, scenes and faces appear at once
 const PRE=[];function preload(){const ids=['hero_f','hero_m','mom','siwoo','minho','sua','yuna','junho','haeun','jihoon','yena','hyeeun','jinwoo','haram','doyeon','haneul','boram','youngmin','seah','hangyeol','jiho'];const ex=['smile','laugh','surprised','sad','angry','relieved'];
@@ -416,6 +417,9 @@ function pickHero(){const m=document.getElementById('modal'),c=document.getEleme
 </script>
 <script src="day2/engine.js"></script>
 <script>
+// the goal shows big for a few seconds, then folds into a small pill (tap it to open it again)
+{const g=document.getElementById('goal');let t=null;const big=()=>{g.classList.remove('mini');clearTimeout(t);t=setTimeout(()=>g.classList.add('mini'),4000)};
+ new MutationObserver(big).observe(g,{childList:true,characterData:true,subtree:true});g.addEventListener('click',big)}
 preload();requestAnimationFrame(loop);
 // test shortcuts: #sit (after Sua), #evening (back home) — for checking only
 const JUMP=location.hash.slice(1);
