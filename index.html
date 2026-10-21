@@ -109,6 +109,7 @@ body,button{word-break:keep-all;overflow-wrap:break-word}
 <script src="i18n.js"></script>
 <script src="day2/i18n_engine.js"></script>
 <script src="day2/data.js"></script>
+<script src="day3/data.js"></script>
 <script>
 // ---------- data ----------
 const MW=1672,MH=941,KID=180;
@@ -414,8 +415,8 @@ function start(){const m=document.getElementById('modal'),c=document.getElementB
  c.innerHTML=`<h2>괴짜교실 반장되기</h2><p class="sub">어떤 말을 배울까요?</p><div class="lgroup">외국어 배우기</div><div class="langs">${MODES.map((md,i)=>md.ui==='ko'?btn(md,i):'').join('')}</div><div class="lgroup">Learn Korean · 한국어 배우기</div><div class="langs">${MODES.map((md,i)=>md.ui!=='ko'?btn(md,i):'').join('')}</div>`;
  m.classList.add('on');c.querySelectorAll('.langs button').forEach(b=>b.onclick=()=>{const md=MODES[+b.dataset.i];UI=md.ui;LANG=md.learn;W=LANGS[LANG].words.notebook;document.documentElement.lang=UI;try{localStorage.setItem('mode',UI+'-'+LANG)}catch(e){}chime();c.classList.remove('lcard');pickHero()})}
 function pickHero(){const m=document.getElementById('modal'),c=document.getElementById('mcard');
- c.innerHTML=`<h2>${tr('괴짜교실 반장되기')}</h2><p>${tr('말 한마디 못 하는 전학생,<br>반장 선거에 나가다.')}</p><p style="margin-top:14px">${tr('누구로 할까요?')}</p>${(()=>{const s=loadSave();return s&&s.day>=2&&s.mode===UI+'-'+LANG?`<p><button class="big" id="cont">${tr('2일차부터 이어 하기')}</button></p>`:''})()}<div class="pick heroes"><button data-h="hero_f"><img src="faces/hero_f_smile.jpg" alt="여자 주인공"></button><button data-h="hero_m"><img src="faces/hero_m_smile.jpg" alt="남자 주인공"></button></div>`;
- m.classList.add('on');{const cb=document.getElementById('cont');if(cb)cb.onclick=()=>{const s=loadSave();HERO=s.hero;Object.assign(HEART,s.heart||{});(s.found||[]).forEach(k=>FOUND.add(k));HEART_D1={...HEART};chime();startDay2()}}c.querySelectorAll('.pick button').forEach(b=>b.onclick=()=>{HERO=b.dataset.h;m.classList.remove('on');chime();bgm('day');load('home_am');say([['nar','','이사 온 다음 날 아침. 아직 풀지 못한 상자들이 쌓여 있다.'],['think','sad','(오늘부터 새 학교… 여기 말은 아직 서툰데.)'],['think','smile','({m}한테 인사하고 학교 가야지.)']],morning)})}
+ c.innerHTML=`<h2>${tr('괴짜교실 반장되기')}</h2><p>${tr('말 한마디 못 하는 전학생,<br>반장 선거에 나가다.')}</p><p style="margin-top:14px">${tr('누구로 할까요?')}</p>${(()=>{const s=loadSave();return s&&s.day>=2&&s.mode===UI+'-'+LANG?`<p><button class="big" id="cont">${tr(s.day+'일차부터 이어 하기')}</button></p>`:''})()}<div class="pick heroes"><button data-h="hero_f"><img src="faces/hero_f_smile.jpg" alt="여자 주인공"></button><button data-h="hero_m"><img src="faces/hero_m_smile.jpg" alt="남자 주인공"></button></div>`;
+ m.classList.add('on');{const cb=document.getElementById('cont');if(cb)cb.onclick=()=>{const s=loadSave();HERO=s.hero;Object.assign(HEART,s.heart||{});(s.found||[]).forEach(k=>FOUND.add(k));HEART_D1={...HEART};chime();startDay(Math.min(s.day,Object.keys(window.D3||{}).length?3:2))}}c.querySelectorAll('.pick button').forEach(b=>b.onclick=()=>{HERO=b.dataset.h;m.classList.remove('on');chime();bgm('day');load('home_am');say([['nar','','이사 온 다음 날 아침. 아직 풀지 못한 상자들이 쌓여 있다.'],['think','sad','(오늘부터 새 학교… 여기 말은 아직 서툰데.)'],['think','smile','({m}한테 인사하고 학교 가야지.)']],morning)})}
 </script>
 <script src="day2/engine.js"></script>
 <script>
@@ -429,8 +430,11 @@ if(JUMP){UI='ko';LANG='id';W=LANGS[LANG].words.notebook;HERO='hero_f';FOUND.add(
  if(JUMP==='sit'){stage='sit';load('class');npcs.push(sprite('sua',600,262));setGoal('내 자리에 앉기','seat')}
  else if(JUMP==='evening'){stage='after';load('class');useDoor()}
  else if(JUMP==='day2'){HEART_D1={};startDay2()}
- else if(JUMP==='d2class'){DAY=2;HEART_D1={};stage='d2_leave';FOUND.add('handkerchief');TODAY.add('handkerchief');useDoor()}
- else if(JUMP==='d2eve'){DAY=2;PICKS=['siwoo','minho'].filter(i=>window.D2&&D2[i]);PICKS.forEach(i=>D2CHOICE[i]='A');stage='d2_after';load('class');useDoor()}
+ else if(JUMP==='day3'){HEART_D1={};FOUND.add('handkerchief');startDay(3)}
+ else if(JUMP==='d3class'){setDay(3);HEART_D1={};stage='d2_leave';FOUND.add('apron');TODAY.add('apron');useDoor()}
+ else if(JUMP==='d3eve'){setDay(3);PICKS=Object.keys(window.D3||{}).slice(0,2);PICKS.forEach(i=>D2CHOICE[i]='A');stage='d2_after';load('class');useDoor()}
+ else if(JUMP==='d2class'){setDay(2);HEART_D1={};stage='d2_leave';FOUND.add('handkerchief');TODAY.add('handkerchief');useDoor()}
+ else if(JUMP==='d2eve'){setDay(2);PICKS=['siwoo','minho'].filter(i=>window.D2&&D2[i]);PICKS.forEach(i=>D2CHOICE[i]='A');stage='d2_after';load('class');useDoor()}
  else if(JUMP==='incident'){stage='class';load('class');TALKED.add('yuna');TALKED.add('junho');TALKED.add('haeun');incident()}}
 else start();
 </script></body></html>
