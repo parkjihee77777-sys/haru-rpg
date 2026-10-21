@@ -127,7 +127,8 @@ const MODES=[{ui:'ko',learn:'id'},{ui:'ko',learn:'vi'},{ui:'ko',learn:'en'},{ui:
 let LANG='id',UI='ko',W='';
 // tr: Korean source line -> line in the player's language, with {w} (taught word) and {L} (taught language) filled in
 function tr(s){if(s==null)return s;let t=UI==='ko'?s:((window.T&&T[UI]&&T[UI][s])??s);const L=UI==='ko'?LANGS[LANG].name:((T[UI]&&T[UI]['한국어'])||'Korean');return t.replace(/\{w\}/g,W).replace(/\{m\}/g,LANGS[LANG].words.mom).replace(/\{L\}/g,L)}
-function nm(id){return tr(NAME[id]||'')}
+// a person whose name is a taught word is labelled with that word (once found), never with its meaning
+function nm(id){if(id==='mom')return (typeof FOUND!=='undefined'&&FOUND.has('mom'))?LANGS[LANG].words.mom:'';return tr(NAME[id]||'')}
 const TALKED=new Set();let CHOICE=null;const HEART={};
 // ---------- state ----------
 let HERO='hero_f',MAP=null,me=null,npcs=[],goal=null,busy=false,cam={x:0,y:0,s:1},grid=null;
@@ -226,6 +227,8 @@ function say(lines,done){busy=true;queue=lines.slice();qDone=done;talkOn=true;ta
 function advance(){if(chEl.classList.contains('on'))return;const l=queue.shift();hideSay();if(!l){talk.classList.remove('on');talkOn=false;busy=false;const d=qDone;qDone=null;d&&d();return}
  if(typeof l==='function'){l();return advance()}
  const[who,expr,text]=l;const fid=who==='me'||who==='think'?HERO:who;
+ // a taught word inside a line is also heard (UI text stays in the player's language)
+ {const raw=(UI==='ko'?text:((T[UI]&&T[UI][text])||text));if(raw.includes('{m}'))setTimeout(()=>speak('mom'),250);else if(raw.includes('{w}'))setTimeout(()=>speak('notebook'),250)}
  if(who!=='nar'&&!sceneEl.classList.contains('on')&&showSay(who,tr(text))){talk.classList.remove('on');return}
  talk.classList.add('on');
  if(who==='nar'){faceEl.className='none';whoEl.textContent=''}else{faceEl.className='';faceEl.style.backgroundImage=`url(faces/${fid}_${expr||'smile'}.jpg)`;whoEl.textContent=who==='think'?tr('나 (속마음)'):nm(who)}
@@ -275,13 +278,13 @@ function talkTo(id){
  if(stage==='after'){say(CHAT[id]||[['nar','','…']]);return}
  if(stage==='home_pm'&&id==='mom'){say([['mom','smile','손 씻고 와. 밥 먹자.']]);return}
  say(CHAT[id]||[])}
-function morning(){find('mom',()=>say([['mom','surprised','어머, 엄마를 불렀네? 일어났구나!'],['mom','smile','오늘 새 학교 첫날이지?'],['mom','relieved','말이 잘 안 나와도 괜찮아. 천천히 보고, 천천히 들으면 돼.'],['mom','smile','아, 학교 갈 때 가져갈 거 하나 놔뒀는데. 찾아 볼래?']],()=>
+function morning(){find('mom',()=>say([['mom','surprised','어머, {m}를 불렀네? 일어났구나!'],['mom','smile','오늘 새 학교 첫날이지?'],['mom','relieved','말이 잘 안 나와도 괜찮아. 천천히 보고, 천천히 들으면 돼.'],['mom','smile','아, 학교 갈 때 가져갈 거 하나 놔뒀는데. 찾아 볼래?']],()=>
  find('notebook',()=>{world.querySelectorAll('.item').forEach(e=>e.remove());say([['mom','laugh','맞아, 그 {w}! 새 학교에서 써.'],['me','smile','…응. 다녀올게.'],['mom','laugh','다녀와! 저녁에 오늘 이야기 들려줘.']],()=>{stage='leave';setGoal('현관으로 나가 학교 가기','door')})},'「{x}」 찾기')),'「{x}」에게 인사하기')}
 function friendsLeft(){return['yuna','junho','haeun','jihoon','yena','hyeeun','siwoo','minho'].filter(i=>!TALKED.has(i))}
 function useDoor(){
  if(stage==='leave'){fade(()=>{stage='class';load('class');setGoal('반 친구들에게 말 걸어 보기',friendsLeft(),id=>TALKED.has(id),' (0/3)');say([['nar','','새 교실. 낯선 얼굴들이 한꺼번에 나를 본다.'],['think','surprised','(…누구한테 먼저 인사하지?)']])});return}
  if(stage==='after'){fade(()=>{stage='home_pm';load('home_pm');bgm('evening');say([['nar','','저녁. 집 안에 따뜻한 불이 켜져 있다.']],()=>find('mom',dinner,'「{x}」에게 다녀왔다고 인사하기'))});return}
- if(stage==='home_am'){say([['think','smile','(가기 전에 엄마한테 인사하자.)']]);return}
+ if(stage==='home_am'){say([['think','smile','(가기 전에 {m}한테 인사하자.)']]);return}
  if(stage==='class'){say([['think','sad','(아직 아무하고도 제대로 말 못 했어…)']]);return}}
 function incident(){setGoal('');busy=true;bgm('tense');
  setTimeout(()=>scene('jar',[['nar','','쨍그랑!'],['nar','','교실 뒤에서 뛰어가던 민호가 시우의 관찰 통을 쳤다. 흙과 번데기가 바닥에 쏟아졌다.'],['minho','angry','아, 뭐야! 거기다 둔 게 잘못이지!'],['siwoo','sad','…시끄러워… 번데기… 번데기가…'],['think','surprised','(시우가 귀를 막고 떨고 있어. 어떡하지?)']],()=>{busy=true;
@@ -305,7 +308,7 @@ function deskFind(k,done){busy=true;const items=['pcase','notebook','pencil'];co
  m.classList.add('on');setTimeout(()=>speak(k),300);document.getElementById('again').onclick=()=>speak(k);const okb=document.getElementById('okb');okb.textContent=tr('이건 {x}이다').replace('{x}',wordOf(k));
  c.querySelectorAll('.pick button').forEach(b=>b.onclick=()=>{sel=b.dataset.k;speak(sel);c.querySelectorAll('.pick button').forEach(x=>x.classList.toggle('ok',x===b));okb.style.visibility='visible'});
  okb.onclick=()=>{if(sel===k){chime();m.classList.remove('on');busy=false;done&&done()}else{buzz();const b=c.querySelector(`[data-k="${sel}"]`);b.classList.remove('ok');b.classList.add('no');setTimeout(()=>b.classList.remove('no'),400);setTimeout(()=>speak(k),600);okb.style.visibility='hidden'}}}
-function dinner(){scene('dinner',[['mom','smile','첫날 어땠어? 얼굴 보니까 할 말이 많은 것 같은데.'],['me','sad','반에서… 관찰 통이 깨졌어. 시우라는 애 거.']].concat(MOM[CHOICE]||[]).concat([['me','relieved','그런데 민호가 나한테 다가왔을 때… 반장 수아가 막아 줬어.'],['mom','laugh','든든한 친구가 있네. 내일은 수아한테 고맙다고 해 볼까?'],['mom','smile','오늘 찾은 말, 기억나? 엄마가 말해 볼게. 잘 듣고 골라 봐.']]),()=>quiz('mom',()=>quiz('notebook',()=>say([['mom','laugh','다 맞혔네! 오늘 생각을 {w}에 적어 보렴.']],night))))}
+function dinner(){scene('dinner',[['mom','laugh','왔구나! 손 씻고 와. 밥 먹자.'],['mom','smile','첫날 어땠어? 얼굴 보니까 할 말이 많은 것 같은데.'],['me','sad','반에서… 관찰 통이 깨졌어. 시우라는 애 거.']].concat(MOM[CHOICE]||[]).concat([['me','relieved','그런데 민호가 나한테 다가왔을 때… 반장 수아가 막아 줬어.'],['mom','laugh','든든한 친구가 있네. 내일은 수아한테 고맙다고 해 볼까?'],['mom','smile','오늘 일, 잊어버리기 전에 {w}에 적어 두렴.']]),()=>{speak('notebook');night()})}
 const MOM={
  A:[['me','relieved','그래서… 시우 앞을 막아섰어.'],['mom','surprised','무서웠을 텐데 친구 앞을 지켜 줬구나.'],['mom','relieved','소리에 놀란 친구에겐 말보다 조용한 그늘이 먼저란다.']],
  B:[['me','relieved','흙이랑 번데기를… {w}에 모아 줬어.'],['mom','laugh','흙과 번데기를 모아 주었네. 친구가 아끼는 작은 생명을 같이 아껴 준 거야.']],
@@ -318,9 +321,9 @@ function quiz(k,done){busy=true;const cards=QUIZ[k].slice().sort(()=>Math.random
  c.innerHTML=`<h2>${tr('엄마가 말한 말은 어느 거?')}</h2><p><button class="spk" id="again">🔊 ${tr('다시 듣기')}</button></p><div class="pick">${cards.map(q=>`<button data-k="${q}"><img src="${PIC[q]}" alt=""></button>`).join('')}</div>`;
  m.classList.add('on');setTimeout(()=>speak(k),300);document.getElementById('again').onclick=()=>speak(k);
  c.querySelectorAll('.pick button').forEach(b=>b.onclick=()=>{if(b.dataset.k===k){b.classList.add('ok');chime();setTimeout(()=>{m.classList.remove('on');speak(k);busy=false;done&&done()},800)}else{b.classList.add('no');buzz();setTimeout(()=>b.classList.remove('no'),400);setTimeout(()=>speak(k),500)}})}
-function night(){setGoal('');bgm('night');scene('night',[['nar','','밤. 새 {w}를 펼쳤다.'],['think','relieved','(오늘 수아가 반 규칙으로 나를 지켜줬어. 정말 멋있었어.)'],['think','smile','(그리고 나도 수아처럼 멋있는 사람이 되고 싶다는 생각을 했어.)'],['think','relieved','(나는 한 명 한 명, 각자 속도를 기다려 주는 따뜻한 교실을 만들고 싶어.)'],['think','surprised','(…나, 다음 학기 반장 선거에 나가 볼까?)']],end)}
+function night(){setGoal('');bgm('night');scene('night',[['nar','','밤. {w}를 펼쳤다.'],['think','relieved','(오늘 수아가 반 규칙으로 나를 지켜줬어. 정말 멋있었어.)'],['think','smile','(그리고 나도 수아처럼 멋있는 사람이 되고 싶다는 생각을 했어.)'],['think','relieved','(나는 한 명 한 명, 각자 속도를 기다려 주는 따뜻한 교실을 만들고 싶어.)'],['think','surprised','(…나, 다음 학기 반장 선거에 나가 볼까?)']],end)}
 function end(){const m=document.getElementById('modal'),c=document.getElementById('mcard');const hs=Object.entries(HEART).map(([i,n])=>`${nm(i)} ♥${n}`).join(' · ')||tr('아직 없음');
- c.innerHTML=`<h2>${tr('1일차 끝 — 반장 선거 출마 결심!')}</h2><p>${tr('오늘 배운 낱말')}</p>${['mom','notebook'].map(k=>`<p><span class="word">${wordOf(k)}</span> = ${tr(GLOSS[k])} <button class="spk" onclick="speak('${k}')">🔊</button></p>`).join('')}<p>${tr('친해진 친구')}: ${hs}</p><p style="color:#8a7a6a">${tr('2일차부터는 하루에 두 친구를 골라 만나요. (준비 중)')}</p><button class="big" id="re">${tr('처음부터 다시')}</button>`;m.classList.add('on');document.getElementById('re').onclick=()=>location.reload()}
+ c.innerHTML=`<h2>${tr('1일차 끝 — 반장 선거 출마 결심!')}</h2><p>${tr('오늘 배운 낱말')}</p><div class="pick">${['mom','notebook'].map(k=>`<button onclick="speak('${k}')"><img src="${PIC[k]}" alt=""><span class="word" style="display:block;margin:6px 0 0">${wordOf(k)} 🔊</span></button>`).join('')}</div><p>${tr('친해진 친구')}: ${hs}</p><p style="color:#8a7a6a">${tr('2일차부터는 하루에 두 친구를 골라 만나요. (준비 중)')}</p><button class="big" id="re">${tr('처음부터 다시')}</button>`;m.classList.add('on');document.getElementById('re').onclick=()=>location.reload()}
 // ---------- start ----------
 function start(){const m=document.getElementById('modal'),c=document.getElementById('mcard');document.getElementById('mute').textContent=muted?'🔇':'🔊';let last='';try{last=localStorage.getItem('mode')||''}catch(e){}
  const btn=(md,i)=>{const learnKo=md.learn==='ko',l=LANGS[learnKo?md.ui:md.learn];return `<button data-i="${i}" class="${md.ui+'-'+md.learn===last?'on':''}"><span class="flag" style="background:${l.flag}"></span><b>${learnKo?l.learnKo:l.name}</b><small>${l.native}</small></button>`};
@@ -328,7 +331,7 @@ function start(){const m=document.getElementById('modal'),c=document.getElementB
  m.classList.add('on');c.querySelectorAll('.langs button').forEach(b=>b.onclick=()=>{const md=MODES[+b.dataset.i];UI=md.ui;LANG=md.learn;W=LANGS[LANG].words.notebook;document.documentElement.lang=UI;try{localStorage.setItem('mode',UI+'-'+LANG)}catch(e){}chime();pickHero()})}
 function pickHero(){const m=document.getElementById('modal'),c=document.getElementById('mcard');
  c.innerHTML=`<h2>${tr('괴짜교실 반장되기')}</h2><p>${tr('말 한마디 못 하는 전학생, 반장 선거에 나가다')}</p><p style="color:#8a7a6a;font-size:15px">${UI==='ko'?`${LANGS[LANG].name} 배우기 · 말은 한국어, 배우는 낱말만 ${LANGS[LANG].name}`:tr('모드 설명')}</p><p style="margin-top:14px">${tr('누구로 할까요?')}</p><div class="pick heroes"><button data-h="hero_f"><img src="faces/hero_f_smile.jpg" alt="여자 주인공"></button><button data-h="hero_m"><img src="faces/hero_m_smile.jpg" alt="남자 주인공"></button></div>`;
- m.classList.add('on');c.querySelectorAll('.pick button').forEach(b=>b.onclick=()=>{HERO=b.dataset.h;m.classList.remove('on');chime();bgm('day');load('home_am');say([['nar','','이사 온 다음 날 아침. 아직 풀지 못한 상자들이 쌓여 있다.'],['think','sad','(오늘부터 새 학교… 여기 말은 하나도 모르는데.)'],['think','smile','(엄마한테 인사하고 학교 가야지.)']],morning)})}
+ m.classList.add('on');c.querySelectorAll('.pick button').forEach(b=>b.onclick=()=>{HERO=b.dataset.h;m.classList.remove('on');chime();bgm('day');load('home_am');say([['nar','','이사 온 다음 날 아침. 아직 풀지 못한 상자들이 쌓여 있다.'],['think','sad','(오늘부터 새 학교… 여기 말은 하나도 모르는데.)'],['think','smile','({m}한테 인사하고 학교 가야지.)']],morning)})}
 preload();requestAnimationFrame(loop);
 // test shortcuts: #sit (after Sua), #evening (back home) — for checking only
 const JUMP=location.hash.slice(1);

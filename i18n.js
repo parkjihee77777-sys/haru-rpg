@@ -30,7 +30,7 @@ en: {
  '(…누구한테 먼저 인사하지?)':'(…Who should I say hi to first?)',
  '엄마와 저녁 먹기':'Have dinner with Mom',
  '저녁. 집 안에 따뜻한 불이 켜져 있다.':'Evening. A warm light is on at home.',
- '(가기 전에 엄마한테 인사하자.)':'(Let me say hi to Mom before I go.)',
+ '(가기 전에 {m}한테 인사하자.)':'(Let me say hi to {m} before I go.)',
  '(아직 아무하고도 제대로 말 못 했어…)':'(I haven’t really talked to anyone yet…)',
  '쨍그랑!':'CRASH!',
  '교실 뒤에서 뛰어가던 민호가 시우의 관찰 통을 쳤다. 흙과 번데기가 바닥에 쏟아졌다.':'Minho, running at the back of the class, knocked over Siwoo’s observation jar. Soil and a pupa spilled onto the floor.',
@@ -132,7 +132,7 @@ id: {
  '(…누구한테 먼저 인사하지?)':'(…Aku sapa siapa dulu, ya?)',
  '엄마와 저녁 먹기':'Makan malam bersama Ibu',
  '저녁. 집 안에 따뜻한 불이 켜져 있다.':'Malam hari. Lampu hangat menyala di rumah.',
- '(가기 전에 엄마한테 인사하자.)':'(Sapa Ibu dulu sebelum berangkat.)',
+ '(가기 전에 {m}한테 인사하자.)':'(Sapa {m} dulu sebelum berangkat.)',
  '(아직 아무하고도 제대로 말 못 했어…)':'(Aku belum benar-benar bicara dengan siapa pun…)',
  '쨍그랑!':'PRANG!',
  '교실 뒤에서 뛰어가던 민호가 시우의 관찰 통을 쳤다. 흙과 번데기가 바닥에 쏟아졌다.':'Minho yang berlari di belakang kelas menabrak toples pengamatan Siwoo. Tanah dan kepompong tumpah ke lantai.',
@@ -233,7 +233,7 @@ vi: {
  '(…누구한테 먼저 인사하지?)':'(…Chào ai trước đây?)',
  '엄마와 저녁 먹기':'Ăn tối với mẹ',
  '저녁. 집 안에 따뜻한 불이 켜져 있다.':'Buổi tối. Trong nhà đèn sáng ấm áp.',
- '(가기 전에 엄마한테 인사하자.)':'(Chào mẹ trước khi đi đã.)',
+ '(가기 전에 {m}한테 인사하자.)':'(Chào {m} trước khi đi đã.)',
  '(아직 아무하고도 제대로 말 못 했어…)':'(Tớ vẫn chưa nói chuyện tử tế với ai cả…)',
  '쨍그랑!':'XOẢNG!',
  '교실 뒤에서 뛰어가던 민호가 시우의 관찰 통을 쳤다. 흙과 번데기가 바닥에 쏟아졌다.':'Minho chạy ở cuối lớp va vào hộp quan sát của Siwoo. Đất và con nhộng đổ tung ra sàn.',
@@ -323,7 +323,7 @@ Object.assign(window.T.en, {
  '오늘 찾은 말, 나한테도 들려줘. 귀 쫑긋!':'Tell me the words you found today. My ears are up!',
  '학교 갈 때 가져갈 거 하나 놔뒀어. 찾아 봐.':'I left something for you to take to school. Look for it.',
  '손 씻고 와. 밥 먹자.':'Go wash your hands. Let’s eat.',
- '어머, 엄마를 불렀네? 일어났구나!':'Oh! You called me? You’re up!',
+ '어머, {m}를 불렀네? 일어났구나!':'Oh! You called me “{m}”? You’re up!',
  '오늘 새 학교 첫날이지?':'Today is your first day at the new school, right?',
  '아, 학교 갈 때 가져갈 거 하나 놔뒀는데. 찾아 볼래?':'Oh, I left something for you to take to school. Can you find it?',
  '맞아, 그 {w}! 새 학교에서 써.':'That’s it, the {w}! Use it at your new school.',
@@ -364,7 +364,7 @@ Object.assign(window.T.id, {
  '오늘 찾은 말, 나한테도 들려줘. 귀 쫑긋!':'Ceritakan kata yang kamu temukan hari ini. Telingaku siap!',
  '학교 갈 때 가져갈 거 하나 놔뒀어. 찾아 봐.':'Ibu sudah menaruh barang untuk dibawa ke sekolah. Coba cari.',
  '손 씻고 와. 밥 먹자.':'Cuci tangan dulu. Ayo makan.',
- '어머, 엄마를 불렀네? 일어났구나!':'Wah, kamu memanggil Ibu? Sudah bangun!',
+ '어머, {m}를 불렀네? 일어났구나!':'Wah, kamu memanggil “{m}”? Sudah bangun!',
  '오늘 새 학교 첫날이지?':'Hari ini hari pertama di sekolah baru, kan?',
  '아, 학교 갈 때 가져갈 거 하나 놔뒀는데. 찾아 볼래?':'Oh, Ibu menaruh sesuatu untuk dibawa ke sekolah. Bisa cari?',
  '맞아, 그 {w}! 새 학교에서 써.':'Betul, {w} itu! Pakai di sekolah baru, ya.',
@@ -406,7 +406,7 @@ Object.assign(window.T.vi, {
  '오늘 찾은 말, 나한테도 들려줘. 귀 쫑긋!':'Kể tớ nghe những từ cậu tìm được hôm nay đi. Tai tớ dựng lên rồi!',
  '학교 갈 때 가져갈 거 하나 놔뒀어. 찾아 봐.':'Mẹ để sẵn một thứ mang đi học rồi. Con tìm đi.',
  '손 씻고 와. 밥 먹자.':'Đi rửa tay đi. Ăn cơm thôi.',
- '어머, 엄마를 불렀네? 일어났구나!':'Ôi, con gọi mẹ à? Dậy rồi hả!',
+ '어머, {m}를 불렀네? 일어났구나!':'Ôi, con gọi “{m}” à? Dậy rồi hả!',
  '오늘 새 학교 첫날이지?':'Hôm nay là ngày đầu ở trường mới nhỉ?',
  '아, 학교 갈 때 가져갈 거 하나 놔뒀는데. 찾아 볼래?':'À, mẹ để một thứ cho con mang đi học. Con tìm thử nhé?',
  '맞아, 그 {w}! 새 학교에서 써.':'Đúng rồi, {w} đó! Dùng ở trường mới nhé.',
@@ -462,7 +462,7 @@ window.T.zh = {
  '새 교실. 낯선 얼굴들이 한꺼번에 나를 본다.':'新教室。一张张陌生的脸同时看向我。',
  '(…누구한테 먼저 인사하지?)':'（……先跟谁打招呼呢？）',
  '저녁. 집 안에 따뜻한 불이 켜져 있다.':'晚上。家里亮着温暖的灯。',
- '(가기 전에 엄마한테 인사하자.)':'（出门前先跟妈妈打个招呼吧。）',
+ '(가기 전에 {m}한테 인사하자.)':'（出门前先跟{m}打个招呼吧。）',
  '(아직 아무하고도 제대로 말 못 했어…)':'（我还没跟任何人好好说过话……）',
  '쨍그랑!':'哐啷！',
  '교실 뒤에서 뛰어가던 민호가 시우의 관찰 통을 쳤다. 흙과 번데기가 바닥에 쏟아졌다.':'在教室后面跑来跑去的敏浩撞翻了诗宇的观察瓶。泥土和蛹撒了一地。',
@@ -555,7 +555,7 @@ window.T.zh = {
  '오늘 찾은 말, 나한테도 들려줘. 귀 쫑긋!':'把今天找到的词也说给我听吧。耳朵竖起来啦！',
  '학교 갈 때 가져갈 거 하나 놔뒀어. 찾아 봐.':'妈妈放了一样上学要带的东西。找找看吧。',
  '손 씻고 와. 밥 먹자.':'去洗洗手。我们吃饭吧。',
- '어머, 엄마를 불렀네? 일어났구나!':'哎呀，你在叫妈妈吗？起床啦！',
+ '어머, {m}를 불렀네? 일어났구나!':'哎呀，你在叫“{m}”吗？起床啦！',
  '오늘 새 학교 첫날이지?':'今天是去新学校的第一天吧？',
  '말이 잘 안 나와도 괜찮아. 천천히 보고, 천천히 들으면 돼.':'说不出话也没关系。慢慢看，慢慢听就好。',
  '아, 학교 갈 때 가져갈 거 하나 놔뒀는데. 찾아 볼래?':'啊，妈妈给你放了一样上学要带的东西。去找找看？',
@@ -564,27 +564,33 @@ window.T.zh = {
 // --- added 2026-10-21: goal lines that say what to do ({x} = word + 🔊)
 Object.assign(window.T.en, {
  '「{x}」 찾기':'Find “{x}”','🔊를 듣고 같은 소리가 나는 걸 눌러 봐':'Listen to 🔊 and tap the thing that sounds the same',
- '(엄마한테 인사하고 학교 가야지.)':'(I should say good morning to Mom before school.)',
+ '({m}한테 인사하고 학교 가야지.)':'(I should say good morning to {m} before school.)',
  '식탁에서 「{x}」 찾기':'Find “{x}” at the table','「{x}」에게 인사하기':'Say good morning to “{x}”',
  '「{x}」에게 다녀왔다고 인사하기':'Tell “{x}” you’re home','「{x}」 꺼내기':'Take out “{x}”'
 });
 Object.assign(window.T.id, {
  '「{x}」 찾기':'Cari “{x}”','🔊를 듣고 같은 소리가 나는 걸 눌러 봐':'Dengarkan 🔊 lalu ketuk benda yang bunyinya sama',
- '(엄마한테 인사하고 학교 가야지.)':'(Aku harus pamit ke Ibu sebelum sekolah.)',
+ '({m}한테 인사하고 학교 가야지.)':'(Aku harus pamit ke {m} sebelum sekolah.)',
  '식탁에서 「{x}」 찾기':'Cari “{x}” di meja makan','「{x}」에게 인사하기':'Sapa “{x}”',
  '「{x}」에게 다녀왔다고 인사하기':'Bilang ke “{x}” kalau kamu sudah pulang','「{x}」 꺼내기':'Keluarkan “{x}”'
 });
 Object.assign(window.T.vi, {
  '「{x}」 찾기':'Tìm “{x}”','🔊를 듣고 같은 소리가 나는 걸 눌러 봐':'Nghe 🔊 rồi chạm vào thứ có âm giống vậy',
- '(엄마한테 인사하고 학교 가야지.)':'(Phải chào mẹ rồi mới đi học.)',
+ '({m}한테 인사하고 학교 가야지.)':'(Phải chào {m} rồi mới đi học.)',
  '식탁에서 「{x}」 찾기':'Tìm “{x}” ở bàn ăn','「{x}」에게 인사하기':'Chào “{x}”',
  '「{x}」에게 다녀왔다고 인사하기':'Chào “{x}” khi về đến nhà','「{x}」 꺼내기':'Lấy “{x}” ra'
 });
 Object.assign(window.T.zh, {
  '「{x}」 찾기':'找一找“{x}”','🔊를 듣고 같은 소리가 나는 걸 눌러 봐':'听 🔊，点一下发音一样的东西',
- '(엄마한테 인사하고 학교 가야지.)':'（上学前要先跟妈妈打招呼。）',
+ '({m}한테 인사하고 학교 가야지.)':'（上学前要先跟{m}打招呼。）',
  '식탁에서 「{x}」 찾기':'在餐桌上找“{x}”','「{x}」에게 인사하기':'跟“{x}”打招呼',
  '「{x}」에게 다녀왔다고 인사하기':'跟“{x}”说我回来了','「{x}」 꺼내기':'拿出“{x}”'
 });
 
 Object.assign(window.T.zh, {'신발 신고 가야지~ 현관은 왼쪽이야.':'穿好鞋子再走哦~门口在左边。'});
+
+// --- 2026-10-21 dinner chat instead of quiz
+Object.assign(window.T.en,{'왔구나! 손 씻고 와. 밥 먹자.':'You’re home! Wash your hands. Let’s eat.','오늘 일, 잊어버리기 전에 {w}에 적어 두렴.':'Write today down in your {w} before you forget.','밤. {w}를 펼쳤다.':'Night. I opened my {w}.'});
+Object.assign(window.T.id,{'왔구나! 손 씻고 와. 밥 먹자.':'Sudah pulang! Cuci tangan dulu. Ayo makan.','오늘 일, 잊어버리기 전에 {w}에 적어 두렴.':'Tulis kejadian hari ini di {w} sebelum lupa, ya.','밤. {w}를 펼쳤다.':'Malam. Aku membuka {w}.'});
+Object.assign(window.T.vi,{'왔구나! 손 씻고 와. 밥 먹자.':'Về rồi à! Đi rửa tay đi. Ăn cơm thôi.','오늘 일, 잊어버리기 전에 {w}에 적어 두렴.':'Viết chuyện hôm nay vào {w} trước khi quên nhé.','밤. {w}를 펼쳤다.':'Buổi tối. Tớ mở {w} ra.'});
+Object.assign(window.T.zh,{'왔구나! 손 씻고 와. 밥 먹자.':'回来啦！去洗洗手。我们吃饭吧。','오늘 일, 잊어버리기 전에 {w}에 적어 두렴.':'趁还没忘，把今天的事写在{w}上吧。','밤. {w}를 펼쳤다.':'晚上。我打开了{w}。'});
