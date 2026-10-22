@@ -44,6 +44,8 @@ html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family
 #fader{position:fixed;inset:0;background:#000;opacity:0;pointer-events:none;transition:opacity .5s;z-index:40}
 #modal{position:fixed;inset:0;background:var(--shade);display:none;justify-content:center;z-index:35;padding:16px;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;touch-action:pan-y}
 #modal.on{display:flex}
+.smark{position:absolute;transform:translate(-50%,-50%);z-index:3500;pointer-events:none;font-size:15px;line-height:1;background:#fff;border:2px solid var(--mint);border-radius:999px;padding:4px 5px;box-shadow:0 2px 3px rgba(0,0,0,.25);opacity:.95}
+.zit{position:relative}.zit::after{content:'🔊';position:absolute;right:4px;top:4px;font-size:13px;background:#fff;border:2px solid var(--mint);border-radius:999px;padding:2px 4px}
 .ztray{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;background:linear-gradient(#e9c79a,#dcb684);border:3px solid var(--line);border-radius:18px;padding:16px 10px}
 .zit{background:rgba(255,255,255,.55);border:3px solid transparent;border-radius:16px;padding:6px;cursor:pointer;width:min(120px,26vw);height:min(120px,26vw);display:flex;align-items:center;justify-content:center}
 .zit img{max-width:100%;max-height:100%;filter:drop-shadow(0 3px 2px rgba(0,0,0,.25))}
@@ -117,13 +119,13 @@ body,button{word-break:keep-all;overflow-wrap:break-word}
 <div id="fader"></div>
 <script>
 // same address, newest version: if the page this phone has kept is older than the one online, fetch the new one and reopen
-const BUILD='1021173833';
+const BUILD='1022100843';
 try{fetch(location.pathname,{cache:'no-store'}).then(r=>r.text()).then(t=>{const m=t.match(/const BUILD='(\d+)'/);if(m&&m[1]!==BUILD&&sessionStorage.getItem('upd')!==m[1]){sessionStorage.setItem('upd',m[1]);fetch(location.pathname,{cache:'reload'}).then(()=>location.reload())}}).catch(()=>{})}catch(e){}
 </script>
-<script src="i18n.js?v=1021173833"></script>
-<script src="day2/i18n_engine.js?v=1021173833"></script>
-<script src="day2/data.js?v=1021173833"></script>
-<script src="day3/data.js?v=1021173833"></script>
+<script src="i18n.js?v=1022100843"></script>
+<script src="day2/i18n_engine.js?v=1022100843"></script>
+<script src="day2/data.js?v=1022100843"></script>
+<script src="day3/data.js?v=1022100843"></script>
 <script>
 // ---------- data ----------
 const MW=1672,MH=941,KID=180;
@@ -236,7 +238,7 @@ function onTap(e){if(sayEl&&talkOn){advance();return}if(busy||!me)return;const x
  let hit=null,bd=1e9;for(const n of npcs){if(!n.h)continue;if(x>n.x-n.w*.4&&x<n.x+n.w*.4&&y>n.y-n.h&&y<n.y+10){const d=Math.abs(y-(n.y-n.h/2));if(d<bd){bd=d;hit=n}}}
  {const wk=WORDKEY[hit&&hit.id]||(DAY>=2&&hit&&npcThing(hit,y));if(hit&&FIND&&wk){tapThing(wk,hit.x,hit.y);walkNear(hit.x,hit.y);return}}
  if(hit){approach(hit);return}
- const objs=(OBJ[MAP]||[]).filter(o=>!(o[0]==='notebook'&&FOUND.has('notebook'))).slice().sort((a,b)=>a[3]-b[3]);
+ const objs=(OBJ[MAP]||[]).filter(o=>!(DAY<2&&o[0]==='notebook'&&FOUND.has('notebook'))).slice().sort((a,b)=>a[3]-b[3]);
  const oh=objs.find(o=>Math.hypot(x-o[1],y-o[2])<o[3]);
  if(DAY>=2&&['d2_class','d2_after'].includes(stage)&&OUT[MAP]&&(Math.hypot(x-OUT[MAP][0],y-OUT[MAP][1])<120||Math.abs(x-OUT[MAP][0])<140&&y>OUT[MAP][1]-280&&y<OUT[MAP][1])){walkTo(OUT[MAP][0],OUT[MAP][1],pickPlace);return}
  const ex=goal&&goal.target==='door'&&EXITS[MAP]&&EXITS[MAP].door;if(ex&&Math.hypot(x-ex[0],y-ex[1])<110){walkTo(ex[0],ex[1],()=>useDoor());return}
@@ -275,7 +277,12 @@ function tapThing(k,x,y){speak(k);if(!FIND)return;closeBubble();bubble=document.
 function keepOnScreen(el){const r=el.getBoundingClientRect();let dx=0,dy=0;if(r.left<8)dx=8-r.left;else if(r.right>innerWidth-8)dx=innerWidth-8-r.right;if(r.bottom>innerHeight-8)dy=innerHeight-8-r.bottom;if(dx)el.style.left=(parseFloat(el.style.left)+dx/cam.s)+'px';if(dy)el.style.top=(parseFloat(el.style.top)+dy/cam.s)+'px'}
 // friendship gauge over the head of every friend you got closer to (full at 10 hearts)
 const GAUGE_MAX=10;function gauges(){world.querySelectorAll('.gauge').forEach(g=>g.remove());for(const n of npcs){const v=HEART[n.id];if(!v||!n.h)continue;const g=document.createElement('div');g.className='gauge';g.innerHTML=`<i>♥</i><b><s style="width:${Math.min(100,v/GAUGE_MAX*100)}%"></s></b>`;g.style.left=n.x+'px';{const t=n.y-n.h-(WORDKEY[n.id]&&FOUND.has(WORDKEY[n.id])?48:12);if(t<70){g.style.top=(n.y+(n.foot||0)+8)+'px';g.style.transform='translate(-50%,0)'}else g.style.top=t+'px'};world.appendChild(g)}}
-function tagAll(){gauges();world.querySelectorAll('.tag').forEach(t=>t.remove());for(const n of npcs){const k=WORDKEY[n.id];if(k&&FOUND.has(k)&&n.h){const t=document.createElement('div');t.className='tag';t.textContent=wordOf(k);t.style.left=n.x+'px';t.style.top=(n.y-n.h-8)+'px';world.appendChild(t)}}}
+function soundMarks(){world.querySelectorAll('.smark').forEach(e=>e.remove());const zs=(typeof ZOOMS!=='undefined'&&DAY>=2&&ZOOMS[MAP])||[];
+ for(const o of (OBJ[MAP]||[])){if(DAY<2&&o[0]==='notebook'&&FOUND.has('notebook'))continue;if(zs.some(z=>o[1]>=z[0]&&o[1]<=z[2]&&o[2]>=z[1]&&o[2]<=z[3]&&o[3]<80))continue;
+  const d=document.createElement('div');d.className='smark';d.textContent='🔊';d.style.left=(o[1]+Math.min(o[3],60)*.55)+'px';d.style.top=(o[2]-Math.min(o[3],60)*.7)+'px';world.appendChild(d)}
+ for(const n of npcs){if(!n.h)continue;if(!(WORDKEY[n.id]||(DAY>=2&&typeof NPC_THING!=='undefined'&&NPC_THING[n.id])))continue;const d=document.createElement('div');d.className='smark';d.textContent='🔊';d.style.left=(n.x+n.w*.45)+'px';d.style.top=(n.y-n.h*.55)+'px';world.appendChild(d)}
+ if(pangEl){const d=document.createElement('div');d.className='smark';d.textContent='🔊';d.style.left=(PANG_AT[0]+40)+'px';d.style.top=(PANG_AT[1]-PANG_H-6)+'px';world.appendChild(d)}}
+function tagAll(){gauges();soundMarks();world.querySelectorAll('.tag').forEach(t=>t.remove());for(const n of npcs){const k=WORDKEY[n.id];if(k&&FOUND.has(k)&&n.h){const t=document.createElement('div');t.className='tag';t.textContent=wordOf(k);t.style.left=n.x+'px';t.style.top=(n.y-n.h-8)+'px';world.appendChild(t)}}}
 function showBag(){const ks=['notebook'].filter(k=>FOUND.has(k));const b=document.getElementById('bag');if(!ks.length){b.style.display='none';return}b.style.display='block';b.textContent='📒 '+ks.map(wordOf).join(' · ')}
 function buzz(){try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();const t=AC.currentTime,o=AC.createOscillator(),g=AC.createGain();o.type='square';o.frequency.value=180;g.gain.setValueAtTime(.12,t);g.gain.exponentialRampToValueAtTime(.0001,t+.35);o.connect(g).connect(AC.destination);o.start(t);o.stop(t+.36)}catch(e){}}
 // ---------- Pangpang ----------
@@ -438,7 +445,7 @@ function pickHero(){const m=document.getElementById('modal'),c=document.getEleme
  c.innerHTML=`<h2>${tr('괴짜교실 반장되기')}</h2><p>${tr('말 한마디 못 하는 전학생,<br>반장 선거에 나가다.')}</p><p style="margin-top:14px">${tr('누구로 할까요?')}</p>${(()=>{const s=loadSave();return s&&s.day>=2&&s.mode===UI+'-'+LANG?`<p><button class="big" id="cont">${tr(s.day+'일차부터 이어 하기')}</button></p>`:''})()}<div class="pick heroes"><button data-h="hero_f"><img src="faces/hero_f_smile.jpg" alt="여자 주인공"></button><button data-h="hero_m"><img src="faces/hero_m_smile.jpg" alt="남자 주인공"></button></div>`;
  m.classList.add('on');{const cb=document.getElementById('cont');if(cb)cb.onclick=()=>{const s=loadSave();HERO=s.hero;Object.assign(HEART,s.heart||{});(s.found||[]).forEach(k=>FOUND.add(k));HEART_D1={...HEART};chime();startDay(Math.min(s.day,Object.keys(window.D3||{}).length?3:2))}}c.querySelectorAll('.pick button').forEach(b=>b.onclick=()=>{HERO=b.dataset.h;m.classList.remove('on');chime();bgm('day');load('home_am');say([['nar','','이사 온 다음 날 아침. 아직 풀지 못한 상자들이 쌓여 있다.'],['think','sad','(오늘부터 새 학교… 여기 말은 아직 서툰데.)'],['think','smile','({m}한테 인사하고 학교 가야지.)']],morning)})}
 </script>
-<script src="day2/engine.js?v=1021173833"></script>
+<script src="day2/engine.js?v=1022100843"></script>
 <script>
 // the goal shows big for a few seconds, then folds into a small pill (tap it to open it again)
 {const g=document.getElementById('goal');let t=null;const big=()=>{g.classList.remove('mini');clearTimeout(t);t=setTimeout(()=>g.classList.add('mini'),4000)};
