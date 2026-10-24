@@ -2,7 +2,7 @@
 // A friend with per-meeting scenes (window.EP[id]) plays their next scene each time you talk to them at school: meeting 1 = their "Day 2",
 // meeting 15 = "Day 16R", whatever the calendar day. Friends without them keep the scenes of the calendar day (D2 / D3).
 // Evening: Mom asks 「오늘 학교 어땠어?」 → the first friend's part → 「또 누구 만났어?」 → the second friend's part.
-let MEET={},FLAGS={},ELECTION=false;// meetings so far per friend, story flags (M04_word …), election day (the voting-day special needs it)
+let MEET={},FLAGS={},ELECTION=false,SCENE_IDS=null,SCENE_EP=null,GOWITH=null;// meetings so far per friend, story flags (M04_word …), election day (the voting-day special needs it)
 const DAYMEET={},TODAYEP={},EPIDX={};// MEET/FLAGS when each day started (for "play this day again"); scene played today per friend; meeting index at day start
 function epNext(id,at){const L=window.EP&&EP[id];if(!L)return null;const n=at==null?(MEET[id]||0):at;
  const v=EP[id+'_vote'];if(ELECTION&&v&&n>=4&&!FLAGS[id+'_vote'])return v;return L[n]||null}
@@ -19,6 +19,8 @@ d2People=function(id){const eps=D2IDS.map(f=>[f,epNext(f,EPIDX[f])]).filter(x=>x
  for(const[f,e]of eps){moved.add(f);(e.with||[]).forEach(w=>moved.add(w[0]))}
  const ps=_d2People(id).filter(p=>!moved.has(p[0]));
  for(const[f,e]of eps)if(e.place===id){ps.push([f,e.at[0],e.at[1]]);(e.with||[]).forEach(w=>ps.push(w))}
+ // a scene that walks on ({go}) takes its friend (and who is with them) along: they stand next to the hero where the hero comes in (spots.js keeps them off things)
+ if(GOWITH&&GOWITH.map===id){const st=(MAPS[id]&&MAPS[id].start)||[600,500];GOWITH.ids.forEach((f,i)=>{const at=ps.findIndex(p=>p[0]===f);if(at>=0)ps.splice(at,1);ps.push([f,st[0]+(i%2?-1:1)*110*(1+(i>>1)),st[1]])})}
  return ps};
 // today's scenes add their things to the maps (drawn spots to tap, pictures laid on top)
 const _setDay=setDay;
@@ -78,11 +80,11 @@ d2Talk=function(id){const e=epNext(id,EPIDX[id]);
  if(!e||PICKS.includes(id)||!['d2_class'].includes(stage)||PICKS.length>=needToday()){
   if(e||!DD()[id]){say([AGAIN[id]||['think','smile','(오늘은 여기까지. 내일 또 얘기해 보자.)']]);return}
   return _d2Talk(id)}
- setGoal('');const pic=!!e.scene;
+ setGoal('');const pic=!!e.scene;SCENE_IDS=[id].concat((e.with||[]).map(w=>w[0]));SCENE_EP=e;GOWITH=null;
  runSteps(e.pre,null,()=>{const choose=()=>ask(e.ask||'어떻게 할까?',e.choices,o=>{D2CHOICE[id]=o.k;sceneEl.classList.remove('on');
   for(const[f,v]of Object.entries(e.flag||{}))FLAGS[f]=!!v[o.k];
   if(e.vote)FLAGS[id+'_vote']=1;else MEET[id]=(MEET[id]||0)+1;TODAYEP[id]=e;
-  say(o.r||[],()=>runSteps(e.post,o.k,()=>{Object.entries(o.pts||{}).forEach(([p,n])=>heart(p,n));PICKS.push(id);TALKED.add(id);
+  say(o.r||[],()=>runSteps(e.post,o.k,()=>{Object.entries(o.pts||{}).forEach(([p,n])=>heart(p,n));PICKS.push(id);TALKED.add(id);SCENE_IDS=null;SCENE_EP=null;GOWITH=null;
    setTimeout(()=>lessons(PICKS.length>=needToday()?'pm':'am'),500)}))});
   if(pic)scene(e.scene,[],choose,true);else{showPic(null);choose()}})};
 // ---- evening: Mom asks, each friend's part follows ----
@@ -112,6 +114,8 @@ end2=function(){const n=DAY,next=n+1,hasNext=dayHasContent(next);DAY=hasNext?nex
  m.classList.add('on');document.getElementById('re').onclick=()=>{try{localStorage.removeItem('haru_save')}catch(e){}location.href=location.pathname};
  document.getElementById('re2').onclick=()=>{for(const k in HEART)delete HEART[k];Object.assign(HEART,DAYHEART[n]||HEART_D1||{});startDay(n)};
  if(hasNext){DAYHEART[next]={...HEART};delete DAYMEET[next];document.getElementById('gonext').onclick=()=>startDay(next)}};
+// a scene that walks on to another place ({go}) brings its friend along; ep.goAlone = {map:[choices]} when the hero goes there alone
+{const _load=load;load=function(m,x){if(SCENE_IDS){const al=SCENE_EP&&SCENE_EP.goAlone&&SCENE_EP.goAlone[m];GOWITH=al&&al.includes(D2CHOICE[SCENE_IDS[0]])?null:{map:m,ids:SCENE_IDS}}return _load(m,x)}}
 // no leaving through the way out while a friend's find is running (the find's thing is on this map; leaving lost the scene and the day got stuck)
 {const _pickPlace=pickPlace;pickPlace=function(){if(FIND&&['d2_class','d2_after'].includes(stage)){say([['think','surprised','(먼저 이 미션부터 끝내자.)']]);return}return _pickPlace()};
  const L={en:'(Let me finish this mission first.)',id:'(Aku selesaikan misi ini dulu.)',vi:'(Làm xong nhiệm vụ này trước đã.)',zh:'（先把这个任务做完吧。）'};

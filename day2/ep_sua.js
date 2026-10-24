@@ -409,7 +409,7 @@ EP.sua=[
   common:[['mom','smile','이건 우리 둘이 먹자. 생일 축하해.'],['me','laugh','응. 그리고 오늘 애들이 생일 노래 불러 줬어. 수아가 제일 크게 불렀어. 음 틀리게.'],['mom','laugh','반장은 노래도 크게 하는구나.']]}},
 
 // ■ Day 11 — 혼자 가 볼래? (10)
-{title:'혼자 가 볼래?',scene:'sua_10',place:'class',at:[600,262],
+{title:'혼자 가 볼래?',scene:'sua_10',place:'class',at:[600,262],goAlone:{hall:['A','C']},
  taps:{hall:[['door',1480,560,55],['door',1058,232,45],['door',520,85,40]]},things:{hall:[['picture',1250,705,60]]},
  pre:[
   ['nar','','점심시간. 수아가 급하게 {@bag}을 챙기고 있었다. 나는 수아에게 갔다.'],
