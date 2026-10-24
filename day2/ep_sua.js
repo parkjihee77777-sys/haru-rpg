@@ -6,7 +6,7 @@ window.EP=window.EP||{};
 EP.sua=[
 // ■ Day 2 — 규칙 7번 (1)
 {title:'규칙 7번',scene:'sua_01',place:'class',at:[600,262],
- things:{class:[['handkerchief',505,302,40]]},taps:{hall:[['stairs',725,75,70]]},
+ taps:{hall:[['stairs',725,75,70]]},
  pre:[
   ['nar','','수아가 교실 앞에서 형광펜으로 뭔가를 체크하고 있었다. 나는 수아에게 갔다.'],
   ['me','smile','수아야. 규칙…… 외워 왔어.'],
@@ -26,7 +26,7 @@ EP.sua=[
   ['sua','angry','규칙 7번! {@handkerchief} 꺼내! 입 막고, 자세 낮추고, 오른쪽 {@stairs}!'],
   ['nar','','수아 말이 너무 빨랐다. 아이들이 줄줄이 복도로 나갔다.'],
   ['think','surprised','({@handkerchief}…… {@handkerchief}이 뭐였지?)'],
-  {k:'handkerchief',goal:'「{x}」 꺼내기'},
+  {k:'handkerchief',goal:'「{x}」 꺼내기',bag:['notebook','pcase','handkerchief','eraser','highlighter']},
   ['nar','','{@handkerchief}으로 입을 막았다. 그런데 ‘자세를 낮춰’는 아직도 모르겠다. 앞 친구들은 벌써 복도 끝에 있었다.'],
   ['sua','angry','왜 안 와? 내가 7번 말했잖아!'],
   ['think','sad','(외운 건 맞는데…… 뜻을 몰라.)']],

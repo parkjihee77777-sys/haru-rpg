@@ -59,12 +59,12 @@ EP.hangyeol=[
 
 // ■ Day 3 — 가운데 줄 (2)
 {title:'가운데 줄',scene:'hangyeol_02',place:'gym',at:[760,560],
- things:{gym:[['name_tag',530,330,40],['line',1010,720,190]]},
+ things:{gym:[['line',1010,720,190]]},
  pre:[
   ['nar','','강당. 외부에서 오신 강사 선생님이 안전교육을 하러 오셨다. 담임 선생님은 출석을 확인하러 잠깐 교무실에 가셨다.'],
   ['nar','','나는 한결이 옆에 섰다. 한결이는 오늘 {@hair_tie}이 새벽보라색이었다.'],
   ['hangyeol','laugh','안녕, 팔찌 쌍둥이. 아니, 손님.'],
-  {k:'name_tag',goal:'「{x}」 달기'},{pic:'hangyeol_02'},
+  {k:'name_tag',goal:'「{x}」 달기',bag:['pcase','name_tag','notebook','handkerchief','pencil']},{pic:'hangyeol_02'},
   ['nar','','강사: 「자, 다들 {@name_tag} 달았죠? 남자 한 {@line}, 여자 한 {@line}! 빨리빨리!」'],
   ['nar','','아이들이 우르르 두 {@line}로 갈라졌다. 한결이는 그 자리에 서 있었다.'],
   ['nar','','한결이가 팔찌를 손가락으로 돌렸다. 한 바퀴, 두 바퀴.'],
@@ -106,13 +106,13 @@ EP.hangyeol=[
 
 // ■ Day 4 — 결이 (3)
 {title:'결이',scene:'hangyeol_03',place:'library',at:[760,560],flag:{H04_name:{A:1,D:1}},
- things:{library:[['colored_pencil',960,392,34],['picture',1045,398,50]]},
+ things:{library:[['picture',1045,398,50]]},
  pre:[
   {pic:'hangyeol_03'},
   ['nar','','점심시간. 도서관 구석에서 한결이가 혼자 뭔가를 그리고 있었다. 나는 한결이 맞은편에 앉았다.'],
   ['hangyeol','smile','어, 손님. 오늘 공방 휴업.'],
   ['me','surprised','뭐 그려?'],
-  {k:'colored_pencil',goal:'「{x}」 빌려주기'},
+  {k:'colored_pencil',goal:'「{x}」 빌려주기',bag:['eraser','notebook','colored_pencil','pcase','sharpener']},
   ['nar','','한결이에게 보라색 {@colored_pencil}을 건넸다.'],
   {k:'picture',goal:'「{x}」 들여다보기'},{pic:'hangyeol_03'},
   ['nar','','{@picture} 속에 팔찌 가게가 있었다. 간판에 「결이 공방」이라고 쓰여 있었다.'],
@@ -303,12 +303,12 @@ EP.hangyeol=[
 
 // ■ Day 8 — 상자 두 개 (7)
 {title:'상자 두 개',scene:'hangyeol_07',place:'class',at:[1300,262],
- things:{class:[['sticker',1160,334,38],['box',780,210,66],['box',905,210,66]]},
+ things:{class:[['box',780,210,66],['box',905,210,66]]},
  pre:[
   {pic:'hangyeol_07'},
   ['nar','','금요일은 칭찬 {@sticker}를 상품으로 바꾸는 날이었다. {@sticker} 판을 들고 {@line}을 섰다. 바로 앞이 한결이였다.'],
   ['hangyeol','laugh','나 {@sticker} 열 개. 오늘 뭐 고를지 일주일 내내 생각했어.'],
-  {k:'sticker',goal:'「{x}」 판 꺼내기'},
+  {k:'sticker',goal:'「{x}」 판 꺼내기',bag:['notebook','pcase','sticker','handkerchief','eraser']},
   ['nar','','{@sticker} 판에 {@sticker}가 열 개 붙어 있었다.'],
   {k:'box',goal:'「{x}」 들여다보기'},{pic:'hangyeol_07'},
   ['nar','','교탁 위에 {@box}가 두 개 있었다. 파란 {@paper}에 ‘남자’, 분홍 {@paper}에 ‘여자’라고 쓰여 있었다.'],
@@ -553,7 +553,7 @@ EP.hangyeol=[
 
 // ■ Day 13 — 번호순 공약 (12)
 {title:'번호순 공약',scene:'hangyeol_12',place:'class',at:[330,262],
- things:{class:[['thread',380,330,30],['notebook',470,336,40]]},
+ things:{class:[['thread',380,330,30]]},
  pre:[
   {pic:'hangyeol_12'},
   ['nar','','방과 후. 선거 공약을 고민하다가 한결이 자리로 갔다. 한결이는 {@thread}을 정리하고 있었다.'],
@@ -561,7 +561,7 @@ EP.hangyeol=[
   ['me','sad','아직. 하나 더 필요해.'],
   {k:'thread',goal:'「{x}」 감아 주기'},
   ['nar','','엉킨 {@thread}을 감아 한결이에게 건넸다.'],
-  {k:'notebook',goal:'「{x}」 펼치기'},{pic:'hangyeol_12'},
+  {k:'notebook',goal:'「{x}」 펼치기',bag:['pcase','colored_pencil','handkerchief','notebook','eraser']},{pic:'hangyeol_12'},
   ['nar','','공약을 적던 쪽을 펼쳤다.'],
   ['hangyeol','smile','나 아이디어 하나 있는데.'],
   ['hangyeol','smile','행사 때 {@line} 설 때, 상 나눌 때, 팀 나눌 때. 남자 여자로 나누지 말고, 다른 방법으로 하기.'],
@@ -657,13 +657,13 @@ EP.hangyeol=[
 
 // ■ Day 15 — 외국인이 무슨 반장 (14)
 {title:'외국인이 무슨 반장',scene:'hangyeol_14',place:'hall',at:[430,430],
- things:{hall:[['poster',300,560,72],['tape',385,575,32]]},
+ things:{hall:[]},
  pre:[
   ['nar','','쉬는 시간. 한결이랑 복도 게시판에 선거 {@poster}를 붙이러 갔다. 한결이가 {@poster} 가장자리에 {@thread}로 테두리를 붙여 줬다.'],
   ['hangyeol','laugh','이 {@poster}, 우리 학교에서 제일 예쁨. 보장함.'],
-  {k:'poster',goal:'「{x}」 펼치기'},
+  {k:'poster',goal:'「{x}」 펼치기',bag:['notebook','poster','pcase','tape','colored_pencil']},
   ['nar','','내 선거 {@poster}를 폈다.'],
-  {k:'tape',goal:'「{x}」 붙이기'},
+  {k:'tape',goal:'「{x}」 붙이기',bag:['glue','pcase','tape','notebook','eraser']},
   ['nar','','{@poster}를 게시판에 붙였다.'],
   {pic:'hangyeol_14'},
   ['nar','','옆 반 아이 둘이 지나가다 내 {@poster} 앞에 멈췄다.'],
@@ -784,7 +784,7 @@ runSteps=function(steps,choice,done){const q=(steps||[]).slice();let pic=false;
    if(s.fx){if(lines.length)break;q.shift();sceneFx(s.fx);continue}
    if(s.lay||s.clear){q.shift();lines.push(()=>layThings(s.lay,s.clear));continue}
    if(s.pic!==undefined){if(lines.length)break;q.shift();pic=!!s.pic;showPic(s.pic);continue}break}
-  const go=()=>{if(!q.length){if(pic)showPic(null);done&&done();return}const f=q.shift();if(f.fx){sceneFx(f.fx);next();return}if(f.pic!==undefined){pic=!!f.pic;showPic(f.pic);next();return}if(pic){pic=false;showPic(null)}if(f.go){fade(()=>{load(f.go);next()});return}find(f.k,()=>{TODAY.add(f.k);next()},f.goal||'「{x}」 찾기')};
+  const go=()=>{if(!q.length){if(pic)showPic(null);done&&done();return}const f=q.shift();if(f.fx){sceneFx(f.fx);next();return}if(f.pic!==undefined){pic=!!f.pic;showPic(f.pic);next();return}if(pic){pic=false;showPic(null)}if(f.go){fade(()=>{load(f.go);next()});return}if(f.bag){bagFind(f.k,f.bag,f.goal,next);return}find(f.k,()=>{TODAY.add(f.k);next()},f.goal||'「{x}」 찾기')};
   if(lines.length)say(lines,go);else go()};
  next()};
 // two places drawn for Hangyeol's scenes: the library (Day 4) and the room at the school trip (Day 12, remembered)
