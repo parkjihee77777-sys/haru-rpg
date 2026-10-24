@@ -1,7 +1,7 @@
 // 양수아 — scenes by meeting (Day N = the Nth meeting with Sua; meeting 1 = Day 2). Source: 괴짜교실_시나리오_개정작업/02_인물별_시나리오/양수아_Day2-16R_전면개정.md
 // Same format as ep_minho.js (loaded after meet.js). New here: a {go:'map'} step moves to another place in the middle of a scene (the drill: class → hall → field),
 // flags S04_play (Day 4) and S05_A / S05_BC / S05_D (Day 5: who presents; Day 6 starts by it), and the results-day special (EP.sua_result, no choice).
-// {고향 놀이} = 「같은 편 손수건 놀이」 (the hero's game), {고향 간식} = 「우리 나라 간식」. The library scenes (Day 3, 13) use the classroom map until a library is drawn.
+// {고향 놀이} = 「같은 편 손수건 놀이」 (the hero's game), {고향 간식} = 「우리 나라 간식」. The library scenes (Day 3, 13) use the library map (maps/library.jpg, added in ep_hangyeol.js).
 window.EP=window.EP||{};
 EP.sua=[
 // ■ Day 2 — 규칙 7번 (1)
@@ -66,8 +66,8 @@ EP.sua=[
   common:[['me','smile','그리고 {m}. 나 수아한테 반장 선거 나간다고 말했어.'],['mom','surprised','정말? 수아가 뭐래?'],['me','laugh','좋아, 그럼 경쟁이네, 그랬어.'],['mom','laugh','멋있는 경쟁자네.']]}},
 
 // ■ Day 3 — 기어가라는 게 아니고 (2)
-{title:'기어가라는 게 아니고',scene:'sua_02',place:'class',at:[690,340],
- things:{class:[['paper',800,428,48],['colored_pencil',885,432,34]]},
+{title:'기어가라는 게 아니고',scene:'sua_02',place:'library',at:[880,560],
+ things:{library:[['paper',1000,520,48],['colored_pencil',1095,525,34]]},
  pre:[
   ['nar','','도서관 구석 {@desk}. 수아가 큰 {@paper}를 펼쳐 놓고 있었다. 나는 수아 맞은편에 앉았다.'],
   ['me','smile','수아야, 뭐 해?'],
@@ -481,8 +481,8 @@ EP.sua=[
   D:[['me','sad','그냥 웃어넘겼어. 근데 하나도 안 웃겼어.'],['mom','sad','웃었으니까 수아는 괜찮은 줄 알았겠다.'],['me','sad','응. 쪽지는 받았는데…… 나 아팠다는 건 수아가 몰라.'],['mom','smile','내일이라도 말해 볼래? 그 말 좀 아팠다고.']]}},
 
 // ■ Day 13 — 이거 내 거랑 똑같은데? (12)
-{title:'이거 내 거랑 똑같은데?',scene:'sua_12',place:'class',at:[690,340],
- things:{class:[['notebook',800,428,40]]},
+{title:'이거 내 거랑 똑같은데?',scene:'sua_12',place:'library',at:[880,560],
+ things:{library:[['notebook',1020,522,40]]},
  pre:[
   ['nar','','도서관. 선거 연설문을 쓰다가 막혔다. 마침 수아가 맞은편에 앉아 있었다. 나는 {w}을 들고 수아에게 갔다.'],
   ['me','smile','수아야, 내 연설문 처음 부분만 봐 줄래?'],
