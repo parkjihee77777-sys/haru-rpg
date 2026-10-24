@@ -348,7 +348,7 @@ EP.hangyeol=[
 
 // ■ Day 9 — 이발소 (8)
 {title:'이발소',scene:'hangyeol_08',place:'gate',at:[960,650],
- things:{gate:[['umbrella',1060,690,64],['hair_tie',880,735,34]]},
+ things:{gate:[['umbrella',1060,690,64]]},
  pre:[
   {pic:'hangyeol_08'},
   ['nar','','하교 시간. 비가 조금 왔다. 교문 앞에서 한결이가 할머니를 기다리고 있었다. 나는 한결이 옆에 섰다.'],
@@ -364,7 +364,8 @@ EP.hangyeol=[
   ['hangyeol','laugh','아무도 뭐라고 안 해. 딱 한 달만! 한 달만 길러 볼게.'],
   ['nar','','할머니: 「아이고, 지난달에도 한 달만이라더니.」'],
   ['nar','','할머니가 한결이 머리를 쓰다듬으셨다. {@hair_tie}이 풀려 땅에 떨어졌다.'],
-  {k:'hair_tie',goal:'「{x}」 주워 주기'},{pic:'hangyeol_08'},
+  {lay:[['hair_tie',880,735,34]]},
+  {k:'hair_tie',goal:'「{x}」 주워 주기'},{clear:['hair_tie']},{pic:'hangyeol_08'},
   ['nar','','젖기 전에 보라색 {@hair_tie}을 주워 한결이에게 건넸다.'],
   ['nar','','할머니: 「아, 한결이 친구구나? 너는 어떻게 생각하니? 머리 길면 눈 나빠지지?」'],
   ['think','surprised','(할머니가 나한테 물어보셨어.)'],
@@ -774,13 +775,14 @@ window.EP_WORDS_HG={
 {const add=window.EP_WORDS_HG;for(const[k,w]of Object.entries(add))if(!D2WORDS[k])D2WORDS[k]=w;d2Merge()}
 for(const k of Object.keys(EP_WORDS_HG))CARDS_HAVE.add(k);
 // {fx:'past'} inside pre/post: the map turns sepia (remembering the school trip); {fx:'now'} brings it back
-// {pic:'name'} (showPic in meet.js) and {fx} both work in this runSteps
+// {pic:'name'} (showPic in meet.js), {lay}/{clear} (layThings in meet.js) and {fx} all work in this runSteps
 function sceneFx(m){world.style.filter=m==='past'?'sepia(.7) saturate(.75) brightness(.92)':''}
 runSteps=function(steps,choice,done){const q=(steps||[]).slice();let pic=false;
  const next=()=>{const lines=[];
   while(q.length){const s=q[0];if(Array.isArray(s)){lines.push(q.shift());continue}
    if(s.only||s.flag){q.shift();const ok=s.only?s.only.includes(choice):(+!!FLAGS[s.flag])===s.is;if(ok)q.unshift(...s.lines);continue}
    if(s.fx){if(lines.length)break;q.shift();sceneFx(s.fx);continue}
+   if(s.lay||s.clear){q.shift();lines.push(()=>layThings(s.lay,s.clear));continue}
    if(s.pic!==undefined){if(lines.length)break;q.shift();pic=!!s.pic;showPic(s.pic);continue}break}
   const go=()=>{if(!q.length){if(pic)showPic(null);done&&done();return}const f=q.shift();if(f.fx){sceneFx(f.fx);next();return}if(f.pic!==undefined){pic=!!f.pic;showPic(f.pic);next();return}if(pic){pic=false;showPic(null)}if(f.go){fade(()=>{load(f.go);next()});return}find(f.k,()=>{TODAY.add(f.k);next()},f.goal||'「{x}」 찾기')};
   if(lines.length)say(lines,go);else go()};

@@ -65,12 +65,19 @@ d2Goal=function(){const left=friendsToday().filter(i=>!PICKS.includes(i));
 // a list of lines and finds, played in order; {only:[…]} / {flag,is} parts play only after that choice / with that flag
 // {pic:'name'} shows that picture over the map from there on (what the lines describe, when the map can't show it); a find always goes back to the map
 // {go:'hall'} walks over to another place and goes on there
+// {lay:[[k,x,y,w,picture?]]} lays things on the map from that line on (tap spots too); {clear:[k…]} takes them away again (both gone when the map is left)
 function showPic(name){if(name){sceneEl.style.backgroundImage=`url(scenes/${name}.jpg)`;sceneEl.classList.add('on');requestAnimationFrame(fitScene)}else sceneEl.classList.remove('on')}
+function layThings(lay,clear){for(const k of clear||[]){world.querySelectorAll('.laid').forEach(e=>{if(e.dataset.k===k)e.remove()});OBJ[MAP]=(OBJ[MAP]||[]).filter(o=>!(o.laid&&o[0]===k))}
+ for(const[k,x,y,w,img]of lay||[]){const it=document.createElement('img');it.className='item thing laid';it.dataset.k=k;it.src=`items/${img||k}.png`;
+  it.style.cssText=`position:absolute;width:${w||56}px;left:${x}px;top:${y}px;transform:translate(-50%,-100%);z-index:${Math.round(y)+1};pointer-events:none;filter:drop-shadow(0 2px 2px rgba(0,0,0,.25))`;world.appendChild(it);
+  const o=[k,x,y-(w||56)*.4,Math.max(30,(w||56)*.55)];o.laid=1;(OBJ[MAP]=OBJ[MAP]||[]).push(o)}
+ tagAll()}
 function runSteps(steps,choice,done){const q=(steps||[]).slice();
  const next=()=>{const lines=[];
   while(q.length){const s=q[0];if(Array.isArray(s)){lines.push(q.shift());continue}
    if(s.only||s.flag){q.shift();const ok=s.only?s.only.includes(choice):(+!!FLAGS[s.flag])===s.is;if(ok)q.unshift(...s.lines);continue}
-   if('pic' in s){q.shift();const pic=s.pic;lines.push(()=>showPic(pic));continue}break}
+   if('pic' in s){q.shift();const pic=s.pic;lines.push(()=>showPic(pic));continue}
+   if(s.lay||s.clear){q.shift();lines.push(()=>layThings(s.lay,s.clear));continue}break}
   const go=()=>{showPic(null);if(!q.length){done&&done();return}const f=q.shift();if(f.go){fade(()=>{load(f.go);next()});return}find(f.k,()=>{TODAY.add(f.k);next()},f.goal||'「{x}」 찾기')};
   if(lines.length)say(lines,go);else go()};
  next()}
