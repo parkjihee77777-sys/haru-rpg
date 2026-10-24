@@ -33,7 +33,8 @@ const JA_RU={
  sticker:['シール','наклейка'],hair_tie:['ヘアゴム','резинка'],magnet:['じしゃく','магнит'],spoon:['スプーン','ложка'],poster:['ポスター','плакат'],
  // Siwoo's scenes (ep_siwoo.js)
  ruler:['じょうぎ','линейка'],bean:['まめ','фасоль'],butterfly:['ちょうちょ','бабочка'],calendar:['カレンダー','календарь'],hourglass:['すなどけい','песочные часы'],
- mirror:['かがみ','зеркало'],map:['ちず','карта'],recorder:['リコーダー','блокфлейта'],card:['カード','карточка']
+ mirror:['かがみ','зеркало'],map:['ちず','карта'],recorder:['リコーダー','блокфлейта'],card:['カード','карточка'],
+ moon:['つき','луна'],note:['メモ','записка'],tofu:['とうふ','тофу'],ladle:['おたま','половник'],photo:['しゃしん','фотография'],book:['ほん','книга'],bus:['バス','автобус'],board:['けいじばん','доска объявлений']
 };
 {for(const[k,[ja,ru]]of Object.entries(JA_RU)){LANGS.ja.words[k]=ja;LANGS.ru.words[k]=ru;const w=typeof D2WORDS!=='undefined'&&D2WORDS[k];if(w){w.ja=ja;w.ru=ru}}
  const miss=Object.keys(LANGS.ko.words).concat(Object.keys(LANGS.en.words)).filter(k=>!JA_RU[k]);if(miss.length)console.warn('ja/ru words missing:',[...new Set(miss)])}
