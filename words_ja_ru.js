@@ -34,7 +34,10 @@ const JA_RU={
  // Siwoo's scenes (ep_siwoo.js)
  ruler:['じょうぎ','линейка'],bean:['まめ','фасоль'],butterfly:['ちょうちょ','бабочка'],calendar:['カレンダー','календарь'],hourglass:['すなどけい','песочные часы'],
  mirror:['かがみ','зеркало'],map:['ちず','карта'],recorder:['リコーダー','блокфлейта'],card:['カード','карточка'],
- moon:['つき','луна'],note:['メモ','записка'],tofu:['とうふ','тофу'],ladle:['おたま','половник'],photo:['しゃしん','фотография'],book:['ほん','книга'],bus:['バス','автобус'],board:['けいじばん','доска объявлений']
+ moon:['つき','луна'],note:['メモ','записка'],tofu:['とうふ','тофу'],ladle:['おたま','половник'],photo:['しゃしん','фотография'],book:['ほん','книга'],bus:['バス','автобус'],board:['けいじばん','доска объявлений'],
+ // Jiho's scenes (ep_jiho.js)
+ tape_measure:['メジャー','рулетка'],pen:['ボールペン','ручка'],wrist:['てくび','запястье'],roof:['やね','крыша'],foot:['あし','нога'],
+ jump_rope:['なわとび','скакалка'],finger:['ゆび','палец'],knee:['ひざ','колено']
 };
 {for(const[k,[ja,ru]]of Object.entries(JA_RU)){LANGS.ja.words[k]=ja;LANGS.ru.words[k]=ru;const w=typeof D2WORDS!=='undefined'&&D2WORDS[k];if(w){w.ja=ja;w.ru=ru}}
  const miss=Object.keys(LANGS.ko.words).concat(Object.keys(LANGS.en.words)).filter(k=>!JA_RU[k]);if(miss.length)console.warn('ja/ru words missing:',[...new Set(miss)])}
