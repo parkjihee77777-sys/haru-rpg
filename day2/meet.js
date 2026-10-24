@@ -87,6 +87,13 @@ d2Talk=function(id){const e=epNext(id,EPIDX[id]);
   say(o.r||[],()=>runSteps(e.post,o.k,()=>{Object.entries(o.pts||{}).forEach(([p,n])=>heart(p,n));PICKS.push(id);TALKED.add(id);SCENE_IDS=null;SCENE_EP=null;GOWITH=null;
    setTimeout(()=>lessons(PICKS.length>=needToday()?'pm':'am'),500)}))});
   if(pic)scene(e.scene,[],choose,true);else{showPic(null);choose()}})};
+// ---- lessons: the class at their desks listening to the teacher (a picture over the classroom; the same lines as before) ----
+const LESSON_PICS=['lesson_1','lesson_2','lesson_3'];// morning pictures (scenes/<name>.jpg), the last one is the afternoon; none = lines on the classroom map
+lessons=function(part){setGoal('');busy=true;fade(()=>{if(MAP!=='class')load('class');
+ const am=[['nar','','딩동댕— 1교시 시작 종이 울렸다.'],['nar','','선생님: 「자, 교과서 펴세요.」'],['think','smile','(아까 일이 자꾸 생각난다.)'],['nar','','2교시, 3교시, 4교시… 오전 수업이 지나갔다.'],['nar','','딩동댕— 점심시간!']];
+ const pm=[['nar','','딩동댕— 5교시 시작 종이 울렸다.'],['nar','','오후 수업이 천천히 지나갔다.'],['nar','','딩동댕— 마지막 종이 울렸다. 방과 후!']];
+ const n=LESSON_PICS.length,pic=!n?null:part==='am'?LESSON_PICS[DAY%Math.max(1,n-1)]:LESSON_PICS[n-1];
+ (pic?(ls,cb)=>scene(pic,ls,cb):say)(part==='am'?am:pm,()=>{if(part==='am')d2Goal();else{stage='d2_after';setGoal('방과 후! 나가는 길로 가서 집에 가기','out')}})})};
 // ---- evening: Mom asks, each friend's part follows ----
 function evePart(id){const e=TODAYEP[id],c=D2CHOICE[id];
  if(e){const v=e.eve||{};let ls=(v.lead||[]).concat(v[c]||[]);if(v.commonIf&&v.commonIf.only.includes(c))ls=ls.concat(v.commonIf.lines);return ls.concat(v.common||[])}
