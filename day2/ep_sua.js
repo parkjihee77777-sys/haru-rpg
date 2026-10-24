@@ -69,6 +69,7 @@ EP.sua=[
 {title:'기어가라는 게 아니고',scene:'sua_02',place:'library',at:[880,560],
  things:{library:[['paper',1000,520,48],['colored_pencil',1095,525,34]]},
  pre:[
+  {pic:'sua_02a'},
   ['nar','','도서관 구석 {@desk}. 수아가 큰 {@paper}를 펼쳐 놓고 있었다. 나는 수아 맞은편에 앉았다.'],
   ['me','smile','수아야, 뭐 해?'],
   ['sua','smile','규칙표 다시 만들어. {@picture}으로.'],
@@ -120,7 +121,9 @@ EP.sua=[
  pre:[
   ['nar','','방금 학급회의가 끝났다. 안건은 ‘금요일 학급 놀이 시간에 뭐 할까’였다.'],
   ['nar','','나는 처음으로 {@hand}을 들고 우리 나라 놀이를 말했다. 떨려서 말이 엉켰다.'],
+  {pic:'sua_03a'},
   ['nar','','(아까 수아가 한 말) 「음…… 규칙이 복잡해 보여서 어려울 것 같아요. 다음 의견!」'],
+  {pic:null},
   ['nar','','결국 피구로 정해졌다. 아이들이 {@chair}를 정리하며 흩어졌다. 나는 수아에게 갔다.'],
   {k:'chair',goal:'「{x}」 넣기'},
   ['me','sad','수아야, 아까 내 놀이…….'],
@@ -163,6 +166,7 @@ EP.sua=[
 {title:'누가 발표해?',scene:'sua_04',place:'class',at:[690,340],
  things:{class:[['notebook',800,428,40],['clock',1040,186,46]]},
  pre:[
+  {pic:'sua_04a'},
   ['nar','','점심시간. 수아가 학급회의 {w}을 펴 놓고 있었다. 나는 수아 옆에 앉았다.'],
   ['sua','smile','다음 학급회의 내일이야. 놀이 발표 준비하자.'],
   {k:'notebook',goal:'「{x}」 펼치기'},
@@ -203,6 +207,7 @@ EP.sua=[
 {title:'그 말이 생각 안 나',scene:'sua_05',place:'class',at:[600,262],
  things:{class:[['hand',780,482,58]]},
  pre:[
+  {pic:'sua_05a'},
   ['nar','','학급회의 시간. 두 번째 안건은 내 놀이였다. 나는 앞으로 나가기 전에 수아 자리로 갔다.'],
   ['sua','smile','준비됐어?'],
   ['me','sad','……응.'],
@@ -253,6 +258,7 @@ EP.sua=[
 {title:'규칙이 안 먹혀',scene:'sua_06',place:'field',at:[800,500],
  things:{field:[['handkerchief',700,560,40]]},
  pre:[
+  {pic:'sua_06a'},
   ['nar','','체육 시간. 드디어 같은 편 {@handkerchief} 놀이를 하는 날이었다. 반 전체가 운동장에 동그랗게 앉았다.'],
   ['nar','','처음 5분은 좋았다. 그런데 곧 이상해졌다.'],
   ['nar','','아이: 「나 잡혔는데 그냥 계속 도망갈래!」'],
@@ -292,6 +298,7 @@ EP.sua=[
 {title:'그거 우리가 같이 만든 건데',scene:'sua_07',place:'class',at:[690,340],
  things:{class:[['pencil',885,436,30],['paper',800,428,48]]},
  pre:[
+  {pic:'sua_07a'},
   ['nar','','방과 후. 수아가 교실에 남아 공약을 쓰고 있었다. 나도 공약을 쓰던 {@pencil}을 들고 수아 쪽으로 갔다.'],
   {k:'pencil',goal:'「{x}」 내려놓기'},
   {k:'paper',goal:'「{x}」 들여다보기'},
@@ -448,6 +455,7 @@ EP.sua=[
  things:{class:[['glue',800,428,30]]},
  pre:[
   ['nar','','쉬는 시간. 옆 반 아이들이 우리 규칙표를 따라 만들기로 했다는 소식을 들었다. 나는 신이 나서 수아 자리로 갔다.'],
+  {pic:'sua_11a'},
   ['nar','','수아는 학급 게시물을 붙이고 있었다. {@desk} 위에 뚜껑 열린 {@glue}이 굴러다녔다.'],
   {k:'glue',goal:'「{x}」 뚜껑 닫기'},
   ['me','laugh','수아야! 옆 반이 우리 규칙표 따라 만든대!'],
@@ -525,6 +533,7 @@ EP.sua=[
 {title:'무슨 말인지 모르겠어',scene:'sua_13',place:'class',at:[690,340],
  things:{class:[['clock',1040,186,46],['water',885,436,28]]},
  pre:[
+  {pic:'sua_13a'},
   ['nar','','방과 후. 수아와 서로 연설을 들어 주기로 했다. 빈 교실에 들어서자 수아가 먼저 와 있었다.'],
   ['sua','smile','나 먼저 할게. 시간 재 줘.'],
   {k:'clock',goal:'「{x}」로 시간 재기'},
@@ -699,14 +708,7 @@ window.EP_WORDS_SUA={
 // ---- what Sua's scenes need from the engine (on top of meet.js) ----
 {const add=window.EP_WORDS_SUA;for(const[k,w]of Object.entries(add))if(!D2WORDS[k])D2WORDS[k]=w;d2Merge()}
 ['stairs','clock','hand','bowl','glue','water','window','chair','colored_pencil'].forEach(k=>CARDS_HAVE.add(k));
-// {go:'hall'} inside pre/post: walk over to another place and go on there (the drill goes down the stairs to the field)
-runSteps=function(steps,choice,done){const q=(steps||[]).slice();
- const next=()=>{const lines=[];
-  while(q.length){const s=q[0];if(Array.isArray(s)){lines.push(q.shift());continue}
-   if(s.only||s.flag){q.shift();const ok=s.only?s.only.includes(choice):(+!!FLAGS[s.flag])===s.is;if(ok)q.unshift(...s.lines);continue}break}
-  const go=()=>{if(!q.length){done&&done();return}const f=q.shift();if(f.go){fade(()=>{load(f.go);next()});return}find(f.k,()=>{TODAY.add(f.k);next()},f.goal||'「{x}」 찾기')};
-  if(lines.length)say(lines,go);else go()};
- next()};
+// {go:'hall'} (walk to another place mid-scene) and {pic:'sua_02a'} (lines over a picture of what is happening) are handled by meet.js runSteps
 // results day (nothing turns it on yet): Sua's special scene instead of her next one
 let RESULT_DAY=false,ENDING=null;
 function endingKey(){const E=ENDING||{},w=E.winner==='sua';
