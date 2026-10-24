@@ -27,6 +27,11 @@ setDay=function(n){_setDay(NATIVE_BY[n]?n:2);DAY=n;for(const k in THINGS)delete 
  for(const f of D2IDS){const e=epNext(f,EPIDX[f]);if(!e)continue;
   for(const[m,ts]of Object.entries(e.taps||{}))NATIVE[m]=(NATIVE[m]||[]).concat(ts);
   for(const[m,ts]of Object.entries(e.things||{}))THINGS[m]=(THINGS[m]||[]).concat(ts)}};
+// a thing laid on the map may use its own picture ([k,x,y,w,picture]): a crumpled test paper is still {paper}
+showThings=function(id){world.querySelectorAll('.thing').forEach(e=>e.remove());const things=placeThings(id);
+ for(const[k,x,y,w,img]of things){const it=document.createElement('img');it.className='item thing';it.src=`items/${img||k}.png`;
+  it.style.cssText=`position:absolute;width:${w||56}px;left:${x}px;top:${y}px;transform:translate(-50%,-100%);z-index:${Math.round(y)+1};pointer-events:none;filter:drop-shadow(0 2px 2px rgba(0,0,0,.25))`;world.appendChild(it)}
+ OBJ[id]=(NATIVE[id]||[]).concat(things.map(([k,x,y,w])=>[k,x,y-(w||56)*.4,Math.max(30,(w||56)*.55)]))};
 // a morning for every day: Day 2 and 3 have their own; later days Mom asks for one of the things that always lie in the kitchen
 const MORNING_KEYS=['apple','bread','cup','umbrella','bag','handkerchief','apron','notebook'];
 function morningOf(n){if(MORNING[n])return MORNING[n];const k=MORNING_KEYS[(n-4)%MORNING_KEYS.length];
@@ -52,13 +57,13 @@ function runSteps(steps,choice,done){const q=(steps||[]).slice();
   const go=()=>{if(!q.length){done&&done();return}const f=q.shift();find(f.k,()=>{TODAY.add(f.k);next()},f.goal||'「{x}」 찾기')};
   if(lines.length)say(lines,go);else go()};
  next()}
-const SCENE_OK=new Set();// highlight pictures that exist (scenes/<name>.jpg); others play on the map
+// ep.scene = highlight picture (scenes/<name>.jpg) shown from the moment before the choice; without it the scene plays on the map
 const _d2Talk=d2Talk;
 d2Talk=function(id){const e=epNext(id,EPIDX[id]);
  if(!e||PICKS.includes(id)||!['d2_class'].includes(stage)||PICKS.length>=needToday()){
   if(e||!DD()[id]){say([AGAIN[id]||['think','smile','(오늘은 여기까지. 내일 또 얘기해 보자.)']]);return}
   return _d2Talk(id)}
- setGoal('');const pic=e.scene&&SCENE_OK.has(e.scene);
+ setGoal('');const pic=!!e.scene;
  runSteps(e.pre,null,()=>{const choose=()=>ask(e.ask||'어떻게 할까?',e.choices,o=>{D2CHOICE[id]=o.k;sceneEl.classList.remove('on');
   for(const[f,v]of Object.entries(e.flag||{}))FLAGS[f]=!!v[o.k];
   if(e.vote)FLAGS[id+'_vote']=1;else MEET[id]=(MEET[id]||0)+1;TODAYEP[id]=e;

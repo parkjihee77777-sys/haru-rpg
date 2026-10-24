@@ -1,12 +1,12 @@
 // 최민호 — scenes by meeting (Day N = the Nth meeting with Minho; meeting 1 = Day 2). Source: 괴짜교실_시나리오_개정작업/02_인물별_시나리오/최민호_Day2-16R_전면개정.md
-// ep = {title, place, at:[x,y] (Minho on that map), with:[[id,x,y]] (others there), things:{map:[[k,x,y,w]]} (pictures laid on the map), taps:{map:[[k,x,y,r]]} (drawn things),
+// ep = {title, place, at:[x,y] (Minho on that map), with:[[id,x,y]] (others there), things:{map:[[k,x,y,w,picture?]]} (pictures laid on the map; items/<picture or k>.png), taps:{map:[[k,x,y,r]]} (drawn things),
 //  pre:[line | find], ask, choices:[{k,text,pts,r}], post:[line | find | {only:[choice…],lines} | {flag,is,lines}], flag:{name:{A:1,…}},
 //  eve:{lead, A, B, C, D, common, commonIf:{only:[…],lines}}}
 // find = {k, goal}: the goal bar shows the goal with the word + 🔊; the confirm button shows the same goal with the word (whatever was tapped).
 window.EP=window.EP||{};
 EP.minho=[
 // ■ Day 2 — 지렁이 글자 (1)
-{title:'지렁이 글자',place:'class',at:[640,600],
+{title:'지렁이 글자',scene:'minho_01',place:'class',at:[640,600],
  taps:{class:[['desk',830,425,60],['desk',400,425,55],['desk',1290,545,55],['desk',300,745,50],['pencil',612,668,16],['pencil',640,660,14]]},
  pre:[
   ['nar','','쉬는 시간. 민호가 자기 {@desk}에 걸터앉아 다리를 흔들고 있었다.'],
@@ -103,7 +103,7 @@ EP.minho=[
   D:[['me','sad','영민이가 말하지 말래서 비밀로 하기로 했어.'],['mom','smile','영민이 부탁을 들어주고 싶었구나.'],['me','sad','응. 근데 민호가 다음에 또 빌리면 된대.'],['mom','sad','그 말이 걸리지? 친구 부탁을 지키는 것도 중요해. 그런데 누가 계속 괴롭힘을 당하는 건 비밀로 두면 안 되는 일이야.'],['mom','smile','영민이한테 다시 말해 볼래? 네가 같이 가 준다고.']]}},
 
 // ■ Day 4 — 고양이를 부르는 말 (3)
-{title:'고양이를 부르는 말',place:'field',at:[1400,700],
+{title:'고양이를 부르는 말',place:'field',scene:'minho_03',at:[1400,700],
  things:{field:[['cat',1470,668,84]]},
  pre:[
   ['nar','','자전거 보관대 뒤 화단. 민호가 쪼그려 앉아 꼼짝도 안 하고 있었다. 내가 다가가자 민호가 손가락을 입에 댔다.'],
@@ -147,7 +147,7 @@ EP.minho=[
   common:[['mom','smile','그 {@cat}, 이름은 있어?'],['me','smile','아직 없어.']]}},
 
 // ■ Day 5 — 봉투는 누가? (4)
-{title:'봉투는 누가?',place:'class',at:[330,262],
+{title:'봉투는 누가?',scene:'minho_04',place:'class',at:[330,262],
  things:{class:[['envelope',1062,150,56]]},
  pre:[
   ['nar','','아침부터 교실이 시끄러웠다. 학급비 {@envelope}가 없어졌다. 몇몇 아이가 민호 쪽을 힐끔거리며 수군거렸다.'],
@@ -200,7 +200,7 @@ EP.minho=[
   common:[['me','smile','{@envelope}, 내가 찾았어. {@blackboard} 아래 틈에서.'],['mom','laugh','어머, 우리 탐정이네.']]}},
 
 // ■ Day 6 — 저눈 반장 손거 (5) ★
-{title:'저눈 반장 손거',place:'class',at:[1300,262],
+{title:'저눈 반장 손거',place:'class',scene:'minho_05',at:[1300,262],
  things:{class:[['notebook',1250,300,40]]},
  pre:[
   ['nar','','다음 국어 시간에 「나의 꿈」을 한 문장씩 발표해야 했다. 민호가 사물함 앞에 서 있어서 나는 그쪽으로 갔다.'],
@@ -333,7 +333,7 @@ EP.minho=[
   D:[['me','smile','민호한테 그만하고 작전 짜자고 했어. 민호는 앞에서 던지고, 은찬이는 뒤에서 피하라고.'],['mom','surprised','민호가 들었어?'],['me','smile','던지는 거 제일 세다고 하니까 들었어.'],['mom','laugh','다들 잘하는 자리에 세운 거네.'],['me','smile','반장 되면 이런 거 하는 건가?'],['mom','smile','그럴지도 모르지.']]}},
 
 // ■ Day 9 — 뒤집힌 우산 (8)
-{title:'뒤집힌 우산',place:'hall',at:[330,700],
+{title:'뒤집힌 우산',scene:'minho_08',place:'hall',at:[330,700],
  pre:[
   ['nar','','하교 시간. 비가 오고 바람이 셌다. 교문 옆에서 민호가 뒤집힌 {@umbrella}과 씨름하고 있었다. 나는 민호 쪽으로 갔다.'],
   ['minho','angry','아, 진짜! 바람 한 번 불었다고 뒤집히냐?'],
@@ -366,7 +366,7 @@ EP.minho=[
 
 // ■ Day 10 — 빨간 동그라미 (9)
 {title:'빨간 동그라미',place:'class',at:[640,600],
- things:{class:[['paper',762,612,48]]},
+ things:{class:[['paper',762,612,56,'paper_crumpled']]},
  pre:[
   ['nar','','받아쓰기 시험지를 돌려받은 쉬는 시간. 나는 60점이었다. 받침을 거의 다 틀렸다.'],
   ['nar','','민호 자리 쪽이 시끄러워서 그쪽으로 가 봤다.'],
@@ -406,8 +406,8 @@ EP.minho=[
   common:[['mom','smile','받침, {m}랑 같이 연습할까?'],['me','smile','응. 다음엔 70점.']]}},
 
 // ■ Day 11 — 울타리 너머 (10)
-{title:'울타리 너머',place:'field',at:[1430,430],
- things:{field:[['big_dog',1545,330,96]]},
+{title:'울타리 너머',scene:'minho_10',place:'field',at:[1430,430],
+ things:{field:[['big_dog',1545,335,120]]},
  taps:{field:[['door',1612,218,32]]},
  pre:[
   ['nar','','쉬는 시간, 학교 뒤뜰. 민호가 울타리 쪽에 서 있어서 그쪽으로 가다가, 나는 멈춰 섰다.'],
@@ -485,7 +485,7 @@ EP.minho=[
 
 // ■ Day 13 — 초코우유 (12)
 {title:'초코우유',place:'class',at:[1060,800],
- things:{class:[['milk',905,880,46],['milk',955,886,46]]},
+ things:{class:[['milk',930,888,92,'milk_crate']]},
  pre:[
   ['nar','','점심시간이 끝나 갈 무렵. 교실 뒤에 남은 급식 {@milk} {@box}가 있었다. 선생님이 먹고 싶은 사람은 가져가도 된다고 하셨다.'],
   ['nar','','민호가 {@box} 앞에 쪼그려 앉아 있어서 나는 그쪽으로 갔다.'],
@@ -518,7 +518,7 @@ EP.minho=[
   D:[['me','smile','배불러서 고맙지만 안 먹는다고 했어. 민호가 그럼 두 개 먹겠대.'],['mom','smile','배부르면 그렇게 말해도 돼. 민호도 그냥 알겠다고 했네.'],['me','laugh','응. 양손에 들고 갔어.'],['mom','laugh','민호만 신났네.']]}},
 
 // ■ Day 14 — 내 그림 지붕의 뿔 (13)
-{title:'내 그림 지붕의 뿔',place:'hall',at:[430,430],
+{title:'내 그림 지붕의 뿔',scene:'minho_13',place:'hall',at:[430,430],
  taps:{hall:[['picture',115,215,55],['picture',185,330,45],['picture',60,420,45]]},
  things:{hall:[['tape',330,560,32]]},
  pre:[
@@ -604,7 +604,7 @@ EP.minho=[
   common:[['me','laugh','그리고 「모두가 사이좋은 반」은 빼래.'],['mom','laugh','민호가 공약도 봐 줬네.']]}},
 
 // ■ Day 16R — 떨어진 필통 (15)
-{title:'떨어진 필통',place:'hall',at:[950,700],
+{title:'떨어진 필통',scene:'minho_15',place:'hall',at:[950,700],
  things:{hall:[['eraser',1010,762,26],['pcase',900,772,50]]},
  pre:[
   ['nar','','쉬는 시간. 1학년 교실 앞 복도를 지나는데, 앞서가던 민호가 갑자기 멈춰 섰다. 나는 민호 쪽으로 갔다.'],
@@ -641,7 +641,7 @@ EP.minho=[
 
 // 특별 장면 — 접힌 종이 (투표일): only on the election day, if Minho was met 4+ times; does not count as a meeting
 EP.minho_vote={title:'접힌 종이',place:'class',at:[700,330],vote:true,
- things:{class:[['box',1180,262,70],['paper',760,350,36]]},
+ things:{class:[['box',1180,262,80,'ballot_box'],['paper',760,350,36]]},
  pre:[
   ['nar','','투표 날. 교실 뒤에 투표함이 놓였다. 나는 후보라서 투표를 먼저 마쳤다. 민호가 줄 뒤쪽에 서 있어서 나는 그쪽으로 갔다.'],
   {k:'box',goal:'「{x}」 찾기'},
