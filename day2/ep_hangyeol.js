@@ -783,8 +783,8 @@ runSteps=function(steps,choice,done){const q=(steps||[]).slice();
 const HERO_HOME={
  vi:{ko:['베트남','베트남어',['뚜언','응옥란'],['민준','아란']],ui:['Việt Nam','tiếng Việt',['Tuấn','Ngọc Lan'],['Min-jun','A-ran']]},
  zh:{ko:['중국','중국어',['하오란','메이링'],['호연','미린']],ui:['中国','中文',['浩然','美玲'],['Hoyeon','Mirin']]},
- ja:{ko:['일본','일본어',['유마','미사키'],['유진','미소']]},
- ru:{ko:['러시아','러시아어',['디마','나스탸'],['도민','나연']]},
+ ja:{ko:['일본','일본어',['유마','미사키'],['유진','미소']],ui:['日本','日本語',['ユウマ','ミサキ'],['ユジン','ミソ']]},
+ ru:{ko:['러시아','러시아어',['디마','나스탸'],['도민','나연']],ui:['Россия','русский',['Дима','Настя'],['Домин','Наён']]},
  en:{ko:['필리핀','영어',['이선','해나'],['이든','한나']],ui:['the Philippines','English',['Ethan','Hannah'],['Eden','Hanna']]},
  id:{ko:['인도네시아','인도네시아어',['리즈키','뿌뜨리'],['이준','유리']],ui:['Indonesia','bahasa Indonesia',['Rizky','Putri'],['Ijun','Yuri']]}};
 function josa(w,p){const c=w.charCodeAt(w.length-1)-0xAC00;if(c<0||c>11171)return p;const jong=c%28;

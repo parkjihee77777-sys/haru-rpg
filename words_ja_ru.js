@@ -27,7 +27,10 @@ const JA_RU={
  desk:['つくえ','парта'],cat:['ねこ','кошка'],envelope:['ふうとう','конверт'],broom:['ほうき','веник'],paper:['かみ','бумага'],big_dog:['いぬ','собака'],
  milk:['ぎゅうにゅう','молоко'],picture:['え','рисунок'],door:['ドア','дверь'],apron:['エプロン','фартук'],
  // Sua's scenes
- stairs:['かいだん','лестница'],clock:['とけい','часы'],hand:['て','рука'],bowl:['おわん','миска'],glue:['のり','клей'],water:['みず','вода'],window:['まど','окно']
+ stairs:['かいだん','лестница'],clock:['とけい','часы'],hand:['て','рука'],bowl:['おわん','миска'],glue:['のり','клей'],water:['みず','вода'],window:['まど','окно'],
+ // Hangyeol's scenes
+ name_tag:['なふだ','бейдж'],line:['れつ','ряд'],hat:['ぼうし','кепка'],rice_cake:['もち','рисовый пирожок'],mask:['おめん','маска'],
+ sticker:['シール','наклейка'],hair_tie:['ヘアゴム','резинка'],magnet:['じしゃく','магнит'],spoon:['スプーン','ложка'],poster:['ポスター','плакат']
 };
 {for(const[k,[ja,ru]]of Object.entries(JA_RU)){LANGS.ja.words[k]=ja;LANGS.ru.words[k]=ru;const w=typeof D2WORDS!=='undefined'&&D2WORDS[k];if(w){w.ja=ja;w.ru=ru}}
  const miss=Object.keys(LANGS.ko.words).concat(Object.keys(LANGS.en.words)).filter(k=>!JA_RU[k]);if(miss.length)console.warn('ja/ru words missing:',[...new Set(miss)])}
