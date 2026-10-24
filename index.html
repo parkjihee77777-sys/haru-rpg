@@ -119,14 +119,14 @@ body,button{word-break:keep-all;overflow-wrap:break-word}
 <div id="fader"></div>
 <script>
 // same address, newest version: if the page this phone has kept is older than the one online, fetch the new one and reopen
-const BUILD='1024105447';
+const BUILD='1024110428';
 try{fetch(location.pathname,{cache:'no-store'}).then(r=>r.text()).then(t=>{const m=t.match(/const BUILD='(\d+)'/);if(m&&m[1]!==BUILD&&sessionStorage.getItem('upd')!==m[1]){sessionStorage.setItem('upd',m[1]);fetch(location.pathname,{cache:'reload'}).then(()=>location.reload())}}).catch(()=>{})}catch(e){}
 </script>
-<script src="i18n.js?v=1024105447"></script>
-<script src="i18n_prologue_v2.js?v=1024105447"></script>
-<script src="day2/i18n_engine.js?v=1024105447"></script>
-<script src="day2/data.js?v=1024105447"></script>
-<script src="day3/data.js?v=1024105447"></script>
+<script src="i18n.js?v=1024110428"></script>
+<script src="i18n_prologue_v2.js?v=1024110428"></script>
+<script src="day2/i18n_engine.js?v=1024110428"></script>
+<script src="day2/data.js?v=1024110428"></script>
+<script src="day3/data.js?v=1024110428"></script>
 <script>
 // ---------- data ----------
 const MW=1672,MH=941,KID=180;
@@ -164,17 +164,19 @@ const CHAT={
 };
 // ---------- languages ----------
 // LANGS: every language the game knows. MODES: what the first screen offers (ui = language of all text, learn = language of the taught words).
-// Add a language: one LANGS row + snd/<code>/<concept>.mp3, and for a "learn Korean" mode its text table in i18n.js.
+// Add a language: one LANGS row + snd/<code>/<concept>.mp3 (ja/ru words are filled by words_ja_ru.js), and for a "learn Korean" mode its text table in i18n.js.
 const KR_FLAG='radial-gradient(circle,#cd2e3a 0 22%,#0047a0 23% 34%,#fff 35%)';
 const LANGS={
  ko:{name:'한국어',native:'한국어',flag:KR_FLAG,tts:'ko-KR',words:{"dog":"강아지","mom": "엄마", "notebook": "공책", "table": "식탁", "chair": "의자", "fridge": "냉장고", "box": "상자", "shoes": "신발", "pcase": "필통", "pencil": "연필"}},
  id:{name:'인도네시아어',native:'Bahasa Indonesia',flag:'linear-gradient(#ce1126 50%,#fff 50%)',tts:'id-ID',words:{"dog":"anak anjing","mom": "ibu", "notebook": "buku", "table": "meja", "chair": "kursi", "fridge": "kulkas", "box": "kardus", "shoes": "sepatu", "pcase": "kotak pensil", "pencil": "pensil"},learnKo:'Belajar bahasa Korea'},
  vi:{name:'베트남어',native:'Tiếng Việt',flag:'radial-gradient(circle at 50% 50%,#ffcd00 22%,#da251d 23%)',tts:'vi-VN',words:{"dog":"chó con","mom": "mẹ", "notebook": "vở", "table": "bàn", "chair": "ghế", "fridge": "tủ lạnh", "box": "thùng", "shoes": "giày", "pcase": "hộp bút", "pencil": "bút chì"},learnKo:'Học tiếng Hàn'},
  en:{name:'영어',native:'English',flag:'linear-gradient(#b22234 0 14%,#fff 14% 28%,#b22234 28% 42%,#fff 42% 57%,#b22234 57% 71%,#fff 71% 85%,#b22234 85%)',tts:'en-US',words:{"dog":"puppy","mom": "mom", "notebook": "notebook", "table": "table", "chair": "chair", "fridge": "fridge", "box": "box", "shoes": "shoes", "pcase": "pencil case", "pencil": "pencil"},learnKo:'Learn Korean'},
- zh:{name:'중국어',native:'中文',flag:'radial-gradient(circle at 26% 30%,#ffde00 0 9%,transparent 10%),#de2910',tts:'zh-CN',words:{"dog":"小狗","mom":"妈妈","notebook":"本子","table":"桌子","chair":"椅子","fridge":"冰箱","box":"箱子","shoes":"鞋子","pcase":"笔袋","pencil":"铅笔"},learnKo:'学韩语'}
+ zh:{name:'중국어',native:'中文',flag:'radial-gradient(circle at 26% 30%,#ffde00 0 9%,transparent 10%),#de2910',tts:'zh-CN',words:{"dog":"小狗","mom":"妈妈","notebook":"本子","table":"桌子","chair":"椅子","fridge":"冰箱","box":"箱子","shoes":"鞋子","pcase":"笔袋","pencil":"铅笔"},learnKo:'学韩语'},
+ ja:{name:'일본어',native:'日本語',flag:'radial-gradient(circle,#bc002d 0 30%,#fff 31%)',tts:'ja-JP',words:{},learnKo:'韓国語を学ぶ'},
+ ru:{name:'러시아어',native:'Русский',flag:'linear-gradient(#fff 0 33%,#0039a6 33% 67%,#d52b1e 67%)',tts:'ru-RU',words:{},learnKo:'Учить корейский'}
 };
 // every mode the game can run; HIDDEN ones stay in the code but are not offered (10/24: Indonesian and all "learn Korean" modes hidden for now)
-const MODES_ALL=[{ui:'ko',learn:'id'},{ui:'ko',learn:'vi'},{ui:'ko',learn:'en'},{ui:'ko',learn:'zh'},{ui:'id',learn:'ko'},{ui:'vi',learn:'ko'},{ui:'en',learn:'ko'},{ui:'zh',learn:'ko'}];
+const MODES_ALL=[{ui:'ko',learn:'id'},{ui:'ko',learn:'ja'},{ui:'ko',learn:'zh'},{ui:'ko',learn:'vi'},{ui:'ko',learn:'ru'},{ui:'ko',learn:'en'},{ui:'id',learn:'ko'},{ui:'vi',learn:'ko'},{ui:'en',learn:'ko'},{ui:'zh',learn:'ko'}];
 const MODE_HIDDEN=m=>m.learn==='id'||m.ui==='id'||m.learn==='ko';
 const MODES=MODES_ALL.filter(m=>!MODE_HIDDEN(m));
 let LANG='id',UI='ko',W='';
@@ -456,12 +458,13 @@ function pickHero(){const m=document.getElementById('modal'),c=document.getEleme
  c.innerHTML=`<h2>${tr('괴짜교실 반장되기')}</h2><p>${tr('말 한마디 못 하는 전학생,<br>반장 선거에 나가다.')}</p><p style="margin-top:14px">${tr('누구로 할까요?')}</p>${(()=>{const s=loadSave();return s&&s.day>=2&&s.mode===UI+'-'+LANG?`<p><button class="big" id="cont">${tr(s.day+'일차부터 이어 하기')}</button></p>`:''})()}<div class="pick heroes"><button data-h="hero_f"><img src="faces/hero_f_smile.jpg" alt="여자 주인공"></button><button data-h="hero_m"><img src="faces/hero_m_smile.jpg" alt="남자 주인공"></button></div>`;
  m.classList.add('on');{const cb=document.getElementById('cont');if(cb)cb.onclick=()=>{const s=loadSave();HERO=s.hero;Object.assign(HEART,s.heart||{});(s.found||[]).forEach(k=>FOUND.add(k));HEART_D1={...HEART};chime();(typeof contGame==='function'?contGame(s):startDay(Math.min(s.day,Object.keys(window.D3||{}).length?3:2)))}}c.querySelectorAll('.pick button').forEach(b=>b.onclick=()=>{HERO=b.dataset.h;m.classList.remove('on');chime();bgm('day');load('home_am');say([['nar','','이사 온 다음 날 아침. 아직 풀지 못한 상자들이 쌓여 있다.'],['think','sad','(오늘부터 새 학교야. 여기 말도 아직 서툰데…….)'],['think','smile','({m}한테 인사하고 학교 가야지.)']],morning)})}
 </script>
-<script src="day2/engine.js?v=1024105447"></script>
-<script src="day2/ep_minho.js?v=1024105447"></script>
-<script src="day2/i18n_meet.js?v=1024105447"></script>
-<script src="day2/meet.js?v=1024105447"></script>
-<script src="day2/ep_sua.js?v=1024105447"></script>
-<script src="day2/i18n_sua.js?v=1024105447"></script>
+<script src="day2/engine.js?v=1024110428"></script>
+<script src="day2/ep_minho.js?v=1024110428"></script>
+<script src="day2/i18n_meet.js?v=1024110428"></script>
+<script src="day2/meet.js?v=1024110428"></script>
+<script src="day2/ep_sua.js?v=1024110428"></script>
+<script src="day2/i18n_sua.js?v=1024110428"></script>
+<script src="words_ja_ru.js?v=1024110428"></script>
 <script>
 // the goal shows big for a few seconds, then folds into a small pill (tap it to open it again)
 {const g=document.getElementById('goal');let t=null;const big=()=>{g.classList.remove('mini');clearTimeout(t);t=setTimeout(()=>g.classList.add('mini'),4000)};
