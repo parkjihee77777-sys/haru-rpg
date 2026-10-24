@@ -119,14 +119,14 @@ body,button{word-break:keep-all;overflow-wrap:break-word}
 <div id="fader"></div>
 <script>
 // same address, newest version: if the page this phone has kept is older than the one online, fetch the new one and reopen
-const BUILD='1024131309';
+const BUILD='1024131508';
 try{fetch(location.pathname,{cache:'no-store'}).then(r=>r.text()).then(t=>{const m=t.match(/const BUILD='(\d+)'/);if(m&&m[1]!==BUILD&&sessionStorage.getItem('upd')!==m[1]){sessionStorage.setItem('upd',m[1]);fetch(location.pathname,{cache:'reload'}).then(()=>location.reload())}}).catch(()=>{})}catch(e){}
 </script>
-<script src="i18n.js?v=1024131309"></script>
-<script src="i18n_prologue_v2.js?v=1024131309"></script>
-<script src="day2/i18n_engine.js?v=1024131309"></script>
-<script src="day2/data.js?v=1024131309"></script>
-<script src="day3/data.js?v=1024131309"></script>
+<script src="i18n.js?v=1024131508"></script>
+<script src="i18n_prologue_v2.js?v=1024131508"></script>
+<script src="day2/i18n_engine.js?v=1024131508"></script>
+<script src="day2/data.js?v=1024131508"></script>
+<script src="day3/data.js?v=1024131508"></script>
 <script>
 // ---------- data ----------
 const MW=1672,MH=941,KID=180;
@@ -260,7 +260,7 @@ function loop(now){const dt=Math.min(.05,(now-last)/1000);last=now;if(me&&!busy)
   if(dx||dy){const l=Math.hypot(dx,dy),sp=300*dt,nx=me.x+dx/l*sp,ny=me.y+dy/l*sp;if(walkable(nx,ny)||!walkable(me.x,me.y)){me.x=nx;me.y=ny}else if(walkable(nx,me.y))me.x=nx;else if(walkable(me.x,ny))me.y=ny;
    me.dir=Math.abs(dx)>Math.abs(dy)?(dx<0?'left':'right'):(dy<0?'up':'down');me.t+=dt;me.frame=[1,0,2,0][Math.floor(me.t*8)%4]}else{if(!me.path)me.frame=0;me.t=0}
   draw(me);follow()}
- placeHint();requestAnimationFrame(loop)}
+ placeHint();if(now-hideT>200){hideT=now;hideMarks()}requestAnimationFrame(loop)}
 // ---------- hint ----------
 const hintEl=document.createElement('div');hintEl.className='hint';hintEl.textContent='▼';
 const ringEl=document.createElement('div');ringEl.className='ring';
@@ -285,12 +285,29 @@ function okLabel(){return tr(FIND_LABEL).replace('{x}',wordOf(FIND))}
 function keepOnScreen(el){const r=el.getBoundingClientRect();let dx=0,dy=0;if(r.left<8)dx=8-r.left;else if(r.right>innerWidth-8)dx=innerWidth-8-r.right;if(r.bottom>innerHeight-8)dy=innerHeight-8-r.bottom;if(dx)el.style.left=(parseFloat(el.style.left)+dx/cam.s)+'px';if(dy)el.style.top=(parseFloat(el.style.top)+dy/cam.s)+'px'}
 // friendship gauge over the head of every friend you got closer to (full at 10 hearts)
 const GAUGE_MAX=10;function gauges(){world.querySelectorAll('.gauge').forEach(g=>g.remove());for(const n of npcs){const v=HEART[n.id];if(!v||!n.h)continue;const g=document.createElement('div');g.className='gauge';g.innerHTML=`<i>♥</i><b><s style="width:${Math.min(100,v/GAUGE_MAX*100)}%"></s></b>`;g.style.left=n.x+'px';{const t=n.y-n.h-(WORDKEY[n.id]&&FOUND.has(WORDKEY[n.id])?48:12);if(t<70){g.style.top=(n.y+(n.foot||0)+8)+'px';g.style.transform='translate(-50%,0)'}else g.style.top=t+'px'};world.appendChild(g)}}
+// one 🔊 beside each thing you can hear: tried around the thing (rim first), kept where it covers no other thing's tap area, no other 🔊, no word tag, gauge or 🔍
+const SM_R=15;
 function soundMarks(){world.querySelectorAll('.smark').forEach(e=>e.remove());const zs=(typeof ZOOMS!=='undefined'&&DAY>=2&&ZOOMS[MAP])||[];
- for(const o of (OBJ[MAP]||[])){if(DAY<2&&o[0]==='notebook'&&FOUND.has('notebook'))continue;if(zs.some(z=>o[1]>=z[0]&&o[1]<=z[2]&&o[2]>=z[1]&&o[2]<=z[3]&&o[3]<80))continue;
-  const d=document.createElement('div');d.className='smark';d.textContent='🔊';d.style.left=(o[1]+Math.min(o[3],60)*.55)+'px';d.style.top=(o[2]-Math.min(o[3],60)*.7)+'px';world.appendChild(d)}
- for(const n of npcs){if(!n.h)continue;if(!(WORDKEY[n.id]||(DAY>=2&&typeof NPC_THING!=='undefined'&&NPC_THING[n.id])))continue;const d=document.createElement('div');d.className='smark';d.textContent='🔊';d.style.left=(n.x+n.w*.45)+'px';d.style.top=(n.y-n.h*.55)+'px';world.appendChild(d)}
- if(pangEl){const d=document.createElement('div');d.className='smark';d.textContent='🔊';d.style.left=(PANG_AT[0]+40)+'px';d.style.top=(PANG_AT[1]-PANG_H-6)+'px';world.appendChild(d)}}
-function tagAll(){gauges();soundMarks();world.querySelectorAll('.tag').forEach(t=>t.remove());for(const n of npcs){const k=WORDKEY[n.id];if(k&&FOUND.has(k)&&n.h){const t=document.createElement('div');t.className='tag';t.textContent=wordOf(k);t.style.left=n.x+'px';t.style.top=(n.y-n.h-8)+'px';world.appendChild(t)}}}
+ const own=[],obs=[],box=(x0,y0,x1,y1)=>({b:[x0,y0,x1,y1]});
+ for(const o of (OBJ[MAP]||[])){if(DAY<2&&o[0]==='notebook'&&FOUND.has('notebook'))continue;if(zs.some(z=>o[1]>=z[0]&&o[1]<=z[2]&&o[2]>=z[1]&&o[2]<=z[3]&&o[3]<80))continue;const c={c:[o[1],o[2],o[3]],k:o[0]};obs.push(c);own.push(c)}
+ for(const z of zs){obs.push(box(z[0],z[1],z[2],z[3]))}
+ for(const n of npcs){if(!n.h)continue;const b=box(n.x-n.w*.4,n.y-n.h,n.x+n.w*.4,n.y+10);b.k=n.id;obs.push(b);if(WORDKEY[n.id]||(DAY>=2&&typeof NPC_THING!=='undefined'&&NPC_THING[n.id]))own.push(b)}
+ if(pangEl){const b=box(PANG_AT[0]-60,PANG_AT[1]-PANG_H-10,PANG_AT[0]+60,PANG_AT[1]+10);b.k='dog';obs.push(b);own.push(b)}
+ if(me&&me.h)obs.push(box(me.x-me.w*.4,me.y-me.h,me.x+me.w*.4,me.y+10));
+ world.querySelectorAll('.tag,.gauge').forEach(e=>{const r=e.getBoundingClientRect(),s=cam.s;if(r.width)obs.push(box((r.left+cam.x)/s,(r.top+cam.y)/s,(r.right+cam.x)/s,(r.bottom+cam.y)/s))});
+ const pen=(x,y,o)=>{if(o.c){return Math.max(0,o.c[2]+SM_R-Math.hypot(x-o.c[0],y-o.c[1]))}const[x0,y0,x1,y1]=o.b,dx=Math.max(x0-x,0,x-x1),dy=Math.max(y0-y,0,y-y1);return dx||dy?Math.max(0,SM_R-Math.hypot(dx,dy)):SM_R+Math.min(x-x0,x1-x,y-y0,y1-y)};
+ const put=[];const size=o=>o.c?o.c[2]*2:(o.b[2]-o.b[0])+(o.b[3]-o.b[1])/2;
+ for(const o of own.slice().sort((a,b)=>size(a)-size(b))){const cand=[];
+  if(o.c){const[x,y,r]=o.c;for(const d of [r,r+14,r*.6,r+28])for(const a of [-45,-135,0,180,-90,45,135,90]){const t=a*Math.PI/180;cand.push([x+Math.cos(t)*d,y+Math.sin(t)*d])}}
+  else{const[x0,y0,x1,y1]=o.b,m=SM_R+3,cx=(x0+x1)/2,h=y1-y0;for(const yy of [y0+h*.3,y0+h*.55,y0+h*.12])cand.push([x1+m,yy],[x0-m,yy]);cand.push([cx,y0-m],[x1+m,y0-m],[x0-m,y0-m],[x1+m,y1-m],[x0-m,y1-m])}
+  let best=null,bs=1e9;for(const[x,y]of cand){if(x<SM_R||y<SM_R||x>MW-SM_R||y>MH-SM_R)continue;let s=0;for(const q of obs)if(q!==o)s+=pen(x,y,q);for(const q of put)s+=Math.max(0,SM_R*2+2-Math.hypot(x-q[0],y-q[1]))*2;if(s<bs){bs=s;best=[x,y]}if(!s)break}
+  if(!best)continue;put.push(best);const d=document.createElement('div');d.className='smark';d.dataset.k=Math.round(bs);d.dataset.o=o.k;d.textContent='🔊';d.style.left=best[0]+'px';d.style.top=best[1]+'px';world.appendChild(d)}
+ hideMarks()}
+// a 🔊 that would sit under a button, the goal, the talk panel or the OK button is hidden (checked as the view moves)
+function hideMarks(){const ui=[...document.querySelectorAll('#goal,#bag,#mute,#talk,#toast>*,.panhint,.bubble,.zmark')].map(e=>e.getBoundingClientRect()).filter(r=>r.width&&r.height);
+ world.querySelectorAll('.smark').forEach(m=>{const r=m.getBoundingClientRect(),hit=ui.some(u=>r.left<u.right+4&&r.right>u.left-4&&r.top<u.bottom+4&&r.bottom>u.top-4);m.style.visibility=hit?'hidden':''})}
+let hideT=0;
+function tagAll(){gauges();world.querySelectorAll('.tag').forEach(t=>t.remove());for(const n of npcs){const k=WORDKEY[n.id];if(k&&FOUND.has(k)&&n.h){const t=document.createElement('div');t.className='tag';t.textContent=wordOf(k);t.style.left=n.x+'px';t.style.top=(n.y-n.h-8)+'px';world.appendChild(t)}}soundMarks()}
 function showBag(){const ks=['notebook'].filter(k=>FOUND.has(k));const b=document.getElementById('bag');if(!ks.length){b.style.display='none';return}b.style.display='block';b.textContent='📒 '+ks.map(wordOf).join(' · ')}
 function buzz(){try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();const t=AC.currentTime,o=AC.createOscillator(),g=AC.createGain();o.type='square';o.frequency.value=180;g.gain.setValueAtTime(.12,t);g.gain.exponentialRampToValueAtTime(.0001,t+.35);o.connect(g).connect(AC.destination);o.start(t);o.stop(t+.36)}catch(e){}}
 // ---------- Pangpang ----------
@@ -458,15 +475,15 @@ function pickHero(){const m=document.getElementById('modal'),c=document.getEleme
  c.innerHTML=`<h2>${tr('괴짜교실 반장되기')}</h2><p>${tr('말 한마디 못 하는 전학생,<br>반장 선거에 나가다.')}</p><p style="margin-top:14px">${tr('누구로 할까요?')}</p>${(()=>{const s=loadSave();return s&&s.day>=2&&s.mode===UI+'-'+LANG?`<p><button class="big" id="cont">${tr(s.day+'일차부터 이어 하기')}</button></p>`:''})()}<div class="pick heroes"><button data-h="hero_f"><img src="faces/hero_f_smile.jpg" alt="여자 주인공"></button><button data-h="hero_m"><img src="faces/hero_m_smile.jpg" alt="남자 주인공"></button></div>`;
  m.classList.add('on');{const cb=document.getElementById('cont');if(cb)cb.onclick=()=>{const s=loadSave();HERO=s.hero;Object.assign(HEART,s.heart||{});(s.found||[]).forEach(k=>FOUND.add(k));HEART_D1={...HEART};chime();(typeof contGame==='function'?contGame(s):startDay(Math.min(s.day,Object.keys(window.D3||{}).length?3:2)))}}c.querySelectorAll('.pick button').forEach(b=>b.onclick=()=>{HERO=b.dataset.h;m.classList.remove('on');chime();bgm('day');load('home_am');say([['nar','','이사 온 다음 날 아침. 아직 풀지 못한 상자들이 쌓여 있다.'],['think','sad','(오늘부터 새 학교야. 여기 말도 아직 서툰데…….)'],['think','smile','({m}한테 인사하고 학교 가야지.)']],morning)})}
 </script>
-<script src="day2/engine.js?v=1024131309"></script>
-<script src="day2/ep_minho.js?v=1024131309"></script>
-<script src="day2/i18n_meet.js?v=1024131309"></script>
-<script src="day2/meet.js?v=1024131309"></script>
-<script src="day2/ep_sua.js?v=1024131309"></script>
-<script src="day2/i18n_sua.js?v=1024131309"></script>
-<script src="day2/ep_hangyeol.js?v=1024131309"></script>
-<script src="day2/i18n_hangyeol.js?v=1024131309"></script>
-<script src="words_ja_ru.js?v=1024131309"></script>
+<script src="day2/engine.js?v=1024131508"></script>
+<script src="day2/ep_minho.js?v=1024131508"></script>
+<script src="day2/i18n_meet.js?v=1024131508"></script>
+<script src="day2/meet.js?v=1024131508"></script>
+<script src="day2/ep_sua.js?v=1024131508"></script>
+<script src="day2/i18n_sua.js?v=1024131508"></script>
+<script src="day2/ep_hangyeol.js?v=1024131508"></script>
+<script src="day2/i18n_hangyeol.js?v=1024131508"></script>
+<script src="words_ja_ru.js?v=1024131508"></script>
 <script>
 // the goal shows big for a few seconds, then folds into a small pill (tap it to open it again)
 {const g=document.getElementById('goal');let t=null;const big=()=>{g.classList.remove('mini');clearTimeout(t);t=setTimeout(()=>g.classList.add('mini'),4000)};
