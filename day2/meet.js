@@ -112,6 +112,10 @@ end2=function(){const n=DAY,next=n+1,hasNext=dayHasContent(next);DAY=hasNext?nex
  m.classList.add('on');document.getElementById('re').onclick=()=>{try{localStorage.removeItem('haru_save')}catch(e){}location.href=location.pathname};
  document.getElementById('re2').onclick=()=>{for(const k in HEART)delete HEART[k];Object.assign(HEART,DAYHEART[n]||HEART_D1||{});startDay(n)};
  if(hasNext){DAYHEART[next]={...HEART};delete DAYMEET[next];document.getElementById('gonext').onclick=()=>startDay(next)}};
+// no leaving through the way out while a friend's find is running (the find's thing is on this map; leaving lost the scene and the day got stuck)
+{const _pickPlace=pickPlace;pickPlace=function(){if(FIND&&['d2_class','d2_after'].includes(stage)){say([['think','surprised','(먼저 이 미션부터 끝내자.)']]);return}return _pickPlace()};
+ const L={en:'(Let me finish this mission first.)',id:'(Aku selesaikan misi ini dulu.)',vi:'(Làm xong nhiệm vụ này trước đã.)',zh:'（先把这个任务做完吧。）'};
+ for(const[u,t]of Object.entries(L)){T[u]=T[u]||{};T[u]['(먼저 이 미션부터 끝내자.)']=t}}
 // talking from Day 3 on works like Day 2
 const _talkTo=talkTo;
 talkTo=function(id){if(DAY>=3){if(FIND)return;
