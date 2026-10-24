@@ -37,7 +37,9 @@ const JA_RU={
  moon:['つき','луна'],note:['メモ','записка'],tofu:['とうふ','тофу'],ladle:['おたま','половник'],photo:['しゃしん','фотография'],book:['ほん','книга'],bus:['バス','автобус'],board:['けいじばん','доска объявлений'],
  // Jiho's scenes (ep_jiho.js)
  tape_measure:['メジャー','рулетка'],pen:['ボールペン','ручка'],wrist:['てくび','запястье'],roof:['やね','крыша'],foot:['あし','нога'],
- jump_rope:['なわとび','скакалка'],finger:['ゆび','палец'],knee:['ひざ','колено']
+ jump_rope:['なわとび','скакалка'],finger:['ゆび','палец'],knee:['ひざ','колено'],
+ // Hyeeun's scenes (ep_hyeeun.js)
+ glove:['てぶくろ','перчатка'],key:['かぎ','ключ'],gym_clothes:['たいそうふく','спортивная форма'],toilet:['トイレ','туалет'],soup:['スープ','суп'],school_gate:['こうもん','школьные ворота']
 };
 {for(const[k,[ja,ru]]of Object.entries(JA_RU)){LANGS.ja.words[k]=ja;LANGS.ru.words[k]=ru;const w=typeof D2WORDS!=='undefined'&&D2WORDS[k];if(w){w.ja=ja;w.ru=ru}}
  const miss=Object.keys(LANGS.ko.words).concat(Object.keys(LANGS.en.words)).filter(k=>!JA_RU[k]);if(miss.length)console.warn('ja/ru words missing:',[...new Set(miss)])}
