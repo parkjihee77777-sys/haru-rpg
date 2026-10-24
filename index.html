@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>괴짜교실 반장되기</title>
+<style>
+:root{--ink:#4a3424;--paper:#fffaf0;--line:#c9a676;--mint:#5fbf9f;--shade:rgba(40,25,10,.55);--bg:#2a211a}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1d1712}}
+:root[data-theme="dark"]{--bg:#1d1712}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family:'Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;overflow:hidden;user-select:none}
+#game{position:fixed;inset:0;overflow:hidden;touch-action:none}
+#world{position:absolute;left:0;top:0;transform-origin:0 0}
+#world img.map{display:block;width:1672px;height:941px}
+.sp{position:absolute;background-repeat:no-repeat;transform:translate(-50%,-100%);pointer-events:none}
+.hint{position:absolute;transform:translate(-50%,-100%);font-size:44px;color:#ffd84a;text-shadow:0 2px 4px rgba(0,0,0,.5);animation:bob 1s ease-in-out infinite;pointer-events:none}
+.ring{position:absolute;width:150px;height:60px;border:5px solid #ffd84a;border-radius:50%;transform:translate(-50%,-50%);animation:pulse 1.2s ease-in-out infinite;pointer-events:none}
+@keyframes bob{50%{margin-top:-14px}}@keyframes pulse{50%{opacity:.35}}
+#goal{position:fixed;left:50%;top:10px;transform:translateX(-50%);background:var(--paper);border:3px solid var(--line);border-radius:999px;padding:8px 18px;font-weight:700;font-size:16px;box-shadow:0 3px 0 var(--line);white-space:nowrap;max-width:calc(100% - 32px);overflow:hidden;text-overflow:ellipsis;z-index:20}
+#goal:empty{display:none}
+#goal.mini{font-size:13px;padding:4px 12px;opacity:.92;max-width:min(62vw,420px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border-width:2px;box-shadow:0 2px 0 var(--line)}#goal.mini .hint2{display:none}
+#toast{position:fixed;left:50%;top:60px;transform:translateX(-50%);z-index:30;display:flex;flex-direction:column;gap:6px;align-items:center;pointer-events:none}
+#toast div{background:#ff7aa2;color:#fff;font-weight:800;border-radius:999px;padding:6px 14px;animation:up 1.8s forwards}
+@keyframes up{0%{opacity:0;transform:translateY(8px)}15%{opacity:1;transform:none}80%{opacity:1}100%{opacity:0;transform:translateY(-10px)}}
+#talk{position:fixed;left:50%;bottom:12px;transform:translateX(-50%);width:min(760px,calc(100% - 24px));background:var(--paper);border:4px solid var(--line);border-radius:22px;box-shadow:0 5px 0 var(--line);padding:14px 16px 14px 14px;display:none;gap:14px;align-items:flex-start;z-index:25;min-height:120px}
+#talk.on{display:flex}
+#face{width:96px;height:96px;border-radius:18px;background:#fff center/cover;flex:none;border:3px solid var(--line)}
+#face.none{display:none}
+#who{font-weight:800;color:#a0662d;font-size:15px;margin-bottom:4px}
+#line{font-size:18px;line-height:1.5;white-space:pre-wrap}
+#line.think{color:#7a6a5a;font-style:italic}
+#next{position:absolute;right:14px;bottom:8px;font-size:20px;color:var(--line);animation:bob 1s infinite}
+#choices{display:none;flex-direction:column;gap:10px;margin-top:10px}
+#choices.on{display:flex}
+#talk{max-height:calc(100dvh - 20px);overflow-y:auto}
+#choices.wait button{pointer-events:none;opacity:.3}#choices button{transition:opacity .35s}
+#choices button{font:inherit;font-size:16px;text-align:left;background:#fff;border:3px solid var(--line);border-radius:16px;box-shadow:0 4px 0 var(--line);padding:10px 14px;color:var(--ink);cursor:pointer}
+#choices button:active{transform:translateY(3px);box-shadow:0 1px 0 var(--line)}
+#choices button.picked{border-color:var(--mint);background:#eafff6;box-shadow:0 4px 0 #3f9a7c}
+@media (max-width:600px){#talk.asking #face{display:none}}
+#choices button.okpick{background:var(--mint);color:#fff;border-color:#3f9a7c;box-shadow:0 4px 0 #3f9a7c;text-align:center;font-weight:800}
+#scene{position:fixed;inset:0;background:#000 center/contain no-repeat;display:none;z-index:22}
+#scene.on{display:block;animation:fade .6s}
+@keyframes fade{from{opacity:0}}
+#fader{position:fixed;inset:0;background:#000;opacity:0;pointer-events:none;transition:opacity .5s;z-index:40}
+#modal{position:fixed;inset:0;background:var(--shade);display:none;justify-content:center;z-index:35;padding:16px;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;touch-action:pan-y}
+#modal.on{display:flex}
+.smark{position:absolute;transform:translate(-50%,-50%);z-index:3500;pointer-events:none;font-size:15px;line-height:1;background:#fff;border:2px solid var(--mint);border-radius:999px;padding:4px 5px;box-shadow:0 2px 3px rgba(0,0,0,.25);opacity:.95}
+.zit{position:relative}.zit::after{content:'🔊';position:absolute;right:4px;top:4px;font-size:13px;background:#fff;border:2px solid var(--mint);border-radius:999px;padding:2px 4px}
+.ztray{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;background:linear-gradient(#e9c79a,#dcb684);border:3px solid var(--line);border-radius:18px;padding:16px 10px}
+.zit{background:rgba(255,255,255,.55);border:3px solid transparent;border-radius:16px;padding:6px;cursor:pointer;width:min(120px,26vw);height:min(120px,26vw);display:flex;align-items:center;justify-content:center}
+.zit img{max-width:100%;max-height:100%;filter:drop-shadow(0 3px 2px rgba(0,0,0,.25))}
+.zit.on{border-color:var(--mint);background:#eafff6}
+.zok{min-height:8px;text-align:center}
+
+.card{background:var(--paper);border:4px solid var(--line);border-radius:26px;box-shadow:0 6px 0 var(--line);padding:22px;max-width:520px;width:100%;text-align:center;margin:auto 0;flex:none}
+@media (max-height:700px),(max-width:480px){.card{padding:16px}.card h2{font-size:19px}}
+.card h2{margin:0 0 10px;font-size:22px}
+.card p{margin:6px 0;font-size:17px;line-height:1.5}
+.big{font:inherit;font-weight:800;font-size:19px;background:var(--mint);color:#fff;border:0;border-radius:18px;box-shadow:0 5px 0 #3f9a7c;padding:13px 26px;margin-top:14px;cursor:pointer}
+.big:active{transform:translateY(4px);box-shadow:0 1px 0 #3f9a7c}
+.pick{display:flex;gap:14px;justify-content:center;margin:14px 0 4px;flex-wrap:wrap}
+.pick button{background:#fff;border:4px solid var(--line);border-radius:20px;box-shadow:0 5px 0 var(--line);padding:6px;cursor:pointer;width:min(140px,27vw)}
+.pick button img{width:100%;display:block;border-radius:12px}
+.pick button.ok{border-color:var(--mint);box-shadow:0 5px 0 #3f9a7c}
+.pick button.no{animation:shake .4s}
+.pick.places{gap:10px}.pick.places button{width:min(112px,40vw)}.pick.places .word{font-size:16px;white-space:nowrap;padding:4px 8px}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.heroes button{width:min(150px,38vw)}
+.word{display:inline-block;background:#fff3c4;border:3px solid #e6c15a;border-radius:14px;padding:4px 14px;font-weight:800;font-size:22px;margin:6px}
+.spk{font:inherit;background:#fff;border:3px solid var(--line);border-radius:999px;padding:6px 14px;cursor:pointer;font-weight:700}
+.panhint{position:fixed;left:50%;bottom:150px;transform:translateX(-50%);background:rgba(40,25,10,.7);color:#fff;border-radius:999px;padding:8px 16px;font-size:15px;z-index:24;pointer-events:none;animation:fadeout 4s forwards}
+@keyframes fadeout{0%,75%{opacity:1}100%{opacity:0}}
+.langs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.langs button{font:inherit;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:96px;background:#fff;border:2px solid #eadcc4;border-radius:16px;box-shadow:0 2px 0 #eadcc4;padding:12px 8px;cursor:pointer;color:var(--ink);transition:transform .08s,border-color .15s}
+.langs button:hover{border-color:var(--line)}
+.langs button:active{transform:translateY(2px);box-shadow:none}
+.langs button.on{border-color:var(--mint);box-shadow:0 2px 0 #3f9a7c}
+.langs .flag{width:38px;height:38px;border-radius:50%;border:2px solid #f1e8da;flex:none;background-size:cover}
+.langs b{font-size:16px;line-height:1.25}
+.langs small{color:#9a8a78;font-size:12px;line-height:1.2}
+.lgroup{display:flex;align-items:center;gap:10px;margin:18px 2px 0;color:#9a7a55;font-size:13px;font-weight:700;letter-spacing:.02em}
+.lgroup::after{content:'';flex:1;height:1px;background:#eadcc4}
+.lcard{border-width:2px;box-shadow:0 8px 24px rgba(40,25,10,.25)}.lcard h2{margin-bottom:2px}.lcard .sub{color:#8a7a6a;font-size:14px;margin:0}
+@media (max-height:520px){#talk{min-height:0;padding:8px 12px;bottom:6px;border-width:3px;box-shadow:0 3px 0 var(--line);gap:10px}#face{width:54px;height:54px;border-radius:12px;border-width:2px}#line{font-size:16px;line-height:1.4}#who{font-size:13px;margin-bottom:1px}#next{bottom:4px;font-size:15px}#choices button{padding:7px 12px;font-size:14px}#choices{gap:6px;margin-top:6px}}
+/* break lines between words, never inside a Korean word; short lines (goal, titles, bubbles) balanced */
+body,button{word-break:keep-all;overflow-wrap:break-word}
+#goal,.card h2,.card p,.say,.bubble,#choices button,.panhint{text-wrap:balance}
+.gauge{position:absolute;transform:translate(-50%,-100%);z-index:3900;display:flex;align-items:center;gap:6px;pointer-events:none;background:#fff;border:3px solid #ff8fab;border-radius:999px;padding:3px 10px 3px 7px;box-shadow:0 3px 0 #e0607f}
+.gauge i{color:#ff4f7b;font-style:normal;font-size:28px;line-height:1}
+.gauge b{display:block;width:96px;height:16px;background:#ffe3ea;border-radius:999px;overflow:hidden}
+.gauge s{display:block;height:100%;background:linear-gradient(90deg,#ff9bb3,#ff4f7b);border-radius:999px;transition:width .6s}
+#mute{position:fixed;left:12px;top:10px;z-index:21;font-size:18px;background:var(--paper);border:3px solid var(--line);border-radius:999px;width:42px;height:42px;box-shadow:0 3px 0 var(--line);cursor:pointer;padding:0}
+.bubble{position:absolute;transform:translate(-50%,14px);z-index:5000;font:inherit;font-weight:800;font-size:22px;white-space:nowrap;background:#fff;color:var(--ink);border:4px solid var(--mint);border-radius:18px;box-shadow:0 5px 0 #3f9a7c;padding:10px 18px;cursor:pointer}
+.tag{position:absolute;transform:translate(-50%,-100%);z-index:4000;background:#fff3c4;border:3px solid #e6c15a;border-radius:12px;padding:2px 10px;font-weight:800;font-size:20px;pointer-events:none;white-space:nowrap}
+#goal{cursor:pointer}
+#goal .hint2{display:block;font-size:13px;font-weight:600;color:#8a7a6a;margin-top:2px}
+#goal:has(.hint2){border-radius:22px}
+.say{position:absolute;transform:translate(-50%,-100%);z-index:6000;background:#fff;border:2px solid var(--line);border-radius:20px;padding:10px 16px;font-size:22px;line-height:1.45;max-width:440px;width:max-content;box-shadow:0 2px 6px rgba(80,50,20,.18);pointer-events:none}
+@media (max-width:600px){.langs button{min-height:84px;padding:10px 6px}.langs b{font-size:15px}
+#goal{top:60px;white-space:normal;text-align:center;max-width:calc(100% - 24px)}#goal.mini{top:14px;white-space:nowrap}#toast{top:130px}
+.say{font-size:26px;max-width:min(440px,92vw)}.bubble{font-size:26px}}
+.say.below{transform:translate(-50%,0)}
+.say.below::after{bottom:auto;top:-12px;border-top:0;border-bottom:11px solid var(--line)}
+.say b{display:block;font-size:16px;color:#a0662d;margin-bottom:2px}
+.say::after{content:'';position:absolute;left:calc(50% + var(--tail,0px));bottom:-12px;margin-left:-9px;border:9px solid transparent;border-top:11px solid var(--line);border-bottom:0}
+.say.thinking{border-radius:999px;padding:12px 24px;color:#6a5a4a}
+/* thought bubble: two small circles trailing down to the head instead of a pointed tail */
+.say.thinking::before,.say.thinking::after{content:'';position:absolute;left:50%;border-radius:50%;background:#fff;border:2px solid var(--line);margin:0}
+.say.thinking::before{width:22px;height:22px;bottom:-30px;margin-left:-18px}
+.say.thinking::after{width:12px;height:12px;bottom:-48px;margin-left:-6px}
+.say.thinking.below::before{bottom:auto;top:-30px}.say.thinking.below::after{bottom:auto;top:-48px;border-bottom:2px solid var(--line)}
+#bag{position:fixed;right:12px;top:10px;z-index:21;background:var(--paper);border:3px solid var(--line);border-radius:999px;padding:6px 12px;font-weight:800;box-shadow:0 3px 0 var(--line);display:none}
+</style></head><body>
+<div id="game"><div id="world"><img class="map" id="mapimg" alt=""></div></div>
+<button id="mute" onclick="toggleMute()">🔊</button><div id="goal"></div><div id="bag"></div><div id="toast"></div>
+<div id="scene"></div>
+<div id="talk"><div id="face"></div><div style="flex:1;min-width:0"><div id="who"></div><div id="line"></div><div id="choices"></div></div><div id="next">▼</div></div>
+<div id="modal"><div class="card" id="mcard"></div></div>
+<div id="fader"></div>
+<script>
+// same address, newest version: if the page this phone has kept is older than the one online, fetch the new one and reopen
+const BUILD='1024161529';
+try{fetch(location.pathname,{cache:'no-store'}).then(r=>r.text()).then(t=>{const m=t.match(/const BUILD='(\d+)'/);if(m&&m[1]!==BUILD&&sessionStorage.getItem('upd')!==m[1]){sessionStorage.setItem('upd',m[1]);fetch(location.pathname,{cache:'reload'}).then(()=>location.reload())}}).catch(()=>{})}catch(e){}
+</script>
+<script src="i18n.js?v=1024161529"></script>
+<script src="i18n_prologue_v2.js?v=1024161529"></script>
+<script src="day2/i18n_engine.js?v=1024161529"></script>
+<script src="day2/data.js?v=1024161529"></script>
+<script src="day3/data.js?v=1024161529"></script>
+<script>
+// ---------- data ----------
+const MW=1672,MH=941,KID=180;
+const SZ={"boram":[0.97,0.99,1.0],"hero_f":[0.907,0.968,0.967],"hero_m":[0.962,0.981,1.035],"mom":[0.971,0.988,1.32],"siwoo":[0.928,0.978,0.988],"minho":[0.943,0.981,1.102],"sua":[0.95,0.98,0.939],"yuna":[0.946,0.98,1.011],"junho":[0.966,0.983,1.016],"haeun":[0.973,0.988,1.029],"jihoon":[0.964,0.981,1.051],"yena":[0.955,0.983,0.943],"hyeeun":[0.963,0.98,1.009]};
+const NAME={pang:'팡팡이',mom:'엄마',siwoo:'시우',minho:'민호',sua:'수아',yuna:'유나',junho:'준호',haeun:'하은',jihoon:'지훈',yena:'예나',hyeeun:'혜은',me:'나'};
+const R=(x0,y0,x1,y1)=>({x0,y0,x1,y1});
+const KITCHEN={walk:[[[120,560],[350,505],[640,455],[880,515],[1395,520],[1420,575],[1360,900],[300,900],[270,610],[200,600]]],rects:[],block:[R(650,360,1175,800)]};
+const MAPS={
+ home_am:{img:'maps/home_am.jpg',...KITCHEN,start:[520,660]},
+ home_pm:{img:'maps/home_pm.jpg',...KITCHEN,start:[340,640]},
+ class:{img:'maps/class.jpg',walk:[],rects:[R(200,230,1460,295),R(552,230,652,830),R(1003,230,1103,830),R(160,800,1100,830),R(552,800,1040,910)],block:[R(720,140,960,280)],start:[1420,262]}
+};
+const EXITS={home_am:{door:[170,550]},class:{door:[1440,262],seat:[770,470]}};
+const SEAT_WALK=[602,500];// aisle next to my chair
+// things you can tap on each map: [word key, x, y, radius] (map px). Tapping one says its name in the language being learned.
+const KITCHEN_OBJ=[['table',911,500,120],['chair',744,568,55],['chair',886,660,55],['fridge',1521,360,110],['box',385,293,90],['box',535,184,70],['shoes',150,502,45]];
+const OBJ={home_am:KITCHEN_OBJ.concat([['notebook',1020,500,42]]),home_pm:KITCHEN_OBJ};
+const PEOPLE={
+ home_am:[['mom',1260,600]],
+ home_pm:[['mom',1260,600]],
+ // [id,x,y,seat] — seated kids sit on chairs facing the blackboard (x,y = chair seat)
+ class:[['siwoo',700,860],['minho',600,600],['yuna',880,0,{top:448}],['junho',1250,262],['haeun',440,0,{top:570}],['jihoon',1050,700],['yena',1190,0,{top:333}],['hyeeun',330,262]]
+};
+// lines: [who, expr, text] ; who 'nar' = narration, 'think' = my thought
+const CHAT={
+ yuna:[['yuna','smile','어, 안녕… 전학생이지? 필요한 거 있으면 말해.'],['yuna','surprised','아, 아니다! 그냥 내가 해 줄게…! 뭐든지.']],
+ junho:[['junho','laugh','전학생! 축구 할 줄 알아? 점심에 같이 뛰자.'],['junho','smile','…발목? 아, 이건 아무것도 아니야. 신경 쓰지 마.']],
+ haeun:[['haeun','smile','아침 먹고 왔어? 빵 하나 남는데… 동생 거지만 괜찮아.']],
+ jihoon:[['jihoon','surprised','잠깐, 거기 서 봐. 빛이 딱 좋아!'],['jihoon','smile','사진 한 장만… 올려도 돼? 하트 많이 받을 것 같은데.']],
+ yena:[['yena','laugh','딴-딴-따라-! 아, 미안. 머릿속 노래가 안 멈춰서.']],
+ hyeeun:[['hyeeun','smile','길 막지 마~ 농담이야.'],['hyeeun','relieved','휠체어 지나갈 자리만 비워 주면 돼. 나머진 내가 알아서 해.']],
+ siwoo:[['siwoo','sad','…가까이 오지 마.'],['siwoo','relieved','번데기… 놀라. 숨… 조용히.']],
+ minho:[['minho','angry','뭘 봐, 전학생? 여긴 내 구역이야.']],
+ sua:[['sua','angry','자리에 앉아. 규칙이야.']]
+};
+// ---------- languages ----------
+// LANGS: every language the game knows. MODES: what the first screen offers (ui = language of all text, learn = language of the taught words).
+// Add a language: one LANGS row + snd/<code>/<concept>.mp3 (ja/ru words are filled by words_ja_ru.js), and for a "learn Korean" mode its text table in i18n.js.
+const KR_FLAG='radial-gradient(circle,#cd2e3a 0 22%,#0047a0 23% 34%,#fff 35%)';
+const LANGS={
+ ko:{name:'한국어',native:'한국어',flag:KR_FLAG,tts:'ko-KR',words:{"dog":"강아지","mom": "엄마", "notebook": "공책", "table": "식탁", "chair": "의자", "fridge": "냉장고", "box": "상자", "shoes": "신발", "pcase": "필통", "pencil": "연필"}},
+ id:{name:'인도네시아어',native:'Bahasa Indonesia',flag:'linear-gradient(#ce1126 50%,#fff 50%)',tts:'id-ID',words:{"dog":"anak anjing","mom": "ibu", "notebook": "buku", "table": "meja", "chair": "kursi", "fridge": "kulkas", "box": "kardus", "shoes": "sepatu", "pcase": "kotak pensil", "pencil": "pensil"},learnKo:'Belajar bahasa Korea'},
+ vi:{name:'베트남어',native:'Tiếng Việt',flag:'radial-gradient(circle at 50% 50%,#ffcd00 22%,#da251d 23%)',tts:'vi-VN',words:{"dog":"chó con","mom": "mẹ", "notebook": "vở", "table": "bàn", "chair": "ghế", "fridge": "tủ lạnh", "box": "thùng", "shoes": "giày", "pcase": "hộp bút", "pencil": "bút chì"},learnKo:'Học tiếng Hàn'},
+ en:{name:'영어',native:'English',flag:'linear-gradient(#b22234 0 14%,#fff 14% 28%,#b22234 28% 42%,#fff 42% 57%,#b22234 57% 71%,#fff 71% 85%,#b22234 85%)',tts:'en-US',words:{"dog":"puppy","mom": "mom", "notebook": "notebook", "table": "table", "chair": "chair", "fridge": "fridge", "box": "box", "shoes": "shoes", "pcase": "pencil case", "pencil": "pencil"},learnKo:'Learn Korean'},
+ zh:{name:'중국어',native:'中文',flag:'radial-gradient(circle at 26% 30%,#ffde00 0 9%,transparent 10%),#de2910',tts:'zh-CN',words:{"dog":"小狗","mom":"妈妈","notebook":"本子","table":"桌子","chair":"椅子","fridge":"冰箱","box":"箱子","shoes":"鞋子","pcase":"笔袋","pencil":"铅笔"},learnKo:'学韩语'},
+ ja:{name:'일본어',native:'日本語',flag:'radial-gradient(circle,#bc002d 0 30%,#fff 31%)',tts:'ja-JP',words:{},learnKo:'韓国語を学ぶ'},
+ ru:{name:'러시아어',native:'Русский',flag:'linear-gradient(#fff 0 33%,#0039a6 33% 67%,#d52b1e 67%)',tts:'ru-RU',words:{},learnKo:'Учить корейский'}
+};
+// every mode the game can run; HIDDEN ones stay in the code but are not offered (10/24: Indonesian and all "learn Korean" modes hidden for now)
+const MODES_ALL=[{ui:'ko',learn:'id'},{ui:'ko',learn:'ja'},{ui:'ko',learn:'zh'},{ui:'ko',learn:'vi'},{ui:'ko',learn:'ru'},{ui:'ko',learn:'en'},{ui:'id',learn:'ko'},{ui:'vi',learn:'ko'},{ui:'en',learn:'ko'},{ui:'zh',learn:'ko'}];
+const MODE_HIDDEN=m=>m.learn==='id'||m.ui==='id'||m.learn==='ko';
+const MODES=MODES_ALL.filter(m=>!MODE_HIDDEN(m));
+let LANG='id',UI='ko',W='';
+// tr: Korean source line -> line in the player's language, with {w} (taught word) and {L} (taught language) filled in
+function tr(s){if(s==null)return s;let t=UI==='ko'?s:((window.T&&T[UI]&&T[UI][s])??s);const L=UI==='ko'?LANGS[LANG].name:((T[UI]&&T[UI]['한국어'])||'Korean');return oneWord(t,s.includes('{x}')).replace(/\{L\}/g,L)}
+// one taught word per line: only one {@key}/{w}/{m} shows in the learned language — the word being taught now (TEACH, the find coming up), else the first word
+// already learned (FOUND). Every other one shows in the player's own language (Korean: the noun, particle fixed). A find label keeps only its target foreign.
+let TEACH=null,LASTW=null;
+function oneWord(t,label){const toks=[...t.matchAll(/\{@([a-z_]+)\}|\{w\}|\{m\}/g)].map(m=>m[1]||(m[0]==='{w}'?'notebook':'mom'));let pick=null;
+ if(!label){pick=TEACH&&toks.includes(TEACH)?TEACH:toks.find(k=>typeof FOUND!=='undefined'&&FOUND.has(k))||null}LASTW=pick;let used=false;
+ return t.replace(/\{@([a-z_]+)\}|\{w\}|\{m\}/g,(m0,k0,i)=>{const k=k0||(m0==='{w}'?'notebook':'mom');if(k===pick&&!used){used=true;return k==='notebook'?(W||LANGS[LANG].words.notebook):LANGS[LANG].words[k]||k}
+  const w=(LANGS[UI]&&LANGS[UI].words[k])||LANGS.ko.words[k]||k;return UI==='ko'?w+'\u0000':w}).replace(/([가-힣])\u0000(으로|로|은|는|을|를|이|가|과|와|이었|였)(?![가-힣])|([가-힣])\u0000(으로|로|이었|였)/g,(m,a,p,a2,p2)=>{a=a||a2;p=p||p2;
+  const c=a.charCodeAt(0)-0xAC00,jong=c%28,J={'으로':['으로','로'],'로':['으로','로'],'은':['은','는'],'는':['은','는'],'을':['을','를'],'를':['을','를'],'이':['이','가'],'가':['이','가'],'과':['과','와'],'와':['과','와'],'이었':['이었','였'],'였':['이었','였']}[p];
+  return a+(p==='으로'||p==='로'?(jong&&jong!==8?'으로':'로'):jong?J[0]:J[1])}).replace(/\u0000/g,'')}
+// mark every line of the friends' scenes with the find that comes next (so that word may already show in the learned language)
+function markTeach(list,next){for(let i=(list||[]).length-1;i>=0;i--){const s=list[i];if(Array.isArray(s))s.teach=next;else if(s&&s.k)next=s.k;else if(s&&s.lines)markTeach(s.lines,next)}return next}
+addEventListener('DOMContentLoaded',()=>{for(const L of Object.values(window.EP||{}))for(const e of(Array.isArray(L)?L:[L])){if(!e||!e.pre)continue;const n=markTeach(e.post,null);(e.choices||[]).forEach(c=>markTeach(c.r,n));markTeach(e.pre,n)}
+ // calendar-day friends (open → finds), mornings, the dinner review: each line knows the find that follows it
+ for(const src of [window.D2,window.D3])for(const d of Object.values(src||{})){const f=d.finds||[];(d.open||[]).forEach(l=>l.teach=f[0]&&f[0].k);f.forEach((s,i)=>{(s.before||[]).forEach(l=>l.teach=s.k);(s.after||[]).forEach(l=>l.teach=(f[i+1]&&f[i+1].k)||null)})}
+ if(typeof MORNING!=='undefined')Object.values(MORNING).forEach(M=>M.open.forEach(l=>l.teach=M.k));
+ if(typeof REVIEW!=='undefined')Object.values(REVIEW).forEach(v=>(v.ask||[]).forEach(l=>l.teach=v.k));
+ if(typeof morningOf==='function'){const _mo=morningOf;morningOf=n=>{const M=_mo(n);M.open.forEach(l=>l.teach=M.k);return M}}});
+// a person whose name is a taught word is labelled with that word (once found), never with its meaning
+function nm(id){if(id==='mom')return (typeof FOUND!=='undefined'&&FOUND.has('mom'))?LANGS[LANG].words.mom:'';return tr(NAME[id]||'')}
+// one line per person for "talked already today" — fits any day
+const AGAIN={mom_am:['mom','smile','얼른 다녀와~ 늦겠다.'],mom_pm:['mom','relieved','오늘 많이 피곤하지? 푹 쉬어.'],
+ sua:['sua','angry','용건 있으면 짧게. 나 할 일 많아.'],minho:['minho','angry','또 뭐야? 볼일 없으면 저리 가.'],siwoo:['siwoo','sad','……'],
+ hyeeun:['hyeeun','smile','왜, 할 말 더 있어? 없으면 나 간다~'],yuna:['yuna','surprised','어, 또 왔네… 혹시 내가 뭐 잘못했어?'],
+ junho:['junho','laugh','왜? 나 지금 몸 풀어야 돼. 이따 보자!'],haeun:['haeun','smile','나 이제 동생 챙기러 가 봐야 해. 다음에 얘기하자~'],
+ yena:['yena','laugh','딴따라… 아, 또 너야? 이 노래 끝나면 얘기하자~'],jihoon:['jihoon','surprised','잠깐, 지금 빛 좋은데… 다음에 얘기해!']};
+const SPOKE=new Set();// who already had their talk in this scene
+const TALKED=new Set();let CHOICE=null;const HEART={};
+// ---------- state ----------
+let HERO='hero_f',MAP=null,me=null,npcs=[],goal=null,busy=false,cam={x:0,y:0,s:1},grid=null;
+const world=document.getElementById('world'),mapimg=document.getElementById('mapimg');
+// ---------- sprites ----------
+const ROW={down:0,left:1,right:2,up:3};
+// seat = {top}: seat/<id>.png is a child sitting on a chair seen from behind. Only the part above that chair's back (top 45%) is shown,
+// set right on top of the map's own chair back (top = chair-back top on the map), so the chair is the classroom's own chair.
+const SEAT_H=237,SEAT_CUT=.45;
+function seatSprite(id,x,s){const el=document.createElement('div');el.className='sp';world.appendChild(el);const o={id,el,x,y:s.top+4,w:0,h:0,seat:true};
+ const im=new Image();im.onload=()=>{const k=SEAT_H/im.height,w=im.width*k;o.w=w;o.h=SEAT_CUT*SEAT_H;el.style.cssText+=`;width:${w}px;height:${o.h}px;left:${x}px;top:${o.y}px;z-index:${Math.round(o.y)};background:url(seat/${id}.png) 0 0/${w}px ${SEAT_H}px no-repeat`};im.src=`seat/${id}.png`;return o}
+function sprite(id,x,y,seat){if(seat&&typeof seat==='object')return seatSprite(id,x,seat);const el=document.createElement('div');el.className='sp';world.appendChild(el);
+ const o={id,el,x,y,dir:seat?'up':'down',frame:0,t:0,w:0,h:0,path:null,onArrive:null,seat:!!seat};
+ const z=SZ[id]||[.95,.98,1];const im=new Image();im.onload=()=>{const ch=im.height/4,cw=im.width/3,dh=KID*z[2]/z[0],k=dh/ch;o.w=cw*k;o.rowH=ch*k;
+  if(seat){const top=(1-z[0]-(1-z[1]))*dh;o.h=top+z[0]*dh*.56;o.foot=0}else{o.h=dh;o.foot=(1-z[1])*dh}
+  el.style.width=o.w+'px';el.style.height=o.h+'px';el.style.backgroundImage=`url(walk/${id}.png)`;el.style.backgroundSize=`${im.width*k}px ${im.height*k}px`;draw(o)};im.src=`walk/${id}.png`;return o}
+function draw(o){o.el.style.left=o.x+'px';o.el.style.top=(o.y+(o.foot||0))+'px';o.el.style.zIndex=Math.round(o.y);o.el.style.backgroundPosition=`${-o.frame*o.w}px ${-ROW[o.dir]*(o.rowH||o.h)}px`}
+// ---------- walkable + path ----------
+function inPoly(p,x,y){let c=false;for(let i=0,j=p.length-1;i<p.length;j=i++){const[xi,yi]=p[i],[xj,yj]=p[j];if((yi>y)!=(yj>y)&&x<(xj-xi)*(y-yi)/(yj-yi)+xi)c=!c}return c}
+function inR(r,x,y){return x>=r.x0&&x<=r.x1&&y>=r.y0&&y<=r.y1}
+function walkable(x,y){const m=MAPS[MAP];if(m.block.some(r=>inR(r,x,y)))return false;return m.walk.some(p=>inPoly(p,x,y))||m.rects.some(r=>inR(r,x,y))}
+const C=16;
+function buildGrid(){const gw=Math.ceil(MW/C),gh=Math.ceil(MH/C);grid={gw,gh,ok:new Uint8Array(gw*gh)};for(let j=0;j<gh;j++)for(let i=0;i<gw;i++)grid.ok[j*gw+i]=walkable(i*C+C/2,j*C+C/2)?1:0}
+function nearestCell(x,y){const{gw,gh,ok}=grid;let best=null,bd=1e9;const ci=Math.floor(x/C),cj=Math.floor(y/C);for(let r=0;r<40&&!best;r++)for(let j=cj-r;j<=cj+r;j++)for(let i=ci-r;i<=ci+r;i++){if(i<0||j<0||i>=gw||j>=gh||!ok[j*gw+i])continue;const d=(i-ci)**2+(j-cj)**2;if(d<bd){bd=d;best=[i,j]}}return best}
+function findPath(x0,y0,x1,y1){const{gw,ok}=grid;const a=nearestCell(x0,y0),b=nearestCell(x1,y1);if(!a||!b)return null;const prev=new Int32Array(ok.length).fill(-1);const s=a[1]*gw+a[0],t=b[1]*gw+b[0];const q=[s];prev[s]=s;
+ for(let h=0;h<q.length;h++){const c=q[h];if(c===t)break;const ci=c%gw,cj=(c-ci)/gw;for(const[di,dj]of[[1,0],[-1,0],[0,1],[0,-1],[1,1],[1,-1],[-1,1],[-1,-1]]){const ni=ci+di,nj=cj+dj;if(ni<0||nj<0||ni>=gw||nj*gw>=ok.length)continue;const n=nj*gw+ni;if(!ok[n]||prev[n]>=0)continue;if(di&&dj&&(!ok[cj*gw+ni]||!ok[nj*gw+ci]))continue;prev[n]=c;q.push(n)}}
+ if(prev[t]<0)return null;const pts=[];for(let c=t;c!==s;c=prev[c])pts.push([(c%gw)*C+C/2,Math.floor(c/gw)*C+C/2]);pts.reverse();
+ // smooth: drop points while straight line stays walkable
+ const out=[];let cur=[x0,y0];for(let i=0;i<pts.length;i++){if(i===pts.length-1||!clear(cur,pts[i+1])){out.push(pts[i]);cur=pts[i]}}return out}
+function clear(a,b){const d=Math.hypot(b[0]-a[0],b[1]-a[1]),n=Math.ceil(d/8);for(let k=1;k<=n;k++){const x=a[0]+(b[0]-a[0])*k/n,y=a[1]+(b[1]-a[1])*k/n;if(!walkable(x,y))return false}return true}
+// walk up next to a tapped person/thing (keeps the 'This is X' button where it is)
+function walkNear(x,y){const side=me.x<x?-1:1;for(const[dx,dy]of[[side*90,0],[0,70],[-side*90,0],[0,-60]]){if(walkable(x+dx,y+dy)){const keep=bubble;walkTo(x+dx,y+dy);bubble=keep;return}}walkTo(x,y)}
+function walkTo(x,y,cb){pan=null;const p=findPath(me.x,me.y,x,y);if(!p||!p.length){me.path=null;cb&&cb();return}me.path=p;me.onArrive=cb||null}
+// ---------- camera / input ----------
+function fit(){const W=innerWidth,H=innerHeight;cam.s=Math.max(W/MW,H/MH)}
+let pan=null;
+function follow(){const W=innerWidth,H=innerHeight,s=cam.s;let x=me.x*s-W/2,y=(me.y-80)*s-H/2;if(pan){x=pan.x;y=pan.y}x=Math.max(0,Math.min(MW*s-W,x));y=Math.max(0,Math.min(MH*s-H,y));cam.x=x;cam.y=y;world.style.transform=`translate(${-x}px,${-y}px) scale(${s})`}
+addEventListener('resize',()=>{fit();me&&follow()});
+// drag = look around; release without moving = a normal tap
+let drag=null;const gameEl=document.getElementById('game');
+gameEl.addEventListener('pointerdown',e=>{drag={x0:e.clientX,y0:e.clientY,cx:cam.x,cy:cam.y,moved:false,e}});
+gameEl.addEventListener('pointermove',e=>{if(!drag)return;const dx=e.clientX-drag.x0,dy=e.clientY-drag.y0;if(!drag.moved&&Math.hypot(dx,dy)<12)return;drag.moved=true;closeBubble();
+ const s=cam.s;pan={x:Math.max(0,Math.min(MW*s-innerWidth,drag.cx-dx)),y:Math.max(0,Math.min(MH*s-innerHeight,drag.cy-dy))};if(me)follow()});
+gameEl.addEventListener('pointerup',e=>{const d=drag;drag=null;if(d&&!d.moved)onTap(d.e)});
+gameEl.addEventListener('pointercancel',()=>{drag=null});
+function onTap(e){if(sayEl&&talkOn){advance();return}if(busy||!me)return;const x=(e.clientX+cam.x)/cam.s,y=(e.clientY+cam.y)/cam.s;
+ // tapped a person?
+ closeBubble();
+ if(hitPang(x,y)){tapPang();if(FIND)walkNear(PANG_AT[0],PANG_AT[1]);return}
+ {const z=(typeof zoomAt==='function')&&zoomAt(x,y);if(z){let ph=null;for(const n of npcs){if(n.h&&x>n.x-n.w*.4&&x<n.x+n.w*.4&&y>n.y-n.h&&y<n.y+10)ph=n}if(!ph||FIND){walkNear((z[0]+z[2])/2,z[3]);openZoom(z);return}}}
+ let hit=null,bd=1e9;for(const n of npcs){if(!n.h)continue;if(x>n.x-n.w*.4&&x<n.x+n.w*.4&&y>n.y-n.h&&y<n.y+10){const d=Math.abs(y-(n.y-n.h/2));if(d<bd){bd=d;hit=n}}}
+ {const wk=WORDKEY[hit&&hit.id]||(DAY>=2&&hit&&npcThing(hit,y));if(hit&&FIND&&wk){tapThing(wk,hit.x,hit.y);walkNear(hit.x,hit.y);return}}
+ if(hit){approach(hit);return}
+ const objs=(OBJ[MAP]||[]).filter(o=>!(DAY<2&&o[0]==='notebook'&&FOUND.has('notebook'))).slice().sort((a,b)=>a[3]-b[3]);
+ const oh=objs.find(o=>Math.hypot(x-o[1],y-o[2])<o[3]);
+ // a thing's own spot wins over the wide exit, door and seat areas around it, so they never share a tap
+ if(oh){tapThing(oh[0],oh[1],oh[2]+oh[3]*.35);walkNear(oh[1],oh[2]+oh[3]*.5);return}
+ if(DAY>=2&&['d2_class','d2_after'].includes(stage)&&OUT[MAP]&&(Math.hypot(x-OUT[MAP][0],y-OUT[MAP][1])<120||Math.abs(x-OUT[MAP][0])<140&&y>OUT[MAP][1]-280&&y<OUT[MAP][1])){walkTo(OUT[MAP][0],OUT[MAP][1],pickPlace);return}
+ const ex=goal&&goal.target==='door'&&EXITS[MAP]&&EXITS[MAP].door;if(ex&&Math.hypot(x-ex[0],y-ex[1])<110){walkTo(ex[0],ex[1],()=>useDoor());return}
+ const st=goal&&goal.target==='seat'&&EXITS[MAP].seat;if(st&&Math.hypot(x-st[0],y-st[1])<110){walkTo(SEAT_WALK[0],SEAT_WALK[1],()=>lesson());return}
+ walkTo(x,y)}
+function approach(n){if(n.seat){for(const dx of [125,-125,160,-160]){const tx=n.x+dx,ty=n.y+15;if(walkable(tx,ty)){walkTo(tx,ty,()=>{me.dir=dx>0?'left':'right';me.frame=0;draw(me);talkTo(n.id)});return}}}const side=me.x<n.x?-1:1;let tx=n.x+side*90,ty=n.y;if(!walkable(tx,ty)){tx=n.x;ty=n.y+60;if(!walkable(tx,ty)){tx=n.x-side*90}}walkTo(tx,ty,()=>{me.dir=Math.abs(n.x-me.x)>Math.abs(n.y-me.y)?(n.x<me.x?'left':'right'):(n.y<me.y?'up':'down');me.frame=0;draw(me);talkTo(n.id)})}
+const keys={};addEventListener('keydown',e=>{keys[e.key]=1;pan=null;if(me)me.path=null;if((e.key==='Enter'||e.key===' ')&&talkOn)advance()});addEventListener('keyup',e=>keys[e.key]=0);
+// ---------- loop ----------
+let last=performance.now();
+function loop(now){const dt=Math.min(.05,(now-last)/1000);last=now;if(me&&!busy){let dx=0,dy=0;if(keys.ArrowLeft)dx--;if(keys.ArrowRight)dx++;if(keys.ArrowUp)dy--;if(keys.ArrowDown)dy++;
+  if(!dx&&!dy&&me.path&&me.path.length){const[tx,ty]=me.path[0],ex=tx-me.x,ey=ty-me.y,d=Math.hypot(ex,ey);if(d<6){me.path.shift();if(!me.path.length){me.path=null;const cb=me.onArrive;me.onArrive=null;me.frame=0;draw(me);cb&&cb()}}else{dx=ex/d;dy=ey/d}}
+  if(dx||dy){const l=Math.hypot(dx,dy),sp=300*dt,nx=me.x+dx/l*sp,ny=me.y+dy/l*sp;if(walkable(nx,ny)||!walkable(me.x,me.y)){me.x=nx;me.y=ny}else if(walkable(nx,me.y))me.x=nx;else if(walkable(me.x,ny))me.y=ny;
+   me.dir=Math.abs(dx)>Math.abs(dy)?(dx<0?'left':'right'):(dy<0?'up':'down');me.t+=dt;me.frame=[1,0,2,0][Math.floor(me.t*8)%4]}else{if(!me.path)me.frame=0;me.t=0}
+  draw(me);follow()}
+ placeHint();if(now-hideT>200){hideT=now;hideMarks()}requestAnimationFrame(loop)}
+// ---------- hint ----------
+const hintEl=document.createElement('div');hintEl.className='hint';hintEl.textContent='▼';
+const ringEl=document.createElement('div');ringEl.className='ring';
+function placeHint(){if(!goal||busy||!goal.target||FIND){hintEl.remove();ringEl.remove();return}let x,y,h=0;if(goal.target==='door'||goal.target==='seat'||goal.target==='out'){[x,y]=goal.target==='out'?OUT[MAP]:EXITS[MAP][goal.target];world.appendChild(ringEl);ringEl.style.left=x+'px';ringEl.style.top=y+'px';ringEl.style.zIndex=2000;h=40}else{const ids=[].concat(goal.target);const ns=npcs.filter(n=>ids.includes(n.id)&&!(goal.skip&&goal.skip(n.id)));if(!ns.length){hintEl.remove();return}ringEl.remove();x=ns[0].x;y=ns[0].y;h=ns[0].h||KID;
+  if(ns.length>1){hintEl.remove();ns.forEach(n=>{});}}world.appendChild(hintEl);hintEl.style.left=x+'px';hintEl.style.top=(y-h-6)+'px';hintEl.style.zIndex=3000}
+function setGoal(text,target,skip,suffix){goal=text?{text,target,skip}:null;document.getElementById('goal').textContent=text?tr(text)+(suffix||''):''}
+// ---------- find by sound ----------
+// FIND = word key to find. Goal bar shows the word (learned language) + 🔊. Tapping anything says its own name and offers "This is {word}" —
+// on every thing, not only the right one, so the player has to compare the sounds.
+let FIND=null,FIND_DONE=null;const FOUND=new Set();const WORDKEY={mom:'mom'};
+function wordOf(k){return LANGS[LANG].words[k]}
+// goal = what to do, with the word in the learned language + 🔊 (e.g. 「mẹ 🔊」에게 인사하기). The first time, a small hint line explains the 🔊 game.
+let findHinted=false;
+let FIND_LABEL='';function find(k,done,goalText,label){FIND=k;FIND_DONE=done;FIND_LABEL=label||goalText||'「{x}」 찾기';const g=document.getElementById('goal');g.innerHTML='';const s=document.createElement('span');s.textContent=tr(goalText||'「{x}」 찾기').replace('{x}',wordOf(k)+' 🔊');g.appendChild(s);
+ if(!findHinted){findHinted=true;const sm=document.createElement('small');sm.className='hint2';sm.textContent=tr('🔊를 듣고 같은 소리가 나는 걸 눌러 봐');g.appendChild(sm)}
+ g.onclick=()=>speak(k);goal={target:null};setTimeout(()=>speak(k),400)}
+let bubble=null;function closeBubble(){if(bubble){bubble.remove();bubble=null}}
+function tapThing(k,x,y){speak(k);if(!FIND)return;closeBubble();bubble=document.createElement('button');bubble.className='bubble';bubble.textContent=okLabel();bubble.style.left=x+'px';bubble.style.top=y+'px';
+ bubble.onpointerdown=ev=>ev.stopPropagation();const bornAt=performance.now();bubble.onclick=ev=>{ev.stopPropagation();if(performance.now()-bornAt<350)return;closeBubble();if(k===FIND){chime();FOUND.add(k);tagAll();const d=FIND_DONE;FIND=null;FIND_DONE=null;const g=document.getElementById('goal');g.onclick=null;g.textContent='';goal=null;showBag();d&&d()}else{buzz()}};world.appendChild(bubble);keepOnScreen(bubble)}
+// the confirm button says this mission's action with the target word (never the name of the thing tapped)
+function okLabel(){return tr(FIND_LABEL).replace('{x}',wordOf(FIND))}
+function keepOnScreen(el){const r=el.getBoundingClientRect();let dx=0,dy=0;if(r.left<8)dx=8-r.left;else if(r.right>innerWidth-8)dx=innerWidth-8-r.right;if(r.bottom>innerHeight-8)dy=innerHeight-8-r.bottom;if(dx)el.style.left=(parseFloat(el.style.left)+dx/cam.s)+'px';if(dy)el.style.top=(parseFloat(el.style.top)+dy/cam.s)+'px'}
+// friendship gauge over the head of every friend you got closer to (full at 10 hearts)
+const GAUGE_MAX=10;function gauges(){world.querySelectorAll('.gauge').forEach(g=>g.remove());for(const n of npcs){const v=HEART[n.id];if(!v||!n.h)continue;const g=document.createElement('div');g.className='gauge';g.innerHTML=`<i>♥</i><b><s style="width:${Math.min(100,v/GAUGE_MAX*100)}%"></s></b>`;g.style.left=n.x+'px';{const t=n.y-n.h-(WORDKEY[n.id]&&FOUND.has(WORDKEY[n.id])?48:12);if(t<70){g.style.top=(n.y+(n.foot||0)+8)+'px';g.style.transform='translate(-50%,0)'}else g.style.top=t+'px'};world.appendChild(g)}}
+// one 🔊 beside each thing you can hear: tried around the thing (rim first), kept where it covers no other thing's tap area, no other 🔊, no word tag, gauge or 🔍
+const SM_R=15;
+// the 🚪 sign goes above the exit, moved up or sideways off any thing's spot
+function placeExitSign(sg,id){const[ox,oy]=OUT[id],w=sg.offsetWidth,ht=sg.offsetHeight,objs=OBJ[id]||[];
+ for(const dy of [200,250,150,300,120,90])for(const dx of [0,-90,90,-170,170,-250,250]){const x=ox+dx,t=Math.max(oy-dy,ht+10);if(x-w/2<5||x+w/2>MW-5)continue;
+  if(!objs.some(o=>{const nx=Math.max(x-w/2,Math.min(o[1],x+w/2)),ny=Math.max(t-ht,Math.min(o[2],t));return Math.hypot(o[1]-nx,o[2]-ny)<o[3]})){sg.style.left=x+'px';sg.style.top=t+'px';return}}}
+// the exits' tap areas (the 🔊 keeps off them): the way out of school maps and the doors
+function exitSpots(){const s=[];if(DAY>=2&&OUT[MAP]&&MAP!=='home_am'&&MAP!=='home_pm')s.push({c:[OUT[MAP][0],OUT[MAP][1],120]},{b:[OUT[MAP][0]-140,OUT[MAP][1]-280,OUT[MAP][0]+140,OUT[MAP][1]]});const d=EXITS[MAP]&&EXITS[MAP].door;if(d&&!(DAY>=2&&OUT[MAP]&&Math.hypot(d[0]-OUT[MAP][0],d[1]-OUT[MAP][1])<50))s.push({c:[d[0],d[1],110]});return s}
+function soundMarks(){world.querySelectorAll('.smark').forEach(e=>e.remove());const zs=(typeof ZOOMS!=='undefined'&&DAY>=2&&ZOOMS[MAP])||[];
+ const own=[],obs=[],box=(x0,y0,x1,y1)=>({b:[x0,y0,x1,y1]});
+ for(const o of (OBJ[MAP]||[])){if(DAY<2&&o[0]==='notebook'&&FOUND.has('notebook'))continue;if(zs.some(z=>o[1]>=z[0]&&o[1]<=z[2]&&o[2]>=z[1]&&o[2]<=z[3]&&o[3]<80))continue;const c={c:[o[1],o[2],o[3]],k:o[0]};obs.push(c);own.push(c)}
+ for(const z of zs){obs.push(box(z[0],z[1],z[2],z[3]))}
+ for(const n of npcs){if(!n.h)continue;const b=box(n.x-n.w*.4,n.y-n.h,n.x+n.w*.4,n.y+10);b.k=n.id;obs.push(b);if(WORDKEY[n.id]||(DAY>=2&&typeof NPC_THING!=='undefined'&&NPC_THING[n.id]))own.push(b)}
+ if(pangEl){const b=box(PANG_AT[0]-60,PANG_AT[1]-PANG_H-10,PANG_AT[0]+60,PANG_AT[1]+10);b.k='dog';obs.push(b);own.push(b)}
+ if(me&&me.h)obs.push(box(me.x-me.w*.4,me.y-me.h,me.x+me.w*.4,me.y+10));
+ obs.push(...exitSpots());
+ obs.push(box(-1e4,-1e4,MW+1e4,110));// the top strip of the map: off screen most of the time, and under the goal when scrolled up
+ world.querySelectorAll('.tag,.gauge,.exitsign').forEach(e=>{const r=e.getBoundingClientRect(),s=cam.s;if(r.width)obs.push(box((r.left+cam.x)/s,(r.top+cam.y)/s,(r.right+cam.x)/s,(r.bottom+cam.y)/s))});
+ const pen=(x,y,o)=>{if(o.c){return Math.max(0,o.c[2]+SM_R-Math.hypot(x-o.c[0],y-o.c[1]))}const[x0,y0,x1,y1]=o.b,dx=Math.max(x0-x,0,x-x1),dy=Math.max(y0-y,0,y-y1);return dx||dy?Math.max(0,SM_R-Math.hypot(dx,dy)):SM_R+Math.min(x-x0,x1-x,y-y0,y1-y)};
+ const put=[];const size=o=>o.c?o.c[2]*2:(o.b[2]-o.b[0])+(o.b[3]-o.b[1])/2;
+ for(const o of own.slice().sort((a,b)=>size(a)-size(b))){const cand=[];
+  if(o.c){const[x,y,r]=o.c;for(const d of [r,r+14,r*.6,r+28,r+42])for(const a of [-45,-135,0,180,-90,45,135,90]){const t=a*Math.PI/180;cand.push([x+Math.cos(t)*d,y+Math.sin(t)*d])}}
+  else{const[x0,y0,x1,y1]=o.b,m=SM_R+3,cx=(x0+x1)/2,h=y1-y0;for(const yy of [y0+h*.3,y0+h*.55,y0+h*.12])cand.push([x1+m,yy],[x0-m,yy]);cand.push([cx,y0-m],[x1+m,y0-m],[x0-m,y0-m],[x1+m,y1-m],[x0-m,y1-m])}
+  let best=null,bs=1e9;for(const[x,y]of cand){if(x<SM_R||y<SM_R||x>MW-SM_R||y>MH-SM_R)continue;let s=0;for(const q of obs)if(q!==o)s+=pen(x,y,q);for(const q of put)s+=Math.max(0,SM_R*2+2-Math.hypot(x-q[0],y-q[1]))*2;if(s<bs){bs=s;best=[x,y]}if(!s)break}
+  if(!best)continue;put.push(best);const d=document.createElement('div');d.className='smark';d.dataset.k=Math.round(bs);d.dataset.o=o.k;d.textContent='🔊';d.style.left=best[0]+'px';d.style.top=best[1]+'px';world.appendChild(d)}
+ hideMarks()}
+// a 🔊 that would sit under a button, the goal, the talk panel or the OK button is hidden (checked as the view moves)
+function hideMarks(){const ui=[...document.querySelectorAll('#goal,#bag,#mute,#talk,#toast>*,.panhint,.bubble,.zmark')].map(e=>e.getBoundingClientRect()).filter(r=>r.width&&r.height);
+ world.querySelectorAll('.smark').forEach(m=>{const r=m.getBoundingClientRect(),hit=ui.some(u=>r.left<u.right+4&&r.right>u.left-4&&r.top<u.bottom+4&&r.bottom>u.top-4);m.style.visibility=hit?'hidden':''})}
+let hideT=0;
+function tagAll(){gauges();world.querySelectorAll('.tag').forEach(t=>t.remove());for(const n of npcs){const k=WORDKEY[n.id];if(k&&FOUND.has(k)&&n.h){const t=document.createElement('div');t.className='tag';t.textContent=wordOf(k);t.style.left=n.x+'px';t.style.top=(n.y-n.h-8)+'px';world.appendChild(t)}}soundMarks()}
+function showBag(){const ks=['notebook'].filter(k=>FOUND.has(k));const b=document.getElementById('bag');if(!ks.length){b.style.display='none';return}b.style.display='block';b.textContent='📒 '+ks.map(wordOf).join(' · ')}
+function buzz(){try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();const t=AC.currentTime,o=AC.createOscillator(),g=AC.createGain();o.type='square';o.frequency.value=180;g.gain.setValueAtTime(.12,t);g.gain.exponentialRampToValueAtTime(.0001,t+.35);o.connect(g).connect(AC.destination);o.start(t);o.stop(t+.36)}catch(e){}}
+// ---------- Pangpang ----------
+const PANG={home_am:['오늘 첫 등교지? 잘하고 와!','나는 팡팡이야. 그리고 네가 정말 좋아.','모르는 말이 나와도 괜찮아. 하나씩 배우면 돼.','천천히 해도 돼. 내가 여기서 기다릴게.','머리 쓰다듬어 주면 하루 종일 힘이 나.','간식 냄새 난다… 아, 아니야. 기분 탓이야.'],
+ home_pm:['왔다! 왔어! 오늘 하루 어땠어?','꼬리 흔들기 백 번 했어. 기다렸거든.','내가 항상 옆에 있어 줄게.','오늘 찾은 말, 나한테도 들려줘. 귀 쫑긋!']};
+const PANG_AT=[400,640],PANG_H=105;let pangEl=null,pangI={home_am:0,home_pm:0};
+function placePang(){if(pangEl){pangEl.remove();pangEl=null}if(!PANG[MAP])return;pangEl=document.createElement('img');pangEl.src='pang/sit.png';pangEl.className='pang';pangEl.style.cssText=`position:absolute;height:${PANG_H}px;left:${PANG_AT[0]}px;top:${PANG_AT[1]}px;transform:translate(-50%,-100%);z-index:${PANG_AT[1]};pointer-events:none`;world.appendChild(pangEl)}
+function hitPang(x,y){return pangEl&&Math.abs(x-PANG_AT[0])<70&&y<PANG_AT[1]+10&&y>PANG_AT[1]-PANG_H-10}
+// Pangpang talks only once per scene (first tap); later taps just make him hop
+const pangSaid={};function tapPang(){speak('dog');const ls=(typeof PANG2!=='undefined'&&DAY>=2&&PANG2[MAP])||PANG[MAP];const first=!pangSaid[MAP];pangSaid[MAP]=true;const t=ls[Math.floor(Math.random()*ls.length)];pangEl.src='pang/happy.png';setTimeout(()=>{if(pangEl)pangEl.src='pang/sit.png'},1400);chime();
+ if(FIND){closeBubble();bubble=document.createElement('button');bubble.className='bubble';bubble.textContent=okLabel();bubble.style.left=PANG_AT[0]+'px';bubble.style.top=PANG_AT[1]+'px';
+  bubble.onpointerdown=ev=>ev.stopPropagation();bubble.onclick=ev=>{ev.stopPropagation();closeBubble();buzz()};world.appendChild(bubble);keepOnScreen(bubble)}
+ if(first&&!FIND)say([['pang','',t]])}
+// ---------- dialogue ----------
+const talk=document.getElementById('talk'),faceEl=document.getElementById('face'),whoEl=document.getElementById('who'),lineEl=document.getElementById('line'),chEl=document.getElementById('choices'),nextEl=document.getElementById('next'),sceneEl=document.getElementById('scene');
+let queue=[],talkOn=false,qDone=null;
+function say(lines,done){if(touring){tourQ.push(()=>say(lines,done));return}busy=true;queue=lines.slice();qDone=done;talkOn=true;talk.classList.add('on');advance()}
+function advance(){if(chEl.classList.contains('on'))return;const l=queue.shift();hideSay();if(!l){talk.classList.remove('on');talkOn=false;busy=false;const d=qDone;qDone=null;d&&d();return}
+ if(typeof l==='function'){l();return advance()}
+ const[who,expr,text]=l;const fid=who==='me'||who==='think'?HERO:who;
+ // the one taught word shown in the learned language in this line is also heard (UI text stays in the player's language)
+ {TEACH=FIND||l.teach||(DAY<=1&&!FOUND.has('mom')?'mom':null);tr(text);const k=LASTW;if(k)setTimeout(()=>speak(k),250)}
+ if(who!=='nar'&&!sceneEl.classList.contains('on')&&showSay(who,tr(text))){talk.classList.remove('on');return}
+ talk.classList.add('on');
+ if(who==='nar'){faceEl.className='none';whoEl.textContent=''}else{faceEl.className='';faceEl.style.backgroundImage=who==='pang'?'url(pang/happy.png)':`url(faces/${fid}_${expr||'smile'}.jpg)`;faceEl.style.backgroundSize=who==='pang'?'contain':'';faceEl.style.backgroundRepeat='no-repeat';faceEl.style.backgroundPosition='center';whoEl.textContent=who==='think'?tr('나 (속마음)'):nm(who)}
+ lineEl.className=who==='think'?'think':'';lineEl.textContent=tr(text);nextEl.style.display='';requestAnimationFrame(fitScene)}
+talk.addEventListener('pointerdown',e=>{e.stopPropagation();if(e.target.closest('#choices'))return;advance()});
+// speech bubble above the speaker on the map; returns false when the speaker is not on the map (then the bottom panel is used)
+let sayEl=null;function hideSay(){if(sayEl){sayEl.remove();sayEl=null}}
+function speakerPos(who){if(who==='pang'&&pangEl)return[PANG_AT[0],PANG_AT[1]-PANG_H,PANG_AT[1]];if((who==='me'||who==='think')&&me&&me.h)return[me.x,me.y-me.h,me.y];const n=npcs.find(n=>n.id===who&&n.h);return n?[n.x,n.y-n.h,n.y]:null}
+function showSay(who,text){const p=speakerPos(who);if(!p)return false;
+ // speaker outside the visible part of the map (e.g. on a phone held upright): use the bottom panel instead
+ {const sx=p[0]*cam.s-cam.x;if(sx<20||sx>innerWidth-20)return false}sayEl=document.createElement('div');sayEl.className='say'+(who==='think'?' thinking':'');
+ const nmEl=document.createElement('b');nmEl.textContent=who==='think'?'':nm(who==='me'?'me':who);const tx=document.createElement('span');tx.textContent=who==='think'?text.replace(/^[(（]\s*/,'').replace(/\s*[)）]$/,''):text;if(nmEl.textContent)sayEl.appendChild(nmEl);sayEl.appendChild(tx);
+ sayEl.style.left=Math.max(230,Math.min(MW-230,p[0]))+'px';sayEl.style.top=(p[1]-(who==='think'?44:14))+'px';world.appendChild(sayEl);
+ // off the top of the screen (or under the goal bar)? show it below the speaker's feet instead
+ if(sayEl.getBoundingClientRect().top<70){sayEl.classList.add('below');sayEl.style.top=(p[2]+14)+'px'}
+ // keep the bubble inside the screen sideways (the tail stays over the speaker)
+ {const r=sayEl.getBoundingClientRect();let dx=0;if(r.left<8)dx=8-r.left;else if(r.right>innerWidth-8)dx=innerWidth-8-r.right;if(dx){sayEl.style.left=(parseFloat(sayEl.style.left)+dx/cam.s)+'px';sayEl.style.setProperty('--tail',(-dx/cam.s)+'px')}}
+ return true}
+function ask(prompt,opts,cb){busy=true;talkOn=true;talk.classList.add('on');faceEl.className='';faceEl.style.backgroundImage=`url(faces/${HERO}_surprised.jpg)`;whoEl.textContent=nm('me');lineEl.className='';lineEl.textContent=tr(prompt);nextEl.style.display='none';chEl.innerHTML='';chEl.classList.add('on','wait');talk.classList.add('asking');clearTimeout(ask.t);ask.t=setTimeout(()=>chEl.classList.remove('wait'),900);
+ // a choice is only marked by the first tap (a swipe to scroll can't pick one); "This one" below confirms it
+ const shownAt=performance.now();let sel=null;const ok=document.createElement('button');ok.className='okpick';ok.textContent=tr('이걸로 할래');ok.style.display='none';
+ opts.forEach(o=>{const b=document.createElement('button');b.textContent=tr(o.text);let p0=null;
+  b.onpointerdown=ev=>{ev.stopPropagation();p0=performance.now()-shownAt>=900?[ev.clientX,ev.clientY]:null};
+  b.onpointermove=ev=>{if(p0&&Math.hypot(ev.clientX-p0[0],ev.clientY-p0[1])>10)p0=null};
+  b.onclick=ev=>{ev.stopPropagation();if(!p0)return;p0=null;sel=o;chEl.querySelectorAll('button').forEach(x=>x.classList.toggle('picked',x===b));ok.style.display='';ok.scrollIntoView({block:'nearest'})};chEl.appendChild(b)});
+ ok.onpointerdown=ev=>ev.stopPropagation();ok.onclick=ev=>{ev.stopPropagation();if(!sel)return;const o=sel;chEl.classList.remove('on');chEl.innerHTML='';talk.classList.remove('on','asking');talkOn=false;busy=false;cb(o)};chEl.appendChild(ok);
+ chEl.addEventListener('scroll',()=>{},{passive:true});requestAnimationFrame(fitScene)}
+// the picture fills the space above the talk panel (black behind it), so nothing important hides under the panel
+function fitScene(){if(!sceneEl.classList.contains('on'))return;const r=talk.classList.contains('on')?talk.getBoundingClientRect():null;const availH=r?r.top-6:innerHeight;const w=Math.min(innerWidth,availH*16/9),hh=w*9/16;sceneEl.style.backgroundSize=`${w}px ${hh}px`;sceneEl.style.backgroundPosition=`center ${Math.max(0,(availH-hh)/2)}px`}
+addEventListener('resize',fitScene);
+function scene(img,lines,done,keep){busy=true;sceneEl.style.backgroundImage=`url(scenes/${img}.jpg)`;sceneEl.classList.add('on');say(lines,()=>{if(!keep)sceneEl.classList.remove('on');done&&done()})}
+sceneEl.addEventListener('pointerdown',e=>{e.stopPropagation();advance()});
+function toast(t){const d=document.createElement('div');d.textContent=t;document.getElementById('toast').appendChild(d);setTimeout(()=>d.remove(),1900)}
+function heart(id,n){if(!n)return;HEART[id]=(HEART[id]||0)+n;setTimeout(gauges,50);toast(`${nm(id)} ♥ +${n}`);chime()}
+// ---------- sound ----------
+let AC=null;function chime(){try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();const t=AC.currentTime;[880,1320].forEach((f,i)=>{const o=AC.createOscillator(),g=AC.createGain();o.frequency.value=f;o.type='sine';g.gain.setValueAtTime(.0001,t+i*.12);g.gain.exponentialRampToValueAtTime(.2,t+i*.12+.02);g.gain.exponentialRampToValueAtTime(.0001,t+i*.12+.35);o.connect(g).connect(AC.destination);o.start(t+i*.12);o.stop(t+i*.12+.4)})}catch(e){}}
+const SND={};function speak(k){duck(1800);const key=LANG+'/'+k;const f=SND[key]||(SND[key]=new Audio(`snd/${LANG}/${k}.mp3`));try{f.currentTime=0;f.play();return}catch(e){}try{const u=new SpeechSynthesisUtterance(LANGS[LANG].words[k]);u.lang=LANGS[LANG].tts;u.rate=.85;const v=speechSynthesis.getVoices().find(v=>v.lang.startsWith(LANG));if(v)u.voice=v;speechSynthesis.cancel();speechSynthesis.speak(u)}catch(e){}}
+// ---------- music ----------
+const BGM_VOL=.12;const BGM={};
+// lower the music while a word or line is being spoken so the pronunciation is clear
+function duck(ms){const a=BGM[bgmNow];if(!a||muted)return;a.volume=.03;clearTimeout(duck.t);duck.t=setTimeout(()=>{a.volume=BGM_VOL},ms||1600)}let bgmNow=null,muted=false;try{muted=localStorage.getItem('mute')==='1'}catch(e){}
+function bgm(name){if(bgmNow===name)return;const old=BGM[bgmNow];bgmNow=name;const a=BGM[name]||(BGM[name]=Object.assign(new Audio(`bgm/${name}.mp3`),{loop:true}));
+ if(old){let v=old.volume;const t=setInterval(()=>{v-=.05;if(v<=0){clearInterval(t);old.pause()}else old.volume=v},60)}
+ a.volume=0;a.currentTime=0;if(muted)return;a.play().catch(()=>{});let v=0;const t=setInterval(()=>{v+=.03;if(v>=BGM_VOL){v=BGM_VOL;clearInterval(t)}a.volume=v},60)}
+function toggleMute(){muted=!muted;try{localStorage.setItem('mute',muted?'1':'0')}catch(e){}const a=BGM[bgmNow];if(a){if(muted)a.pause();else{a.volume=BGM_VOL;a.play().catch(()=>{})}}document.getElementById('mute').textContent=muted?'🔇':'🔊'}
+// ---------- maps ----------
+function fade(cb){const f=document.getElementById('fader');f.style.opacity=1;busy=true;setTimeout(()=>{cb();setTimeout(()=>{f.style.opacity=0;if(!touring)busy=false},150)},520)}
+// places: the morning and evening kitchen are the same place
+const PLACE={home_am:'home',home_pm:'home',class:'class'};const SEEN=new Set();let touring=false;const tourQ=[];
+function tour(){touring=true;busy=true;const s=cam.s,W=innerWidth,H=innerHeight,maxX=Math.max(0,MW*s-W),maxY=Math.max(0,MH*s-H);
+ const horiz=maxX>=maxY;const a=horiz?{x:0,y:maxY/2}:{x:maxX/2,y:0},b=horiz?{x:maxX,y:maxY/2}:{x:maxX/2,y:maxY};
+ const dist=horiz?maxX:maxY,sweep=dist<40?900:Math.min(4200,1400+dist*2.2);const t0=performance.now()+350;
+ const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;pan={...a};follow();
+ function back(){const s0=performance.now(),from={...pan};let tx=me.x*s-W/2,ty=(me.y-80)*s-H/2;tx=Math.max(0,Math.min(maxX,tx));ty=Math.max(0,Math.min(maxY,ty));
+  (function step(now){const k=Math.min(1,(now-s0)/900),e=ease(k);pan={x:from.x+(tx-from.x)*e,y:from.y+(ty-from.y)*e};follow();if(k<1)requestAnimationFrame(step);else{pan=null;touring=false;busy=false;follow();while(tourQ.length)tourQ.shift()()}})(s0)}
+ (function step(now){const k=Math.max(0,Math.min(1,(now-t0)/sweep)),e=ease(k);pan={x:a.x+(b.x-a.x)*e,y:a.y+(b.y-a.y)*e};follow();if(k<1)requestAnimationFrame(step);else setTimeout(back,350)})(performance.now())}
+let panHinted=false;function load(id,extra){setGoal('');closeBubble();if(!panHinted&&innerWidth<innerHeight){panHinted=true;setTimeout(()=>{if(touring){tourQ.push(()=>setTimeout(()=>{const d=document.createElement('div');d.className='panhint';d.textContent=tr('👆 화면을 끌어서 둘러볼 수 있어요');document.body.appendChild(d);setTimeout(()=>d.remove(),4200)},600));return}const d=document.createElement('div');d.className='panhint';d.textContent=tr('👆 화면을 끌어서 둘러볼 수 있어요');document.body.appendChild(d);setTimeout(()=>d.remove(),4200)},1200)}pan=null;MAP=id;world.querySelectorAll('.sp').forEach(e=>e.remove());mapimg.src=(typeof DAY!=='undefined'&&DAY>=2&&MAPS[id].img2)||MAPS[id].img;buildGrid();const[sx,sy]=MAPS[id].start;me=sprite(HERO,sx,sy);npcs=((typeof DAY!=='undefined'&&DAY>=2&&D2PLACE[id])?d2People(id):(PEOPLE[id]||[])).concat(extra||[]).map(([n,x,y,s])=>sprite(n,x,y,s));
+ world.querySelectorAll('.item').forEach(e=>e.remove());if(id==='home_am'&&!FOUND.has('notebook')){const it=document.createElement('img');it.className='item';it.src='items/notebook.png';it.style.cssText='position:absolute;width:58px;left:991px;top:478px;transform:rotate(-12deg);z-index:400;pointer-events:none';world.appendChild(it)}
+ if(typeof placeD2Item==='function')placeD2Item();if(DAY>=2&&D2PLACE[id])showThings(id);if(typeof showZoomMarks==='function')showZoomMarks();if(DAY>=2&&OUT[id]&&id!=='home_am'&&id!=='home_pm'){const sg=document.createElement('div');sg.className='item exitsign';sg.textContent='🚪 '+tr('나가기');sg.style.cssText=`position:absolute;left:${OUT[id][0]}px;top:${Math.max(OUT[id][1]-200,170)}px;transform:translate(-50%,-100%);font-size:30px;font-weight:800;background:#fff;border:4px solid var(--line);border-radius:999px;padding:6px 18px;box-shadow:0 4px 0 var(--line);white-space:nowrap;z-index:4500;pointer-events:none`;world.appendChild(sg);placeExitSign(sg,id)}setTimeout(tagAll,600);placePang();fit();follow();
+ const place=PLACE[id]||id;if(!SEEN.has(place)){SEEN.add(place);tour()}}
+// preload every picture so maps, scenes and faces appear at once
+const PRE=[];function preload(){const ids=['hero_f','hero_m','mom','siwoo','minho','sua','yuna','junho','haeun','jihoon','yena','hyeeun','jinwoo','haram','doyeon','haneul','boram','youngmin','seah','hangyeol','jiho'];const ex=['smile','laugh','surprised','sad','angry','relieved'];
+ const list=['maps/home_am.jpg','maps/class.jpg','maps/home_pm.jpg','items/notebook.png','cards/pcase.jpg','scenes/jar.jpg','scenes/sua2.jpg','scenes/threat_f.jpg','scenes/threat_m.jpg','scenes/intro_f.jpg','scenes/intro_m.jpg','pang/sit.png','pang/happy.png','scenes/dinner.jpg','scenes/night.jpg','scenes/dinner_m.jpg','scenes/night_m.jpg','cards/notebook.jpg','cards/bag.jpg','cards/pencil.jpg'];
+ ['yuna','haeun','yena'].forEach(i=>list.push(`seat/${i}.png`));ids.forEach(i=>{list.push(`walk/${i}.png`);ex.forEach(e=>list.push(`faces/${i}_${e}.jpg`))});list.forEach(s=>{const im=new Image();im.src=s;PRE.push(im)})}
+function loadMap(id,cb){const im=new Image();im.onload=im.onerror=cb;im.src=MAPS[id].img}
+// ---------- story ----------
+let stage='home_am';
+let dinnerDone=false;function talkTo(id){
+ if(DAY===2&&FIND)return;
+ if(DAY===2&&D2PLACE[MAP]){d2Talk(id);return}
+ if(DAY===2&&stage==='d2_home'&&id==='mom'){say([['mom','smile','{@handkerchief} 챙겼어?']]);return}
+ if(DAY===2&&stage==='d2_leave'&&id==='mom'){say([AGAIN.mom_am]);return}
+ if(stage==='home_am'&&id==='mom'){say([['mom','smile','학교 갈 때 가져갈 거 하나 놔뒀어. 찾아 봐.']]);return}
+ if(stage==='leave'&&id==='mom'){say([AGAIN.mom_am]);return}
+ if(stage==='class'&&TALKED.has(id)&&AGAIN[id]){say([AGAIN[id]]);return}
+ if(stage==='class'){const lines=CHAT[id]||[];const first=!TALKED.has(id);say(lines,()=>{if(first&&id!=='sua'){TALKED.add(id);heart(id,1)}const n=TALKED.size;if(n>=3){incident()}else setGoal('반 친구들에게 말 걸어 보기',friendsLeft(),id2=>TALKED.has(id2),` (${n}/3)`)});return}
+ if(stage==='after'||stage==='sit'){say([AGAIN[id]||['nar','','…']]);return}
+ if(stage==='home_pm'&&id==='mom'){if(!dinnerDone&&DAY>=2&&FIND!=='mom'){if(!busy)find('mom',dinner2,'「{x}」에게 다녀왔다고 인사하기');return}// Day 2+: going to Mom yourself starts the Mom mission (it used to skip it, and on Day 3+ played the Day 1 dinner)
+ if(!dinnerDone){FIND=null;FIND_DONE=null;const g=document.getElementById('goal');g.onclick=null;g.textContent='';goal=null;dinner();return}say([AGAIN.mom_pm]);return}
+ say(CHAT[id]||[])}
+function morning(){find('mom',()=>say([['mom','smile','일어났어? 잘 잤니?'],['me','sad','응……'],['mom','smile','오늘 새 학교 가는 날이지? 긴장돼?'],['me','sad','조금.'],['mom','relieved','모르는 말이 나오면 다시 물어봐도 돼. 처음부터 다 잘할 필요는 없잖아.'],['mom','smile','아, 학교에 가져갈 것도 챙겨야지. 이것 좀 찾아볼래?']],()=>
+ find('notebook',()=>{world.querySelectorAll('.item').forEach(e=>e.remove());say([['mom','laugh','맞아, 그 {w}! 새 학교에서 써.'],['me','smile','응. 다녀올게.'],['mom','laugh','다녀와! 저녁에 무슨 일이 있었는지 들려줘.']],()=>{stage='leave';setGoal('현관으로 나가 학교 가기','door')})},'「{x}」 챙기기')),'「{x}」에게 인사하기')}
+function friendsLeft(){return['yuna','junho','haeun','jihoon','yena','hyeeun','siwoo','minho'].filter(i=>!TALKED.has(i))}
+function useDoor(){
+ if(stage==='d2_leave'){fade(d2Class);return}
+ if(stage==='d2_after'){fade(d2Home);return}
+ if(stage==='d2_home'){say([['think','smile','(먼저 {m}가 챙겨 준 걸 가져가자.)']]);return}
+ if(stage==='d2_class'){say([['think','sad','(아직 두 친구랑 이야기 못 했어.)']]);return}
+ if(stage==='leave'){fade(()=>{stage='class';load('class');setGoal('반 친구들에게 말 걸어 보기',friendsLeft(),id=>TALKED.has(id),' (0/3)');say([['nar','','교실 문을 열자 낯선 얼굴들이 한꺼번에 나를 돌아본다.'],['think','surprised','(와, 애들이 정말 많아. 누구한테 먼저 말을 걸지?)']])});return}
+ if(stage==='after'){fade(()=>{stage='home_pm';load('home_pm');bgm('evening');say([['nar','','저녁. 집 안에 따뜻한 불이 켜져 있다.']],()=>find('mom',dinner,'「{x}」에게 다녀왔다고 말하기'))});return}
+ if(stage==='home_am'){say([['think','smile','(가기 전에 {m}한테 인사하자.)']]);return}
+ if(stage==='class'){say([['think','sad','(아직 아무하고도 제대로 말 못 했어…)']]);return}}
+function incident(){setGoal('');busy=true;bgm('tense');
+ setTimeout(()=>scene('jar',[['nar','','쨍그랑!'],['nar','','교실 뒤에서 뛰어오던 민호가 책상 모서리를 쳤다. 그 위에 있던 시우의 관찰 통이 바닥으로 떨어졌다.'],['nar','','투명한 통이 깨지고, 흙과 번데기가 바닥에 쏟아졌다.'],
+  ['minho','angry','아, 뭐야! 누가 이런 걸 여기다 놨어?'],['siwoo','sad','……번데기.'],['minho','surprised','뭐?'],['siwoo','sad','번데기…… 밟지 마.'],['nar','','시우는 귀를 막은 채 바닥에 쪼그려 앉았다. 손을 뻗었다가 다시 거둔다.'],
+  ['minho','angry','야, 별것도 아닌 벌레 가지고 왜 그래?'],['siwoo','sad','별것…… 아니야.'],['nar','','시우의 목소리가 가늘게 떨렸다.'],['minho','angry','뭐라고? 잘 안 들려.'],['think','surprised','(민호는 화가 났고, 시우는 움직이지도 못하고 있어. 어떡하지?)']],()=>{busy=true;
+  ask('어떻게 할까?',[
+   {k:'A',text:'「시우야, 내가 같이 주워 줄까?」 하고 물은 뒤 대답을 기다린다.',pts:{siwoo:2},r:[['me','smile','시우야, 내가 같이 주워 줄까?'],['siwoo','sad','……'],['nar','','시우는 한참 뒤 고개를 끄덕인다.'],['siwoo','sad','그거…… 손으로 잡으면 안 돼.'],['me','surprised','그럼 어떻게 해야 해?'],['siwoo','relieved','종이로…… 밑에서 받쳐.'],['nar','','나는 시우가 알려 준 대로 {w} 한 장을 조심히 내밀었다.']]},
+   {k:'B',text:'민호에게 「네가 쳤잖아. 네가 치워.」라고 말한다.',pts:{siwoo:1},r:[['me','angry','네가 쳤잖아. 네가 치워.'],['minho','angry','뭐? 내가 일부러 그랬냐?'],['me','angry','그래도 네가 떨어뜨렸잖아.'],['nar','','민호가 얼굴을 찌푸렸다.'],['minho','angry','아, 알았다고! 치우면 될 거 아냐!'],['nar','','민호가 바닥의 흙을 성급하게 쓸어 모으려 한다.'],['siwoo','surprised','안 돼! 거기 번데기!'],['nar','','민호의 손이 멈칫한다.']]},
+   {k:'C',text:'「선생님을 모셔올게.」 하고 교실 문 쪽으로 간다.',pts:{siwoo:2},r:[['me','surprised','선생님을 모셔올게.'],['minho','angry','야! 그런 것까지 선생님한테 일러?'],['me','angry','통이 깨졌잖아. 다칠 수도 있어.'],['nar','','나는 깨진 조각을 피해 문 쪽으로 갔다.'],['nar','','마침 복도에서 오시던 선생님께 통이 깨졌다고 말씀드렸다.'],['nar','','선생님: 「알겠어. 조각에는 손대지 말고, 선생님이 치울게. 친구들한테도 가까이 가지 말라고 전해 줄래?」'],['nar','','나는 교실로 돌아와 친구들에게 조각을 조심하라고 알렸다.']]},
+   {k:'D',text:'번데기가 밟히기 전에 {w} 종이로 먼저 옮기려 한다.',pts:{siwoo:1},r:[['nar','','나는 {w}을 펼쳐 한 장을 찢었다. 번데기 밑으로 밀어 넣으려는 순간이었다.'],['siwoo','surprised','잠깐!'],['nar','','나는 손을 멈췄다.'],['siwoo','sad','거기…… 건드리면 안 돼. 아직 붙어 있어.'],['me','sad','아…… 미안. 난 도와주려고……'],['siwoo','relieved','……알아.'],['nar','','시우가 종이를 가리켰다.'],['siwoo','relieved','이쪽으로……']]}
+  ],o=>{CHOICE=o.k;sceneEl.classList.remove('on');say(o.r.concat([
+   ['nar','','깨진 조각 때문에 친구들이 시우 주변으로 다가오지 못한 채 웅성거렸다.'],['nar','','선생님이 조각을 정리하고, 다친 아이가 없는지 확인하셨다.'],
+   ['minho','angry','쟤가 통을 저기 둔 게 문제라니까!'],['nar','','선생님: 「일부러 그런 게 아니더라도, 물건이 깨졌으면 먼저 미안하다고 해야지. 다른 친구 물건을 함부로 다뤄선 안 돼.」'],
+   ['minho','sad','……알았어요.'],['nar','','선생님이 다른 도구를 가지러 잠깐 교실 밖으로 나가셨다.']]),()=>{Object.entries(o.pts).forEach(([i,n])=>heart(i,n));
+   setTimeout(()=>scene('threat_'+(HERO==='hero_m'?'m':'f'),[['minho','angry','야, 전학생.'],['nar','','민호가 성큼성큼 다가왔다.'],['minho','angry','첫날부터 아주 나서네?'],['nar','','민호가 내 책상을 손바닥으로 쾅 내리쳤다.'],['minho','angry','여기선 나한테 까불면 피곤해져. 알겠어?'],['think','surprised','(뭐라고 해야 하지? 말이 잘 안 나와…….)']],()=>setTimeout(suaEnters,300)),300)})})},true),400)}
+function suaEnters(){scene('sua2',[['nar','','드르륵!'],['sua','angry','최민호. 거기까지.'],['minho','angry','넌 또 뭐야?'],['sua','angry','교실에서 뛰지 않기. 친구 밀지 않기. 규칙 3번, 5번.'],['minho','angry','안 밀었거든?'],['sua','angry','지금 밀려고 했잖아. 벌점 두 개.'],['minho','angry','아, 진짜! 너는 맨날 규칙 타령이야!'],['sua','smile','규칙은 누구나 지키는 거야. 너도 예외 없어.'],['nar','','민호가 씩씩거리며 물러섰다.'],
+ ['sua','smile','전학생 맞지? 다친 데 없으면 자리에 앉아. 우리 반 규칙은 내일까지 외워 와.'],['think','surprised','(와…… 반장이 저렇게 말하니까 민호도 물러나는구나.)'],['nar','','수아가 자리로 돌아갔다. 시우는 여전히 빈 관찰 통이 있던 자리를 바라보고 있었다.'],['siwoo','sad','……통이 없으면……'],['think','sad','(그런데 시우는 아직도 속상해 보여.)']],()=>{
+  heart('sua',1);bgm('day');stage='sit';npcs.push(sprite('sua',600,262));setGoal('내 자리에 앉기','seat')})}
+function lesson(){setGoal('');busy=true;fade(()=>{});setTimeout(()=>scene('intro_'+(HERO==='hero_m'?'m':'f'),[['nar','','1교시가 시작됐다. 선생님이 칠판에 내 이름을 쓰셨다.'],['nar','','선생님: 「오늘 새 친구가 왔어요. 자기소개 해 볼까요?」'],['me','sad','……아, 안녕. 나는……'],['nar','','말이 목에 걸려 나오지 않았다. 몇몇 아이들이 킥킥 웃었다.'],['hyeeun','smile','괜찮아, 천천히 해도 돼!'],['me','relieved','……잘 부탁해.'],['nar','','선생님: 「자, 다들 {w} 꺼내세요.」']],()=>deskFind('notebook',()=>{sceneEl.classList.remove('on');
+  say([['nar','','나는 {w}에 오늘 시간표를 또박또박 적었다.'],['nar','','수업 내내 시우는 깨진 관찰 통이 놓였던 자리를 자꾸 바라봤다.'],['nar','','딩동댕— 마지막 종이 울렸다.']],()=>{stage='after';setGoal('교실 문으로 나가 집에 가기','door')})}),true),700)}
+// desk: the things on my desk; tap one to hear its name, "This is {word}" under the tapped one
+function deskFind(k,done){busy=true;const items=['pcase','notebook','pencil'];const m=document.getElementById('modal'),c=document.getElementById('mcard');let sel=null;
+ c.innerHTML=`<h2>${tr('「{x}」 꺼내기').replace('{x}',wordOf(k))} <button class="spk" id="again">🔊</button></h2><div class="pick">${items.map(q=>`<button data-k="${q}"><img src="cards/${q}.jpg" alt=""></button>`).join('')}</div><button class="big" id="okb" style="visibility:hidden"></button>`;
+ m.classList.add('on');setTimeout(()=>speak(k),300);document.getElementById('again').onclick=()=>speak(k);const okb=document.getElementById('okb');okb.textContent=tr('「{x}」 꺼내기').replace('{x}',wordOf(k));
+ c.querySelectorAll('.pick button').forEach(b=>b.onclick=()=>{sel=b.dataset.k;speak(sel);c.querySelectorAll('.pick button').forEach(x=>x.classList.toggle('ok',x===b));okb.style.visibility='visible'});
+ okb.onclick=()=>{if(sel===k){chime();m.classList.remove('on');busy=false;done&&done()}else{buzz();const b=c.querySelector(`[data-k="${sel}"]`);b.classList.remove('ok');b.classList.add('no');setTimeout(()=>b.classList.remove('no'),400);okb.style.visibility='hidden'}}}
+function dinner(){if(DAY>=2)return dinner2();scene('dinner'+(HERO==='hero_m'?'_m':''),[['mom','laugh','왔구나! 손 씻고 와. 밥 먹자.'],['mom','smile','첫날 어땠어?'],['me','sad','교실에서 관찰 통이 깨졌어. 시우라는 친구 거.'],['mom','surprised','어쩌다가?'],['me','angry','민호라는 애가 뛰어가다가 쳤어. 그런데 시우 잘못이라고 하는 거야.']].concat(MOM[CHOICE]||[]).concat([
+  ['me','sad','그런데 민호가 나한테까지 뭐라고 했어. 좀 무서웠어.'],['mom','sad','많이 놀랐겠다. 민호가 왜 그런 행동을 했는지는 모르지만, 친구를 겁주거나 괴롭히는 건 잘못이야. 그런 일이 또 생기면 선생님께 꼭 말씀드리자.'],
+  ['me','relieved','그때 반장 수아가 나타났어. 민호한테 규칙을 말하니까 바로 물러났어.'],['mom','laugh','든든한 반장이네.'],['me','smile','응. 정말 멋있었어.'],['mom','smile','그랬구나. 그런데 시우는 지금 괜찮대?'],['me','sad','……모르겠어. 아직 속상해 보였어.'],['mom','relieved','내일 학교에 가면 한번 물어보렴.'],['mom','smile','오늘 있었던 일은 잊어버리기 전에 {w}에 적어 두면 좋겠다.']]),()=>{dinnerDone=true;speak('notebook');night()})}
+const MOM={
+ A:[['me','smile','시우한테 같이 주워 줄까 하고 물었어. 한참 있다가 어떻게 해야 하는지 알려 줬어.'],['mom','laugh','시우가 대답할 때까지 기다렸구나. 잘했네.'],['mom','smile','시우는 그 번데기를 아주 소중하게 생각하나 봐. 누굴 도울 때는 먼저 물어보면, 상대가 무엇을 원하는지 알 수 있지.']],
+ B:[['me','angry','민호한테 네가 쳤으니까 네가 치우라고 했어.'],['mom','smile','민호가 잘못한 일을 지적한 건 맞는 행동이야.'],['mom','relieved','그런데 깨진 통이랑 번데기는 아무렇게나 치울 수 없었겠지? 시우가 무엇을 걱정하는지도 살폈으면 더 좋았을 거야.']],
+ C:[['me','relieved','선생님을 모셔왔어. 깨진 조각에 누가 다칠 수도 있을 것 같아서.'],['mom','laugh','좋은 생각이었네. 깨진 통에 손을 베일 수도 있었잖아.'],['mom','smile','친구를 돕는다고 모든 일을 혼자 해결할 필요는 없어. 위험하거나 어려운 일이 생기면 어른에게 도움을 청하는 게 현명할 때도 있단다.']],
+ D:[['me','sad','번데기부터 구해 주려고 했는데, 시우가 그러면 안 된다고 하더라.'],['mom','smile','도와주고 싶었는데 시우가 말려서 당황했겠네.'],['mom','relieved','네가 생각한 방법과 시우가 원하는 방법이 달랐던 거야. 다음에는 어떻게 해 주면 좋을지 먼저 물어보면 좋겠지?']]};
+// quiz: Mom says the word, pick the right picture among three
+const PIC={mom:'faces/mom_smile.jpg',sua:'faces/sua_smile.jpg',yuna:'faces/yuna_smile.jpg',notebook:'cards/notebook.jpg',bag:'cards/bag.jpg',pencil:'cards/pencil.jpg'};
+const QUIZ={mom:['mom','sua','yuna'],notebook:['notebook','bag','pencil']};const GLOSS={mom:'엄마',notebook:'공책'};
+function quiz(k,done){busy=true;const cards=QUIZ[k].slice().sort(()=>Math.random()-.5);const m=document.getElementById('modal'),c=document.getElementById('mcard');
+ c.innerHTML=`<h2>${tr('엄마가 말한 말은 어느 거?')}</h2><p><button class="spk" id="again">🔊 ${tr('다시 듣기')}</button></p><div class="pick">${cards.map(q=>`<button data-k="${q}"><img src="${PIC[q]}" alt=""></button>`).join('')}</div>`;
+ m.classList.add('on');setTimeout(()=>speak(k),300);document.getElementById('again').onclick=()=>speak(k);
+ c.querySelectorAll('.pick button').forEach(b=>b.onclick=()=>{if(b.dataset.k===k){b.classList.add('ok');chime();setTimeout(()=>{m.classList.remove('on');speak(k);busy=false;done&&done()},800)}else{b.classList.add('no');buzz();setTimeout(()=>b.classList.remove('no'),400);setTimeout(()=>speak(k),500)}})}
+// the names written in the notebook on the first night: the classmates you actually talked to, in that order
+function metLine(){const ns=[...TALKED].filter(i=>NAME[i]&&i!=='sua').map(nm);if(!ns.length)return null;const J={en:['(',', ','… and ','.)'],id:['(',', ','… dan ','.)'],vi:['(',', ','… và ','.)'],zh:['（','、','……还有','。）']}[UI]||['(',', ','…… 그리고 ','.)'];const last=ns.pop();return J[0]+(ns.length?ns.join(J[1])+J[2]:'')+last+J[3]}
+function night(){setGoal('');bgm('night');scene('night'+(HERO==='hero_m'?'_m':''),[['nar','','밤. 침대에 앉아 {w}을 펼쳤다.'],['think','relieved','(수아는 대단했어. 민호가 그렇게 무서웠는데, 한마디로 물러나게 했잖아.)'],['think','smile','(나도 수아처럼 멋진 반장이 되고 싶어.)'],['nar','','나는 {w}에 오늘 만난 친구들의 이름을 하나씩 적었다.'],['think','smile',metLine()||'(유나, 준호, 하은…… 그리고 시우.)'],['think','sad','(시우는 번데기가 정말 소중했나 봐. 수아가 민호를 막아 준 건 멋졌지만, 시우가 괜찮은지는 아무도 묻지 않았어.)'],['think','relieved','(반장이 되면 친구들 이야기도 잘 들어 주고 싶어. 사람마다 마음도 다르고, 필요한 것도 다를 테니까.)'],['think','surprised','(좋아. 나도 다음 학기 반장 선거에 나가 볼까?)']],end)}
+function end(){const m=document.getElementById('modal'),c=document.getElementById('mcard');const hs=Object.entries(HEART).map(([i,n])=>`${nm(i)} ♥${n}`).join(' · ')||tr('아직 없음');
+ c.innerHTML=`<h2>${tr('1일차 끝 — 반장 선거 출마 결심!')}</h2><p>${tr('오늘 배운 낱말')}</p><div class="pick">${['mom','notebook'].map(k=>`<button onclick="speak('${k}')"><img src="${PIC[k]}" alt=""><span class="word" style="display:block;margin:6px 0 0">${wordOf(k)} 🔊</span></button>`).join('')}</div><p>${tr('친해진 친구')}: ${hs}</p><p style="color:#8a7a6a">${tr('2일차부터는 하루에 두 친구를 골라 만나요.')}</p><button class="big" id="go2">${tr('2일차 시작')}</button> <button class="big" id="re">${tr('처음부터 다시')}</button>`;m.classList.add('on');document.getElementById('re').onclick=()=>location.reload();
+ DAY=1;HEART_D1={...HEART};DAY=2;saveDay();DAY=1;document.getElementById('go2').onclick=()=>startDay2()}
+// ---------- start ----------
+function start(){const m=document.getElementById('modal'),c=document.getElementById('mcard');document.getElementById('mute').textContent=muted?'🔇':'🔊';let last='';try{last=localStorage.getItem('mode')||''}catch(e){}
+ const btn=(md,i)=>{const learnKo=md.learn==='ko',l=LANGS[learnKo?md.ui:md.learn];return `<button data-i="${i}" class="${md.ui+'-'+md.learn===last?'on':''}"><span class="flag" style="background:${l.flag}"></span><b>${learnKo?l.learnKo:l.name}</b><small>${learnKo?'':l.native}</small></button>`};
+ c.classList.add('lcard');
+ c.innerHTML=`<h2>괴짜교실 반장되기</h2><p class="sub">어떤 말을 배울까요?</p><div class="lgroup">외국어 배우기</div><div class="langs">${MODES.map((md,i)=>md.ui==='ko'?btn(md,i):'').join('')}</div>${MODES.some(md=>md.ui!=='ko')?`<div class="lgroup">Learn Korean · 한국어 배우기</div><div class="langs">${MODES.map((md,i)=>md.ui!=='ko'?btn(md,i):'').join('')}</div>`:''}`;
+ m.classList.add('on');c.querySelectorAll('.langs button').forEach(b=>b.onclick=()=>{const md=MODES[+b.dataset.i];UI=md.ui;LANG=md.learn;W=LANGS[LANG].words.notebook;document.documentElement.lang=UI;try{localStorage.setItem('mode',UI+'-'+LANG)}catch(e){}chime();c.classList.remove('lcard');pickHero()})}
+function pickHero(){const m=document.getElementById('modal'),c=document.getElementById('mcard');
+ c.innerHTML=`<h2>${tr('괴짜교실 반장되기')}</h2><p>${tr('말 한마디 못 하는 전학생,<br>반장 선거에 나가다.')}</p><p style="margin-top:14px">${tr('누구로 할까요?')}</p>${(()=>{const s=loadSave();return s&&s.day>=2&&s.mode===UI+'-'+LANG?`<p><button class="big" id="cont">${tr(s.day+'일차부터 이어 하기')}</button></p>`:''})()}<div class="pick heroes"><button data-h="hero_f"><img src="faces/hero_f_smile.jpg" alt="여자 주인공"></button><button data-h="hero_m"><img src="faces/hero_m_smile.jpg" alt="남자 주인공"></button></div>`;
+ m.classList.add('on');{const cb=document.getElementById('cont');if(cb)cb.onclick=()=>{const s=loadSave();HERO=s.hero;Object.assign(HEART,s.heart||{});(s.found||[]).forEach(k=>FOUND.add(k));HEART_D1={...HEART};chime();(typeof contGame==='function'?contGame(s):startDay(Math.min(s.day,Object.keys(window.D3||{}).length?3:2)))}}c.querySelectorAll('.pick button').forEach(b=>b.onclick=()=>{HERO=b.dataset.h;m.classList.remove('on');chime();bgm('day');load('home_am');say([['nar','','이사 온 다음 날 아침. 아직 풀지 못한 상자들이 쌓여 있다.'],['think','sad','(오늘부터 새 학교야. 여기 말도 아직 서툰데…….)'],['think','smile','({m}한테 인사하고 학교 가야지.)']],morning)})}
+</script>
+<script src="day2/engine.js?v=1024161529"></script>
+<script src="day2/ep_minho.js?v=1024161529"></script>
+<script src="day2/i18n_meet.js?v=1024161529"></script>
+<script src="day2/meet.js?v=1024161529"></script>
+<script src="day2/ep_sua.js?v=1024161529"></script>
+<script src="day2/i18n_sua.js?v=1024161529"></script>
+<script src="day2/ep_hangyeol.js?v=1024161529"></script>
+<script src="day2/i18n_hangyeol.js?v=1024161529"></script>
+<script src="day2/ep_siwoo.js?v=1024161529"></script>
+<script src="day2/i18n_siwoo.js?v=1024161529"></script>
+<script src="words_ja_ru.js?v=1024161529"></script>
+<script src="day2/spots.js?v=1024161529"></script>
+<script>
+// the goal shows big for a few seconds, then folds into a small pill (tap it to open it again)
+{const g=document.getElementById('goal');let t=null;const big=()=>{g.classList.remove('mini');clearTimeout(t);t=setTimeout(()=>g.classList.add('mini'),4000)};
+ new MutationObserver(big).observe(g,{childList:true,characterData:true,subtree:true});g.addEventListener('click',big)}
+preload();requestAnimationFrame(loop);
+// test shortcuts: #sit (after Sua), #evening (back home) — for checking only
+const JUMP=location.hash.slice(1);
+if(JUMP){UI='ko';LANG='id';W=LANGS[LANG].words.notebook;HERO='hero_f';FOUND.add('mom');FOUND.add('notebook');CHOICE='B';bgm('day');
+ if(JUMP==='sit'){stage='sit';load('class');npcs.push(sprite('sua',600,262));setGoal('내 자리에 앉기','seat')}
+ else if(JUMP==='evening'){stage='after';load('class');useDoor()}
+ else if(JUMP==='day2'){HEART_D1={};startDay2()}
+ else if(JUMP==='day3'){HEART_D1={};FOUND.add('handkerchief');startDay(3)}
+ else if(JUMP==='d3class'){setDay(3);HEART_D1={};stage='d2_leave';FOUND.add('apron');TODAY.add('apron');useDoor()}
+ else if(JUMP==='d3eve'){setDay(3);PICKS=Object.keys(window.D3||{}).slice(0,2);PICKS.forEach(i=>D2CHOICE[i]='A');stage='d2_after';load('class');useDoor()}
+ else if(JUMP==='d2class'){setDay(2);HEART_D1={};stage='d2_leave';FOUND.add('handkerchief');TODAY.add('handkerchief');useDoor()}
+ else if(JUMP==='d2eve'){setDay(2);PICKS=['siwoo','minho'].filter(i=>window.D2&&D2[i]);PICKS.forEach(i=>D2CHOICE[i]='A');stage='d2_after';load('class');useDoor()}
+ else if(JUMP==='incident'){stage='class';load('class');TALKED.add('yuna');TALKED.add('junho');TALKED.add('haeun');incident()}}
+else start();
+</script></body></html>
