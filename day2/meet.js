@@ -24,6 +24,7 @@ d2People=function(id){const eps=D2IDS.map(f=>[f,epNext(f,EPIDX[f])]).filter(x=>x
 const _setDay=setDay;
 // days without their own drawn maps keep Day 2's (the same things lie in the same places)
 setDay=function(n){_setDay(NATIVE_BY[n]?n:2);DAY=n;for(const k in THINGS)delete THINGS[k];
+ D2PLACE={...D2PLACE};PLACES.length=0;PLACES.push(...BASE_PLACES);for(const id of extraPlacesToday()){D2PLACE[id]=[];PLACES.push([id,EXTRA_MAPS[id].name])}
  for(const f of D2IDS){const e=epNext(f,EPIDX[f]);if(!e)continue;
   for(const[m,ts]of Object.entries(e.taps||{}))NATIVE[m]=(NATIVE[m]||[]).concat(ts);
   for(const[m,ts]of Object.entries(e.things||{}))THINGS[m]=(THINGS[m]||[]).concat(ts)}};
@@ -32,6 +33,16 @@ showThings=function(id){world.querySelectorAll('.thing').forEach(e=>e.remove());
  for(const[k,x,y,w,img]of things){const it=document.createElement('img');it.className='item thing';it.src=`items/${img||k}.png`;
   it.style.cssText=`position:absolute;width:${w||56}px;left:${x}px;top:${y}px;transform:translate(-50%,-100%);z-index:${Math.round(y)+1};pointer-events:none;filter:drop-shadow(0 2px 2px rgba(0,0,0,.25))`;world.appendChild(it)}
  OBJ[id]=(NATIVE[id]||[]).concat(things.map(([k,x,y,w])=>[k,x,y-(w||56)*.4,Math.max(30,(w||56)*.55)]))};
+// ---- places only some scenes use (behind the school, gym, front gate…): they show up in "where to go?" on the days a scene happens there ----
+const EXTRA_MAPS={
+ flowerbed:{name:'화단',img:'maps/flowerbed.jpg',walk:[[[640,330],[1320,350],[1330,930],[780,930],[760,800],[440,800],[330,740],[470,610],[620,470]]],start:[800,600],out:[525,450]},
+ gym:{name:'체육관',img:'maps/gym.jpg',walk:[[[480,290],[1330,290],[1440,450],[1440,690],[1660,700],[1672,941],[0,941],[0,700],[200,560],[480,350]]],block:[R(1440,450,1650,690)],start:[800,650],out:[105,560]},
+ backyard:{name:'뒤뜰',img:'maps/backyard.jpg',walk:[[[700,330],[1060,240],[1080,320],[1400,440],[1520,470],[1380,560],[1280,700],[1250,820],[960,830],[700,800],[480,740],[300,700],[400,610],[540,500],[700,420]]],start:[850,600],out:[865,250]},
+ stands:{name:'스탠드',img:'maps/stands.jpg',walk:[[[420,580],[960,470],[1150,420],[1672,300],[1672,941],[0,941],[0,840],[420,780]]],start:[900,650],out:[1560,420]},
+ gate:{name:'교문',img:'maps/gate.jpg',walk:[[[0,450],[420,360],[930,260],[1220,250],[1660,140],[1660,210],[1060,450],[1010,540],[870,540],[580,600],[520,555],[0,540]],[[860,520],[1020,520],[1170,600],[1180,780],[1660,650],[1672,941],[730,941],[720,700],[860,640]]],start:[900,450],out:[650,250]}};
+for(const[id,m]of Object.entries(EXTRA_MAPS)){MAPS[id]={img:m.img,walk:m.walk,rects:[],block:m.block||[],start:m.start};OUT[id]=m.out;PLACE[id]=id}
+const BASE_PLACES=PLACES.slice();
+function extraPlacesToday(){const ids=new Set();for(const f of D2IDS){const e=epNext(f,EPIDX[f]);if(e&&EXTRA_MAPS[e.place])ids.add(e.place)}return[...ids]}
 // a morning for every day: Day 2 and 3 have their own; later days Mom asks for one of the things that always lie in the kitchen
 const MORNING_KEYS=['apple','bread','cup','umbrella','bag','handkerchief','apron','notebook'];
 function morningOf(n){if(MORNING[n])return MORNING[n];const k=MORNING_KEYS[(n-4)%MORNING_KEYS.length];

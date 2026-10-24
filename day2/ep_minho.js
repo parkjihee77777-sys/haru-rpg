@@ -103,8 +103,8 @@ EP.minho=[
   D:[['me','sad','영민이가 말하지 말래서 비밀로 하기로 했어.'],['mom','smile','영민이 부탁을 들어주고 싶었구나.'],['me','sad','응. 근데 민호가 다음에 또 빌리면 된대.'],['mom','sad','그 말이 걸리지? 친구 부탁을 지키는 것도 중요해. 그런데 누가 계속 괴롭힘을 당하는 건 비밀로 두면 안 되는 일이야.'],['mom','smile','영민이한테 다시 말해 볼래? 네가 같이 가 준다고.']]}},
 
 // ■ Day 4 — 고양이를 부르는 말 (3)
-{title:'고양이를 부르는 말',place:'field',scene:'minho_03',at:[1400,700],
- things:{field:[['cat',1470,668,84]]},
+{title:'고양이를 부르는 말',place:'flowerbed',scene:'minho_03',at:[1220,660],
+ things:{flowerbed:[['cat',1395,650,80]]},
  pre:[
   ['nar','','자전거 보관대 뒤 화단. 민호가 쪼그려 앉아 꼼짝도 안 하고 있었다. 내가 다가가자 민호가 손가락을 입에 댔다.'],
   ['minho','surprised','쉿.'],
@@ -291,8 +291,9 @@ EP.minho=[
   D:[['me','angry','민호가 놀러 간다고 애들한테 크게 말했어.'],['mom','surprised','어머. 민호 표정은?'],['me','sad','엄청 화났어. 그 뒤로 나 안 쳐다봐.'],['mom','smile','애들 다 듣는 데서 말하면 민호도 창피했겠다. 넌 그냥 안 간다고만 해도 됐을 텐데.'],['me','sad','……그러네.']]}},
 
 // ■ Day 8 — 너 때문에 졌잖아 (7)
-{title:'너 때문에 졌잖아',scene:'minho_07',place:'field',at:[860,460],
- things:{field:[['shoes',960,500,54]]},
+{title:'너 때문에 졌잖아',scene:'minho_07',place:'gym',at:[760,560],
+ taps:{gym:[['ball',1392,300,55]]},
+ things:{gym:[['shoes',900,640,58]]},
  pre:[
   ['nar','','체육 시간. 피구 팀을 나눴는데 나는 민호와 같은 팀이 됐다.'],
   ['minho','laugh','오, 전학생. 너 피할 줄은 알지?'],
@@ -333,7 +334,9 @@ EP.minho=[
   D:[['me','smile','민호한테 그만하고 작전 짜자고 했어. 민호는 앞에서 던지고, 은찬이는 뒤에서 피하라고.'],['mom','surprised','민호가 들었어?'],['me','smile','던지는 거 제일 세다고 하니까 들었어.'],['mom','laugh','다들 잘하는 자리에 세운 거네.'],['me','smile','반장 되면 이런 거 하는 건가?'],['mom','smile','그럴지도 모르지.']]}},
 
 // ■ Day 9 — 뒤집힌 우산 (8)
-{title:'뒤집힌 우산',scene:'minho_08',place:'hall',at:[330,700],
+{title:'뒤집힌 우산',scene:'minho_08',place:'gate',at:[960,650],
+ taps:{gate:[['umbrella',782,185,32]]},
+ things:{gate:[['umbrella',1060,690,64]]},
  pre:[
   ['nar','','하교 시간. 비가 오고 바람이 셌다. 교문 옆에서 민호가 뒤집힌 {@umbrella}과 씨름하고 있었다. 나는 민호 쪽으로 갔다.'],
   ['minho','angry','아, 진짜! 바람 한 번 불었다고 뒤집히냐?'],
@@ -406,9 +409,9 @@ EP.minho=[
   common:[['mom','smile','받침, {m}랑 같이 연습할까?'],['me','smile','응. 다음엔 70점.']]}},
 
 // ■ Day 11 — 울타리 너머 (10)
-{title:'울타리 너머',scene:'minho_10',place:'field',at:[1430,430],
- things:{field:[['big_dog',1545,335,120]]},
- taps:{field:[['door',1612,218,32]]},
+{title:'울타리 너머',scene:'minho_10',place:'backyard',at:[1060,520],
+ things:{backyard:[['big_dog',1250,400,130]]},
+ taps:{backyard:[['door',1470,300,42],['broom',95,640,26]]},
  pre:[
   ['nar','','쉬는 시간, 학교 뒤뜰. 민호가 울타리 쪽에 서 있어서 그쪽으로 가다가, 나는 멈춰 섰다.'],
   ['nar','','컹! 컹!'],
@@ -562,8 +565,9 @@ EP.minho=[
   common:[['me','laugh','민호가 내 {@picture} 보고 멋있대.'],['mom','smile','할머니 집이 멋있지.']]}},
 
 // ■ Day 15 — 나 같은 애는? (14)
-{title:'나 같은 애는?',scene:'minho_14',place:'field',at:[500,320],
- things:{field:[['ball',590,352,34],['notebook',420,345,36]]},
+{title:'나 같은 애는?',scene:'minho_14',place:'stands',at:[640,540],
+ taps:{stands:[['trash_can',22,770,40]]},
+ things:{stands:[['ball',740,575,36],['notebook',560,570,38]]},
  pre:[
   ['nar','','운동장 스탠드. 민호가 혼자 {@ball}을 발로 굴리고 있었다. 나는 공약을 쓰던 {w}을 들고 민호 옆에 앉았다.'],
   {k:'ball',goal:'「{x}」 멈추기'},
