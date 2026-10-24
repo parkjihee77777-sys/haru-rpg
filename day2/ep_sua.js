@@ -5,7 +5,7 @@
 window.EP=window.EP||{};
 EP.sua=[
 // ■ Day 2 — 규칙 7번 (1)
-{title:'규칙 7번',place:'class',at:[600,262],
+{title:'규칙 7번',scene:'sua_01',place:'class',at:[600,262],
  things:{class:[['handkerchief',505,302,40]]},taps:{hall:[['stairs',725,75,70]]},
  pre:[
   ['nar','','아침. 수아가 교실 앞에서 형광펜으로 뭔가를 체크하고 있었다. 나는 수아에게 갔다.'],
@@ -66,7 +66,7 @@ EP.sua=[
   common:[['me','smile','그리고 {m}. 나 수아한테 반장 선거 나간다고 말했어.'],['mom','surprised','정말? 수아가 뭐래?'],['me','laugh','좋아, 그럼 경쟁이네, 그랬어.'],['mom','laugh','멋있는 경쟁자네.']]}},
 
 // ■ Day 3 — 기어가라는 게 아니고 (2)
-{title:'기어가라는 게 아니고',place:'class',at:[690,340],
+{title:'기어가라는 게 아니고',scene:'sua_02',place:'class',at:[690,340],
  things:{class:[['paper',800,428,48],['colored_pencil',885,432,34]]},
  pre:[
   ['nar','','도서관 구석 {@desk}. 수아가 큰 {@paper}를 펼쳐 놓고 있었다. 나는 수아 맞은편에 앉았다.'],
@@ -115,7 +115,7 @@ EP.sua=[
   D:[['me','sad','수아한테 그냥 네가 다 하라고 했어. 넌 다 잘하니까.'],['mom','surprised','수아가 뭐래?'],['me','smile','빨래판 {@stairs} 붙일 거냐고. 그래서 내가 그렸어.'],['mom','smile','수아 말이 맞네. {@picture}은 네가 더 잘하잖아.']]}},
 
 // ■ Day 4 — 너도 빨라 (3)
-{title:'너도 빨라',place:'class',at:[600,262],
+{title:'너도 빨라',scene:'sua_03',place:'class',at:[600,262],
  taps:{class:[['chair',375,355,30],['chair',470,355,30],['chair',770,355,30],['chair',885,355,30],['chair',1185,355,30],['chair',1290,355,30],['chair',340,470,30],['chair',445,470,30],['chair',750,475,30],['chair',1195,480,30],['chair',290,600,30],['chair',405,600,30],['chair',1210,605,30],['chair',250,750,30]]},
  pre:[
   ['nar','','방금 학급회의가 끝났다. 안건은 ‘금요일 학급 놀이 시간에 뭐 할까’였다.'],
@@ -160,7 +160,7 @@ EP.sua=[
   common:[['mom','smile','반장도 못 알아들을 때가 있구나.'],['me','smile','응. 나만 그런 줄 알았어.']]}},
 
 // ■ Day 5 — 누가 발표해? (4)
-{title:'누가 발표해?',place:'class',at:[690,340],
+{title:'누가 발표해?',scene:'sua_04',place:'class',at:[690,340],
  things:{class:[['notebook',800,428,40],['clock',1040,186,46]]},
  pre:[
   ['nar','','점심시간. 수아가 학급회의 {w}을 펴 놓고 있었다. 나는 수아 옆에 앉았다.'],
@@ -200,7 +200,7 @@ EP.sua=[
   D:[['me','smile','나눠서 하자고 했어. 시범은 내가, 규칙 설명은 수아가.'],['mom','surprised','시범?'],['me','smile','수아도 말로는 못 알아들었잖아. 해 보니까 알았어.'],['mom','smile','네가 잘하는 걸로 맡았구나.']]}},
 
 // ■ Day 6 — 그 말이 생각 안 나 (5) ★
-{title:'그 말이 생각 안 나',place:'class',at:[600,262],
+{title:'그 말이 생각 안 나',scene:'sua_05',place:'class',at:[600,262],
  things:{class:[['hand',780,482,58]]},
  pre:[
   ['nar','','학급회의 시간. 두 번째 안건은 내 놀이였다. 나는 앞으로 나가기 전에 수아 자리로 갔다.'],
@@ -250,7 +250,7 @@ EP.sua=[
   common:[['me','smile','그리고 수아가 나보고 오늘부터 진짜 경쟁자래.'],['mom','surprised','와. 반장한테 그런 말 들었어?'],['me','laugh','응. 좀 좋았어.']]}},
 
 // ■ Day 7 — 규칙이 안 먹혀 (6)
-{title:'규칙이 안 먹혀',place:'field',at:[800,500],
+{title:'규칙이 안 먹혀',scene:'sua_06',place:'field',at:[800,500],
  things:{field:[['handkerchief',700,560,40]]},
  pre:[
   ['nar','','체육 시간. 드디어 같은 편 {@handkerchief} 놀이를 하는 날이었다. 반 전체가 운동장에 동그랗게 앉았다.'],
@@ -289,7 +289,7 @@ EP.sua=[
   D:[['me','smile','애들한테 어디가 헷갈렸냐고 물어봤어. 그래서 잡히면 모자 벗기로 했어.'],['mom','surprised','애들 말 듣고 바로 고쳤구나.'],['me','smile','응. 다툼이 줄었어.']]}},
 
 // ■ Day 8 — 그거 우리가 같이 만든 건데 (7)
-{title:'그거 우리가 같이 만든 건데',place:'class',at:[690,340],
+{title:'그거 우리가 같이 만든 건데',scene:'sua_07',place:'class',at:[690,340],
  things:{class:[['pencil',885,436,30],['paper',800,428,48]]},
  pre:[
   ['nar','','방과 후. 수아가 교실에 남아 공약을 쓰고 있었다. 나도 공약을 쓰던 {@pencil}을 들고 수아 쪽으로 갔다.'],
@@ -325,7 +325,7 @@ EP.sua=[
   D:[['me','sad','괜찮다고 했어. 근데 안 괜찮아.'],['mom','sad','속으로만 서운했구나.'],['me','sad','응. 말하면 싸울 것 같아서.'],['mom','smile','서운하다고 말하는 거랑 싸우는 건 다른 거야. 내일 말해 봐도 늦지 않아.']]}},
 
 // ■ Day 9 — 왜 경쟁자를 도와? (8)
-{title:'왜 경쟁자를 도와?',place:'class',at:[690,340],
+{title:'왜 경쟁자를 도와?',scene:'sua_08',place:'class',at:[690,340],
  things:{class:[['box',800,432,62]]},
  pre:[
   ['nar','','쉬는 시간. 수아가 교실을 뛰어다니고 있었다. 오늘 종례까지 체험학습 신청서를 다 걷어야 한다고 했다.'],
@@ -364,8 +364,8 @@ EP.sua=[
   common:[['mom','smile','근데 경쟁자를 도와주는 거, 이상하진 않았어?'],['me','smile','……모르겠어. 그냥 반 일이잖아.']]}},
 
 // ■ Day 10 — 안 되는 이유 (9)
-{title:'안 되는 이유',place:'class',at:[690,340],
- things:{class:[['bowl',800,430,52,'lunch_box']]},
+{title:'안 되는 이유',scene:'sua_09',place:'class',at:[690,340],
+ things:{class:[['bowl',800,430,52]]},
  pre:[
   ['nar','','오늘은 내 생일이었다. {m}가 새벽부터 우리 나라 간식을 만들어 {@bowl}에 담아 주셨다. 반 친구들이랑 나눠 먹으라고.'],
   ['nar','','나는 {@bowl}을 안고 수아에게 갔다.'],
@@ -402,7 +402,7 @@ EP.sua=[
   common:[['mom','smile','이건 우리 둘이 먹자. 생일 축하해.'],['me','laugh','응. 그리고 오늘 애들이 생일 노래 불러 줬어. 수아가 제일 크게 불렀어. 음 틀리게.'],['mom','laugh','반장은 노래도 크게 하는구나.']]}},
 
 // ■ Day 11 — 혼자 가 볼래? (10)
-{title:'혼자 가 볼래?',place:'class',at:[600,262],
+{title:'혼자 가 볼래?',scene:'sua_10',place:'class',at:[600,262],
  taps:{hall:[['door',1480,560,55],['door',1058,232,45],['door',520,85,40]]},things:{hall:[['picture',1250,705,60]]},
  pre:[
   ['nar','','점심시간. 수아가 급하게 {@bag}을 챙기고 있었다. 나는 수아에게 갔다.'],
@@ -444,7 +444,7 @@ EP.sua=[
   D:[['me','smile','처음 1분만 같이 가 달라고 했어. 수아가 인사하고, 얘가 그렸다고 말해 주고 나갔어. 그다음엔 내가 했어.'],['mom','smile','필요한 만큼만 도움을 받았구나.'],['me','smile','응. 수아가 {@door} 열어 주니까 덜 떨렸어.']]}},
 
 // ■ Day 12 — 넌 반장 안 해 봐서 몰라 (11)
-{title:'넌 반장 안 해 봐서 몰라',place:'class',at:[690,340],
+{title:'넌 반장 안 해 봐서 몰라',scene:'sua_11',place:'class',at:[690,340],
  things:{class:[['glue',800,428,30]]},
  pre:[
   ['nar','','쉬는 시간. 옆 반 아이들이 우리 규칙표를 따라 만들기로 했다는 소식을 들었다. 나는 신이 나서 수아 자리로 갔다.'],
@@ -481,7 +481,7 @@ EP.sua=[
   D:[['me','sad','그냥 웃어넘겼어. 근데 하나도 안 웃겼어.'],['mom','sad','웃었으니까 수아는 괜찮은 줄 알았겠다.'],['me','sad','응. 쪽지는 받았는데…… 나 아팠다는 건 수아가 몰라.'],['mom','smile','내일이라도 말해 볼래? 그 말 좀 아팠다고.']]}},
 
 // ■ Day 13 — 이거 내 거랑 똑같은데? (12)
-{title:'이거 내 거랑 똑같은데?',place:'class',at:[690,340],
+{title:'이거 내 거랑 똑같은데?',scene:'sua_12',place:'class',at:[690,340],
  things:{class:[['notebook',800,428,40]]},
  pre:[
   ['nar','','도서관. 선거 연설문을 쓰다가 막혔다. 마침 수아가 맞은편에 앉아 있었다. 나는 {w}을 들고 수아에게 갔다.'],
@@ -522,7 +522,7 @@ EP.sua=[
   D:[['me','smile','지우고 다시 썼어. 첫날 시우 생각이 났거든. 아무도 시우한테 괜찮냐고 안 물어봤잖아.'],['mom','surprised','그날 {w}에 썼던 거?'],['me','smile','응. 수아가 그건 자기가 못 쓰는 거래.'],['mom','smile','네가 겪은 일이니까 너만 쓸 수 있지.']]}},
 
 // ■ Day 14 — 무슨 말인지 모르겠어 (13)
-{title:'무슨 말인지 모르겠어',place:'class',at:[690,340],
+{title:'무슨 말인지 모르겠어',scene:'sua_13',place:'class',at:[690,340],
  things:{class:[['clock',1040,186,46],['water',885,436,28]]},
  pre:[
   ['nar','','방과 후. 수아와 서로 연설을 들어 주기로 했다. 빈 교실에 들어서자 수아가 먼저 와 있었다.'],
@@ -563,7 +563,7 @@ EP.sua=[
   D:[['me','sad','수아 말대로 다 고쳤어. 짧아졌어. 근데 수아가 이제 누구 연설인지 모르겠대.'],['mom','surprised','다 빼 버렸구나.'],['me','sad','응. ‘괜찮아?’도 뺐어.'],['mom','smile','그건 다시 넣고 싶지 않아?'],['me','smile','……넣을래.']]}},
 
 // ■ Day 15 — 번호순이냐, 물어보기냐 (14)
-{title:'번호순이냐, 물어보기냐',place:'class',at:[600,262],
+{title:'번호순이냐, 물어보기냐',scene:'sua_14',place:'class',at:[600,262],
  taps:{class:[['desk',380,305,55],['desk',830,305,55],['desk',1240,305,55],['desk',400,420,55],['desk',830,420,55],['desk',1260,420,55],['desk',370,545,55],['desk',830,545,55],['desk',330,680,55],['desk',820,680,55],['desk',1320,680,55],
   ['chair',375,355,30],['chair',470,355,30],['chair',770,355,30],['chair',885,355,30],['chair',1185,355,30],['chair',1290,355,30],['chair',340,470,30],['chair',445,470,30],['chair',750,475,30],['chair',1195,480,30],['chair',290,600,30],['chair',405,600,30],['chair',1210,605,30],['chair',250,750,30]]},
  pre:[
@@ -603,7 +603,7 @@ EP.sua=[
   D:[['me','sad','내 방식대로 다 물어보자고 했는데, 다들 앞이나 창가래. 결국 시간 다 가서 선생님이 정하셨어.'],['mom','laugh','스물네 명한테 다 물어봤어?'],['me','sad','응…… 수아 말도 맞았어. 시간이 없었어.']]}},
 
 // ■ Day 16R — 내가 반장이 되면 (15)
-{title:'내가 반장이 되면',place:'hall',at:[1000,400],
+{title:'내가 반장이 되면',scene:'sua_15',place:'hall',at:[1000,400],
  taps:{hall:[['window',1290,110,60],['window',1590,200,60],['window',520,30,40]]},things:{hall:[['paper',1060,432,40]]},
  pre:[
   ['nar','','방과 후. 복도 창가에 수아가 서 있었다. 나는 수아 옆으로 갔다.'],
@@ -698,7 +698,7 @@ window.EP_WORDS_SUA={
 
 // ---- what Sua's scenes need from the engine (on top of meet.js) ----
 {const add=window.EP_WORDS_SUA;for(const[k,w]of Object.entries(add))if(!D2WORDS[k])D2WORDS[k]=w;d2Merge()}
-['stairs','clock','hand','glue','water','window','chair','colored_pencil'].forEach(k=>CARDS_HAVE.add(k));
+['stairs','clock','hand','bowl','glue','water','window','chair','colored_pencil'].forEach(k=>CARDS_HAVE.add(k));
 // {go:'hall'} inside pre/post: walk over to another place and go on there (the drill goes down the stairs to the field)
 runSteps=function(steps,choice,done){const q=(steps||[]).slice();
  const next=()=>{const lines=[];
