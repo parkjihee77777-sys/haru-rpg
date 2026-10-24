@@ -119,14 +119,14 @@ body,button{word-break:keep-all;overflow-wrap:break-word}
 <div id="fader"></div>
 <script>
 // same address, newest version: if the page this phone has kept is older than the one online, fetch the new one and reopen
-const BUILD='1024161529';
+const BUILD='1024162417';
 try{fetch(location.pathname,{cache:'no-store'}).then(r=>r.text()).then(t=>{const m=t.match(/const BUILD='(\d+)'/);if(m&&m[1]!==BUILD&&sessionStorage.getItem('upd')!==m[1]){sessionStorage.setItem('upd',m[1]);fetch(location.pathname,{cache:'reload'}).then(()=>location.reload())}}).catch(()=>{})}catch(e){}
 </script>
-<script src="i18n.js?v=1024161529"></script>
-<script src="i18n_prologue_v2.js?v=1024161529"></script>
-<script src="day2/i18n_engine.js?v=1024161529"></script>
-<script src="day2/data.js?v=1024161529"></script>
-<script src="day3/data.js?v=1024161529"></script>
+<script src="i18n.js?v=1024162417"></script>
+<script src="i18n_prologue_v2.js?v=1024162417"></script>
+<script src="day2/i18n_engine.js?v=1024162417"></script>
+<script src="day2/data.js?v=1024162417"></script>
+<script src="day3/data.js?v=1024162417"></script>
 <script>
 // ---------- data ----------
 const MW=1672,MH=941,KID=180;
@@ -181,24 +181,24 @@ const MODE_HIDDEN=m=>m.learn==='id'||m.ui==='id'||m.learn==='ko';
 const MODES=MODES_ALL.filter(m=>!MODE_HIDDEN(m));
 let LANG='id',UI='ko',W='';
 // tr: Korean source line -> line in the player's language, with {w} (taught word) and {L} (taught language) filled in
-function tr(s){if(s==null)return s;let t=UI==='ko'?s:((window.T&&T[UI]&&T[UI][s])??s);const L=UI==='ko'?LANGS[LANG].name:((T[UI]&&T[UI]['한국어'])||'Korean');return oneWord(t,s.includes('{x}')).replace(/\{L\}/g,L)}
-// one taught word per line: only one {@key}/{w}/{m} shows in the learned language — the word being taught now (TEACH, the find coming up), else the first word
-// already learned (FOUND). Every other one shows in the player's own language (Korean: the noun, particle fixed). A find label keeps only its target foreign.
-let TEACH=null,LASTW=null;
-function oneWord(t,label){const toks=[...t.matchAll(/\{@([a-z_]+)\}|\{w\}|\{m\}/g)].map(m=>m[1]||(m[0]==='{w}'?'notebook':'mom'));let pick=null;
- if(!label){pick=TEACH&&toks.includes(TEACH)?TEACH:toks.find(k=>typeof FOUND!=='undefined'&&FOUND.has(k))||null}LASTW=pick;let used=false;
- return t.replace(/\{@([a-z_]+)\}|\{w\}|\{m\}/g,(m0,k0,i)=>{const k=k0||(m0==='{w}'?'notebook':'mom');if(k===pick&&!used){used=true;return k==='notebook'?(W||LANGS[LANG].words.notebook):LANGS[LANG].words[k]||k}
+function tr(s){if(s==null)return s;let t=UI==='ko'?s:((window.T&&T[UI]&&T[UI][s])??s);const L=UI==='ko'?LANGS[LANG].name:((T[UI]&&T[UI]['한국어'])||'Korean');return oneWord(t).replace(/\{L\}/g,L)}
+// taught words in a line: a {@key}/{w}/{m} shows in the learned language when it is one of today's mission words (TEACH: every find of the scene
+// being played, the morning, the review) or a word already learned (FOUND); a word taught on a later day shows in the player's own language
+// (Korean: the noun, particle fixed). Every word shown in the learned language is heard, one after another.
+let TEACH=[],LASTW=[];
+function oneWord(t){const ok=k=>(typeof FOUND!=='undefined'&&FOUND.has(k))||(TEACH||[]).includes(k)||(typeof FIND!=='undefined'&&FIND===k);LASTW=[];
+ return t.replace(/\{@([a-z_]+)\}|\{w\}|\{m\}/g,(m0,k0)=>{const k=k0||(m0==='{w}'?'notebook':'mom');if(ok(k)){if(!LASTW.includes(k))LASTW.push(k);return k==='notebook'?(W||LANGS[LANG].words.notebook):LANGS[LANG].words[k]||k}
   const w=(LANGS[UI]&&LANGS[UI].words[k])||LANGS.ko.words[k]||k;return UI==='ko'?w+'\u0000':w}).replace(/([가-힣])\u0000(으로|로|은|는|을|를|이|가|과|와|이었|였)(?![가-힣])|([가-힣])\u0000(으로|로|이었|였)/g,(m,a,p,a2,p2)=>{a=a||a2;p=p||p2;
   const c=a.charCodeAt(0)-0xAC00,jong=c%28,J={'으로':['으로','로'],'로':['으로','로'],'은':['은','는'],'는':['은','는'],'을':['을','를'],'를':['을','를'],'이':['이','가'],'가':['이','가'],'과':['과','와'],'와':['과','와'],'이었':['이었','였'],'였':['이었','였']}[p];
   return a+(p==='으로'||p==='로'?(jong&&jong!==8?'으로':'로'):jong?J[0]:J[1])}).replace(/\u0000/g,'')}
-// mark every line of the friends' scenes with the find that comes next (so that word may already show in the learned language)
-function markTeach(list,next){for(let i=(list||[]).length-1;i>=0;i--){const s=list[i];if(Array.isArray(s))s.teach=next;else if(s&&s.k)next=s.k;else if(s&&s.lines)markTeach(s.lines,next)}return next}
-addEventListener('DOMContentLoaded',()=>{for(const L of Object.values(window.EP||{}))for(const e of(Array.isArray(L)?L:[L])){if(!e||!e.pre)continue;const n=markTeach(e.post,null);(e.choices||[]).forEach(c=>markTeach(c.r,n));markTeach(e.pre,n)}
- // calendar-day friends (open → finds), mornings, the dinner review: each line knows the find that follows it
- for(const src of [window.D2,window.D3])for(const d of Object.values(src||{})){const f=d.finds||[];(d.open||[]).forEach(l=>l.teach=f[0]&&f[0].k);f.forEach((s,i)=>{(s.before||[]).forEach(l=>l.teach=s.k);(s.after||[]).forEach(l=>l.teach=(f[i+1]&&f[i+1].k)||null)})}
- if(typeof MORNING!=='undefined')Object.values(MORNING).forEach(M=>M.open.forEach(l=>l.teach=M.k));
- if(typeof REVIEW!=='undefined')Object.values(REVIEW).forEach(v=>(v.ask||[]).forEach(l=>l.teach=v.k));
- if(typeof morningOf==='function'){const _mo=morningOf;morningOf=n=>{const M=_mo(n);M.open.forEach(l=>l.teach=M.k);return M}}});
+// mark every line of a scene with that scene's mission words (all its finds)
+function findKeys(x,out=[]){if(Array.isArray(x)){if(typeof x[0]!=='string')x.forEach(y=>findKeys(y,out))}else if(x&&typeof x==='object'){if(typeof x.k==='string'&&/^[a-z]/.test(x.k)&&!out.includes(x.k))out.push(x.k);for(const v of Object.values(x))if(v&&typeof v==='object')findKeys(v,out)}return out}
+function markTeach(x,keys){if(Array.isArray(x)){if(typeof x[0]==='string'&&typeof x[2]==='string')x.teach=keys;else x.forEach(y=>markTeach(y,keys))}else if(x&&typeof x==='object')for(const v of Object.values(x))if(v&&typeof v==='object')markTeach(v,keys)}
+addEventListener('DOMContentLoaded',()=>{for(const L of Object.values(window.EP||{}))for(const e of(Array.isArray(L)?L:[L]))if(e)markTeach(e,findKeys(e));
+ for(const src of [window.D2,window.D3])for(const d of Object.values(src||{}))markTeach(d,findKeys(d));
+ if(typeof MORNING!=='undefined')Object.values(MORNING).forEach(M=>markTeach(M,['mom',M.k]));
+ if(typeof REVIEW!=='undefined')Object.values(REVIEW).forEach(v=>markTeach(v,[v.k]));
+ if(typeof morningOf==='function'){const _mo=morningOf;morningOf=n=>{const M=_mo(n);markTeach(M,['mom',M.k]);return M}}});
 // a person whose name is a taught word is labelled with that word (once found), never with its meaning
 function nm(id){if(id==='mom')return (typeof FOUND!=='undefined'&&FOUND.has('mom'))?LANGS[LANG].words.mom:'';return tr(NAME[id]||'')}
 // one line per person for "talked already today" — fits any day
@@ -355,7 +355,7 @@ function advance(){if(chEl.classList.contains('on'))return;const l=queue.shift()
  if(typeof l==='function'){l();return advance()}
  const[who,expr,text]=l;const fid=who==='me'||who==='think'?HERO:who;
  // the one taught word shown in the learned language in this line is also heard (UI text stays in the player's language)
- {TEACH=FIND||l.teach||(DAY<=1&&!FOUND.has('mom')?'mom':null);tr(text);const k=LASTW;if(k)setTimeout(()=>speak(k),250)}
+ {TEACH=l.teach||(DAY<=1?['mom','notebook']:[]);tr(text);LASTW.slice().forEach((k,i)=>setTimeout(()=>speak(k),250+i*900))}
  if(who!=='nar'&&!sceneEl.classList.contains('on')&&showSay(who,tr(text))){talk.classList.remove('on');return}
  talk.classList.add('on');
  if(who==='nar'){faceEl.className='none';whoEl.textContent=''}else{faceEl.className='';faceEl.style.backgroundImage=who==='pang'?'url(pang/happy.png)':`url(faces/${fid}_${expr||'smile'}.jpg)`;faceEl.style.backgroundSize=who==='pang'?'contain':'';faceEl.style.backgroundRepeat='no-repeat';faceEl.style.backgroundPosition='center';whoEl.textContent=who==='think'?tr('나 (속마음)'):nm(who)}
@@ -433,7 +433,7 @@ let dinnerDone=false;function talkTo(id){
  if(stage==='class'&&TALKED.has(id)&&AGAIN[id]){say([AGAIN[id]]);return}
  if(stage==='class'){const lines=CHAT[id]||[];const first=!TALKED.has(id);say(lines,()=>{if(first&&id!=='sua'){TALKED.add(id);heart(id,1)}const n=TALKED.size;if(n>=3){incident()}else setGoal('반 친구들에게 말 걸어 보기',friendsLeft(),id2=>TALKED.has(id2),` (${n}/3)`)});return}
  if(stage==='after'||stage==='sit'){say([AGAIN[id]||['nar','','…']]);return}
- if(stage==='home_pm'&&id==='mom'){if(!dinnerDone&&DAY>=2&&FIND!=='mom'){if(!busy)find('mom',dinner2,'「{x}」에게 다녀왔다고 인사하기');return}// Day 2+: going to Mom yourself starts the Mom mission (it used to skip it, and on Day 3+ played the Day 1 dinner)
+ if(stage==='home_pm'&&id==='mom'){if(!dinnerDone&&DAY>=2&&FIND!=='mom'){if(!busy)find('mom',dinner2,'「{x}」에게 다녀왔다고 말하기');return}// Day 2+: going to Mom yourself starts the Mom mission (it used to skip it, and on Day 3+ played the Day 1 dinner)
  if(!dinnerDone){FIND=null;FIND_DONE=null;const g=document.getElementById('goal');g.onclick=null;g.textContent='';goal=null;dinner();return}say([AGAIN.mom_pm]);return}
  say(CHAT[id]||[])}
 function morning(){find('mom',()=>say([['mom','smile','일어났어? 잘 잤니?'],['me','sad','응……'],['mom','smile','오늘 새 학교 가는 날이지? 긴장돼?'],['me','sad','조금.'],['mom','relieved','모르는 말이 나오면 다시 물어봐도 돼. 처음부터 다 잘할 필요는 없잖아.'],['mom','smile','아, 학교에 가져갈 것도 챙겨야지. 이것 좀 찾아볼래?']],()=>
@@ -504,18 +504,20 @@ function pickHero(){const m=document.getElementById('modal'),c=document.getEleme
  c.innerHTML=`<h2>${tr('괴짜교실 반장되기')}</h2><p>${tr('말 한마디 못 하는 전학생,<br>반장 선거에 나가다.')}</p><p style="margin-top:14px">${tr('누구로 할까요?')}</p>${(()=>{const s=loadSave();return s&&s.day>=2&&s.mode===UI+'-'+LANG?`<p><button class="big" id="cont">${tr(s.day+'일차부터 이어 하기')}</button></p>`:''})()}<div class="pick heroes"><button data-h="hero_f"><img src="faces/hero_f_smile.jpg" alt="여자 주인공"></button><button data-h="hero_m"><img src="faces/hero_m_smile.jpg" alt="남자 주인공"></button></div>`;
  m.classList.add('on');{const cb=document.getElementById('cont');if(cb)cb.onclick=()=>{const s=loadSave();HERO=s.hero;Object.assign(HEART,s.heart||{});(s.found||[]).forEach(k=>FOUND.add(k));HEART_D1={...HEART};chime();(typeof contGame==='function'?contGame(s):startDay(Math.min(s.day,Object.keys(window.D3||{}).length?3:2)))}}c.querySelectorAll('.pick button').forEach(b=>b.onclick=()=>{HERO=b.dataset.h;m.classList.remove('on');chime();bgm('day');load('home_am');say([['nar','','이사 온 다음 날 아침. 아직 풀지 못한 상자들이 쌓여 있다.'],['think','sad','(오늘부터 새 학교야. 여기 말도 아직 서툰데…….)'],['think','smile','({m}한테 인사하고 학교 가야지.)']],morning)})}
 </script>
-<script src="day2/engine.js?v=1024161529"></script>
-<script src="day2/ep_minho.js?v=1024161529"></script>
-<script src="day2/i18n_meet.js?v=1024161529"></script>
-<script src="day2/meet.js?v=1024161529"></script>
-<script src="day2/ep_sua.js?v=1024161529"></script>
-<script src="day2/i18n_sua.js?v=1024161529"></script>
-<script src="day2/ep_hangyeol.js?v=1024161529"></script>
-<script src="day2/i18n_hangyeol.js?v=1024161529"></script>
-<script src="day2/ep_siwoo.js?v=1024161529"></script>
-<script src="day2/i18n_siwoo.js?v=1024161529"></script>
-<script src="words_ja_ru.js?v=1024161529"></script>
-<script src="day2/spots.js?v=1024161529"></script>
+<script src="day2/engine.js?v=1024162417"></script>
+<script src="day2/ep_minho.js?v=1024162417"></script>
+<script src="day2/i18n_meet.js?v=1024162417"></script>
+<script src="day2/meet.js?v=1024162417"></script>
+<script src="day2/ep_sua.js?v=1024162417"></script>
+<script src="day2/i18n_sua.js?v=1024162417"></script>
+<script src="day2/ep_hangyeol.js?v=1024162417"></script>
+<script src="day2/i18n_hangyeol.js?v=1024162417"></script>
+<script src="day2/ep_siwoo.js?v=1024162417"></script>
+<script src="day2/i18n_siwoo.js?v=1024162417"></script>
+<script src="day2/ep_haram.js?v=1024162417"></script>
+<script src="day2/i18n_haram.js?v=1024162417"></script>
+<script src="words_ja_ru.js?v=1024162417"></script>
+<script src="day2/spots.js?v=1024162417"></script>
 <script>
 // the goal shows big for a few seconds, then folds into a small pill (tap it to open it again)
 {const g=document.getElementById('goal');let t=null;const big=()=>{g.classList.remove('mini');clearTimeout(t);t=setTimeout(()=>g.classList.add('mini'),4000)};

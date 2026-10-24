@@ -53,8 +53,8 @@ startDay=function(n){const m=document.getElementById('modal');m.classList.remove
  if(DAYMEET[n]){MEET={...DAYMEET[n].meet};FLAGS={...DAYMEET[n].flags}}else DAYMEET[n]={meet:{...MEET},flags:{...FLAGS}};
  for(const k in EPIDX)delete EPIDX[k];for(const k in TODAYEP)delete TODAYEP[k];for(const f of D2IDS)if(window.EP&&EP[f])EPIDX[f]=MEET[f]||0;
  setDay(n);PICKS=[];D2CHOICE={};TALKED.clear();TODAY.clear();dinnerDone=false;CHOICE=null;for(const k in pangSaid)delete pangSaid[k];
- const M=morningOf(n);stage='d2_home';bgm('day');fade(()=>{load('home_am');say(M.open,()=>
-  find(M.k,()=>{TODAY.add(M.k);say(M.after,()=>{stage='d2_leave';setGoal('현관으로 나가 학교 가기','door')})},'「{x}」 찾기'))})};
+ const M=morningOf(n);stage='d2_home';bgm('day');fade(()=>{load('home_am');say(M.open.slice(0,1),()=>find('mom',()=>{TODAY.add('mom');say(M.open.slice(1),()=>
+  find(M.k,()=>{TODAY.add(M.k);say(M.after,()=>{stage='d2_leave';setGoal('현관으로 나가 학교 가기','door')})},'「{x}」 찾기'))},'「{x}」에게 인사하기'))})};
 startDay2=function(){startDay(2)};
 d2Class=function(){stage='d2_class';load('hall');say([['nar','',DAY===2?'둘째 날. 학교에 왔다.':DAY===3?'셋째 날. 학교에 왔다.':'오늘도 학교에 왔다.'],['think','smile','(오늘은 누구한테 말 걸어 볼까? 두 명쯤…)']],pickPlace)};
 // how many friends you can meet today: two, or fewer when fewer have something new

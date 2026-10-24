@@ -119,7 +119,7 @@ function lessons(part){setGoal('');busy=true;fade(()=>{if(MAP!=='class')load('cl
  const pm=[['nar','','딩동댕— 5교시 시작 종이 울렸다.'],['nar','','오후 수업이 천천히 지나갔다.'],['nar','','딩동댕— 마지막 종이 울렸다. 방과 후!']];
  say(part==='am'?am:pm,()=>{if(part==='am')d2Goal();else{stage='d2_after';setGoal('방과 후! 나가는 길로 가서 집에 가기','out')}})})}
 // ---- evening ----
-function d2Home(){stage='home_pm';dinnerDone=false;load('home_pm');bgm('evening');say([['nar','','저녁. 부엌에서 맛있는 냄새가 난다.']],()=>find('mom',dinner2,'「{x}」에게 다녀왔다고 인사하기'))}
+function d2Home(){stage='home_pm';dinnerDone=false;load('home_pm');bgm('evening');say([['nar','','저녁. 부엌에서 맛있는 냄새가 난다.']],()=>find('mom',dinner2,'「{x}」에게 다녀왔다고 말하기'))}
 // spaced review at dinner: a word learned two days ago comes back (Mom asks to see it, you find it in the kitchen)
 const REVIEW={3:{k:'notebook',ask:[['mom','smile','참, 첫날 산 그 {w}, 요즘도 써?'],['mom','laugh','엄마한테 보여 줄래?']],goal:'「{x}」 보여 주기',after:[['mom','laugh','어머, 글씨 예쁘다! 매일 쓰고 있었구나.']]}};
 function dinner2(){let ls=[['mom','laugh','왔구나! 손 씻고 와. 밥 먹자.'],['mom','smile','오늘은 누구랑 이야기했어?']];
