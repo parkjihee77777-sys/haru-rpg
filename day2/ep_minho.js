@@ -1,6 +1,6 @@
 // 최민호 — scenes by meeting (Day N = the Nth meeting with Minho; meeting 1 = Day 2). Source: 괴짜교실_시나리오_개정작업/02_인물별_시나리오/최민호_Day2-16R_전면개정.md
 // ep = {title, place, at:[x,y] (Minho on that map), with:[[id,x,y]] (others there), things:{map:[[k,x,y,w,picture?]]} (pictures laid on the map; items/<picture or k>.png), taps:{map:[[k,x,y,r]]} (drawn things),
-//  pre:[line | find], ask, choices:[{k,text,pts,r}], post:[line | find | {only:[choice…],lines} | {flag,is,lines}], flag:{name:{A:1,…}},
+//  pre:[line | find | {pic:name} (picture over the map from that line on)], ask, choices:[{k,text,pts,r}], post:[line | find | {only:[choice…],lines} | {flag,is,lines}], flag:{name:{A:1,…}},
 //  eve:{lead, A, B, C, D, common, commonIf:{only:[…],lines}}}
 // find = {k, goal}: the goal bar shows the goal with the word + 🔊; the confirm button shows the same goal with the word (whatever was tapped).
 window.EP=window.EP||{};
@@ -9,6 +9,7 @@ EP.minho=[
 {title:'지렁이 글자',scene:'minho_01',place:'class',at:[640,600],
  taps:{class:[['desk',830,425,60],['desk',400,425,55],['desk',1290,545,55],['desk',300,745,50],['pencil',612,668,16],['pencil',640,660,14]]},
  pre:[
+  {pic:'minho_01a'},
   ['nar','','쉬는 시간. 민호가 자기 {@desk}에 걸터앉아 다리를 흔들고 있었다.'],
   ['think','sad','(어제 시우 관찰 통을 깨뜨린 애야. 내 {@desk}도 쾅 쳤지.)'],
   ['think','sad','(그래도…… 계속 피하기만 할 순 없잖아.)'],
@@ -20,6 +21,7 @@ EP.minho=[
   ['minho','laugh','오, 이거 뭐야? 그림이야, 글자야?'],
   ['me','sad','내 이름.'],
   ['minho','laugh','이게 이름이라고? 지렁이 기어가는 것 같은데.'],
+  {pic:'minho_01'},
   ['nar','','민호가 {@pcase}을 휙 집어 들었다. 지퍼가 열려 있어서 {@pencil}이 우르르 쏟아졌다.'],
   ['nar','','달그락!'],
   ['minho','laugh','어이쿠. 야, 근데 이거 어떻게 읽어? 꼬부랑꼬부랑?'],
@@ -106,10 +108,12 @@ EP.minho=[
 {title:'고양이를 부르는 말',place:'flowerbed',scene:'minho_03',at:[1220,660],
  things:{flowerbed:[['cat',1395,650,80]]},
  pre:[
+  {pic:'minho_03a'},
   ['nar','','자전거 보관대 뒤 화단. 민호가 쪼그려 앉아 꼼짝도 안 하고 있었다. 내가 다가가자 민호가 손가락을 입에 댔다.'],
   ['minho','surprised','쉿.'],
   ['me','surprised','왜?'],
   ['minho','smile','저기. 화단 밑.'],
+  {pic:'minho_03'},
   ['nar','','노란 {@cat} 한 마리가 화단 밑에서 눈만 내놓고 있었다.'],
   {k:'cat',goal:'「{x}」 가리키기'},
   ['nar','','나도 모르게 우리 나라 말로 작게 중얼거렸다. 방금 들은 바로 그 말이었다.'],
@@ -150,6 +154,7 @@ EP.minho=[
 {title:'봉투는 누가?',scene:'minho_04',place:'class',at:[330,262],
  things:{class:[['envelope',1062,150,56]]},
  pre:[
+  {pic:'minho_04'},
   ['nar','','아침부터 교실이 시끄러웠다. 학급비 {@envelope}가 없어졌다. 몇몇 아이가 민호 쪽을 힐끔거리며 수군거렸다.'],
   ['nar','','민호는 팔짱을 끼고 창가에 서 있었다. 나는 민호 쪽으로 갔다.'],
   ['minho','angry','뭐야. 너도 내가 가져갔다고 생각하지?'],
@@ -211,6 +216,7 @@ EP.minho=[
   ['me','smile','나는 이거.'],
   ['nar','','나는 소리 내어 읽었다.'],
   ['me','smile','저는…… 반장 선거에 나갈 거예요.'],
+  {pic:'minho_05'},
   ['nar','','민호의 눈이 커졌다. 그러더니 교실 전체에 들리게 따라 했다.'],
   ['minho','laugh','저눈~ 반장 손거에~ 나갈 고예요오~!'],
   ['nar','','여기저기서 웃음이 터졌다. 누군가 「반장 손거래!」 하고 또 따라 했다.'],
@@ -300,6 +306,7 @@ EP.minho=[
   ['me','smile','……열심히 할게.'],
   ['nar','','첫 판이 시작됐다. 민호는 {@ball}을 정말 세게 던졌다.'],
   ['nar','','휘익— 퍽!'],
+  {pic:'minho_07'},
   ['nar','','그런데 우리 팀 은찬이가 풀린 {@shoes} 끈을 밟고 넘어졌다. {@ball}에 맞았고, 마지막 남은 사람도 곧 맞았다. 첫 판은 졌다.'],
   ['minho','angry','야! 너 때문에 졌잖아! {@shoes} 끈 하나 못 묶냐?'],
   ['nar','','은찬: 「……」'],
@@ -338,6 +345,7 @@ EP.minho=[
  taps:{gate:[['umbrella',782,185,32]]},
  things:{gate:[['umbrella',1060,690,64]]},
  pre:[
+  {pic:'minho_08'},
   ['nar','','하교 시간. 비가 오고 바람이 셌다. 교문 옆에서 민호가 뒤집힌 {@umbrella}과 씨름하고 있었다. 나는 민호 쪽으로 갔다.'],
   ['minho','angry','아, 진짜! 바람 한 번 불었다고 뒤집히냐?'],
   ['me','surprised','망가졌어?'],
@@ -379,6 +387,7 @@ EP.minho=[
   ['minho','angry','내놔!'],
   ['nar','','민호가 시험지를 도로 뺏더니 꾸깃꾸깃 구겨서 던졌다. 구겨진 {@paper}가 굴러와 내 발 앞에서 멈췄다.'],
   {k:'paper',goal:'「{x}」 줍기'},
+  {pic:'minho_09'},
   ['nar','','민호의 구겨진 시험지가 내 손에 있었다.'],
   ['nar','','아이: 「야, 전학생! 펴 봐! 진짜 30점인지!」'],
   ['nar','','민호가 나를 노려봤다. 얼굴이 새빨갰다.'],
@@ -490,6 +499,7 @@ EP.minho=[
 {title:'초코우유',scene:'minho_12',place:'class',at:[1060,800],
  things:{class:[['milk',930,888,92,'milk_crate']]},
  pre:[
+  {pic:'minho_12a'},
   ['nar','','점심시간이 끝나 갈 무렵. 교실 뒤에 남은 급식 {@milk} {@box}가 있었다. 선생님이 먹고 싶은 사람은 가져가도 된다고 하셨다.'],
   ['nar','','민호가 {@box} 앞에 쪼그려 앉아 있어서 나는 그쪽으로 갔다.'],
   ['me','smile','민호야, 뭐 해?'],
@@ -528,6 +538,7 @@ EP.minho=[
   ['nar','','복도 게시판에 미술 시간에 그린 「우리 동네」 {@picture}이 붙어 있었다. 내 {@picture}도 있었다. 할머니네 집 지붕을 그린 {@picture}이었다.'],
   ['nar','','게시판 앞에 민호가 서 있었다. 나는 민호 쪽으로 갔다. 그런데 분위기가 이상했다.'],
   {k:'picture',goal:'「{x}」 살펴보기'},
+  {pic:'minho_13'},
   ['nar','','내 {@picture} 속 지붕 위에 검은 사인펜으로 뿔 두 개가 그려져 있었다.'],
   ['nar','','그 앞에서 민호가 같은 반 아이 둘을 막고 서 있었다. 민호 손에는 한 아이의 사인펜이 들려 있었다. 머리 위로 높이.'],
   ['minho','angry','이거 누가 그랬냐고. 너희잖아.'],
@@ -569,6 +580,7 @@ EP.minho=[
  taps:{stands:[['trash_can',22,770,40]]},
  things:{stands:[['ball',740,575,36],['notebook',560,570,38]]},
  pre:[
+  {pic:'minho_14'},
   ['nar','','운동장 스탠드. 민호가 혼자 {@ball}을 발로 굴리고 있었다. 나는 공약을 쓰던 {w}을 들고 민호 옆에 앉았다.'],
   {k:'ball',goal:'「{x}」 멈추기'},
   {k:'notebook',goal:'「{x}」 펼치기'},
@@ -615,6 +627,7 @@ EP.minho=[
   ['nar','','1학년 아이 하나가 넘어지면서 {@pcase}을 떨어뜨렸다. {@pencil}과 {@eraser}가 복도에 흩어졌다.'],
   ['nar','','아이는 넘어진 채로 민호를 올려다봤다. 겁먹은 얼굴이었다.'],
   ['think','surprised','(민호다. 처음 만난 날, 내 {@pcase}을 머리 위로 들고 흔들었던…….)'],
+  {pic:'minho_15'},
   ['nar','','민호가 쪼그려 앉았다. {@pencil}을 하나씩 주워서 {@pcase}에 넣었다.'],
   ['minho','smile','흘리고 다니지 마. 밟으면 부러져.'],
   ['nar','','{@eraser} 하나가 내 발 앞까지 굴러왔다.'],

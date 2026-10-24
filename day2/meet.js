@@ -61,11 +61,14 @@ d2Goal=function(){const left=friendsToday().filter(i=>!PICKS.includes(i));
  if(PICKS.length>=needToday()||!left.length){if(stage==='d2_class'){setGoal('');setTimeout(()=>lessons('pm'),300)}return}
  setGoal(PICKS.length?'점심시간! 한 친구를 더 만나 보기':'오늘 이야기할 친구 2명 고르기',left,id=>PICKS.includes(id),` (${PICKS.length}/${needToday()})`)};
 // a list of lines and finds, played in order; {only:[…]} / {flag,is} parts play only after that choice / with that flag
+// {pic:'name'} shows that picture over the map from there on (what the lines describe, when the map can't show it); a find always goes back to the map
+function showPic(name){if(name){sceneEl.style.backgroundImage=`url(scenes/${name}.jpg)`;sceneEl.classList.add('on');requestAnimationFrame(fitScene)}else sceneEl.classList.remove('on')}
 function runSteps(steps,choice,done){const q=(steps||[]).slice();
  const next=()=>{const lines=[];
   while(q.length){const s=q[0];if(Array.isArray(s)){lines.push(q.shift());continue}
-   if(s.only||s.flag){q.shift();const ok=s.only?s.only.includes(choice):(+!!FLAGS[s.flag])===s.is;if(ok)q.unshift(...s.lines);continue}break}
-  const go=()=>{if(!q.length){done&&done();return}const f=q.shift();find(f.k,()=>{TODAY.add(f.k);next()},f.goal||'「{x}」 찾기')};
+   if(s.only||s.flag){q.shift();const ok=s.only?s.only.includes(choice):(+!!FLAGS[s.flag])===s.is;if(ok)q.unshift(...s.lines);continue}
+   if('pic' in s){q.shift();const pic=s.pic;lines.push(()=>showPic(pic));continue}break}
+  const go=()=>{if(!q.length){done&&done();return}const f=q.shift();showPic(null);find(f.k,()=>{TODAY.add(f.k);next()},f.goal||'「{x}」 찾기')};
   if(lines.length)say(lines,go);else go()};
  next()}
 // ep.scene = highlight picture (scenes/<name>.jpg) shown from the moment before the choice; without it the scene plays on the map
@@ -80,7 +83,7 @@ d2Talk=function(id){const e=epNext(id,EPIDX[id]);
   if(e.vote)FLAGS[id+'_vote']=1;else MEET[id]=(MEET[id]||0)+1;TODAYEP[id]=e;
   say(o.r||[],()=>runSteps(e.post,o.k,()=>{Object.entries(o.pts||{}).forEach(([p,n])=>heart(p,n));PICKS.push(id);TALKED.add(id);
    setTimeout(()=>lessons(PICKS.length>=needToday()?'pm':'am'),500)}))});
-  if(pic)scene(e.scene,[],choose,true);else choose()})};
+  if(pic)scene(e.scene,[],choose,true);else{showPic(null);choose()}})};
 // ---- evening: Mom asks, each friend's part follows ----
 function evePart(id){const e=TODAYEP[id],c=D2CHOICE[id];
  if(e){const v=e.eve||{};let ls=(v.lead||[]).concat(v[c]||[]);if(v.commonIf&&v.commonIf.only.includes(c))ls=ls.concat(v.commonIf.lines);return ls.concat(v.common||[])}
