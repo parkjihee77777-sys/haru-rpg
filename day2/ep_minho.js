@@ -59,7 +59,7 @@ EP.minho=[
   common:[['mom','smile','이름표, {m}가 새로 써 줄까?'],['me','smile','아니. 이거 그냥 쓸래.']]}},
 
 // ■ Day 3 — 세 번째 공 (2)
-{title:'세 번째 공',place:'field',at:[560,600],with:[['youngmin',700,650]],
+{title:'세 번째 공',scene:'minho_02',place:'field',at:[560,600],with:[['youngmin',700,650]],
  pre:[
   ['nar','','운동장 구석에서 민호가 {@ball}을 발로 굴리고 있었다. 내가 다가가자 민호가 손을 흔들었다.'],
   ['minho','laugh','어, 전학생! 너 {@ball} 찰 줄 알아?'],
@@ -248,7 +248,7 @@ EP.minho=[
   common:[['mom','surprised','근데 진짜 반장 선거 나가?'],['me','smile','응. 이제 반 애들 다 알아.'],['mom','laugh','그럼 이제 진짜네.']]}},
 
 // ■ Day 7 — 청소 당번 땡땡이 (6)
-{title:'청소 당번 땡땡이',place:'class',at:[1380,330],
+{title:'청소 당번 땡땡이',scene:'minho_06',place:'class',at:[1380,330],
  taps:{class:[['broom',1550,322,30]]},
  things:{class:[['ball',1205,282,34]]},
  pre:[
@@ -291,7 +291,7 @@ EP.minho=[
   D:[['me','angry','민호가 놀러 간다고 애들한테 크게 말했어.'],['mom','surprised','어머. 민호 표정은?'],['me','sad','엄청 화났어. 그 뒤로 나 안 쳐다봐.'],['mom','smile','애들 다 듣는 데서 말하면 민호도 창피했겠다. 넌 그냥 안 간다고만 해도 됐을 텐데.'],['me','sad','……그러네.']]}},
 
 // ■ Day 8 — 너 때문에 졌잖아 (7)
-{title:'너 때문에 졌잖아',place:'field',at:[860,460],
+{title:'너 때문에 졌잖아',scene:'minho_07',place:'field',at:[860,460],
  things:{field:[['shoes',960,500,54]]},
  pre:[
   ['nar','','체육 시간. 피구 팀을 나눴는데 나는 민호와 같은 팀이 됐다.'],
@@ -365,7 +365,7 @@ EP.minho=[
   D:[['me','sad','고쳐 보려고 {@umbrella}을 폈는데, 뾰족한 데가 내 손 쪽으로 왔어.'],['mom','surprised','어머, 안 다쳤어?'],['me','smile','응. 민호가 조심하라고 소리쳐 줬어.'],['mom','relieved','민호가? 다행이다. 부러진 건 고치기보다 다치지 않게 두는 게 먼저야.']]}},
 
 // ■ Day 10 — 빨간 동그라미 (9)
-{title:'빨간 동그라미',place:'class',at:[640,600],
+{title:'빨간 동그라미',scene:'minho_09',place:'class',at:[640,600],
  things:{class:[['paper',762,612,56,'paper_crumpled']]},
  pre:[
   ['nar','','받아쓰기 시험지를 돌려받은 쉬는 시간. 나는 60점이었다. 받침을 거의 다 틀렸다.'],
@@ -446,7 +446,7 @@ EP.minho=[
   common:[['mom','smile','너는 큰 {@big_dog} 아직도 무서워?'],['me','smile','응. 근데 울타리 있으면 괜찮아.']]}},
 
 // ■ Day 12 — 우리 친하잖아 (11)
-{title:'우리 친하잖아',place:'class',at:[640,600],
+{title:'우리 친하잖아',scene:'minho_11',place:'class',at:[640,600],
  things:{class:[['notebook',430,690,36]]},
  pre:[
   ['nar','','아침. 교실에 들어서자 민호가 내 자리 쪽으로 손짓했다. 나는 {@bag}을 메고 민호 쪽으로 갔다.'],
@@ -484,7 +484,7 @@ EP.minho=[
   D:[['me','sad','나도 안 했다고 거짓말했어. 근데 숙제 낼 때 들켰어.'],['mom','surprised','민호가 뭐래?'],['me','sad','했잖아! 하고 소리쳤어. 엄청 어색했어.'],['mom','smile','그냥 싫다고 하는 것보다 더 어색해졌네.'],['me','sad','……응.']]}},
 
 // ■ Day 13 — 초코우유 (12)
-{title:'초코우유',place:'class',at:[1060,800],
+{title:'초코우유',scene:'minho_12',place:'class',at:[1060,800],
  things:{class:[['milk',930,888,92,'milk_crate']]},
  pre:[
   ['nar','','점심시간이 끝나 갈 무렵. 교실 뒤에 남은 급식 {@milk} {@box}가 있었다. 선생님이 먹고 싶은 사람은 가져가도 된다고 하셨다.'],
@@ -562,7 +562,7 @@ EP.minho=[
   common:[['me','laugh','민호가 내 {@picture} 보고 멋있대.'],['mom','smile','할머니 집이 멋있지.']]}},
 
 // ■ Day 15 — 나 같은 애는? (14)
-{title:'나 같은 애는?',place:'field',at:[500,320],
+{title:'나 같은 애는?',scene:'minho_14',place:'field',at:[500,320],
  things:{field:[['ball',590,352,34],['notebook',420,345,36]]},
  pre:[
   ['nar','','운동장 스탠드. 민호가 혼자 {@ball}을 발로 굴리고 있었다. 나는 공약을 쓰던 {w}을 들고 민호 옆에 앉았다.'],
@@ -640,7 +640,7 @@ EP.minho=[
 ];
 
 // 특별 장면 — 접힌 종이 (투표일): only on the election day, if Minho was met 4+ times; does not count as a meeting
-EP.minho_vote={title:'접힌 종이',place:'class',at:[700,330],vote:true,
+EP.minho_vote={title:'접힌 종이',scene:'minho_vote',place:'class',at:[700,330],vote:true,
  things:{class:[['box',1180,262,80,'ballot_box'],['paper',760,350,36]]},
  pre:[
   ['nar','','투표 날. 교실 뒤에 투표함이 놓였다. 나는 후보라서 투표를 먼저 마쳤다. 민호가 줄 뒤쪽에 서 있어서 나는 그쪽으로 갔다.'],
