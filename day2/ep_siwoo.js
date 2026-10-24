@@ -649,7 +649,7 @@ EP.siwoo=[
 
 // ■ Day 15 — 리코더 합주 (14)
 {title:'리코더 합주',scene:'siwoo_14',place:'music',at:[720,840],with:[['junho',1180,840]],
- things:{music:[['recorder',830,640,64],['card',330,300,44]]},
+ things:{music:[['recorder',830,640,64],['card',415,300,44]]},
  pre:[
   ['nar','','음악 시간. 오늘은 반 전체 {@recorder} 합주를 하는 날이었다. 스물네 명이 동시에.'],
   ['nar','','나는 시우 옆, 30센티 떨어진 자리에 앉았다.'],

@@ -53,8 +53,8 @@ Object.assign(MAPS,{
  cafe:{img:'maps/cafe.jpg',walk:[[[37,465],[223,362],[1189,260],[1672,381],[1672,938],[0,938]]],rects:[],block:[R(149,474,632,818),R(530,372,985,650),R(836,288,1245,465),R(1050,595,1672,938),R(641,780,1189,938)],start:[640,390]}});
 Object.assign(PLACE,{hall:'hall',field:'field',cafe:'cafe'});
 
-// the way out of each place (tap it → "where to?")
-const OUT={class:[1440,262],hall:[1230,560],field:[330,440],cafe:[640,385]};
+// the way out of each place (tap it → "where to?"); the hall's is the drawn door on the right wall (it used to sit on the lockers)
+const OUT={class:[1440,262],hall:[1460,820],field:[330,440],cafe:[640,385]};
 const PLACES=[['class','교실'],['hall','복도'],['field','운동장'],['cafe','급식실']];
 // who is where on Day 2 — most kids sit at their desks; seat = {top: chair-back top on the map}
 const PLACE_BY={2:{

@@ -119,14 +119,14 @@ body,button{word-break:keep-all;overflow-wrap:break-word}
 <div id="fader"></div>
 <script>
 // same address, newest version: if the page this phone has kept is older than the one online, fetch the new one and reopen
-const BUILD='1024154954';
+const BUILD='1024155416';
 try{fetch(location.pathname,{cache:'no-store'}).then(r=>r.text()).then(t=>{const m=t.match(/const BUILD='(\d+)'/);if(m&&m[1]!==BUILD&&sessionStorage.getItem('upd')!==m[1]){sessionStorage.setItem('upd',m[1]);fetch(location.pathname,{cache:'reload'}).then(()=>location.reload())}}).catch(()=>{})}catch(e){}
 </script>
-<script src="i18n.js?v=1024154954"></script>
-<script src="i18n_prologue_v2.js?v=1024154954"></script>
-<script src="day2/i18n_engine.js?v=1024154954"></script>
-<script src="day2/data.js?v=1024154954"></script>
-<script src="day3/data.js?v=1024154954"></script>
+<script src="i18n.js?v=1024155416"></script>
+<script src="i18n_prologue_v2.js?v=1024155416"></script>
+<script src="day2/i18n_engine.js?v=1024155416"></script>
+<script src="day2/data.js?v=1024155416"></script>
+<script src="day3/data.js?v=1024155416"></script>
 <script>
 // ---------- data ----------
 const MW=1672,MH=941,KID=180;
@@ -246,10 +246,11 @@ function onTap(e){if(sayEl&&talkOn){advance();return}if(busy||!me)return;const x
  if(hit){approach(hit);return}
  const objs=(OBJ[MAP]||[]).filter(o=>!(DAY<2&&o[0]==='notebook'&&FOUND.has('notebook'))).slice().sort((a,b)=>a[3]-b[3]);
  const oh=objs.find(o=>Math.hypot(x-o[1],y-o[2])<o[3]);
+ // a thing's own spot wins over the wide exit, door and seat areas around it, so they never share a tap
+ if(oh){tapThing(oh[0],oh[1],oh[2]+oh[3]*.35);walkNear(oh[1],oh[2]+oh[3]*.5);return}
  if(DAY>=2&&['d2_class','d2_after'].includes(stage)&&OUT[MAP]&&(Math.hypot(x-OUT[MAP][0],y-OUT[MAP][1])<120||Math.abs(x-OUT[MAP][0])<140&&y>OUT[MAP][1]-280&&y<OUT[MAP][1])){walkTo(OUT[MAP][0],OUT[MAP][1],pickPlace);return}
  const ex=goal&&goal.target==='door'&&EXITS[MAP]&&EXITS[MAP].door;if(ex&&Math.hypot(x-ex[0],y-ex[1])<110){walkTo(ex[0],ex[1],()=>useDoor());return}
  const st=goal&&goal.target==='seat'&&EXITS[MAP].seat;if(st&&Math.hypot(x-st[0],y-st[1])<110){walkTo(SEAT_WALK[0],SEAT_WALK[1],()=>lesson());return}
- if(oh){tapThing(oh[0],oh[1],oh[2]+oh[3]*.35);walkNear(oh[1],oh[2]+oh[3]*.5);return}
  walkTo(x,y)}
 function approach(n){if(n.seat){for(const dx of [125,-125,160,-160]){const tx=n.x+dx,ty=n.y+15;if(walkable(tx,ty)){walkTo(tx,ty,()=>{me.dir=dx>0?'left':'right';me.frame=0;draw(me);talkTo(n.id)});return}}}const side=me.x<n.x?-1:1;let tx=n.x+side*90,ty=n.y;if(!walkable(tx,ty)){tx=n.x;ty=n.y+60;if(!walkable(tx,ty)){tx=n.x-side*90}}walkTo(tx,ty,()=>{me.dir=Math.abs(n.x-me.x)>Math.abs(n.y-me.y)?(n.x<me.x?'left':'right'):(n.y<me.y?'up':'down');me.frame=0;draw(me);talkTo(n.id)})}
 const keys={};addEventListener('keydown',e=>{keys[e.key]=1;pan=null;if(me)me.path=null;if((e.key==='Enter'||e.key===' ')&&talkOn)advance()});addEventListener('keyup',e=>keys[e.key]=0);
@@ -287,6 +288,12 @@ function keepOnScreen(el){const r=el.getBoundingClientRect();let dx=0,dy=0;if(r.
 const GAUGE_MAX=10;function gauges(){world.querySelectorAll('.gauge').forEach(g=>g.remove());for(const n of npcs){const v=HEART[n.id];if(!v||!n.h)continue;const g=document.createElement('div');g.className='gauge';g.innerHTML=`<i>♥</i><b><s style="width:${Math.min(100,v/GAUGE_MAX*100)}%"></s></b>`;g.style.left=n.x+'px';{const t=n.y-n.h-(WORDKEY[n.id]&&FOUND.has(WORDKEY[n.id])?48:12);if(t<70){g.style.top=(n.y+(n.foot||0)+8)+'px';g.style.transform='translate(-50%,0)'}else g.style.top=t+'px'};world.appendChild(g)}}
 // one 🔊 beside each thing you can hear: tried around the thing (rim first), kept where it covers no other thing's tap area, no other 🔊, no word tag, gauge or 🔍
 const SM_R=15;
+// the 🚪 sign goes above the exit, moved up or sideways off any thing's spot
+function placeExitSign(sg,id){const[ox,oy]=OUT[id],w=sg.offsetWidth,ht=sg.offsetHeight,objs=OBJ[id]||[];
+ for(const dy of [200,250,150,300,120,90])for(const dx of [0,-90,90,-170,170,-250,250]){const x=ox+dx,t=Math.max(oy-dy,ht+10);if(x-w/2<5||x+w/2>MW-5)continue;
+  if(!objs.some(o=>{const nx=Math.max(x-w/2,Math.min(o[1],x+w/2)),ny=Math.max(t-ht,Math.min(o[2],t));return Math.hypot(o[1]-nx,o[2]-ny)<o[3]})){sg.style.left=x+'px';sg.style.top=t+'px';return}}}
+// the exits' tap areas (the 🔊 keeps off them): the way out of school maps and the doors
+function exitSpots(){const s=[];if(DAY>=2&&OUT[MAP]&&MAP!=='home_am'&&MAP!=='home_pm')s.push({c:[OUT[MAP][0],OUT[MAP][1],120]},{b:[OUT[MAP][0]-140,OUT[MAP][1]-280,OUT[MAP][0]+140,OUT[MAP][1]]});const d=EXITS[MAP]&&EXITS[MAP].door;if(d&&!(DAY>=2&&OUT[MAP]&&Math.hypot(d[0]-OUT[MAP][0],d[1]-OUT[MAP][1])<50))s.push({c:[d[0],d[1],110]});return s}
 function soundMarks(){world.querySelectorAll('.smark').forEach(e=>e.remove());const zs=(typeof ZOOMS!=='undefined'&&DAY>=2&&ZOOMS[MAP])||[];
  const own=[],obs=[],box=(x0,y0,x1,y1)=>({b:[x0,y0,x1,y1]});
  for(const o of (OBJ[MAP]||[])){if(DAY<2&&o[0]==='notebook'&&FOUND.has('notebook'))continue;if(zs.some(z=>o[1]>=z[0]&&o[1]<=z[2]&&o[2]>=z[1]&&o[2]<=z[3]&&o[3]<80))continue;const c={c:[o[1],o[2],o[3]],k:o[0]};obs.push(c);own.push(c)}
@@ -294,11 +301,12 @@ function soundMarks(){world.querySelectorAll('.smark').forEach(e=>e.remove());co
  for(const n of npcs){if(!n.h)continue;const b=box(n.x-n.w*.4,n.y-n.h,n.x+n.w*.4,n.y+10);b.k=n.id;obs.push(b);if(WORDKEY[n.id]||(DAY>=2&&typeof NPC_THING!=='undefined'&&NPC_THING[n.id]))own.push(b)}
  if(pangEl){const b=box(PANG_AT[0]-60,PANG_AT[1]-PANG_H-10,PANG_AT[0]+60,PANG_AT[1]+10);b.k='dog';obs.push(b);own.push(b)}
  if(me&&me.h)obs.push(box(me.x-me.w*.4,me.y-me.h,me.x+me.w*.4,me.y+10));
- world.querySelectorAll('.tag,.gauge').forEach(e=>{const r=e.getBoundingClientRect(),s=cam.s;if(r.width)obs.push(box((r.left+cam.x)/s,(r.top+cam.y)/s,(r.right+cam.x)/s,(r.bottom+cam.y)/s))});
+ obs.push(...exitSpots());
+ world.querySelectorAll('.tag,.gauge,.exitsign').forEach(e=>{const r=e.getBoundingClientRect(),s=cam.s;if(r.width)obs.push(box((r.left+cam.x)/s,(r.top+cam.y)/s,(r.right+cam.x)/s,(r.bottom+cam.y)/s))});
  const pen=(x,y,o)=>{if(o.c){return Math.max(0,o.c[2]+SM_R-Math.hypot(x-o.c[0],y-o.c[1]))}const[x0,y0,x1,y1]=o.b,dx=Math.max(x0-x,0,x-x1),dy=Math.max(y0-y,0,y-y1);return dx||dy?Math.max(0,SM_R-Math.hypot(dx,dy)):SM_R+Math.min(x-x0,x1-x,y-y0,y1-y)};
  const put=[];const size=o=>o.c?o.c[2]*2:(o.b[2]-o.b[0])+(o.b[3]-o.b[1])/2;
  for(const o of own.slice().sort((a,b)=>size(a)-size(b))){const cand=[];
-  if(o.c){const[x,y,r]=o.c;for(const d of [r,r+14,r*.6,r+28])for(const a of [-45,-135,0,180,-90,45,135,90]){const t=a*Math.PI/180;cand.push([x+Math.cos(t)*d,y+Math.sin(t)*d])}}
+  if(o.c){const[x,y,r]=o.c;for(const d of [r,r+14,r*.6,r+28,r+42])for(const a of [-45,-135,0,180,-90,45,135,90]){const t=a*Math.PI/180;cand.push([x+Math.cos(t)*d,y+Math.sin(t)*d])}}
   else{const[x0,y0,x1,y1]=o.b,m=SM_R+3,cx=(x0+x1)/2,h=y1-y0;for(const yy of [y0+h*.3,y0+h*.55,y0+h*.12])cand.push([x1+m,yy],[x0-m,yy]);cand.push([cx,y0-m],[x1+m,y0-m],[x0-m,y0-m],[x1+m,y1-m],[x0-m,y1-m])}
   let best=null,bs=1e9;for(const[x,y]of cand){if(x<SM_R||y<SM_R||x>MW-SM_R||y>MH-SM_R)continue;let s=0;for(const q of obs)if(q!==o)s+=pen(x,y,q);for(const q of put)s+=Math.max(0,SM_R*2+2-Math.hypot(x-q[0],y-q[1]))*2;if(s<bs){bs=s;best=[x,y]}if(!s)break}
   if(!best)continue;put.push(best);const d=document.createElement('div');d.className='smark';d.dataset.k=Math.round(bs);d.dataset.o=o.k;d.textContent='🔊';d.style.left=best[0]+'px';d.style.top=best[1]+'px';world.appendChild(d)}
@@ -388,7 +396,7 @@ function tour(){touring=true;busy=true;const s=cam.s,W=innerWidth,H=innerHeight,
  (function step(now){const k=Math.max(0,Math.min(1,(now-t0)/sweep)),e=ease(k);pan={x:a.x+(b.x-a.x)*e,y:a.y+(b.y-a.y)*e};follow();if(k<1)requestAnimationFrame(step);else setTimeout(back,350)})(performance.now())}
 let panHinted=false;function load(id,extra){setGoal('');closeBubble();if(!panHinted&&innerWidth<innerHeight){panHinted=true;setTimeout(()=>{if(touring){tourQ.push(()=>setTimeout(()=>{const d=document.createElement('div');d.className='panhint';d.textContent=tr('👆 화면을 끌어서 둘러볼 수 있어요');document.body.appendChild(d);setTimeout(()=>d.remove(),4200)},600));return}const d=document.createElement('div');d.className='panhint';d.textContent=tr('👆 화면을 끌어서 둘러볼 수 있어요');document.body.appendChild(d);setTimeout(()=>d.remove(),4200)},1200)}pan=null;MAP=id;world.querySelectorAll('.sp').forEach(e=>e.remove());mapimg.src=(typeof DAY!=='undefined'&&DAY>=2&&MAPS[id].img2)||MAPS[id].img;buildGrid();const[sx,sy]=MAPS[id].start;me=sprite(HERO,sx,sy);npcs=((typeof DAY!=='undefined'&&DAY>=2&&D2PLACE[id])?d2People(id):(PEOPLE[id]||[])).concat(extra||[]).map(([n,x,y,s])=>sprite(n,x,y,s));
  world.querySelectorAll('.item').forEach(e=>e.remove());if(id==='home_am'&&!FOUND.has('notebook')){const it=document.createElement('img');it.className='item';it.src='items/notebook.png';it.style.cssText='position:absolute;width:58px;left:991px;top:478px;transform:rotate(-12deg);z-index:400;pointer-events:none';world.appendChild(it)}
- if(typeof placeD2Item==='function')placeD2Item();if(DAY>=2&&D2PLACE[id])showThings(id);if(typeof showZoomMarks==='function')showZoomMarks();if(DAY>=2&&OUT[id]&&id!=='home_am'&&id!=='home_pm'){const sg=document.createElement('div');sg.className='item exitsign';sg.textContent='🚪 '+tr('나가기');sg.style.cssText=`position:absolute;left:${OUT[id][0]}px;top:${Math.max(OUT[id][1]-200,170)}px;transform:translate(-50%,-100%);font-size:30px;font-weight:800;background:#fff;border:4px solid var(--line);border-radius:999px;padding:6px 18px;box-shadow:0 4px 0 var(--line);white-space:nowrap;z-index:4500;pointer-events:none`;world.appendChild(sg)}setTimeout(tagAll,600);placePang();fit();follow();
+ if(typeof placeD2Item==='function')placeD2Item();if(DAY>=2&&D2PLACE[id])showThings(id);if(typeof showZoomMarks==='function')showZoomMarks();if(DAY>=2&&OUT[id]&&id!=='home_am'&&id!=='home_pm'){const sg=document.createElement('div');sg.className='item exitsign';sg.textContent='🚪 '+tr('나가기');sg.style.cssText=`position:absolute;left:${OUT[id][0]}px;top:${Math.max(OUT[id][1]-200,170)}px;transform:translate(-50%,-100%);font-size:30px;font-weight:800;background:#fff;border:4px solid var(--line);border-radius:999px;padding:6px 18px;box-shadow:0 4px 0 var(--line);white-space:nowrap;z-index:4500;pointer-events:none`;world.appendChild(sg);placeExitSign(sg,id)}setTimeout(tagAll,600);placePang();fit();follow();
  const place=PLACE[id]||id;if(!SEEN.has(place)){SEEN.add(place);tour()}}
 // preload every picture so maps, scenes and faces appear at once
 const PRE=[];function preload(){const ids=['hero_f','hero_m','mom','siwoo','minho','sua','yuna','junho','haeun','jihoon','yena','hyeeun','jinwoo','haram','doyeon','haneul','boram','youngmin','seah','hangyeol','jiho'];const ex=['smile','laugh','surprised','sad','angry','relieved'];
@@ -477,18 +485,18 @@ function pickHero(){const m=document.getElementById('modal'),c=document.getEleme
  c.innerHTML=`<h2>${tr('괴짜교실 반장되기')}</h2><p>${tr('말 한마디 못 하는 전학생,<br>반장 선거에 나가다.')}</p><p style="margin-top:14px">${tr('누구로 할까요?')}</p>${(()=>{const s=loadSave();return s&&s.day>=2&&s.mode===UI+'-'+LANG?`<p><button class="big" id="cont">${tr(s.day+'일차부터 이어 하기')}</button></p>`:''})()}<div class="pick heroes"><button data-h="hero_f"><img src="faces/hero_f_smile.jpg" alt="여자 주인공"></button><button data-h="hero_m"><img src="faces/hero_m_smile.jpg" alt="남자 주인공"></button></div>`;
  m.classList.add('on');{const cb=document.getElementById('cont');if(cb)cb.onclick=()=>{const s=loadSave();HERO=s.hero;Object.assign(HEART,s.heart||{});(s.found||[]).forEach(k=>FOUND.add(k));HEART_D1={...HEART};chime();(typeof contGame==='function'?contGame(s):startDay(Math.min(s.day,Object.keys(window.D3||{}).length?3:2)))}}c.querySelectorAll('.pick button').forEach(b=>b.onclick=()=>{HERO=b.dataset.h;m.classList.remove('on');chime();bgm('day');load('home_am');say([['nar','','이사 온 다음 날 아침. 아직 풀지 못한 상자들이 쌓여 있다.'],['think','sad','(오늘부터 새 학교야. 여기 말도 아직 서툰데…….)'],['think','smile','({m}한테 인사하고 학교 가야지.)']],morning)})}
 </script>
-<script src="day2/engine.js?v=1024154954"></script>
-<script src="day2/ep_minho.js?v=1024154954"></script>
-<script src="day2/i18n_meet.js?v=1024154954"></script>
-<script src="day2/meet.js?v=1024154954"></script>
-<script src="day2/ep_sua.js?v=1024154954"></script>
-<script src="day2/i18n_sua.js?v=1024154954"></script>
-<script src="day2/ep_hangyeol.js?v=1024154954"></script>
-<script src="day2/i18n_hangyeol.js?v=1024154954"></script>
-<script src="day2/ep_siwoo.js?v=1024154954"></script>
-<script src="day2/i18n_siwoo.js?v=1024154954"></script>
-<script src="words_ja_ru.js?v=1024154954"></script>
-<script src="day2/spots.js?v=1024154954"></script>
+<script src="day2/engine.js?v=1024155416"></script>
+<script src="day2/ep_minho.js?v=1024155416"></script>
+<script src="day2/i18n_meet.js?v=1024155416"></script>
+<script src="day2/meet.js?v=1024155416"></script>
+<script src="day2/ep_sua.js?v=1024155416"></script>
+<script src="day2/i18n_sua.js?v=1024155416"></script>
+<script src="day2/ep_hangyeol.js?v=1024155416"></script>
+<script src="day2/i18n_hangyeol.js?v=1024155416"></script>
+<script src="day2/ep_siwoo.js?v=1024155416"></script>
+<script src="day2/i18n_siwoo.js?v=1024155416"></script>
+<script src="words_ja_ru.js?v=1024155416"></script>
+<script src="day2/spots.js?v=1024155416"></script>
 <script>
 // the goal shows big for a few seconds, then folds into a small pill (tap it to open it again)
 {const g=document.getElementById('goal');let t=null;const big=()=>{g.classList.remove('mini');clearTimeout(t);t=setTimeout(()=>g.classList.add('mini'),4000)};
