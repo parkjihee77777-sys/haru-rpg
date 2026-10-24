@@ -104,8 +104,8 @@ EP.hangyeol=[
   common:[['me','smile','그리고 담임 선생님이 오셔서 우리 반은 앞으로 번호순으로 선대.'],['mom','surprised','선생님이 그렇게 정하셨어?'],['me','smile','응. 그 말만 하셨어.']]}},
 
 // ■ Day 4 — 결이 (3)
-{title:'결이',scene:'hangyeol_03',place:'class',at:[330,262],flag:{H04_name:{A:1,D:1}},
- things:{class:[['colored_pencil',380,330,34],['picture',470,336,50]]},
+{title:'결이',scene:'hangyeol_03',place:'library',at:[760,560],flag:{H04_name:{A:1,D:1}},
+ things:{library:[['colored_pencil',960,392,34],['picture',1045,398,50]]},
  pre:[
   ['nar','','점심시간. 도서관 구석에서 한결이가 혼자 뭔가를 그리고 있었다. 나는 한결이 맞은편에 앉았다.'],
   ['hangyeol','smile','어, 손님. 오늘 공방 휴업.'],
@@ -489,15 +489,15 @@ EP.hangyeol=[
   common:[['mom','smile','그 {@flashlight} 사진, {m}도 보고 싶다.'],['me','smile','선생님이 뽑아 주신대. 가져올게.']]}},
 
 // ■ Day 12 — 어른이 된 나 (11) — 교실에서 시작해 수련회 밤을 떠올린다
-{title:'어른이 된 나',scene:'hangyeol_11',place:'class',at:[330,262],
- things:{class:[['flashlight',400,330,40],['paper',480,336,46]]},
+{title:'어른이 된 나',scene:'hangyeol_11',place:'class',at:[330,262],also:{triproom:[640,450]},
+ things:{triproom:[['flashlight',600,470,40],['paper',690,480,46]]},
  pre:[
   ['nar','','쉬는 시간. 창가에서 한결이가 수련회 사진을 보고 있었다. 선생님이 뽑아서 나눠 주신 사진이었다. 나는 한결이 옆으로 갔다.'],
   ['hangyeol','laugh','이거 봐. 우리 이불 뒤집어쓰고 찍은 거.'],
   ['nar','','사진 속 우리는 이불 속에서 {@flashlight}을 들고 웃고 있었다.'],
   ['me','laugh','아, 그날 밤!'],
   ['hangyeol','smile','그날 내가 {@picture} 보여 줬잖아. 기억나?'],
-  {fx:'past'},
+  {fx:'past'},{go:'triproom'},
   ['nar','','수련회 밤 자유 시간. 한결이 방에서 불을 끄고, 이불을 뒤집어쓴 채 {@flashlight}을 켰다.'],
   {k:'flashlight',goal:'「{x}」 켜기'},
   ['nar','','이불 속이 노랗게 밝아졌다.'],
@@ -533,7 +533,7 @@ EP.hangyeol=[
   ['nar','','선생님(문밖에서): 「열 시다. 다들 자기 방으로 가세요~」'],
   ['nar','','우리는 동시에 {@flashlight}을 껐다. 내가 방문을 나서려는데, 깜깜한 데서 한결이 목소리가 들렸다.'],
   ['hangyeol','smile','오늘 {@picture} 보여 준 거, 너가 처음이다.'],
-  {fx:'now'},
+  {fx:'now'},{go:'class'},
   ['nar','','한결이가 다음 사진을 넘겼다. 다음 사진은 {@flashlight} 불빛에 눈이 부셔 찡그린 내 얼굴이었다.'],
   ['hangyeol','laugh','이건 지울까?'],
   ['me','angry','지워! 당장!'],
@@ -773,6 +773,13 @@ runSteps=function(steps,choice,done){const q=(steps||[]).slice();
   const go=()=>{if(!q.length){done&&done();return}const f=q.shift();if(f.fx){sceneFx(f.fx);next();return}if(f.go){fade(()=>{load(f.go);next()});return}find(f.k,()=>{TODAY.add(f.k);next()},f.goal||'「{x}」 찾기')};
   if(lines.length)say(lines,go);else go()};
  next()};
+// two places drawn for Hangyeol's scenes: the library (Day 4) and the room at the school trip (Day 12, remembered)
+Object.assign(EXTRA_MAPS,{
+ library:{name:'도서관',img:'maps/library.jpg',walk:[[[350,430],[640,330],[820,300],[1100,400],[1450,560],[1450,700],[1300,700],[1150,941],[640,941],[560,700],[500,560],[350,520]]],block:[R(800,320,1130,480),R(930,450,1290,640)],start:[800,720],out:[1460,540]},
+ triproom:{name:'수련회 방',img:'maps/triproom.jpg',walk:[[[560,420],[1220,420],[1250,560],[1480,580],[1440,941],[700,941],[650,780],[460,760],[400,560]]],block:[R(440,500,740,740)],start:[900,700],out:[1290,520]}});
+for(const id of ['library','triproom']){const m=EXTRA_MAPS[id];MAPS[id]={img:m.img,walk:m.walk,rects:[],block:m.block||[],start:m.start};OUT[id]=m.out;PLACE[id]=id}
+{const P={'도서관':['library','perpustakaan','thư viện','图书馆','としょしつ','библиотека'],'수련회 방':['room at the school trip','kamar perkemahan','phòng ở trại','研学旅行的房间','しゅくはくがくしゅうのへや','комната в лагере']};
+ ['en','id','vi','zh','ja','ru'].forEach((u,i)=>{T[u]=T[u]||{};for(const[k,v]of Object.entries(P))if(!(k in T[u]))T[u][k]=v[i]})}
 // a scene that walks on to a place it does not start in ({go:'stands'}) shows its things there too, and the friend can stand there as well (ep.also)
 {const _sd2=setDay;setDay=function(n){_sd2(n);for(const f of D2IDS){const e=epNext(f,EPIDX[f]);if(!e)continue;
   for(const m of Object.keys(Object.assign({},e.things,e.taps,e.also)))if(EXTRA_MAPS[m]&&!D2PLACE[m])D2PLACE[m]=[]}}}
