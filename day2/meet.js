@@ -141,6 +141,16 @@ talkTo=function(id){if(DAY>=3){if(FIND)return;
   if(stage==='d2_home'&&id==='mom'){say([['mom','smile','오늘도 잘 다녀와.']]);return}
   if(stage==='d2_leave'&&id==='mom'){say([AGAIN.mom_am]);return}}
  return _talkTo(id)};
+// ---- the teacher speaks with her own face: every line written 「선생님: 「…」」 (narration) is shown as the teacher's line in the bottom panel;
+// the line text itself stays as written, and its translations lose the leading "Teacher:" label
+NAME.teacher='선생님';
+{const TN={en:'Teacher',id:'Bu Guru',vi:'Cô giáo',zh:'老师',ja:'先生',ru:'Учительница'};window.T=window.T||{};for(const u in TN){T[u]=T[u]||{};if(!T[u]['선생님'])T[u]['선생님']=TN[u]}}
+const TEACH_RE=/^선생님:\s*「([\s\S]*)」$/,TEACH_SERIOUS=/안 돼|그만|싸우|빠진다|하지 말|조용|떠들|뛰지/;
+function stripLabel(t){const m=t&&t.match(/^(?:Teacher|Bu Guru|Guru|Cô giáo|Cô|老师|先生|Учительница|Учитель)\s*[:：]\s*[「"“『«]?([\s\S]*?)[」"”』»]?\s*$/);return m?m[1]:t}
+function teacherLine(l){if(!Array.isArray(l)||l[0]!=='nar'||typeof l[2]!=='string')return l;const m=l[2].match(TEACH_RE);if(!m)return l;const inner=m[1];
+ for(const u in T){const v=T[u]&&T[u][l[2]];if(v&&!(inner in T[u]))T[u][inner]=stripLabel(v)}
+ const n=['teacher',TEACH_SERIOUS.test(inner)?'angry':'smile',inner];if(l.teach)n.teach=l.teach;return n}
+{const _say=say;say=function(lines,done){return _say(Array.isArray(lines)?lines.map(teacherLine):lines,done)}}
 // test shortcuts: #meet5 = the morning of the day you meet Minho the 5th time (Day 6); #meet5eve = that evening with Siwoo
 {const h=location.hash.match(/^#meet(\d+)(eve)?$/);if(h)setTimeout(()=>{const k=+h[1];HEART_D1={};FOUND.add('handkerchief');MEET={minho:k-1};if(k>4)FLAGS.M04_word=true;const day=k+1;
  if(!h[2]){startDay(day);return}
