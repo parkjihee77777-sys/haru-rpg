@@ -1496,7 +1496,7 @@ EP.yena=[
   D:[['me','smile','근데 틀릴까 봐 교과서에서 「학교 종」 첫 줄 베꼈어.'],['mom','laugh','(웃음) 학교 종이 땡땡땡?'],['me','smile','응. 예나가 엄청 웃었어. 애들도. 근데 예나가 스물세 명은 다 자기 얘긴데 나만 「학교 종」이래.'],['mom','smile','……틀린 데는 없었는데.'],['me','smile','응. 근데 내 줄에 내가 없었어. 예나가 ‘틀려도 돼, 나도 전학셍 썼잖아’ 했어.'],['mom','surprised','그럼 다음엔?'],['me','smile','다음엔 틀려도 내 얘기 쓸래.']],
   common:[['me','smile','{m}, 마지막에 예나가 또 그랬어. ‘딴-딴-따라-! 아, 미안. 머릿속 노래가 안 멈춰서.’'],['mom','surprised','처음 만났을 때 그 말?'],['me','smile','응. 똑같은 말. 그래서 내가 미안 안 해도 된다고 했어. 나도 들린다고.'],['mom','surprised','뭐가 들려?'],['me','laugh','(웃음) 예나도 그렇게 물어봤어. 칠단 노래, {@notice_book} 노래, 귀뚜라미, 다 들린다고 했어.'],['mom','smile','(식탁을 {@finger|으로} 톡, 톡, 톡 치며) 칠 일은 칠~'],['me','smile','칠 이 십사~'],['mom','smile','……엄마도 들린다.']]}}
 ];
-const YN_HAVE=new Set(['yena_01','yena_01a','yena_01b','yena_01c','yena_01d','yena_02','yena_02a','yena_02b','yena_02c','yena_02d','yena_02e','yena_03','yena_03a','yena_03b','yena_03c','yena_03d']);
+const YN_HAVE=new Set(['yena_01','yena_01a','yena_01b','yena_01c','yena_01d','yena_02','yena_02a','yena_02b','yena_02c','yena_02d','yena_02e','yena_03','yena_03a','yena_03b','yena_03c','yena_03d','yena_03e','yena_04a','yena_04b','item:drum','item:ear']);
 
 // the new words in Yena's scenes (pencil, desk, blackboard, notice_book, chair, hand, pcase, knee, cup, notebook, finger, paper, eraser, clock, door, foot, indoor_shoes are already in the game)
 window.EP_WORDS_YN={
