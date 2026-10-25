@@ -74,7 +74,7 @@ Object.assign(window.T.en,{
   '아, 진짜! 너는 맨날 규칙 타령이야!':'Ugh, seriously! You’re always going on about rules!',
   '규칙은 누구나 지키는 거야. 너도 예외 없어.':'Everyone follows the rules. No exceptions, not even you.',
   '민호가 씩씩거리며 물러섰다.':'Minho backed off, huffing.',
-  '전학생 맞지? 다친 데 없으면 자리에 앉아. 우리 반 규칙은 내일까지 외워 와.':'You’re the new student, right? If you’re not hurt, take your seat. Learn our class rules by tomorrow.',
+  '전학생 맞지? 다친 데 없으면 자리에 앉아. 다음에 만나면 우리 반 규칙 물어볼 거야~':'You’re the new student, right? If you’re not hurt, take your seat. Next time we meet, I’ll ask you about our class rules~',
   '(와…… 반장이 저렇게 말하니까 민호도 물러나는구나.)':'(Wow… when the class president talks like that, even Minho backs down.)',
   '수아가 자리로 돌아갔다. 시우는 여전히 빈 관찰 통이 있던 자리를 바라보고 있었다.':'Sua went back to her seat. Siwoo was still staring at the spot where the observation box had been.',
   '……통이 없으면……':'…Without the box…',
@@ -198,7 +198,7 @@ Object.assign(window.T.id,{
   '아, 진짜! 너는 맨날 규칙 타령이야!':'Ah, yang benar saja! Kamu tiap hari ngomongin aturan terus!',
   '규칙은 누구나 지키는 거야. 너도 예외 없어.':'Aturan itu untuk semua orang. Kamu juga tidak terkecuali.',
   '민호가 씩씩거리며 물러섰다.':'Minho mundur sambil mendengus.',
-  '전학생 맞지? 다친 데 없으면 자리에 앉아. 우리 반 규칙은 내일까지 외워 와.':'Kamu anak baru, kan? Kalau tidak ada yang luka, duduklah. Hafalkan aturan kelas kita sampai besok, ya.',
+  '전학생 맞지? 다친 데 없으면 자리에 앉아. 다음에 만나면 우리 반 규칙 물어볼 거야~':'Kamu anak baru, kan? Kalau tidak ada yang luka, duduklah. Nanti kalau kita ketemu lagi, aku bakal tanya aturan kelas kita~',
   '(와…… 반장이 저렇게 말하니까 민호도 물러나는구나.)':'(Wah… kalau ketua kelas bicara begitu, Minho pun mundur.)',
   '수아가 자리로 돌아갔다. 시우는 여전히 빈 관찰 통이 있던 자리를 바라보고 있었다.':'Sua kembali ke tempat duduknya. Siwoo masih memandangi tempat kotak pengamatan tadi berada.',
   '……통이 없으면……':'…Kalau tidak ada kotaknya…',
@@ -322,7 +322,7 @@ Object.assign(window.T.vi,{
   '아, 진짜! 너는 맨날 규칙 타령이야!':'Trời ạ! Lúc nào cậu cũng nội quy, nội quy!',
   '규칙은 누구나 지키는 거야. 너도 예외 없어.':'Nội quy thì ai cũng phải theo. Cậu cũng không ngoại lệ.',
   '민호가 씩씩거리며 물러섰다.':'Minho thở phì phò rồi lùi lại.',
-  '전학생 맞지? 다친 데 없으면 자리에 앉아. 우리 반 규칙은 내일까지 외워 와.':'Cậu là học sinh mới phải không? Không bị thương thì về chỗ ngồi đi. Mai nhớ thuộc nội quy lớp mình nhé.',
+  '전학생 맞지? 다친 데 없으면 자리에 앉아. 다음에 만나면 우리 반 규칙 물어볼 거야~':'Cậu là học sinh mới phải không? Không bị thương thì về chỗ ngồi đi. Lần sau gặp, tớ sẽ hỏi cậu nội quy lớp mình đấy~',
   '(와…… 반장이 저렇게 말하니까 민호도 물러나는구나.)':'(Oa… lớp trưởng nói vậy là Minho cũng phải lùi.)',
   '수아가 자리로 돌아갔다. 시우는 여전히 빈 관찰 통이 있던 자리를 바라보고 있었다.':'Sua quay về chỗ. Siwoo vẫn nhìn chằm chằm vào chỗ chiếc hộp quan sát từng nằm.',
   '……통이 없으면……':'…Không có hộp thì…',
@@ -446,7 +446,7 @@ Object.assign(window.T.zh,{
   '아, 진짜! 너는 맨날 규칙 타령이야!':'啊，真是的！你每天就知道念叨规则！',
   '규칙은 누구나 지키는 거야. 너도 예외 없어.':'规则是每个人都要遵守的。你也不例外。',
   '민호가 씩씩거리며 물러섰다.':'敏浩气呼呼地退开了。',
-  '전학생 맞지? 다친 데 없으면 자리에 앉아. 우리 반 규칙은 내일까지 외워 와.':'你是转学生吧？没受伤的话就回座位坐好。明天之前把我们班的规则背下来。',
+  '전학생 맞지? 다친 데 없으면 자리에 앉아. 다음에 만나면 우리 반 규칙 물어볼 거야~':'你是转学生吧？没受伤的话就回座位坐好。下次见面，我会问你我们班的规则哦~',
   '(와…… 반장이 저렇게 말하니까 민호도 물러나는구나.)':'（哇……班长那样一说，连敏浩都退了。）',
   '수아가 자리로 돌아갔다. 시우는 여전히 빈 관찰 통이 있던 자리를 바라보고 있었다.':'秀雅回到了座位。时雨还在望着观察盒原来放着的地方。',
   '……통이 없으면……':'……没有盒子的话……',
@@ -494,3 +494,5 @@ Object.assign(window.T.zh,{
   '(와, 애들이 정말 많아. 누구한테 먼저 말을 걸지?)':'（哇，人好多啊。先跟谁说话呢？）',
   '「{x}」에게 다녀왔다고 말하기':'跟“{x}”说我回来了'
 });
+window.T.ja=window.T.ja||{};window.T.ja['전학생 맞지? 다친 데 없으면 자리에 앉아. 다음에 만나면 우리 반 규칙 물어볼 거야~']='転校生だよね？けががないなら席に座って。今度会ったら、うちのクラスのルール、聞くからね〜';
+window.T.ru=window.T.ru||{};window.T.ru['전학생 맞지? 다친 데 없으면 자리에 앉아. 다음에 만나면 우리 반 규칙 물어볼 거야~']='Тебя к нам перевели, да? Если всё в порядке, садись на место. В следующий раз спрошу у тебя правила нашего класса~';

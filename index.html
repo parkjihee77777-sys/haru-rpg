@@ -119,14 +119,14 @@ body,button{word-break:keep-all;overflow-wrap:break-word}
 <div id="fader"></div>
 <script>
 // same address, newest version: if the page this phone has kept is older than the one online, fetch the new one and reopen
-const BUILD='1025093625';
+const BUILD='1025111134';
 try{fetch(location.pathname,{cache:'no-store'}).then(r=>r.text()).then(t=>{const m=t.match(/const BUILD='(\d+)'/);if(m&&m[1]!==BUILD&&sessionStorage.getItem('upd')!==m[1]){sessionStorage.setItem('upd',m[1]);fetch(location.pathname,{cache:'reload'}).then(()=>location.reload())}}).catch(()=>{})}catch(e){}
 </script>
-<script src="i18n.js?v=1025093625"></script>
-<script src="i18n_prologue_v2.js?v=1025093625"></script>
-<script src="day2/i18n_engine.js?v=1025093625"></script>
-<script src="day2/data.js?v=1025093625"></script>
-<script src="day3/data.js?v=1025093625"></script>
+<script src="i18n.js?v=1025111134"></script>
+<script src="i18n_prologue_v2.js?v=1025111134"></script>
+<script src="day2/i18n_engine.js?v=1025111134"></script>
+<script src="day2/data.js?v=1025111134"></script>
+<script src="day3/data.js?v=1025111134"></script>
 <script>
 // ---------- data ----------
 const MW=1672,MH=941,KID=180;
@@ -470,7 +470,7 @@ function incident(){setGoal('');busy=true;bgm('tense');
    ['minho','sad','……알았어요.'],['nar','','선생님이 다른 도구를 가지러 잠깐 교실 밖으로 나가셨다.']]),()=>{Object.entries(o.pts).forEach(([i,n])=>heart(i,n));
    setTimeout(()=>scene('threat_'+(HERO==='hero_m'?'m':'f'),[['minho','angry','야, 전학생.'],['nar','','민호가 성큼성큼 다가왔다.'],['minho','angry','첫날부터 아주 나서네?'],['nar','','민호가 내 책상을 손바닥으로 쾅 내리쳤다.'],['minho','angry','여기선 나한테 까불면 피곤해져. 알겠어?'],['think','surprised','(뭐라고 해야 하지? 말이 잘 안 나와…….)']],()=>setTimeout(suaEnters,300)),300)})})},true),400)}
 function suaEnters(){scene('sua2',[['nar','','드르륵!'],['sua','angry','최민호. 거기까지.'],['minho','angry','넌 또 뭐야?'],['sua','angry','교실에서 뛰지 않기. 친구 밀지 않기. 규칙 3번, 5번.'],['minho','angry','안 밀었거든?'],['sua','angry','지금 밀려고 했잖아. 벌점 두 개.'],['minho','angry','아, 진짜! 너는 맨날 규칙 타령이야!'],['sua','smile','규칙은 누구나 지키는 거야. 너도 예외 없어.'],['nar','','민호가 씩씩거리며 물러섰다.'],
- ['sua','smile','전학생 맞지? 다친 데 없으면 자리에 앉아. 우리 반 규칙은 내일까지 외워 와.'],['think','surprised','(와…… 반장이 저렇게 말하니까 민호도 물러나는구나.)'],['nar','','수아가 자리로 돌아갔다. 시우는 여전히 빈 관찰 통이 있던 자리를 바라보고 있었다.'],['siwoo','sad','……통이 없으면……'],['think','sad','(그런데 시우는 아직도 속상해 보여.)']],()=>{
+ ['sua','smile','전학생 맞지? 다친 데 없으면 자리에 앉아. 다음에 만나면 우리 반 규칙 물어볼 거야~'],['think','surprised','(와…… 반장이 저렇게 말하니까 민호도 물러나는구나.)'],['nar','','수아가 자리로 돌아갔다. 시우는 여전히 빈 관찰 통이 있던 자리를 바라보고 있었다.'],['siwoo','sad','……통이 없으면……'],['think','sad','(그런데 시우는 아직도 속상해 보여.)']],()=>{
   heart('sua',1);bgm('day');stage='sit';npcs.push(sprite('sua',600,262));setGoal('내 자리에 앉기','seat')})}
 function lesson(){setGoal('');busy=true;fade(()=>{});setTimeout(()=>scene('intro_'+(HERO==='hero_m'?'m':'f'),[['nar','','1교시가 시작됐다. 선생님이 칠판에 내 이름을 쓰셨다.'],['nar','','선생님: 「오늘 새 친구가 왔어요. 자기소개 해 볼까요?」'],['me','sad','……아, 안녕. 나는……'],['nar','','말이 목에 걸려 나오지 않았다. 몇몇 아이들이 킥킥 웃었다.'],['hyeeun','smile','괜찮아, 천천히 해도 돼!'],['me','relieved','……잘 부탁해.'],['nar','','선생님: 「자, 다들 {w} 꺼내세요.」']],()=>deskFind('notebook',()=>{sceneEl.classList.remove('on');
   say([['nar','','나는 {w}에 오늘 시간표를 또박또박 적었다.'],['nar','','수업 내내 시우는 깨진 관찰 통이 놓였던 자리를 자꾸 바라봤다.'],['nar','','딩동댕— 마지막 종이 울렸다.']],()=>{stage='after';setGoal('교실 문으로 나가 집에 가기','door')})}),true),700)}
@@ -511,27 +511,27 @@ function pickHero(){const m=document.getElementById('modal'),c=document.getEleme
  c.innerHTML=`<h2>${tr('괴짜교실 반장되기')}</h2><p>${tr('말 한마디 못 하는 전학생,<br>반장 선거에 나가다.')}</p><p style="margin-top:14px">${tr('누구로 할까요?')}</p>${(()=>{const s=loadSave();return s&&s.day>=2&&s.mode===UI+'-'+LANG?`<p><button class="big" id="cont">${tr(s.day+'일차부터 이어 하기')}</button></p>`:''})()}<div class="pick heroes"><button data-h="hero_f"><img src="faces/hero_f_smile.jpg" alt="여자 주인공"></button><button data-h="hero_m"><img src="faces/hero_m_smile.jpg" alt="남자 주인공"></button></div>`;
  m.classList.add('on');{const cb=document.getElementById('cont');if(cb)cb.onclick=()=>{const s=loadSave();HERO=s.hero;Object.assign(HEART,s.heart||{});(s.found||[]).forEach(k=>FOUND.add(k));HEART_D1={...HEART};chime();(typeof contGame==='function'?contGame(s):startDay(Math.min(s.day,Object.keys(window.D3||{}).length?3:2)))}}c.querySelectorAll('.pick button').forEach(b=>b.onclick=()=>{HERO=b.dataset.h;m.classList.remove('on');chime();bgm('day');load('home_am');say([['nar','','이사 온 다음 날 아침. 아직 풀지 못한 상자들이 쌓여 있다.'],['think','sad','(오늘부터 새 학교야. 여기 말도 아직 서툰데…….)'],['think','smile','({m}한테 인사하고 학교 가야지.)']],morning)})}
 </script>
-<script src="day2/engine.js?v=1025093625"></script>
-<script src="day2/ep_minho.js?v=1025093625"></script>
-<script src="day2/i18n_meet.js?v=1025093625"></script>
-<script src="day2/meet.js?v=1025093625"></script>
-<script src="day2/ep_sua.js?v=1025093625"></script>
-<script src="day2/i18n_sua.js?v=1025093625"></script>
-<script src="day2/ep_hangyeol.js?v=1025093625"></script>
-<script src="day2/i18n_hangyeol.js?v=1025093625"></script>
-<script src="day2/ep_siwoo.js?v=1025093625"></script>
-<script src="day2/i18n_siwoo.js?v=1025093625"></script>
-<script src="day2/ep_haram.js?v=1025093625"></script>
-<script src="day2/i18n_haram.js?v=1025093625"></script>
-<script src="day2/ep_jiho.js?v=1025093625"></script>
-<script src="day2/i18n_jiho.js?v=1025093625"></script>
-<script src="day2/ep_hyeeun.js?v=1025093625"></script>
-<script src="day2/i18n_hyeeun.js?v=1025093625"></script>
-<script src="words_ja_ru.js?v=1025093625"></script>
-<script src="day2/mybag.js?v=1025093625"></script>
-<script src="day2/spots.js?v=1025093625"></script>
-<script src="day2/textfit.js?v=1025093625"></script>
-<script src="day2/tester.js?v=1025093625"></script>
+<script src="day2/engine.js?v=1025111134"></script>
+<script src="day2/ep_minho.js?v=1025111134"></script>
+<script src="day2/i18n_meet.js?v=1025111134"></script>
+<script src="day2/meet.js?v=1025111134"></script>
+<script src="day2/ep_sua.js?v=1025111134"></script>
+<script src="day2/i18n_sua.js?v=1025111134"></script>
+<script src="day2/ep_hangyeol.js?v=1025111134"></script>
+<script src="day2/i18n_hangyeol.js?v=1025111134"></script>
+<script src="day2/ep_siwoo.js?v=1025111134"></script>
+<script src="day2/i18n_siwoo.js?v=1025111134"></script>
+<script src="day2/ep_haram.js?v=1025111134"></script>
+<script src="day2/i18n_haram.js?v=1025111134"></script>
+<script src="day2/ep_jiho.js?v=1025111134"></script>
+<script src="day2/i18n_jiho.js?v=1025111134"></script>
+<script src="day2/ep_hyeeun.js?v=1025111134"></script>
+<script src="day2/i18n_hyeeun.js?v=1025111134"></script>
+<script src="words_ja_ru.js?v=1025111134"></script>
+<script src="day2/mybag.js?v=1025111134"></script>
+<script src="day2/spots.js?v=1025111134"></script>
+<script src="day2/textfit.js?v=1025111134"></script>
+<script src="day2/tester.js?v=1025111134"></script>
 <script>
 // the goal shows big for a few seconds, then folds into a small pill (tap it to open it again)
 {const g=document.getElementById('goal');let t=null;const big=()=>{g.classList.remove('mini');clearTimeout(t);t=setTimeout(()=>g.classList.add('mini'),4000)};
