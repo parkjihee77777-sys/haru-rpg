@@ -44,7 +44,7 @@ html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family
 #fader{position:fixed;inset:0;background:#000;opacity:0;pointer-events:none;transition:opacity .5s;z-index:40}
 #modal{position:fixed;inset:0;background:var(--shade);display:none;justify-content:center;z-index:35;padding:16px;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;touch-action:pan-y}
 #modal.on{display:flex}
-.smark{position:absolute;transform:translate(-50%,-50%);z-index:3500;pointer-events:none;font-size:15px;line-height:1;background:#fff;border:2px solid var(--mint);border-radius:999px;padding:4px 5px;box-shadow:0 2px 3px rgba(0,0,0,.25);opacity:.95}
+.smark{position:absolute;transform:translate(-50%,-50%);z-index:3500;pointer-events:none;font-size:12px;line-height:1;background:rgba(255,255,255,.85);border:1.5px solid var(--mint);border-radius:999px;padding:3px 4px;box-shadow:0 1px 2px rgba(0,0,0,.2);opacity:.7;transition:opacity .2s,transform .2s}.smark.on{opacity:1;transform:translate(-50%,-50%) scale(1.25)}#goal.low{right:auto}
 .zit{position:relative}.zit::after{content:'🔊';position:absolute;right:4px;top:4px;font-size:13px;background:#fff;border:2px solid var(--mint);border-radius:999px;padding:2px 4px}
 .ztray{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;background:linear-gradient(#e9c79a,#dcb684);border:3px solid var(--line);border-radius:18px;padding:16px 10px}
 .zit{background:rgba(255,255,255,.55);border:3px solid transparent;border-radius:16px;padding:6px;cursor:pointer;width:min(120px,26vw);height:min(120px,26vw);display:flex;align-items:center;justify-content:center}
@@ -119,14 +119,14 @@ body,button{word-break:keep-all;overflow-wrap:break-word}
 <div id="fader"></div>
 <script>
 // same address, newest version: if the page this phone has kept is older than the one online, fetch the new one and reopen
-const BUILD='1025112006';
+const BUILD='1025112300';
 try{fetch(location.pathname,{cache:'no-store'}).then(r=>r.text()).then(t=>{const m=t.match(/const BUILD='(\d+)'/);if(m&&m[1]!==BUILD&&sessionStorage.getItem('upd')!==m[1]){sessionStorage.setItem('upd',m[1]);fetch(location.pathname,{cache:'reload'}).then(()=>location.reload())}}).catch(()=>{})}catch(e){}
 </script>
-<script src="i18n.js?v=1025112006"></script>
-<script src="i18n_prologue_v2.js?v=1025112006"></script>
-<script src="day2/i18n_engine.js?v=1025112006"></script>
-<script src="day2/data.js?v=1025112006"></script>
-<script src="day3/data.js?v=1025112006"></script>
+<script src="i18n.js?v=1025112300"></script>
+<script src="i18n_prologue_v2.js?v=1025112300"></script>
+<script src="day2/i18n_engine.js?v=1025112300"></script>
+<script src="day2/data.js?v=1025112300"></script>
+<script src="day3/data.js?v=1025112300"></script>
 <script>
 // ---------- data ----------
 const MW=1672,MH=941,KID=180;
@@ -249,7 +249,7 @@ function walkTo(x,y,cb){pan=null;const p=findPath(me.x,me.y,x,y);if(!p||!p.lengt
 // ---------- camera / input ----------
 function fit(){const W=innerWidth,H=innerHeight;cam.s=Math.max(W/MW,H/MH)}
 let pan=null;
-function follow(){const W=innerWidth,H=innerHeight,s=cam.s;let x=me.x*s-W/2,y=(me.y-80)*s-H/2;if(pan){x=pan.x;y=pan.y}x=Math.max(0,Math.min(MW*s-W,x));y=Math.max(0,Math.min(MH*s-H,y));cam.x=x;cam.y=y;world.style.transform=`translate(${-x}px,${-y}px) scale(${s})`}
+function follow(){const W=innerWidth,H=innerHeight,s=cam.s;let x=me.x*s-W/2,y=(me.y-80)*s-H/2+camNY;if(pan){x=pan.x;y=pan.y}x=Math.max(0,Math.min(MW*s-W,x));y=Math.max(0,Math.min(MH*s-H,y));cam.x=x;cam.y=y;world.style.transform=`translate(${-x}px,${-y}px) scale(${s})`}
 addEventListener('resize',()=>{fit();me&&follow()});
 // drag = look around; release without moving = a normal tap
 let drag=null;const gameEl=document.getElementById('game');
@@ -283,7 +283,7 @@ function loop(now){const dt=Math.min(.05,(now-last)/1000);last=now;if(me&&!busy)
   if(dx||dy){const l=Math.hypot(dx,dy),sp=300*dt,nx=me.x+dx/l*sp,ny=me.y+dy/l*sp;if(walkable(nx,ny)||!walkable(me.x,me.y)){me.x=nx;me.y=ny}else if(walkable(nx,me.y))me.x=nx;else if(walkable(me.x,ny))me.y=ny;
    me.dir=Math.abs(dx)>Math.abs(dy)?(dx<0?'left':'right'):(dy<0?'up':'down');me.t+=dt;me.frame=[1,0,2,0][Math.floor(me.t*8)%4]}else{if(!me.path)me.frame=0;me.t=0}
   draw(me);follow()}
- placeHint();if(now-hideT>200){hideT=now;hideMarks()}requestAnimationFrame(loop)}
+ placeHint();if(now-hideT>120){hideT=now;clearUI();hideMarks()}requestAnimationFrame(loop)}
 // ---------- hint ----------
 const hintEl=document.createElement('div');hintEl.className='hint';hintEl.textContent='▼';
 const ringEl=document.createElement('div');ringEl.className='ring';
@@ -299,7 +299,7 @@ function wordOf(k){return LANGS[LANG].words[k]}
 let findHinted=false;
 let FIND_LABEL='';function find(k,done,goalText,label){FIND=k;FIND_DONE=done;FIND_LABEL=label||goalText||'「{x}」 찾기';const g=document.getElementById('goal');g.innerHTML='';const s=document.createElement('span');s.textContent=tr(goalText||'「{x}」 찾기').replace('{x}',wordOf(k)+' 🔊');g.appendChild(s);
  if(!findHinted){findHinted=true;const sm=document.createElement('small');sm.className='hint2';sm.textContent=tr('🔊를 듣고 같은 소리가 나는 걸 눌러 봐');g.appendChild(sm)}
- g.onclick=()=>speak(k);goal={target:null};setTimeout(()=>speak(k),400)}
+ g.onclick=()=>speak(k);goal={target:null};setTimeout(()=>speak(k),400);setTimeout(clearUI,30)}
 let bubble=null;function closeBubble(){if(bubble){bubble.remove();bubble=null}}
 function tapThing(k,x,y){speak(k);if(!FIND)return;closeBubble();bubble=document.createElement('button');bubble.className='bubble';bubble.textContent=okLabel();bubble.style.left=x+'px';bubble.style.top=y+'px';
  bubble.onpointerdown=ev=>ev.stopPropagation();const bornAt=performance.now();bubble.onclick=ev=>{ev.stopPropagation();if(performance.now()-bornAt<350)return;closeBubble();if(k===FIND){chime();FOUND.add(k);tagAll();const d=FIND_DONE;FIND=null;FIND_DONE=null;const g=document.getElementById('goal');g.onclick=null;g.textContent='';goal=null;showBag();d&&d()}else{buzz()}};world.appendChild(bubble);keepOnScreen(bubble)}
@@ -308,36 +308,46 @@ function okLabel(){return tr(FIND_LABEL).replace('{x}',wordOf(FIND))}
 function keepOnScreen(el){const r=el.getBoundingClientRect();let dx=0,dy=0;if(r.left<8)dx=8-r.left;else if(r.right>innerWidth-8)dx=innerWidth-8-r.right;if(r.bottom>innerHeight-8)dy=innerHeight-8-r.bottom;if(dx)el.style.left=(parseFloat(el.style.left)+dx/cam.s)+'px';if(dy)el.style.top=(parseFloat(el.style.top)+dy/cam.s)+'px'}
 // friendship gauge over the head of every friend you got closer to (full at 10 hearts)
 const GAUGE_MAX=10;function gauges(){world.querySelectorAll('.gauge').forEach(g=>g.remove());for(const n of npcs){const v=HEART[n.id];if(!v||!n.h)continue;const g=document.createElement('div');g.className='gauge';g.innerHTML=`<i>♥</i><b><s style="width:${Math.min(100,v/GAUGE_MAX*100)}%"></s></b>`;g.style.left=n.x+'px';{const t=n.y-n.h-(WORDKEY[n.id]&&FOUND.has(WORDKEY[n.id])?48:12);if(t<70){g.style.top=(n.y+(n.foot||0)+8)+'px';g.style.transform='translate(-50%,0)'}else g.style.top=t+'px'};world.appendChild(g)}}
-// one 🔊 beside each thing you can hear: tried around the thing (rim first), kept where it covers no other thing's tap area, no other 🔊, no word tag, gauge or 🔍
-const SM_R=15;
+// one small see-through 🔊 badge on a corner of each thing you can hear, overlapping its edge (top-right first; another corner when that one would sit on another 🔊); it lights up while its word plays
+const SM_D=24;
 // the 🚪 sign goes above the exit, moved up or sideways off any thing's spot
 function placeExitSign(sg,id){const[ox,oy]=OUT[id],w=sg.offsetWidth,ht=sg.offsetHeight,objs=OBJ[id]||[];
  for(const dy of [200,250,150,300,120,90])for(const dx of [0,-90,90,-170,170,-250,250]){const x=ox+dx,t=Math.max(oy-dy,ht+10);if(x-w/2<5||x+w/2>MW-5)continue;
   if(!objs.some(o=>{const nx=Math.max(x-w/2,Math.min(o[1],x+w/2)),ny=Math.max(t-ht,Math.min(o[2],t));return Math.hypot(o[1]-nx,o[2]-ny)<o[3]})){sg.style.left=x+'px';sg.style.top=t+'px';return}}}
-// the exits' tap areas (the 🔊 keeps off them): the way out of school maps and the doors
-function exitSpots(){const s=[];if(DAY>=2&&OUT[MAP]&&MAP!=='home_am'&&MAP!=='home_pm')s.push({c:[OUT[MAP][0],OUT[MAP][1],120]},{b:[OUT[MAP][0]-140,OUT[MAP][1]-280,OUT[MAP][0]+140,OUT[MAP][1]]});const d=EXITS[MAP]&&EXITS[MAP].door;if(d&&!(DAY>=2&&OUT[MAP]&&Math.hypot(d[0]-OUT[MAP][0],d[1]-OUT[MAP][1])<50))s.push({c:[d[0],d[1],110]});return s}
 function soundMarks(){world.querySelectorAll('.smark').forEach(e=>e.remove());const zs=(typeof ZOOMS!=='undefined'&&DAY>=2&&ZOOMS[MAP])||[];
- const own=[],obs=[],box=(x0,y0,x1,y1)=>({b:[x0,y0,x1,y1]});
- for(const o of (OBJ[MAP]||[])){if(DAY<2&&o[0]==='notebook'&&FOUND.has('notebook'))continue;if(zs.some(z=>o[1]>=z[0]&&o[1]<=z[2]&&o[2]>=z[1]&&o[2]<=z[3]&&o[3]<80))continue;const c={c:[o[1],o[2],o[3]],k:o[0]};obs.push(c);own.push(c)}
- for(const z of zs){obs.push(box(z[0],z[1],z[2],z[3]))}
- for(const n of npcs){if(!n.h)continue;const b=box(n.x-n.w*.4,n.y-n.h,n.x+n.w*.4,n.y+10);b.k=n.id;obs.push(b);if(WORDKEY[n.id]||(DAY>=2&&typeof NPC_THING!=='undefined'&&NPC_THING[n.id]))own.push(b)}
- if(pangEl){const b=box(PANG_AT[0]-60,PANG_AT[1]-PANG_H-10,PANG_AT[0]+60,PANG_AT[1]+10);b.k='dog';obs.push(b);own.push(b)}
- if(me&&me.h)obs.push(box(me.x-me.w*.4,me.y-me.h,me.x+me.w*.4,me.y+10));
- obs.push(...exitSpots());
- obs.push(box(-1e4,-1e4,MW+1e4,110));// the top strip of the map: off screen most of the time, and under the goal when scrolled up
- world.querySelectorAll('.tag,.gauge,.exitsign').forEach(e=>{const r=e.getBoundingClientRect(),s=cam.s;if(r.width)obs.push(box((r.left+cam.x)/s,(r.top+cam.y)/s,(r.right+cam.x)/s,(r.bottom+cam.y)/s))});
- const pen=(x,y,o)=>{if(o.c){return Math.max(0,o.c[2]+SM_R-Math.hypot(x-o.c[0],y-o.c[1]))}const[x0,y0,x1,y1]=o.b,dx=Math.max(x0-x,0,x-x1),dy=Math.max(y0-y,0,y-y1);return dx||dy?Math.max(0,SM_R-Math.hypot(dx,dy)):SM_R+Math.min(x-x0,x1-x,y-y0,y1-y)};
- const put=[];const size=o=>o.c?o.c[2]*2:(o.b[2]-o.b[0])+(o.b[3]-o.b[1])/2;
- for(const o of own.slice().sort((a,b)=>size(a)-size(b))){const cand=[];
-  if(o.c){const[x,y,r]=o.c;for(const d of [r,r+14,r*.6,r+28,r+42])for(const a of [-45,-135,0,180,-90,45,135,90]){const t=a*Math.PI/180;cand.push([x+Math.cos(t)*d,y+Math.sin(t)*d])}}
-  else{const[x0,y0,x1,y1]=o.b,m=SM_R+3,cx=(x0+x1)/2,h=y1-y0;for(const yy of [y0+h*.3,y0+h*.55,y0+h*.12])cand.push([x1+m,yy],[x0-m,yy]);cand.push([cx,y0-m],[x1+m,y0-m],[x0-m,y0-m],[x1+m,y1-m],[x0-m,y1-m])}
-  let best=null,bs=1e9;for(const[x,y]of cand){if(x<SM_R||y<SM_R||x>MW-SM_R||y>MH-SM_R)continue;let s=0;for(const q of obs)if(q!==o)s+=pen(x,y,q);for(const q of put)s+=Math.max(0,SM_R*2+2-Math.hypot(x-q[0],y-q[1]))*2;if(s<bs){bs=s;best=[x,y]}if(!s)break}
-  if(!best)continue;put.push(best);const d=document.createElement('div');d.className='smark';d.dataset.k=Math.round(bs);d.dataset.o=o.k;d.textContent='🔊';d.style.left=best[0]+'px';d.style.top=best[1]+'px';world.appendChild(d)}
+ const own=[];
+ for(const o of (OBJ[MAP]||[])){if(DAY<2&&o[0]==='notebook'&&FOUND.has('notebook'))continue;if(zs.some(z=>o[1]>=z[0]&&o[1]<=z[2]&&o[2]>=z[1]&&o[2]<=z[3]&&o[3]<80))continue;const r=o[3]*.72;own.push({k:o[0],b:[o[1]-r,o[2]-r,o[1]+r,o[2]+r]})}
+ for(const n of npcs){if(!n.h)continue;if(WORDKEY[n.id]||(DAY>=2&&typeof NPC_THING!=='undefined'&&NPC_THING[n.id]))own.push({k:WORDKEY[n.id]||n.id,b:[n.x-n.w*.3,n.y-n.h*.92,n.x+n.w*.3,n.y]})}
+ if(pangEl)own.push({k:'dog',b:[PANG_AT[0]-45,PANG_AT[1]-PANG_H,PANG_AT[0]+45,PANG_AT[1]]});
+ const put=[];
+ for(const o of own){const[x0,y0,x1,y1]=o.b;let best=null,bs=1e9;for(const[x,y]of [[x1,y0],[x0,y0],[x1,y1],[x0,y1]]){let s=0;for(const q of put)s+=Math.max(0,SM_D-Math.hypot(x-q[0],y-q[1]));if(s<bs){bs=s;best=[x,y]}if(!s)break}
+  put.push(best);const d=document.createElement('div');d.className='smark';d.dataset.o=o.k;d.textContent='🔊';d.style.left=best[0]+'px';d.style.top=best[1]+'px';world.appendChild(d)}
  hideMarks()}
-// a 🔊 that would sit under a button, the goal, the talk panel or the OK button is hidden (checked as the view moves)
+function lightMark(k){world.querySelectorAll('.smark').forEach(m=>{if(m.dataset.o!==k)return;m.classList.add('on');clearTimeout(m._t);m._t=setTimeout(()=>m.classList.remove('on'),1300)})}
+// last fallback only: a 🔊 still under a button, the goal, the talk panel or the OK button is hidden (the camera normally keeps things clear of them, see clearUI)
 function hideMarks(){const ui=[...document.querySelectorAll('#goal,#bag,#mute,#talk,#toast>*,.panhint,.bubble,.zmark')].map(e=>e.getBoundingClientRect()).filter(r=>r.width&&r.height);
  world.querySelectorAll('.smark').forEach(m=>{const r=m.getBoundingClientRect(),hit=ui.some(u=>r.left<u.right+4&&r.right>u.left-4&&r.top<u.bottom+4&&r.bottom>u.top-4);m.style.visibility=hit?'hidden':''})}
 let hideT=0;
+// fixed UI (goal, corner buttons, talk panel) never covers a thing in view: the camera slides up or down to the spot that covers the fewest things (staying put on a tie);
+// a thing still under the goal at the map's edge moves the goal to the bottom of the screen
+let camNY=0,goalTopR=null;
+function uiCovers(){const g=document.getElementById('goal'),R=[];for(const e of document.querySelectorAll('#mute,#bag,#talk')){const r=e.getBoundingClientRect();if(r.width&&r.height&&getComputedStyle(e).display!=='none')R.push(r)}
+ if(g.textContent){const r=g.getBoundingClientRect();if(r.width){if(!g.classList.contains('low'))goalTopR={left:r.left,right:r.right,top:r.top,bottom:r.bottom};R.push(r)}}return R}
+function clearUI(){if(!me||!MAP||drag||touring)return;const g=document.getElementById('goal'),W=innerWidth,H=innerHeight,s=cam.s,R=uiCovers(),maxY=Math.max(0,MH*s-H);
+ const spots=(OBJ[MAP]||[]).filter(o=>!(DAY<2&&o[0]==='notebook'&&FOUND.has('notebook'))).map(o=>[o[1],o[2],Math.min(o[3],28)]);
+ for(const n of npcs)if(n.h&&(WORDKEY[n.id]||(DAY>=2&&typeof NPC_THING!=='undefined'&&NPC_THING[n.id])))spots.push([n.x,n.y-n.h*.6,28]);if(pangEl)spots.push([PANG_AT[0],PANG_AT[1]-PANG_H/2,28]);
+ const hit=(cx,cy,r,u)=>cx+r>u.left-4&&cx-r<u.right+4&&cy+r>u.top-4&&cy-r<u.bottom+4;
+ const cov=(dy,rects)=>{const y=Math.max(0,Math.min(maxY,cam.y+dy));let n=0,up=0,down=0;for(const[x,yy,r]of spots){const cx=x*s-cam.x,cy=yy*s-y,rr=r*s;if(cx<0||cx>W||cy<0||cy>H)continue;for(const u of rects)if(hit(cx,cy,rr,u)){n++;if(u.top<H/2)up=Math.max(up,u.bottom+6-(cy-rr));else down=Math.max(down,cy+rr-(u.top-6));break}}return{n,up,down}};
+ const c0=cov(0,R);let best=0,bn=c0.n;
+ for(const dy of [-c0.up,c0.down,-c0.up-40,c0.down+40])if(dy){const c=cov(dy,R).n;if(c<bn||(c===bn&&c<c0.n&&Math.abs(dy)<Math.abs(best))){bn=c;best=dy}}
+ if(best){const step=Math.sign(best)*Math.min(Math.abs(best),60);if(pan)pan={x:pan.x,y:Math.max(0,Math.min(maxY,pan.y+step))};else camNY+=step;follow()}
+ // the goal still covers something here (the map can't slide further): it moves to the first free spot (top or bottom; middle, left or right), staying put while its spot is free
+ if(best||!g.textContent)return;const gr=g.getBoundingClientRect();if(!gr.width)return;const t=document.getElementById('talk'),tr2=t.classList.contains('on')?t.getBoundingClientRect():null,gw=gr.width,gh=gr.height;
+ const topY=goalTopR?goalTopR.top:10,botY=(tr2?tr2.top:H)-14-gh,m=Math.min(60,(W-gw)/2);
+ const at={tc:[(W-gw)/2,topY],bc:[(W-gw)/2,botY],tl:[m,topY],tr:[W-m-gw,topY],bl:[m,botY],br:[W-m-gw,botY]};
+ const others=R.filter(r=>!(r.left===gr.left&&r.top===gr.top));const n=k=>{const[x,y]=at[k],r={left:x,right:x+gw,top:y,bottom:y+gh};return cov(0,[r]).n*10+(others.some(o=>o.left<r.right&&o.right>r.left&&o.top<r.bottom&&o.bottom>r.top)?5:0)};
+ const cur=g.dataset.pos||'tc';let pick=cur,pn=n(cur);if(pn)for(const k of ['tc','bc','tl','tr','bl','br']){const v=n(k);if(v<pn){pn=v;pick=k}}
+ if(pick!==cur){g.dataset.pos=pick;if(pick==='tc'){g.style.cssText='';g.classList.remove('low')}else{const[x,y]=at[pick];g.classList.add('low');g.style.cssText=`left:${x}px;top:${y}px!important;bottom:auto;transform:none`}}}
 function tagAll(){gauges();world.querySelectorAll('.tag').forEach(t=>t.remove());for(const n of npcs){const k=WORDKEY[n.id];if(k&&FOUND.has(k)&&n.h){const t=document.createElement('div');t.className='tag';t.textContent=wordOf(k);t.style.left=n.x+'px';t.style.top=(n.y-n.h-8)+'px';world.appendChild(t)}}soundMarks()}
 function showBag(){const ks=['notebook'].filter(k=>FOUND.has(k));const b=document.getElementById('bag');if(!ks.length){b.style.display='none';return}b.style.display='block';b.textContent='📒 '+ks.map(wordOf).join(' · ')}
 function buzz(){try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();const t=AC.currentTime,o=AC.createOscillator(),g=AC.createGain();o.type='square';o.frequency.value=180;g.gain.setValueAtTime(.12,t);g.gain.exponentialRampToValueAtTime(.0001,t+.35);o.connect(g).connect(AC.destination);o.start(t);o.stop(t+.36)}catch(e){}}
@@ -399,7 +409,7 @@ function toast(t){const d=document.createElement('div');d.textContent=t;document
 function heart(id,n){if(!n)return;HEART[id]=(HEART[id]||0)+n;setTimeout(gauges,50);toast(`${nm(id)} ♥ +${n}`);chime()}
 // ---------- sound ----------
 let AC=null;function chime(){try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();const t=AC.currentTime;[880,1320].forEach((f,i)=>{const o=AC.createOscillator(),g=AC.createGain();o.frequency.value=f;o.type='sine';g.gain.setValueAtTime(.0001,t+i*.12);g.gain.exponentialRampToValueAtTime(.2,t+i*.12+.02);g.gain.exponentialRampToValueAtTime(.0001,t+i*.12+.35);o.connect(g).connect(AC.destination);o.start(t+i*.12);o.stop(t+i*.12+.4)})}catch(e){}}
-const SND={};function speak(k){duck(1800);const key=LANG+'/'+k;const f=SND[key]||(SND[key]=new Audio(`snd/${LANG}/${k}.mp3`));try{f.currentTime=0;f.play();return}catch(e){}try{const u=new SpeechSynthesisUtterance(LANGS[LANG].words[k]);u.lang=LANGS[LANG].tts;u.rate=.85;const v=speechSynthesis.getVoices().find(v=>v.lang.startsWith(LANG));if(v)u.voice=v;speechSynthesis.cancel();speechSynthesis.speak(u)}catch(e){}}
+const SND={};function speak(k){lightMark(k);duck(1800);const key=LANG+'/'+k;const f=SND[key]||(SND[key]=new Audio(`snd/${LANG}/${k}.mp3`));try{f.currentTime=0;f.play();return}catch(e){}try{const u=new SpeechSynthesisUtterance(LANGS[LANG].words[k]);u.lang=LANGS[LANG].tts;u.rate=.85;const v=speechSynthesis.getVoices().find(v=>v.lang.startsWith(LANG));if(v)u.voice=v;speechSynthesis.cancel();speechSynthesis.speak(u)}catch(e){}}
 // ---------- music ----------
 const BGM_VOL=.12;const BGM={};
 // lower the music while a word or line is being spoken so the pronunciation is clear
@@ -419,7 +429,7 @@ function tour(){touring=true;busy=true;const s=cam.s,W=innerWidth,H=innerHeight,
  function back(){const s0=performance.now(),from={...pan};let tx=me.x*s-W/2,ty=(me.y-80)*s-H/2;tx=Math.max(0,Math.min(maxX,tx));ty=Math.max(0,Math.min(maxY,ty));
   (function step(now){const k=Math.min(1,(now-s0)/900),e=ease(k);pan={x:from.x+(tx-from.x)*e,y:from.y+(ty-from.y)*e};follow();if(k<1)requestAnimationFrame(step);else{pan=null;touring=false;busy=false;follow();while(tourQ.length)tourQ.shift()()}})(s0)}
  (function step(now){const k=Math.max(0,Math.min(1,(now-t0)/sweep)),e=ease(k);pan={x:a.x+(b.x-a.x)*e,y:a.y+(b.y-a.y)*e};follow();if(k<1)requestAnimationFrame(step);else setTimeout(back,350)})(performance.now())}
-let panHinted=false;function load(id,extra){setGoal('');closeBubble();if(!panHinted&&innerWidth<innerHeight){panHinted=true;setTimeout(()=>{if(touring){tourQ.push(()=>setTimeout(()=>{const d=document.createElement('div');d.className='panhint';d.textContent=tr('👆 화면을 끌어서 둘러볼 수 있어요');document.body.appendChild(d);setTimeout(()=>d.remove(),4200)},600));return}const d=document.createElement('div');d.className='panhint';d.textContent=tr('👆 화면을 끌어서 둘러볼 수 있어요');document.body.appendChild(d);setTimeout(()=>d.remove(),4200)},1200)}pan=null;MAP=id;world.querySelectorAll('.sp').forEach(e=>e.remove());mapimg.src=(typeof DAY!=='undefined'&&DAY>=2&&MAPS[id].img2)||MAPS[id].img;buildGrid();const[sx,sy]=MAPS[id].start;me=sprite(HERO,sx,sy);npcs=((typeof DAY!=='undefined'&&DAY>=2&&D2PLACE[id])?d2People(id):(PEOPLE[id]||[])).concat(extra||[]).map(([n,x,y,s])=>sprite(n,x,y,s));
+let panHinted=false;function load(id,extra){setGoal('');closeBubble();if(!panHinted&&innerWidth<innerHeight){panHinted=true;setTimeout(()=>{if(touring){tourQ.push(()=>setTimeout(()=>{const d=document.createElement('div');d.className='panhint';d.textContent=tr('👆 화면을 끌어서 둘러볼 수 있어요');document.body.appendChild(d);setTimeout(()=>d.remove(),4200)},600));return}const d=document.createElement('div');d.className='panhint';d.textContent=tr('👆 화면을 끌어서 둘러볼 수 있어요');document.body.appendChild(d);setTimeout(()=>d.remove(),4200)},1200)}pan=null;camNY=0;{const g=document.getElementById('goal');g.dataset.pos='tc';g.style.cssText='';g.classList.remove('low')}MAP=id;world.querySelectorAll('.sp').forEach(e=>e.remove());mapimg.src=(typeof DAY!=='undefined'&&DAY>=2&&MAPS[id].img2)||MAPS[id].img;buildGrid();const[sx,sy]=MAPS[id].start;me=sprite(HERO,sx,sy);npcs=((typeof DAY!=='undefined'&&DAY>=2&&D2PLACE[id])?d2People(id):(PEOPLE[id]||[])).concat(extra||[]).map(([n,x,y,s])=>sprite(n,x,y,s));
  world.querySelectorAll('.item').forEach(e=>e.remove());if(id==='home_am'&&!FOUND.has('notebook')){const it=document.createElement('img');it.className='item';it.src='items/notebook.png';it.style.cssText='position:absolute;width:58px;left:991px;top:478px;transform:rotate(-12deg);z-index:400;pointer-events:none';world.appendChild(it)}
  if(typeof placeD2Item==='function')placeD2Item();if(DAY>=2&&D2PLACE[id])showThings(id);if(typeof showZoomMarks==='function')showZoomMarks();if(DAY>=2&&OUT[id]&&id!=='home_am'&&id!=='home_pm'){const sg=document.createElement('div');sg.className='item exitsign';sg.textContent='🚪 '+tr('나가기');sg.style.cssText=`position:absolute;left:${OUT[id][0]}px;top:${Math.max(OUT[id][1]-200,170)}px;transform:translate(-50%,-100%);font-size:30px;font-weight:800;background:#fff;border:4px solid var(--line);border-radius:999px;padding:6px 18px;box-shadow:0 4px 0 var(--line);white-space:nowrap;z-index:4500;pointer-events:none`;world.appendChild(sg);placeExitSign(sg,id)}setTimeout(tagAll,600);placePang();fit();follow();
  const place=PLACE[id]||id;if(!SEEN.has(place)){SEEN.add(place);tour()}}
@@ -511,27 +521,27 @@ function pickHero(){const m=document.getElementById('modal'),c=document.getEleme
  c.innerHTML=`<h2>${tr('괴짜교실 반장되기')}</h2><p>${tr('말 한마디 못 하는 전학생,<br>반장 선거에 나가다.')}</p><p style="margin-top:14px">${tr('누구로 할까요?')}</p>${(()=>{const s=loadSave();return s&&s.day>=2&&s.mode===UI+'-'+LANG?`<p><button class="big" id="cont">${tr(s.day+'일차부터 이어 하기')}</button></p>`:''})()}<div class="pick heroes"><button data-h="hero_f"><img src="faces/hero_f_smile.jpg" alt="여자 주인공"></button><button data-h="hero_m"><img src="faces/hero_m_smile.jpg" alt="남자 주인공"></button></div>`;
  m.classList.add('on');{const cb=document.getElementById('cont');if(cb)cb.onclick=()=>{const s=loadSave();HERO=s.hero;Object.assign(HEART,s.heart||{});(s.found||[]).forEach(k=>FOUND.add(k));HEART_D1={...HEART};chime();(typeof contGame==='function'?contGame(s):startDay(Math.min(s.day,Object.keys(window.D3||{}).length?3:2)))}}c.querySelectorAll('.pick button').forEach(b=>b.onclick=()=>{HERO=b.dataset.h;m.classList.remove('on');chime();bgm('day');load('home_am');say([['nar','','이사 온 다음 날 아침. 아직 풀지 못한 상자들이 쌓여 있다.'],['think','sad','(오늘부터 새 학교야. 여기 말도 아직 서툰데…….)'],['think','smile','({m}한테 인사하고 학교 가야지.)']],morning)})}
 </script>
-<script src="day2/engine.js?v=1025112006"></script>
-<script src="day2/ep_minho.js?v=1025112006"></script>
-<script src="day2/i18n_meet.js?v=1025112006"></script>
-<script src="day2/meet.js?v=1025112006"></script>
-<script src="day2/ep_sua.js?v=1025112006"></script>
-<script src="day2/i18n_sua.js?v=1025112006"></script>
-<script src="day2/ep_hangyeol.js?v=1025112006"></script>
-<script src="day2/i18n_hangyeol.js?v=1025112006"></script>
-<script src="day2/ep_siwoo.js?v=1025112006"></script>
-<script src="day2/i18n_siwoo.js?v=1025112006"></script>
-<script src="day2/ep_haram.js?v=1025112006"></script>
-<script src="day2/i18n_haram.js?v=1025112006"></script>
-<script src="day2/ep_jiho.js?v=1025112006"></script>
-<script src="day2/i18n_jiho.js?v=1025112006"></script>
-<script src="day2/ep_hyeeun.js?v=1025112006"></script>
-<script src="day2/i18n_hyeeun.js?v=1025112006"></script>
-<script src="words_ja_ru.js?v=1025112006"></script>
-<script src="day2/mybag.js?v=1025112006"></script>
-<script src="day2/spots.js?v=1025112006"></script>
-<script src="day2/textfit.js?v=1025112006"></script>
-<script src="day2/tester.js?v=1025112006"></script>
+<script src="day2/engine.js?v=1025112300"></script>
+<script src="day2/ep_minho.js?v=1025112300"></script>
+<script src="day2/i18n_meet.js?v=1025112300"></script>
+<script src="day2/meet.js?v=1025112300"></script>
+<script src="day2/ep_sua.js?v=1025112300"></script>
+<script src="day2/i18n_sua.js?v=1025112300"></script>
+<script src="day2/ep_hangyeol.js?v=1025112300"></script>
+<script src="day2/i18n_hangyeol.js?v=1025112300"></script>
+<script src="day2/ep_siwoo.js?v=1025112300"></script>
+<script src="day2/i18n_siwoo.js?v=1025112300"></script>
+<script src="day2/ep_haram.js?v=1025112300"></script>
+<script src="day2/i18n_haram.js?v=1025112300"></script>
+<script src="day2/ep_jiho.js?v=1025112300"></script>
+<script src="day2/i18n_jiho.js?v=1025112300"></script>
+<script src="day2/ep_hyeeun.js?v=1025112300"></script>
+<script src="day2/i18n_hyeeun.js?v=1025112300"></script>
+<script src="words_ja_ru.js?v=1025112300"></script>
+<script src="day2/mybag.js?v=1025112300"></script>
+<script src="day2/spots.js?v=1025112300"></script>
+<script src="day2/textfit.js?v=1025112300"></script>
+<script src="day2/tester.js?v=1025112300"></script>
 <script>
 // the goal shows big for a few seconds, then folds into a small pill (tap it to open it again)
 {const g=document.getElementById('goal');let t=null;const big=()=>{g.classList.remove('mini');clearTimeout(t);t=setTimeout(()=>g.classList.add('mini'),4000)};
