@@ -3,7 +3,10 @@ const ZOOMS={};// map id → [[x0,y0,x1,y1], …] (map px), filled below
 // Every friend scene runs on the classroom map: open lines → word finds (picture cards, by sound) → the friend's thought → a choice A–D →
 // reaction → hearts. Evening: Mom asks about the day; what I tell her and her answer depend on who I met and what I chose.
 function DD(){return(DAY>=3?window.D3:window.D2)||{}}
-const D2IDS=['minho','jinwoo','haram','junho','doyeon','haeun','haneul','boram','yena','youngmin','jihoon','seah','sua','siwoo','yuna','hangyeol','hyeeun','jiho'];
+// 10/25: 진우·보람·도연 are out of the game (15 kids). Their old data stays in the files; ALL_IDS still feeds the word table they brought.
+const GONE_IDS=['jinwoo','boram','doyeon'];
+const ALL_IDS=['minho','jinwoo','haram','junho','doyeon','haeun','haneul','boram','yena','youngmin','jihoon','seah','sua','siwoo','yuna','hangyeol','hyeeun','jiho'];
+const D2IDS=ALL_IDS.filter(i=>!GONE_IDS.includes(i));
 const D2NAME={jinwoo:'진우',haram:'하람',doyeon:'도연',haneul:'하늘',boram:'보람',youngmin:'영민',seah:'세아',hangyeol:'한결',jiho:'지호'};
 Object.assign(NAME,D2NAME);
 Object.assign(SZ,{"jinwoo":[0.961,0.983,1.009],"haram":[0.961,0.98,0.974],"doyeon":[0.944,0.976,1.021],"haneul":[0.971,0.988,0.994],"boram":[0.973,0.988,1.002],"youngmin":[0.966,0.983,1.018],"seah":[0.888,0.974,0.974],"hangyeol":[0.956,0.983,0.986],"jiho":[0.919,0.973,1.006]});
@@ -12,7 +15,7 @@ const D2WORDS={handkerchief:{ko:'손수건',en:'handkerchief',id:'sapu tangan',v
  chalk:{ko:'분필',en:'chalk',id:'kapur',vi:'phấn',zh:'粉笔'},umbrella:{ko:'우산',en:'umbrella',id:'payung',vi:'cái ô',zh:'雨伞'},ball:{ko:'공',en:'ball',id:'bola',vi:'quả bóng',zh:'球'},
  flag:{ko:'깃발',en:'flag',id:'bendera',vi:'lá cờ',zh:'旗子'},cup:{ko:'컵',en:'cup',id:'gelas',vi:'cái cốc',zh:'杯子'},bread:{ko:'빵',en:'bread',id:'roti',vi:'bánh mì',zh:'面包'},
  apple:{ko:'사과',en:'apple',id:'apel',vi:'quả táo',zh:'苹果'},bag:{ko:'가방',en:'bag',id:'tas',vi:'cặp sách',zh:'书包'},bench:{ko:'벤치',en:'bench',id:'bangku',vi:'ghế băng',zh:'长椅'}};
-function d2Merge(){for(const src of [window.D2,window.D3])for(const id of D2IDS){const d=src&&src[id];if(!d)continue;Object.assign(D2WORDS,d.words||{});
+function d2Merge(){for(const src of [window.D2,window.D3])for(const id of ALL_IDS){const d=src&&src[id];if(!d)continue;Object.assign(D2WORDS,d.words||{});
   if(d.again&&!AGAIN[id])AGAIN[id]=d.again;if(d.name&&!NAME[id])NAME[id]=d.name;
   for(const ui of ['en','id','vi','zh']){T[ui]=T[ui]||{};for(const[k,v]of Object.entries((d.tr&&d.tr[ui])||{}))if(!(k in T[ui]))T[ui][k]=v}}
  for(const[k,w]of Object.entries(D2WORDS))for(const l of Object.keys(LANGS))if(w[l])LANGS[l].words[k]=w[l]}
@@ -58,8 +61,8 @@ const OUT={class:[1440,262],hall:[1460,820],field:[330,440],cafe:[640,385]};
 const PLACES=[['class','교실'],['hall','복도'],['field','운동장'],['cafe','급식실']];
 // who is where on Day 2 — most kids sit at their desks; seat = {top: chair-back top on the map}
 const PLACE_BY={2:{
- class:[['yena',1190,0,{top:333}],['doyeon',380,0,{top:333}],['jinwoo',1325,0,{top:448}],['hangyeol',760,0,{top:572}],['jihoon',885,0,{top:572}],['youngmin',395,0,{top:715}],['siwoo',895,0,{top:715}],['haneul',1405,0,{top:715}],['minho',640,600],['sua',600,262]],
- hall:[['hyeeun',760,880],['seah',1100,640],['boram',570,640]],
+ class:[['yena',1190,0,{top:333}],['hangyeol',760,0,{top:572}],['jihoon',885,0,{top:572}],['youngmin',395,0,{top:715}],['siwoo',895,0,{top:715}],['haneul',1405,0,{top:715}],['minho',640,600],['sua',600,262]],
+ hall:[['hyeeun',760,880],['seah',1100,640]],
  field:[['junho',1300,745],['jiho',1200,380]],
  cafe:[['haram',515,470],['haeun',1360,565],['yuna',330,860]]}};
 let D2PLACE={};

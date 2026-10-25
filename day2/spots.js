@@ -25,3 +25,5 @@ d2People=function(id){const ps=_d2PeopleSpots(id).map(p=>p.slice());const S=SEAT
  for(const p of ps){if(p[3])continue;if(clash(id,p[1],p[2],placed)){const c=freeSpot(id,p[1],p[2],placed);if(c){p[1]=c[0];p[2]=c[1]}}placed.push([p[1],p[2]])}
  return ps};
 }
+// a save from before 10/25 may still hold 진우·보람·도연 (out of the game): forget them whenever a day starts
+{const _sdGone=startDay;startDay=function(n){for(const k of GONE_IDS){delete HEART[k];delete MEET[k];if(typeof HEART_D1==='object'&&HEART_D1)delete HEART_D1[k]}return _sdGone(n)}}
