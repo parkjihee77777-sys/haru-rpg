@@ -39,7 +39,9 @@ const JA_RU={
  tape_measure:['メジャー','рулетка'],pen:['ボールペン','ручка'],wrist:['てくび','запястье'],roof:['やね','крыша'],foot:['あし','нога'],
  jump_rope:['なわとび','скакалка'],finger:['ゆび','палец'],knee:['ひざ','колено'],
  // Hyeeun's scenes (ep_hyeeun.js)
- glove:['てぶくろ','перчатка'],key:['かぎ','ключ'],gym_clothes:['たいそうふく','спортивная форма'],toilet:['トイレ','туалет'],soup:['スープ','суп'],school_gate:['こうもん','школьные ворота']
+ glove:['てぶくろ','перчатка'],key:['かぎ','ключ'],gym_clothes:['たいそうふく','спортивная форма'],toilet:['トイレ','туалет'],soup:['スープ','суп'],school_gate:['こうもん','школьные ворота'],
+ // Haneul's scenes (ep_haneul.js); drawer and paintbrush are listed above
+ pocket:['ポケット','карман'],tv:['テレビ','телевизор'],textbook:['きょうかしょ','учебник'],cloud:['くも','облако'],paints:['えのぐ','краски']
 };
 {for(const[k,[ja,ru]]of Object.entries(JA_RU)){LANGS.ja.words[k]=ja;LANGS.ru.words[k]=ru;const w=typeof D2WORDS!=='undefined'&&D2WORDS[k];if(w){w.ja=ja;w.ru=ru}}
  const miss=Object.keys(LANGS.ko.words).concat(Object.keys(LANGS.en.words)).filter(k=>!JA_RU[k]);if(miss.length)console.warn('ja/ru words missing:',[...new Set(miss)])}
