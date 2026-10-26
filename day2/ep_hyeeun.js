@@ -256,6 +256,7 @@ EP.hyeeun=[
   ['nar','','혜은이가 가리킨 가방 옆 주머니에서 마른 {@glove|을} 꺼내 건넸다.'],
   {only:['A'],lines:[['nar','','나는 {@glove|을} 건네고, 경사로 위로 올라가 말린 매트도 폈다.']]},
   {only:['B','C'],lines:[['nar','','혜은이가 위쪽 매트를 가리켰다. 「저것도 펴 줄래?」 나는 올라가서 매트를 폈다.']]},
+  {pic:'hyeeun_03a'},
   ['nar','','혜은이가 {@glove|을} 꼈다. 손가락 끝이 뚫린 {@glove}. 손바닥 쪽이 오돌토돌했다.'],
   ['nar','','혜은이가 바퀴를 밀었다. 이번엔 미끄러지지 않았다. 쭉, 쭉. 혼자 올라갔다.'],
   ['nar','','경사로 위에서 담임 선생님과 마주쳤다. 급식실에 가시던 길이었다.'],
@@ -266,7 +267,8 @@ EP.hyeeun=[
   ['nar','','선생님이 경사로를 내려다보셨다.'],
   ['nar','','선생님: 「이건 혜은이가 조심할 일이 아니라 학교가 고칠 일이네. 행정실에 말해서 미끄럼 막는 띠를 붙여 달라고 할게. 다른 사람도 미끄러질 수 있으니까.」'],
   ['nar','','선생님이 급식실로 들어가셨다. 혜은이가 나를 돌아봤다.'],
-  ['hyeeun','laugh','아, 오해하지 마. 별 하나는 경사로 거야. 너 거 아니고.']],
+  ['hyeeun','laugh','아, 오해하지 마. 별 하나는 경사로 거야. 너 거 아니고.'],
+  {pic:null}],
  eve:{lead:[['me','smile','{m}, 비 그치고 나서 급식실 가는 경사로가 엄청 미끄러웠어.'],['mom','surprised','넘어진 사람 없어?'],['me','sad','응. 근데 혜은이 손이 바퀴에서 자꾸 미끄러졌어. 바퀴가 젖어서.'],['mom','smile','손으로 바퀴를 미니까 그렇겠다.']],
   A:[['me','smile','도와줄까 물었더니, 미는 거 말고 {@glove} 꺼내 달래. 그리고 위에 말린 매트 펴 달래.'],['mom','surprised','{@glove|이랑} 매트?'],['me','laugh','응. {@glove} 끼니까 혼자 쭉쭉 올라갔어.'],['mom','smile','혜은이는 뭐가 필요한지 정확히 아네.']],
   B:[['me','smile','옆에서 ‘천천히 해, 할 수 있어!’ 했는데, 할 수 있는 건 안대. 맨날 한대.'],['mom','laugh','(웃음) 맞는 말이네.'],['me','smile','오늘은 혜은이가 문제가 아니라 바퀴가 미끄러운 거래.'],['mom','surprised','그럼 뭐가 필요했어?'],['me','smile','마른 {@glove|이랑}…… 안 미끄러운 길.']],
@@ -537,6 +539,7 @@ EP.hyeeun=[
   {k:'ball',goal:'「{x}」 굴려 주기'},
   {clear:['ball']},
   ['nar','','{@ball|이} 혜은이 바퀴 옆에서 멈췄다.'],
+  {pic:'hyeeun_06a'},
   ['nar','','혜은이가 {@ball|을} 들고, 몸을 살짝 뒤로 젖혔다가 던졌다. {@ball|이} 높게 날아가 {@basket}에 쏙 들어갔다.'],
   ['nar','','다섯 개 중 네 개가 들어갔다. 홀수 팀이 2판을 이겼다.'],
   ['junho','laugh','와, 혜은이 진짜 잘한다!'],
@@ -544,7 +547,8 @@ EP.hyeeun=[
   {only:['A'],lines:[['hyeeun','smile','아무도 안 물어봤잖아.']]},
   {only:['B'],lines:[['hyeeun','smile','누가 대신 던져서.']]},
   ['nar','','선생님: 「다 쓴 {@ball|은} 바로 {@ball} 수레에 넣어요. 바닥에 {@ball|이} 굴러다니면 누구든 밟아요.」'],
-  ['nar','','아이들이 {@ball|을} 주워 수레에 넣었다. 혜은이도 무릎에 {@ball} 두 개를 올리고 수레까지 굴러갔다.']],
+  ['nar','','아이들이 {@ball|을} 주워 수레에 넣었다. 혜은이도 무릎에 {@ball} 두 개를 올리고 수레까지 굴러갔다.'],
+  {pic:null}],
  eve:{lead:[['me','smile','{m}, 오늘 체육 시간에 {@basket}에 {@ball} 넣기 했어. 선생님이 우리 팀 순서를 나보고 정하래.'],['mom','surprised','네가? 어떻게 정했어?'],['me','smile','근데 준호가 혜은이는 점수 적으면 되겠다고 했어.']],
   A:[['me','sad','나도 그래, 하고 혜은이를 점수 적는 데 넣었어. 1판에 1점 차로 졌어.'],['mom','surprised','혜은이는?'],['me','sad','점수는 하나도 안 틀리게 적었어. 근데 끝나고 자기 던지기 잘한대. 아무도 안 물어봤대.'],['mom','smile','……물어볼 걸 그랬다 싶었어?'],['me','sad','응. 2판에 던졌는데 다섯 개 중에 네 개 넣었어.']],
   B:[['me','sad','혜은이 몫까지 내가 두 번 던지겠다고 했어. 그랬더니 혜은이가 자기 팔 멀쩡하대.'],['mom','laugh','(웃음) 그 말 시원하다.'],['me','sad','그건 자기 {@ball|을} 가져가는 거래. 근데 나 두 개나 빗나갔어.'],['mom','surprised','혜은이 {@ball|은} 어땠어?'],['me','laugh','2판에 던졌는데 다섯 개 중에 네 개! 나보다 훨씬 잘해.']],
@@ -1303,7 +1307,17 @@ window.EP_WORDS_HE={
  school_gate:{ko:'교문',en:'school gate',id:'gerbang sekolah',vi:'cổng trường',zh:'校门',ja:'こうもん',ru:'школьные ворота'}};
 
 // ---- what Hyeeun's scenes need from the engine (on top of meet.js and the other per-friend files) ----
-// a choice's reaction (r) is said as plain lines; when it holds {clear}/{flag} steps it plays at the start of post instead (runSteps handles those)
+// situation pictures (art/scenes/hyeeun/pics2.json): over a choice's reaction (meeting index → choice → picture), and from a line on in pre/post ([meeting index, 'pre'|'post', start of the line, picture])
+{const RP={"0": {"B": "hyeeun_01b", "A": "hyeeun_01d", "C": "hyeeun_01d"}, "1": {"A": "hyeeun_02", "B": "hyeeun_02", "C": "hyeeun_02", "D": "hyeeun_02"}, "2": {"D": "hyeeun_03c", "C": "hyeeun_03d"}, "3": {"D": "hyeeun_04"}, "4": {"A": "hyeeun_05b", "D": "hyeeun_05c", "B": "hyeeun_05", "C": "hyeeun_05"}, "5": {"A": "hyeeun_06c", "D": "hyeeun_06d"}, "6": {"C": "hyeeun_07a", "A": "hyeeun_07b", "D": "hyeeun_07c"}, "7": {"A": "hyeeun_08c", "C": "hyeeun_08", "D": "hyeeun_08"}, "8": {"C": "hyeeun_09a", "A": "hyeeun_09b", "D": "hyeeun_09c", "B": "hyeeun_09"}, "9": {"B": "hyeeun_10b", "C": "hyeeun_10c", "D": "hyeeun_10d"}, "10": {"B": "hyeeun_11d", "C": "hyeeun_11"}, "11": {"C": "hyeeun_12a"}, "12": {"A": "hyeeun_13d"}, "13": {"D": "hyeeun_14d", "B": "hyeeun_14b", "C": "hyeeun_14b"}, "14": {"A": "hyeeun_15a", "B": "hyeeun_15", "C": "hyeeun_15", "D": "hyeeun_15"}};
+ const AN=[[0, "pre", "나도 {@bag|을} 의자 옆 바닥에 내려놓았다.", "hyeeun_01c"], [1, "pre", "쉬는 시간. 나는 {@cup|을} 들고 복도 정수기로 갔다.", "hyeeun_02c"], [1, "post", "혜은이가 젖은 {@glove|을} 꼭 짰다.", "hyeeun_02b"], [2, "pre", "나는 접은 {@umbrella|을} 들고 혜은이 옆으로 갔다.", "hyeeun_03b"], [3, "post", "그때 교무실 문이 열리고 담임 선생님이 나오셨다.", "hyeeun_04b"], [3, "post", "윤 선생님이 {@key} 하나를 빼서 나에게 내미셨다.", "hyeeun_04c"], [3, "post", "잠시 뒤, 3층에 올라갔던 반 아이들이 투덜거리며 내려왔다.", "hyeeun_04d"], [4, "post", "쉬는 시간이 끝나 갈 때, 혜은이가 내 자리 옆으로 왔다.", "hyeeun_05d"], [5, "pre", "선생님: 「던지는 선은 하나예요.", "hyeeun_06b"], [6, "post", "혜은이가 {@gym_clothes|을} 무릎에 올리고 바퀴를 굴렸다.", "hyeeun_07d"], [7, "pre", "오늘은 내가 우유 당번이었다.", "hyeeun_08b"], [7, "post", "우리는 교무실 앞에서 담임 선생님을 만났다.", "hyeeun_08d"], [8, "post", "혜은이가 미역국을 한 숟가락 떠먹었다.", "hyeeun_09d"], [9, "pre", "도서관 문에는 낮은 문턱이 있었다.", "hyeeun_10a"], [10, "pre", "혜은이 {@flowerpot|은} 컸다.", "hyeeun_11c"], [11, "post", "혜은이가 건의서 끝을 마저 썼다.", "hyeeun_12b"], [11, "post", "혜은이가 건의서를 반으로 접었다.", "hyeeun_12c"], [12, "pre", "그때 지훈이가 카메라를 들고 뛰어왔다.", "hyeeun_13b"], [12, "pre", "카메라 화면에 작년 반장이", "hyeeun_13c"], [13, "post", "우리는 교실 앞에 도착했다.", "hyeeun_14c"], [14, "pre", "꼬마 2가 휠체어 뒤를 힐끗 봤다.", "hyeeun_15b"], [14, "post", "혜은이가 {@glove|을} 꼈다.", "hyeeun_15c"], [14, "post", "혜은이가 교실 쪽으로 바퀴를 굴렸다.", "hyeeun_15d"]];
+ for(const[i,m]of Object.entries(RP))for(const o of EP.hyeeun[i].choices)if(m[o.k])o.r=[{pic:m[o.k]}].concat(o.r||[],[{pic:null}]);
+ const put=(a,txt,pic)=>{for(let j=0;j<a.length;j++){const x=a[j];if(Array.isArray(x)&&typeof x[2]==='string'&&x[2].startsWith(txt)){a.splice(j,0,{pic});return true}if(x&&x.lines&&put(x.lines,txt,pic))return true}return false};
+ for(const[i,w,txt,pic]of AN)if(!put(EP.hyeeun[i][w],txt,pic))console.warn('hyeeun pic: no line',i,w,txt)}
+// pictures not drawn yet are skipped: take a name out of TODO_PICS once scenes/hyeeun_<name>.jpg is in place (prompts: art/scenes/hyeeun/pics2.json)
+{const TODO_PICS=new Set(["hyeeun_01b", "hyeeun_01c", "hyeeun_01d", "hyeeun_02c", "hyeeun_02b", "hyeeun_03a", "hyeeun_03b", "hyeeun_03c", "hyeeun_03d", "hyeeun_04b", "hyeeun_04c", "hyeeun_04d", "hyeeun_05b", "hyeeun_05c", "hyeeun_05d", "hyeeun_06a", "hyeeun_06b", "hyeeun_06c", "hyeeun_06d", "hyeeun_07a", "hyeeun_07b", "hyeeun_07c", "hyeeun_07d", "hyeeun_08b", "hyeeun_08c", "hyeeun_08d", "hyeeun_09a", "hyeeun_09b", "hyeeun_09c", "hyeeun_09d", "hyeeun_10a", "hyeeun_10b", "hyeeun_10c", "hyeeun_10d", "hyeeun_11c", "hyeeun_11d", "hyeeun_12a", "hyeeun_12b", "hyeeun_12c", "hyeeun_13b", "hyeeun_13c", "hyeeun_13d", "hyeeun_14c", "hyeeun_14d", "hyeeun_14b", "hyeeun_15a", "hyeeun_15b", "hyeeun_15c", "hyeeun_15d"]);
+ const drop=a=>{if(!Array.isArray(a))return;for(let j=a.length-1;j>=0;j--){const x=a[j];if(x&&!Array.isArray(x)&&typeof x==='object'){if(typeof x.pic==='string'&&TODO_PICS.has(x.pic)){a.splice(j,1);continue}drop(x.lines)}}};
+ for(const e of EP.hyeeun){drop(e.pre);drop(e.post);for(const o of e.choices){drop(o.r);if(o.r&&o.r.length===1&&o.r[0]&&o.r[0].pic===null)o.r=[];else if(o.r&&o.r.length&&o.r[0]&&o.r[0].pic===null)o.r.shift()}}}
+// a choice's reaction (r) is said as plain lines; when it holds {clear}/{flag}/{pic} steps it plays at the start of post instead (runSteps handles those)
 for(const e of EP.hyeeun)for(const o of e.choices)if(o.r&&o.r.some(x=>!Array.isArray(x))){e.post=[{only:[o.k],lines:o.r}].concat(e.post||[]);o.r=[]}
 {const add=window.EP_WORDS_HE;for(const[k,w]of Object.entries(add))if(!D2WORDS[k])D2WORDS[k]=w;d2Merge()}
 for(const k of Object.keys(EP_WORDS_HE))CARDS_HAVE.add(k);
