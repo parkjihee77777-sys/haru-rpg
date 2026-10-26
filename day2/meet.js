@@ -63,7 +63,7 @@ d2Goal=function(){const left=friendsToday().filter(i=>!PICKS.includes(i));
  if(PICKS.length>=needToday()||!left.length){if(stage==='d2_class'){setGoal('');setTimeout(()=>lessons('pm'),300)}return}
  setGoal(PICKS.length?'점심시간! 한 친구를 더 만나 보기':'오늘 이야기할 친구 2명 고르기',left,id=>PICKS.includes(id),` (${PICKS.length}/${needToday()})`)};
 // a list of lines and finds, played in order; {only:[…]} / {flag,is} parts play only after that choice / with that flag
-// {pic:'name'} shows that picture over the map from there on (what the lines describe, when the map can't show it); a find always goes back to the map
+// {pic:'name'} (in pre, a choice's r or post) shows that picture over the map from there on (what the lines describe, when the map can't show it); a find always goes back to the map
 // {go:'hall'} walks over to another place and goes on there
 // {lay:[[k,x,y,w,picture?]]} lays things on the map from that line on (tap spots too); {clear:[k…]} takes them away again (both gone when the map is left)
 // a picture not drawn yet is skipped (the map stays, no black screen): each meeting checks its pictures when it starts
@@ -77,7 +77,7 @@ function layThings(lay,clear){for(const k of clear||[]){world.querySelectorAll('
  tagAll()}
 function runSteps(steps,choice,done){const q=(steps||[]).slice();
  const next=()=>{const lines=[];
-  while(q.length){const s=q[0];if(Array.isArray(s)){lines.push(q.shift());continue}
+  while(q.length){const s=q[0];if(Array.isArray(s)||typeof s==='function'){lines.push(q.shift());continue}
    if(s.only||s.flag){q.shift();const ok=s.only?s.only.includes(choice):(+!!FLAGS[s.flag])===s.is;if(ok)q.unshift(...s.lines);continue}
    if('pic' in s){q.shift();const pic=s.pic;lines.push(()=>showPic(pic));continue}
    if(s.lay||s.clear){q.shift();lines.push(()=>layThings(s.lay,s.clear));continue}break}
@@ -94,8 +94,10 @@ d2Talk=function(id){const e=epNext(id,EPIDX[id]);
  runSteps(e.pre,null,()=>{const choose=()=>ask(e.ask||'어떻게 할까?',e.choices,o=>{D2CHOICE[id]=o.k;sceneEl.classList.remove('on');
   for(const[f,v]of Object.entries(e.flag||{}))FLAGS[f]=!!v[o.k];
   if(e.vote)FLAGS[id+'_vote']=1;else MEET[id]=(MEET[id]||0)+1;TODAYEP[id]=e;
-  say(o.r||[],()=>runSteps(e.post,o.k,()=>{Object.entries(o.pts||{}).forEach(([p,n])=>heart(p,n));PICKS.push(id);TALKED.add(id);SCENE_IDS=null;SCENE_EP=null;GOWITH=null;
-   setTimeout(()=>lessons(PICKS.length>=needToday()?'pm':'am'),500)}))});
+  const r=o.r||[],thenPost=()=>runSteps(e.post,o.k,()=>{Object.entries(o.pts||{}).forEach(([p,n])=>heart(p,n));PICKS.push(id);TALKED.add(id);SCENE_IDS=null;SCENE_EP=null;GOWITH=null;
+   setTimeout(()=>lessons(PICKS.length>=needToday()?'pm':'am'),500)});
+  // a reaction with showPic functions in it (Siwoo) still plays as plain lines; one with {pic}/{lay}/{only} steps plays through runSteps
+  if(r.some(x=>typeof x==='function'))say(r,thenPost);else runSteps(r,o.k,thenPost)});
   if(pic&&PICOK[e.scene]!==false){scene(e.scene,[],choose,true);picProbe(e.scene)}else{showPic(null);choose()}})};
 // ---- lessons: the class at their desks listening to the teacher (a picture over the classroom; the same lines as before) ----
 const LESSON_PICS=['lesson_1','lesson_2','lesson_3'];// morning pictures (scenes/<name>.jpg), the last one is the afternoon; none = lines on the classroom map
