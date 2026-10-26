@@ -24,7 +24,7 @@ EP.hangyeol=[
   ['junho','smile','……초록색 돼?'],
   ['nar','','준호가 {@line} 맨 뒤에 섰다. 아이들이 또 웃었다. 이번엔 준호를 보고.'],
   ['hangyeol','laugh','자, 다음 손님!'],
-  {k:'thread',goal:'「{x}」 고르기'},{pic:'hangyeol_01'},
+  {k:'thread',goal:'「{x}」 고르기'},{pic:'hangyeol_01c'},
   ['hangyeol','smile','색 골라. 이건 딸기우유색, 이건 새벽보라, 이건 운동장 초록.'],
   ['nar','','한결이는 색마다 이름이 있었다. 손목의 팔찌는 딸기우유색과 새벽보라였다.'],
   ['think','surprised','(뭘 고르지? 뭐라고 말하지?)']],
@@ -46,6 +46,7 @@ EP.hangyeol=[
    ['hangyeol','laugh','괜찮아, 전학생. 나 이미 이겼어. 쟤 지금 내 손님이잖아.'],['nar','','한결이가 씩 웃었다. 나는 머쓱해졌다.'],['hangyeol','smile','그래서, 너는 무슨 색?']]}],
  post:[
   {k:'scissors',goal:'「{x}」 건네주기'},
+  {pic:'hangyeol_01b'},
   ['nar','','한결이가 {@thread} 끝을 싹둑 잘랐다. 그리고 완성된 팔찌를 내 손목에 묶어 줬다. 매듭이 단단했다.'],
   ['hangyeol','laugh','개업 기념이라 첫 개는 공짜. 끊어지면 A/S도 해 줌.'],
   ['me','surprised','A/S가 뭐야?'],
@@ -61,6 +62,7 @@ EP.hangyeol=[
 {title:'가운데 줄',scene:'hangyeol_02',place:'gym',at:[760,560],
  things:{gym:[['line',1010,720,190]]},
  pre:[
+  {pic:'hangyeol_02a'},
   ['nar','','강당. 외부에서 오신 강사 선생님이 안전교육을 하러 오셨다. 담임 선생님은 출석을 확인하러 잠깐 교무실에 가셨다.'],
   ['nar','','나는 한결이 옆에 섰다. 한결이는 오늘 {@hair_tie}이 새벽보라색이었다.'],
   ['hangyeol','laugh','안녕, 팔찌 쌍둥이. 아니, 손님.'],
@@ -88,6 +90,7 @@ EP.hangyeol=[
    ['me','smile','선생님! 키 순서로 한 {@line}로 서면 안 돼요? 저 아직 우리 반 {@line} 몰라서요.'],['nar','','강사: 「음? 한 {@line}로?」'],['nar','','아이: 「그게 더 빨라요! 우리 반은 원래 번호순이에요!」'],
    ['nar','','강사: 「그래? 그럼 번호순으로 한 {@line}!」'],['nar','','아이들이 다시 한 {@line}로 섰다. 한결이가 내 뒤에 섰다. 등 뒤에서 작게 들렸다.'],['hangyeol','smile','……땡큐.']]}],
  post:[
+  {pic:'hangyeol_02b'},
   ['nar','','그때 담임 선생님이 강당에 들어오셨다. 강사 선생님과 몇 마디 나누시더니 앞에 서셨다.'],
   ['nar','','선생님: 「우리 반은 번호순 한 {@line}로 설게요. 앞으로 행사 때도 이렇게 해요.」'],
   ['nar','','선생님은 그 말만 하셨다. 누구도 쳐다보지 않으셨다. 아이들이 번호순으로 섰다.'],
@@ -251,6 +254,7 @@ EP.hangyeol=[
 {title:'누이 역',scene:'hangyeol_06',place:'class',at:[1300,262],
  things:{class:[['rice_cake',790,205,46],['mask',905,205,58]]},
  pre:[
+  {pic:'hangyeol_06'},
   ['nar','','학예회 연극은 「해님 달님」으로 정해졌다. {@blackboard}에 역할이 적혔다. 오빠, 누이, 엄마, 호랑이, 나무꾼.'],
   ['nar','','나는 한결이 자리로 갔다. 한결이는 {@blackboard}을 뚫어지게 보고 있었다.'],
   ['me','smile','너 뭐 할 거야?'],
@@ -427,6 +431,7 @@ EP.hangyeol=[
  post:[
   {k:'stairs',goal:'「{x}」 피해서 걷기'},
   ['nar','','5학년들이 내려간 {@stairs} 반대쪽 복도로 교실에 갔다.'],
+  {go:'class'},
   ['nar','','교실. 나는 담임 선생님께 본 걸 말씀드렸다.'],
   {only:['A','C'],lines:[['nar','','한결이도 옆에 있었다.']]},
   {only:['B','D'],lines:[['nar','','한결이 없이, 나 혼자 말씀드렸다. 아까 일이 계속 생각났다.']]},
@@ -449,6 +454,7 @@ EP.hangyeol=[
 {title:'혼자 쓰는 방',scene:'hangyeol_10',place:'class',at:[1380,330],
  things:{class:[['magnet',1110,262,30]]},
  pre:[
+  {pic:'hangyeol_10'},
   ['nar','','쉬는 시간. 지난주에 다녀온 수련회 사진이 교실 뒤 게시판에 붙었다. 사진 옆에는 그때 쓰던 방 배정표도 같이 붙어 있었다. 아이들이 우르르 몰려가 자기 얼굴을 찾았다.'],
   ['nar','','나는 한결이 옆으로 갔다. 한결이는 배정표에서 조금 떨어진 자리에 서 있었다.'],
   {k:'blackboard',goal:'「{x}」 옆 보기'},
@@ -783,7 +789,7 @@ runSteps=function(steps,choice,done){const q=(steps||[]).slice();let pic=false;
    if(s.fx){if(lines.length)break;q.shift();sceneFx(s.fx);continue}
    if(s.lay||s.clear){q.shift();lines.push(()=>layThings(s.lay,s.clear));continue}
    if(s.pic!==undefined){if(lines.length)break;q.shift();pic=!!s.pic;showPic(s.pic);continue}break}
-  const go=()=>{if(!q.length){if(pic)showPic(null);done&&done();return}const f=q.shift();if(f.fx){sceneFx(f.fx);next();return}if(f.pic!==undefined){pic=!!f.pic;showPic(f.pic);next();return}if(pic){pic=false;showPic(null)}if(f.go){fade(()=>{load(f.go);next()});return}if(f.bag){bagFind(f.k,f.bag,f.goal,next);return}find(f.k,()=>{TODAY.add(f.k);next()},f.goal||'「{x}」 찾기')};
+  const go=()=>{if(!q.length){if(pic)showPic(null);done&&done();return}const f=q.shift();if(f.fx){sceneFx(f.fx);next();return}if(f.pic!==undefined){pic=!!f.pic;showPic(f.pic);next();return}if(pic){pic=false;showPic(null)}if(f.go){fade(()=>{load(f.go);next()});return}if(f.bag){bagFind(f.k,f.bag,f.goal,next);return}if('tray' in f)TRAY_NEXT=f.tray;find(f.k,()=>{TODAY.add(f.k);next()},f.goal||'「{x}」 찾기')};
   if(lines.length)say(lines,go);else go()};
  next()};
 // two places drawn for Hangyeol's scenes: the library (Day 4) and the room at the school trip (Day 12, remembered)
