@@ -9,10 +9,10 @@ st.textContent=`.tk{white-space:nowrap}
 .bubble{white-space:normal;max-width:min(420px,92vw);text-align:center;text-wrap:balance;line-height:1.3}
 @media (max-width:600px){.bubble{max-width:min(420px,96vw)}}`;
 document.head.appendChild(st);
-// wrap every space-separated piece of the element's text in a no-break span (long pieces can still break)
+// wrap every space-separated piece of the element's text in a no-break span (long pieces and Chinese/Japanese, which has no spaces, can still break)
 function fitTokens(el){if(!el)return;const walk=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);const ns=[];while(walk.nextNode())ns.push(walk.currentNode);
  for(const n of ns){if(n.parentNode&&n.parentNode.classList&&n.parentNode.classList.contains('tk'))continue;const parts=n.nodeValue.split(/(\s+)/);if(parts.length<2&&!/\S/.test(n.nodeValue))continue;
-  const f=document.createDocumentFragment();for(const p of parts){if(!p)continue;if(/^\s+$/.test(p)||p.length>18){f.appendChild(document.createTextNode(p));continue}const s=document.createElement('span');s.className='tk';s.textContent=p;f.appendChild(s)}
+  const f=document.createDocumentFragment();for(const p of parts){if(!p)continue;if(/^\s+$/.test(p)||p.length>18||/[\u3040-\u30ff\u3400-\u9fff]/.test(p)){f.appendChild(document.createTextNode(p));continue}const s=document.createElement('span');s.className='tk';s.textContent=p;f.appendChild(s)}
   n.parentNode.replaceChild(f,n)}}
 window.fitTokens=fitTokens;
 // over-head bubbles: whole words; one taller than about four lines (five on a wide screen) moves to the talk panel
