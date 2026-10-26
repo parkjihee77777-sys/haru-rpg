@@ -46,6 +46,8 @@ const JA_RU={
  sock:['くつした','носок'],ankle:['あしくび','лодыжка'],goal:['ゴール','ворота'],bed:['ベッド','кровать'],towel:['タオル','полотенце'],wall:['かべ','стена'],vest:['ビブス','манишка'],band_aid:['ばんそうこう','пластырь'],
  // Yuna's scenes (ep_yuna.js); textbook is listed above
  swing:['ブランコ','качели'],drawing_paper:['がようし','альбомный лист'],tangerine:['みかん','мандарин'],indoor_shoes:['うわばき','сменная обувь'],
+ // Haeun's scenes (ep_haeun.js); textbook and indoor_shoes are listed above
+ snack:['おかし','печенье'],toothbrush:['はブラシ','зубная щётка'],stone:['いし','камешек'],forehead:['おでこ','лоб'],blanket:['もうふ','плед'],nose:['はな','нос'],notice_book:['れんらくちょう','дневник'],clothes:['ふく','одежда'],gift:['プレゼント','подарок'],banana:['バナナ','банан'],
  // Jihoon's scenes (ep_jihoon.js)
  shadow:['かげ','тень'],phone:['スマホ','телефон'],camera:['カメラ','фотоаппарат'],flower:['はな','цветок'],eye:['め','глаз'],grandma:['おばあちゃん','бабушка'],doll:['ぬいぐるみ','игрушка'],friend:['ともだち','друг'],sand:['すな','песок'],tree:['き','дерево'],name:['なまえ','имя'],spider:['クモ','паук'],teacher:['せんせい','учительница'],sun:['たいよう','солнце']
 };
