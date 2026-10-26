@@ -599,6 +599,8 @@ Object.assign(window.T.en,{'👆 화면을 끌어서 둘러볼 수 있어요':'�
 Object.assign(window.T.id,{'👆 화면을 끌어서 둘러볼 수 있어요':'👆 Geser layar untuk melihat sekeliling'});
 Object.assign(window.T.vi,{'👆 화면을 끌어서 둘러볼 수 있어요':'👆 Kéo màn hình để nhìn xung quanh'});
 Object.assign(window.T.zh,{'👆 화면을 끌어서 둘러볼 수 있어요':'👆 拖动屏幕可以四处看看'});
+window.T.ja=window.T.ja||{};window.T.ja['👆 화면을 끌어서 둘러볼 수 있어요']='👆 がめんをドラッグして見まわせるよ';
+window.T.ru=window.T.ru||{};window.T.ru['👆 화면을 끌어서 둘러볼 수 있어요']='👆 Проведи по экрану, чтобы осмотреться';
 
 Object.assign(window.T.en,{'말 한마디 못 하는 전학생,<br>반장 선거에 나가다.':'A new student who can’t speak a word<br>runs for class president.'});
 Object.assign(window.T.id,{'말 한마디 못 하는 전학생,<br>반장 선거에 나가다.':'Murid baru yang belum bisa bicara sepatah kata pun<br>ikut pemilihan ketua kelas.'});
