@@ -10,7 +10,7 @@ EP.hyeeun=[
 {title:'길 막지 마',scene:'hyeeun_01',place:'class',at:[700,880],with:[['jihoon',980,860]],
  pre:[
   ['nar','','쉬는 시간. 교실 뒤쪽이 시끄러웠다. 아이들이 {@bag|을} 책상 옆 바닥에 내려놓고 떠들고 있었다.'],
-  {lay:[['bag',820,880,52]]},
+  {lay:[['bag',668,938,54]]},
   ['nar','','나도 {@bag|을} 의자 옆 바닥에 내려놓았다. 책상 옆 고리에 거는 걸 깜빡했다.'],
   ['think','surprised','(첫날 자기소개 할 때 「천천히 해도 돼」 해 준 애가 있었는데. 누구였지?)'],
   ['nar','','그때 뒤에서 목소리가 들렸다.'],
@@ -1317,6 +1317,10 @@ window.EP_WORDS_HE={
 {const TODO_PICS=new Set(["hyeeun_01b", "hyeeun_03d", "hyeeun_04b", "hyeeun_04c", "hyeeun_04d", "hyeeun_05b", "hyeeun_05c", "hyeeun_05d", "hyeeun_06a", "hyeeun_06b", "hyeeun_06c", "hyeeun_06d", "hyeeun_07a", "hyeeun_07b", "hyeeun_07c", "hyeeun_07d", "hyeeun_08b", "hyeeun_08c", "hyeeun_08d", "hyeeun_09a", "hyeeun_09b", "hyeeun_09c", "hyeeun_09d", "hyeeun_10a", "hyeeun_10b", "hyeeun_10c", "hyeeun_10d", "hyeeun_11c", "hyeeun_11d", "hyeeun_12a", "hyeeun_12b", "hyeeun_12c", "hyeeun_13b", "hyeeun_13c", "hyeeun_13d", "hyeeun_14c", "hyeeun_14d", "hyeeun_14b", "hyeeun_15a", "hyeeun_15b", "hyeeun_15c", "hyeeun_15d"]);
  const drop=a=>{if(!Array.isArray(a))return;for(let j=a.length-1;j>=0;j--){const x=a[j];if(x&&!Array.isArray(x)&&typeof x==='object'){if(typeof x.pic==='string'&&TODO_PICS.has(x.pic)){a.splice(j,1);continue}drop(x.lines)}}};
  for(const e of EP.hyeeun){drop(e.pre);drop(e.post);for(const o of e.choices){drop(o.r);if(o.r&&o.r.length===1&&o.r[0]&&o.r[0].pic===null)o.r=[];else if(o.r&&o.r.length&&o.r[0]&&o.r[0].pic===null)o.r.shift()}}}
+// meeting 1: while my bag lies on the floor by her wheel (laid at 668,938 until the bag find clears it), I walk without it (walk/<hero>_nobag.png, when drawn)
+{const NB={};for(const h of ['hero_f','hero_m']){const im=new Image();im.onload=()=>NB[h]=true;im.onerror=()=>NB[h]=false;im.src=`walk/${h}_nobag.png`}
+ const bagOff=off=>{if(me&&me.el&&(!off||NB[HERO]))me.el.style.backgroundImage=`url(walk/${HERO}${off?'_nobag':''}.png)`};
+ const _lt=layThings;layThings=function(lay,clear){const r=_lt.apply(this,arguments);if(SCENE_EP===EP.hyeeun[0]){if((lay||[]).some(x=>x[0]==='bag'&&x[1]===668&&x[2]===938))bagOff(true);if((clear||[]).includes('bag'))bagOff(false)}return r}}
 // a choice's reaction (r) is said as plain lines; when it holds {clear}/{flag}/{pic} steps it plays at the start of post instead (runSteps handles those)
 for(const e of EP.hyeeun)for(const o of e.choices)if(o.r&&o.r.some(x=>!Array.isArray(x))){e.post=[{only:[o.k],lines:o.r}].concat(e.post||[]);o.r=[]}
 {const add=window.EP_WORDS_HE;for(const[k,w]of Object.entries(add))if(!D2WORDS[k])D2WORDS[k]=w;d2Merge()}
