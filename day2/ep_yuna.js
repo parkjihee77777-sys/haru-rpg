@@ -89,7 +89,7 @@ EP.yuna=[
   ['junho','laugh','유나야, {@pencil} 고마워! 다 썼어.'],
   {lay:[['pencil',1300,688,40]]},
   ['nar','','준호가 {@pencil|을} 내 책상 모서리에 내려놓고 자리로 뛰어갔다. 유나 책상이 아니라 내 책상이었다.'],
-  {k:'pencil',goal:'「{x}」 돌려주기'},
+  {k:'pencil',goal:'「{x}」 돌려주기',bag:['eraser','pencil','pcase','notebook','handkerchief']},
   {clear:['pencil','eraser']},
   ['nar','','준호가 두고 간 {@pencil|을} 유나 필통에 넣어 주었다.'],
   {pic:'yuna_01c'},
@@ -194,7 +194,7 @@ EP.yuna=[
   common:[['me','laugh','근데 웃긴 거. 선생님이 제목 지훈이가 썼냐고 물어보니까, 지훈이가 ‘제가 불러 줬어요’ 했어.'],['mom','laugh','(웃음) 불러 준 것도 일이긴 하지.'],['me','smile','선생님이 그때 유나를 한 번 봤어. 아무 말 안 했어.'],['mom','smile','그렇구나.']]}},
 
 // ■ Day 4 — 1인 1역 셋 (3)
-{title:'1인 1역 셋',scene:'yuna_03',place:'class',at:[330,560],
+{title:'1인 1역 셋',scene:'yuna_03',place:'class',at:[200,600,'stand'],
  things:{class:[['trash_can',1127,226,58]]},
  pre:[
   ['nar','','종례가 끝났다. 1인 1역 시간. 교실 뒤 게시판에 각자 맡은 일이 붙어 있었다.'],
@@ -297,8 +297,8 @@ EP.yuna=[
 
 // ■ Day 5 — 너 먼저 타 (4)
 {title:'너 먼저 타',scene:'yuna_04',place:'field',at:[1180,560],with:[['jihoon',1500,640]],
- things:{field:[['swing',1380,700,250],['clock',1628,212,40]]},
  pre:[
+  {lay:[['swing',1385,640,230],['clock',1615,205,64]]},
   ['nar','','점심시간. 운동장 구석에 {@swing|가} 두 개 있었다. 아이들이 {@swing} 옆에 서서 기다리고 있었다. 규칙은 하나. 열 번 왔다 갔다 하면 내리기.'],
   ['nar','','유나가 {@swing} 앞에 서 있었다. 나는 유나 뒤에 섰다.'],
   ['yuna','smile','어, 안녕! 너도 {@swing}?'],
@@ -661,7 +661,7 @@ EP.yuna=[
   common:[['me','smile','그리고 유나가 바로 {@pencil|을} 주려고 했어. 받으면 뭘 꼭 줘야 할 것 같대.'],['mom','surprised','그래서?'],['me','smile','빌리기만 했어. 내 {@pencil} 심 부러져서. 3교시 끝나고 돌려줬어.'],['me','laugh','그리고 내가 전에 유나 {@eraser} 빌렸었잖아. 그 얘기 하니까 유나가 {@pencil} 목소리로 ‘우리 비긴 거예요’ 했어.'],['mom','laugh','(웃음) 비겼네.']]}},
 
 // ■ Day 9 — 다 같이 했다고 해 줘 (8)
-{title:'다 같이 했다고 해 줘',scene:'yuna_08',place:'class',at:[1218,722],with:[['jihoon',1480,820],['yena',1050,830]],
+{title:'다 같이 했다고 해 줘',scene:'yuna_08',place:'class',at:[1218,722],with:[['jihoon',1480,820],['yena',1340,800,null,'stand']],
  pre:[
   ['nar','','아침. 1교시 전에 모둠 신문을 붙여서 내야 했다. 우리 모둠은 지난번 국어 모둠과 같았다. 유나, 지훈, 예나, 나. 지난번 종례 때 정했다. 각자 기사 한 칸씩 써 오고, 오늘 아침에 큰 {@drawing_paper|에} 같이 붙이기로.'],
   ['nar','','나는 내 기사를 써 왔다. 「우리 학교 그네」. 다섯 줄. 집에서 엄마한테 맞춤법을 두 개 물어봤다.'],
@@ -765,7 +765,7 @@ EP.yuna=[
   ['nar','','점심시간. 급식실. 오늘 반찬 옆 칸에 {@tangerine|이} 하나씩 있었다.'],
   {k:'tray',goal:'「{x}」 받기'},
   ['nar','','{@tray|을} 받아 배식 줄로 갔다.'],
-  {lay:[['tangerine',700,470,34]]},
+  {lay:[['tangerine',700,470,62]]},
   {pic:'yuna_09a'},
   ['nar','','나는 유나 맞은편에 앉았다. 유나가 {@tangerine|을} {@tray} 맨 구석에 놓았다. 그리고 가끔 봤다. 반찬을 먹으면서 한 번, 국을 먹으면서 한 번.'],
   ['think','smile','(유나, {@tangerine} 좋아하나 봐.)'],
@@ -835,7 +835,7 @@ EP.yuna=[
   {pic:'yuna_09c'},
   ['nar','','그리고 껍질을 깠다. 한 조각을 떼어 내게 내밀었다.'],
   ['yuna','smile','이건 주고 싶어서 주는 거야.'],
-  {k:'tangerine',goal:'「{x}」 한 조각 받기'},
+  {k:'tangerine',goal:'「{x}」 한 조각 받기',tray:false},
   {clear:['tangerine']},
   ['nar','','유나가 내민 {@tangerine} 한 조각을 받았다.'],
   ['nar','','{@tangerine|이} 달았다.'],
@@ -850,11 +850,12 @@ EP.yuna=[
 
 // ■ Day 11 — 열 번째 풀 (10)
 {title:'열 번째 풀',scene:'yuna_10',place:'class',at:[1218,722],with:[['jihoon',1480,820],['yena',1050,830],['junho',1000,680],['haeun',600,720]],
- things:{class:[['scissors',1290,214,44]]},
  pre:[
   ['nar','','5교시 미술. 잡지를 오려 붙여 「내가 좋아하는 것」을 만드는 시간이었다.'],
   ['nar','','선생님: 「{@scissors|로} 오리고, {@glue|로} 붙여요. 30분이에요.」'],
+  {lay:[['scissors',1290,214,64]]},
   {k:'scissors',goal:'「{x}」 꺼내기'},
+  {clear:['scissors']},
   ['nar','','사물함에서 {@scissors|를} 꺼내 자리로 왔다.'],
   ['nar','','나는 오리기부터 했다. 공, 강아지, 그네 사진. 다 오렸다.'],
   {pic:'yuna_10a'},
@@ -1131,9 +1132,7 @@ EP.yuna=[
  also:{gatesun:[880,560]},
  pre:[
   ['nar','','종례가 끝났다. 1층 신발장 앞. 다들 {@indoor_shoes|를} 벗고 운동화로 갈아 신었다.'],
-  {lay:[['indoor_shoes',1240,560,52]]},
-  {k:'indoor_shoes',goal:'「{x}」 벗어서 넣기'},
-  {clear:['indoor_shoes']},
+  {k:'indoor_shoes',goal:'「{x}」 벗어서 넣기',bag:['indoor_shoes','shoes','sock','hand','pocket']},
   ['nar','','{@indoor_shoes|를} 벗어 신발장 칸에 넣고 운동화를 신었다.'],
   {pic:'yuna_13b'},
   ['nar','','유나가 옆 칸에서 운동화 끈을 빨리 묶고 있었다. 신발장 위 시계를 두 번 봤다.'],
@@ -1204,10 +1203,10 @@ EP.yuna=[
    ['think','sad','(유나가 나한테 처음 집 얘기 했는데. 나는 ‘괜찮아’ 하고 얘기를 끝냈어.)']]}],
  post:[
   ['nar','','교문 앞. 노란 유치원 차가 오고 있었다. 유나가 운동화 끈이 풀린 걸 봤다.'],
-  {lay:[['bag',940,600,56]]},
+  {lay:[['bag',960,610,72]]},
   ['yuna','smile','아, 끈. 잠깐 {@bag} 좀 들어 줄래?'],
   ['nar','','유나가 나한테 부탁을 했다. 「아, 내가 할게」가 아니라, 「들어 줄래?」.'],
-  {k:'bag',goal:'「{x}」 들어 주기'},
+  {k:'bag',goal:'「{x}」 들어 주기',tray:false},
   {clear:['bag']},
   {pic:'yuna_13d'},
   ['nar','','유나의 {@bag|을} 받아 들었다. 유나가 쪼그려 앉아 끈을 묶었다.'],
@@ -1283,7 +1282,9 @@ EP.yuna=[
   ['me','laugh','……콜.'],
   {pic:'yuna_14b'},
   ['nar','','지호가 {@ball|을} 던졌다. 세게. 나는 받았다.'],
+  {lay:[['ball',730,650,60]]},
   {k:'ball',goal:'「{x}」 주고받기'},
+  {clear:['ball']},
   ['nar','','지호와 {@ball|을} 열 번 주고받았다. 한 칸 뒤로.'],
   {pic:'yuna_14c'},
   ['nar','','체육이 끝나고 교실로 돌아가는 길. 유나가 내 옆으로 왔다.'],

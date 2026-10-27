@@ -23,7 +23,7 @@ d2People=function(id){const ps=_d2PeopleSpots(id).map(p=>p.slice());const S=SEAT
  if(S){const taken=ps.filter(p=>p[3]).map(p=>[p[1],p[3].top]);
   // a friend whose scene is here today picks a seat first, so the kid pushed off a seat by today's things never takes theirs
   const here=f=>(SCENE_IDS||[]).includes(f)?0:(D2IDS.includes(f)&&(epNext(f,EPIDX[f])||{}).place===id)?1:2;
-  for(const p of ps.filter(p=>!p[3]&&SEATED_ART.has(p[0])).sort((a,b)=>here(a[0])-here(b[0]))){let best=null,bd=1e9;
+  for(const p of ps.filter(p=>!p[3]&&p[4]!=='stand'&&SEATED_ART.has(p[0])).sort((a,b)=>here(a[0])-here(b[0]))){let best=null,bd=1e9;
    for(const[top,xs]of S)for(const x of xs){if(taken.some(([tx,tt])=>tt===top&&Math.abs(tx-x)<40)||seatHidesThing(id,x,top))continue;const d=Math.hypot(x-p[1],top+150-p[2]);if(d<bd){bd=d;best=[x,top]}}
    if(best){p[1]=best[0];p[2]=0;p[3]={top:best[1]};taken.push(best)}}}
  const placed=ps.filter(p=>p[3]).map(spotOf);
