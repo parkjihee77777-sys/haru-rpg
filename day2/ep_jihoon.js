@@ -191,7 +191,7 @@ EP.jihoon=[
   common:[['me','surprised','{m}, 창밖에 {@cloud} 있어?'],['mom','surprised','노을 쪽에 하나 있네. 저건 뭐 같아?'],['me','smile','음…… 양말. 지훈이가 아까 짝 잃어버린 양말 같다고 했어.'],['mom','laugh','(웃음) 짝 잃어버린 양말이라니.']]}},
 
 // ■ Day 4 — 포즈 끝나고 (3)
-{title:'포즈 끝나고',scene:'jihoon_03',place:'flowerbed',at:[1270,560],with:[['youngmin',470,660]],taps:{flowerbed:[['flower',1440,870,55]]},
+{title:'포즈 끝나고',scene:'jihoon_03',place:'flowerbed',at:[1270,560],with:[['youngmin',470,660]],
  pre:[
   {pic:'jihoon_03a'},
   ['nar','','점심시간. 화단 앞 낮은 담에 지훈이가 앉아 있었다.'],
@@ -276,6 +276,7 @@ EP.jihoon=[
   ['jihoon','smile','봤지? 포즈 끝나고, 웃을 때가 진짜야. 물어보고, 기다리면 돼.'],
   ['think','smile','(물어보면 그 모습이 없어지는 줄 알았어. 근데 기다리니까 다시 왔어.)'],
   ['youngmin','smile','저기 하얀 {@flower}도 찍어 줄래? 나 그 {@flower} 좋아해.'],
+  {lay:[['flower',1440,850,70]]},
   {k:'flower',goal:'「{x}」 찍기'},
   ['nar','','화단의 하얀 {@flower|을} 찍었다. 찰칵. 이번엔 흔들리지 않았다.'],
   ['nar','','종이 울리기 전에 나는 {@camera} 끈을 풀어 지훈이에게 돌려줬다. 지훈이가 화면을 넘기며 하얀 {@flower} {@photo|을} 봤다.'],
@@ -1128,7 +1129,7 @@ EP.jihoon=[
   ['nar','','점심시간. 골대 뒤 잔디에 지훈이가 앉아 있었다. {@camera} 단추를 계속 눌렀다. 화면이 까맸다.'],
   ['jihoon','smile','배터리 없어. 어제 충전 까먹었어.'],
   ['jihoon','smile','오늘 {@sun} 진짜 좋은데. {@cloud}도 있고. 다 놓치겠어.'],
-  {lay:[['sun',1560,90,100]]},
+  {lay:[['sun',1290,95,100]]},
   {k:'sun',goal:'「{x}」 가리키기'},
   {clear:['sun']},
   ['nar','','한 {@hand|으로} {@eye|을} 가리고, 다른 {@hand|으로} {@sun|가} 있는 쪽을 가리켰다. {@sun|를} 똑바로 보지는 않았다.'],
