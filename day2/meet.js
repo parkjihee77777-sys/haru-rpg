@@ -69,7 +69,9 @@ d2Goal=function(){const left=friendsToday().filter(i=>!PICKS.includes(i));
 // a picture not drawn yet is skipped (the map stays, no black screen): each meeting checks its pictures when it starts
 const PICOK={};function picProbe(name){if(name in PICOK)return;PICOK[name]=null;const im=new Image();im.onload=()=>{PICOK[name]=true};
  im.onerror=()=>{PICOK[name]=false;if(sceneEl.style.backgroundImage.includes(`scenes/${name}.jpg`))sceneEl.classList.remove('on')};im.src=`scenes/${name}.jpg`}
-function showPic(name){if(name&&PICOK[name]!==false){picProbe(name);sceneEl.style.backgroundImage=`url(scenes/${name}.jpg)`;sceneEl.classList.add('on');requestAnimationFrame(fitScene)}else sceneEl.classList.remove('on')}
+// a picture that shows me (or my shadow) has a boy and a girl version: HEROPIC.add('name') in ep_<id>.js, files scenes/name_m.jpg and name_f.jpg
+const HEROPIC=new Set();function heroPic(n){return n&&HEROPIC.has(n)?n+(HERO==='hero_m'?'_m':'_f'):n}
+function showPic(name){name=heroPic(name);if(name&&PICOK[name]!==false){picProbe(name);sceneEl.style.backgroundImage=`url(scenes/${name}.jpg)`;sceneEl.classList.add('on');requestAnimationFrame(fitScene)}else sceneEl.classList.remove('on')}
 function layThings(lay,clear){for(const k of clear||[]){world.querySelectorAll('.laid').forEach(e=>{if(e.dataset.k===k)e.remove()});OBJ[MAP]=(OBJ[MAP]||[]).filter(o=>!(o.laid&&o[0]===k))}
  for(const[k,x,y,w,img]of lay||[]){const it=document.createElement('img');it.className='item thing laid';it.dataset.k=k;it.src=`items/${img||k}.png`;
   it.style.cssText=`position:absolute;width:${w||56}px;left:${x}px;top:${y}px;transform:translate(-50%,-100%);z-index:${Math.round(y)+1};pointer-events:none;filter:drop-shadow(0 2px 2px rgba(0,0,0,.25))`;world.appendChild(it);
@@ -90,7 +92,7 @@ d2Talk=function(id){const e=epNext(id,EPIDX[id]);
  if(!e||PICKS.includes(id)||!['d2_class'].includes(stage)||PICKS.length>=needToday()){
   if(e||!DD()[id]){say([AGAIN[id]||['think','smile','(오늘은 여기까지. 내일 또 얘기해 보자.)']]);return}
   return _d2Talk(id)}
- setGoal('');for(const m of JSON.stringify(e).matchAll(/"(?:pic|scene)":"(\w+)"/g))picProbe(m[1]);const pic=!!e.scene&&PICOK[e.scene]!==false;SCENE_IDS=[id].concat((e.with||[]).map(w=>w[0]));SCENE_EP=e;GOWITH=null;
+ setGoal('');for(const m of JSON.stringify(e).matchAll(/"(?:pic|scene)":"(\w+)"/g))picProbe(heroPic(m[1]));const hs=heroPic(e.scene),pic=!!e.scene&&PICOK[hs]!==false;SCENE_IDS=[id].concat((e.with||[]).map(w=>w[0]));SCENE_EP=e;GOWITH=null;
  runSteps(e.pre,null,()=>{const choose=()=>ask(e.ask||'어떻게 할까?',e.choices,o=>{D2CHOICE[id]=o.k;sceneEl.classList.remove('on');
   for(const[f,v]of Object.entries(e.flag||{}))FLAGS[f]=!!v[o.k];
   if(e.vote)FLAGS[id+'_vote']=1;else MEET[id]=(MEET[id]||0)+1;TODAYEP[id]=e;
@@ -98,7 +100,7 @@ d2Talk=function(id){const e=epNext(id,EPIDX[id]);
    setTimeout(()=>lessons(PICKS.length>=needToday()?'pm':'am'),500)});
   // a reaction with showPic functions in it (Siwoo) still plays as plain lines; one with {pic}/{lay}/{only} steps plays through runSteps
   if(r.some(x=>typeof x==='function'))say(r,thenPost);else runSteps(r,o.k,thenPost)});
-  if(pic&&PICOK[e.scene]!==false){scene(e.scene,[],choose,true);picProbe(e.scene)}else{showPic(null);choose()}})};
+  if(pic&&PICOK[hs]!==false){scene(hs,[],choose,true);picProbe(hs)}else{showPic(null);choose()}})};
 // ---- lessons: the class at their desks listening to the teacher (a picture over the classroom; the same lines as before) ----
 const LESSON_PICS=['lesson_1','lesson_2','lesson_3'];// morning pictures (scenes/<name>.jpg), the last one is the afternoon; none = lines on the classroom map
 lessons=function(part){setGoal('');busy=true;fade(()=>{if(MAP!=='class')load('class');
