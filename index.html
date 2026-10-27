@@ -119,14 +119,14 @@ body,button{word-break:keep-all;overflow-wrap:break-word}
 <div id="fader"></div>
 <script>
 // same address, newest version: if the page this phone has kept is older than the one online, fetch the new one and reopen
-const BUILD='1027154536';
+const BUILD='1027154710';
 try{fetch(location.pathname,{cache:'no-store'}).then(r=>r.text()).then(t=>{const m=t.match(/const BUILD='(\d+)'/);if(m&&m[1]!==BUILD&&sessionStorage.getItem('upd')!==m[1]){sessionStorage.setItem('upd',m[1]);fetch(location.pathname,{cache:'reload'}).then(()=>location.reload())}}).catch(()=>{})}catch(e){}
 </script>
-<script src="i18n.js?v=1027154536"></script>
-<script src="i18n_prologue_v2.js?v=1027154536"></script>
-<script src="day2/i18n_engine.js?v=1027154536"></script>
-<script src="day2/data.js?v=1027154536"></script>
-<script src="day3/data.js?v=1027154536"></script>
+<script src="i18n.js?v=1027154710"></script>
+<script src="i18n_prologue_v2.js?v=1027154710"></script>
+<script src="day2/i18n_engine.js?v=1027154710"></script>
+<script src="day2/data.js?v=1027154710"></script>
+<script src="day3/data.js?v=1027154710"></script>
 <script>
 // ---------- data ----------
 const MW=1672,MH=941,KID=180;
@@ -531,43 +531,43 @@ function pickHero(){const m=document.getElementById('modal'),c=document.getEleme
  c.innerHTML=`<h2>${tr('괴짜교실 반장되기')}</h2><p>${tr('말 한마디 못 하는 전학생,<br>반장 선거에 나가다.')}</p><p style="margin-top:14px">${tr('누구로 할까요?')}</p>${(()=>{const s=loadSave();return s&&s.day>=2&&s.mode===UI+'-'+LANG?`<p><button class="big" id="cont">${tr(s.day+'일차부터 이어 하기')}</button></p>`:''})()}<div class="pick heroes"><button data-h="hero_f"><img src="faces/hero_f_smile.jpg" alt="여자 주인공"></button><button data-h="hero_m"><img src="faces/hero_m_smile.jpg" alt="남자 주인공"></button></div>`;
  m.classList.add('on');{const cb=document.getElementById('cont');if(cb)cb.onclick=()=>{const s=loadSave();HERO=s.hero;Object.assign(HEART,s.heart||{});(s.found||[]).forEach(k=>FOUND.add(k));HEART_D1={...HEART};chime();(typeof contGame==='function'?contGame(s):startDay(Math.min(s.day,Object.keys(window.D3||{}).length?3:2)))}}c.querySelectorAll('.pick button').forEach(b=>b.onclick=()=>{HERO=b.dataset.h;m.classList.remove('on');chime();bgm('day');load('home_am');say([['nar','','이사 온 다음 날 아침. 아직 풀지 못한 상자들이 쌓여 있다.'],['think','sad','(오늘부터 새 학교야. 여기 말도 아직 서툰데…….)'],['think','smile','({m}한테 인사하고 학교 가야지.)']],morning)})}
 </script>
-<script src="day2/engine.js?v=1027154536"></script>
-<script src="day2/ep_minho.js?v=1027154536"></script>
-<script src="day2/i18n_meet.js?v=1027154536"></script>
-<script src="day2/meet.js?v=1027154536"></script>
-<script src="day2/ep_sua.js?v=1027154536"></script>
-<script src="day2/i18n_sua.js?v=1027154536"></script>
-<script src="day2/ep_hangyeol.js?v=1027154536"></script>
-<script src="day2/i18n_hangyeol.js?v=1027154536"></script>
-<script src="day2/ep_siwoo.js?v=1027154536"></script>
-<script src="day2/i18n_siwoo.js?v=1027154536"></script>
-<script src="day2/ep_haram.js?v=1027154536"></script>
-<script src="day2/i18n_haram.js?v=1027154536"></script>
-<script src="day2/ep_jiho.js?v=1027154536"></script>
-<script src="day2/i18n_jiho.js?v=1027154536"></script>
-<script src="day2/ep_hyeeun.js?v=1027154536"></script>
-<script src="day2/i18n_hyeeun.js?v=1027154536"></script>
-<script src="day2/ep_haneul.js?v=1027154536"></script>
-<script src="day2/i18n_haneul.js?v=1027154536"></script>
-<script src="day2/ep_junho.js?v=1027154536"></script>
-<script src="day2/i18n_junho.js?v=1027154536"></script>
-<script src="day2/ep_yuna.js?v=1027154536"></script>
-<script src="day2/i18n_yuna.js?v=1027154536"></script>
-<script src="day2/ep_yena.js?v=1027154536"></script>
-<script src="day2/i18n_yena.js?v=1027154536"></script>
-<script src="day2/ep_haeun.js?v=1027154536"></script>
-<script src="day2/i18n_haeun.js?v=1027154536"></script>
-<script src="day2/ep_youngmin.js?v=1027154536"></script>
-<script src="day2/i18n_youngmin.js?v=1027154536"></script>
-<script src="day2/ep_seah.js?v=1027154536"></script>
-<script src="day2/i18n_seah.js?v=1027154536"></script>
-<script src="day2/ep_jihoon.js?v=1027154536"></script>
-<script src="day2/i18n_jihoon.js?v=1027154536"></script>
-<script src="words_ja_ru.js?v=1027154536"></script>
-<script src="day2/mybag.js?v=1027154536"></script>
-<script src="day2/spots.js?v=1027154536"></script>
-<script src="day2/textfit.js?v=1027154536"></script>
-<script src="day2/tester.js?v=1027154536"></script>
+<script src="day2/engine.js?v=1027154710"></script>
+<script src="day2/ep_minho.js?v=1027154710"></script>
+<script src="day2/i18n_meet.js?v=1027154710"></script>
+<script src="day2/meet.js?v=1027154710"></script>
+<script src="day2/ep_sua.js?v=1027154710"></script>
+<script src="day2/i18n_sua.js?v=1027154710"></script>
+<script src="day2/ep_hangyeol.js?v=1027154710"></script>
+<script src="day2/i18n_hangyeol.js?v=1027154710"></script>
+<script src="day2/ep_siwoo.js?v=1027154710"></script>
+<script src="day2/i18n_siwoo.js?v=1027154710"></script>
+<script src="day2/ep_haram.js?v=1027154710"></script>
+<script src="day2/i18n_haram.js?v=1027154710"></script>
+<script src="day2/ep_jiho.js?v=1027154710"></script>
+<script src="day2/i18n_jiho.js?v=1027154710"></script>
+<script src="day2/ep_hyeeun.js?v=1027154710"></script>
+<script src="day2/i18n_hyeeun.js?v=1027154710"></script>
+<script src="day2/ep_haneul.js?v=1027154710"></script>
+<script src="day2/i18n_haneul.js?v=1027154710"></script>
+<script src="day2/ep_junho.js?v=1027154710"></script>
+<script src="day2/i18n_junho.js?v=1027154710"></script>
+<script src="day2/ep_yuna.js?v=1027154710"></script>
+<script src="day2/i18n_yuna.js?v=1027154710"></script>
+<script src="day2/ep_yena.js?v=1027154710"></script>
+<script src="day2/i18n_yena.js?v=1027154710"></script>
+<script src="day2/ep_haeun.js?v=1027154710"></script>
+<script src="day2/i18n_haeun.js?v=1027154710"></script>
+<script src="day2/ep_youngmin.js?v=1027154710"></script>
+<script src="day2/i18n_youngmin.js?v=1027154710"></script>
+<script src="day2/ep_seah.js?v=1027154710"></script>
+<script src="day2/i18n_seah.js?v=1027154710"></script>
+<script src="day2/ep_jihoon.js?v=1027154710"></script>
+<script src="day2/i18n_jihoon.js?v=1027154710"></script>
+<script src="words_ja_ru.js?v=1027154710"></script>
+<script src="day2/mybag.js?v=1027154710"></script>
+<script src="day2/spots.js?v=1027154710"></script>
+<script src="day2/textfit.js?v=1027154710"></script>
+<script src="day2/tester.js?v=1027154710"></script>
 <script>
 // the goal shows big for a few seconds, then folds into a small pill (tap it to open it again)
 {const g=document.getElementById('goal');let t=null;const big=()=>{g.classList.remove('mini');clearTimeout(t);t=setTimeout(()=>g.classList.add('mini'),4000)};

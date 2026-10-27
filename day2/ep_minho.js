@@ -300,7 +300,6 @@ EP.minho=[
 // ■ Day 8 — 너 때문에 졌잖아 (7)
 {title:'너 때문에 졌잖아',scene:'minho_07',place:'gym',at:[760,560],
  taps:{gym:[['ball',1392,300,55]]},
- things:{gym:[['shoes',900,640,58]]},
  pre:[
   ['nar','','체육 시간. 피구 팀을 나눴는데 나는 민호와 같은 팀이 됐다.'],
   ['minho','laugh','오, 전학생. 너 피할 줄은 알지?'],
@@ -314,7 +313,7 @@ EP.minho=[
   ['nar','','은찬이는 고개를 푹 숙였다. 귀까지 빨개져 있었다.'],
   ['nar','','선생님: 「2분 쉬고 다음 판!」'],
   ['nar','','나는 민호 옆으로 갔다. 그런데 걷다 보니 내 {@shoes} 끈도 풀려 있었다.'],
-  {k:'shoes',goal:'「{x}」 끈 묶기'},
+  {k:'shoes',goal:'「{x}」 끈 묶기',bag:['sock','hand','shoes','knee','gym_clothes']},// my own shoes: picked like 「내 가방」, not searched on the gym floor
   {k:'ball',goal:'「{x}」 주워 오기'},
   ['minho','angry','다음 판 지면 진짜 은찬이 탓이다.'],
   ['think','sad','(넘어지고 싶어서 넘어진 것도 아닌데. 그리고 2분밖에 없어.)']],
