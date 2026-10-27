@@ -105,7 +105,7 @@ EP.seah=[
   common:[['me','smile','{m}, 세아는 웃을 때 민호 얼굴을 먼저 봐. 민호가 웃으면 웃어.'],['mom','surprised','그래?'],['me','smile','응. 근데 몇 명인지는 제일 먼저 알아. 민호보다 먼저.'],['mom','smile','보는 게 빠른 친구구나.'],{only:['A','C','D'],lines:[['me','smile','그리고 나 경찰 했는데, 지훈이 잡았어. 지훈이가 ‘촌스럽게 잡혔네’ 했어.'],['mom','laugh','(웃음) 잡힌 것도 촌스러운 게 있어?']]},{only:['B'],lines:[['me','smile','다음엔 나도 경찰 할 거야. 나 잘 뛰어.'],['mom','smile','알지. 전에 다니던 학교에서도 맨날 뛰었잖아.']]}]}},
 
 // ■ Day 3 — 벌점 기계 (2)
-{title:'벌점 기계',scene:'seah_02',place:'class',at:[1150,285],with:[['minho',1260,280],['jiho',1050,285]],taps:{class:[['locker',1300,190,60],['chair',885,620,40]]},
+{title:'벌점 기계',scene:'seah_02',place:'class',at:[1150,285],with:[['minho',1260,280],['jiho',990,285],['jihoon',870,290]],taps:{class:[['locker',1300,190,60],['chair',885,620,40]]},
  pre:[
   ['nar','','2교시가 끝났다. 국어책을 넣으려고 교실 뒤로 갔다. 내 {@locker|은} 창가 쪽 맨 끝이었다.'],
   {k:'locker',goal:'「{x}」 열기'},
@@ -191,7 +191,7 @@ EP.seah=[
   common:[['me','smile','{m}, 세아는 웃기 전에 민호 얼굴을 봐. 오늘도 그랬어. 근데 웃을 때 눈은 수아 쪽을 봤어.'],['mom','surprised','웃으면서 수아를 봤어?'],['me','smile','응. 웃는 거 같은데 안 웃는 얼굴이었어.'],['mom','smile','……그런 얼굴이 있지.'],['me','smile','나도 끼고 싶었어. 창가에. 근데 웃으면 끼는 거라서, 그게 좀 이상했어.'],['mom','smile','끼고 싶은 마음은 이상한 게 아니야. 새 교실이잖아.'],['me','smile','응.']]}},
 
 // ■ Day 4 — 정원 다섯 명 (3)
-{title:'정원 다섯 명',scene:'seah_03',place:'class',at:[1150,285],with:[['minho',1260,280],['jiho',1050,285]],
+{title:'정원 다섯 명',scene:'seah_03',place:'class',at:[1150,285],with:[['minho',1260,280],['jiho',990,285]],
  pre:[
   ['nar','','3교시는 수학이었다. 문제를 풀다가 연필심이 부러졌다.'],
   ['think','smile','(아, 연필깎이 써야지.)'],
@@ -316,6 +316,7 @@ EP.seah=[
   {k:'A',text:'「민호 아직 안 왔잖아. 빈 데 앉는 건 괜찮지?」 하고 빈 {@chair}에 앉는다. 영민이도 부른다.',pts:{seah:1},r:[
    ['me','smile','민호 아직 안 왔잖아. 빈 데 앉는 건 괜찮지? 영민아, 여기 앉자.'],
    ['nar','','나는 {@spoon|이} 없는 빈 {@chair}에 앉았다. 영민이도 내 옆에 앉았다. 세아는 아무 말도 안 했다. {@spoon}만 내려다봤다.'],
+   {come:[['minho',1180,470],['jiho',1385,475]]},
    ['nar','','조금 뒤 민호와 지호가 {@tray|을} 들고 왔다. 민호가 식탁을 보더니 얼굴을 찌푸렸다.'],
    ['minho','angry','세아. 자리 맡으랬잖아.'],
    ['seah','sad','……미안.'],
@@ -331,6 +332,7 @@ EP.seah=[
    ['nar','','{@back} 뒤가 잠깐 조용했다.'],
    ['seah','sad','(작게) ……계란말이.'],
    ['me','smile','나도.'],
+   {come:[['minho',1180,470],['jiho',1385,475]]},
    ['nar','','민호와 지호가 왔다. {@spoon} 자리에 앉았다. 민호가 {@back} 뒤의 나를 한 번 봤다. 하지만 나는 세아 식탁에 앉은 게 아니었다. 민호는 아무 말도 안 했다.'],
    ['nar','','그 뒤로도 가끔 {@back} 뒤에서 세아 목소리가 들렸다. 민호한테 「맞아, 맞아.」 하는 소리. 그리고 한 번은, 나한테만 들리게 작게. 「……계란말이 한 개 더 받을 수 있어. 저기 아주머니한테 말하면.」']]},
   {k:'C',text:'「알았어. 나 너랑 먹고 싶었는데. 다음에 같이 먹자.」 하고 영민이와 저쪽 창가 자리로 간다.',pts:{seah:2},r:[
@@ -341,6 +343,7 @@ EP.seah=[
    ['me','smile','영민아, 저기 창가 끝에 한 자리, 그 옆에 하나 더 있어. 같이 가자.'],
    ['youngmin','smile','……응. 천천히 가도 돼? 국 흘려.'],
    ['me','smile','응. 천천히.'],
+   {come:[['minho',1180,470],['jiho',1385,475]]},
    ['nar','','우리는 창가 끝 자리에 앉았다. 세아 식탁이 비스듬히 보였다. 민호와 지호가 와서 앉았다. 세아는 민호 쪽을 보며 「맞아, 맞아.」 했다.'],
    ['nar','','그러다 한 번, 세아가 이쪽을 봤다. 나랑 눈이 마주쳤다. 세아가 {@spoon|을} 살짝 들었다. 인사 같았다.']]},
   {k:'D',text:'영민이와 옆 식탁에 앉은 뒤, 세아에게 손짓한다. 「세아야, 너도 이리 와. 민호 기다리지 말고.」',pts:{seah:1},r:[
@@ -351,12 +354,14 @@ EP.seah=[
    ['me','smile','그냥 와. {@spoon} 두면 되잖아.'],
    ['seah','smile','……안 돼.'],
    ['nar','','세아 목소리가 떨렸다. 세아는 몸을 창 쪽으로 돌려 앉았다. 내 쪽이 안 보이게.'],
+   {come:[['minho',1180,470],['jiho',1385,475]]},
    ['nar','','조금 뒤 민호와 지호가 왔다. 세아는 민호 쪽만 보며 「맞아, 맞아.」 했다. 평소보다 더 자주.'],
    ['think','sad','(이리 오라고 했어. 세아가 거기 있기 싫어 보여서.)'],
    ['think','smile','(근데 세아는 거기 있겠다고 했어. 내가 부르니까 더 꼭 붙어 있어.)']]}],
  post:[
   ['nar','','그때 쨍그랑, 작은 소리가 났다. 영민이 {@spoon|이} 바닥에 떨어졌다. 영민이는 떨어진 {@spoon|을} 내려다봤다. 수저통은 저 멀리 줄 앞이었다.'],
   ['nar','','영민이보다, 나보다 먼저 일어난 사람이 있었다.'],
+  {come:[['minho',1180,470],['jiho',1385,475]]},
   {pic:'seah_04e'},
   ['nar','','세아였다. 민호와 지호가 자기 {@spoon|을} 갖고 와서, 세아가 맡아 둔 {@spoon} 두 개는 남아 있었다. 세아가 그중 하나를 들고 와서 영민이 {@tray} 옆에 놓았다. 그리고 바로 돌아갔다. 아무 말 없이.'],
   ['youngmin','smile','……어.'],
@@ -396,6 +401,7 @@ EP.seah=[
   {k:'door',goal:'「{x}」 열기'},
   ['nar','','교실 뒤쪽 {@door|을} 열었다.'],
   {go:'class'},
+  {put:[['jiho',1010,280]]},
   ['nar','','{@door|을} 열었다. 바로 앞이 창가였다. 민호가 {@locker}에 기대 서 있었다. 지호도 있었다.'],
   {pic:'seah_05b'},
   ['nar','','민호가 우리 둘을 봤다. 웃고 있는 세아를. 그리고 나를.'],
@@ -674,7 +680,7 @@ EP.seah=[
   common:[['me','smile','{m}, 지호는 {@back} 글씨 1등이래. 근데 내가 ‘공’ 썼는데 ‘곰’이래.'],['mom','laugh','(웃음) 곰.'],['me','smile','그리고 ‘방금 건 연습’이래. 지호는 틀리면 맨날 연습이래.'],['mom','surprised','세아는 오늘 웃었어?'],['me','smile','응. 지호 ‘곰’ 할 때. 민호 얼굴 보기 전에 웃었어.'],['mom','smile','요즘 그런 웃음이 자주 나오네.'],['me','surprised','……그런가?']]}},
 
 // ■ Day 9 — 원카드는 다섯 명도 돼 (8)
-{title:'원카드는 다섯 명도 돼',place:'class',at:[1150,285],with:[['minho',1260,280],['jiho',1050,285]],
+{title:'원카드는 다섯 명도 돼',place:'class',at:[1150,285],with:[['minho',1260,280],['jiho',990,285]],
  pre:[
   ['nar','','비가 왔다. 점심시간에 운동장에 못 나갔다. 급식실에서 교실로 오는 길은 지붕이 없는 곳이 조금 있었다.'],
   ['nar','','교실에 들어오니 {@umbrella}에서 {@water|이} 뚝뚝 떨어졌다.'],
@@ -769,7 +775,7 @@ EP.seah=[
   common:[['me','smile','{m}. 세아가 그랬어. 민호 말고 나 본 거 처음이래.'],['mom','smile','처음.'],['me','sad','응. 근데 그게 좀 무서웠어.'],['mom','sad','무서웠어?'],['me','smile','세아는 앞에 선 사람 얼굴 보고 따라 하잖아. 오늘은 내가 앞에 섰어. 내가 ‘인원 찼어’ 하면 세아도 했을 거야.'],['mom','smile','……네가 무슨 말을 하든.'],['me','smile','응. 그러니까 내 말을 조심해야 돼. 근데 세아가 내 말만 따라 하는 것도 이상해.'],['mom','smile','세아가 세아 말을 하면 좋겠구나.'],['me','smile','……응. 그거.']]}},
 
 // ■ Day 10 — 넷이서 (9)
-{title:'넷이서',place:'class',at:[1150,285],with:[['minho',1260,280],['jiho',1050,285],['hangyeol',950,280],['haeun',700,265],['hyeeun',480,270],['haram',380,265]],taps:{class:[['desk',830,425,60]]},
+{title:'넷이서',place:'class',at:[1150,285],with:[['minho',1260,280],['jiho',990,285],['hangyeol',870,285],['haeun',700,265],['hyeeun',480,270],['haram',380,265]],taps:{class:[['desk',830,425,60]]},
  pre:[
   ['nar','','선생님: 「4교시 사회는 모둠으로 ‘우리 동네 지도’ 만들 거예요. 모둠은 늘 선생님이 정했죠? 오늘만 한 번, 네 명씩 자유롭게 모여 보세요.」'],
   ['nar','','선생님: 「대신 약속 하나. 혼자 남는 사람 없게. 다 정해지면 {@desk} 붙이고 앉아요.」'],
@@ -1042,7 +1048,7 @@ EP.seah=[
   common:[['me','smile','근데 엄마! 다음 판에 민호가 세아한테 ‘너도 와’ 했어. 세아가 다음 판에 간다고 하니까, ‘다음 판 말고, 지금’ 했어.'],['mom','surprised','……민호가?'],['me','smile','응. 세아가 처음이래. 민호가 ‘지금’ 한 거. 그리고 세아가 민호 옆으로 걸어갔어. 반 걸음 뒤 말고.'],['mom','smile','그랬구나.'],['me','smile','그리고 내가 들어가면 열셋이라 홀수인데, 지호가 술래 하나 더 하면 된대. 그 자리에서 규칙 만들었어. 그래서 나도 했어.'],['mom','surprised','세아는 꼬리 뺏겼어?'],['me','smile','한 번도 안 뺏겼어. 누가 어디서 오는지 다 봐서.'],['mom','laugh','(웃음) 그건 세아한테 딱 맞는 놀이네.']]}},
 
 // ■ Day 13 — 메아리 (12)
-{title:'메아리',place:'class',at:[1150,285],with:[['minho',1260,280],['jiho',1050,285],['jihoon',950,280]],
+{title:'메아리',place:'class',at:[1150,285],with:[['minho',1260,280],['jiho',990,285],['jihoon',870,290]],
  pre:[
   ['nar','','1교시가 끝났다. 오늘은 내가 {@blackboard} 지우는 날이었다.'],
   {k:'blackboard',goal:'「{x}」 지우기'},
@@ -1141,7 +1147,7 @@ EP.seah=[
   common:[['me','smile','근데 엄마! 민호가 지훈이한테 그거 하지 말래. 별명 따라 하는 거 별로래.'],['mom','surprised','……민호가?'],['me','smile','응. 지호도 ‘네가?’ 했어. 민호가 받아쓰기 때 애들이 ‘30점! 30점!’ 따라 해서 별로였대.'],['mom','smile','그랬구나.'],['me','sad','그리고 벌점 기계도 이제 안 한대. 수아한테 미안하다고 했대. 수아가 ‘정리하면, 알았어’ 하고 형광펜 딸깍 했대.'],['mom','laugh','(웃음) 수아답네.'],['me','smile','응. 그건 웃어도 되는 거였어. 다 같이 웃었어.'],['mom','smile','웃어도 되는 웃음이랑 아닌 웃음을 오늘 둘 다 봤네.']]}},
 
 // ■ Day 14 — 나는 안 할래 (13)
-{title:'나는 안 할래',place:'class',at:[1150,285],with:[['minho',1260,280],['jiho',1050,285],['jihoon',950,280]],
+{title:'나는 안 할래',place:'class',at:[1150,285],with:[['minho',1260,280],['jiho',990,285],['jihoon',870,290]],
  pre:[
   ['nar','','3교시가 끝났다. 국어 {@notebook|을} 덮었다.'],
   {k:'notebook',goal:'「{x}」 덮기',bag:['pencil','eraser','pcase','notebook','scissors']},
@@ -1429,6 +1435,17 @@ window.EP_WORDS_SE={
 // ---- what Seah's scenes need from the engine (on top of meet.js and the other per-friend files) ----
 // a choice's reaction (r) is said as plain lines; when it holds {pic}/{lay}/{clear} steps it plays at the start of post instead (runSteps handles those)
 for(const e of EP.seah)for(const o of e.choices)if(o.r&&o.r.some(x=>!Array.isArray(x))){e.post=[{only:[o.k],lines:o.r}].concat(e.post||[]);o.r=[]}
+// {come:[[id,x,y]…]}: kids who arrive in the middle of a scene (Day 5 lunch: Minho and Jiho come in late) walk in from the door then
+// {put:[[id,x,y]…]}: kids already there when the hero walks into a place (Day 6: Jiho by the lockers with Minho) — standing there from the start
+// {come:[[id,x,y]…]}: kids who arrive in the middle of a scene (Day 5 lunch: Minho and Jiho come in late) walk in from the door then
+// both ride in a {clear} step (every runSteps, Hangyeol's too, plays {lay}/{clear} through layThings), so layThings does them
+{const join=w=>{if(SCENE_IDS&&!SCENE_IDS.includes(w[0]))SCENE_IDS.push(w[0])};
+ const put=ws=>{for(const w of ws){const i=npcs.findIndex(n=>n.id===w[0]);if(i>=0&&!npcs[i].seat&&Math.hypot(npcs[i].x-w[1],npcs[i].y-w[2])>200){npcs[i].el.remove();npcs.splice(i,1)}}
+  for(const w of ws)if(!npcs.some(n=>n.id===w[0])){npcs.push(sprite(w[0],w[1],w[2]));join(w)}};
+ const come=ws=>{let k=0;for(const w of ws)if(!npcs.some(n=>n.id===w[0])){npcs.push(comeOver(w,k++));join(w)}};
+ const _laySe=layThings;layThings=function(lay,clear){const keep=[];for(const c of clear||[]){if(c&&c.put)put(c.put);else if(c&&c.come)come(c.come);else keep.push(c)}return _laySe(lay,keep)};
+ const fix=L=>(L||[]).forEach((x,i)=>{if(x&&typeof x==='object'&&!Array.isArray(x)){if(x.come||x.put)L[i]={clear:[x]};else if(x.lines)fix(x.lines)}});
+ for(const e of EP.seah){fix(e.pre);fix(e.post);for(const o of e.choices||[])fix(o.r)}}
 {const add=window.EP_WORDS_SE;for(const[k,w]of Object.entries(add))if(!D2WORDS[k])D2WORDS[k]=w;d2Merge()}
 // a word card only where the picture exists (tree, back and sand have no card yet)
 for(const k of ['water_bottle','desk','chair','window'])CARDS_HAVE.add(k);
@@ -1436,6 +1453,11 @@ for(const k of ['water_bottle','desk','chair','window'])CARDS_HAVE.add(k);
 {const _ntSe=npcThing;npcThing=function(n,y){if(FIND==='back'&&n.id==='jiho')return 'back';return _ntSe(n,y)}}
 // …and while that find runs Jiho turns around, so his back is what you see
 {const _fdSe=find;find=function(k,done,goal,label){if(k==='back'){const j=npcs.find(p=>p.id==='jiho');if(j){j.dir='up';draw(j)}}return _fdSe(k,done,goal,label)}}
+// a kid Seah's scene brings along who already stands somewhere else on this map (their own scene today is here too) walks over like the others:
+// take them off their spot so d2Talk brings them in from the door to where the scene puts them
+{const _dtSe=d2Talk;d2Talk=function(id){const e=id==='seah'&&epNext('seah',EPIDX.seah);
+  if(e&&e.place===MAP)for(const w of e.with||[]){const i=npcs.findIndex(n=>n.id===w[0]);if(i>=0&&!npcs[i].seat&&Math.hypot(npcs[i].x-w[1],npcs[i].y-w[2])>200){npcs[i].el.remove();npcs.splice(i,1)}}
+  return _dtSe(id)}}
 // test shortcuts: #se5 = the morning of the day you meet Seah the 5th time (Day 6); #se5eve = that evening; #se15b = Day 16R with the flags off
 {const h=location.hash.match(/^#se(\d+)(eve|b)?$/);
  if(h)setTimeout(()=>{const k=+h[1];HEART_D1={};FOUND.add('handkerchief');MEET={seah:k-1};
