@@ -99,8 +99,9 @@ EP.youngmin=[
   common:[['me','smile','근데 엄마, 영민이가 다 쓰고 나서 {@blackboard} 지워도 된다고 했어. 그래서 내가 마저 지웠어.'],['mom','smile','다 쓴 사람이 지워도 된다고 하고 지웠네.'],['me','smile','응. 그게 좋았어.'],['mom','smile','다음에 영민이 글씨 엄마도 한번 보고 싶다.'],['me','smile','진짜 반듯해. 나도 그렇게 쓰고 싶어.']]}},
 
 // ■ Day 3 — 세 번만 톡톡톡 (2)
-{title:'세 번만 톡톡톡',scene:'youngmin_02',place:'class',at:[300,330],with:[['yena',420,300],['jihoon',520,250]],things:{class:[['fish',118,338,74,'fish_tank']]},
+{title:'세 번만 톡톡톡',scene:'youngmin_02',place:'class',at:[300,330],with:[['yena',420,300],['jihoon',520,250]],
  pre:[
+  {lay:[['fish',118,338,74,'fish_tank']]},
   ['nar','','1교시 전. 교실 창가에 작은 어항이 있었다. 나는 가까이 가 봤다.'],
   {k:'fish',goal:'「{x}」 들여다보기'},
   ['nar','','어항 앞에 쪼그려 앉아 {@fish|를} 봤다.'],
@@ -827,8 +828,9 @@ EP.youngmin=[
   common:[['mom','smile','엄마도 그 말 해 본 적 있어.'],['me','surprised','엄마도?'],['mom','smile','응. 너 어릴 때, {@shoes} 신는 거 기다리다가. ‘빨리 좀’ 하고 나서 엄마도 놀랐어.'],['me','surprised','……그래서 어떻게 했어?'],['mom','smile','엄마가 급했다고 말했어. 네 탓이 아니라고. 그리고 다시 기다렸지.'],{flag:'M10_fix',is:1,lines:[['me','laugh','영민이도 동생한테 ‘빨리 좀’ 한대. 그래서 둘이 웃었어.'],['mom','laugh','(웃음) 다들 하는구나.']]},{flag:'M10_fix',is:0,lines:[['me','smile','……나 아직 영민이한테 말 안 했어.'],['mom','surprised','다음에 만나면 말할 수 있겠어?'],['me','smile','응. 내가 급했던 거라고.']]}]}},
 
 // ■ Day 11 — 젖은 알림장 (10)
-{title:'젖은 알림장',place:'class',at:[400,870],with:[['sua',520,560]],things:{class:[['fish',118,338,74,'fish_tank']]},
+{title:'젖은 알림장',place:'class',at:[400,870],with:[['sua',520,560]],
  pre:[
+  {lay:[['fish',118,338,74,'fish_tank']]},
   ['nar','','아침. 자리에 앉아 {@bag|을} 열었다. {@bag} 바닥이 축축했다.'],
   {k:'water_bottle',goal:'「{x}」 꺼내기',bag:['textbook','water_bottle','notice_book','pcase','notebook']},
   ['nar','','{@bag}에서 {@water_bottle|을} 꺼냈다.'],
@@ -911,8 +913,9 @@ EP.youngmin=[
   common:[['me','smile','선생님은 남은 숙제 쉬는 시간에 하라고 했어. {@notice_book|은} 창가에 말리래. 어항 옆에.'],['mom','surprised','말랐어?'],['me','smile','조금. 글씨는 아직 번졌어. 새로 써야 돼.'],{only:['B','C'],lines:[['me','smile','영민이가 자기 거 보고 새로 쓰래. 자기 글씨 따라 써도 된대.'],['mom','smile','영민이 글씨 반듯하잖아. 좋은 본이네.']]},{only:['A','D'],lines:[['me','smile','영민이가 쉬는 시간에 4번 알려 줬어. 체육복 금요일. 짧게.'],['mom','smile','그래도 알려 줬구나.']]},['mom','smile','그리고 {@water_bottle} {@lid|은} 꼭 닫자.'],['me','laugh','(웃음) 응. 끝까지 돌릴게. 딸깍 할 때까지.']]}},
 
 // ■ Day 12 — 보고 있으면 더 느려져 (11)
-{title:'보고 있으면 더 느려져',place:'class',at:[400,870],things:{class:[['fish',118,338,74,'fish_tank']]},
+{title:'보고 있으면 더 느려져',place:'class',at:[400,870],
  pre:[
+  {lay:[['fish',118,338,74,'fish_tank']]},
   ['nar','','점심을 먹고 교실로 왔다. 영민이가 독서 기록장을 펴고 있었다.'],
   ['youngmin','smile','이거 그림만 그리면 끝이야. 다 하면 도서관 같이 가.'],
   ['me','smile','응!'],
@@ -990,8 +993,9 @@ EP.youngmin=[
   common:[['me','smile','{m}, 기다리는 거랑 쳐다보는 거랑 다른 거야.'],['mom','smile','그렇네.'],['me','smile','나도 한국어로 글 쓸 때 누가 옆에서 보면 싫어. 근데 기다릴 때는 그걸 까먹었어.'],['mom','smile','기다리는 쪽이 되면 까먹기 쉽지.'],['me','smile','응. 다음엔 다른 거 하고 있을래.']]}},
 
 // ■ Day 13 — 붓는 건 천천히 (12)
-{title:'붓는 건 천천히',place:'class',at:[300,430],with:[['sua',800,260],['yena',420,560],['junho',700,600],['jiho',900,600],['haeun',1000,450]],things:{class:[['fish',118,338,74,'fish_tank']]},
+{title:'붓는 건 천천히',place:'class',at:[300,430],with:[['sua',800,260],['yena',420,560],['junho',700,600],['jiho',900,600],['haeun',1000,450]],
  pre:[
+  {lay:[['fish',118,338,74,'fish_tank']]},
   ['nar','','5교시. 선생님이 교실 앞에 {@bucket|를} 놓으셨다.'],
   {lay:[['bucket',700,262,60]]},
   ['nar','','선생님: 「오늘은 어항 물을 반만 갈아요. 이 {@bucket} 물은 선생님이 하루 동안 받아 둔 물이에요. 바로 받은 물은 {@fish}한테 안 좋아요.」'],
@@ -1076,7 +1080,7 @@ EP.youngmin=[
   common:[['me','smile','{m}, 빨리 하는 게 맞는 일도 있고, 천천히 하는 게 맞는 일도 있어. 물 붓는 건 천천히가 맞아.'],['mom','smile','그렇네. 일마다 맞는 사람이 다르구나.'],['me','smile','응. 반장 되면 일 나눌 때 먼저 물어볼래.'],['mom','smile','……좋은 생각이다.']]}},
 
 // ■ Day 14 — 다 읽었어 (13)
-{title:'다 읽었어',place:'library',at:[900,700],with:[['jiho',1250,560],['jihoon',1150,640],['yena',1480,660]],
+{title:'다 읽었어',place:'library',at:[900,700],with:[['jiho',1250,560],['jihoon',1150,640],['yena',1300,700]],
  pre:[
   ['nar','','점심시간. 도서관은 조용했다. 나는 그림책 코너에 있었다.'],
   ['nar','','영민이가 {@book} 한 권을 두 손으로 들고 왔다. 「거북이, 바다 밑으로」. 「우주로 간 거북이」 다음 권이었다. 지난번 {@book}보다 두 배는 두꺼웠다. 그림은 몇 장에 하나씩만 있었다.'],
