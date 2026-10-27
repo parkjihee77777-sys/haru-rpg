@@ -119,14 +119,14 @@ body,button{word-break:keep-all;overflow-wrap:break-word}
 <div id="fader"></div>
 <script>
 // same address, newest version: if the page this phone has kept is older than the one online, fetch the new one and reopen
-const BUILD='1027141305';
+const BUILD='1027142156';
 try{fetch(location.pathname,{cache:'no-store'}).then(r=>r.text()).then(t=>{const m=t.match(/const BUILD='(\d+)'/);if(m&&m[1]!==BUILD&&sessionStorage.getItem('upd')!==m[1]){sessionStorage.setItem('upd',m[1]);fetch(location.pathname,{cache:'reload'}).then(()=>location.reload())}}).catch(()=>{})}catch(e){}
 </script>
-<script src="i18n.js?v=1027141305"></script>
-<script src="i18n_prologue_v2.js?v=1027141305"></script>
-<script src="day2/i18n_engine.js?v=1027141305"></script>
-<script src="day2/data.js?v=1027141305"></script>
-<script src="day3/data.js?v=1027141305"></script>
+<script src="i18n.js?v=1027142156"></script>
+<script src="i18n_prologue_v2.js?v=1027142156"></script>
+<script src="day2/i18n_engine.js?v=1027142156"></script>
+<script src="day2/data.js?v=1027142156"></script>
+<script src="day3/data.js?v=1027142156"></script>
 <script>
 // ---------- data ----------
 const MW=1672,MH=941,KID=180;
@@ -244,12 +244,15 @@ function findPath(x0,y0,x1,y1){const{gw,ok}=grid;const a=nearestCell(x0,y0),b=ne
  const out=[];let cur=[x0,y0];for(let i=0;i<pts.length;i++){if(i===pts.length-1||!clear(cur,pts[i+1])){out.push(pts[i]);cur=pts[i]}}return out}
 function clear(a,b){const d=Math.hypot(b[0]-a[0],b[1]-a[1]),n=Math.ceil(d/8);for(let k=1;k<=n;k++){const x=a[0]+(b[0]-a[0])*k/n,y=a[1]+(b[1]-a[1])*k/n;if(!walkable(x,y))return false}return true}
 // walk up next to a tapped person/thing (keeps the 'This is X' button where it is)
-function walkNear(x,y){const side=me.x<x?-1:1;for(const[dx,dy]of[[side*90,0],[0,70],[-side*90,0],[0,-60]]){if(walkable(x+dx,y+dy)){const keep=bubble;walkTo(x+dx,y+dy);bubble=keep;return}}walkTo(x,y)}
-function walkTo(x,y,cb){pan=null;const p=findPath(me.x,me.y,x,y);if(!p||!p.length){me.path=null;cb&&cb();return}me.path=p;me.onArrive=cb||null}
+// the screen stays where it is while the hero walks over to a tapped thing (it used to jump back to the hero, so the thing and its
+// 'This is X' button slid off a phone screen until the hero got there)
+function walkNear(x,y){const hold={x:cam.x,y:cam.y};const side=me.x<x?-1:1;for(const[dx,dy]of[[side*90,0],[0,70],[-side*90,0],[0,-60]]){if(walkable(x+dx,y+dy)){const keep=bubble;walkTo(x+dx,y+dy);bubble=keep;pan=hold;glide=0;return}}walkTo(x,y);pan=hold;glide=0}
+function walkTo(x,y,cb){if(pan)glide=performance.now();pan=null;const p=findPath(me.x,me.y,x,y);if(!p||!p.length){me.path=null;cb&&cb();return}me.path=p;me.onArrive=cb||null}
 // ---------- camera / input ----------
 function fit(){const W=innerWidth,H=innerHeight;cam.s=Math.max(W/MW,H/MH)}
-let pan=null;
-function follow(){const W=innerWidth,H=innerHeight,s=cam.s;let x=me.x*s-W/2,y=(me.y-80)*s-H/2+camNY;if(pan){x=pan.x;y=pan.y}x=Math.max(0,Math.min(MW*s-W,x));y=Math.max(0,Math.min(MH*s-H,y));cam.x=x;cam.y=y;world.style.transform=`translate(${-x}px,${-y}px) scale(${s})`}
+let pan=null,glide=0;// glide: when the screen goes back to following the hero it slides there (no jump)
+function follow(){const W=innerWidth,H=innerHeight,s=cam.s;let x=me.x*s-W/2,y=(me.y-80)*s-H/2+camNY;if(pan){x=pan.x;y=pan.y;glide=0}x=Math.max(0,Math.min(MW*s-W,x));y=Math.max(0,Math.min(MH*s-H,y));
+ if(glide){if(performance.now()-glide>600)glide=0;else{x=cam.x+(x-cam.x)*.18;y=cam.y+(y-cam.y)*.18}}cam.x=x;cam.y=y;world.style.transform=`translate(${-x}px,${-y}px) scale(${s})`}
 addEventListener('resize',()=>{fit();me&&follow()});
 // drag = look around; release without moving = a normal tap
 let drag=null;const gameEl=document.getElementById('game');
@@ -528,43 +531,43 @@ function pickHero(){const m=document.getElementById('modal'),c=document.getEleme
  c.innerHTML=`<h2>${tr('괴짜교실 반장되기')}</h2><p>${tr('말 한마디 못 하는 전학생,<br>반장 선거에 나가다.')}</p><p style="margin-top:14px">${tr('누구로 할까요?')}</p>${(()=>{const s=loadSave();return s&&s.day>=2&&s.mode===UI+'-'+LANG?`<p><button class="big" id="cont">${tr(s.day+'일차부터 이어 하기')}</button></p>`:''})()}<div class="pick heroes"><button data-h="hero_f"><img src="faces/hero_f_smile.jpg" alt="여자 주인공"></button><button data-h="hero_m"><img src="faces/hero_m_smile.jpg" alt="남자 주인공"></button></div>`;
  m.classList.add('on');{const cb=document.getElementById('cont');if(cb)cb.onclick=()=>{const s=loadSave();HERO=s.hero;Object.assign(HEART,s.heart||{});(s.found||[]).forEach(k=>FOUND.add(k));HEART_D1={...HEART};chime();(typeof contGame==='function'?contGame(s):startDay(Math.min(s.day,Object.keys(window.D3||{}).length?3:2)))}}c.querySelectorAll('.pick button').forEach(b=>b.onclick=()=>{HERO=b.dataset.h;m.classList.remove('on');chime();bgm('day');load('home_am');say([['nar','','이사 온 다음 날 아침. 아직 풀지 못한 상자들이 쌓여 있다.'],['think','sad','(오늘부터 새 학교야. 여기 말도 아직 서툰데…….)'],['think','smile','({m}한테 인사하고 학교 가야지.)']],morning)})}
 </script>
-<script src="day2/engine.js?v=1027141305"></script>
-<script src="day2/ep_minho.js?v=1027141305"></script>
-<script src="day2/i18n_meet.js?v=1027141305"></script>
-<script src="day2/meet.js?v=1027141305"></script>
-<script src="day2/ep_sua.js?v=1027141305"></script>
-<script src="day2/i18n_sua.js?v=1027141305"></script>
-<script src="day2/ep_hangyeol.js?v=1027141305"></script>
-<script src="day2/i18n_hangyeol.js?v=1027141305"></script>
-<script src="day2/ep_siwoo.js?v=1027141305"></script>
-<script src="day2/i18n_siwoo.js?v=1027141305"></script>
-<script src="day2/ep_haram.js?v=1027141305"></script>
-<script src="day2/i18n_haram.js?v=1027141305"></script>
-<script src="day2/ep_jiho.js?v=1027141305"></script>
-<script src="day2/i18n_jiho.js?v=1027141305"></script>
-<script src="day2/ep_hyeeun.js?v=1027141305"></script>
-<script src="day2/i18n_hyeeun.js?v=1027141305"></script>
-<script src="day2/ep_haneul.js?v=1027141305"></script>
-<script src="day2/i18n_haneul.js?v=1027141305"></script>
-<script src="day2/ep_junho.js?v=1027141305"></script>
-<script src="day2/i18n_junho.js?v=1027141305"></script>
-<script src="day2/ep_yuna.js?v=1027141305"></script>
-<script src="day2/i18n_yuna.js?v=1027141305"></script>
-<script src="day2/ep_yena.js?v=1027141305"></script>
-<script src="day2/i18n_yena.js?v=1027141305"></script>
-<script src="day2/ep_haeun.js?v=1027141305"></script>
-<script src="day2/i18n_haeun.js?v=1027141305"></script>
-<script src="day2/ep_youngmin.js?v=1027141305"></script>
-<script src="day2/i18n_youngmin.js?v=1027141305"></script>
-<script src="day2/ep_seah.js?v=1027141305"></script>
-<script src="day2/i18n_seah.js?v=1027141305"></script>
-<script src="day2/ep_jihoon.js?v=1027141305"></script>
-<script src="day2/i18n_jihoon.js?v=1027141305"></script>
-<script src="words_ja_ru.js?v=1027141305"></script>
-<script src="day2/mybag.js?v=1027141305"></script>
-<script src="day2/spots.js?v=1027141305"></script>
-<script src="day2/textfit.js?v=1027141305"></script>
-<script src="day2/tester.js?v=1027141305"></script>
+<script src="day2/engine.js?v=1027142156"></script>
+<script src="day2/ep_minho.js?v=1027142156"></script>
+<script src="day2/i18n_meet.js?v=1027142156"></script>
+<script src="day2/meet.js?v=1027142156"></script>
+<script src="day2/ep_sua.js?v=1027142156"></script>
+<script src="day2/i18n_sua.js?v=1027142156"></script>
+<script src="day2/ep_hangyeol.js?v=1027142156"></script>
+<script src="day2/i18n_hangyeol.js?v=1027142156"></script>
+<script src="day2/ep_siwoo.js?v=1027142156"></script>
+<script src="day2/i18n_siwoo.js?v=1027142156"></script>
+<script src="day2/ep_haram.js?v=1027142156"></script>
+<script src="day2/i18n_haram.js?v=1027142156"></script>
+<script src="day2/ep_jiho.js?v=1027142156"></script>
+<script src="day2/i18n_jiho.js?v=1027142156"></script>
+<script src="day2/ep_hyeeun.js?v=1027142156"></script>
+<script src="day2/i18n_hyeeun.js?v=1027142156"></script>
+<script src="day2/ep_haneul.js?v=1027142156"></script>
+<script src="day2/i18n_haneul.js?v=1027142156"></script>
+<script src="day2/ep_junho.js?v=1027142156"></script>
+<script src="day2/i18n_junho.js?v=1027142156"></script>
+<script src="day2/ep_yuna.js?v=1027142156"></script>
+<script src="day2/i18n_yuna.js?v=1027142156"></script>
+<script src="day2/ep_yena.js?v=1027142156"></script>
+<script src="day2/i18n_yena.js?v=1027142156"></script>
+<script src="day2/ep_haeun.js?v=1027142156"></script>
+<script src="day2/i18n_haeun.js?v=1027142156"></script>
+<script src="day2/ep_youngmin.js?v=1027142156"></script>
+<script src="day2/i18n_youngmin.js?v=1027142156"></script>
+<script src="day2/ep_seah.js?v=1027142156"></script>
+<script src="day2/i18n_seah.js?v=1027142156"></script>
+<script src="day2/ep_jihoon.js?v=1027142156"></script>
+<script src="day2/i18n_jihoon.js?v=1027142156"></script>
+<script src="words_ja_ru.js?v=1027142156"></script>
+<script src="day2/mybag.js?v=1027142156"></script>
+<script src="day2/spots.js?v=1027142156"></script>
+<script src="day2/textfit.js?v=1027142156"></script>
+<script src="day2/tester.js?v=1027142156"></script>
 <script>
 // the goal shows big for a few seconds, then folds into a small pill (tap it to open it again)
 {const g=document.getElementById('goal');let t=null;const big=()=>{g.classList.remove('mini');clearTimeout(t);t=setTimeout(()=>g.classList.add('mini'),4000)};
