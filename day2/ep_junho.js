@@ -1667,6 +1667,11 @@ const NURSE_WALK=[[[110,745],[300,620],[470,600],[640,560],[760,370],[1000,385],
 {const _d2PeopleJu=d2People;d2People=function(id){const ps=_d2PeopleJu(id),e=epNext('junho',EPIDX.junho);if(!e)return ps;
   if(GOWITH&&GOWITH.map===id&&GOWITH.ids.includes('junho'))return ps;
   return ps.filter(p=>p[0]!=='junho'||(id===e.place&&p[1]===e.at[0]&&p[2]===e.at[1]))}}
+// when a meeting walks on ({go}), Junho comes too and stands where the talk happens there (10/27: at the taps he stayed far off at the map's door)
+EP.junho[0].goAt={stands:[420,720]};EP.junho[1].goAt={gym:[1150,640]};EP.junho[4].goAt={nurse:[1080,780]};EP.junho[13].goAt={nurse:[300,700]};
+{const _loadJu=load;load=function(m,x){const r=_loadJu(m,x),e=SCENE_EP;
+  if(e&&e.goAt&&e.goAt[m]&&SCENE_IDS&&SCENE_IDS[0]==='junho'){npcs=npcs.filter(p=>{if(p.id!=='junho')return true;p.el.remove();return false});npcs.push(sprite('junho',e.goAt[m][0],e.goAt[m][1]))}
+  return r}}
 // the school nurse's office, drawn for Junho's scenes (Day 6 and Day 15 end there)
 Object.assign(EXTRA_MAPS,{nurse:{name:'보건실',img:'maps/nurse.jpg',walk:NURSE_WALK,block:NURSE_BLOCK,start:NURSE_START,out:NURSE_OUT}});
 {const m=EXTRA_MAPS.nurse;MAPS.nurse={img:m.img,walk:m.walk,rects:[],block:m.block,start:m.start};OUT.nurse=m.out;PLACE.nurse='nurse'}
