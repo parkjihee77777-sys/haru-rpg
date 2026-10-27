@@ -1,5 +1,5 @@
 // 정유나 — built by build_yu.sh from p1–p4.js (see the header below)
-window.YU_HAVE=new Set(['yuna_01','yuna_02','yuna_03','yuna_04','yuna_05','yuna_06','yuna_07','yuna_08','yuna_09','yuna_10','yuna_14']);
+window.YU_HAVE=new Set(['yuna_01','yuna_02','yuna_03','yuna_04','yuna_05','yuna_06','yuna_07','yuna_08','yuna_09','yuna_10','yuna_11','yuna_12','yuna_13','yuna_14','yuna_15']);
 // 정유나 — scenes by meeting (Day N = the Nth meeting with Yuna; meeting 1 = Day 2). Source: 괴짜교실_시나리오_개정작업/02_인물별_시나리오/정유나_Day2-16R_신규.md
 // Same format as ep_hyeeun.js (loaded after ep_hyeeun.js). Replaces Yuna's calendar Day 2 scene.
 // Faces: 'forced' = a smile with the mouth only (faces/yuna_forced.jpg; the hero has one too for Day 14 and 16R), 'laugh' = she smiles with her eyes too.
