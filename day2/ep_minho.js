@@ -154,7 +154,7 @@ EP.minho=[
 
 // ■ Day 5 — 봉투는 누가? (4)
 {title:'봉투는 누가?',scene:'minho_04',place:'class',at:[330,262],
- things:{class:[['envelope',1062,150,56]]},
+ things:{class:[['envelope',680,192,56]]},// at the foot of the wall under the blackboard's left end (「칠판 아래 좁은 틈」), clear of the wall clock and the blackboard tap
  pre:[
   {pic:'minho_04'},
   ['nar','','아침부터 교실이 시끄러웠다. 학급비 {@envelope|가} 없어졌다. 몇몇 아이가 민호 쪽을 힐끔거리며 수군거렸다.'],
