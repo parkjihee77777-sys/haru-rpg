@@ -403,7 +403,7 @@ EP.hangyeol=[
 
 // ■ Day 10 — 복도의 5학년 (9)
 {title:'복도의 5학년',scene:'hangyeol_09',place:'hall',at:[1000,400],
- taps:{hall:[['window',1290,110,60],['window',1590,200,60],['window',520,30,40],['stairs',725,75,70]]},
+ taps:{hall:[['window',1290,110,60],['window',1590,200,60],['stairs',725,75,70]]},
  pre:[
   ['nar','','쉬는 시간. 한결이랑 2층 {@window} 앞에서 운동장을 보고 있었다. 한결이 머리에 보라색 {@hair_tie}이 있었다.'],
   ['hangyeol','laugh','저기 봐, 준호 또 {@ball} 놓쳤다.'],
