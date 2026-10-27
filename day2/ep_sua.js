@@ -6,7 +6,7 @@ window.EP=window.EP||{};
 EP.sua=[
 // ■ Day 2 — 규칙 7번 (1)
 {title:'규칙 7번',scene:'sua_01',place:'class',at:[600,262],
- taps:{hall:[['stairs',725,75,70]]},
+ taps:{hall:[['stairs',725,95,70]]},
  pre:[
   ['nar','','수아가 교실 앞에서 형광펜으로 뭔가를 체크하고 있었다. 나는 수아에게 갔다.'],
   ['me','smile','수아야. 규칙…… 외워 왔어.'],
@@ -411,7 +411,7 @@ EP.sua=[
 
 // ■ Day 11 — 혼자 가 볼래? (10)
 {title:'혼자 가 볼래?',scene:'sua_10',place:'class',at:[600,262],goAlone:{hall:['A','C']},
- taps:{hall:[['door',1480,560,55],['door',1058,232,45],['door',520,85,40]]},things:{hall:[['picture',1250,705,60]]},
+ taps:{hall:[['door',1480,560,55],['door',1058,232,45]]},things:{hall:[['picture',1250,705,60]]},
  pre:[
   ['nar','','쉬는 시간. 수아가 급하게 {@bag}을 챙기고 있었다. 나는 수아에게 갔다.'],
   ['sua','smile','마침 잘 왔다.'],
@@ -614,7 +614,7 @@ EP.sua=[
 
 // ■ Day 16R — 내가 반장이 되면 (15)
 {title:'내가 반장이 되면',scene:'sua_15',place:'hall',at:[1000,400],
- taps:{hall:[['window',1290,110,60],['window',1590,200,60],['window',520,30,40]]},things:{hall:[['paper',1060,432,40]]},
+ taps:{hall:[['window',1290,110,60],['window',1590,200,60]]},things:{hall:[['paper',1060,432,40]]},
  pre:[
   ['nar','','복도 창가에 수아가 서 있었다. 나는 수아 옆으로 갔다.'],
   {k:'window',goal:'「{x}」 열기'},
