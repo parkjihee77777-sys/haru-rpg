@@ -151,7 +151,7 @@ EP.siwoo=[
   common:[['me','smile','2번은 내가 적어야 돼. {m}, 이상한 말 하나 알려 줘.'],['mom','smile','음…… ‘발이 넓다’?'],['me','surprised','……발이 크다는 거야?'],['mom','laugh','그거 2번으로 적어.']]}},
 
 // ■ Day 5 — 숟가락 소리 (4)
-{title:'숟가락 소리',scene:'siwoo_04',place:'cafe',at:[1010,700],
+{title:'숟가락 소리',scene:'siwoo_04',place:'cafe',at:[1010,700],sit:[1210,705],
  things:{cafe:[['earmuffs',1085,770,46]]},
  pre:[
   ['nar','','점심시간 급식실. 시끄러웠다. 수백 명이 한꺼번에 떠들고, {@tray}이 부딪치고, {@chair}가 끌렸다.'],
@@ -670,7 +670,7 @@ EP.siwoo=[
   common:[['me','laugh','그리고 하은이가 시우한테 24번 알려 줬어. ‘눈이 높다.’ 시우가 눈 높이는 사람마다 다르대.'],['mom','laugh','그것도 맞는 말이다.'],['me','smile','시우도 웃었어. 처음 봤어.']]}},
 
 // ■ Day 15 — 리코더 합주 (14)
-{title:'리코더 합주',scene:'siwoo_14',place:'music',at:[720,840],with:[['junho',1180,840]],
+{title:'리코더 합주',scene:'siwoo_14',place:'music',at:[720,840],sit:[1010,640],with:[['junho',1180,840]],
  things:{music:[['recorder',830,640,64],['card',415,300,44]]},
  pre:[
   ['nar','','음악 시간. 오늘은 반 전체 {@recorder} 합주를 하는 날이었다. 스물네 명이 동시에.'],
@@ -804,5 +804,6 @@ for(const id of ['music']){const m=EXTRA_MAPS[id];MAPS[id]={img:m.img,walk:m.wal
   setDay(day);PICKS=['siwoo'];EPIDX.siwoo=k-1;TODAYEP.siwoo=EP.siwoo[k-1];MEET.siwoo=k;D2CHOICE.siwoo='C';
   stage='d2_after';load('class');useDoor()},90)}
 // stand:1 = he stands where his scene says (meetings 1, 5, 15: at the window; 12: just outside 30 cm of the hero's desk), not at a desk; spots.js seats every kid with sitting art, so this runs after it
+// sit:[x,top] = he sits at that chair (top = the chair back's top) where the classroom seats don't reach: the cafeteria table (4), the music room desk (14)
 addEventListener('load',()=>{const _dpSw=d2People;d2People=function(id){const ps=_dpSw(id),e=epNext('siwoo',EPIDX.siwoo);
- if(e&&e.stand&&e.place===id){const p=ps.find(p=>p[0]==='siwoo');if(p){p[1]=e.at[0];p[2]=e.at[1];p.length=3}}return ps}});
+ if(e&&e.place===id){const p=ps.find(p=>p[0]==='siwoo');if(p&&e.stand){p[1]=e.at[0];p[2]=e.at[1];p.length=3}else if(p&&e.sit){p[1]=e.sit[0];p[2]=0;p[3]={top:e.sit[1]}}}return ps}});
