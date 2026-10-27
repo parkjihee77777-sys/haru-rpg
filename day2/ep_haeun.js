@@ -322,7 +322,7 @@ EP.haeun=[
   common:[['me','smile','그리고 선생님이 쉬는 시간에 하은이만 조용히 부르셨어. 보건실 가서 10분 누워 있어도 된다고.'],['mom','smile','선생님이 보셨구나.'],['me','smile','응. 근데 애들은 아무도 몰라. 하은이가 나한테만 말해 줬어. 안 간대. 4교시 수학이라서.'],['mom','laugh','(웃음) 수학은 못 빠지지.'],['me','smile','{m}, 하은이가 천근만근 알려 주고 ‘이건 내가 갚는 거야’ 했어.'],['mom','surprised','뭘 갚는데?'],['me','smile','……몰라. 하은이 「갚을 거」 칸에 나도 있나 봐.']]}},
 
 // ■ Day 5 — 남아서 버리기 아까워 (4)
-{title:'남아서 버리기 아까워',scene:'haeun_04',place:'cafe',at:[680,720],with:[['yena',300,860],['jiho',820,720]],
+{title:'남아서 버리기 아까워',scene:'haeun_04',place:'cafe',at:[680,720],with:[['yena',300,860],['jiho',960,740]],
  pre:[
   {pic:'haeun_04a'},
   ['nar','','점심시간. 급식실 줄이 길었다. 내 앞에 하은이가 서 있었다.'],
@@ -1232,7 +1232,7 @@ EP.haeun=[
   common:[['me','smile','근데 마지막에 내 소매에 지우개 가루가 남아 있었어. 하은이 손이 나오다가 멈췄어. 그리고 ‘털어’ 했어.'],['mom','surprised','네가 털었어?'],['me','smile','응. 내 손으로.'],['mom','smile','하은이가 손을 멈췄구나.'],['me','smile','응. 하은이한테는 그게 어려웠을 거야. 손이 먼저 나가니까.'],['mom','smile','……그런 것 같네. 이 사인은 엄마가 할게. 엄마 손으로.'],['me','laugh','(웃음) 응.']]}},
 
 // ■ Day 13 — 선물은 아무거나 (12)
-{title:'선물은 아무거나',scene:'haeun_12',place:'class',at:[405,720],with:[['yena',560,640]],
+{title:'선물은 아무거나',scene:'haeun_12',place:'class',at:[405,720],with:[['yena',560,640],['jihoon',885,700]],
  pre:[
   ['nar','','1교시 뒤 쉬는 시간. 예나가 신발 끈을 묶으려고 쪼그려 앉았다. 손에 작은 상자를 들고 있었다. 반짝이는 포장지에 리본이 달려 있었다.'],
   {lay:[['gift',620,660,44]]},
@@ -1686,3 +1686,8 @@ for(const id of ['welfare']){const m=EXTRA_MAPS[id];MAPS[id]={img:m.img,walk:m.w
   if(h[2]!=='eve'){startDay(day);return}
   setDay(day);PICKS=['haeun'];EPIDX.haeun=k-1;TODAYEP.haeun=EP.haeun[k-1];MEET.haeun=k;D2CHOICE.haeun='B';
   stage='d2_after';load('class');useDoor()},97)}
+// when a meeting walks on ({go}) to the welfare room or the nurse's office, Haeun comes too and stands where the talk happens (10/27 picture check: in the nurse's office she was missing)
+EP.haeun[5].goAt={welfare:[1160,660]};EP.haeun[8].goAt={nurse:[960,660]};EP.haeun[13].goAt={welfare:[1160,660]};
+{const _loadHa=load;load=function(m,x){const r=_loadHa(m,x),e=SCENE_EP;
+  if(e&&e.goAt&&e.goAt[m]&&SCENE_IDS&&SCENE_IDS[0]==='haeun'){npcs=npcs.filter(p=>{if(p.id!=='haeun')return true;p.el.remove();return false});npcs.push(sprite('haeun',e.goAt[m][0],e.goAt[m][1]))}
+  return r}}
