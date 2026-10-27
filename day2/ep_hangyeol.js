@@ -321,7 +321,7 @@ EP.hangyeol=[
 {title:'상자 두 개',scene:'hangyeol_07',place:'class',at:[1300,262],
  things:{class:[['box',780,210,66],['box',905,210,66]]},
  pre:[
-  {pic:'hangyeol_07'},
+  {pic:'hangyeol_07a'},
   ['nar','','금요일은 칭찬 {@sticker}를 상품으로 바꾸는 날이었다. {@sticker} 판을 들고 {@line}을 섰다. 바로 앞이 한결이였다.'],
   ['hangyeol','laugh','나 {@sticker} 열 개. 오늘 뭐 고를지 일주일 내내 생각했어.'],
   {k:'sticker',goal:'「{x}」 판 꺼내기',bag:['notebook','pcase','sticker','handkerchief','eraser']},
@@ -353,8 +353,8 @@ EP.hangyeol=[
    ['me','smile','그럼 그냥 골라. 아무도 안 봐. 다들 자기 거 고르느라 바빠.'],['nar','','한결이가 주위를 봤다. 정말 다들 자기 상품만 보고 있었다.'],
    ['nar','','한결이가 여자 {@box}에 손을 넣어 보라색 머리핀을 집었다. 그리고 재빨리 자기 {@hair_tie} 옆에 꽂았다.'],['hangyeol','laugh','……대박 사건.']]}],
  post:[
-  {only:['A','C','D'],lines:[['nar','','다 고르고 나서 선생님이 빈 {@box} 두 개를 보셨다. 그리고 남자, 여자 {@paper}를 떼어 내셨다.'],['nar','','선생님: 「다음 주부터는 {@box} 하나로 할게요. 선생님이 미처 생각을 못 했네요.」']]},
-  {only:['A','B','D'],lines:[['nar','','쉬는 시간. 한결이 머리에 보라색 나비가 앉아 있었다.']]},
+  {only:['A','C','D'],lines:[{pic:'hangyeol_07c'},['nar','','다 고르고 나서 선생님이 빈 {@box} 두 개를 보셨다. 그리고 남자, 여자 {@paper}를 떼어 내셨다.'],['nar','','선생님: 「다음 주부터는 {@box} 하나로 할게요. 선생님이 미처 생각을 못 했네요.」']]},
+  {only:['A','B','D'],lines:[{pic:'hangyeol_07b'},['nar','','쉬는 시간. 한결이 머리에 보라색 나비가 앉아 있었다.']]},
   {only:['C'],lines:[['nar','','쉬는 시간. 한결이 머리에는 여전히 {@hair_tie}만 있었다. 대신 손에 딱지가 있었다. 준호랑 딱지를 치며 웃고 있었다.']]}],
  eve:{lead:[['me','smile','{m}, 오늘 칭찬 {@sticker}로 상품 바꿨어.'],['mom','surprised','오, 뭐 골랐어?'],['me','sad','근데 {@box}가 두 개였어. 남자 {@box}, 여자 {@box}.'],['mom','smile','그렇게 나눠 놓으면 고르기 애매한 사람도 있겠다.']],
   A:[['me','smile','한결이가 여자 {@box}에 있는 보라색 머리핀을 보고 있었어. 그래서 내가 골라서 줬어.'],['mom','surprised','한결이가 좋아했어?'],['me','sad','고맙대. 근데 자기도 {@sticker} 열 개 있었대. 애들도 다 쳐다봤고.'],['mom','smile','음…… 한결이도 자기가 고르고 싶었나 보다.']],
@@ -366,7 +366,7 @@ EP.hangyeol=[
 {title:'이발소',scene:'hangyeol_08',place:'gate',at:[960,650],
  things:{gate:[['umbrella',1060,690,64]]},
  pre:[
-  {pic:'hangyeol_08'},
+  {pic:'hangyeol_08a'},
   ['nar','','하교 시간. 비가 조금 왔다. 교문 앞에서 한결이가 할머니를 기다리고 있었다. 나는 한결이 옆에 섰다.'],
   ['hangyeol','laugh','우리 할머니 오신다. 엄청 귀여우셔.'],
   ['nar','','꽃무늬 {@umbrella}을 쓴 할머니가 오셨다. 한결이를 보자마자 웃으셨다.'],
@@ -402,6 +402,7 @@ EP.hangyeol=[
    ['nar','','나는 대답을 못 했다. 할머니가 잠깐 {@umbrella}을 정리하러 가셨을 때, 한결이에게 작게 말했다.'],['me','angry','할머니 너무하신다.'],['hangyeol','sad','……우리 할머니 나쁜 사람 아니야.'],
    ['nar','','한결이가 팔찌를 돌렸다.'],['hangyeol','smile','할머니는 그냥 걱정하는 거야. 나 할머니 엄청 좋아해.'],['me','sad','아…… 미안.']]}],
  post:[
+  {pic:'hangyeol_08b'},
   ['nar','','할머니가 한결이 손을 잡고 걸어가셨다. 둘이 {@umbrella} 하나를 같이 썼다. 한결이가 할머니 쪽으로 {@umbrella}을 기울였다.'],
   ['nar','','한결이가 한 번 뒤돌아보며 손을 흔들었다. 입 모양으로 말했다.'],
   ['hangyeol','laugh','한 달!']],
@@ -415,6 +416,7 @@ EP.hangyeol=[
 {title:'복도의 5학년',scene:'hangyeol_09',place:'hall',at:[1000,400],
  taps:{hall:[['window',1290,110,60],['window',1590,200,60],['stairs',725,75,70]]},
  pre:[
+  {pic:'hangyeol_09a'},
   ['nar','','쉬는 시간. 한결이랑 2층 {@window} 앞에서 운동장을 보고 있었다. 한결이 머리에 보라색 {@hair_tie}이 있었다.'],
   ['hangyeol','laugh','저기 봐, 준호 또 {@ball} 놓쳤다.'],
   {k:'window',goal:'「{x}」 밖 보기'},{pic:'hangyeol_09'},
@@ -443,7 +445,7 @@ EP.hangyeol=[
  post:[
   {k:'stairs',goal:'「{x}」 피해서 걷기'},
   ['nar','','5학년들이 내려간 {@stairs} 반대쪽 복도로 교실에 갔다.'],
-  {go:'class'},
+  {go:'class'},{pic:'hangyeol_09b'},
   ['nar','','교실. 나는 담임 선생님께 본 걸 말씀드렸다.'],
   {only:['A','C'],lines:[['nar','','한결이도 옆에 있었다.']]},
   {only:['B','D'],lines:[['nar','','한결이 없이, 나 혼자 말씀드렸다. 아까 일이 계속 생각났다.']]},
@@ -451,6 +453,7 @@ EP.hangyeol=[
   ['nar','','선생님: 「말해 줘서 고마워. 몇 명이었는지, 얼굴 기억나니?」'],
   ['me','smile','세 명이요. 한 명은 노란 {@shoes} 신었어요.'],
   ['nar','','선생님: 「알겠어. 그건 선생님이 5학년 선생님과 이야기할게. 너희가 다시 그 5학년들 만나서 해결할 필요 없어.」'],
+  {pic:'hangyeol_09d'},
   ['nar','','선생님은 한결이에게 무슨 일이었는지 다시 묻지 않으셨다. 대신 한결이에게만 들리게 말씀하셨다.'],
   ['nar','','선생님: 「한결아, 혹시 또 그러면 언제든 바로 와. 그리고 그 아이들 말은 그 아이들이 잘못한 거야. 넌 아무것도 잘못 안 했어.」'],
   ['hangyeol','smile','……네.'],
@@ -463,7 +466,7 @@ EP.hangyeol=[
   common:[['me','smile','선생님이 한결이한테 너는 아무것도 잘못 안 했대.'],['mom','relieved','선생님 말씀이 맞아.']]}},
 
 // ■ Day 11 — 혼자 쓰는 방 (10)
-{title:'혼자 쓰는 방',scene:'hangyeol_10',place:'class',at:[1380,330],
+{title:'혼자 쓰는 방',scene:'hangyeol_10',place:'class',at:[1380,330],stand:1,
  things:{class:[['magnet',1110,262,30]]},
  pre:[
   {pic:'hangyeol_10'},
@@ -473,6 +476,7 @@ EP.hangyeol=[
   ['nar','','{@blackboard} 옆 게시판에 수련회 사진과 방 배정표가 보였다.'],
   {k:'magnet',goal:'「{x}」 다시 붙이기'},
   ['nar','','아이들이 밀다가 떨어진 {@magnet}을 주워 사진 귀퉁이에 다시 붙였다.'],
+  {pic:'hangyeol_10a'},
   ['nar','','배정표에는 6인실 방들이 쭉 있었다. 그리고 맨 아래에 한 {@line}이 따로 있었다. 「보건실 옆 1인실 — 한결」'],
   ['nar','','수련회 전에 선생님이 한결이한테 따로 물어보셨다고 했다. 방을 어떻게 쓰고 싶냐고. 한결이는 그 방을 골랐고, 자유 시간에 친구 한 명 불러도 된다고 해서 나를 불렀다.'],
   ['nar','','사진 한 장에 한결이 방에서 {@flashlight}을 들고 웃는 우리가 찍혀 있었다.'],
@@ -500,9 +504,11 @@ EP.hangyeol=[
    ['me','laugh','몰라~ VIP 방이라서!'],['nar','','나는 사진 앞에서 왕관 쓴 시늉을 했다.'],['nar','','아이: 「VIP래! 하하!」'],
    ['hangyeol','laugh','VIP 방은 입장료 있다. 과자 하나.'],['nar','','아이: 「치사해! 그럼 우리 방도 입장료 받을 거야!」'],['nar','','아이들이 웃으며 흩어졌다. 한결이가 나를 보고 엄지를 들었다.']]}],
  post:[
+  {pic:'hangyeol_10b'},
   ['nar','','종이 울리기 직전, 담임 선생님이 게시판 앞을 지나가셨다.'],
   ['nar','','선생님: 「방 배정이 궁금한 사람은 선생님한테 물어보세요. 다른 친구한테 묻지 말고요.」'],
   ['nar','','선생님은 그것만 말씀하셨다.'],
+  {pic:'hangyeol_10c'},
   ['nar','','한결이가 자리로 돌아가다가 나를 돌아봤다.'],
   {only:['A','D'],lines:[['hangyeol','smile','아까 진짜 고마웠다. 설명 안 해 줘서. 그리고 수련회 때 와 준 것도.'],['me','laugh','{@flashlight} 또 하자.']]},
   {only:['B','C'],lines:[['hangyeol','sad','아까…… 다음엔 그냥 선생님이 정했다고 해. 그게 사실이니까. ……그래도 수련회 때 와 줘서 좋았어.'],['me','smile','응.']]}],
@@ -517,6 +523,7 @@ EP.hangyeol=[
 {title:'어른이 된 나',scene:'hangyeol_11',place:'class',at:[330,262],also:{triproom:[640,450]},
  things:{triproom:[['flashlight',600,470,40],['paper',690,480,46]]},
  pre:[
+  {pic:'hangyeol_11a'},
   ['nar','','쉬는 시간. 창가에서 한결이가 수련회 사진을 보고 있었다. 선생님이 뽑아서 나눠 주신 사진이었다. 나는 한결이 옆으로 갔다.'],
   ['hangyeol','laugh','이거 봐. 우리 이불 뒤집어쓰고 찍은 거.'],
   ['nar','','사진 속 우리는 이불 속에서 {@flashlight}을 들고 웃고 있었다.'],
@@ -554,11 +561,13 @@ EP.hangyeol=[
    ['hangyeol','sad','그냥 이 {@picture} 속 내가 좋아. 그거 말고는 아직 잘 모르겠어.'],['me','sad','……응.'],
    ['think','sad','(한결이가 말할 준비 되면 먼저 말한다고 했는데. 내가 너무 빨리 물었어.)']]}],
  post:[
+  {pic:'hangyeol_11b'},
   ['nar','','똑똑.'],
   ['nar','','선생님(문밖에서): 「열 시다. 다들 자기 방으로 가세요~」'],
   ['nar','','우리는 동시에 {@flashlight}을 껐다. 내가 방문을 나서려는데, 깜깜한 데서 한결이 목소리가 들렸다.'],
   ['hangyeol','smile','오늘 {@picture} 보여 준 거, 너가 처음이다.'],
   {fx:'now'},{go:'class'},
+  {pic:'hangyeol_11c'},
   ['nar','','한결이가 다음 사진을 넘겼다. 다음 사진은 {@flashlight} 불빛에 눈이 부셔 찡그린 내 얼굴이었다.'],
   ['hangyeol','laugh','이건 지울까?'],
   ['me','angry','지워! 당장!'],
@@ -578,6 +587,7 @@ EP.hangyeol=[
   ['hangyeol','smile','공약 다 썼어?'],
   ['me','sad','아직. 하나 더 필요해.'],
   {k:'thread',goal:'「{x}」 감아 주기'},
+  {pic:'hangyeol_12a'},
   ['nar','','엉킨 {@thread}을 감아 한결이에게 건넸다.'],
   {k:'notebook',goal:'「{x}」 펼치기',bag:['pcase','colored_pencil','handkerchief','notebook','eraser']},{pic:'hangyeol_12'},
   ['nar','','공약을 적던 쪽을 펼쳤다.'],
@@ -604,6 +614,7 @@ EP.hangyeol=[
    ['me','laugh','아! 피구 때 내가 한 말.'],['hangyeol','laugh','응. 그거 진짜 맞는 말이었거든.'],
    ['nar','','{w}에 쓴 글: 「공약 3. 남자 대 여자 말고, 매번 새로운 방법으로 팀을 나누겠습니다. 결과가 매번 달라져서 더 재밌습니다!」']]}],
  post:[
+  {pic:'hangyeol_12b'},
   ['nar','','한결이가 {@thread} 한 가닥을 잘라 내 {w} 위에 올려놓았다.'],
   ['hangyeol','laugh','선거 팔찌. 당선되면 금색 {@thread}로 하나 더 해 줄게.'],
   ['me','surprised','떨어지면?'],
@@ -657,6 +668,7 @@ EP.hangyeol=[
    ['yena','surprised','뭐? 너만? 언제부터?'],['junho','surprised','왜 너만 알았어?'],
    ['nar','','질문이 갑자기 한결이에게 몰렸다. 한결이가 웃었지만 팔찌를 세 바퀴 돌렸다.'],['hangyeol','smile','……그건 비밀 공방 회원이라서.'],
    ['think','sad','(한결이가 말한 날인데, 내 얘기를 해 버렸어.)']]},
+  {pic:'hangyeol_13b'},
   ['nar','','급식실을 나오는데 담임 선생님이 한결이를 부르셨다. 한결이가 나도 같이 가자고 손짓했다. 선생님은 복도 끝 조용한 데서 말씀하셨다.'],
   ['nar','','선생님: 「아까 친구들이 결이라고 부르는 거 들었어. 선생님도 그렇게 불러 줄까?」'],
   ['hangyeol','surprised','……선생님도요?'],
@@ -664,6 +676,7 @@ EP.hangyeol=[
   ['nar','','한결이가 한참 생각했다.'],
   ['hangyeol','smile','……교실에서는 아직 한결이로 해 주세요. 친구들끼리만 결이요. 천천히 할래요.'],
   ['nar','','선생님: 「그래. 네가 정한 대로 할게. 혹시 누가 그 이름으로 놀리면 바로 말해 주고.」'],
+  {pic:'hangyeol_13c'},
   ['nar','','선생님은 한결이 어깨를 한 번 토닥이시고 교무실로 가셨다.'],
   ['hangyeol','laugh','……대박 사건.']],
  eve:{lead:[['me','smile','{m}, 오늘 한결이가 급식 먹다가 친구들한테 앞으로 ‘결이’라고 불러 달라고 했어.'],['mom','surprised','아, 그랬구나.'],['me','laugh','준호는 오케이, 결이, 하고 그냥 밥 먹었어.'],['mom','laugh','준호답다.']],
@@ -677,6 +690,7 @@ EP.hangyeol=[
 {title:'외국인이 무슨 반장',scene:'hangyeol_14',place:'hall',at:[430,430],
  things:{hall:[]},
  pre:[
+  {pic:'hangyeol_14a'},
   ['nar','','쉬는 시간. 한결이랑 복도 게시판에 선거 {@poster}를 붙이러 갔다. 한결이가 {@poster} 가장자리에 {@thread}로 테두리를 붙여 줬다.'],
   ['hangyeol','laugh','이 {@poster}, 우리 학교에서 제일 예쁨. 보장함.'],
   {k:'poster',goal:'「{x}」 펼치기',bag:['notebook','poster','pcase','tape','colored_pencil']},
@@ -709,6 +723,7 @@ EP.hangyeol=[
    ['nar','','옆 반 아이들이 갔다. 나는 한참 {@poster}만 봤다.'],['me','smile','한결아, 고마워.'],['hangyeol','laugh','뭘. 손님 보호도 A/S야.'],
    ['me','smile','근데 다음엔 내가 먼저 말해 볼게. 반장 하려면 그래야 할 것 같아.'],['hangyeol','surprised','……오. 멋있는데?'],['hangyeol','smile','그럼 다음엔 내가 뒤에 서 있을게. 너 막히면 그때 나간다.']]}],
  post:[
+  {pic:'hangyeol_14b'},
   ['nar','','{@poster}가 반듯하게 붙었다. 한결이가 {@thread} 테두리를 손가락으로 쓸었다.'],
   ['hangyeol','smile','있잖아. 강당에서 남자 {@line}, 여자 {@line} 섰던 날 기억나? 그날 너 내 옆에 있었잖아.'],
   ['hangyeol','smile','그래서 오늘은 내가 옆에 선 거야. 그게 다야.']],
@@ -722,6 +737,7 @@ EP.hangyeol=[
 {title:'이어달리기',scene:'hangyeol_15',place:'field',at:[800,500],also:{stands:[640,540]},
  things:{field:[['flag',900,560,50],['water',760,575,40]]},
  pre:[
+  {pic:'hangyeol_15c'},
   ['nar','','체육 시간. 다음 달 운동회에 나갈 이어달리기 연습 경기를 했다. 운동회 규칙대로 한 팀에 네 명, 남자 두 명, 여자 두 명.'],
   ['nar','','며칠 전에 선생님이 한결이를 따로 부르셨다. 한결이는 나중에 나한테만 말해 줬다.'],
   ['hangyeol','smile','선생님이 명단에 어떻게 넣을지 나한테 물어보셨어. 남자 칸에 써도 되는지. 싫으면 다른 방법 찾아보겠다고.'],
@@ -759,6 +775,7 @@ EP.hangyeol=[
    ['me','surprised','그런 거…… 생각 안 해 봤어.'],['hangyeol','surprised','그래?'],['nar','','한결이가 잠깐 하늘을 봤다.'],['hangyeol','smile','그것도 나쁘지 않네. 생각 안 해도 되는 거.'],
    ['nar','','그런데 한결이는 뭔가 더 듣고 싶었던 얼굴이었다.'],['think','sad','(그냥 넘어가기만 한 것 같아.)']]}],
  post:[
+  {pic:'hangyeol_15b'},
   ['nar','','한결이가 주머니에서 뭔가를 꺼냈다. {@thread} 팔찌였다. 딸기우유색, 새벽보라, 그리고 처음 보는 색 하나.'],
   ['hangyeol','smile','이거 새 색이야. 이름은 아직 없어.'],
   ['me','surprised','왜?'],
@@ -811,6 +828,9 @@ Object.assign(EXTRA_MAPS,{
 for(const id of ['library','triproom']){const m=EXTRA_MAPS[id];MAPS[id]={img:m.img,walk:m.walk,rects:[],block:m.block||[],start:m.start};OUT[id]=m.out;PLACE[id]=id}
 {const P={'도서관':['library','perpustakaan','thư viện','图书馆','としょしつ','библиотека'],'수련회 방':['room at the school trip','kamar perkemahan','phòng ở trại','研学旅行的房间','しゅくはくがくしゅうのへや','комната в лагере']};
  ['en','id','vi','zh','ja','ru'].forEach((u,i)=>{T[u]=T[u]||{};for(const[k,v]of Object.entries(P))if(!(k in T[u]))T[u][k]=v[i]})}
+// stand:1 = Hangyeol stands where the scene says (meeting 10: a little away from the room list on the board), not at his desk; spots.js seats kids with sitting art, so this runs after it
+addEventListener('load',()=>{const _dpHg=d2People;d2People=function(id){const ps=_dpHg(id),e=epNext('hangyeol',EPIDX.hangyeol);
+ if(e&&e.stand&&e.place===id){const p=ps.find(p=>p[0]==='hangyeol');if(p){p[1]=e.at[0];p[2]=e.at[1];p.length=3}}return ps}});
 // a scene that walks on to a place it does not start in ({go:'stands'}) shows its things there too, and the friend can stand there as well (ep.also)
 {const _sd2=setDay;setDay=function(n){_sd2(n);for(const f of D2IDS){const e=epNext(f,EPIDX[f]);if(!e)continue;
   for(const m of Object.keys(Object.assign({},e.things,e.taps,e.also)))if(EXTRA_MAPS[m]&&!D2PLACE[m])D2PLACE[m]=[]}}}
