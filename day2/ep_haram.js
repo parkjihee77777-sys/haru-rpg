@@ -1,7 +1,7 @@
 // 이하람 — scenes by meeting (Day N = the Nth meeting with Haram; meeting 1 = Day 2). Source: 괴짜교실_시나리오_개정작업/02_인물별_시나리오/이하람_Day2-16R_전면개정.md
 // Same format as ep_siwoo.js (loaded after ep_siwoo.js). Replaces Haram's calendar Day 2 scene.
 // Flags: R03_ask (Day 3 A·D), R03_visit (Day 3 A·B·D: went to the full-moon evening → Day 4, 12, 16R), R06_D (Day 6 D: everyone's own 30 seconds → Day 15 C).
-// Places: the cafeteria (Day 2, 6, 7), the classroom, the hallway (Day 4, 12, 15), the back yard bench (Day 9), the library (Day 11), the rooftop garden (Day 14, drawn for these scenes).
+// Places: the cafeteria (Day 2, 6, 7), the classroom, the hallway (Day 4, 15), the classroom → hall → front gate (Day 12), the back yard bench (Day 9), the library (Day 11), the rooftop garden (Day 14, drawn for these scenes).
 window.EP=window.EP||{};
 EP.haram=[
 // ■ Day 2 — 30초 노래 (1)
@@ -64,7 +64,7 @@ EP.haram=[
   D:[['me','sad','그거 무슨 주문이냐고 물었어. 애들이 그렇게 말해서 나도 모르게.'],['mom','surprised','하람이는?'],['me','sad','주문 아니래. 밥 고맙다는 노래래. 다들 주문이라고 한대.'],['mom','sad','다들 그러면 매번 속상하겠다. 그래도 바로 미안하다고 했지?'],['me','smile','응.']]}},
 
 // ■ Day 3 — 보름 초대 (2)
-{title:'보름 초대',scene:'haram_02',place:'class',at:[700,262],flag:{R03_ask:{A:1,D:1},R03_visit:{A:1,B:1,D:1}},
+{title:'보름 초대',scene:'haram_02',place:'class',at:[700,262,'stand'],flag:{R03_ask:{A:1,D:1},R03_visit:{A:1,B:1,D:1}},
  things:{class:[['calendar',1296,108,62],['moon',64,190,80]]},
  pre:[
   {pic:'haram_02'},
@@ -164,9 +164,9 @@ EP.haram=[
    ['haeun','surprised','……너네 엄마가 괜찮대?'],['me','smile','응. 어른끼리 확인했대.']]},
   ['nar','','하람이 퀴즈 {@paper|와} 같이 {@pencil|이} 바닥에 떨어져 있었다.'],
   {k:'pencil',goal:'「{x}」 주워 주기'},
-  {only:['C'],lines:[['nar','','쉬는 시간이 끝날 무렵, 교실에서.']]},
+  {only:['C'],lines:[{go:'class'},['nar','','쉬는 시간이 끝날 무렵, 교실에서.']]},
   ['nar','','하람이가 퀴즈 {@paper|를} 다시 들었다.'],
-  {pic:'haram_d04_confide'},['haram','sad','……그 말, 나도 알아. 사이비.'],
+  {only:['A','B','D'],lines:[{pic:'haram_d04_confide'}]},['haram','sad','……그 말, 나도 알아. 사이비.'],
   ['haram','sad','1학년 때부터 들었어. 그 말 들으면 우리 엄마가 나쁜 사람이 되는 것 같아. 우리 엄마 진짜 좋은 사람인데.'],
   ['think','surprised','(하람이가 처음으로 퀴즈 말고 진짜 얘기를 했어.)'],
   {only:['A','D'],lines:[['haram','sad','……너는 믿었어?'],['me','smile','몰라서 무서웠어. 근데 확인 안 하고 믿진 않았어.'],['haram','relieved','……그럼 됐어.']]},
@@ -219,13 +219,13 @@ EP.haram=[
   {k:'D',text:'선생님께 모둠 마감을 어떻게 할지 같이 여쭤보자고 한다.',pts:{haram:2},r:[
    ['me','smile','선생님께 여쭤보자. 이럴 땐 어떻게 하는지.'],
    ['nar','','하람이와 같이 선생님께 갔다.'],
-   {pic:'haram_04a'},
+   {lay:[['teacher',1040,390,120]]},{pic:'haram_04a'},
    ['haram','smile','선생님, 저 내일 가족 일로 못 와요. 모둠 과제 마감인데요.'],
    ['nar','','선생님: 「미리 알려 줘서 고마워. 그럼 내일은 하람이 몫 빼고 먼저 내고, 하람이 부분은 모레 하람이가 마저 해서 붙이자.」'],
    ['nar','','선생님: 「그리고 모둠 여러분. 종교나 가족 행사 때문에 빠지는 날이 있는 사람은 누구든 미리 알려 주세요. 알면 일정을 맞출 수 있어요.」'],
    ['junho','surprised','……그럼 하람이가 무임승차한 게 아니네요?'],
    ['nar','','선생님: 「미리 말하고 자기 몫을 하면, 무임승차가 아니죠.」'],
-   {pic:null}]}],
+   {pic:null},{clear:['teacher']}]}],
  post:[
   {pic:null},
   ['nar','','종이 울렸다. 하람이가 모둠 자료를 내 {@bag}에 넣어 주려고 했다. 내일 내가 대신 내기로 했다.'],
@@ -438,7 +438,7 @@ EP.haram=[
 {title:'냄새만',scene:'haram_08',place:'backyard',at:[560,600],
  taps:{backyard:[['bench',410,480,70]]},things:{backyard:[['water_bottle',650,640,36]]},
  pre:[
-  ['nar','','쉬는 시간. 뒤뜰 {@bench}에 하람이가 혼자 앉아 있었다. 오늘은 퀴즈를 내지 않았다.'],
+  {pic:'haram_08'},['nar','','쉬는 시간. 뒤뜰 {@bench}에 하람이가 혼자 앉아 있었다. 오늘은 퀴즈를 내지 않았다.'],
   ['nar','','나는 하람이 옆에 앉았다.'],
   {k:'bench',goal:'「{x}」에 앉기'},
   {k:'water_bottle',goal:'「{x}」 건네기'},
@@ -609,11 +609,11 @@ EP.haram=[
    ['yena','laugh','우리도 노래로 할 때 있어!']]}],
  post:[
   {pic:null},
-  {pic:'haram_11a'},
+  {only:['B','C','D'],lines:[{pic:'haram_11a'}]},
   ['nar','','도서관 선생님이 지나가시다가 우리 책상의 {@book|을} 보셨다.'],
   ['nar','','도서관 선생님: 「세계의 명절 {@book} 보는구나. 그 {@book}에 보면 사람마다 믿는 게 진짜 다양해. 누가 맞는지는 {@book}에도 안 나와. 대신 다들 뭘 소중히 여기는지는 나와 있지.」'],
   {pic:null},
-  {only:['A','B'],lines:[{pic:'haram_d11_sticker'},['nar','','그날 하람이와 예나는 오후 내내 말을 하지 않았다. 그런데 종례 시간, 예나가 하람이 책상에 크리스마스 스티커 하나를 슬쩍 놓고 갔다. 하람이는 그 옆에 보름달 {@picture|을} 그려 줬다.']]},
+  {only:['A','B'],lines:[{go:'class'},{pic:'haram_d11_sticker'},['nar','','그날 하람이와 예나는 오후 내내 말을 하지 않았다. 그런데 종례 시간, 예나가 하람이 책상에 크리스마스 스티커 하나를 슬쩍 놓고 갔다. 하람이는 그 옆에 보름달 {@picture|을} 그려 줬다.']]},
   {only:['C','D'],lines:[{pic:'haram_d11_sing'},['nar','','둘은 남은 쉬는 시간 동안 서로의 노래를 한 소절씩 불러 줬다. 도서관이라 아주 작게.']]}],
  eve:{lead:[['me','sad','{m}, 오늘 예나랑 하람이가 싸웠어. 누가 믿는 게 진짜인지.'],['mom','surprised','……아이고, 그건 어른들도 싸우는 건데.'],['me','sad','둘 다 나한테 누가 맞냐고 물었어.']],
   A:[['me','sad','하람이 말이 맞는 것 같다고 했어. 예나가 화나서 나갔어. 하람이도 이기려던 거 아니었대.'],['mom','smile','친구 편 들어 주고 싶었구나.'],['me','sad','응. 근데 그건 편 들 문제가 아니었나 봐.']],
@@ -622,11 +622,12 @@ EP.haram=[
   D:[['me','smile','둘 다 좋아하는 사람이 알려 준 거니까 소중하겠다고 했어. 그리고 나도 할머니한테 배운 인사 있다고 했어.'],['mom','surprised','예나랑 하람이는?'],['me','laugh','서로 할머니 기도 어떻게 하냐고 물어봤어. 둘 다 노래로 할 때가 있대.']]}},
 
 // ■ Day 12 — 가지 말래 (11)
-{title:'가지 말래',scene:'haram_11',place:'hall',at:[980,700],with:[['haeun',800,560]],
+{title:'가지 말래',scene:'haram_11',place:'class',at:[600,690],with:[['haeun',1050,690]],
  things:{hall:[['shoes',1120,700,50]]},taps:{hall:[['door',520,95,50]]},
  pre:[
   {pic:'haram_d12_invites'},['nar','','하교 시간. 하은이 생일 파티 초대장이 반에 돌았다. 이번 주 토요일, 하은이네 집.'],
   ['nar','','나는 초대장을 받았다. 하람이 책상 위에는 초대장이 없었다.'],
+  {go:'hall'},
   ['nar','','신발장 앞에서 하람이가 {@shoes} 끈을 천천히 묶고 있었다. 나는 하람이 옆으로 갔다.'],
   {k:'shoes',goal:'「{x}」 꺼내기'},
   {pic:'haram_11'},
@@ -672,7 +673,7 @@ EP.haram=[
    {pic:'haram_d12_know'},{flag:'R03_visit',is:0,lines:[['me','smile','안 부끄러워. 나는 너네 집 아직 안 가 봤지만, 너는 알아. 너는 퀴즈 내고, {@tofu} 마지막에 먹고, 궁금한 거 못 참는 애야.'],['haram','surprised','……그게 다야?'],['me','smile','응. 그거면 돼.']]}]},
   {k:'door',goal:'「{x}」 열기'},
   ['nar','','{@door|을} 열고 같이 나갔다.'],
-  {pic:'haram_12a'},
+  {go:'gatesun'},{pic:'haram_12a'},
   ['nar','','학교 정문 앞. 하람이가 하늘을 가리켰다. 낮달이 떠 있었다.'],
   ['haram','smile','오늘 문제! {@moon|은} 누구 거게?'],
   ['me','surprised','……몰라.'],
@@ -726,12 +727,12 @@ EP.haram=[
    ['me','smile','선생님한테 같이 가서, 못 가는 사람은 어떻게 하는지 물어볼래?'],
    ['haram','sad','……작년엔 그냥 결석했는데.'],['me','smile','물어보는 건 괜찮잖아.'],
    ['nar','','하람이랑 같이 선생님께 갔다.'],
-   {pic:'haram_04a'},
+   {lay:[['teacher',1040,390,120]]},{pic:'haram_04a'},
    ['nar','','선생님: 「아, 하람이 그날 가족 쉼의 날이구나. 미리 말해 줘서 고마워.」'],
    ['nar','','선생님: 「그날은 출석은 가족 행사로 처리할게. 그리고 과학관 활동지를 미리 줄 테니, 나중에 다녀온 친구들이랑 같이 해 보자. 하람이가 하고 싶으면.」'],
    ['haram','surprised','……천체관 활동지도 있어요?'],
    ['nar','','선생님: 「있지. 하람이가 제일 좋아할 것 같은데.」'],
-   {pic:null}]}],
+   {pic:null},{clear:['teacher']}]}],
  post:[
   {pic:null},
   ['nar','','종이 울리기 전, 하람이가 가정통신문을 다시 펼쳤다. 뒷면에 과학관 안내 {@photo|이} 있었다.'],
@@ -825,7 +826,7 @@ EP.haram=[
  choices:[
   {k:'A',text:'「……알았어. 선거 끝날 때까지만.」',pts:{haram:1},r:[
    ['me','sad','……알았어. 선거 끝날 때까지만.'],['haram','smile','응. 그게 나아.'],
-   {pic:'haram_d15_alone'},
+   {go:'cafe'},{pic:'haram_d15_alone'},
    ['nar','','하람이가 먼저 교실로 들어갔다. 다음 급식 시간, 하람이는 다른 테이블에 혼자 앉았다. 감사 노래가 작게 들렸다. 나는 {@chopsticks|을} 들지 못했다.'],
    ['think','sad','(하람이가 하자고 한 건데…… 왜 이렇게 마음이 안 좋지.)']]},
   {k:'B',text:'옆 반 아이들에게 크게 따진다. 「너네가 하람이를 알아? 사이비라는 말 쓰지 마!」',pts:{haram:1},r:[
@@ -854,6 +855,7 @@ EP.haram=[
    ['nar','','우리 반 아이 하나가 고개를 끄덕였다.'],
    {pic:'haram_d15_junho'},['junho','smile','맞아. 우리 반은 밥 먹기 전에 각자 해. 나는 그냥 가만히 있어.'],
    ['nar','','옆 반 아이들이 시시하다는 듯 흩어졌다.']]},
+  {only:['A'],lines:[{go:'hall'}]},
   {pic:'haram_15a'},
   ['nar','','다음 쉬는 시간. 담임 선생님이 {@board} 앞에 오셨다. 낙서가 지워졌는지 확인하시고, 우리 반 아이들 앞에서 말씀하셨다.'],
   ['nar','','선생님: 「사람이나 가족을 ‘사이비’라고 부르는 말은 우리 학교에서 쓰지 않아요. 그건 그 사람이 뭘 믿는지가 아니라, 그 사람을 나쁘게 만드는 말이에요. 옆 반 선생님께도 말씀드렸어요.」'],
@@ -867,7 +869,7 @@ EP.haram=[
   common:[['me','smile','선생님이 사이비라는 말은 학교에서 안 쓴대. 그 사람을 나쁘게 만드는 말이래.'],['mom','smile','맞아. 엄마도 오늘 처음 배웠다.']]}},
 
 // ■ Day 16R — 다음 보름 (15)
-{title:'다음 보름',scene:'haram_15',place:'class',at:[262,262],
+{title:'다음 보름',scene:'haram_15',place:'class',at:[262,262,'stand'],
  things:{class:[['picture',196,230,60],['moon',64,190,80]]},
  pre:[
   {pic:'haram_d16_drawing'},['nar','','쉬는 시간. 하람이가 창가에서 뭔가를 그리고 있었다. 창밖에는 낮달이 떠 있었다. 거의 둥글었다.'],
@@ -969,3 +971,25 @@ for(const id of ['rooftop']){const m=EXTRA_MAPS[id];MAPS[id]={img:m.img,walk:m.w
   if(h[2]!=='eve'){startDay(day);return}
   setDay(day);PICKS=['haram'];EPIDX.haram=k-1;TODAYEP.haram=EP.haram[k-1];MEET.haram=k;D2CHOICE.haram='C';
   stage='d2_after';load('class');useDoor()},95)}
+// who stands on the map follows the lines (10/27 picture check): kids leave when the line says they left, arrive when it says they came
+// (the step is {clear:[fn]} like ep_junho.js: every runSteps hands {clear} to layThings, and Junho's layThings runs the functions)
+{const kidOff=(...ids)=>({clear:[()=>{npcs=npcs.filter(p=>{if(!ids.includes(p.id))return true;p.el.remove();return false})}]});
+ const kidOn=(id,x,y)=>({clear:[()=>{if(!npcs.some(p=>p.id===id))npcs.push(sprite(id,x,y))}]});
+ const at=(n,sub,step,before)=>{let hit=0;const walk=a=>{for(let i=0;i<a.length;i++){const x=a[i];
+   if(Array.isArray(x)&&typeof x[2]==='string'&&x[2].includes(sub)){a.splice(before?i:i+1,0,step);hit++;i++}else if(x&&!Array.isArray(x)&&x.lines)walk(x.lines)}};
+  const e=EP.haram[n-1];walk(e.pre||[]);walk(e.post||[]);for(const c of e.choices)walk(c.r||[]);if(!hit)console.warn('haram: no line',n,sub)};
+ at(10,'예나가 {@book|을} 탁 덮고 도서관을 나가',kidOff('yena'));            // A: Yena walks out of the library
+ at(11,'그때 하은이가 신발장 앞으로 왔다',kidOn('haeun',800,560),true);      // Haeun comes to the shoe lockers later
+ at(11,'하은이가 먼저 나갔다',kidOff('haeun'));
+ at(13,'오늘은 {HC} 명절이었다',kidOff('haram'),true);                       // I sit alone on the rooftop; Haram looks in at the stair window later
+ at(13,'하람이가 옆에 앉았다',kidOn('haram',720,640),true)}
+// when a meeting walks on ({go}), Haram stands where the talk happens there and kids who aren't in that part stay behind
+// (3 C: the classroom without Haeun; 10 A·B: the classroom at closing time; 11: the shoe lockers, then the sunny front gate (gatesun, drawn for Hyeeun) without Haeun; 14 A: Haram alone at another cafeteria table)
+EP.haram[2].goOff={class:['haeun']};
+EP.haram[10].goAt={hall:[980,700],gatesun:[780,510]};EP.haram[10].goOff={hall:['haeun'],gatesun:['haeun']};
+EP.haram[13].goAt={cafe:[1210,760],hall:[420,560]};EP.haram[13].goOff={cafe:['junho']};
+{const _loadHr=load;load=function(m,x){const r=_loadHr(m,x),e=SCENE_EP;
+  if(e&&SCENE_IDS&&SCENE_IDS[0]==='haram'){const off=(e.goOff&&e.goOff[m])||[],a=e.goAt&&e.goAt[m];
+   npcs=npcs.filter(p=>{if(!off.includes(p.id)&&!(a&&p.id==='haram'))return true;p.el.remove();return false});
+   if(a)npcs.push(a[2]?sprite('haram',a[0],0,{top:a[2]}):sprite('haram',a[0],a[1]))}
+  return r}}
