@@ -577,7 +577,7 @@ EP.seah=[
   {only:['B','D'],lines:[['jiho','smile','우리 4점, 저쪽 4점! 동점!']]},
   {only:['A','C'],lines:[['jiho','smile','우리 2점, 저쪽 5점…… 다음 판은 무조건 이긴다!']]},
   ['nar','','선생님: 「좋아요. 다음 체육 시간에 또 해요. 그땐 번호 다시 섞을 거예요. {@ball} 정리할 사람, {@ball} 갖고 와요.」'],
-  {lay:[['ball',1100,520,34]]},
+  {lay:[['ball',1100,520,44]]},
   {k:'ball',goal:'「{x}」 선생님께 건네기'},
   ['nar','','우리 팀 {@ball|을} 들고 가서 선생님 {@ball} 바구니에 넣었다.'],
   {clear:['ball']},
@@ -687,7 +687,7 @@ EP.seah=[
   ['nar','','{@umbrella|을} 접어 교실 뒤 우산꽂이에 걸었다.'],
   {clear:['umbrella']},
   ['nar','','우산꽂이 옆, 창가 바닥에 민호가 {@card|를} 펼치고 있었다. 트럼프 {@card|였}다.'],
-  {lay:[['card',1200,330,34]]},
+  {lay:[['card',1300,345,48,'cards_play']]},
   ['minho','smile','원카드 할 사람.'],
   ['jiho','smile','나!'],
   ['seah','smile','……나도.'],
@@ -1440,6 +1440,8 @@ for(const e of EP.seah)for(const o of e.choices)if(o.r&&o.r.some(x=>!Array.isArr
 for(const k of ['water_bottle','desk','chair','window'])CARDS_HAVE.add(k);
 // Day 8: 「{등}에 글씨 쓰기」 — the back is Jiho's own back: tapping Jiho while that find runs is tapping his {back}
 {const _ntSe=npcThing;npcThing=function(n,y){if(FIND==='back'&&n.id==='jiho')return 'back';return _ntSe(n,y)}}
+// …and while that find runs Jiho turns around, so his back is what you see
+{const _fdSe=find;find=function(k,done,goal,label){if(k==='back'){const j=npcs.find(p=>p.id==='jiho');if(j){j.dir='up';draw(j)}}return _fdSe(k,done,goal,label)}}
 // test shortcuts: #se5 = the morning of the day you meet Seah the 5th time (Day 6); #se5eve = that evening; #se15b = Day 16R with the flags off
 {const h=location.hash.match(/^#se(\d+)(eve|b)?$/);
  if(h)setTimeout(()=>{const k=+h[1];HEART_D1={};FOUND.add('handkerchief');MEET={seah:k-1};
