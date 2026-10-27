@@ -19,7 +19,7 @@ d2People=function(id){const eps=D2IDS.map(f=>[f,epNext(f,EPIDX[f])]).filter(x=>x
  for(const[f,e]of eps){moved.add(f);(e.with||[]).forEach(w=>moved.add(w[0]))}
  const ps=_d2People(id).filter(p=>!moved.has(p[0]));
  // each kid stands in one spot only: a friend's own scene first, then the kids other scenes here bring along (several scenes may list the same kid)
- const here=new Set();for(const[f,e]of eps)if(e.place===id&&!here.has(f)){here.add(f);ps.push([f,e.at[0],e.at[1]])}
+ const here=new Set();for(const[f,e]of eps)if(e.place===id&&!here.has(f)){here.add(f);ps.push(e.at[2]==='stand'?[f,e.at[0],e.at[1],null,'stand']:[f,e.at[0],e.at[1]])}
  // a kid whose own story today happens somewhere else (and isn't done yet) stands only there, where it will happen;
  // another friend's scene here that brings them along adds them when that scene starts (d2Talk)
  const ownElsewhere=w=>{const e2=epNext(w,EPIDX[w]);return e2&&e2.place&&e2.place!==id&&!PICKS.includes(w)};
@@ -68,6 +68,15 @@ function needToday(){return Math.min(2,friendsToday().length)}
 d2Goal=function(){const left=friendsToday().filter(i=>!PICKS.includes(i));
  if(PICKS.length>=needToday()||!left.length){if(stage==='d2_class'){setGoal('');setTimeout(()=>lessons('pm'),300)}return}
  setGoal(PICKS.length?'점심시간! 한 친구를 더 만나 보기':'오늘 이야기할 친구 2명 고르기',left,id=>PICKS.includes(id),` (${PICKS.length}/${needToday()})`)};
+// a kid a scene brings along walks in from the way into the school (the map's door) to their spot; a seated one fades in at the desk
+function comeOver(w,k){const n=sprite(w[0],w[1],w[2],w[3]);if(w[3]&&typeof w[3]==='object'){n.el.style.opacity=0;n.el.style.transition='opacity .7s';requestAnimationFrame(()=>requestAnimationFrame(()=>{n.el.style.opacity=1}));return n}
+ const st=OUT[MAP]||(MAPS[MAP]&&MAPS[MAP].start);if(!st)return n;const tx=w[1],ty=w[2];let p=findPath(st[0],st[1],tx,ty);if(!p||!p.length)return n;
+ n.x=st[0];n.y=st[1];n.path=p;const go=performance.now()+(k||0)*550;let last=go;n.el.style.visibility='hidden';
+ const step=now=>{if(!npcs.includes(n)){return}if(now<go||!n.w){requestAnimationFrame(step);return}n.el.style.visibility='';const dt=Math.min(.05,(now-last)/1000);last=now;
+  if(!p.length){n.path=null;n.x=tx;n.y=ty;n.frame=0;n.dir='down';draw(n);return}
+  const[px,py]=p[0],ex=px-n.x,ey=py-n.y,d=Math.hypot(ex,ey);if(d<6){p.shift()}else{const k=Math.min(d,260*dt)/d;n.x+=ex*k;n.y+=ey*k;
+   n.dir=Math.abs(ex)>Math.abs(ey)?(ex<0?'left':'right'):(ey<0?'up':'down');n.t=(n.t||0)+dt;n.frame=[1,0,2,0][Math.floor(n.t*8)%4]}draw(n);requestAnimationFrame(step)};
+ draw(n);requestAnimationFrame(step);return n}
 // after a scene: a kid who came along but whose own story today is somewhere else goes back there (leaves this map), so tapping them
 // here can't start their story in the wrong place
 function tidyPeople(){npcs=npcs.filter(n=>{const e=D2IDS.includes(n.id)&&!PICKS.includes(n.id)&&epNext(n.id,EPIDX[n.id]);
@@ -102,7 +111,7 @@ d2Talk=function(id){const e=epNext(id,EPIDX[id]);
  if(!e||PICKS.includes(id)||!['d2_class'].includes(stage)||PICKS.length>=needToday()){
   if(e||!DD()[id]){say([AGAIN[id]||['think','smile','(오늘은 여기까지. 내일 또 얘기해 보자.)']]);return}
   return _d2Talk(id)}
- for(const w of e.with||[])if(!npcs.some(n=>n.id===w[0]))npcs.push(sprite(w[0],w[1],w[2],w[3]));// the kids this scene brings along come over now
+ {let k=0;for(const w of e.with||[])if(!npcs.some(n=>n.id===w[0]))npcs.push(comeOver(w,k++))}// the kids this scene brings along come over now (walk in from the school door, no popping up)
  setGoal('');for(const m of JSON.stringify(e).matchAll(/"(?:pic|scene)":"(\w+)"/g))picProbe(heroPic(m[1]));const hs=heroPic(e.scene),pic=!!e.scene&&PICOK[hs]!==false;SCENE_IDS=[id].concat((e.with||[]).map(w=>w[0]));SCENE_EP=e;GOWITH=null;
  runSteps(e.pre,null,()=>{const choose=()=>ask(e.ask||'어떻게 할까?',e.choices,o=>{D2CHOICE[id]=o.k;sceneEl.classList.remove('on');
   for(const[f,v]of Object.entries(e.flag||{}))FLAGS[f]=!!v[o.k];
