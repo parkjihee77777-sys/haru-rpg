@@ -475,9 +475,7 @@ EP.jihoon=[
  pre:[
   ['nar','','점심시간. 밥을 먹고 1층 현관으로 내려왔다. 유리문 밖에서 바람이 휭휭 불었다. 운동장 {@tree|가} 한쪽으로 휘었다.'],
   ['nar','','선생님: 「(지나가시며) 오늘 바람 차요. 나갈 사람은 겉옷 꼭 입고 나가요.」'],
-  {lay:[['shoes',1060,640,48]]},
-  {k:'shoes',goal:'「{x}」 갈아 신기'},
-  {clear:['shoes']},
+  {k:'shoes',goal:'「{x}」 갈아 신기',bag:['shoes','indoor_shoes','sock','pocket','hand']},
   ['nar','','실내화를 신발장에 넣고 {@shoes|을} 꺼내 신었다.'],
   ['nar','','신발장 앞에 지훈이가 있었다. 반팔 티셔츠만 입고 있었다. 목에는 {@camera}. {@hand}에는 초록 점퍼를 구겨서 들고 있었다.'],
   ['nar','','점퍼는 컸다. 색이 좀 바랬다. 소매 끝이 닳아 있었다. 안쪽 목에 이름표가 붙어 있었다. 「배지성」.'],
@@ -1307,9 +1305,7 @@ EP.jihoon=[
   ['nar','','{@grandma|가} 장바구니를 끌고 횡단보도 앞에 서셨다. 지훈이가 뛰어가 손잡이를 잡았다. 그리고 돌아서서 {@hand|을} 흔들었다. 크게.'],
   ['jihoon','smile','다음에 봐!'],
   ['grandma','smile','또 보재이~!'],
-  {lay:[['hand',1150,700,46]]},
-  {k:'hand',goal:'「{x}」 흔들기'},
-  {clear:['hand']},
+  {k:'hand',goal:'「{x}」 흔들기',bag:['hand','shoes','sock','pocket','knee']},
   ['nar','','나도 {@hand|을} 크게 흔들었다.'],
   ['nar','','신호가 바뀌었다. 두 사람이 횡단보도를 건넜다. 긴 {@shadow} 두 개가 나란히 갔다. 장바구니 {@shadow}도 따라갔다.'],
   ['nar','','나는 손가락으로 네모를 만들었다. 그 안에 {@shadow} 셋이 들어왔다.'],
@@ -1348,10 +1344,10 @@ for(const k of Object.keys(EP_WORDS_JN))CARDS_HAVE.add(k);
 // Grandma talks like the teacher: her own face (faces/grandma_*.jpg) and, as her name, the word the player learns for 할머니
 NAME.grandma='할머니';
 {const _nmJn=nm;nm=function(id){if(id==='grandma')return LANGS[LANG].words.grandma||'할머니';return _nmJn(id)}}
-// ep.friend = the classmate who is the {friend} of a find (Day 9: stand next to Youngmin): tapping them answers that find
+// ep.friend = the classmate who is the {friend} of a find (Day 9: stand next to Youngmin): tapping them answers that find; the camera glides over to them like Mom's missions
 {const _findJn=find;find=function(k,done,goal,label){const e=SCENE_EP,f=e&&e.friend;
  if(f&&k==='friend'){WORDKEY[f]='friend';const d=done;done=function(){delete WORDKEY[f];return d&&d.apply(this,arguments)}}
- return _findJn(k,done,goal,label)}}
+ const r=_findJn(k,done,goal,label);if(f&&k==='friend')setTimeout(()=>lookAt(f),300);return r}}
 // test shortcuts: #jn5 = the morning of the day you meet Jihoon the 5th time (Day 6); #jn5eve = that evening; #jn15b = Day 16R with the flags off
 {const h=location.hash.match(/^#jn(\d+)(eve|b)?$/);
  if(h)setTimeout(()=>{const k=+h[1];HEART_D1={};FOUND.add('handkerchief');MEET={jihoon:k-1};
