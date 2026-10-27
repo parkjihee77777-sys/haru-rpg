@@ -18,7 +18,9 @@ const _d2People=d2People;
 d2People=function(id){const eps=D2IDS.map(f=>[f,epNext(f,EPIDX[f])]).filter(x=>x[1]);const moved=new Set();
  for(const[f,e]of eps){moved.add(f);(e.with||[]).forEach(w=>moved.add(w[0]))}
  const ps=_d2People(id).filter(p=>!moved.has(p[0]));
- for(const[f,e]of eps)if(e.place===id){ps.push([f,e.at[0],e.at[1]]);(e.with||[]).forEach(w=>ps.push(w))}
+ // each kid stands in one spot only: a friend's own scene first, then the kids other scenes here bring along (several scenes may list the same kid)
+ const here=new Set();for(const[f,e]of eps)if(e.place===id&&!here.has(f)){here.add(f);ps.push([f,e.at[0],e.at[1]])}
+ for(const[f,e]of eps)if(e.place===id)(e.with||[]).forEach(w=>{if(!here.has(w[0])){here.add(w[0]);ps.push(w)}})
  // a scene that walks on ({go}) takes its friend (and who is with them) along: they stand next to the hero where the hero comes in (spots.js keeps them off things)
  if(GOWITH&&GOWITH.map===id){const st=(MAPS[id]&&MAPS[id].start)||[600,500];GOWITH.ids.forEach((f,i)=>{const at=ps.findIndex(p=>p[0]===f);if(at>=0)ps.splice(at,1);ps.push([f,st[0]+(i%2?-1:1)*110*(1+(i>>1)),st[1]])})}
  return ps};
