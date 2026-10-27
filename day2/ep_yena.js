@@ -1163,7 +1163,7 @@ EP.yena=[
  flag:{S13_song:{D:1}},
  post:[
   ['nar','','이제 {@water_bottle|이었}다. 예나 {@water_bottle|은} 분홍색이었다. 음악실 어딘가에 있을 거였다.'],
-  {lay:[['water_bottle',1180,300,34]]},
+  {lay:[['water_bottle',1262,238,48,'water_bottle_pink']]},
   {k:'water_bottle',goal:'「{x}」 챙기기'},
   {clear:['water_bottle']},
   ['nar','','나는 음악실 창틀 위에서 예나의 분홍 {@water_bottle|을} 찾아 들었다.'],
@@ -1184,7 +1184,7 @@ EP.yena=[
   common:[['me','smile','{m}, 예나는 노래로 넣은 건 하나도 안 까먹어. 근데 노래에 안 넣은 건 다 까먹어.'],['mom','smile','그럼 넣으면 되겠네.'],['me','laugh','(웃음) 엄마 지금 예나 같아.'],['mom','laugh','엄마도 장 볼 때 속으로 노래하는데. 두부~ 대파~ 계란 한 판~'],['me','surprised','진짜?'],['mom','smile','진짜. 안 그러면 꼭 하나 빼먹어.']]}},
 
 // ■ Day 14 — 발가락 박자 (13)
-{title:'발가락 박자',scene:'yena_13',place:'class',at:[300,720],
+{title:'발가락 박자',scene:'yena_13',place:'class',at:[205,345],stand:1,
  pre:[
   ['nar','','점심을 먹고 교실로 돌아왔다. 다들 아직 밖에 있었다. 교실은 거의 비어 있었다.'],
   {pic:'yena_13a'},
@@ -1519,6 +1519,9 @@ for(const k of ['drum','ear'].filter(k=>YN_HAVE.has('item:'+k)))CARDS_HAVE.add(k
   const x=Math.round((n?n.x:800)+dx),y=Math.round((n?n.y:700)+dy);if(img==='-'){tapOnly.push([k,x,y,w]);return null}return[k,x,y,w,img||undefined]}).filter(Boolean);
  _layYn(lay,clear);
  for(const[k,x,y,w]of tapOnly){const o=[k,x,y,Math.max(30,w*.55)];o.laid=1;(OBJ[MAP]=OBJ[MAP]||[]).push(o)}if(tapOnly.length)tagAll()}}
+// stand:1 = she stands where her scene says (meeting 13: alone by the window), not at a desk; spots.js seats every kid with sitting art, so this runs after it
+addEventListener('load',()=>{const _dpYn=d2People;d2People=function(id){const ps=_dpYn(id),e=epNext('yena',EPIDX.yena);
+ if(e&&e.stand&&e.place===id){const p=ps.find(p=>p[0]==='yena');if(p){p[1]=e.at[0];p[2]=e.at[1];p.length=3}}return ps}});
 // test shortcuts: #yn5 = the morning of the day you meet Yena the 5th time (Day 6); #yn5eve = that evening; #yn15b = Day 16R with the flags off
 {const h=location.hash.match(/^#yn(\d+)(eve|b)?$/);
  if(h)setTimeout(()=>{const k=+h[1];HEART_D1={};FOUND.add('handkerchief');MEET={yena:k-1};
