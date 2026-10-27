@@ -468,9 +468,7 @@ EP.haneul=[
   {only:['B','C'],lines:[['nar','','「아까는 네가 다 가져갔어. 눈. 그래서 0.」 끝에 {@cloud}.']]},
   {only:['A','D'],lines:[['nar','','「아까는 다 왔어. 괜찮아. 지금은 0.」 끝에 {@cloud}.']]},
   {only:['C'],lines:[['nar','','그 밑에 한 줄이 더 있었다. 「선생님 웃었어? 셋째 칸 눈 진짜 똑같지.」']]},
-  {lay:[['pocket',1452,606,44]]},
-  {k:'pocket',goal:'「{x}」에 넣기'},
-  {clear:['pocket']},
+  {k:'pocket',goal:'「{x}」에 넣기',bag:['pocket','hand','shoes','sock','clothes']},
   ['nar','','나는 {@note|를} {@pocket|에} 넣었다. 아무한테도 안 보여 줄 거였다. 이건 반만 무서운 이야기니까.']],
  eve:{
   lead:[
