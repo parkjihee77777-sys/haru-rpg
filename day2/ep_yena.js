@@ -1162,7 +1162,7 @@ EP.yena=[
    ['me','smile','응. 나도 들으면 같이 챙길게. 내 거.']]}],
  flag:{S13_song:{D:1}},
  post:[
-  ['nar','','이제 물병이었다. 예나 {@water_bottle|은} 분홍색이었다. 음악실 어딘가에 있을 거였다.'],
+  ['nar','','이제 {@water_bottle|이었}다. 예나 {@water_bottle|은} 분홍색이었다. 음악실 어딘가에 있을 거였다.'],
   {lay:[['water_bottle',1180,300,34]]},
   {k:'water_bottle',goal:'「{x}」 챙기기'},
   {clear:['water_bottle']},
