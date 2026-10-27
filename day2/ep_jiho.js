@@ -9,7 +9,7 @@ window.EP=window.EP||{};
 EP.jiho=[
 // ■ Day 2 — 방금 건 연습 판 (1)
 {title:'방금 건 연습 판',scene:'jiho_01',place:'field',at:[900,330],with:[['junho',760,380],['haeun',1050,380]],
- things:{field:[['shoes',990,470,48],['ball',820,450,42]]},
+ things:{field:[['ball',820,450,42]]},
  pre:[
   {pic:'jiho_01a'},
   ['nar','','쉬는 시간. 운동장 가장자리에 아이들이 동그랗게 모여 있었다. 가운데에서 지호가 축구{@ball}을 발로 톡톡 차올리고 있었다.'],
@@ -27,7 +27,7 @@ EP.jiho=[
   ['jiho','laugh','콜! 잠깐, 끈부터.'],
   ['nar','','지호가 쪼그려 앉아 {@shoes} 끈을 묶었다. 한 번 묶고, 그 위에 한 번 더.'],
   ['jiho','smile','시합 전엔 두 번. 너도 묶어.'],
-  {k:'shoes',goal:'「{x}」 끈 묶기'},
+  {k:'shoes',goal:'「{x}」 끈 묶기',bag:['sock','hand','shoes','pocket','indoor_shoes']},
   {pic:'jiho_01b'},
   ['nar','','지호가 먼저 했다. 스물일곱 개.'],
   ['nar','','내 차례. 처음엔 {@ball}이 낯설었다. 그런데 열 개가 넘자 발이 기억났다.'],
@@ -484,7 +484,7 @@ EP.jiho=[
 
 // ■ Day 7 — 아무도 못 봤어 (6)
 {title:'아무도 못 봤어',scene:'jiho_06',place:'field',at:[640,380],with:[['yena',820,470]],
- things:{field:[['foot',560,600,46]],stands:[['water_bottle',760,600,44]]},
+ things:{stands:[['water_bottle',760,600,44]]},
  pre:[
   {pic:'jiho_06a'},
   ['nar','','체육 시간. 오늘은 발야구를 했다. 번호 홀수가 한 팀, 짝수가 한 팀. 나와 지호는 같은 팀이 됐다.'],
@@ -493,7 +493,7 @@ EP.jiho=[
   ['me','surprised','……1루가 어디야?'],
   ['jiho','smile','저기! 하얀 판!'],
   ['think','smile','(공으로 맞히면 아웃. 먼저 밟으면 아웃. 알았어.)'],
-  {k:'foot',goal:'「{x}」로 공 차기'},
+  {k:'foot',goal:'「{x}」로 공 차기',bag:['hand','knee','foot','ear','eye']},
   {pic:'jiho_06'},
   ['nar','','마지막 회. 점수는 4대4. 우리 팀은 투 아웃이었다. 내가 차고, 다음이 지호 차례였다.'],
   ['nar','','내가 찬 {@ball}이 땅볼로 굴러갔다. 나는 1루로 뛰었다. 수비하던 예나가 {@ball}을 주워 던졌다.'],
@@ -747,7 +747,7 @@ EP.jiho=[
 
 // ■ Day 10 — 잠깐 멈춰 (9)
 {title:'잠깐 멈춰',scene:'jiho_09',place:'gym',at:[860,520],with:[['haeun',1080,600]],
- things:{gym:[['finger',740,700,46],['ice',1000,720,44]]},
+ things:{gym:[['ice',1000,720,44]]},
  pre:[
   ['nar','','체육 시간. 모둠별 농구 시합을 했다. 규칙은 하나였다. 패스를 다섯 번 하고 나서 슛하기. 선생님이 모둠을 정해 주셨다. 나와 지호는 같은 모둠이었다.'],
   ['jiho','angry','패스! 패스! 세게! 빨리!'],
@@ -758,7 +758,7 @@ EP.jiho=[
   ['nar','','퍽.'],
   ['me','sad','앗!'],
   ['nar','','오른손 가운뎃{@finger}이 뒤로 확 꺾였다. 찌릿했다. {@ball}이 바닥으로 굴러갔다.'],
-  {k:'finger',goal:'「{x}」 구부려 보기'},
+  {k:'finger',goal:'「{x}」 구부려 보기',bag:['knee','foot','finger','ear','eye']},
   ['nar','','가운뎃{@finger}을 구부리려는데 잘 안 구부러졌다. 마디가 빨갛게 부어오르기 시작했다.'],
   ['jiho','surprised','괜찮지? 털어! 털면 돼!'],
   ['nar','','지호가 {@ball}을 주워 오며 소리쳤다.'],
@@ -1013,7 +1013,7 @@ EP.jiho=[
 
 // ■ Day 13 — 코치 (12)
 {title:'코치',scene:'jiho_12',place:'flowerbed',at:[1000,560],
- things:{flowerbed:[['shoes',880,700,48],['knee',1120,720,44],['ball',1180,600,42]]},
+ things:{flowerbed:[['ball',1180,600,42]]},
  pre:[
   {pic:'jiho_12c'},
   ['nar','','긴 쉬는 시간. 지호가 나를 운동장 구석, 화단 뒤로 데려갔다. 아무도 없는 곳이었다.'],
@@ -1024,7 +1024,7 @@ EP.jiho=[
   ['me','surprised','왜 비밀이야?'],
   ['jiho','angry','배우는 거 들키면 지는 거 같잖아.'],
   ['nar','','지호가 쪼그려 앉아 {@shoes} 끈을 풀었다.'],
-  {k:'shoes',goal:'「{x}」 끈 묶기'},
+  {k:'shoes',goal:'「{x}」 끈 묶기',bag:['indoor_shoes','sock','pocket','shoes','hand']},
   ['nar','','지호가 끈을 두 번 묶었다. 나도 따라 두 번 묶었다.'],
   ['me','surprised','연습인데 두 번 묶어?'],
   ['jiho','smile','연습도 판이야.'],
@@ -1032,7 +1032,7 @@ EP.jiho=[
   ['me','smile','발끝 말고 발등으로. 신발 끈 있는 데.'],
   ['jiho','surprised','발등?'],
   ['me','smile','응. 그리고 다리를 쭉 펴지 말고, {@knee}을 조금 굽혀.'],
-  {k:'knee',goal:'「{x}」 굽히기'},
+  {k:'knee',goal:'「{x}」 굽히기',bag:['foot','knee','ankle','hand','ear']},
   {pic:'jiho_12a'},
   ['nar','','내가 {@knee}을 살짝 굽히고 발등으로 {@ball}을 톡 차올려 보였다.'],
   {pic:'jiho_12d'},
@@ -1107,7 +1107,7 @@ EP.jiho=[
 
 // ■ Day 14 — 진 사람이 먼저 (13)
 {title:'진 사람이 먼저',scene:'jiho_13',place:'hall',at:[1120,480],
- taps:{hall:[['window',1280,235,55]]},things:{hall:[['hand',1000,600,48]]},
+ taps:{hall:[['window',1280,235,55]]},
  pre:[
   {pic:'jiho_13a'},
   ['nar','','쉬는 시간. 복도 창가에 지호가 혼자 서 있었다. 손등에 볼펜으로 뭔가를 쓰고 있었다. 숫자 「1」.'],
@@ -1139,7 +1139,7 @@ EP.jiho=[
   ['think','sad','(내가 진다. 반장이 안 된다.)'],
   ['think','sad','(생각하기 싫어. 근데 지호는 지금 그걸 생각하고 있어.)'],
   {flag:'J08_rank',is:1,lines:[['jiho','smile','너는 꼴찌라고 그냥 말하던 애잖아. 이것도 할 수 있지?']]},
-  {k:'hand',goal:'「{x}」 내밀기'},
+  {k:'hand',goal:'「{x}」 내밀기',bag:['foot','ear','knee','hand','pocket']},
   ['nar','','내가 지호에게 {@hand}을 내밀었다. 지호가 잡았다.']],
  ask:'뭐라고 할까?',
  choices:[
@@ -1278,7 +1278,7 @@ EP.jiho=[
 
 // ■ Day 16R — 진짜 판 (15)
 {title:'진짜 판',scene:'jiho_15',place:'field',at:[900,330],with:[['junho',740,380],['haeun',1060,380],['youngmin',1180,450],['yena',620,470],['hyeeun',960,520]],
- things:{field:[['shoes',800,560,48],['ball',1100,560,42]]},
+ things:{field:[['ball',1100,560,42]]},
  pre:[
   ['nar','','쉬는 시간. 운동장 가장자리, 처음 지호를 만났던 자리. 지호가 {@ball}을 발밑에 두고 기다리고 있었다.'],
   ['jiho','smile','진짜 판. 오늘은 연습 판 없음. 내가 그 말 안 한다. 약속.'],
@@ -1286,7 +1286,7 @@ EP.jiho=[
   ['nar','','준호, 하은, 영민이, 예나가 둘러섰다. 혜은이가 휠체어를 밀고 맨 앞으로 왔다.'],
   ['hyeeun','smile','내가 셀게. 크게. 나머진 너희가 알아서 해.'],
   ['nar','','지호가 쪼그려 앉아 {@shoes} 끈을 묶었다. 한 번, 그리고 한 번 더. 나도 옆에 앉았다.'],
-  {k:'shoes',goal:'「{x}」 끈 두 번 묶기'},
+  {k:'shoes',goal:'「{x}」 끈 두 번 묶기',bag:['hand','shoes','sock','indoor_shoes','pocket']},
   ['nar','','나도 끈을 두 번 묶었다. 지호가 그걸 보고 씩 웃었다.'],
   ['jiho','smile','너도 두 번 하네.'],
   ['me','smile','진짜 판이니까.'],
