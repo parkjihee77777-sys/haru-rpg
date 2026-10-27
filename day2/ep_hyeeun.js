@@ -557,8 +557,8 @@ EP.hyeeun=[
   common:[['me','laugh','혜은이 진짜 잘 던져. 다섯 개 중에 네 개.'],['mom','surprised','너는?'],['me','sad','……두 개.'],['mom','laugh','(웃음) 다음엔 혜은이한테 던지는 법 물어봐.']]}},
 
 // ■ Day 8 — 맨 위 칸 (7)
-{title:'맨 위 칸',scene:'hyeeun_07',place:'class',at:[1170,275],
- taps:{class:[['locker',1290,180,75]]},
+{title:'맨 위 칸',scene:'hyeeun_07',place:'class',at:[960,880],
+ things:{class:[['locker',1060,932,76]]},// a tall locker at the back of the room (the drawn one by the blackboard is low; her top shelf is above my shoulder)
  pre:[
   ['nar','','쉬는 시간. 다음 시간은 체육이었다. 아이들이 교실 뒤 {@locker}에서 {@gym_clothes|을} 꺼내고 있었다.'],
   ['nar','','{@locker|은} 번호순이었다. 혜은이는 23번. 맨 위 칸이었다.'],
@@ -616,7 +616,7 @@ EP.hyeeun=[
    ['hyeeun','sad','……네.'],
    ['think','sad','(맞는 말이었는데. 다들 혜은이를 봤어. 혜은이가 말하려던 걸 내가 먼저 했어.)']]}],
  post:[
-  {lay:[['gym_clothes',1240,335,54]]},
+  {lay:[['gym_clothes',990,915,54]]},
   ['nar','','나는 꺼낸 {@gym_clothes|을} 혜은이에게 건넸다.'],
   {k:'gym_clothes',goal:'「{x}」 건네기'},
   {clear:['gym_clothes']},
