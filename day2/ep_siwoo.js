@@ -5,7 +5,7 @@
 window.EP=window.EP||{};
 EP.siwoo=[
 // ■ Day 2 — 30센티 (1)
-{title:'30센티',scene:'siwoo_01',place:'class',at:[262,262],flag:{W02_dist:{A:1,D:1}},
+{title:'30센티',scene:'siwoo_01',place:'class',at:[310,262],stand:1,flag:{W02_dist:{A:1,D:1}},
  things:{class:[['milk_carton',128,262,38],['ruler',196,214,74]]},taps:{class:[['window',95,120,70]]},
  pre:[
   ['nar','','아침. 시우가 창가에 서 있었다. 창틀 위에 {@milk_carton} 하나가 놓여 있었다. 윗부분을 잘라 내고 {@tissue}를 깐 {@milk_carton}이었다.'],
@@ -214,7 +214,7 @@ EP.siwoo=[
   common:[['me','smile','선생님이 애들한테 설명해 주셨어. 사람마다 소리가 크게 들리는 정도가 다르대. 그건 떼쓰는 게 아니래. 근데 시우 이름은 한 번도 안 말씀하셨어.'],['mom','relieved','선생님이 시우를 지켜 주셨네.'],['me','smile','그리고 쉬는 자리 카드 생겼어. 누구든 쓸 수 있대.'],['mom','smile','너도 급식실 힘들면 써도 되겠다.']]}},
 
 // ■ Day 6 — 12일째 (5) ★
-{title:'나비 나오는 날',scene:'siwoo_05',place:'class',at:[262,262],with:[['haeun',420,262]],
+{title:'나비 나오는 날',scene:'siwoo_05',place:'class',at:[310,262],stand:1,with:[['haeun',420,262]],
  things:{class:[['milk_carton',128,262,38],['butterfly',170,236,40]]},taps:{class:[['window',95,120,70]]},
  pre:[
   ['nar','','아침. 교실에 들어서자 시우가 창가에 서 있었다. 평소보다 더 꼼짝도 하지 않았다. 손이 작게 펄럭이고 있었다.'],
@@ -567,7 +567,7 @@ EP.siwoo=[
   common:[['mom','smile','혼자 있는 게 좋은 것과 같이 하는 법을 모르는 건 다를 수 있지.'],['me','smile','응. 물어봐야 알아.']]}},
 
 // ■ Day 13 — 100퍼센트 (12)
-{title:'100퍼센트',scene:'siwoo_12',place:'class',at:[600,690],
+{title:'100퍼센트',scene:'siwoo_12',place:'class',at:[600,770],stand:1,
  things:{class:[['notebook',760,702,38],['pencil',830,704,32]]},
  pre:[
   ['nar','','방과 후. 반장 선거 공약을 쓰고 있는데, 시우가 30센티 밖에 와서 섰다. {w}을 들고 있었다.'],
@@ -714,7 +714,7 @@ EP.siwoo=[
   D:[['me','smile','선생님께 {@door} 닫아도 되냐고 했어. 소리 울린다고. 선생님이 처음엔 작게 시작하자고 하셨어. 그리고 시우 {@desk}에 {@card} 놔 줬어.'],['mom','smile','모두한테 좋게 바꾸고, 시우한텐 {@card}까지.'],['me','laugh','시우가 거의 끝까지 했어. 마지막 큰 부분에서 자기가 알아서 칸막이로 갔어.']]}},
 
 // ■ Day 16R — 몇 센티? (15)
-{title:'몇 센티?',scene:'siwoo_15',place:'class',at:[262,262],
+{title:'몇 센티?',scene:'siwoo_15',place:'class',at:[310,262],stand:1,
  things:{class:[['milk_carton',128,262,38],['ruler',196,214,74],['butterfly',70,110,44]]},
  pre:[
   ['nar','','방과 후. 창가에 시우가 서 있었다. 처음 말 걸었던 날처럼. 창틀 위에 새 {@milk_carton}이 있었다. 안에 새 {@cocoon}가 있었다.'],
@@ -803,3 +803,6 @@ for(const id of ['music']){const m=EXTRA_MAPS[id];MAPS[id]={img:m.img,walk:m.wal
   if(h[2]!=='eve'){startDay(day);return}
   setDay(day);PICKS=['siwoo'];EPIDX.siwoo=k-1;TODAYEP.siwoo=EP.siwoo[k-1];MEET.siwoo=k;D2CHOICE.siwoo='C';
   stage='d2_after';load('class');useDoor()},90)}
+// stand:1 = he stands where his scene says (meetings 1, 5, 15: at the window; 12: just outside 30 cm of the hero's desk), not at a desk; spots.js seats every kid with sitting art, so this runs after it
+addEventListener('load',()=>{const _dpSw=d2People;d2People=function(id){const ps=_dpSw(id),e=epNext('siwoo',EPIDX.siwoo);
+ if(e&&e.stand&&e.place===id){const p=ps.find(p=>p[0]==='siwoo');if(p){p[1]=e.at[0];p[2]=e.at[1];p.length=3}}return ps}});
