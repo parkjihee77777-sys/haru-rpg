@@ -99,7 +99,7 @@ EP.youngmin=[
   common:[['me','smile','근데 엄마, 영민이가 다 쓰고 나서 {@blackboard} 지워도 된다고 했어. 그래서 내가 마저 지웠어.'],['mom','smile','다 쓴 사람이 지워도 된다고 하고 지웠네.'],['me','smile','응. 그게 좋았어.'],['mom','smile','다음에 영민이 글씨 엄마도 한번 보고 싶다.'],['me','smile','진짜 반듯해. 나도 그렇게 쓰고 싶어.']]}},
 
 // ■ Day 3 — 세 번만 톡톡톡 (2)
-{title:'세 번만 톡톡톡',scene:'youngmin_02',place:'class',at:[300,330],with:[['yena',420,300],['jihoon',520,250]],
+{title:'세 번만 톡톡톡',scene:'youngmin_02',place:'class',at:[220,420],with:[['yena',420,300],['jihoon',520,250]],
  pre:[
   {lay:[['fish',118,338,74,'fish_tank']]},
   ['nar','','1교시 전. 교실 창가에 작은 어항이 있었다. 나는 가까이 가 봤다.'],
@@ -196,7 +196,7 @@ EP.youngmin=[
   common:[['me','smile','{m}, 근데 나도 그래. 한국어로 말하다 멈추면, 누가 먼저 끝내 버려.'],['mom','surprised','그럴 때 어때?'],['me','smile','……내 말이 없어지는 것 같아. 맞는 말이어도.'],['mom','smile','그랬구나.'],['me','smile','‘급해’는 맨날 늦게 먹는대. 그래도 다 먹는대.'],['mom','smile','다 먹으면 됐지, 뭐.']]}},
 
 // ■ Day 4 — 너 때문에 늦어지잖아 (3)
-{title:'너 때문에 늦어지잖아',scene:'youngmin_03',place:'class',at:[830,560],with:[['junho',700,560],['haeun',960,560]],
+{title:'너 때문에 늦어지잖아',scene:'youngmin_03',place:'class',at:[830,560],with:[['junho',640,470],['haeun',764,0,{top:448}]],
  pre:[
   ['nar','','3교시 과학. 선생님이 오늘 과학 모둠을 새로 짜 주셨다. 네 명씩 {@desk|을} 붙였다. 우리 모둠은 준호, 하은, 영민, 그리고 나였다.'],
   ['nar','','선생님: 「오늘은 {@magnet}에 붙는 물건을 찾아요. 모둠마다 {@magnet} 하나, 기록지 한 장.」'],
@@ -591,7 +591,7 @@ EP.youngmin=[
   common:[['me','smile','그리고 나올 때 지호가 영민이한테 그랬어. 자기는 생각나면 말이 먼저 나온대. 근데 그 {@book|은} 놀릴 게 아니었대.'],['mom','smile','지호가 직접 말했구나.'],['me','smile','응. 영민이는 ‘응’ 했어.'],['mom','smile','영민이는 좋아하는 {@book|을} 여러 번 읽는구나.'],['me','smile','응. 끝까지 가는 거 알면 안 무섭대.']]}},
 
 // ■ Day 8 — 문제가 다섯 개 (7)
-{title:'문제가 다섯 개',scene:'youngmin_07',place:'class',at:[400,870],with:[['jiho',560,880]],things:{class:[['clock',1040,186,46]]},
+{title:'문제가 다섯 개',scene:'youngmin_07',place:'class',at:[400,870],with:[['jiho',600,760]],things:{class:[['clock',1040,186,46]]},
  pre:[
   ['nar','','3교시 수학. 선생님이 {@worksheet|를} 한 장씩 나눠 주셨다.'],
   ['nar','','선생님: 「10분 동안 풀어요. {@clock} 긴바늘이 4에 오면 끝.」'],
@@ -993,7 +993,7 @@ EP.youngmin=[
   common:[['me','smile','{m}, 기다리는 거랑 쳐다보는 거랑 다른 거야.'],['mom','smile','그렇네.'],['me','smile','나도 한국어로 글 쓸 때 누가 옆에서 보면 싫어. 근데 기다릴 때는 그걸 까먹었어.'],['mom','smile','기다리는 쪽이 되면 까먹기 쉽지.'],['me','smile','응. 다음엔 다른 거 하고 있을래.']]}},
 
 // ■ Day 13 — 붓는 건 천천히 (12)
-{title:'붓는 건 천천히',place:'class',at:[300,430],with:[['sua',800,260],['yena',420,560],['junho',700,600],['jiho',900,600],['haeun',1000,450]],
+{title:'붓는 건 천천히',place:'class',at:[220,420],with:[['sua',800,262],['haeun',920,262],['yena',470,300],['junho',600,340],['jiho',600,450]],
  pre:[
   {lay:[['fish',118,338,74,'fish_tank']]},
   ['nar','','5교시. 선생님이 교실 앞에 {@bucket|를} 놓으셨다.'],
@@ -1061,7 +1061,7 @@ EP.youngmin=[
   {only:['A','B'],lines:[['nar','','수아가 「{@fish} 세기 — 영민」을 지웠다. 「새 물 붓기 — 영민, 나」로 고쳤다. 그리고 「{@fish} 세기 — 수아」.'],['sua','smile','……나 너무 빨리 정했다. 붓기는 영민이가 맞네. 세기는 내가 할게. 나 빨리 세.'],['nar','','수아가 웃었다. 영민이도 웃었다.']]},
   ['nar','','헌 물을 반쯤 덜어 냈다. 이제 새 물을 부을 차례였다. 선생님이 {@bucket|를} 어항 옆으로 들어 주셨다.'],
   {clear:['bucket']},
-  {lay:[['bucket',215,430,56]]},
+  {lay:[['bucket',140,470,56]]},
   {lay:[['cup',880,178,34]]},
   {k:'cup',goal:'「{x}」 건네주기'},
   {clear:['cup']},
@@ -1240,7 +1240,7 @@ EP.youngmin=[
   common:[['me','smile','{m}, 영민이가 ‘먼저 가’는 진짜였대. 기다려 주는 것도 좋은데, 먼저 가도 되는 날도 있는 거야.'],['mom','smile','그렇지. 너도 하고 싶은 게 있으니까.'],['me','smile','응. 영민이가 ‘먼저 가’ 할 때 얼굴 보면 알아. 진짜인지.'],['mom','smile','영민이 얼굴을 많이 봤구나.'],['me','smile','영민이가 ‘너 이제 내 얼굴 다 아는구나’ 했어.']]}},
 
 // ■ Day 16R — 지워도 돼 (15)
-{title:'지워도 돼',place:'class',at:[400,870],with:[['jiho',600,880],['jihoon',720,880]],
+{title:'지워도 돼',place:'class',at:[400,870],with:[['jiho',600,760],['jihoon',470,890]],
  pre:[
   ['nar','','6교시가 끝났다. 선생님이 {@blackboard}에 {@notice_book|을} 쓰셨다. 다섯 줄이었다.'],
   ['nar','','선생님: 「{@notice_book} 다 쓴 사람은 {@bag} 싸요. 이번 달 {@blackboard} 당번?」'],
@@ -1356,3 +1356,14 @@ for(const k of Object.keys(EP_WORDS_YM).concat(['desk']))CARDS_HAVE.add(k);
   if(h[2]!=='eve'){startDay(day);return}
   setDay(day);PICKS=['youngmin'];EPIDX.youngmin=k-1;TODAYEP.youngmin=EP.youngmin[k-1];MEET.youngmin=k;D2CHOICE.youngmin='B';
   stage='d2_after';load('class');useDoor()},101)}
+// Youngmin's scenes at the fish tank (meetings 2 and 12) happen on foot: he stands at the scene's spot instead of sitting at the nearest desk.
+// In meetings 2, 3 and 12 the kids the scene brings along leave their own desks and come to the scene (they are already in the classroom,
+// so meet.js would otherwise leave them where they sit).
+{const STAND=new Set([1,11]),GATHER=new Set([1,2,11]);
+ const _dpYm=d2People;d2People=function(id){const ps=_dpYm(id),e=epNext('youngmin',EPIDX.youngmin);
+  if(e&&STAND.has(EP.youngmin.indexOf(e))&&e.place===id&&!PICKS.includes('youngmin'))for(const p of ps)if(p[0]==='youngmin'){p.length=3;p[1]=e.at[0];p[2]=e.at[1];p[4]='stand'}
+  return ps};
+ const _dtYm=d2Talk;d2Talk=function(id){const e=id==='youngmin'&&epNext(id,EPIDX[id]);
+  if(e&&GATHER.has(EP.youngmin.indexOf(e))&&!PICKS.includes(id)&&stage==='d2_class'&&PICKS.length<needToday())
+   for(const w of e.with||[]){const n=npcs.find(n=>n.id===w[0]);if(n&&Math.hypot(n.x-w[1],n.y-(w[3]?w[3].top+150:w[2]))>150){n.el&&n.el.remove();npcs=npcs.filter(m=>m!==n)}}
+  return _dtYm(id)}}
