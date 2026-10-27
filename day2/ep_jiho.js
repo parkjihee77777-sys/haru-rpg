@@ -286,7 +286,7 @@ EP.jiho=[
   common:[['me','smile','지호한테 반장 왜 나가냐니까, 1등 하려고래. 투표 1등.'],['mom','laugh','(웃음) 솔직하네. 너는 뭐라고 했어?'],['me','smile','친구들 얘기 잘 들어 주고 싶다고.'],['mom','smile','둘이 이유가 다르네.'],['me','laugh','응. 그리고 지호 손 엄청 세. 악수했는데 아팠어.']]}},
 
 // ■ Day 5 — 아프대 (4)
-{title:'아프대',scene:'jiho_04',place:'class',at:[700,860],with:[['youngmin',960,860]],taps:{class:[['desk',1290,545,55]]},
+{title:'아프대',scene:'jiho_04',place:'class',at:[520,880],with:[['youngmin',395,865]],taps:{class:[['desk',1290,545,55]]},
  things:{class:[['wrist',1030,800,44]]},
  pre:[
   {pic:'jiho_04b'},
@@ -577,13 +577,14 @@ EP.jiho=[
 
 // ■ Day 8 — 너는 몇 등? (7)
 {title:'너는 몇 등?',scene:'jiho_07',place:'hall',at:[820,420],
- things:{hall:[['bag',940,600,52]]},taps:{hall:[['door',1058,232,45]]},
+ things:{hall:[['bag',940,600,52]]},taps:{gatesun:[['door',970,690,100]]},
  pre:[
   {pic:'jiho_07b'},
   ['nar','','오늘 체육 시간에 50미터 달리기 기록을 쟀다. 지호는 7.9초로 반 1등이었다. 나는 10.4초였다. 반에서 꼴찌였다. 처음 쟀을 때보다는 1초 빨라졌지만.'],
   ['nar','','하교 시간. 신발을 갈아 신는데 {@bag}끈이 어깨에서 자꾸 흘러내렸다.'],
   {k:'bag',goal:'「{x}」 메기'},
   ['nar','','{@bag}끈을 줄여서 두 어깨에 단단히 멨다.'],
+  {go:'gatesun'},
   {pic:'jiho_07a'},
   ['nar','','정문 앞으로 나가는데, 큰 목소리가 들렸다.'],
   ['nar','','지호 아빠: 「백지호! 아들!」'],
@@ -1012,7 +1013,7 @@ EP.jiho=[
   common:[['mom','smile','심판 또 할 거야?'],['me','laugh','응. 근데 손에 땀 엄청 났어. {@whistle} 끈이 젖었어.'],['mom','laugh','(웃음) 다음엔 {@handkerchief} 챙겨 가.']]}},
 
 // ■ Day 13 — 코치 (12)
-{title:'코치',scene:'jiho_12',place:'flowerbed',at:[1000,560],
+{title:'코치',scene:'jiho_12',place:'flowerbed',at:[1280,560],
  things:{flowerbed:[['ball',1180,600,42]]},
  pre:[
   {pic:'jiho_12c'},
