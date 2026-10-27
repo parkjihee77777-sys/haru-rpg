@@ -1318,7 +1318,7 @@ window.EP_WORDS_HE={
  const drop=a=>{if(!Array.isArray(a))return;for(let j=a.length-1;j>=0;j--){const x=a[j];if(x&&!Array.isArray(x)&&typeof x==='object'){if(typeof x.pic==='string'&&TODO_PICS.has(x.pic)){a.splice(j,1);continue}drop(x.lines)}}};
  for(const e of EP.hyeeun){drop(e.pre);drop(e.post);for(const o of e.choices){drop(o.r);if(o.r&&o.r.length===1&&o.r[0]&&o.r[0].pic===null)o.r=[];else if(o.r&&o.r.length&&o.r[0]&&o.r[0].pic===null)o.r.shift()}}}
 // meeting 1: while my bag lies on the floor by her wheel (laid at 668,938 until the bag find clears it), I walk without it (walk/<hero>_nobag.png, when drawn)
-{const NB={};for(const h of ['hero_f','hero_m']){const im=new Image();im.onload=()=>NB[h]=true;im.onerror=()=>NB[h]=false;im.src=`walk/${h}_nobag.png`}
+{const NB={hero_f:false,hero_m:false};// set to true once walk/hero_f_nobag.png / hero_m_nobag.png are drawn (no probing: a missing file is a 404 for every player)
  const bagOff=off=>{if(me&&me.el&&(!off||NB[HERO]))me.el.style.backgroundImage=`url(walk/${HERO}${off?'_nobag':''}.png)`};
  const _lt=layThings;layThings=function(lay,clear){const r=_lt.apply(this,arguments);if(SCENE_EP===EP.hyeeun[0]){if((lay||[]).some(x=>x[0]==='bag'&&x[1]===668&&x[2]===938))bagOff(true);if((clear||[]).includes('bag'))bagOff(false)}return r}}
 // a choice's reaction (r) is said as plain lines; when it holds {clear}/{flag}/{pic} steps it plays at the start of post instead (runSteps handles those)
