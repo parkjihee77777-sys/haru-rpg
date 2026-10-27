@@ -802,7 +802,7 @@ EP.haneul=[
   ['nar','','다 먹고 {@tray|을} 반납하러 일어날 때였다. 큰 식탁에서 지훈이가 크게 불렀다.'],
   ['jihoon','laugh','전학생! 너 왜 거기 있었어!'],
   ['nar','','하늘이가 깜짝 놀랐다. {@tray} 위 {@chopsticks|이} 굴러서 바닥에 떨어졌다. 하늘이 어깨가 굳었다. 몇 명이 소리 난 쪽을 봤다.'],
-  {lay:[['chopsticks',330,560,40]]},
+  {lay:[['chopsticks',650,735,50]]},
   {k:'chopsticks',goal:'「{x}」 줍기'},
   {clear:['chopsticks']},
   ['nar','','나는 {@chopsticks|을} 주워서 하늘이 {@tray|에} 올려 두었다. 그리고 지훈이 쪽을 보며 손을 흔들었다.'],
