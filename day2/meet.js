@@ -77,6 +77,10 @@ function comeOver(w,k,from){const n=sprite(w[0],w[1],w[2],w[3]);if(w[3]&&typeof 
   const[px,py]=p[0],ex=px-n.x,ey=py-n.y,d=Math.hypot(ex,ey);if(d<6){p.shift()}else{const k=Math.min(d,260*dt)/d;n.x+=ex*k;n.y+=ey*k;
    n.dir=Math.abs(ex)>Math.abs(ey)?(ex<0?'left':'right'):(ey<0?'up':'down');n.t=(n.t||0)+dt;n.frame=[1,0,2,0][Math.floor(n.t*8)%4]}draw(n);requestAnimationFrame(step)};
  draw(n);requestAnimationFrame(step);return n}
+function moveKid(m){const[id,x,y,how]=m;const n=npcs.find(k=>k.id===id);
+ if(how==='out'){if(!n)return;const st=OUT[MAP]||(MAPS[MAP]&&MAPS[MAP].start);npcs.splice(npcs.indexOf(n),1);n.el.remove();const w=comeOver([id,st[0],st[1]],0,[n.x,n.y]);npcs.push(w);
+  const t=setInterval(()=>{if(!w.path){clearInterval(t);const i=npcs.indexOf(w);if(i>=0)npcs.splice(i,1);w.el.remove()}},200);return}
+ const at=n?[n.x,n.y]:null;if(n){npcs.splice(npcs.indexOf(n),1);n.el.remove()}npcs.push(comeOver([id,x,y],0,at))}
 // after a scene: a kid who came along but whose own story today is somewhere else goes back there (leaves this map), so tapping them
 // here can't start their story in the wrong place
 function tidyPeople(){npcs=npcs.filter(n=>{const e=D2IDS.includes(n.id)&&!PICKS.includes(n.id)&&epNext(n.id,EPIDX[n.id]);
@@ -101,7 +105,9 @@ function runSteps(steps,choice,done){const q=(steps||[]).slice();
   while(q.length){const s=q[0];if(Array.isArray(s)||typeof s==='function'){lines.push(q.shift());continue}
    if(s.only||s.flag){q.shift();const ok=s.only?s.only.includes(choice):(+!!FLAGS[s.flag])===s.is;if(ok)q.unshift(...s.lines);continue}
    if('pic' in s){q.shift();const pic=s.pic;lines.push(()=>showPic(pic));continue}
-   if(s.lay||s.clear){q.shift();lines.push(()=>layThings(s.lay,s.clear));continue}break}
+   if(s.lay||s.clear){q.shift();lines.push(()=>layThings(s.lay,s.clear));continue}
+   // {move:[id,x,y]} a kid walks to that spot from that line on (comes in from the door if not on this map); {move:[id,x,y,'out']} walks out and leaves
+   if(s.move){q.shift();const m=s.move;lines.push(()=>moveKid(m));continue}break}
   const go=()=>{showPic(null);if(!q.length){done&&done();return}const f=q.shift();if(f.go){fade(()=>{load(f.go);next()});return}find(f.k,()=>{TODAY.add(f.k);next()},f.goal||'「{x}」 찾기')};
   if(lines.length)say(lines,go);else go()};
  next()}
