@@ -1653,6 +1653,22 @@ const NURSE_WALK=[[[110,745],[300,620],[470,600],[640,560],[760,370],[1000,385],
 {const _d2PeopleJu=d2People;d2People=function(id){const ps=_d2PeopleJu(id),e=epNext('junho',EPIDX.junho);if(!e)return ps;
   if(GOWITH&&GOWITH.map===id&&GOWITH.ids.includes('junho'))return ps;
   return ps.filter(p=>p[0]!=='junho'||(id===e.place&&p[1]===e.at[0]&&p[2]===e.at[1]))}}
+// who stands on the map follows the lines (10/27 picture check): kids leave when the line says they left, arrive when it says they came
+// (the step is {clear:[fn]}: every runSteps, also the ones other friends' files put in, hands {clear} to layThings)
+{const _ltJu=layThings;layThings=function(lay,clear){(clear||[]).forEach(k=>{if(typeof k==='function')k()});return _ltJu(lay,(clear||[]).filter(k=>typeof k!=='function'))}}
+{const kidOff=(...ids)=>()=>{npcs=npcs.filter(p=>{if(!ids.includes(p.id))return true;p.el.remove();return false})};
+ const kidOn=(id,x,y)=>()=>{if(!npcs.some(p=>p.id===id))npcs.push(sprite(id,x,y))};
+ const onlyKids=(...keep)=>()=>{npcs=npcs.filter(p=>{if(keep.includes(p.id))return true;p.el.remove();return false})};
+ const at=(n,sub,f,before)=>{let hit=0;const fn={clear:[f]};const walk=a=>{for(let i=0;i<a.length;i++){const x=a[i];
+   if(Array.isArray(x)&&typeof x[2]==='string'&&x[2].includes(sub)){a.splice(before?i:i+1,0,fn);hit++;i++}else if(x&&!Array.isArray(x)&&x.lines)walk(x.lines)}};
+  const e=EP.junho[n-1];walk(e.pre||[]);walk(e.post||[]);for(const c of e.choices)walk(c.r||[]);if(!hit)console.warn('junho: no line',n,sub)};
+ at(7,'교실이 거의 비어 있었다',onlyKids('junho','haeun'));                 // the others went out to the field
+ at(8,'하은이랑 지훈이가 갔다',kidOff('haeun','jihoon'));
+ at(11,'준호 자리는 비어 있었다',kidOff('junho'),true);                     // he is at the nurse's office
+ at(11,'교실 뒷문이 열렸다',kidOn('junho',1520,430));                       // and comes in at the back door
+ EP.junho[13].pre.unshift({clear:[kidOff('yena')]});at(14,'예나가 노래를 흥얼거리며 뛰어오고',kidOn('yena',760,700),true);
+ for(const s of['천천히, 운동장 문 쪽으로','혼자 운동장 문 쪽으로 걸어갔다','준호가 걸어갔다. 나는 판으로','혼자 1층 끝 복도로 들어갔다'])at(15,s,kidOff('junho'));
+ at(15,'운동장 문 쪽에서 준호가 걸어왔다',kidOn('junho',1330,330),true)}
 // when a meeting walks on ({go}), Junho comes too and stands where the talk happens there (10/27: at the taps he stayed far off at the map's door)
 EP.junho[0].goAt={stands:[420,720]};EP.junho[1].goAt={gym:[1150,640]};EP.junho[4].goAt={nurse:[1080,780]};EP.junho[13].goAt={nurse:[300,700]};
 {const _loadJu=load;load=function(m,x){const r=_loadJu(m,x),e=SCENE_EP;
