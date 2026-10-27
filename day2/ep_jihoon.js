@@ -11,15 +11,13 @@
 window.EP=window.EP||{};
 EP.jihoon=[
 // ■ Day 2 — 빛이 딱 좋아 (1)
-{title:'빛이 딱 좋아',scene:'jihoon_01',place:'field',at:[960,235],
+{title:'빛이 딱 좋아',scene:'jihoon_01',place:'field',at:[960,235],taps:{field:[['shadow',880,150,60],['shadow',1130,205,85]]},
  pre:[
-  {lay:[['shadow',830,250,90]]},
   ['nar','','점심시간. 밥을 먹고 운동장으로 나왔다. {@sun|가} 쨍했다.'],
   {pic:'jihoon_01a'},
   ['nar','','운동장 가장자리에 등나무 쉼터가 있었다. 나무 지붕 사이로 빛이 들어왔다. 바닥에 동그란 빛 점이 잔뜩 떨어져 있었다. 그 사이사이가 나뭇잎 {@shadow|였}다.'],
   ['think','smile','(바닥이 반짝반짝해. 빛이랑 {@shadow|가} 섞였어.)'],
   {k:'shadow',goal:'「{x}」 밟기'},
-  {clear:['shadow']},
   ['nar','','{@shadow|를} 밟는 순간이었다.'],
   ['jihoon','smile','잠깐! 거기 서 봐. 빛이 딱 좋아!'],
   {pic:'jihoon_01b'},
@@ -1207,7 +1205,7 @@ EP.jihoon=[
   common:[['me','smile','그리고 잔디에 누워 있는데, 내가 지훈이한테 말했어. 너는 {@sun|가} 어디 있는지 제일 먼저 본다고. 남들이 못 보는 거 본다고. 그건 {@camera} 없어도 있다고.'],['mom','surprised','지훈이가 뭐래?'],['me','smile','자기 엄마가 한 말이랑 비슷하대. 그 {@camera} 지훈이 엄마가 옛날에 쓰던 거래. 지훈이 어릴 때 엄청 찍었는데 다 흔들렸대. 근데 지훈이 엄마가 흔들린 게 제일 지훈이 같대.'],['mom','smile','……좋은 말씀이다.'],['me','laugh','응. 지훈이가 {@eye} 감고 웃었어.']]}},
 
 // ■ Day 16R — 빛이 딱 좋아 (15)
-{title:'빛이 딱 좋아',place:'gatesun',at:[1240,780],
+{title:'빛이 딱 좋아',place:'gatesun',at:[1240,780],taps:{gatesun:[['shadow',1040,745,80]]},
  pre:[
   ['nar','','종례가 끝났다. {@school_gate|을} 나서는데 {@sun|가} 낮게 내려와 있었다. {@school_gate} 앞 길이 노랗게 물들었다. 그림자들이 길게 늘어났다.'],
   {lay:[['shadow',980,650,140,'shadow_long']]},
