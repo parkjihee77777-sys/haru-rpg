@@ -9,7 +9,7 @@ window.EP=window.EP||{};
 EP.jiho=[
 // ■ Day 2 — 방금 건 연습 판 (1)
 {title:'방금 건 연습 판',scene:'jiho_01',place:'field',at:[900,330],with:[['junho',760,380],['haeun',1050,380]],
- things:{field:[['shoes',990,470,48],['ball',820,450,34]]},
+ things:{field:[['shoes',990,470,48],['ball',820,450,42]]},
  pre:[
   {pic:'jiho_01a'},
   ['nar','','쉬는 시간. 운동장 가장자리에 아이들이 동그랗게 모여 있었다. 가운데에서 지호가 축구{@ball}을 발로 톡톡 차올리고 있었다.'],
@@ -287,7 +287,7 @@ EP.jiho=[
 
 // ■ Day 5 — 아프대 (4)
 {title:'아프대',scene:'jiho_04',place:'class',at:[700,860],with:[['youngmin',960,860]],
- taps:{class:[['desk',828,690,55]]},things:{class:[['wrist',1030,800,44]]},
+ things:{class:[['wrist',1030,800,44]]},
  pre:[
   {pic:'jiho_04b'},
   ['nar','','쉬는 시간. 비가 와서 운동장에 나갈 수 없었다. 교실 뒤에 아이들이 몰려 있었다.'],
@@ -372,7 +372,7 @@ EP.jiho=[
 
 // ■ Day 6 — 지붕 위의 공 (5) ★
 {title:'지붕 위의 공',scene:'jiho_05',place:'field',at:[1400,430],with:[['junho',1250,470],['haeun',1180,560]],flag:{J06_stop:{A:1,C:1}},
- taps:{field:[['roof',1628,182,48]]},things:{field:[['ball',1290,520,34]]},
+ taps:{field:[['roof',1628,182,48]]},things:{field:[['ball',1290,520,42]]},
  pre:[
   {pic:'jiho_05d'},
   ['nar','','쉬는 시간 축구. 오늘은 지호가 나를 자기 팀에 넣었다.'],
@@ -484,7 +484,7 @@ EP.jiho=[
 
 // ■ Day 7 — 아무도 못 봤어 (6)
 {title:'아무도 못 봤어',scene:'jiho_06',place:'field',at:[640,380],with:[['yena',820,470]],
- things:{field:[['foot',560,600,46]],stands:[['water_bottle',760,600,38]]},
+ things:{field:[['foot',560,600,46]],stands:[['water_bottle',760,600,44]]},
  pre:[
   {pic:'jiho_06a'},
   ['nar','','체육 시간. 오늘은 발야구를 했다. 번호 홀수가 한 팀, 짝수가 한 팀. 나와 지호는 같은 팀이 됐다.'],
@@ -577,7 +577,7 @@ EP.jiho=[
 
 // ■ Day 8 — 너는 몇 등? (7)
 {title:'너는 몇 등?',scene:'jiho_07',place:'hall',at:[820,420],
- things:{hall:[['bag',940,600,52]]},taps:{hall:[['door',520,95,50]]},
+ things:{hall:[['bag',940,600,52]]},
  pre:[
   {pic:'jiho_07b'},
   ['nar','','오늘 체육 시간에 50미터 달리기 기록을 쟀다. 지호는 7.9초로 반 1등이었다. 나는 10.4초였다. 반에서 꼴찌였다. 처음 쟀을 때보다는 1초 빨라졌지만.'],
@@ -654,7 +654,7 @@ EP.jiho=[
 
 // ■ Day 9 — 이긴 쪽 (8)
 {title:'이긴 쪽',scene:'jiho_08',place:'gym',at:[760,560],with:[['jihoon',980,600],['hangyeol',1250,420]],
- things:{gym:[['jump_rope',880,660,56],['water',600,760,40]]},
+ things:{gym:[['jump_rope',880,660,56],['water',600,760,46]]},
  pre:[
   ['nar','','체육 시간. 오늘은 {@jump_rope} 오래 뛰기를 했다. 두 명씩 짝이 돼서 서로 횟수를 세 줬다. 내 짝은 또 지호였다.'],
   ['nar','','체육관 한쪽에서 한결이가 2단 뛰기를 하고 있었다. 아이들이 「와아!」 했다.'],
@@ -747,7 +747,7 @@ EP.jiho=[
 
 // ■ Day 10 — 잠깐 멈춰 (9)
 {title:'잠깐 멈춰',scene:'jiho_09',place:'gym',at:[860,520],with:[['haeun',1080,600]],
- things:{gym:[['finger',740,700,40],['ice',1000,720,36]]},
+ things:{gym:[['finger',740,700,46],['ice',1000,720,44]]},
  pre:[
   ['nar','','체육 시간. 모둠별 농구 시합을 했다. 규칙은 하나였다. 패스를 다섯 번 하고 나서 슛하기. 선생님이 모둠을 정해 주셨다. 나와 지호는 같은 모둠이었다.'],
   ['jiho','angry','패스! 패스! 세게! 빨리!'],
@@ -832,7 +832,7 @@ EP.jiho=[
 
 // ■ Day 11 — 빨리 먹기 시합 (10)
 {title:'빨리 먹기 시합',scene:'jiho_10',place:'cafe',at:[660,720],with:[['junho',800,760],['haeun',540,760],['yena',900,700]],
- things:{cafe:[['milk',1460,520,32]]},
+ things:{cafe:[['milk',1330,700,46]]},
  pre:[
   {pic:'jiho_10c'},
   ['nar','','점심시간. 오늘 급식은 카레였다. 내가 좋아하는 거였다. 나는 지호, 준호, 하은, 예나와 같은 식탁에 앉았다.'],
@@ -917,7 +917,7 @@ EP.jiho=[
 
 // ■ Day 12 — 심판 (11)
 {title:'심판',scene:'jiho_11',place:'field',at:[820,420],with:[['youngmin',980,470],['junho',660,470]],
- things:{field:[['ball',1000,560,34]]},
+ things:{field:[['ball',1000,560,42]]},
  pre:[
   ['nar','','쉬는 시간 축구. 오늘은 사람이 홀수라 한 명이 남았다. 준호가 나를 가리켰다.'],
   ['junho','smile','전학생이 심판 해. 지호가 네 말은 듣잖아.'],
@@ -1013,7 +1013,7 @@ EP.jiho=[
 
 // ■ Day 13 — 코치 (12)
 {title:'코치',scene:'jiho_12',place:'flowerbed',at:[1000,560],
- things:{flowerbed:[['shoes',880,700,48],['knee',1120,720,44],['ball',1180,600,34]]},
+ things:{flowerbed:[['shoes',880,700,48],['knee',1120,720,44],['ball',1180,600,42]]},
  pre:[
   {pic:'jiho_12c'},
   ['nar','','긴 쉬는 시간. 지호가 나를 운동장 구석, 화단 뒤로 데려갔다. 아무도 없는 곳이었다.'],
@@ -1107,7 +1107,7 @@ EP.jiho=[
 
 // ■ Day 14 — 진 사람이 먼저 (13)
 {title:'진 사람이 먼저',scene:'jiho_13',place:'hall',at:[1120,480],
- taps:{hall:[['window',1290,110,60]]},things:{hall:[['hand',1000,600,48]]},
+ taps:{hall:[['window',1280,235,55]]},things:{hall:[['hand',1000,600,48]]},
  pre:[
   {pic:'jiho_13a'},
   ['nar','','쉬는 시간. 복도 창가에 지호가 혼자 서 있었다. 손등에 볼펜으로 뭔가를 쓰고 있었다. 숫자 「1」.'],
@@ -1278,7 +1278,7 @@ EP.jiho=[
 
 // ■ Day 16R — 진짜 판 (15)
 {title:'진짜 판',scene:'jiho_15',place:'field',at:[900,330],with:[['junho',740,380],['haeun',1060,380],['youngmin',1180,450],['yena',620,470],['hyeeun',960,520]],
- things:{field:[['shoes',800,560,48],['ball',1100,560,34]]},
+ things:{field:[['shoes',800,560,48],['ball',1100,560,42]]},
  pre:[
   ['nar','','쉬는 시간. 운동장 가장자리, 처음 지호를 만났던 자리. 지호가 {@ball}을 발밑에 두고 기다리고 있었다.'],
   ['jiho','smile','진짜 판. 오늘은 연습 판 없음. 내가 그 말 안 한다. 약속.'],
