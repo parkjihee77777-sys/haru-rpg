@@ -257,8 +257,7 @@ EP.minho=[
 
 // ■ Day 7 — 청소 당번 땡땡이 (6)
 {title:'청소 당번 땡땡이',scene:'minho_06',place:'class',at:[1380,330],
- taps:{class:[['broom',1550,322,30]]},
- things:{class:[['ball',1205,282,34]]},
+ things:{class:[['ball',1205,282,34],['broom',1450,450,90]]},// the broom lies on the floor by the shelf, clear of Minho (the poles behind the plant were not clearly a broom)
  pre:[
   ['nar','','청소 시간. 내 당번 구역은 교실 뒤쪽이었다. 민호도 같은 당번인데, 사물함 옆에서 {@ball}만 튕기고 있었다.'],
   ['me','smile','민호야, 너도 뒤쪽 당번이지?'],
@@ -466,7 +465,7 @@ EP.minho=[
  pre:[
   ['nar','','아침. 교실에 들어서자 민호가 내 자리 쪽으로 손짓했다. 나는 {@bag|을} 메고 민호 쪽으로 갔다.'],
   ['minho','smile','야, 전학생. 빨리 와 봐.'],
-  {k:'bag',goal:'「{x}」 열기'},
+  {k:'bag',goal:'「{x}」 열기',tray:true},// my own bag: picked from pictures (the bags on the map are other kids')
   {k:'notebook',goal:'「{x}」 꺼내기'},
   ['minho','smile','어, 그거 수학 숙제지? 다 했어?'],
   ['me','smile','응.'],
