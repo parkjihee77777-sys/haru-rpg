@@ -31,7 +31,7 @@ d2People=function(id){const eps=D2IDS.map(f=>[f,epNext(f,EPIDX[f])]).filter(x=>x
 const _setDay=setDay;
 // days without their own drawn maps keep Day 2's (the same things lie in the same places)
 setDay=function(n){_setDay(NATIVE_BY[n]?n:2);DAY=n;for(const k in THINGS)delete THINGS[k];
- D2PLACE={...D2PLACE};PLACES.length=0;PLACES.push(...BASE_PLACES);for(const id of extraPlacesToday()){D2PLACE[id]=[];PLACES.push([id,EXTRA_MAPS[id].name])}
+ D2PLACE={...D2PLACE};PLACES.length=0;PLACES.push(...BASE_PLACES);for(const id of extraPlacesToday()){D2PLACE[id]=[];PLACES.push([id,EXTRA_MAPS[id].name])}for(const id of goPlacesToday())if(!D2PLACE[id])D2PLACE[id]=[];
  for(const f of D2IDS){const e=epNext(f,EPIDX[f]);if(!e)continue;
   for(const[m,ts]of Object.entries(e.taps||{}))NATIVE[m]=(NATIVE[m]||[]).concat(ts);
   for(const[m,ts]of Object.entries(e.things||{}))THINGS[m]=(THINGS[m]||[]).concat(ts)}};
@@ -50,6 +50,8 @@ const EXTRA_MAPS={
 for(const[id,m]of Object.entries(EXTRA_MAPS)){MAPS[id]={img:m.img,walk:m.walk,rects:[],block:m.block||[],start:m.start};OUT[id]=m.out;PLACE[id]=id}
 const BASE_PLACES=PLACES.slice();
 function extraPlacesToday(){const ids=new Set();for(const f of D2IDS){const e=epNext(f,EPIDX[f]);if(e&&EXTRA_MAPS[e.place])ids.add(e.place)}return[...ids]}
+// a place a scene walks on to ({go:'gatesun'}) is set up too (not offered to walk to), or the friend who comes along is not drawn there
+function goPlacesToday(){const ids=new Set();for(const f of D2IDS){const e=epNext(f,EPIDX[f]);if(e)for(const m of JSON.stringify(e).matchAll(/"go":"(\w+)"/g))if(EXTRA_MAPS[m[1]])ids.add(m[1])}return[...ids]}
 // a morning for every day: Day 2 and 3 have their own; later days Mom asks for one of the things that always lie in the kitchen
 const MORNING_KEYS=['apple','bread','cup','umbrella','bag','handkerchief','apron','notebook'];
 function morningOf(n){if(MORNING[n])return MORNING[n];const k=MORNING_KEYS[(n-4)%MORNING_KEYS.length];

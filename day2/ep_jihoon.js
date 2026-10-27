@@ -369,7 +369,7 @@ EP.jihoon=[
   common:[['me','smile','엄마. 지훈이는 웃는 {@photo|이} 하나도 없대. 자기는 찍는 사람이래.'],['mom','smile','찍는 사람은 {@photo}에 잘 안 나오지.'],['me','smile','응. 근데 지훈이 {@photo|은} 다 똑같아. 턱 내리고 {@eye} 크게. 그게 제일 안 촌스럽대.'],['mom','surprised','촌스럽다는 게 뭘까?'],['me','surprised','……몰라. 남들이 이상하게 볼 것 같은 거?'],['mom','smile','음. 그렇구나.']]}},
 
 // ■ Day 6 — 교문 앞 할머니 (5)
-{title:'교문 앞 할머니',place:'gatesun',at:[880,520],with:[['jiho',1010,470]],taps:{gatesun:[['school_gate',970,690,110]]},
+{title:'교문 앞 할머니',place:'gatesun',at:[1060,520],with:[['jiho',1180,620]],taps:{gatesun:[['school_gate',970,690,110]]},
  pre:[
   ['nar','','종례가 끝났다. {@phone|을} 돌려받고 {@shoes|을} 갈아 신었다. 지훈이, 지호, 나는 같이 {@school_gate|으로} 걸었다.'],
   ['jihoon','smile','오늘 {@cloud} 없다. 재미없어.'],
@@ -630,7 +630,7 @@ EP.jihoon=[
   common:[['me','smile','그리고 수업 시작할 때 꽥이가 꽥 했어. {@teacher|이} 누가 오리 키우냐고 하셨어. 그랬더니 서랍 여기저기서 꽥꽥 했어.'],['mom','smile','(크게 웃음) 다들 서랍에 넣고 누르고 있었구나.'],['me','smile','응. 다 아직 좋아하는 거였어. 지훈이 주머니에서도 꽥 했어.']]}},
 
 // ■ Day 9 — 치즈 말고 (8)
-{title:'치즈 말고',place:'field',at:[1290,560],with:[['youngmin',1450,620],['jiho',1330,700],['junho',1520,690],['yena',1210,690],['haram',1600,610]],friend:'youngmin',
+{title:'치즈 말고',place:'field',at:[1290,560],with:[['youngmin',1440,600],['jiho',1320,720],['junho',1580,700],['yena',1160,690],['haram',1610,500]],friend:'youngmin',
  pre:[
   ['nar','','점심시간. 철봉 옆 모래밭에 우리 반 아이들이 모여 있었다. 지호, 준호, 예나, 하람, 영민, 그리고 나.'],
   ['nar','','지훈이가 모래밭 앞에서 {@camera|를} 들었다. {@teacher|이} 부탁하셨다고 했다. 사진첩에 「우리 반 점심」 {@photo|을} 하나 올려 달라고.'],
