@@ -26,7 +26,7 @@ d2People=function(id){const eps=D2IDS.map(f=>[f,epNext(f,EPIDX[f])]).filter(x=>x
  for(const[f,e]of eps)if(e.place===id)(e.with||[]).forEach(w=>{if(!here.has(w[0])&&!ownElsewhere(w[0])){here.add(w[0]);ps.push(w)}})
  // a scene that walks on ({go}) takes its friend (and who is with them) along: they stand next to the hero where the hero comes in (spots.js keeps them off things)
  if(GOWITH&&GOWITH.map===id){const st=(MAPS[id]&&MAPS[id].start)||[600,500];GOWITH.ids.forEach((f,i)=>{const at=ps.findIndex(p=>p[0]===f);if(at>=0)ps.splice(at,1);ps.push([f,st[0]+(i%2?-1:1)*110*(1+(i>>1)),st[1]])})}
- return ps};
+ return ps.filter(p=>AWAY.get(p[0])!==id)};
 // today's scenes add their things to the maps (drawn spots to tap, pictures laid on top)
 const _setDay=setDay;
 // days without their own drawn maps keep Day 2's (the same things lie in the same places)
@@ -80,12 +80,13 @@ function comeOver(w,k,from){const n=sprite(w[0],w[1],w[2],w[3]);if(w[3]&&typeof 
    n.dir=Math.abs(ex)>Math.abs(ey)?(ex<0?'left':'right'):(ey<0?'up':'down');n.t=(n.t||0)+dt;n.frame=[1,0,2,0][Math.floor(n.t*8)%4]}draw(n);requestAnimationFrame(step)};
  draw(n);requestAnimationFrame(step);return n}
 function moveKid(m){const[id,x,y,how]=m;const n=npcs.find(k=>k.id===id);
- if(how==='out'){if(!n)return;const st=OUT[MAP]||(MAPS[MAP]&&MAPS[MAP].start);npcs.splice(npcs.indexOf(n),1);n.el.remove();const w=comeOver([id,st[0],st[1]],0,[n.x,n.y]);npcs.push(w);
+ if(how==='out'){AWAY.set(id,MAP);if(!n)return;const st=OUT[MAP]||(MAPS[MAP]&&MAPS[MAP].start);npcs.splice(npcs.indexOf(n),1);n.el.remove();const w=comeOver([id,st[0],st[1]],0,[n.x,n.y]);npcs.push(w);
   const t=setInterval(()=>{if(!w.path){clearInterval(t);const i=npcs.indexOf(w);if(i>=0)npcs.splice(i,1);w.el.remove()}},200);return}
- const at=n?[n.x,n.y]:null;if(n){npcs.splice(npcs.indexOf(n),1);n.el.remove()}npcs.push(comeOver([id,x,y],0,at))}
+ AWAY.delete(id);const at=n?[n.x,n.y]:null;if(n){npcs.splice(npcs.indexOf(n),1);n.el.remove()}npcs.push(comeOver([id,x,y],0,at))}
+const AWAY=new Map();// kid → the map they walked out of in this scene ({move:[…,'out']}): not back on that map until the scene ends (tidyPeople); other maps are fine
 // after a scene: a kid who came along but whose own story today is somewhere else goes back there (leaves this map), so tapping them
 // here can't start their story in the wrong place
-function tidyPeople(){npcs=npcs.filter(n=>{const e=D2IDS.includes(n.id)&&!PICKS.includes(n.id)&&epNext(n.id,EPIDX[n.id]);
+function tidyPeople(){AWAY.clear();npcs=npcs.filter(n=>{const e=D2IDS.includes(n.id)&&!PICKS.includes(n.id)&&epNext(n.id,EPIDX[n.id]);
  if(e&&e.place&&e.place!==MAP&&!(e.also&&e.also[MAP])){n.el&&n.el.remove();return false}return true})}
 // a list of lines and finds, played in order; {only:[…]} / {flag,is} parts play only after that choice / with that flag
 // {pic:'name'} (in pre, a choice's r or post) shows that picture over the map from there on (what the lines describe, when the map can't show it); a find always goes back to the map
