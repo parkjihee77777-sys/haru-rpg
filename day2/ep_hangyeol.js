@@ -109,7 +109,7 @@ EP.hangyeol=[
   common:[['me','smile','그리고 담임 선생님이 오셔서 우리 반은 앞으로 번호순으로 선대.'],['mom','surprised','선생님이 그렇게 정하셨어?'],['me','smile','응. 그 말만 하셨어.']]}},
 
 // ■ Day 4 — 결이 (3)
-{title:'결이',scene:'hangyeol_03',place:'library',at:[760,560],flag:{H04_name:{A:1,D:1}},
+{title:'결이',scene:'hangyeol_03',place:'library',at:[1140,470],flag:{H04_name:{A:1,D:1}},
  things:{library:[['picture',1045,398,50]]},
  pre:[
   {pic:'hangyeol_03'},
@@ -206,7 +206,7 @@ EP.hangyeol=[
   D:[['me','laugh','한결이가 피하기 제일 잘하니까 팀 정하라고 했어. 한결이가 생일로 나눴어! 반 애들 생일을 다 외우고 있어.'],['mom','surprised','어머, 다?'],['me','laugh','응. 다.'],['mom','laugh','그런 친구가 팀을 정하니까 재밌었겠다.']]}},
 
 // ■ Day 6 — 너 친하잖아 (5) ★
-{title:'너 친하잖아',scene:'hangyeol_05',place:'class',at:[1380,330],with:[['jihoon',1240,300]],
+{title:'너 친하잖아',scene:'hangyeol_05',place:'class',at:[1380,330],with:[['jihoon',1130,330,null,'stand']],
  taps:{class:[['locker',1290,180,75]]},
  pre:[
   {pic:'hangyeol_05'},
@@ -263,16 +263,16 @@ EP.hangyeol=[
 {title:'누이 역',scene:'hangyeol_06',place:'class',at:[1300,262],
  things:{class:[['rice_cake',790,205,46],['mask',905,205,58]]},
  pre:[
-  {pic:'hangyeol_06'},
   ['nar','','학예회 연극은 「해님 달님」으로 정해졌다. {@blackboard}에 역할이 적혔다. 오빠, 누이, 엄마, 호랑이, 나무꾼.'],
   ['nar','','나는 한결이 자리로 갔다. 한결이는 {@blackboard}을 뚫어지게 보고 있었다.'],
   ['me','smile','너 뭐 할 거야?'],
   ['hangyeol','smile','……누이. 마지막에 해님 되는 거.'],
   ['think','surprised','(어, 나도 누이 하고 싶은데.)'],
   ['think','smile','(누이는 마지막에 하늘로 올라가잖아. 제일 멋있어.)'],
-  {k:'rice_cake',goal:'「{x}」 소품 들기'},{pic:'hangyeol_06'},
+  {k:'rice_cake',goal:'「{x}」 소품 들기'},
   ['nar','','소품 바구니에서 {@paper}로 만든 {@rice_cake}을 들었다.'],
   ['nar','','선생님: 「하고 싶은 역할에 이름 쓰세요. 두 명 이상이면 오디션으로 정할게요.」'],
+  {pic:'hangyeol_06'},
   ['nar','','한결이가 ‘누이’ 칸에 이름을 썼다. 교실 뒤에서 누가 킥킥 웃었다.'],
   ['nar','','아이: 「한결이가 누이래! 남자가?」'],
   ['nar','','선생님: 「역할은 하고 싶은 사람이 오디션 보는 거예요. 호랑이도 꼭 호랑이가 하는 거 아니잖아요?」'],
@@ -318,7 +318,7 @@ EP.hangyeol=[
   common:[['me','smile','근데 누가 남자가 누이를 하냐고 웃었는데, 선생님이 호랑이도 꼭 호랑이가 하는 거 아니라고 하셨어.'],['mom','laugh','선생님 재치 있으시다.']]}},
 
 // ■ Day 8 — 상자 두 개 (7)
-{title:'상자 두 개',scene:'hangyeol_07',place:'class',at:[1300,262],
+{title:'상자 두 개',scene:'hangyeol_07',place:'class',at:[1020,330,'stand'],
  things:{class:[['box',780,210,66],['box',905,210,66]]},
  pre:[
   {pic:'hangyeol_07a'},
@@ -413,7 +413,7 @@ EP.hangyeol=[
   D:[['me','sad','할머니 너무하신다고 했어. 근데 한결이가 할머니 나쁜 사람 아니래. 엄청 좋아한대.'],['mom','smile','남의 할머니를 그렇게 말하면 한결이도 속상하지.'],['me','sad','응. 할머니는 걱정하는 거래.'],['mom','smile','가족끼리는 시간이 좀 걸리는 일도 있어.']]}},
 
 // ■ Day 10 — 복도의 5학년 (9)
-{title:'복도의 5학년',scene:'hangyeol_09',place:'hall',at:[1000,400],
+{title:'복도의 5학년',scene:'hangyeol_09',place:'hall',at:[1060,440],
  taps:{hall:[['window',1290,110,60],['window',1590,200,60],['stairs',725,75,70]]},
  pre:[
   {pic:'hangyeol_09a'},
@@ -831,6 +831,20 @@ for(const id of ['library','triproom']){const m=EXTRA_MAPS[id];MAPS[id]={img:m.i
 // stand:1 = Hangyeol stands where the scene says (meeting 10: a little away from the room list on the board), not at his desk; spots.js seats kids with sitting art, so this runs after it
 addEventListener('load',()=>{const _dpHg=d2People;d2People=function(id){const ps=_dpHg(id),e=epNext('hangyeol',EPIDX.hangyeol);
  if(e&&e.stand&&e.place===id){const p=ps.find(p=>p[0]==='hangyeol');if(p){p[1]=e.at[0];p[2]=e.at[1];p.length=3}}return ps}});
+// who is on the map follows the lines (10/27 picture check): meeting 5 Hangyeol hides behind the door until he comes out; meeting 12 is after school (only Hangyeol is left)
+// (the step is {clear:[fn]}: runSteps hands {clear} to layThings, which runs the functions)
+{const _ltHg=layThings;layThings=function(lay,clear){(clear||[]).forEach(k=>{if(typeof k==='function')k()});return _ltHg(lay,(clear||[]).filter(k=>typeof k!=='function'))}}
+{const kidOff=(...ids)=>()=>{npcs=npcs.filter(p=>{if(!ids.includes(p.id))return true;p.el.remove();return false})};
+ const kidOn=(id,x,y)=>()=>{if(!npcs.some(p=>p.id===id))npcs.push(sprite(id,x,y))};
+ const onlyKids=(...keep)=>()=>{npcs=npcs.filter(p=>{if(keep.includes(p.id))return true;p.el.remove();return false})};
+ const at=(n,sub,f,before)=>{let hit=0;const fn={clear:[f]};const walk=a=>{for(let i=0;i<a.length;i++){const x=a[i];
+   if(Array.isArray(x)&&typeof x[2]==='string'&&x[2].includes(sub)){a.splice(before?i:i+1,0,fn);hit++;i++}else if(x&&!Array.isArray(x)&&x.lines)walk(x.lines)}};
+  const e=EP.hangyeol[n-1];walk(e.pre||[]);walk(e.post||[]);for(const c of e.choices)walk(c.r||[]);if(!hit)console.warn('hangyeol: no line',n,sub)};
+ at(5,'한결이는 보이지 않았다',kidOff('hangyeol'),true);
+ at(5,'한결이가 거기 서 있었다',kidOn('hangyeol',1440,320));            // B: behind the door at the back
+ at(5,'한결이가 {@door} 뒤에서 나왔다',kidOn('hangyeol',1440,320));
+ at(5,'내 옆 {@locker}에 등을 기댔다',()=>{const h=npcs.find(p=>p.id==='hangyeol');if(h){h.x=1340;h.y=300;draw(h)}});
+ at(12,'방과 후. 선거 공약을',onlyKids('hangyeol'),true)}
 // a scene that walks on to a place it does not start in ({go:'stands'}) shows its things there too, and the friend can stand there as well (ep.also)
 {const _sd2=setDay;setDay=function(n){_sd2(n);for(const f of D2IDS){const e=epNext(f,EPIDX[f]);if(!e)continue;
   for(const m of Object.keys(Object.assign({},e.things,e.taps,e.also)))if(EXTRA_MAPS[m]&&!D2PLACE[m])D2PLACE[m]=[]}}}
