@@ -20,7 +20,10 @@ d2People=function(id){const eps=D2IDS.map(f=>[f,epNext(f,EPIDX[f])]).filter(x=>x
  const ps=_d2People(id).filter(p=>!moved.has(p[0]));
  // each kid stands in one spot only: a friend's own scene first, then the kids other scenes here bring along (several scenes may list the same kid)
  const here=new Set();for(const[f,e]of eps)if(e.place===id&&!here.has(f)){here.add(f);ps.push([f,e.at[0],e.at[1]])}
- for(const[f,e]of eps)if(e.place===id)(e.with||[]).forEach(w=>{if(!here.has(w[0])){here.add(w[0]);ps.push(w)}})
+ // a kid whose own story today happens somewhere else (and isn't done yet) stands only there, where it will happen;
+ // another friend's scene here that brings them along adds them when that scene starts (d2Talk)
+ const ownElsewhere=w=>{const e2=epNext(w,EPIDX[w]);return e2&&e2.place&&e2.place!==id&&!PICKS.includes(w)};
+ for(const[f,e]of eps)if(e.place===id)(e.with||[]).forEach(w=>{if(!here.has(w[0])&&!ownElsewhere(w[0])){here.add(w[0]);ps.push(w)}})
  // a scene that walks on ({go}) takes its friend (and who is with them) along: they stand next to the hero where the hero comes in (spots.js keeps them off things)
  if(GOWITH&&GOWITH.map===id){const st=(MAPS[id]&&MAPS[id].start)||[600,500];GOWITH.ids.forEach((f,i)=>{const at=ps.findIndex(p=>p[0]===f);if(at>=0)ps.splice(at,1);ps.push([f,st[0]+(i%2?-1:1)*110*(1+(i>>1)),st[1]])})}
  return ps};
@@ -65,6 +68,10 @@ function needToday(){return Math.min(2,friendsToday().length)}
 d2Goal=function(){const left=friendsToday().filter(i=>!PICKS.includes(i));
  if(PICKS.length>=needToday()||!left.length){if(stage==='d2_class'){setGoal('');setTimeout(()=>lessons('pm'),300)}return}
  setGoal(PICKS.length?'점심시간! 한 친구를 더 만나 보기':'오늘 이야기할 친구 2명 고르기',left,id=>PICKS.includes(id),` (${PICKS.length}/${needToday()})`)};
+// after a scene: a kid who came along but whose own story today is somewhere else goes back there (leaves this map), so tapping them
+// here can't start their story in the wrong place
+function tidyPeople(){npcs=npcs.filter(n=>{const e=D2IDS.includes(n.id)&&!PICKS.includes(n.id)&&epNext(n.id,EPIDX[n.id]);
+ if(e&&e.place&&e.place!==MAP&&!(e.also&&e.also[MAP])){n.el&&n.el.remove();return false}return true})}
 // a list of lines and finds, played in order; {only:[…]} / {flag,is} parts play only after that choice / with that flag
 // {pic:'name'} (in pre, a choice's r or post) shows that picture over the map from there on (what the lines describe, when the map can't show it); a find always goes back to the map
 // {go:'hall'} walks over to another place and goes on there
@@ -95,11 +102,12 @@ d2Talk=function(id){const e=epNext(id,EPIDX[id]);
  if(!e||PICKS.includes(id)||!['d2_class'].includes(stage)||PICKS.length>=needToday()){
   if(e||!DD()[id]){say([AGAIN[id]||['think','smile','(오늘은 여기까지. 내일 또 얘기해 보자.)']]);return}
   return _d2Talk(id)}
+ for(const w of e.with||[])if(!npcs.some(n=>n.id===w[0]))npcs.push(sprite(w[0],w[1],w[2],w[3]));// the kids this scene brings along come over now
  setGoal('');for(const m of JSON.stringify(e).matchAll(/"(?:pic|scene)":"(\w+)"/g))picProbe(heroPic(m[1]));const hs=heroPic(e.scene),pic=!!e.scene&&PICOK[hs]!==false;SCENE_IDS=[id].concat((e.with||[]).map(w=>w[0]));SCENE_EP=e;GOWITH=null;
  runSteps(e.pre,null,()=>{const choose=()=>ask(e.ask||'어떻게 할까?',e.choices,o=>{D2CHOICE[id]=o.k;sceneEl.classList.remove('on');
   for(const[f,v]of Object.entries(e.flag||{}))FLAGS[f]=!!v[o.k];
   if(e.vote)FLAGS[id+'_vote']=1;else MEET[id]=(MEET[id]||0)+1;TODAYEP[id]=e;
-  const r=o.r||[],thenPost=()=>runSteps(e.post,o.k,()=>{Object.entries(o.pts||{}).forEach(([p,n])=>heart(p,n));PICKS.push(id);TALKED.add(id);SCENE_IDS=null;SCENE_EP=null;GOWITH=null;
+  const r=o.r||[],thenPost=()=>runSteps(e.post,o.k,()=>{Object.entries(o.pts||{}).forEach(([p,n])=>heart(p,n));PICKS.push(id);TALKED.add(id);tidyPeople();SCENE_IDS=null;SCENE_EP=null;GOWITH=null;
    setTimeout(()=>lessons(PICKS.length>=needToday()?'pm':'am'),500)});
   // a reaction with showPic functions in it (Siwoo) still plays as plain lines; one with {pic}/{lay}/{only} steps plays through runSteps
   if(r.some(x=>typeof x==='function'))say(r,thenPost);else runSteps(r,o.k,thenPost)});
