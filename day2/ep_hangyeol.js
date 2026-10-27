@@ -809,18 +809,20 @@ window.EP_WORDS_HG={
 {const add=window.EP_WORDS_HG;for(const[k,w]of Object.entries(add))if(!D2WORDS[k])D2WORDS[k]=w;d2Merge()}
 for(const k of Object.keys(EP_WORDS_HG))CARDS_HAVE.add(k);
 // {fx:'past'} inside pre/post: the map turns sepia (remembering the school trip); {fx:'now'} brings it back
-// {pic:'name'} (showPic in meet.js), {lay}/{clear} (layThings in meet.js) and {fx} all work in this runSteps
+// meet.js's runSteps does every step ({pic}, {lay}/{clear}, {move}, {only}/{flag}, {go}, functions between lines); this only wraps it to add
+// {fx:'past'|'now'} and the find options {k, bag:[…]} (pick from pictures, like 「my bag」) and {k, tray:true|false} (mybag.js) for every kid's scenes
 function sceneFx(m){world.style.filter=m==='past'?'sepia(.7) saturate(.75) brightness(.92)':''}
-runSteps=function(steps,choice,done){const q=(steps||[]).slice();let pic=false;
- const next=()=>{const lines=[];
-  while(q.length){const s=q[0];if(Array.isArray(s)){lines.push(q.shift());continue}
-   if(s.only||s.flag){q.shift();const ok=s.only?s.only.includes(choice):(+!!FLAGS[s.flag])===s.is;if(ok)q.unshift(...s.lines);continue}
-   if(s.fx){if(lines.length)break;q.shift();sceneFx(s.fx);continue}
-   if(s.lay||s.clear){q.shift();lines.push(()=>layThings(s.lay,s.clear));continue}
-   if(s.pic!==undefined){if(lines.length)break;q.shift();pic=!!s.pic;showPic(s.pic);continue}break}
-  const go=()=>{if(!q.length){if(pic)showPic(null);done&&done();return}const f=q.shift();if(f.fx){sceneFx(f.fx);next();return}if(f.pic!==undefined){pic=!!f.pic;showPic(f.pic);next();return}if(pic){pic=false;showPic(null)}if(f.go){fade(()=>{load(f.go);next()});return}if(f.bag){bagFind(f.k,f.bag,f.goal,next);return}if('tray' in f)TRAY_NEXT=f.tray;find(f.k,()=>{TODAY.add(f.k);next()},f.goal||'「{x}」 찾기')};
-  if(lines.length)say(lines,go);else go()};
- next()};
+let BAG_NEXT=null;// set by a step just before the find it belongs to, read by find (wrapped on load, so it sits outside mybag.js's tray wrapper)
+{const _rsHg=runSteps;
+ const prep=a=>(a||[]).flatMap(s=>{if(!s||Array.isArray(s)||typeof s==='function')return[s];
+  if(s.lines)return[Object.assign({},s,{lines:prep(s.lines)})];
+  if(s.fx){const m=s.fx;return[()=>sceneFx(m)]}
+  if(s.k&&(s.bag||'tray' in s)){const f=Object.assign({},s);delete f.bag;delete f.tray;const bag=s.bag,tray=s.tray,k=s.k;
+   return[()=>{if(bag)BAG_NEXT={k,bag};if(tray!==undefined)TRAY_NEXT=tray},f]}
+  return[s]});
+ runSteps=function(steps,choice,done){return _rsHg(prep(steps),choice,done)}}
+addEventListener('load',()=>{const _fdHg=find;find=function(k,done,goal,label){const b=BAG_NEXT;BAG_NEXT=null;
+ if(b&&b.k===k){TRAY_NEXT=null;return bagFind(k,b.bag,goal||'「{x}」 찾기',done)}return _fdHg(k,done,goal,label)}});
 // two places drawn for Hangyeol's scenes: the library (Day 4) and the room at the school trip (Day 12, remembered)
 Object.assign(EXTRA_MAPS,{
  library:{name:'도서관',img:'maps/library.jpg',walk:[[[350,430],[640,330],[820,300],[1100,400],[1450,560],[1450,700],[1300,700],[1150,941],[640,941],[560,700],[500,560],[350,520]]],block:[R(800,320,1130,480),R(930,450,1290,640)],start:[800,720],out:[1460,540]},
@@ -836,7 +838,9 @@ addEventListener('load',()=>{const _dpHg=d2People;d2People=function(id){const ps
 {const _ltHg=layThings;layThings=function(lay,clear){(clear||[]).forEach(k=>{if(typeof k==='function')k()});return _ltHg(lay,(clear||[]).filter(k=>typeof k!=='function'))}}
 {const kidOff=(...ids)=>()=>{npcs=npcs.filter(p=>{if(!ids.includes(p.id))return true;p.el.remove();return false})};
  const kidOn=(id,x,y)=>()=>{if(!npcs.some(p=>p.id===id))npcs.push(sprite(id,x,y))};
- const onlyKids=(...keep)=>()=>{npcs=npcs.filter(p=>{if(keep.includes(p.id))return true;p.el.remove();return false})};
+ let away=[];// kids taken off for a scene come back when it ends (another friend's scene may still happen here today)
+ const onlyKids=(...keep)=>()=>{npcs=npcs.filter(p=>{if(keep.includes(p.id))return true;p.el.remove();away.push(p);return false})};
+ const kidsBack=()=>{for(const p of away)if(!npcs.some(n=>n.id===p.id)){world.appendChild(p.el);npcs.push(p)}away=[]};
  const at=(n,sub,f,before)=>{let hit=0;const fn={clear:[f]};const walk=a=>{for(let i=0;i<a.length;i++){const x=a[i];
    if(Array.isArray(x)&&typeof x[2]==='string'&&x[2].includes(sub)){a.splice(before?i:i+1,0,fn);hit++;i++}else if(x&&!Array.isArray(x)&&x.lines)walk(x.lines)}};
   const e=EP.hangyeol[n-1];walk(e.pre||[]);walk(e.post||[]);for(const c of e.choices)walk(c.r||[]);if(!hit)console.warn('hangyeol: no line',n,sub)};
@@ -844,7 +848,8 @@ addEventListener('load',()=>{const _dpHg=d2People;d2People=function(id){const ps
  at(5,'한결이가 거기 서 있었다',kidOn('hangyeol',1440,320));            // B: behind the door at the back
  at(5,'한결이가 {@door} 뒤에서 나왔다',kidOn('hangyeol',1440,320));
  at(5,'내 옆 {@locker}에 등을 기댔다',()=>{const h=npcs.find(p=>p.id==='hangyeol');if(h){h.x=1340;h.y=300;draw(h)}});
- at(12,'방과 후. 선거 공약을',onlyKids('hangyeol'),true)}
+ at(12,'방과 후. 선거 공약을',onlyKids('hangyeol'),true);
+ {const e=EP.hangyeol[11];(e.post=e.post||[]).push({clear:[kidsBack]})}}
 // a scene that walks on to a place it does not start in ({go:'stands'}) shows its things there too, and the friend can stand there as well (ep.also)
 {const _sd2=setDay;setDay=function(n){_sd2(n);for(const f of D2IDS){const e=epNext(f,EPIDX[f]);if(!e)continue;
   for(const m of Object.keys(Object.assign({},e.things,e.taps,e.also)))if(EXTRA_MAPS[m]&&!D2PLACE[m])D2PLACE[m]=[]}}}
