@@ -1372,7 +1372,7 @@ EP.youngmin=[
 window.EP_WORDS_YM={
  fish:{ko:'물고기',en:'fish',id:'ikan',vi:'con cá',zh:'鱼',ja:'さかな',ru:'рыбка'},
  bookshelf:{ko:'책꽂이',en:'bookshelf',id:'rak buku',vi:'giá sách',zh:'书架',ja:'ほんだな',ru:'книжная полка'},
- worksheet:{ko:'학습지',en:'worksheet',id:'lembar kerja',vi:'phiếu bài tập',zh:'练习纸',ja:'プリント',ru:'рабочий лист'},
+ worksheet:{ko:'학습지',en:'worksheet',id:'lembar kerja',vi:'phiếu bài tập',zh:'练习纸',ja:'プリント',ru:'листок с заданиями'},
  bucket:{ko:'양동이',en:'bucket',id:'ember',vi:'cái xô',zh:'水桶',ja:'バケツ',ru:'ведро'},
  stamp:{ko:'도장',en:'stamp',id:'stempel',vi:'con dấu',zh:'印章',ja:'はんこ',ru:'штамп'},
  water_bottle:{ko:'물병',en:'water bottle',id:'botol minum',vi:'bình nước',zh:'水壶',ja:'すいとう',ru:'бутылка'}};

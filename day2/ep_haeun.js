@@ -1663,7 +1663,7 @@ window.EP_WORDS_HA={
  forehead:{ko:'이마',en:'forehead',id:'dahi',vi:'cái trán',zh:'额头',ja:'おでこ',ru:'лоб'},
  blanket:{ko:'담요',en:'blanket',id:'selimut',vi:'cái chăn',zh:'毯子',ja:'もうふ',ru:'плед'},
  nose:{ko:'코',en:'nose',id:'hidung',vi:'cái mũi',zh:'鼻子',ja:'はな',ru:'нос'},
- notice_book:{ko:'알림장',en:'homework diary',id:'buku penghubung',vi:'sổ liên lạc',zh:'记事本',ja:'れんらくちょう',ru:'дневник'},
+ notice_book:{ko:'알림장',en:'homework diary',id:'buku penghubung',vi:'sổ liên lạc',zh:'联络本',ja:'れんらくちょう',ru:'дневник'},
  clothes:{ko:'옷',en:'clothes',id:'baju',vi:'quần áo',zh:'衣服',ja:'ふく',ru:'одежда'},
  gift:{ko:'선물',en:'present',id:'hadiah',vi:'món quà',zh:'礼物',ja:'プレゼント',ru:'подарок'},
  banana:{ko:'바나나',en:'banana',id:'pisang',vi:'quả chuối',zh:'香蕉',ja:'バナナ',ru:'банан'}};

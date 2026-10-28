@@ -795,7 +795,7 @@ EP.hangyeol=[
 // the new words in Hangyeol's scenes (thread, scissors, colored pencil, picture, ball, locker, box, umbrella, stairs, window, blackboard, flashlight, paper, notebook, chopsticks, tape, flag, water are already in the game)
 window.EP_WORDS_HG={
  name_tag:{ko:'이름표',en:'name tag',id:'tanda nama',vi:'bảng tên',zh:'名牌',ja:'なふだ',ru:'бейдж'},
- line:{ko:'줄',en:'line',id:'barisan',vi:'hàng',zh:'队伍',ja:'れつ',ru:'ряд'},
+ line:{ko:'줄',en:'line',id:'barisan',vi:'hàng',zh:'队伍',ja:'れつ',ru:'очередь'},
  hat:{ko:'모자',en:'cap',id:'topi',vi:'cái mũ',zh:'帽子',ja:'ぼうし',ru:'кепка'},
  rice_cake:{ko:'떡',en:'rice cake',id:'kue beras',vi:'bánh gạo',zh:'年糕',ja:'もち',ru:'рисовый пирожок'},
  mask:{ko:'가면',en:'mask',id:'topeng',vi:'mặt nạ',zh:'面具',ja:'おめん',ru:'маска'},

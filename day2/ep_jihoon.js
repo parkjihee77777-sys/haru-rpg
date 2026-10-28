@@ -1331,7 +1331,7 @@ window.EP_WORDS_JN={
  friend:{ko:'친구',en:'friend',id:'teman',vi:'người bạn',zh:'朋友',ja:'ともだち',ru:'друг'},
  sand:{ko:'모래',en:'sand',id:'pasir',vi:'cát',zh:'沙子',ja:'すな',ru:'песок'},
  tree:{ko:'나무',en:'tree',id:'pohon',vi:'cái cây',zh:'树',ja:'き',ru:'дерево'},
- name:{ko:'이름',en:'name',id:'nama',vi:'cái tên',zh:'名字',ja:'なまえ',ru:'имя'},
+ name:{ko:'이름',en:'name',id:'nama',vi:'tên',zh:'名字',ja:'なまえ',ru:'имя'},
  spider:{ko:'거미',en:'spider',id:'laba-laba',vi:'con nhện',zh:'蜘蛛',ja:'クモ',ru:'паук'},
  teacher:{ko:'선생님',en:'teacher',id:'guru',vi:'cô giáo',zh:'老师',ja:'せんせい',ru:'учительница'},
  sun:{ko:'해',en:'sun',id:'matahari',vi:'mặt trời',zh:'太阳',ja:'たいよう',ru:'солнце'}};

@@ -29,7 +29,7 @@ const JA_RU={
  // Sua's scenes
  stairs:['かいだん','лестница'],clock:['とけい','часы'],hand:['て','рука'],bowl:['おわん','миска'],glue:['のり','клей'],water:['みず','вода'],window:['まど','окно'],
  // Hangyeol's scenes
- name_tag:['なふだ','бейдж'],line:['れつ','ряд'],hat:['ぼうし','кепка'],rice_cake:['もち','рисовый пирожок'],mask:['おめん','маска'],
+ name_tag:['なふだ','бейдж'],line:['れつ','очередь'],hat:['ぼうし','кепка'],rice_cake:['もち','рисовый пирожок'],mask:['おめん','маска'],
  sticker:['シール','наклейка'],hair_tie:['ヘアゴム','резинка'],magnet:['じしゃく','магнит'],spoon:['スプーン','ложка'],poster:['ポスター','плакат'],
  // Siwoo's scenes (ep_siwoo.js)
  ruler:['じょうぎ','линейка'],bean:['まめ','фасоль'],butterfly:['ちょうちょ','бабочка'],calendar:['カレンダー','календарь'],hourglass:['すなどけい','песочные часы'],
@@ -40,10 +40,10 @@ const JA_RU={
  jump_rope:['なわとび','скакалка'],finger:['ゆび','палец'],knee:['ひざ','колено'],
  // Hyeeun's scenes (ep_hyeeun.js)
  glove:['てぶくろ','перчатка'],key:['かぎ','ключ'],gym_clothes:['たいそうふく','спортивная форма'],toilet:['トイレ','туалет'],soup:['スープ','суп'],school_gate:['こうもん','школьные ворота'],
- // Haneul's scenes (ep_haneul.js); drawer and paintbrush are listed above
- pocket:['ポケット','карман'],tv:['テレビ','телевизор'],textbook:['きょうかしょ','учебник'],cloud:['くも','облако'],paints:['えのぐ','краски'],
  // Junho's scenes (ep_junho.js)
  sock:['くつした','носок'],ankle:['あしくび','лодыжка'],goal:['ゴール','ворота'],bed:['ベッド','кровать'],towel:['タオル','полотенце'],wall:['かべ','стена'],vest:['ビブス','манишка'],band_aid:['ばんそうこう','пластырь'],
+ // Haneul's scenes (ep_haneul.js); drawer and paintbrush are listed above
+ pocket:['ポケット','карман'],tv:['テレビ','телевизор'],textbook:['きょうかしょ','учебник'],cloud:['くも','облако'],paints:['えのぐ','краски'],
  // Yuna's scenes (ep_yuna.js); textbook is listed above
  swing:['ブランコ','качели'],drawing_paper:['がようし','альбомный лист'],tangerine:['みかん','мандарин'],indoor_shoes:['うわばき','сменная обувь'],
  // Haeun's scenes (ep_haeun.js); textbook and indoor_shoes are listed above

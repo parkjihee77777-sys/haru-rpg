@@ -196,3 +196,7 @@ function teacherLine(l){if(!Array.isArray(l)||l[0]!=='nar'||typeof l[2]!=='strin
  if(!h[2]){startDay(day);return}
  setDay(day);EPIDX.minho=k-1;const e=EP.minho[k-1];TODAYEP.minho=e;MEET.minho=k;PICKS=['minho'];D2CHOICE.minho='A';
  if(day===2&&D2.siwoo){PICKS.push('siwoo');D2CHOICE.siwoo='B'}stage='d2_after';load('class');useDoor()},50)}
+// words some scenes teach that no friend's file listed (Haeun's coin, Hyeeun's basket, Yuna's flowerpot and watering can): without them the line showed the key 「coin」
+{const W={coin:{ko:'동전',en:'coin',id:'koin',vi:'đồng xu',zh:'硬币'},basket:{ko:'바구니',en:'basket',id:'keranjang',vi:'cái rổ',zh:'篮子'},
+ flowerpot:{ko:'화분',en:'flowerpot',id:'pot bunga',vi:'chậu hoa',zh:'花盆'},watering_can:{ko:'물뿌리개',en:'watering can',id:'penyiram',vi:'bình tưới',zh:'喷壶'}};
+ for(const[k,w]of Object.entries(W))if(!D2WORDS[k])D2WORDS[k]=w;d2Merge()}
