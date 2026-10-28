@@ -87,7 +87,9 @@ const AWAY=new Map();// kid → the map they walked out of in this scene ({move:
 // after a scene: a kid who came along but whose own story today is somewhere else goes back there (leaves this map), so tapping them
 // here can't start their story in the wrong place
 function tidyPeople(){AWAY.clear();npcs=npcs.filter(n=>{const e=D2IDS.includes(n.id)&&!PICKS.includes(n.id)&&epNext(n.id,EPIDX[n.id]);
- if(e&&e.place&&e.place!==MAP&&!(e.also&&e.also[MAP])){n.el&&n.el.remove();return false}return true})}
+ if(e&&e.place&&e.place!==MAP&&!(e.also&&e.also[MAP])){n.el&&n.el.remove();return false}return true});
+ // a scene that sent kids off this map (Junho 7: the others go out to the field) is over: whoever belongs here walks back in from the door
+ let k=0;for(const w of d2People(MAP))if(!npcs.some(n=>n.id===w[0]))npcs.push(comeOver(w,k++))}
 // a list of lines and finds, played in order; {only:[…]} / {flag,is} parts play only after that choice / with that flag
 // {pic:'name'} (in pre, a choice's r or post) shows that picture over the map from there on (what the lines describe, when the map can't show it); a find always goes back to the map
 // {go:'hall'} walks over to another place and goes on there
