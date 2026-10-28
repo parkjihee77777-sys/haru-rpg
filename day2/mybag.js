@@ -41,3 +41,26 @@ function trayItems(k){const t=(OBJ[MAP]||[]).find(o=>o[0]===k);const near=(OBJ[M
   const use=force===true||(force!==false&&DAY>=2&&!/^home/.test(MAP)&&hardToSee(k));
   if(!use)return _findTray(k,done,goal,label);
   const im=new Image();im.onload=()=>bagFind(k,trayItems(k),goal||'「{x}」 찾기',done);im.onerror=()=>_findTray(k,done,goal,label);im.src=`items/${k}.png`}}
+// ---- two-step finds (trial, 10/28): tap the place, then pick the thing from a close-up ----
+// A thing lying on the map is no longer hunted as a tiny spot: the area around it (and a kid sitting or standing right there)
+// opens the close-up tray with the thing and a few others from around it, so small or hidden things are always seen clearly.
+// Trial: Haeun's meetings, or every meeting with ?area=all in the address.
+const AREA_TRIAL=['haeun'];let AREA=null;
+const areaOn=()=>DAY>=2&&!/^home/.test(MAP)&&(/[?&]area=all/.test(location.search)||(SCENE_IDS&&AREA_TRIAL.includes(SCENE_IDS[0])));
+{const _findArea=find;
+ find=function(k,done,goal,label){AREA=null;const r=_findArea(k,done,goal,label);
+  const spots=(OBJ[MAP]||[]).filter(o=>o[0]===k);
+  // set at once (a quick tap must already open the close-up); a thing without a cut-out picture stays an ordinary map tap
+  if(FIND===k&&areaOn()&&spots.length){const A={k,goal:goal||'「{x}」 찾기',zones:spots.map(o=>[o[1],o[2],Math.max(90,o[3]*2.2)]),
+     kids:npcs.filter(n=>n.h&&spots.some(o=>Math.hypot(n.x-o[1],n.y-n.h/2-o[2])<150)).map(n=>n.id)};AREA=A;
+   const im=new Image();im.onerror=()=>{if(AREA===A)AREA=null};im.src=`items/${k}.png`}
+  return r}}
+{const _onTapArea=onTap;
+ onTap=function(e){const a=AREA;if(!a||FIND!==a.k||busy||!me||(sayEl&&talkOn))return _onTapArea(e);
+  const x=(e.clientX+cam.x)/cam.s,y=(e.clientY+cam.y)/cam.s;
+  const z=a.zones.find(([zx,zy,r])=>Math.hypot(x-zx,y-zy)<r);
+  const kid=!z&&npcs.find(n=>a.kids.includes(n.id)&&n.h&&x>n.x-n.w*.4&&x<n.x+n.w*.4&&y>n.y-n.h&&y<n.y+10);
+  if(!z&&!kid)return _onTapArea(e);
+  closeBubble();const at=z||[kid.x,kid.y];walkNear(at[0],at[1]);
+  const d=FIND_DONE;
+  bagFind(a.k,trayItems(a.k),a.goal,()=>{AREA=null;FIND=null;FIND_DONE=null;const g=document.getElementById('goal');g.onclick=null;g.textContent='';goal=null;tagAll();showBag();d&&d()})}}
