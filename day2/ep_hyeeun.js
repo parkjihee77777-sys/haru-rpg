@@ -27,7 +27,7 @@ EP.hyeeun=[
   ['nar','','내 {@bag|은} 들었다. 그런데 통로에는 {@bag|이} 두 개 더 있었다. 주인들은 교실 앞쪽에서 떠들고 있었다.'],
   ['hyeeun','smile','앞{@wheel|이} 작아서 끈 같은 데 잘 걸려. 걸리면 내가 앞으로 쏠려.'],
   ['nar','','혜은이는 담담하게 말했다. 날씨 얘기를 하는 것 같았다.'],
-  ['nar','','혜은이 자리는 맨 뒤, 뒷문 바로 옆이었다. 거기까지 가려면 이 통로를 지나야 했다.'],
+  ['nar','','혜은이 자리는 맨 뒤, 통로 끝이었다. 거기까지 가려면 이 통로를 지나야 했다.'],
   ['think','surprised','(종 치기 전에 자리에 가야 할 텐데.)'],
   ['think','surprised','(뒤에서 밀어 주면 금방 갈 것 같은데. 아니면 {@bag|을} 다 치워야 하나?)']],
  ask:'어떻게 할까?',
@@ -1315,7 +1315,7 @@ window.EP_WORDS_HE={
  const put=(a,txt,pic)=>{for(let j=0;j<a.length;j++){const x=a[j];if(Array.isArray(x)&&typeof x[2]==='string'&&x[2].startsWith(txt)){a.splice(j,0,{pic});return true}if(x&&x.lines&&put(x.lines,txt,pic))return true}return false};
  for(const[i,w,txt,pic]of AN)if(!put(EP.hyeeun[i][w],txt,pic))console.warn('hyeeun pic: no line',i,w,txt)}
 // pictures not drawn yet are skipped: take a name out of TODO_PICS once scenes/hyeeun_<name>.jpg is in place (prompts: art/scenes/hyeeun/pics2.json)
-{const TODO_PICS=new Set(["hyeeun_03d", "hyeeun_04b", "hyeeun_04c", "hyeeun_04d", "hyeeun_05b", "hyeeun_05c", "hyeeun_05d", "hyeeun_06a", "hyeeun_06b", "hyeeun_06c", "hyeeun_06d", "hyeeun_07a", "hyeeun_07b", "hyeeun_07c", "hyeeun_07d", "hyeeun_08b", "hyeeun_08c", "hyeeun_08d", "hyeeun_09a", "hyeeun_09b", "hyeeun_09c", "hyeeun_09d", "hyeeun_10a", "hyeeun_10b", "hyeeun_10c", "hyeeun_10d", "hyeeun_11c", "hyeeun_11d", "hyeeun_12a", "hyeeun_12b", "hyeeun_12c", "hyeeun_13b", "hyeeun_13c", "hyeeun_13d", "hyeeun_14c", "hyeeun_14d", "hyeeun_14b", "hyeeun_15a", "hyeeun_15b", "hyeeun_15c", "hyeeun_15d"]);
+{const TODO_PICS=new Set([ "hyeeun_11d", "hyeeun_12a", "hyeeun_12b", "hyeeun_12c", "hyeeun_13b", "hyeeun_13c", "hyeeun_13d", "hyeeun_14c", "hyeeun_14d", "hyeeun_14b", "hyeeun_15a", "hyeeun_15b", "hyeeun_15c", "hyeeun_15d"]);
  const drop=a=>{if(!Array.isArray(a))return;for(let j=a.length-1;j>=0;j--){const x=a[j];if(x&&!Array.isArray(x)&&typeof x==='object'){if(typeof x.pic==='string'&&TODO_PICS.has(x.pic)){a.splice(j,1);continue}drop(x.lines)}}};
  for(const e of EP.hyeeun){drop(e.pre);drop(e.post);for(const o of e.choices){drop(o.r);if(o.r&&o.r.length===1&&o.r[0]&&o.r[0].pic===null)o.r=[];else if(o.r&&o.r.length&&o.r[0]&&o.r[0].pic===null)o.r.shift()}}}
 // meeting 1: while my bag lies on the floor by her wheel (laid at 668,938 until the bag find clears it), I walk without it (walk/<hero>_nobag.png, when drawn)
