@@ -112,7 +112,9 @@ function runSteps(steps,choice,done){const q=(steps||[]).slice();
    if('pic' in s){q.shift();const pic=s.pic;lines.push(()=>showPic(pic));continue}
    if(s.lay||s.clear){q.shift();lines.push(()=>layThings(s.lay,s.clear));continue}
    // {move:[id,x,y]} a kid walks to that spot from that line on (comes in from the door if not on this map); {move:[id,x,y,'out']} walks out and leaves
-   if(s.move){q.shift();const m=s.move;lines.push(()=>moveKid(m));continue}break}
+   if(s.move){q.shift();const m=s.move;lines.push(()=>moveKid(m));continue}
+   // {me:[x,y]} I walk there from that line on, even while the lines go on (to my own seat when the scene says I am at it)
+   if(s.me){q.shift();const m=s.me;lines.push(()=>{me.auto=true;walkTo(m[0],m[1],()=>{me.auto=false})});continue}break}
   const go=()=>{showPic(null);if(!q.length){done&&done();return}const f=q.shift();if(f.go){fade(()=>{load(f.go);next()});return}find(f.k,()=>{TODAY.add(f.k);next()},f.goal||'「{x}」 찾기')};
   if(lines.length)say(lines,go);else go()};
  next()}
