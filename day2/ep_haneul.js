@@ -2203,3 +2203,6 @@ for(const id of ['science']){const m=EXTRA_MAPS[id];MAPS[id]={img:m.img,walk:m.w
   if(h[2]!=='eve'){startDay(day);return}
   setDay(day);PICKS=['haneul'];EPIDX.haneul=k-1;TODAYEP.haneul=EP.haneul[k-1];MEET.haneul=k;D2CHOICE.haneul='B';
   stage='d2_after';load('class');useDoor()},99)}
+
+// pictures where Haneul drew me (or my back shows): a boy and a girl version; a version not drawn yet is skipped (01a: both being redrawn - Haneul sits at the desk, not crouching on the floor)
+for(const n of ['haneul_01a','haneul_15','haneul_05_A'])HEROPIC.add(n);
