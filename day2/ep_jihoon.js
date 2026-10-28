@@ -266,6 +266,7 @@ EP.jihoon=[
   {only:['A','D'],lines:[['nar','','영민이가 허리를 쭉 펴고 브이를 했다. 얼굴이 딱딱했다. 지훈이가 나한테 고개를 끄덕였다. 네가 찍으라는 뜻이었다. 나는 「하나, 둘」 하고 눌렀다.']]},
   ['nar','','브이 {@photo|을} 찍고 나서였다. 지훈이가 영민이 책 위에 다시 떨어진 꽃잎을 가리켰다.'],
   ['jihoon','sad','영민아, 꽃잎이 너 따라서 책 읽는다.'],
+  {pic:'jihoon_03e'},
   ['nar','','영민이가 꽃잎을 봤다. 그리고 웃음이 터졌다. 어깨가 풀렸다. 처음에 봤던 그 작은 웃음이었다.'],
   ['jihoon','smile','(작게) 지금!'],
   ['me','surprised','영민아, 이것도 찍어도 돼?'],
@@ -288,15 +289,17 @@ EP.jihoon=[
   common:[['me','smile','지훈이가 그랬어. 포즈 끝나고 웃을 때가 진짜래.'],['mom','smile','포즈 끝나고.'],['me','smile','응. 영민이가 그 {@photo} 보고 ‘이건 나 같다’ 했어.'],['mom','smile','좋은 말이다.']]}},
 
 // ■ Day 5 — 눈 감은 사진 (4)
-{title:'눈 감은 사진',place:'class',at:[1240,290],with:[['jiho',1080,330],['yena',1390,350]],
+{title:'눈 감은 사진',scene:'jihoon_04',place:'class',at:[1240,290],with:[['jiho',1080,330],['yena',1390,350]],
  pre:[
   {lay:[['photo',1300,95,46,'photo_board']]},
+  {pic:'jihoon_04a'},
   ['nar','','2교시가 끝났다. 교실 뒤 게시판 앞에 아이들이 모여 있었다.'],
   ['nar','','게시판 한쪽에 「이번 주 우리 반」 칸이 있다. {@teacher|이} 사진첩에서 몇 장을 뽑아 붙이신다. {@photo} 밑에는 하트 {@sticker|를} 붙이는 빈칸이 있다. 한 사람이 일주일에 세 장씩 붙일 수 있다.'],
   ['yena','smile','딴-딴-따라~ 전학생! 너 나왔어!'],
   ['nar','','나는 게시판 앞으로 갔다.'],
   {k:'photo',goal:'「{x}」 보기'},
   ['nar','','{@photo} 속에 내가 있었다. 지난주 체육 시간이었다. {@ball|을} 놓치고 웃는 얼굴이었다. {@eye|은} 반쯤 감겼다. 입은 크게 벌어졌다. 머리카락이 한쪽으로 날렸다.'],
+  {pic:'jihoon_04b'},
   ['jiho','smile','으하하, 전학생 표정 봐! 하마 같다!'],
   ['nar','','몇 명이 웃었다. 나쁜 웃음은 아니었다. 그래도 얼굴이 뜨거워졌다. 귀까지 빨개지는 게 느껴졌다.'],
   ['jihoon','smile','아, 이건 좀…….'],
@@ -322,6 +325,7 @@ EP.jihoon=[
   {k:'B',text:'지훈이 말대로 한다. 「응. 점심에 다시 찍어 줘.」',pts:{jihoon:1},r:[
    ['me','smile','응. 점심에 다시 찍어 줘. 잘 나오게.'],
    ['jihoon','smile','오케이! 각도는 내가 알아. 턱 조금 내리고, {@eye} 크게, 브이.'],
+   {pic:'jihoon_04d'},
    ['nar','','지훈이가 내 앞에서 포즈를 보여 줬다. 턱을 내리고, {@eye|을} 크게 뜨고, 브이. 지훈이 셀카 얼굴이랑 똑같았다.'],
    ['think','smile','(그럼 이 {@photo|은} 없어지는 거지. {@ball} 놓치고 웃던 날도.)'],
    ['nar','','나는 고개를 끄덕였다. 그런데 마음이 조금 이상했다.']]},
@@ -347,6 +351,7 @@ EP.jihoon=[
   {only:['A'],lines:[['nar','','내 {@hand}에 있는 {@photo|이었}다.']]},
   ['jihoon','smile','……근데 있잖아.'],
   ['jihoon','smile','이 {@photo}, 웃는 게 진짜다. 다른 애들 {@photo|은} 다 ‘치즈’ 얼굴인데.'],
+  {pic:'jihoon_04e'},
   ['nar','','지훈이가 게시판의 다른 사진들을 가리켰다. 정말이었다. 다들 브이였다. 지훈이 셀카도 있었다. 턱 내리고, {@eye} 크게.'],
   ['me','surprised','네 {@photo|은}?'],
   ['jihoon','smile','나는 맨날 이 각도야. 이게 제일 안 촌스러워.'],
@@ -1331,7 +1336,7 @@ window.EP_WORDS_JN={
  friend:{ko:'친구',en:'friend',id:'teman',vi:'người bạn',zh:'朋友',ja:'ともだち',ru:'друг'},
  sand:{ko:'모래',en:'sand',id:'pasir',vi:'cát',zh:'沙子',ja:'すな',ru:'песок'},
  tree:{ko:'나무',en:'tree',id:'pohon',vi:'cái cây',zh:'树',ja:'き',ru:'дерево'},
- name:{ko:'이름',en:'name',id:'nama',vi:'tên',zh:'名字',ja:'なまえ',ru:'имя'},
+ name:{ko:'이름',en:'name',id:'nama',vi:'cái tên',zh:'名字',ja:'なまえ',ru:'имя'},
  spider:{ko:'거미',en:'spider',id:'laba-laba',vi:'con nhện',zh:'蜘蛛',ja:'クモ',ru:'паук'},
  teacher:{ko:'선생님',en:'teacher',id:'guru',vi:'cô giáo',zh:'老师',ja:'せんせい',ru:'учительница'},
  sun:{ko:'해',en:'sun',id:'matahari',vi:'mặt trời',zh:'太阳',ja:'たいよう',ru:'солнце'}};
@@ -1343,6 +1348,8 @@ for(const e of EP.jihoon)for(const o of e.choices)if(o.r&&o.r.some(x=>!Array.isA
 for(const k of Object.keys(EP_WORDS_JN))CARDS_HAVE.add(k);
 // Grandma talks like the teacher: her own face (faces/grandma_*.jpg) and, as her name, the word the player learns for 할머니
 NAME.grandma='할머니';
+// the shadow photo in meeting 1 shows my own shadow: a boy and a girl version (scenes/jihoon_01f_m.jpg / _f.jpg)
+if(typeof HEROPIC!=='undefined')HEROPIC.add('jihoon_01f');
 {const _nmJn=nm;nm=function(id){if(id==='grandma')return LANGS[LANG].words.grandma||'할머니';return _nmJn(id)}}
 // ep.friend = the classmate who is the {friend} of a find (Day 9: stand next to Youngmin): tapping them answers that find; the camera glides over to them like Mom's missions
 {const _findJn=find;find=function(k,done,goal,label){const e=SCENE_EP,f=e&&e.friend;
