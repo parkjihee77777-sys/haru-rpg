@@ -73,7 +73,7 @@ d2Goal=function(){const left=friendsToday().filter(i=>!PICKS.includes(i));
 // a kid a scene brings along walks in from the way into the school (the map's door) to their spot; a seated one fades in at the desk
 function comeOver(w,k,from){const n=sprite(w[0],w[1],w[2],w[3]);if(w[3]&&typeof w[3]==='object'){n.el.style.opacity=0;n.el.style.transition='opacity .7s';requestAnimationFrame(()=>requestAnimationFrame(()=>{n.el.style.opacity=1}));return n}
  const st=from||OUT[MAP]||(MAPS[MAP]&&MAPS[MAP].start);if(!st)return n;const tx=w[1],ty=w[2];let p=findPath(st[0],st[1],tx,ty);if(!p||!p.length)return n;
- n.x=st[0];n.y=st[1];n.path=p;const go=performance.now()+(k||0)*550;let last=go;n.el.style.visibility='hidden';
+ n.x=st[0];n.y=st[1];n.path=p;n.dest=[tx,ty];const go=performance.now()+(k||0)*550;let last=go;n.el.style.visibility='hidden';
  const step=now=>{if(!npcs.includes(n)){return}if(now<go||!n.w){requestAnimationFrame(step);return}n.el.style.visibility='';const dt=Math.min(.05,(now-last)/1000);last=now;
   if(!p.length){n.path=null;n.x=tx;n.y=ty;n.frame=0;n.dir='down';draw(n);return}
   const[px,py]=p[0],ex=px-n.x,ey=py-n.y,d=Math.hypot(ex,ey);if(d<6){p.shift()}else{const k=Math.min(d,260*dt)/d;n.x+=ex*k;n.y+=ey*k;
@@ -100,8 +100,20 @@ const PICOK={};function picProbe(name){if(name in PICOK)return;PICOK[name]=null;
 // a picture that shows me (or my shadow) has a boy and a girl version: HEROPIC.add('name') in ep_<id>.js, files scenes/name_m.jpg and name_f.jpg
 const HEROPIC=new Set();function heroPic(n){return n&&HEROPIC.has(n)?n+(HERO==='hero_m'?'_m':'_f'):n}
 function showPic(name){name=heroPic(name);if(name&&PICOK[name]!==false){picProbe(name);sceneEl.style.backgroundImage=`url(scenes/${name}.jpg)`;sceneEl.classList.add('on');requestAnimationFrame(fitScene)}else sceneEl.classList.remove('on')}
+// a thing a scene lays next to where it put a kid (its at / with spot, or the desk that spot would sit at) moves along when the kid ended up elsewhere
+// (another kid took that seat, or spots.js moved them off a thing): Haeun's bread lay on someone else's desk. Things already next to the kid stay.
+// where a kid is, or is walking to (a kid coming in from the door lays things where they will stand)
+function kidSpot(n){return n.path&&n.dest?n.dest:[n.x,n.y]}
+function followKids(lay){const e=SCENE_EP;if(!e||!lay.length)return lay;const S=(window.SEATS_ALL||{})[MAP];
+ const want=[];if(e.place===MAP&&e.at)want.push([SCENE_IDS&&SCENE_IDS[0],e.at[0],e.at[1]]);for(const w of e.with||[])want.push([w[0],w[1],w[2]]);
+ const anchors=[];for(const[id,x,y]of want){const n=npcs.find(p=>p.id===id);if(!n)continue;let ex=x,ey=y,[ax,ay]=kidSpot(n);
+  if(n.seat&&S){let best=null,bd=1e9;for(const[top,xs]of S)for(const sx of xs){const d=Math.hypot(sx-x,top+150-y);if(d<bd){bd=d;best=[sx,top+4]}}if(best){ex=best[0];ey=best[1]}}
+  if(Math.hypot(ax-ex,ay-ey)>30)anchors.push({ex,ey,ax,ay})}
+ if(!anchors.length)return lay;
+ return lay.map(t=>{if(typeof t[1]!=='number')return t;let a=null,bd=220;for(const q of anchors){const d=Math.hypot(t[1]-q.ex,t[2]-q.ey);if(d<bd){bd=d;a=q}}
+  if(!a||Math.hypot(t[1]-a.ax,t[2]-a.ay)<bd)return t;const c=t.slice();c[1]=Math.round(t[1]+a.ax-a.ex);c[2]=Math.round(t[2]+a.ay-a.ey);return c})}
 // a thing can lie next to a kid wherever spots.js put them: [k,'@id',dx,dy,w,picture] (Yena's file also turns picture '-' into a tap spot only)
-function layThings(lay,clear){lay=(lay||[]).map(t=>{if(typeof t[1]!=='string'||t[1][0]!=='@')return t;const n=npcs.find(p=>p.id===t[1].slice(1));const[k,,dx,dy,w,img]=t;return[k,Math.round((n?n.x:800)+(dx||0)),Math.round((n?n.y:700)+(dy||0)),w,img]});for(const k of clear||[]){world.querySelectorAll('.laid').forEach(e=>{if(e.dataset.k===k)e.remove()});OBJ[MAP]=(OBJ[MAP]||[]).filter(o=>!(o.laid&&o[0]===k))}
+function layThings(lay,clear){lay=(lay||[]).map(t=>{if(typeof t[1]!=='string'||t[1][0]!=='@')return t;const n=npcs.find(p=>p.id===t[1].slice(1));const[k,,dx,dy,w,img]=t;const[nx,ny]=n?kidSpot(n):[800,700];return[k,Math.round(nx+(dx||0)),Math.round(ny+(dy||0)),w,img]});lay=followKids(lay);for(const k of clear||[]){world.querySelectorAll('.laid').forEach(e=>{if(e.dataset.k===k)e.remove()});OBJ[MAP]=(OBJ[MAP]||[]).filter(o=>!(o.laid&&o[0]===k))}
  for(const[k,x,y,w,img]of lay||[]){const it=document.createElement('img');it.className='item thing laid';it.dataset.k=k;it.src=`items/${img||k}.png`;
   it.style.cssText=`position:absolute;width:${w||56}px;left:${x}px;top:${y}px;transform:translate(-50%,-100%);z-index:${Math.round(y)+1};pointer-events:none;filter:drop-shadow(0 2px 2px rgba(0,0,0,.25))`;world.appendChild(it);
   const o=[k,x,y-(w||56)*.4,Math.max(30,(w||56)*.55)];o.laid=1;(OBJ[MAP]=OBJ[MAP]||[]).push(o)}

@@ -688,10 +688,8 @@ EP.seah=[
  pre:[
   ['nar','','비가 왔다. 점심시간에 운동장에 못 나갔다. 급식실에서 교실로 오는 길은 지붕이 없는 곳이 조금 있었다.'],
   ['nar','','교실에 들어오니 {@umbrella}에서 {@water|이} 뚝뚝 떨어졌다.'],
-  {lay:[['umbrella',1380,300,40]]},
-  {k:'umbrella',goal:'「{x}」 접어서 걸기'},
+  {k:'umbrella',goal:'「{x}」 접어서 걸기',bag:['bag','umbrella','water_bottle','handkerchief','pencil']},
   ['nar','','{@umbrella|을} 접어 교실 뒤 우산꽂이에 걸었다.'],
-  {clear:['umbrella']},
   ['nar','','우산꽂이 옆, 창가 바닥에 민호가 {@card|를} 펼치고 있었다. 트럼프 {@card|였}다.'],
   {lay:[['card',1300,345,48,'cards_play']]},
   ['minho','smile','원카드 할 사람.'],

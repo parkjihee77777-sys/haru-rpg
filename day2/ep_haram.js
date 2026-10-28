@@ -229,7 +229,7 @@ EP.haram=[
  post:[
   {pic:null},
   ['nar','','종이 울렸다. 하람이가 모둠 자료를 내 {@bag}에 넣어 주려고 했다. 내일 내가 대신 내기로 했다.'],
-  {k:'bag',goal:'「{x}」에 넣기'},
+  {k:'bag',goal:'「{x}」에 넣기',bag:['pcase','bag','notebook','water_bottle','handkerchief']},
   {pic:'haram_d05_bag'},{only:['B','D'],lines:[['haram','smile','내일 이거 대신 내 줘. 발표는 내가 할게.'],['junho','laugh','대신 잘해라!']]},
   {only:['A'],lines:[['haram','smile','고마워. 근데 그 길은 내가 아는데. 남은 건 내가 지금 그릴게.'],['nar','','하람이가 {w|을} 다시 가져가 쉬는 시간 내내 그렸다.']]},
   {only:['C'],lines:[['haram','sad','……미리 말했는데.'],['me','sad','……응. 미안. 알았는데.'],['nar','','하람이는 그래도 {w|을} 내 {@bag}에 넣었다.']]},

@@ -220,7 +220,7 @@ EP.youngmin=[
   ['haeun','smile','가만있어 봐. 내가 쓸게. 내가 빨라.'],
   {pic:'youngmin_03b'},
   ['nar','','하은이가 영민이 앞에서 기록지를 쓱 가져갔다. 영민이 손에 있던 {@pencil|이} {@desk} 위를 굴렀다. 바닥으로 떨어졌다.'],
-  {lay:[['pencil',612,640,40]]},
+  {lay:[['pencil','@youngmin',-70,40,40]]},
   ['nar','','영민이는 {@pencil|을} 줍지 않았다. {@chair}에 등을 기댔다. 눈은 창문 쪽을 봤다.'],
   ['youngmin','sad','……응. 네가 해.'],
   {k:'pencil',goal:'「{x}」 줍기'},

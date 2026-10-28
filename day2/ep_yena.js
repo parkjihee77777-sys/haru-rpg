@@ -1503,7 +1503,7 @@ const ZOFF_YN={};
 {const _layYn=layThings;layThings=function(lay,clear){const tapOnly=[];
  for(const k of clear||[])if(ZOFF_YN[k]){const[m,zs]=ZOFF_YN[k];delete ZOFF_YN[k];if(ZOOMS[m])ZOOMS[m].push(...zs);if(m===MAP&&typeof showZoomMarks==='function')showZoomMarks()}
  lay=(lay||[]).map(t=>{if(typeof t[1]!=='string')return t;const n=npcs.find(p=>p.id===t[1].slice(1));let[k,,dx,dy,w,img]=t;if(['drum','ear'].includes(k)&&!YN_HAVE.has('item:'+k))img='-';
-  const x=Math.round((n?n.x:800)+dx),y=Math.round((n?n.y:700)+dy);if(img==='-'){tapOnly.push([k,x,y,w]);return null}return[k,x,y,w,img||undefined]}).filter(Boolean);
+  const[nx,ny]=n?(typeof kidSpot==='function'?kidSpot(n):[n.x,n.y]):[800,700],x=Math.round(nx+dx),y=Math.round(ny+dy);if(img==='-'){tapOnly.push([k,x,y,w]);return null}return[k,x,y,w,img||undefined]}).filter(Boolean);
  _layYn(lay,clear);
  for(const[k,x,y,w]of tapOnly){const o=[k,x,y,Math.max(30,w*.55)];o.laid=1;(OBJ[MAP]=OBJ[MAP]||[]).push(o);
   const zs=ZOOMS[MAP]||[],off=zs.filter(z=>z[0]<x+w&&z[2]>x-w&&z[1]<y+w&&z[3]>y-w*1.6);if(off.length){ZOOMS[MAP]=zs.filter(z=>!off.includes(z));ZOFF_YN[k]=[MAP,off];if(typeof showZoomMarks==='function')showZoomMarks()}}

@@ -4,7 +4,7 @@
 // to a thing you tap or to the way out moves to the nearest free spot that is still on the floor.
 {
 // chair centres (x) on the classroom map, by row (top = the chair back's top on the map)
-const SEATS={class:[[333,[376,478,764,890,1182,1313]],[448,[334,454,764,890,1194,1325]],[572,[292,406,760,885,1218,1349]],[715,[263,395,760,895,1272,1405]]]};
+const SEATS=window.SEATS_ALL={class:[[333,[376,478,764,890,1182,1313]],[448,[334,454,764,890,1194,1325]],[572,[292,406,760,885,1218,1349]],[715,[263,395,760,895,1272,1405]]]};
 const spotOf=p=>p[3]?[p[1],p[3].top+150]:[p[1],p[2]];// a seated kid's body sits a little below the chair back
 function onFloor(id,x,y){const m=MAPS[id];if(!m||!m.walk)return true;if((m.block||[]).some(r=>inR(r,x,y)))return false;
  return m.walk.some(p=>inPoly(p,x,y))||(m.rects||[]).some(r=>inR(r,x,y))}
