@@ -100,7 +100,8 @@ const PICOK={};function picProbe(name){if(name in PICOK)return;PICOK[name]=null;
 // a picture that shows me (or my shadow) has a boy and a girl version: HEROPIC.add('name') in ep_<id>.js, files scenes/name_m.jpg and name_f.jpg
 const HEROPIC=new Set();function heroPic(n){return n&&HEROPIC.has(n)?n+(HERO==='hero_m'?'_m':'_f'):n}
 function showPic(name){name=heroPic(name);if(name&&PICOK[name]!==false){picProbe(name);sceneEl.style.backgroundImage=`url(scenes/${name}.jpg)`;sceneEl.classList.add('on');requestAnimationFrame(fitScene)}else sceneEl.classList.remove('on')}
-function layThings(lay,clear){for(const k of clear||[]){world.querySelectorAll('.laid').forEach(e=>{if(e.dataset.k===k)e.remove()});OBJ[MAP]=(OBJ[MAP]||[]).filter(o=>!(o.laid&&o[0]===k))}
+// a thing can lie next to a kid wherever spots.js put them: [k,'@id',dx,dy,w,picture] (Yena's file also turns picture '-' into a tap spot only)
+function layThings(lay,clear){lay=(lay||[]).map(t=>{if(typeof t[1]!=='string'||t[1][0]!=='@')return t;const n=npcs.find(p=>p.id===t[1].slice(1));const[k,,dx,dy,w,img]=t;return[k,Math.round((n?n.x:800)+(dx||0)),Math.round((n?n.y:700)+(dy||0)),w,img]});for(const k of clear||[]){world.querySelectorAll('.laid').forEach(e=>{if(e.dataset.k===k)e.remove()});OBJ[MAP]=(OBJ[MAP]||[]).filter(o=>!(o.laid&&o[0]===k))}
  for(const[k,x,y,w,img]of lay||[]){const it=document.createElement('img');it.className='item thing laid';it.dataset.k=k;it.src=`items/${img||k}.png`;
   it.style.cssText=`position:absolute;width:${w||56}px;left:${x}px;top:${y}px;transform:translate(-50%,-100%);z-index:${Math.round(y)+1};pointer-events:none;filter:drop-shadow(0 2px 2px rgba(0,0,0,.25))`;world.appendChild(it);
   const o=[k,x,y-(w||56)*.4,Math.max(30,(w||56)*.55)];o.laid=1;(OBJ[MAP]=OBJ[MAP]||[]).push(o)}
@@ -202,3 +203,5 @@ function teacherLine(l){if(!Array.isArray(l)||l[0]!=='nar'||typeof l[2]!=='strin
 {const W={coin:{ko:'동전',en:'coin',id:'koin',vi:'đồng xu',zh:'硬币'},basket:{ko:'바구니',en:'basket',id:'keranjang',vi:'cái rổ',zh:'篮子'},
  flowerpot:{ko:'화분',en:'flowerpot',id:'pot bunga',vi:'chậu hoa',zh:'花盆'},watering_can:{ko:'물뿌리개',en:'watering can',id:'penyiram',vi:'bình tưới',zh:'喷壶'}};
  for(const[k,w]of Object.entries(W))if(!D2WORDS[k])D2WORDS[k]=w;d2Merge()}
+// when a find starts, the 🔊 marks are laid again: the thing looked for keeps its own mark even under a smaller thing on it (soundMarks)
+{const _findSm=find;find=function(...a){const r=_findSm(...a);if(typeof soundMarks==='function')soundMarks();return r}}

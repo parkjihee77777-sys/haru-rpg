@@ -9,7 +9,7 @@ EP.hangyeol=[
 {title:'한결 공방',scene:'hangyeol_01',place:'class',at:[330,262],with:[['junho',470,250]],
  things:{class:[['thread',370,330,30],['scissors',460,336,42]]},
  pre:[
-  {lay:[['thread',368,322,44],['scissors',458,326,46]]},
+  {lay:[['thread','@hangyeol',-8,-15,44],['scissors','@hangyeol',82,-11,46]]},
   {pic:'hangyeol_01'},
   ['nar','','쉬는 시간. 창가 자리에 아이들이 {@line}을 서 있었다. 맨 앞에 앉은 아이가 손가락 사이로 알록달록한 {@thread}을 빠르게 엮고 있었다.'],
   ['nar','','{@desk} 위에 {@paper}가 한 장 붙어 있었다. 「한결 공방 — 쉬는 시간만 영업」'],
@@ -583,7 +583,7 @@ EP.hangyeol=[
 {title:'번호순 공약',scene:'hangyeol_12',place:'class',at:[330,262],
  things:{class:[['thread',380,330,30]]},
  pre:[
-  {lay:[['thread',378,322,44]]},
+  {lay:[['thread','@hangyeol',2,-15,44]]},
   {pic:'hangyeol_12'},
   ['nar','','방과 후. 선거 공약을 고민하다가 한결이 자리로 갔다. 한결이는 {@thread}을 정리하고 있었다.'],
   ['hangyeol','smile','공약 다 썼어?'],
