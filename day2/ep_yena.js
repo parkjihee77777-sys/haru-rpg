@@ -1498,11 +1498,16 @@ for(const e of EP.yena)for(const o of e.choices)if(o.r&&o.r.some(x=>!Array.isArr
 for(const k of ['drum','ear'].filter(k=>YN_HAVE.has('item:'+k)))CARDS_HAVE.add(k);
 // {lay:[[k,'@yena',dx,dy,w,picture]]} lays a thing next to where that friend really stands or sits (spots.js may have moved her), so her things are always beside her;
 // picture '-' = only a tap spot (her desk), nothing drawn
+// a tap-only spot (her desk) switches off the magnifier spots over it until it is cleared: a tap on the desk opened an empty close-up instead of finding the desk
+const ZOFF_YN={};
 {const _layYn=layThings;layThings=function(lay,clear){const tapOnly=[];
+ for(const k of clear||[])if(ZOFF_YN[k]){const[m,zs]=ZOFF_YN[k];delete ZOFF_YN[k];if(ZOOMS[m])ZOOMS[m].push(...zs);if(m===MAP&&typeof showZoomMarks==='function')showZoomMarks()}
  lay=(lay||[]).map(t=>{if(typeof t[1]!=='string')return t;const n=npcs.find(p=>p.id===t[1].slice(1));let[k,,dx,dy,w,img]=t;if(['drum','ear'].includes(k)&&!YN_HAVE.has('item:'+k))img='-';
   const x=Math.round((n?n.x:800)+dx),y=Math.round((n?n.y:700)+dy);if(img==='-'){tapOnly.push([k,x,y,w]);return null}return[k,x,y,w,img||undefined]}).filter(Boolean);
  _layYn(lay,clear);
- for(const[k,x,y,w]of tapOnly){const o=[k,x,y,Math.max(30,w*.55)];o.laid=1;(OBJ[MAP]=OBJ[MAP]||[]).push(o)}if(tapOnly.length)tagAll()}}
+ for(const[k,x,y,w]of tapOnly){const o=[k,x,y,Math.max(30,w*.55)];o.laid=1;(OBJ[MAP]=OBJ[MAP]||[]).push(o);
+  const zs=ZOOMS[MAP]||[],off=zs.filter(z=>z[0]<x+w&&z[2]>x-w&&z[1]<y+w&&z[3]>y-w*1.6);if(off.length){ZOOMS[MAP]=zs.filter(z=>!off.includes(z));ZOFF_YN[k]=[MAP,off];if(typeof showZoomMarks==='function')showZoomMarks()}}
+ if(tapOnly.length)tagAll()}}
 // stand:1 = she stands where her scene says (meeting 13: alone by the window), not at a desk; spots.js seats every kid with sitting art, so this runs after it
 addEventListener('load',()=>{const _dpYn=d2People;d2People=function(id){const ps=_dpYn(id),e=epNext('yena',EPIDX.yena);
  if(e&&e.stand&&e.place===id){const p=ps.find(p=>p[0]==='yena');if(p){p[1]=e.at[0];p[2]=e.at[1];p.length=3}}return ps}});
