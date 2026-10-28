@@ -101,7 +101,7 @@ EP.youngmin=[
 // ■ Day 3 — 세 번만 톡톡톡 (2)
 {title:'세 번만 톡톡톡',scene:'youngmin_02',place:'class',at:[220,420],with:[['yena',420,300],['jihoon',520,250]],
  pre:[
-  {lay:[['fish',118,338,74,'fish_tank']]},
+  {lay:[['fish',162,298,70,'fish_tank']]},
   ['nar','','1교시 전. 교실 창가에 작은 어항이 있었다. 나는 가까이 가 봤다.'],
   {k:'fish',goal:'「{x}」 들여다보기'},
   ['nar','','어항 앞에 쪼그려 앉아 {@fish|를} 봤다.'],
@@ -178,9 +178,7 @@ EP.youngmin=[
   ['yena','smile','‘급해’는 진짜 느리다. 근데 먹긴 먹네.'],
   ['youngmin','smile','……‘급해’는 맨날 늦게 먹어. 그래도 다 먹어.'],
   ['nar','','영민이가 밥통을 내려놓았다. {@lid|이} 열린 채였다.'],
-  {lay:[['lid',150,345,30]]},
-  {k:'lid',goal:'「{x}」 꼭 닫기'},
-  {clear:['lid']},
+  {k:'lid',goal:'「{x}」 꼭 닫기',bag:['spoon','lid','fish','pencil','water_bottle']},
   ['youngmin','smile','끝까지 돌려야 해. 안 그러면 밥이 눅눅해져.'],
   ['nar','','나는 {@lid|을} 끝까지 돌렸다. 딸깍 소리가 났다.'],
   {only:['B','D'],lines:[['yena','smile','영민아, 다음엔 내가 ‘톡톡톡’ 해도 돼? 네가 옆에서 봐 줘.'],['youngmin','smile','……응. 세 번만.']]},
@@ -846,7 +844,7 @@ EP.youngmin=[
 // ■ Day 11 — 젖은 알림장 (10)
 {title:'젖은 알림장',scene:'youngmin_10',place:'class',at:[400,870],with:[['sua',520,560]],
  pre:[
-  {lay:[['fish',118,338,74,'fish_tank']]},
+  {lay:[['fish',162,298,70,'fish_tank']]},
   {pic:'youngmin_10a'},
   ['nar','','아침. 자리에 앉아 {@bag|을} 열었다. {@bag} 바닥이 축축했다.'],
   {k:'water_bottle',goal:'「{x}」 꺼내기',bag:['textbook','water_bottle','notice_book','pcase','notebook']},
@@ -934,7 +932,7 @@ EP.youngmin=[
 // ■ Day 12 — 보고 있으면 더 느려져 (11)
 {title:'보고 있으면 더 느려져',scene:'youngmin_11',place:'class',at:[400,870],
  pre:[
-  {lay:[['fish',118,338,74,'fish_tank']]},
+  {lay:[['fish',162,298,70,'fish_tank']]},
   ['nar','','점심을 먹고 교실로 왔다. 영민이가 독서 기록장을 펴고 있었다.'],
   ['youngmin','smile','이거 그림만 그리면 끝이야. 다 하면 도서관 같이 가.'],
   ['me','smile','응!'],
@@ -1019,7 +1017,7 @@ EP.youngmin=[
 // ■ Day 13 — 붓는 건 천천히 (12)
 {title:'붓는 건 천천히',scene:'youngmin_12',place:'class',at:[220,420],with:[['sua',800,262],['haeun',920,262],['yena',470,300],['junho',600,340],['jiho',600,450]],
  pre:[
-  {lay:[['fish',118,338,74,'fish_tank']]},
+  {lay:[['fish',162,298,70,'fish_tank']]},
   {pic:'youngmin_12a'},
   ['nar','','5교시. 선생님이 교실 앞에 {@bucket|를} 놓으셨다.'],
   {lay:[['bucket',700,262,60]]},

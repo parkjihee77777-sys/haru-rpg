@@ -14,7 +14,7 @@ EP.haram=[
   ['haram','laugh','응! 앉아, 앉아. 오늘 문제! 오늘 반찬 중에 제일 맛없는 건?'],
   ['me','surprised','……어?'],
   ['haram','smile','정답은 가지무침. 내 생각이야.'],
-  {k:'tray',goal:'「{x}」 내려놓기'},
+  {k:'tray',goal:'「{x}」 내려놓기',bag:['spoon','tray','chopsticks','water_bottle','handkerchief']},
   {pic:'haram_01'},
   ['nar','','내가 {@spoon|을} 들려는데, 하람이가 두 손을 가슴 앞에 모았다. 눈을 감았다. 그리고 아주 작은 목소리로 노래를 시작했다. 처음 듣는 가락이었다.'],
   ['nar','','옆 테이블 아이들이 킥킥거렸다.'],
