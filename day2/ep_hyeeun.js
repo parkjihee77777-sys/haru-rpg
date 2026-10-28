@@ -7,10 +7,10 @@
 window.EP=window.EP||{};
 EP.hyeeun=[
 // ■ Day 2 — 길 막지 마 (1)
-{title:'길 막지 마',scene:'hyeeun_01',place:'class',at:[700,880],with:[['jihoon',980,860]],
+{title:'길 막지 마',scene:'hyeeun_01',place:'class',at:[700,825],with:[['jihoon',980,860]],
  pre:[
   ['nar','','쉬는 시간. 교실 뒤쪽이 시끄러웠다. 아이들이 {@bag|을} 책상 옆 바닥에 내려놓고 떠들고 있었다.'],
-  {lay:[['bag',668,938,54]]},
+  {lay:[['bag',745,866,54]]},
   ['nar','','나도 {@bag|을} 의자 옆 바닥에 내려놓았다. 책상 옆 고리에 거는 걸 깜빡했다.'],
   ['think','surprised','(첫날 자기소개 할 때 「천천히 해도 돼」 해 준 애가 있었는데. 누구였지?)'],
   ['nar','','그때 뒤에서 목소리가 들렸다.'],
@@ -23,7 +23,7 @@ EP.hyeeun=[
   ['hyeeun','smile','농담은 ‘길 막지 마’의 ‘마~’ 부분. {@bag|은} 진짜 치워 줘.'],
   {k:'bag',goal:'「{x}」 들어 올리기'},
   {clear:['bag']},
-  {lay:[['bag',600,800,46],['bag',880,800,46]]},
+  {lay:[['bag',525,830,46],['bag',880,826,46]]},
   ['nar','','내 {@bag|은} 들었다. 그런데 통로에는 {@bag|이} 두 개 더 있었다. 주인들은 교실 앞쪽에서 떠들고 있었다.'],
   ['hyeeun','smile','앞{@wheel|이} 작아서 끈 같은 데 잘 걸려. 걸리면 내가 앞으로 쏠려.'],
   ['nar','','혜은이는 담담하게 말했다. 날씨 얘기를 하는 것 같았다.'],
@@ -79,7 +79,7 @@ EP.hyeeun=[
  post:[
   ['nar','','혜은이가 자리에 도착했다. 그런데 바로 멈췄다.'],
   ['hyeeun','surprised','어? 앞{@wheel} 앞에 뭐 있다.'],
-  {lay:[['eraser',640,890,30]]},
+  {lay:[['eraser',668,866,36]]},
   ['nar','','혜은이 앞{@wheel} 앞에 작은 지우개 하나가 있었다. 내 거였다. {@bag|을} 들 때 떨어진 모양이었다.'],
   {k:'wheel',goal:'「{x}」 앞 비우기'},
   {clear:['eraser']},
@@ -1318,10 +1318,10 @@ window.EP_WORDS_HE={
 {const TODO_PICS=new Set([]);
  const drop=a=>{if(!Array.isArray(a))return;for(let j=a.length-1;j>=0;j--){const x=a[j];if(x&&!Array.isArray(x)&&typeof x==='object'){if(typeof x.pic==='string'&&TODO_PICS.has(x.pic)){a.splice(j,1);continue}drop(x.lines)}}};
  for(const e of EP.hyeeun){drop(e.pre);drop(e.post);for(const o of e.choices){drop(o.r);if(o.r&&o.r.length===1&&o.r[0]&&o.r[0].pic===null)o.r=[];else if(o.r&&o.r.length&&o.r[0]&&o.r[0].pic===null)o.r.shift()}}}
-// meeting 1: while my bag lies on the floor by her wheel (laid at 668,938 until the bag find clears it), I walk without it (walk/<hero>_nobag.png, when drawn)
+// meeting 1: while my bag lies on the floor by her wheel (laid at 745,866 until the bag find clears it), I walk without it (walk/<hero>_nobag.png, when drawn)
 {const NB={hero_f:true,hero_m:true};// walk/hero_f_nobag.png / hero_m_nobag.png (drawn 10/28)
  const bagOff=off=>{if(me&&me.el&&(!off||NB[HERO]))me.el.style.backgroundImage=`url(walk/${HERO}${off?'_nobag':''}.png)`};
- const _lt=layThings;layThings=function(lay,clear){const r=_lt.apply(this,arguments);if(SCENE_EP===EP.hyeeun[0]){if((lay||[]).some(x=>x[0]==='bag'&&x[1]===668&&x[2]===938))bagOff(true);if((clear||[]).includes('bag'))bagOff(false)}return r}}
+ const _lt=layThings;layThings=function(lay,clear){const r=_lt.apply(this,arguments);if(SCENE_EP===EP.hyeeun[0]){if((lay||[]).some(x=>x[0]==='bag'&&x[1]===745&&x[2]===866))bagOff(true);if((clear||[]).includes('bag'))bagOff(false)}return r}}
 // a choice's reaction (r) is said as plain lines; when it holds {clear}/{flag}/{pic} steps it plays at the start of post instead (runSteps handles those)
 for(const e of EP.hyeeun)for(const o of e.choices)if(o.r&&o.r.some(x=>!Array.isArray(x))){e.post=[{only:[o.k],lines:o.r}].concat(e.post||[]);o.r=[]}
 {const add=window.EP_WORDS_HE;for(const[k,w]of Object.entries(add))if(!D2WORDS[k])D2WORDS[k]=w;d2Merge()}
