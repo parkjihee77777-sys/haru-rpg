@@ -29,6 +29,12 @@ d2People=function(id){const ps=_d2PeopleSpots(id).map(p=>p.slice());const S=SEAT
  const placed=ps.filter(p=>p[3]).map(spotOf);
  for(const p of ps){if(p[3])continue;if(clash(id,p[1],p[2],placed)){const c=freeSpot(id,p[1],p[2],placed);if(c){p[1]=c[0];p[2]=c[1]}}placed.push([p[1],p[2]])}
  return ps};
+// a desk or a chair to find in the classroom can be any of them (the map shows 24; Minho's meeting had 4 fixed ones, none near him):
+// while that find runs every desk and chair near the scene's friend gets a spot (the whole room when the friend isn't here; no 🔊 on each of them)
+{const _findSeat=find;find=function(k,done,goal,label){if(MAP==='class'&&(k==='desk'||k==='chair')){const add=[];const f=SCENE_IDS&&npcs.find(n=>n.id===SCENE_IDS[0]);
+ for(const[top,xs]of SEATS.class)for(const x of xs){const o=k==='desk'?[k,x,top-25,50]:[k,x,top+45,35];if(f&&Math.hypot(o[1]-f.x,o[2]-f.y)>380)continue;if(!(OBJ.class||[]).some(p=>p[0]===k&&Math.hypot(p[1]-o[1],p[2]-o[2])<40)){o.seatAll=1;add.push(o)}}
+ (OBJ.class=OBJ.class||[]).push(...add);const d=done;done=function(){OBJ.class=(OBJ.class||[]).filter(o=>!o.seatAll);return d&&d.apply(this,arguments)}}
+ return _findSeat(k,done,goal,label)}}
 }
 // a save from before 10/25 may still hold 진우·보람·도연 (out of the game): forget them whenever a day starts
 {const _sdGone=startDay;startDay=function(n){for(const k of GONE_IDS){delete HEART[k];delete MEET[k];if(typeof HEART_D1==='object'&&HEART_D1)delete HEART_D1[k]}return _sdGone(n)}}
