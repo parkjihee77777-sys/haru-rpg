@@ -80,9 +80,7 @@ EP.haneul=[
   ['nar','','딩동댕— (1교시 시작 종)'],
   ['teacher','smile','학습지 나눠 줄게요. 한 장씩 갖고 뒤로 넘겨요.'],
   ['nar','','학습지 묶음이 앞에서부터 왔다. 유나가 돌아서 나에게 건넸다. 나는 한 장을 가졌다. 남은 한 장은 맨 뒤, 하늘이 몫이었다.'],
-  {lay:[['paper',1440,548,44]]},
-  {k:'paper',goal:'「{x}」 뒤로 넘기기'},
-  {clear:['paper']},
+  {k:'paper',goal:'「{x}」 뒤로 넘기기',bag:['notebook','paper','pencil','eraser','pcase']},
   {pic:'haneul_01p'},
   ['nar','','나는 돌아보지 않았다. {@paper|만} 어깨 너머로 들어 올렸다. 뒤에서 {@paper|를} 받는 손이 느껴졌다. 아주 가볍게.'],
   {only:['A','D'],lines:[['nar','','1교시 중간. 선생님이 {@blackboard|에} 쓰실 때, 어깨 너머로 작게 접힌 {@paper|가} 넘어왔다. 네 번 접혀 있었다. 펴 보니 짧은 글이 있었다.'],['nar','','「첫날 {@door} 앞에서 너 다리 굳었지. 그림에 그렇게 그렸어. 미안. 그림 안 쳐다봐 줘서 고마워.」 끝에 작은 {@cloud}.'],['think','sad','(봤구나. 내 다리 굳은 거. 다들 내 얼굴 볼 때, 하늘이는 내 다리를 봤어.)']]},
@@ -2205,4 +2203,4 @@ for(const id of ['science']){const m=EXTRA_MAPS[id];MAPS[id]={img:m.img,walk:m.w
   stage='d2_after';load('class');useDoor()},99)}
 
 // pictures where Haneul drew me (or my back shows): a boy and a girl version; a version not drawn yet is skipped (01a: both being redrawn - Haneul sits at the desk, not crouching on the floor)
-for(const n of ['haneul_01a','haneul_15','haneul_05_A'])HEROPIC.add(n);
+for(const n of ['haneul_01a','haneul_15','haneul_05_A','haneul_01p'])HEROPIC.add(n);// 01p: being redrawn too (I pass the worksheet back over my shoulder without looking; only Haneul's hand behind)
