@@ -217,3 +217,6 @@ function teacherLine(l){if(!Array.isArray(l)||l[0]!=='nar'||typeof l[2]!=='strin
  for(const[k,w]of Object.entries(W))if(!D2WORDS[k])D2WORDS[k]=w;d2Merge()}
 // when a find starts, the 🔊 marks are laid again: the thing looked for keeps its own mark even under a smaller thing on it (soundMarks)
 {const _findSm=find;find=function(...a){const r=_findSm(...a);if(typeof soundMarks==='function')soundMarks();return r}}
+// the hero's dad (11/03): {d} in a line, 'dad' as a speaker at dinner (Day 4, 8, 12, 16R)
+{const W={dad:{ko:'아빠',en:'dad',id:'ayah',vi:'bố',zh:'爸爸'}};for(const[k,w]of Object.entries(W))if(!D2WORDS[k])D2WORDS[k]=w;d2Merge();
+ if(LANGS.ja)LANGS.ja.words.dad='パパ';if(LANGS.ru)LANGS.ru.words.dad='папа'}

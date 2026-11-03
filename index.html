@@ -119,14 +119,14 @@ body,button{word-break:keep-all;overflow-wrap:break-word}
 <div id="fader"></div>
 <script>
 // same address, newest version: if the page this phone has kept is older than the one online, fetch the new one and reopen
-const BUILD='1103144336';
+const BUILD='1103172301';
 try{fetch(location.pathname,{cache:'no-store'}).then(r=>r.text()).then(t=>{const m=t.match(/const BUILD='(\d+)'/);if(m&&m[1]!==BUILD&&sessionStorage.getItem('upd')!==m[1]){sessionStorage.setItem('upd',m[1]);fetch(location.pathname,{cache:'reload'}).then(()=>location.reload())}}).catch(()=>{})}catch(e){}
 </script>
-<script src="i18n.js?v=1103144336"></script>
-<script src="i18n_prologue_v2.js?v=1103144336"></script>
-<script src="day2/i18n_engine.js?v=1103144336"></script>
-<script src="day2/data.js?v=1103144336"></script>
-<script src="day3/data.js?v=1103144336"></script>
+<script src="i18n.js?v=1103172301"></script>
+<script src="i18n_prologue_v2.js?v=1103172301"></script>
+<script src="day2/i18n_engine.js?v=1103172301"></script>
+<script src="day2/data.js?v=1103172301"></script>
+<script src="day3/data.js?v=1103172301"></script>
 <script>
 // ---------- data ----------
 const MW=1672,MH=941,KID=180;
@@ -187,7 +187,7 @@ function tr(s){if(s==null)return s;let t=UI==='ko'?s:((window.T&&T[UI]&&T[UI][s]
 // (Korean: the noun, particle fixed). Every word shown in the learned language is heard, one after another.
 let TEACH=[],LASTW=[];
 function oneWord(t){const ok=k=>(typeof FOUND!=='undefined'&&FOUND.has(k))||(TEACH||[]).includes(k)||(typeof FIND!=='undefined'&&FIND===k);LASTW=[];
- return t.replace(/\{@([a-z_]+)\}|\{w\}|\{m\}/g,(m0,k0)=>{const k=k0||(m0==='{w}'?'notebook':'mom');if(ok(k)){if(!LASTW.includes(k))LASTW.push(k);return k==='notebook'?(W||LANGS[LANG].words.notebook):LANGS[LANG].words[k]||k}
+ return t.replace(/\{@([a-z_]+)\}|\{w\}|\{m\}|\{d\}/g,(m0,k0)=>{const k=k0||(m0==='{w}'?'notebook':m0==='{d}'?'dad':'mom');if(ok(k)){if(!LASTW.includes(k))LASTW.push(k);return k==='notebook'?(W||LANGS[LANG].words.notebook):LANGS[LANG].words[k]||k}
   const w=(LANGS[UI]&&LANGS[UI].words[k])||LANGS.ko.words[k]||k;return UI==='ko'?w+'\u0000':w}).replace(/([가-힣])\u0000(으로|로|은|는|을|를|이|가|과|와|이었|였)(?![가-힣])|([가-힣])\u0000(으로|로|이었|였)/g,(m,a,p,a2,p2)=>{a=a||a2;p=p||p2;
   const c=a.charCodeAt(0)-0xAC00,jong=c%28,J={'으로':['으로','로'],'로':['으로','로'],'은':['은','는'],'는':['은','는'],'을':['을','를'],'를':['을','를'],'이':['이','가'],'가':['이','가'],'과':['과','와'],'와':['과','와'],'이었':['이었','였'],'였':['이었','였']}[p];
   return a+(p==='으로'||p==='로'?(jong&&jong!==8?'으로':'로'):jong?J[0]:J[1])}).replace(/\u0000/g,'')}
@@ -205,7 +205,9 @@ function lookAt(id){const n=npcs.find(n=>n.id===id);if(!n||touring)return;const 
  const maxX=Math.max(0,MW*s-W),maxY=Math.max(0,MH*s-H),both=Math.abs(n.x-me.x)*s<W-160,cx=both?(n.x+me.x)/2:n.x,tx=Math.max(0,Math.min(maxX,cx*s-W/2)),ty=Math.max(0,Math.min(maxY,((n.y+me.y)/2-80)*s-H/2));
  const from={x:cam.x,y:cam.y},s0=performance.now();(function step(now){const k=Math.min(1,(now-s0)/700),e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;pan={x:from.x+(tx-from.x)*e,y:from.y+(ty-from.y)*e};follow();if(k<1)requestAnimationFrame(step)})(s0)}
 // a person whose name is a taught word is labelled with that word (once found), never with its meaning
-function nm(id){if(id==='mom')return (typeof FOUND!=='undefined'&&FOUND.has('mom'))?LANGS[LANG].words.mom:'';return tr(NAME[id]||'')}
+// Dad (the hero's father) talks at dinner on some days; until his face pictures are drawn his lines show without a face
+let DAD_FACE=false;{const im=new Image();im.onload=()=>{DAD_FACE=true};im.src='faces/dad_smile.jpg'}
+function nm(id){if(id==='mom')return (typeof FOUND!=='undefined'&&FOUND.has('mom'))?LANGS[LANG].words.mom:'';if(id==='dad')return (typeof FOUND!=='undefined'&&FOUND.has('dad')&&LANGS[LANG].words.dad)||tr('아빠');return tr(NAME[id]||'')}
 // one line per person for "talked already today" — fits any day
 const AGAIN={mom_am:['mom','smile','얼른 다녀와~ 늦겠다.'],mom_pm:['mom','relieved','오늘 많이 피곤하지? 푹 쉬어.'],
  sua:['sua','angry','용건 있으면 짧게. 나 할 일 많아.'],minho:['minho','angry','또 뭐야? 볼일 없으면 저리 가.'],siwoo:['siwoo','sad','……'],
@@ -384,7 +386,7 @@ function advance(){if(chEl.classList.contains('on'))return;const l=queue.shift()
  {TEACH=l.teach||(DAY<=1?['mom','notebook']:[]);tr(text);LASTW.slice().forEach((k,i)=>setTimeout(()=>speak(k),250+i*900))}
  if(who!=='nar'&&!sceneEl.classList.contains('on')&&showSay(who,tr(text))){talk.classList.remove('on');return}
  talk.classList.add('on');
- if(who==='nar'){faceEl.className='none';whoEl.textContent=''}else{faceEl.className='';faceEl.style.backgroundImage=who==='pang'?'url(pang/happy.png)':`url(faces/${fid}_${expr||'smile'}.jpg)`;faceEl.style.backgroundSize=who==='pang'?'contain':'';faceEl.style.backgroundRepeat='no-repeat';faceEl.style.backgroundPosition='center';whoEl.textContent=who==='think'?tr('나 (속마음)'):nm(who)}
+ if(who==='nar'){faceEl.className='none';whoEl.textContent=''}else{faceEl.className=(who==='dad'&&!DAD_FACE)?'none':'';faceEl.style.backgroundImage=who==='pang'?'url(pang/happy.png)':`url(faces/${fid}_${expr||'smile'}.jpg)`;faceEl.style.backgroundSize=who==='pang'?'contain':'';faceEl.style.backgroundRepeat='no-repeat';faceEl.style.backgroundPosition='center';whoEl.textContent=who==='think'?tr('나 (속마음)'):nm(who)}
  lineEl.className=who==='think'?'think':'';lineEl.textContent=tr(text);nextEl.style.display='';requestAnimationFrame(fitScene)}
 talk.addEventListener('pointerdown',e=>{e.stopPropagation();if(e.target.closest('#choices'))return;advance()});
 // speech bubble above the speaker on the map; returns false when the speaker is not on the map (then the bottom panel is used)
@@ -535,28 +537,28 @@ function pickHero(){const m=document.getElementById('modal'),c=document.getEleme
  c.innerHTML=`<h2>${tr('괴짜교실 반장되기')}</h2><p>${tr('말 한마디 못 하는 전학생,<br>반장 선거에 나가다.')}</p><p style="margin-top:14px">${tr('누구로 할까요?')}</p>${(()=>{const s=loadSave();return s&&s.day>=2&&s.mode===UI+'-'+LANG?`<p><button class="big" id="cont">${tr(s.day+'일차부터 이어 하기')}</button></p>`:''})()}<div class="pick heroes"><button data-h="hero_f"><img src="faces/hero_f_smile.jpg" alt="여자 주인공"></button><button data-h="hero_m"><img src="faces/hero_m_smile.jpg" alt="남자 주인공"></button></div>`;
  m.classList.add('on');{const cb=document.getElementById('cont');if(cb)cb.onclick=()=>{const s=loadSave();HERO=s.hero;Object.assign(HEART,s.heart||{});(s.found||[]).forEach(k=>FOUND.add(k));HEART_D1={...HEART};chime();(typeof contGame==='function'?contGame(s):startDay(Math.min(s.day,Object.keys(window.D3||{}).length?3:2)))}}c.querySelectorAll('.pick button').forEach(b=>b.onclick=()=>{HERO=b.dataset.h;m.classList.remove('on');chime();bgm('day');load('home_am');say([['nar','','이사 온 다음 날 아침. 아직 풀지 못한 상자들이 쌓여 있다.'],['think','sad','(오늘부터 새 학교야. 여기 말도 아직 서툰데…….)'],['think','smile','({m}한테 인사하고 학교 가야지.)']],morning)})}
 </script>
-<script src="day2/engine.js?v=1103144336"></script>
-<script src="day2/ep_minho.js?v=1103144336"></script>
-<script src="day2/meet.js?v=1103144336"></script>
-<script src="day2/ep_sua.js?v=1103144336"></script>
-<script src="day2/ep_hangyeol.js?v=1103144336"></script>
-<script src="day2/ep_siwoo.js?v=1103144336"></script>
-<script src="day2/ep_haram.js?v=1103144336"></script>
-<script src="day2/ep_jiho.js?v=1103144336"></script>
-<script src="day2/ep_hyeeun.js?v=1103144336"></script>
-<script src="day2/ep_haneul.js?v=1103144336"></script>
-<script src="day2/ep_junho.js?v=1103144336"></script>
-<script src="day2/ep_yuna.js?v=1103144336"></script>
-<script src="day2/ep_yena.js?v=1103144336"></script>
-<script src="day2/ep_haeun.js?v=1103144336"></script>
-<script src="day2/ep_youngmin.js?v=1103144336"></script>
-<script src="day2/ep_seah.js?v=1103144336"></script>
-<script src="day2/ep_jihoon.js?v=1103144336"></script>
-<script src="words_ja_ru.js?v=1103144336"></script>
-<script src="day2/mybag.js?v=1103144336"></script>
-<script src="day2/spots.js?v=1103144336"></script>
-<script src="day2/textfit.js?v=1103144336"></script>
-<script src="day2/tester.js?v=1103144336"></script>
+<script src="day2/engine.js?v=1103172301"></script>
+<script src="day2/ep_minho.js?v=1103172301"></script>
+<script src="day2/meet.js?v=1103172301"></script>
+<script src="day2/ep_sua.js?v=1103172301"></script>
+<script src="day2/ep_hangyeol.js?v=1103172301"></script>
+<script src="day2/ep_siwoo.js?v=1103172301"></script>
+<script src="day2/ep_haram.js?v=1103172301"></script>
+<script src="day2/ep_jiho.js?v=1103172301"></script>
+<script src="day2/ep_hyeeun.js?v=1103172301"></script>
+<script src="day2/ep_haneul.js?v=1103172301"></script>
+<script src="day2/ep_junho.js?v=1103172301"></script>
+<script src="day2/ep_yuna.js?v=1103172301"></script>
+<script src="day2/ep_yena.js?v=1103172301"></script>
+<script src="day2/ep_haeun.js?v=1103172301"></script>
+<script src="day2/ep_youngmin.js?v=1103172301"></script>
+<script src="day2/ep_seah.js?v=1103172301"></script>
+<script src="day2/ep_jihoon.js?v=1103172301"></script>
+<script src="words_ja_ru.js?v=1103172301"></script>
+<script src="day2/mybag.js?v=1103172301"></script>
+<script src="day2/spots.js?v=1103172301"></script>
+<script src="day2/textfit.js?v=1103172301"></script>
+<script src="day2/tester.js?v=1103172301"></script>
 <script>
 // the goal shows big for a few seconds, then folds into a small pill (tap it to open it again)
 {const g=document.getElementById('goal');let t=null;const big=()=>{g.classList.remove('mini');clearTimeout(t);t=setTimeout(()=>g.classList.add('mini'),4000)};
