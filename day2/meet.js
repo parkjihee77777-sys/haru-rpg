@@ -227,3 +227,7 @@ function teacherLine(l){if(!Array.isArray(l)||l[0]!=='nar'||typeof l[2]!=='strin
 // the hero's dad (11/03): {d} in a line, 'dad' as a speaker at dinner (Day 4, 8, 12, 16R)
 {const W={dad:{ko:'아빠',en:'dad',id:'ayah',vi:'bố',zh:'爸爸'}};for(const[k,w]of Object.entries(W))if(!D2WORDS[k])D2WORDS[k]=w;d2Merge();
  if(LANGS.ja)LANGS.ja.words.dad='パパ';if(LANGS.ru)LANGS.ru.words.dad='папа'}
+// on Dad's days (Day 4, 8, 12, 16) dinner shows the picture with Dad at the table (scenes/<dinner picture>_dad.jpg)
+const DAD_DAYS=[4,8,12,16];
+{const _sceneDad=scene;scene=function(img,lines,done,keep){if((img==='dinner'||img==='dinner_m')&&DAD_DAYS.includes(DAY)){const c=UI==='ko'?LANG:UI;
+  img=(DINNER_HOME.includes(c)?'dinner_'+c+(HERO==='hero_m'?'_m':'_f'):(HERO==='hero_m'?'dinner_m':'dinner'))+'_dad'}return _sceneDad(img,lines,done,keep)}}
