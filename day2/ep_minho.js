@@ -501,7 +501,7 @@ EP.minho=[
 
 // ■ Day 13 — 초코우유 (12)
 {title:'초코우유',scene:'minho_12',place:'class',at:[1060,800],
- things:{class:[['milk',930,888,92,'milk_crate']]},
+ things:{class:[['milk',930,830,92,'milk_crate']]},
  pre:[
   {pic:'minho_12a'},
   ['nar','','점심시간이 끝나 갈 무렵. 교실 뒤에 남은 급식 {@milk} {@box|가} 있었다. 선생님이 먹고 싶은 사람은 가져가도 된다고 하셨다.'],
