@@ -867,7 +867,7 @@ const HERO_HOME={
  en:{ko:['필리핀','영어',['이선','해나'],['이든','한나']],ui:['the Philippines','English',['Ethan','Hannah'],['Eden','Hanna']]},
  id:{ko:['인도네시아','인도네시아어',['리즈키','뿌뜨리'],['이준','유리']],ui:['Indonesia','bahasa Indonesia',['Rizky','Putri'],['Ijun','Yuri']]}};
 function josa(w,p){const c=w.charCodeAt(w.length-1)-0xAC00;if(c<0||c>11171)return p;const jong=c%28;
- const P={'을':['을','를'],'은':['은','는'],'이':['이','가'],'이라고':['이라고','라고'],'이랑':['이랑','랑'],'으로':['으로','로']}[p];if(!P)return p;
+ const P={'을':['을','를'],'은':['은','는'],'이':['이','가'],'이라고':['이라고','라고'],'이랑':['이랑','랑'],'으로':['으로','로'],'아':['아','야']}[p];if(!P)return p;
  if(p==='으로'&&jong===8)return'로';return jong?P[0]:P[1]}
 {const _tr3=tr;tr=function(s){const t=_tr3(s);if(t==null||t.indexOf('{')<0)return t;const ko=UI==='ko',H=ko?(HERO_HOME[LANG]||HERO_HOME.vi).ko:(HERO_HOME[UI]||HERO_HOME.vi).ui||HERO_HOME.vi.ui,g=HERO==='hero_m'?0:1;
  return t.replace(/\{HC\}/g,H[0]).replace(/\{HL\}/g,H[1]).replace(/\{(HN|SN)(?:\|([^}]*))?\}/g,(m,k,p)=>{const w=(k==='HN'?H[2]:H[3])[g];return p&&ko?w+josa(w,p):w})}}
