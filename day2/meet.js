@@ -118,6 +118,12 @@ function layThings(lay,clear){lay=(lay||[]).map(t=>{if(typeof t[1]!=='string'||t
   it.style.cssText=`position:absolute;width:${w||56}px;left:${x}px;top:${y}px;transform:translate(-50%,-100%);z-index:${Math.round(y)+1};pointer-events:none;filter:drop-shadow(0 2px 2px rgba(0,0,0,.25))`;world.appendChild(it);
   const o=[k,x,y-(w||56)*.4,Math.max(30,(w||56)*.55)];o.laid=1;(OBJ[MAP]=OBJ[MAP]||[]).push(o)}
  tagAll()}
+// the four choices of a meeting are shown in a mixed order (11/03): the 0-point one and the +1 one move to a different place each meeting,
+// so over a friend's 15 meetings every place A~D holds each kind about equally often (the keys A~D, flags and branches stay as they are)
+function choiceOrder(id,i,cs){if(!cs||cs.length!==4)return cs;const sc=c=>Object.values(c.pts||{}).reduce((a,b)=>a+b,0);
+ const zero=cs.filter(c=>sc(c)<=0),one=cs.filter(c=>sc(c)===1),two=cs.filter(c=>sc(c)>=2);if(zero.length!==1||one.length!==1||two.length!==2)return cs;
+ let h=0;for(const ch of id)h=(h*31+ch.charCodeAt(0))>>>0;const zp=(i+h)%4,op=(zp+1+(i+(h>>>3))%3)%4;
+ const out=[];out[zp]=zero[0];out[op]=one[0];let t=0;for(let p=0;p<4;p++)if(!out[p])out[p]=two[t++];return out}
 function runSteps(steps,choice,done){const q=(steps||[]).slice();
  const next=()=>{const lines=[];
   while(q.length){const s=q[0];if(Array.isArray(s)||typeof s==='function'){lines.push(q.shift());continue}
@@ -141,7 +147,7 @@ d2Talk=function(id){const e=epNext(id,EPIDX[id]);
   // already on this map (their own story is here too): they go over to where this scene has them (stand up and walk, or fade in at the desk)
   if(Math.hypot(n.x-w[1],n.y-w[2])>60){const at=[n.x,n.y];n.el.remove();npcs.splice(npcs.indexOf(n),1);npcs.push(comeOver(w,k++,at))}}}// the kids this scene brings along come over now (walk in from the school door, no popping up)
  setGoal('');for(const m of JSON.stringify(e).matchAll(/"(?:pic|scene)":"(\w+)"/g))picProbe(heroPic(m[1]));const hs=heroPic(e.scene),pic=!!e.scene&&PICOK[hs]!==false;SCENE_IDS=[id].concat((e.with||[]).map(w=>w[0]));SCENE_EP=e;GOWITH=null;
- runSteps(e.pre,null,()=>{const choose=()=>ask(e.ask||'어떻게 할까?',e.choices,o=>{D2CHOICE[id]=o.k;sceneEl.classList.remove('on');
+ runSteps(e.pre,null,()=>{const choose=()=>ask(e.ask||'어떻게 할까?',choiceOrder(id,EPIDX[id]||0,e.choices),o=>{D2CHOICE[id]=o.k;sceneEl.classList.remove('on');
   for(const[f,v]of Object.entries(e.flag||{}))FLAGS[f]=!!v[o.k];
   if(e.vote)FLAGS[id+'_vote']=1;else MEET[id]=(MEET[id]||0)+1;TODAYEP[id]=e;
   const r=o.r||[],thenPost=()=>runSteps(e.post,o.k,()=>{Object.entries(o.pts||{}).forEach(([p,n])=>heart(p,n));PICKS.push(id);TALKED.add(id);tidyPeople();SCENE_IDS=null;SCENE_EP=null;GOWITH=null;
