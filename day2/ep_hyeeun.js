@@ -1318,7 +1318,7 @@ window.EP_WORDS_HE={
  const put=(a,txt,pic)=>{for(let j=0;j<a.length;j++){const x=a[j];if(Array.isArray(x)&&typeof x[2]==='string'&&x[2].startsWith(txt)){a.splice(j,0,{pic});return true}if(x&&x.lines&&put(x.lines,txt,pic))return true}return false};
  for(const[i,w,txt,pic]of AN)if(!put(EP.hyeeun[i][w],txt,pic))console.warn('hyeeun pic: no line',i,w,txt)}
 // pictures not drawn yet are skipped: take a name out of TODO_PICS once scenes/hyeeun_<name>.jpg is in place (prompts: art/scenes/hyeeun/pics2.json)
-{const TODO_PICS=new Set(['hyeeun_11a']);
+{const TODO_PICS=new Set([]);
  const drop=a=>{if(!Array.isArray(a))return;for(let j=a.length-1;j>=0;j--){const x=a[j];if(x&&!Array.isArray(x)&&typeof x==='object'){if(typeof x.pic==='string'&&TODO_PICS.has(x.pic)){a.splice(j,1);continue}drop(x.lines)}}};
  for(const e of EP.hyeeun){drop(e.pre);drop(e.post);for(const o of e.choices){drop(o.r);if(o.r&&o.r.length===1&&o.r[0]&&o.r[0].pic===null)o.r=[];else if(o.r&&o.r.length&&o.r[0]&&o.r[0].pic===null)o.r.shift()}}}
 // meeting 1: while my bag lies on the floor by her wheel (laid at 745,866 until the bag find clears it), I walk without it (walk/<hero>_nobag.png, when drawn)
