@@ -955,7 +955,7 @@ for(const k of Object.keys(EP_WORDS_HR))CARDS_HAVE.add(k);
   if(/[лl]/.test(l))return'l';if(/[bcdfgjkmnpqstvxzбвгджзкмнпрстфхцчшщ]/.test(l))return'y';return''};
  const josaAny=(w,p)=>{const pr=PAIR.find(x=>x.includes(p));if(!pr)return p;let i=w.length-1;while(i>0&&/[ьъ\s.!?…」』)]/.test(w[i]))i--;const j=jong(w[i]||'');
   if(pr[0]==='으로')return j&&j!=='l'?'으로':'로';return j?pr[0]:pr[1]};
- const RE=/\{(m|w|@\w+)\|([가-힣]+)\}/g;
+ const RE=/\{(m|d|w|@\w+)\|([가-힣]+)\}/g;
  const _tr4=tr;tr=function(s){if(s==null||typeof s!=='string'||s.indexOf('|')<0)return _tr4(s);let t=UI==='ko'?null:_tr4(s);
   if(t==null||RE.test(t)){RE.lastIndex=0;t=_tr4(s.replace(RE,(a,k,p)=>'{'+k+'}\uE000'+p+'\uE001')).replace(/\uE000([가-힣]+)\uE001/g,(a,p,o,str)=>josaAny(str.slice(Math.max(0,o-4),o),p))}
   RE.lastIndex=0;return t}}

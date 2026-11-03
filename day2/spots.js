@@ -38,3 +38,7 @@ d2People=function(id){const ps=_d2PeopleSpots(id).map(p=>p.slice());const S=SEAT
 }
 // a save from before 10/25 may still hold 진우·보람·도연 (out of the game): forget them whenever a day starts
 {const _sdGone=startDay;startDay=function(n){for(const k of GONE_IDS){delete HEART[k];delete MEET[k];if(typeof HEART_D1==='object'&&HEART_D1)delete HEART_D1[k]}return _sdGone(n)}}
+// calling the hero by name: {SN|아} → 「민준아」「아란아」/「미소야」 (Korean screen; other screens just the name). Kept here, outside any friend's file
+{const _trCall=tr;tr=function(s){if(typeof s!=='string'||s.indexOf('{SN|')<0||typeof HERO_HOME==='undefined')return _trCall(s);
+ const ko=UI==='ko',H=ko?(HERO_HOME[LANG]||HERO_HOME.vi).ko:((HERO_HOME[UI]||HERO_HOME.vi).ui||HERO_HOME.vi.ui),w=H[3][HERO==='hero_m'?0:1];
+ return _trCall(s.replace(/\{SN\|(아|야)\}/g,()=>{if(!ko)return w;const c=w.charCodeAt(w.length-1)-0xAC00;return w+(c>=0&&c<=11171&&c%28?'아':'야')}))}}

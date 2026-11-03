@@ -162,7 +162,7 @@ function evePart(id){const e=TODAYEP[id],c=D2CHOICE[id];
  const d=DD()[id]||{};return(d.tell||[]).concat((d.mom&&d.mom[c])||[])}
 dinner2=function(){let ls=[['mom','laugh','왔구나! 손 씻고 와. 밥 먹자.'],['mom','smile','오늘 학교 어땠어?']];
  // on Dad's days each friend's dinner opens with Dad coming home: the second friend's opening line would say it again, so it is dropped
- PICKS.forEach((id,n)=>{if(n===1)ls.push(['mom','smile','또 누구 만났어?']);let p=evePart(id);if(n===1){const i=p.findIndex((l,j)=>j<2&&Array.isArray(l)&&l[0]==='nar'&&/\{d\}/.test(l[2]||''));if(i>=0)p=p.filter((l,j)=>j!==i)}ls=ls.concat(p)});
+ PICKS.forEach((id,n)=>{if(n===1)ls.push(['mom','smile','또 누구 만났어?']);let p=evePart(id);if(n===1){const i=p.findIndex((l,j)=>j<2&&Array.isArray(l)&&((l[0]==='nar'||l[0]==='me')&&/\{d/.test(l[2]||'')&&/왔|다녀|일찍|놓였/.test(l[2]||'')||l[0]==='dad'&&/다녀왔|일찍/.test(l[2]||'')));if(i>=0)p=p.filter((l,j)=>j!==i)}ls=ls.concat(p)});
  const D=()=>'dinner'+(HERO==='hero_m'?'_m':'');
  const end=()=>scene(D(),[['mom','relieved',DAY===2?'하루 만에 친구가 둘이나 생겼네. 엄마는 그게 제일 좋다.':'친구 이야기가 점점 많아지네. 엄마도 듣는 게 즐거워.'],['mom','smile','오늘 일도 {w}에 적어 두렴. 내일은 또 누구를 만날까?']],()=>{dinnerDone=true;night2()});
  const rv=REVIEW[DAY];
