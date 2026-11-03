@@ -610,6 +610,7 @@ EP.haram=[
  post:[
   {pic:null},
   {only:['B','C','D'],lines:[{pic:'haram_11a'}]},
+  {only:['A'],lines:[{pic:'haram_11b'}]},
   ['nar','','도서관 선생님이 지나가시다가 우리 책상의 {@book|을} 보셨다.'],
   ['nar','','도서관 선생님: 「세계의 명절 {@book} 보는구나. 그 {@book}에 보면 사람마다 믿는 게 진짜 다양해. 누가 맞는지는 {@book}에도 안 나와. 대신 다들 뭘 소중히 여기는지는 나와 있지.」'],
   {pic:null},
