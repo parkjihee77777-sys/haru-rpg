@@ -20,5 +20,5 @@ if(TESTER){
  end.style.cssText='position:fixed;left:8px;bottom:8px;z-index:9998;font:700 14px system-ui,sans-serif;color:var(--ink,#4a3424);background:var(--paper,#fffaf0);border:3px solid var(--line,#c9a676);border-radius:999px;padding:6px 14px;display:none';
  end.onclick=ev=>{ev.stopPropagation();if(busy||FIND||stage!=='d2_class'||!PICKS.length)return;ending=true;end.style.display='none';setGoal('');lessons('pm')};
  addEventListener('DOMContentLoaded',()=>{document.body.append(badge,end)});
- setInterval(()=>{end.style.display=stage==='d2_class'&&PICKS.length&&!busy&&!FIND&&!talkOn&&left().length?'':'none'},400);
+ setInterval(()=>{end.textContent=tr('오늘은 여기까지');end.style.display=stage==='d2_class'&&PICKS.length&&!busy&&!FIND&&!talkOn&&left().length?'':'none'},400);
 }

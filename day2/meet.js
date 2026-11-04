@@ -11,7 +11,7 @@ function friendData(id){return epNext(id,EPIDX[id])||DD()[id]}
 function friendsToday(){return D2IDS.filter(i=>friendData(i))}
 {const add=window.EP_WORDS||{};for(const[k,w]of Object.entries(add))if(!D2WORDS[k])D2WORDS[k]=w;d2Merge()}
 // {H} = the hero's own language ("우리 나라 말" in Korean)
-const HOME_NAME={ko:'우리 나라 말',en:'English',id:'bahasa Indonesia',vi:'tiếng Việt',zh:'中文'};
+const HOME_NAME={ko:'우리 나라 말',en:'English',id:'bahasa Indonesia',vi:'tiếng Việt',zh:'中文',ja:'日本語',ru:'русский'};
 {const _tr=tr;tr=function(s){const t=_tr(s);return t==null?t:t.replace(/\{H\}/g,HOME_NAME[UI]||HOME_NAME.ko)}}
 // where friends stand: a friend with a scene today stands where that scene happens
 const _d2People=d2People;
@@ -194,7 +194,7 @@ end2=function(){const n=DAY,next=n+1,hasNext=dayHasContent(next);DAY=hasNext?nex
 {const _load=load;load=function(m,x){if(SCENE_IDS){const al=SCENE_EP&&SCENE_EP.goAlone&&SCENE_EP.goAlone[m];GOWITH=al&&al.includes(D2CHOICE[SCENE_IDS[0]])?null:{map:m,ids:SCENE_IDS}}return _load(m,x)}}
 // no leaving through the way out while a friend's find is running (the find's thing is on this map; leaving lost the scene and the day got stuck)
 {const _pickPlace=pickPlace;pickPlace=function(){if(FIND&&['d2_class','d2_after'].includes(stage)){say([['think','surprised','(먼저 이 미션부터 끝내자.)']]);return}return _pickPlace()};
- const L={en:'(Let me finish this mission first.)',id:'(Aku selesaikan misi ini dulu.)',vi:'(Làm xong nhiệm vụ này trước đã.)',zh:'（先把这个任务做完吧。）'};
+ const L={en:'(Let me finish this mission first.)',id:'(Aku selesaikan misi ini dulu.)',vi:'(Làm xong nhiệm vụ này trước đã.)',zh:'（先把这个任务做完吧。）',ja:'（まずこのミッションを終わらせよう。）',ru:'(Сначала закончу это задание.)'};
  for(const[u,t]of Object.entries(L)){T[u]=T[u]||{};T[u]['(먼저 이 미션부터 끝내자.)']=t}}
 // talking from Day 3 on works like Day 2
 const _talkTo=talkTo;
