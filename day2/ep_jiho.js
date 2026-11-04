@@ -290,7 +290,6 @@ EP.jiho=[
 
 // ■ Day 5 — 아프대 (4)
 {title:'아프대',scene:'jiho_04',place:'class',at:[520,880],with:[['youngmin',395,865]],taps:{class:[['desk',1290,545,55]]},
- things:{class:[['wrist',1030,800,44]]},
  pre:[
   {pic:'jiho_04b'},
   ['nar','','쉬는 시간. 비가 와서 운동장에 나갈 수 없었다. 교실 뒤에 아이들이 몰려 있었다.'],
@@ -353,7 +352,7 @@ EP.jiho=[
   {pic:'jiho_04a'},
   ['nar','','선생님은 아이들을 보지 않고 영민이 앞에 먼저 쪼그려 앉으셨다.'],
   ['nar','','선생님: 「어느 쪽 {@wrist}이에요?」'],
-  {k:'wrist',goal:'「{x}」 가리키기'},
+  {k:'wrist',goal:'「{x}」 가리키기',tray:true},// Youngmin's wrist: picked from pictures (a forearm lying on the floor looked cut off, 11/05)
   ['nar','','내가 영민이의 오른쪽 {@wrist}을 가리켰다. 선생님이 살살 돌려 보셨다.'],
   {pic:'jiho_04a'},
   ['nar','','선생님: 「삐끗한 것 같네요. 영민이는 선생님이랑 보건실 가요.」'],
