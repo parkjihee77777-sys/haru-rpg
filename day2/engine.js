@@ -76,6 +76,7 @@ let DAY=1,PICKS=[],D2CHOICE={};
 // everything that depends on the day: scenes, who is where, tap spots, zooms, which drawn maps exist
 function setDay(n){DAY=n;const N=NATIVE_BY[n]||{},Z=ZOOMS_BY[n]||{};for(const k in NATIVE)delete NATIVE[k];Object.assign(NATIVE,N);for(const k in ZOOMS)delete ZOOMS[k];Object.assign(ZOOMS,Z);
  D2PLACE=PLACE_BY[n]||PLACE_BY[2];for(const m of ['class','hall','field','cafe'])MAPS[m].img2=(MAP_DONE[n]||[]).includes(m)?`maps/${m}${n}.jpg`:undefined;
+ if(MAPS.cafe.img2)MAPS.cafe.img2='maps/cafe2_lunch.jpg';// lunchtime: children from other classes eat at the tables
  MAPS.home_am.img2='maps/home_am2.jpg';MAPS.home_pm.img2='maps/home_pm2.jpg';ZOOMS.home_am=[[850,470,1060,560]];ZOOMS.home_pm=[[870,470,1040,545]]}
 const MAP_DONE={2:['class','hall','field','cafe']};
 function saveDay(){try{localStorage.setItem('haru_save',JSON.stringify({day:DAY,hero:HERO,heart:HEART,found:[...FOUND],mode:UI+'-'+LANG}))}catch(e){}}
