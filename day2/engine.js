@@ -66,7 +66,7 @@ const PLACE_BY={2:{
  field:[['junho',1300,745],['jiho',1200,380]],
  cafe:[['haram',515,470],['haeun',1360,565],['yuna',330,860]]}};
 let D2PLACE={};
-const SEATED_ART=new Set(['yuna','haeun','yena','siwoo','doyeon','haneul','youngmin','jihoon','jinwoo','hangyeol','haram']);// seat/<id>.png exists; others stand at their desk until drawn
+const SEATED_ART=new Set(['yuna','haeun','yena','siwoo','doyeon','haneul','youngmin','jihoon','jinwoo','hangyeol','haram','jiho','junho','minho','seah','sua']);// seat/<id>.png exists; others stand at their desk until drawn
 function d2People(id){return(D2PLACE[id]||[]).map(p=>p[3]&&!SEATED_ART.has(p[0])?[p[0],p[1],p[3].top+175]:p)}
 function goPlace(dest){fade(()=>{load(dest);if(stage==='d2_class')d2Goal();else setGoal('방과 후! 나가는 길로 가서 집에 가기','out')})}
 function pickPlace(){const m=document.getElementById('modal'),c=document.getElementById('mcard');busy=true;
