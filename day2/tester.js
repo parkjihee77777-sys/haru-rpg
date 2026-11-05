@@ -14,11 +14,13 @@ if(TESTER){
   ending=false;return _lessons('pm')};
  // calendar-day friends (engine.js) stop at 2 picks on their own: let that one check see no picks yet
  const _talk=d2Talk;d2Talk=function(id){if(!epNext(id,EPIDX[id])&&!PICKS.includes(id)&&stage==='d2_class'){const keep=PICKS;PICKS=[];try{return _talk(id)}finally{PICKS=keep}}return _talk(id)};
+ // the count says how many met (the 「(0/15)」 of the usual 「2명 고르기」 goal read wrong here)
+ {const _sg=setGoal;setGoal=function(text,target,skip,suffix){if(suffix&&/^ \(\d+\/\d+\)$/.test(suffix)&&stage==='d2_class')suffix=` (${PICKS.length}✓)`;return _sg(text,target,skip,suffix)}}
  const badge=document.createElement('div');badge.textContent='TEST';
  badge.style.cssText='position:fixed;right:6px;bottom:6px;z-index:9999;font:700 11px/1 system-ui,sans-serif;color:#fff;background:rgba(200,60,60,.75);padding:3px 6px;border-radius:6px;pointer-events:none';
  const end=document.createElement('button');end.textContent='오늘은 여기까지';
  end.style.cssText='position:fixed;left:8px;bottom:8px;z-index:9998;font:700 14px system-ui,sans-serif;color:var(--ink,#4a3424);background:var(--paper,#fffaf0);border:3px solid var(--line,#c9a676);border-radius:999px;padding:6px 14px;display:none';
- end.onclick=ev=>{ev.stopPropagation();if(busy||FIND||stage!=='d2_class'||!PICKS.length)return;ending=true;end.style.display='none';setGoal('');lessons('pm')};
+ let armed=0;end.onclick=ev=>{ev.stopPropagation();if(busy||FIND||stage!=='d2_class'||!PICKS.length)return;if(performance.now()-armed>3000){armed=performance.now();end.textContent='✓ ?';end.style.background='#ffe9a8';return}armed=0;end.style.background='';ending=true;end.style.display='none';setGoal('');lessons('pm')};
  addEventListener('DOMContentLoaded',()=>{document.body.append(badge,end)});
- setInterval(()=>{end.textContent=tr('오늘은 여기까지');end.style.display=stage==='d2_class'&&PICKS.length&&!busy&&!FIND&&!talkOn&&left().length?'':'none'},400);
+ setInterval(()=>{if(!armed||performance.now()-armed>3000){armed=0;end.style.background='';end.textContent=tr('오늘은 여기까지')}end.style.display=stage==='d2_class'&&PICKS.length&&!busy&&!FIND&&!talkOn&&left().length?'':'none'},400);
 }
