@@ -1,6 +1,7 @@
 // Translation review (번역검수, 2026-11): reviewed and newly filled lines for the screens in en/vi/zh/ja/ru.
 // Built by E:/NovelHaru/tools/build_i18n_fix.py from 번역검수/<lang>/fixes.json - do not edit by hand. Loaded last (I18N_LAZY), so these lines win.
 Object.assign(T.en=T.en||{},{
+"(음악이 아니었어. 말을 덜 걸어오게 하는 거였어.)": "(It wasn't for music. It was so people would talk to him less.)",
 "{n}일차부터 이어 하기": "Continue from Day {n}",
 "「{x}」 챙기기": "Pack the 「{x}」",
 "드르륵!": "Rattle!",
@@ -897,6 +898,7 @@ Object.assign(T.en=T.en||{},{
 "응. 근데 하늘이가 {@note|에} 그랬어. 다들 기다리면 대답이 안 된대.": "Yeah. But Haneul wrote in a {@note}. When everyone waits, he can't get an answer out."
 });
 Object.assign(T.vi=T.vi||{},{
+"(음악이 아니었어. 말을 덜 걸어오게 하는 거였어.)": "(Không phải để nghe nhạc. Mà để người ta ít bắt chuyện với cậu ấy hơn.)",
 "{n}일차부터 이어 하기": "Chơi tiếp từ ngày {n}",
 "나 (속마음)": "Mình (nghĩ thầm)",
 "전학생! 축구 할 줄 알아? 점심에 같이 뛰자.": "Bạn mới! Cậu biết đá bóng không? Trưa nay đá cùng nhau đi.",
@@ -1585,6 +1587,7 @@ Object.assign(T.vi=T.vi||{},{
 "반장 되면 이런 거 하는 건가?": "Làm lớp trưởng là phải làm mấy việc thế này à?"
 });
 Object.assign(T.zh=T.zh||{},{
+"(음악이 아니었어. 말을 덜 걸어오게 하는 거였어.)": "（不是为了听音乐。是为了让别人少跟他搭话。）",
 "{n}일차부터 이어 하기": "从第{n}天继续",
 "시우": "时雨",
 "유나": "由娜",
@@ -3416,6 +3419,7 @@ Object.assign(T.zh=T.zh||{},{
 "오늘은 여기까지": "今天就到这里"
 });
 Object.assign(T.ja=T.ja||{},{
+"(음악이 아니었어. 말을 덜 걸어오게 하는 거였어.)": "（音楽じゃなかったんだ。話しかけられるのをへらすためだったんだ。）",
 "{n}일차부터 이어 하기": "{n}日目からつづける",
 "팡팡이": "パンパン",
 "엄마": "お母さん",
@@ -4246,6 +4250,7 @@ Object.assign(T.ja=T.ja||{},{
 "나는 유리문 밖으로 나갔다. 돌아보니 지훈이가 현관에 서서 밖만 보고 있었다. 반팔이었다. 점퍼는 신발장 안에 있었다.": "ガラスのドアの外に出た。ふり返ると、ジフンが玄関に立って外ばかり見ていた。半そでだった。ジャンパーはげた箱の中だった。"
 });
 Object.assign(T.ru=T.ru||{},{
+"(음악이 아니었어. 말을 덜 걸어오게 하는 거였어.)": "(Это не для музыки. Это чтобы с ним меньше заговаривали.)",
 "{n}일차부터 이어 하기": "Продолжить с {n}-го дня",
 "민호 눈을 보고 짧게 말한다. 「내 거야. 돌려줘. 내 이름 놀리지 마.」": "Посмотреть Минхо в глаза и сказать коротко: «Это моё. Отдай. Не смейся над моим именем».",
 "내 이름 놀리지 마.": "Не смейся над моим именем.",
