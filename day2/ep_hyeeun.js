@@ -250,7 +250,7 @@ EP.hyeeun=[
   {only:['B','C','D'],lines:[['hyeeun','smile','내 가방 옆 주머니에 마른 {@glove} 있어. 꺼내 줄래?']]},
   {only:['A'],lines:[['nar','','나는 혜은이가 말한 가방 옆 주머니를 열었다.']]},
   {lay:[['glove',700,640,32]]},
-  {k:'glove',goal:'「{x}」 꺼내 주기'},
+  {k:'glove',goal:'「{x}」 꺼내 주기',tray:true},// out of her bag's side pocket: picked from pictures (the glove lay under me, 11/05)
   {clear:['glove']},
   ['nar','','혜은이가 가리킨 가방 옆 주머니에서 마른 {@glove|을} 꺼내 건넸다.'],
   {only:['A'],lines:[['nar','','나는 {@glove|을} 건네고, 경사로 위로 올라가 말린 매트도 폈다.']]},
@@ -556,7 +556,7 @@ EP.hyeeun=[
 
 // ■ Day 8 — 맨 위 칸 (7)
 {title:'맨 위 칸',scene:'hyeeun_07',place:'class',at:[960,880],
- things:{class:[['locker',1060,932,76]]},// a tall locker at the back of the room (the drawn one by the blackboard is low; her top shelf is above my shoulder)
+ things:{class:[['locker',1210,935,76]]},// a tall locker at the back of the room (the drawn one by the blackboard is low; her top shelf is above my shoulder)
  pre:[
   ['nar','','쉬는 시간. 다음 시간은 체육이었다. 아이들이 교실 뒤 {@locker}에서 {@gym_clothes|을} 꺼내고 있었다.'],
   ['nar','','{@locker|은} 번호순이었다. 혜은이는 23번. 맨 위 칸이었다.'],
@@ -614,7 +614,7 @@ EP.hyeeun=[
    ['hyeeun','sad','……네.'],
    ['think','sad','(맞는 말이었는데. 다들 혜은이를 봤어. 혜은이가 말하려던 걸 내가 먼저 했어.)']]}],
  post:[
-  {lay:[['gym_clothes',990,915,54]]},
+  {lay:[['gym_clothes',1140,915,54]]},
   ['nar','','나는 꺼낸 {@gym_clothes|을} 혜은이에게 건넸다.'],
   {k:'gym_clothes',goal:'「{x}」 건네기'},
   {clear:['gym_clothes']},

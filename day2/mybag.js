@@ -38,7 +38,7 @@ function trayItems(k){const t=(OBJ[MAP]||[]).find(o=>o[0]===k);const near=(OBJ[M
  out.splice(Math.floor(Math.random()*(out.length+1)),0,k);return out}
 {const _findTray=find;
  find=function(k,done,goal,label){const force=TRAY_NEXT;TRAY_NEXT=null;
-  const use=force===true||(force!==false&&DAY>=2&&!/^home/.test(MAP)&&hardToSee(k));
+  const use=force===true||(force!==false&&DAY>=2&&!/^home/.test(MAP)&&(hardToSee(k)||BODY_PARTS.has(k)));
   if(!use)return _findTray(k,done,goal,label);
   const im=new Image();im.onload=()=>bagFind(k,trayItems(k),goal||'「{x}」 찾기',done);im.onerror=()=>_findTray(k,done,goal,label);im.src=`items/${k}.png`}}
 // ---- two-step finds (trial, 10/28): tap the place, then pick the thing from a close-up ----
@@ -64,3 +64,9 @@ const areaOn=()=>DAY>=2&&!/^home/.test(MAP)&&(/[?&]area=all/.test(location.searc
   closeBubble();const at=z||[kid.x,kid.y];walkNear(at[0],at[1]);
   const d=FIND_DONE;
   bagFind(a.k,trayItems(a.k),a.goal,()=>{AREA=null;FIND=null;FIND_DONE=null;const g=document.getElementById('goal');g.onclick=null;g.textContent='';goal=null;tagAll();showBag();d&&d()})}}
+// ---- body parts (11/05): a hand, knee or ankle drawn alone on the map looked cut off from a body ----
+// it is never drawn there (its tap spot stays) and its find opens the picture tray (above)
+const BODY_PARTS=new Set(['hand','finger','knee','ankle','wrist','foot','forehead','ear','eye','nose','elbow','shoulder','toe','heel','palm','cheek','neck','arm','leg']);
+function hideBodyParts(){world.querySelectorAll('img.thing,img.laid').forEach(e=>{const k=(e.getAttribute('src')||'').match(/items\/(\w+)\.png/);if(k&&BODY_PARTS.has(k[1]))e.style.display='none'})}
+{const _st=showThings;showThings=function(){const r=_st.apply(this,arguments);hideBodyParts();return r}}
+{const _lt=layThings;layThings=function(){const r=_lt.apply(this,arguments);hideBodyParts();return r}}
