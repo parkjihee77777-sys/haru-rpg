@@ -112,7 +112,7 @@ EP.hangyeol=[
   common:[['me','smile','그리고 담임 선생님이 오셔서 우리 반은 앞으로 번호순으로 선대.'],['mom','surprised','선생님이 그렇게 정하셨어?'],['me','smile','응. 그리고 머리 길이로 남자 여자 정하는 거 아니래.']]}},
 
 // ■ Day 4 — 결이 (3)
-{title:'결이',scene:'hangyeol_03',place:'library',at:[1140,470],flag:{H04_name:{A:1,D:1}},
+{title:'결이',scene:'hangyeol_03',place:'library',at:[890,490],flag:{H04_name:{A:1,D:1}},
  things:{library:[['picture',1045,398,50]]},
  pre:[
   {pic:'hangyeol_03'},

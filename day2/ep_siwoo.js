@@ -601,7 +601,7 @@ EP.siwoo=[
 
 // ■ Day 13 — 100퍼센트 (12)
 {title:'100퍼센트',scene:'siwoo_12',place:'class',at:[600,770],stand:1,
- things:{class:[['notebook',760,702,38],['pencil',830,704,32]]},
+ things:{class:[['notebook',760,702,38]]},
  pre:[
   {pic:'siwoo_12a'},
   ['nar','','방과 후. 반장 선거 공약을 쓰고 있는데, 시우가 30센티 밖에 와서 섰다. {w}을 들고 있었다.'],
@@ -634,7 +634,7 @@ EP.siwoo=[
    ['me','smile','시우야, 너는 반장이 뭘 해 줬으면 좋겠어?'],{pic:'siwoo_12c'},['nar','','시우가 한참 생각했다. 그리고 {w}에 적어서 보여 줬다. 「1. 바뀌는 거 미리 말해 주기. 2. 조용한 자리 지켜 주기. 3. 말한 거 지키기.」'],
    ['me','surprised','……이거 다 지킬 수 있는 거네.'],['siwoo','smile','응. 그래서 적었어.'],['me','smile','이거 나 공약에 넣어도 돼? 시우 이름은 안 넣고.'],['siwoo','smile','……이름 넣어도 돼. 그럼 지켜야 하잖아.']]}],
  post:[
-  {k:'pencil',goal:'「{x}」로 고쳐 쓰기'},
+  {k:'pencil',goal:'「{x}」로 고쳐 쓰기',bag:['pcase','pencil','eraser','notebook','pen']},// my own pencil (it lay on a desk away from us, 11/05)
   ['nar','','공약 {@paper}의 한 줄이 새로 적혔다.'],
   ['nar','','시우가 {w}을 덮었다.'],
   ['siwoo','smile','……나 투표 정확하게 할 거야. 공약 다 읽고.'],

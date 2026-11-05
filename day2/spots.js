@@ -44,7 +44,8 @@ d2People=function(id){const ps=_d2PeopleSpots(id).map(p=>p.slice());const S=SEAT
   for(const p of ps.filter(p=>!p[3]&&p[4]!=='stand'&&SEATED_ART.has(p[0])).sort((a,b)=>here(a[0])-here(b[0]))){let best=null,bd=1e9;
    for(const[top,xs]of S)for(const x of xs){if(taken.some(([tx,tt])=>tt===top&&Math.abs(tx-x)<40)||seatHidesThing(id,x,top,p[0]))continue;const d=Math.hypot(x-p[1],top+150-p[2]);if(d<bd){bd=d;best=[x,top]}}
    if(best){p[1]=best[0];p[2]=0;p[3]={top:best[1]};taken.push(best)}
-   if(best)ownThings(id,p[0],best,taken)}}
+   // a friend whose scene has them standing (stand:1) leaves their things where the scene put them (Siwoo 12's notebook went to a desk he never sat at, 11/05)
+   if(best&&!(D2IDS.includes(p[0])&&(epNext(p[0],EPIDX[p[0]])||{}).stand&&(epNext(p[0],EPIDX[p[0]])||{}).place===id))ownThings(id,p[0],best,taken)}}
  const placed=ps.filter(p=>p[3]).map(spotOf);
  for(const p of ps){if(p[3])continue;if(!footOk(id,p[1],p[2])||clash(id,p[1],p[2],placed)){const c=freeSpot(id,p[1],p[2],placed);if(c){p[1]=c[0];p[2]=c[1]}}placed.push([p[1],p[2]])}
  return ps};
