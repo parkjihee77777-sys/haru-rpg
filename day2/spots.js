@@ -10,7 +10,11 @@ function onFloor(id,x,y){const m=MAPS[id];if(!m||!m.walk)return true;if((m.block
  return m.walk.some(p=>inPoly(p,x,y))||(m.rects||[]).some(r=>inR(r,x,y))}
 // feet (or Hyeeun's wheels) must rest on open floor: the foot point, a little to each side and a little in front of it all on the walkable floor
 // (a foot point just behind a table or desk edge looks like standing on it)
-function footOk(id,x,y){return onFloor(id,x,y)&&onFloor(id,x-30,y)&&onFloor(id,x+30,y)&&onFloor(id,x,y+20)}
+// the classroom's desks (with their chairs) are not floor: the walk area runs over them, so a kid could stand on a desk (Jihoon in Haeun's scene, Yena in Haneul's, 11/05)
+function onDesk(id,x,y){if(id==='class'&&x>715&&x<965&&y>150&&y<292)return true;// the teacher's desk (Jiho stood floating in it in Youngmin's story)
+ const S=SEATS[id];if(!S)return false;for(const[top,xs]of S)for(let i=0;i+1<xs.length;i+=2)if(x>xs[i]-75&&x<xs[i+1]+75&&y>top-62&&y<top+78)return true;return false}
+window.onDesk=onDesk;
+function footOk(id,x,y){return onFloor(id,x,y)&&onFloor(id,x-30,y)&&onFloor(id,x+30,y)&&onFloor(id,x,y+20)&&!onDesk(id,x,y)&&!onDesk(id,x-25,y)&&!onDesk(id,x+25,y)}
 window.footOk=footOk;
 function clash(id,x,y,placed){if(placed.some(([px,py])=>Math.abs(px-x)<110&&Math.abs(py-y)<90))return true;
  // the body (about 110 wide, up to 210 high above the feet) must leave every tap spot and the way out free

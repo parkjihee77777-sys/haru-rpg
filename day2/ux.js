@@ -200,3 +200,64 @@ setInterval(()=>{if(!me||!MAP)return;placeArrow();
   if(r.top<6)dy=Math.max(dy,6-r.top);if(r.right>innerWidth-6&&r.left<innerWidth)dx=Math.max(-160*cam.s,innerWidth-6-r.right);if(r.left<6&&r.right>0)dx=Math.min(160*cam.s,6-r.left);
   if(dy)sg.style.top=Math.min(OUT[MAP][1]-30,t0+dy/cam.s)+'px';if(dx)sg.style.left=(l0+dx/cam.s)+'px'}},200);
 }
+// ===== things laid on a map never sit on something drawn there (milk carton on the flowerpot), on another thing or on a kid =====
+// the map picture is measured once (how much drawing = edges in each 16 px cell); a thing whose spot is busy, or that covers another
+// thing or a kid, moves to the nearest quiet spot on the same surface (same colour under its foot, a little left/right first)
+{
+const GRID={};
+function gridOf(img){const key=img.getAttribute('src');if(GRID[key])return GRID[key];if(!img.complete||!img.naturalWidth)return null;
+ const S=4,w=Math.round(MW/S),h=Math.round(MH/S),cv=document.createElement('canvas');cv.width=w;cv.height=h;const cx=cv.getContext('2d',{willReadFrequently:true});
+ try{cx.drawImage(img,0,0,w,h)}catch(e){return null}let d;try{d=cx.getImageData(0,0,w,h).data}catch(e){return null}
+ const g=new Float32Array(w*h),col=new Float32Array(w*h*3);for(let i=0;i<w*h;i++){g[i]=(d[i*4]*.3+d[i*4+1]*.59+d[i*4+2]*.11);col[i*3]=d[i*4];col[i*3+1]=d[i*4+1];col[i*3+2]=d[i*4+2]}
+ const e=new Float32Array(w*h);for(let y=1;y<h-1;y++)for(let x=1;x<w-1;x++){const i=y*w+x;e[i]=Math.abs(g[i+1]-g[i-1])+Math.abs(g[i+w]-g[i-w])}
+ const P=new Float64Array((w+1)*(h+1));for(let y=0;y<h;y++){let s=0;for(let x=0;x<w;x++){s+=e[y*w+x];P[(y+1)*(w+1)+x+1]=P[y*(w+1)+x+1]+s}}
+ return GRID[key]={w,h,S,P,col}}
+function busyAt(G,x0,y0,x1,y1){const S=G.S;let a=Math.max(0,Math.floor(x0/S)),b=Math.max(0,Math.floor(y0/S)),c=Math.min(G.w,Math.ceil(x1/S)),d=Math.min(G.h,Math.ceil(y1/S));if(c<=a||d<=b)return 99;
+ const W=G.w+1;return(G.P[d*W+c]-G.P[b*W+c]-G.P[d*W+a]+G.P[b*W+a])/((c-a)*(d-b))}
+function colAt(G,x,y){const S=G.S,i=Math.max(0,Math.min(G.h-1,Math.round(y/S)))*G.w+Math.max(0,Math.min(G.w-1,Math.round(x/S)));return[G.col[i*3],G.col[i*3+1],G.col[i*3+2]]}
+function boxOf(el){const w=parseFloat(el.style.width)||56,r=el.naturalWidth?el.naturalHeight/el.naturalWidth:1,h=w*r,x=parseFloat(el.style.left),y=parseFloat(el.style.top);return{x,y,w,h,x0:x-w/2,x1:x+w/2,y0:y-h,y1:y}}
+const ov=(a,b)=>Math.max(0,Math.min(a.x1,b.x1)-Math.max(a.x0,b.x0))*Math.max(0,Math.min(a.y1,b.y1)-Math.max(a.y0,b.y0));
+const kidBox=n=>({x0:n.x-n.w*.35,x1:n.x+n.w*.35,y0:n.y-(n.h||0),y1:n.y+(n.foot||0)});
+const BUSY_TH=34;
+function busyOf(G,b){return busyAt(G,b.x0+b.w*.15,b.y0+b.h*.1,b.x1-b.w*.15,b.y1-b.h*.18)}
+function problems(G,el,b,others){const bad=[];if(G&&busyOf(G,b)>BUSY_TH)bad.push('map');
+ for(const o of others){if(o.el===el)continue;const a=ov(b,o.b);if(a>.25*Math.min(b.w*b.h,o.b.w*o.b.h))bad.push('thing:'+o.el.dataset.k2)}
+ for(const n of npcs)if(n.h&&n.w&&ov(b,kidBox(n))>.3*b.w*b.h)bad.push('kid:'+n.id);return bad}
+function surf(G,b){const pts=[[b.x0-b.w*.25,b.y1-3],[b.x1+b.w*.25,b.y1-3],[b.x,b.y1+6]].map(([x,y])=>colAt(G,x,y));return pts.reduce((a,c)=>[a[0]+c[0]/3,a[1]+c[1]/3,a[2]+c[2]/3],[0,0,0])}
+function declutter(){const img=document.getElementById('mapimg'),G=gridOf(img);if(!G){if(img&&!img.complete)img.addEventListener('load',()=>setTimeout(declutter,50),{once:true});return}
+ const els=[...world.querySelectorAll('img.thing')];if(els.some(el=>!el.complete)){clearTimeout(declutter.t);declutter.t=setTimeout(declutter,200);return}
+ const all=els.map(el=>{el.dataset.k2=el.dataset.k||(el.getAttribute('src')||'').replace(/^items\/|\.png$/g,'');return{el,b:boxOf(el)}});
+ const score=o=>busyOf(G,o.b);all.sort((p,q)=>score(q)-score(p));
+ for(const o of all){if(o.el.dataset.moved||o.b.w>=110)continue;const bad=problems(G,o.el,o.b,all);if(!bad.length)continue;
+  const b0=o.b,busy0=busyOf(G,b0),s0=surf(G,b0);let best=null;
+  for(const d of [20,35,50,65,80,100,120,140,160])for(const[dx,dy]of[[d,0],[-d,0],[d,-8],[-d,-8],[d,8],[-d,8],[0,-Math.min(d,30)],[0,Math.min(d,20)]]){
+   const nb={x:b0.x+dx,y:b0.y+dy,w:b0.w,h:b0.h,x0:b0.x0+dx,x1:b0.x1+dx,y0:b0.y0+dy,y1:b0.y1+dy};if(nb.x0<4||nb.x1>MW-4||nb.y0<4||nb.y1>MH-4)continue;
+   const s1=surf(G,nb);if(Math.hypot(s1[0]-s0[0],s1[1]-s0[1],s1[2]-s0[2])>38)continue;
+   const bz=busyOf(G,nb);if(bad.includes('map')?bz>Math.min(BUSY_TH,busy0*.6):bz>Math.max(BUSY_TH,busy0+4))continue;
+   if(problems(G,o.el,nb,all).length)continue;best=[dx,dy];break}
+  if(!best)continue;
+  // the tap spot moves with it
+  const k=o.el.dataset.k2.replace(/_cut$/,''),os=(OBJ[MAP]||[]).filter(t=>Math.abs(t[1]-b0.x)<2&&(t[0]===o.el.dataset.k2||t[0]===k||o.el.dataset.k&&t[0]===o.el.dataset.k));
+  for(const t of os){t[1]+=best[0];t[2]+=best[1]}
+  o.el.style.left=(b0.x+best[0])+'px';o.el.style.top=(b0.y+best[1])+'px';o.el.dataset.moved=best.join(',');o.b=boxOf(o.el)}
+ if(typeof soundMarks==='function')soundMarks()}
+window.declutter=declutter;
+{const _st=showThings;showThings=function(){const r=_st.apply(this,arguments);setTimeout(declutter,0);return r}}
+{const _lt=layThings;layThings=function(){const r=_lt.apply(this,arguments);setTimeout(declutter,0);return r}}
+window.thingReport=function(){const img=document.getElementById('mapimg'),G=gridOf(img);const els=[...world.querySelectorAll('img.thing')];
+ const all=els.map(el=>{el.dataset.k2=el.dataset.k||(el.getAttribute('src')||'').replace(/^items\/|\.png$/g,'');return{el,b:boxOf(el)}});
+ return all.map(o=>({k:o.el.dataset.k2,x:Math.round(o.b.x),y:Math.round(o.b.y),w:Math.round(o.b.w),busy:G?Math.round(busyOf(G,o.b)):null,moved:o.el.dataset.moved||null,bad:problems(G,o.el,o.b,all)}))};
+}
+// ===== every standing kid has their feet on open floor at every moment =====
+// kids were checked only when a map was set up; a kid a scene brings over ({with}, walking in from the door) or moves ({move})
+// could stop on a desk (Haeun's scene). Their stopping spot is checked too, and a watch moves anyone who still stands off the floor.
+{
+const floorOk=(x,y)=>typeof footOk!=='function'||!MAP||footOk(MAP,x,y);
+function nearFloor(x,y,self){for(let r=20;r<=600;r+=20)for(let a=0;a<16;a++){const t=a/16*Math.PI*2,cx=Math.round(x+Math.cos(t)*r),cy=Math.round(y+Math.sin(t)*r*.6);
+  if(cx<20||cx>MW-20||cy<60||cy>MH-10||!floorOk(cx,cy))continue;if(npcs.some(n=>n!==self&&!n.seat&&Math.abs(n.x-cx)<90&&Math.abs(n.y-cy)<70))continue;if(me&&Math.abs(me.x-cx)<70&&Math.abs(me.y-cy)<50)continue;return[cx,cy]}return null}
+window.nearFloor=nearFloor;
+const _co=comeOver;comeOver=function(w,k,from){if(w&&!(w[3]&&typeof w[3]==='object')&&!floorOk(w[1],w[2])){const p=nearFloor(w[1],w[2]);if(p){w=w.slice();w[1]=p[0];w[2]=p[1]}}return _co(w,k,from)};
+setInterval(()=>{if(!MAP||touring)return;for(const n of npcs){if(n.seat||n.path||!n.h)continue;if(floorOk(n.x,n.y))continue;const p=nearFloor(n.x,n.y,n);if(!p)continue;
+ n.x=p[0];n.y=p[1];draw(n);window.FEET_FIXED=(window.FEET_FIXED||0)+1}},400);
+window.feetReport=()=>npcs.filter(n=>!n.seat&&!n.path&&n.h&&!floorOk(n.x,n.y)).map(n=>[n.id,Math.round(n.x),Math.round(n.y)]);
+}

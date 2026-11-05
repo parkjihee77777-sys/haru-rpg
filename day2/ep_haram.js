@@ -117,7 +117,7 @@ EP.haram=[
 
 // ■ Day 4 — 끌려간대 (3)
 {title:'끌려간대',scene:'haram_03',place:'hall',at:[820,420],with:[['haeun',880,640]],
- things:{hall:[['note',830,700,30],['pencil',640,380,30]]},
+ things:{hall:[['note',900,730,30],['pencil',640,380,30]]},
  pre:[
   {pic:'haram_03'},
   ['nar','','쉬는 시간. 하람이한테 가려고 복도로 나왔다. 그런데 하은이가 「잠깐만!」 하고 나를 불러 세웠다.'],
