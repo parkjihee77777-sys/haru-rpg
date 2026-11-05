@@ -377,7 +377,7 @@ EP.jihoon=[
   common:[['me','smile','엄마. 지훈이는 웃는 {@photo|이} 하나도 없대. 자기는 찍는 사람이래.'],['mom','smile','찍는 사람은 {@photo}에 잘 안 나오지.'],['me','smile','응. 근데 지훈이 {@photo|은} 다 똑같아. 턱 내리고 {@eye} 크게. 그게 제일 안 촌스럽대.'],['mom','surprised','촌스럽다는 게 뭘까?'],['me','surprised','……몰라. 남들이 이상하게 볼 것 같은 거?'],['mom','smile','음. 그렇구나.']]}},
 
 // ■ Day 6 — 교문 앞 할머니 (5)
-{title:'교문 앞 할머니',scene:'jihoon_05',place:'gatesun',at:[1060,520],with:[['jiho',1180,620]],taps:{gatesun:[['school_gate',970,690,110]]},
+{title:'교문 앞 할머니',scene:'jihoon_05',place:'gatesun',at:[1060,520],with:[['jiho',840,530]],taps:{gatesun:[['school_gate',970,690,110]]},
  pre:[
   ['nar','','종례가 끝났다. {@phone|을} 돌려받고 {@shoes|을} 갈아 신었다. 지훈이, 지호, 나는 같이 {@school_gate|으로} 걸었다.'],
   ['jihoon','smile','오늘 {@cloud} 없다. 재미없어.'],
@@ -566,7 +566,7 @@ EP.jihoon=[
   common:[['me','smile','{m}, 근데 그 점퍼 팔 {@pocket}에 쪽지가 있었어. 형이 쓴 거.'],['mom','surprised','뭐라고?'],['me','smile','‘지훈이 줌. {@pocket} 다섯 개. 따뜻함 보장. 촌스러움도 보장.’'],['mom','laugh','(웃음이 터짐) 형이 다 알고 있었네.'],['me','laugh','응. 지훈이가 {@eye}까지 웃었어. 그 쪽지는 {@photo}도 안 찍고 그냥 {@pocket}에 둔대.'],['mom','smile','좋은 점퍼네.']]}},
 
 // ■ Day 8 — 꽥이 (7)
-{title:'꽥이',scene:'jihoon_07',place:'class',at:[900,600],with:[['jiho',620,480],['yena',1230,620]],
+{title:'꽥이',scene:'jihoon_07',place:'class',at:[900,600],with:[['jiho',620,480],['yena',1070,620]],
  pre:[
   {lay:[['doll',1080,650,36]]},
   ['nar','','1교시가 끝났다. 나는 책상 옆 고리에 건 {@bag|을} 열었다. 물통을 꺼내려고.'],

@@ -116,7 +116,7 @@ EP.haram=[
   D:[['me','smile','뭐 하는지 먼저 물어봤어. 손님은 노래 안 해도 된대. 하람이 이모부도 안 한대. 그냥 국 먹고 {@moon} 본대.'],['mom','surprised','자세히 물어봤구나. 하람이 동생은?'],['me','laugh','맨날 고기 안 나와서 고마웠다고 한대.'],['mom','laugh','엄마가 하람이 엄마랑 통화해 볼게. 괜찮으면 다녀와.']]}},
 
 // ■ Day 4 — 끌려간대 (3)
-{title:'끌려간대',scene:'haram_03',place:'hall',at:[820,420],with:[['haeun',760,640]],
+{title:'끌려간대',scene:'haram_03',place:'hall',at:[820,420],with:[['haeun',880,640]],
  things:{hall:[['note',830,700,30],['pencil',640,380,30]]},
  pre:[
   {pic:'haram_03'},
@@ -807,7 +807,7 @@ EP.haram=[
   common:[['me','smile','{m}, 우리 지금 {@window} 열고 {@moon} 보자. 할머니도 볼 수도 있잖아.'],['mom','relieved','……그래.'],['nar','','{m|가} {@window|을} 열었다. 나는 {@moon|을} 보고 할머니한테 인사했다. {m}도 같이 했다.'],['me','smile','하람이는 {@moon}에 동그라미 그려. 멀리 있는 사람한테 하는 인사래. 나는 할머니 말로 했어.']]}},
 
 // ■ Day 15 — 게시판 낙서 (14)
-{title:'게시판 낙서',scene:'haram_14',place:'hall',at:[420,560],with:[['junho',760,700]],
+{title:'게시판 낙서',scene:'haram_14',place:'hall',at:[420,560],with:[['junho',880,700]],
  taps:{hall:[['board',120,300,90]]},things:{hall:[['paper',180,420,44]]},
  pre:[
   ['nar','','쉬는 시간. 복도 {@board} 앞에 아이들이 모여 있었다. 나는 하람이랑 같이 그쪽으로 갔다.'],

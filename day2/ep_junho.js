@@ -1113,7 +1113,7 @@ EP.junho=[
   common:[['me','smile','{m}, 준호가 나 반장 나가냐고 물었어.'],['mom','surprised','뭐라고 했어?'],['me','smile','생각 중이라고. 근데 준호가 반장 되면 애들이 이런 거 나한테 말할 거래. 아픈 거, 싫은 거.'],['mom','smile','……그렇겠다.'],['me','surprised','엄마. 반장은 다 들어 줘야 돼?'],['mom','surprised','글쎄. 너는 어떻게 생각해?'],['me','smile','다 들어 줄 수는 있어. 근데 다 정해 줄 수는 없어.'],['mom','smile','……응. 엄마도 그렇게 생각해.']]}},
 
 // ■ Day 12 — 얼음 대러 (11)
-{title:'얼음 대러',scene:'junho_11',place:'class',at:[1300,560],with:[['haeun',800,560],['jiho',920,420],['jihoon',1150,700]],taps:{class:[['window',100,170,75]]},
+{title:'얼음 대러',scene:'junho_11',place:'class',at:[1300,560],with:[['haeun',620,560],['jiho',920,420],['jihoon',1150,700]],taps:{class:[['window',100,170,75]]},
  pre:[
   ['nar','','점심시간이 끝나고 교실로 들어왔다. 체육복 {@bag|이} 땀에 젖어 있었다. 나는 {@bag|을} {@desk} 옆 고리에 걸었다.'],
   {k:'bag',goal:'「{x}」 걸기'},

@@ -937,7 +937,7 @@ EP.haeun=[
   common:[['me','smile','그리고 하은이가 내 {@note|를} 엄청 작게 접어 줬어. 안 잃어버리게. 이거 봐.'],['mom','surprised','와, 이렇게 작게?'],['me','smile','응. 하은이는 하준이 {@notice_book}에 이렇게 {@note|를} 넣어 준대. ‘숙제 3번 해’, ‘우유 마셔’. 엄마 대신.'],['mom','smile','……하은이가 {@note|를} 쓰는구나.'],['me','laugh','응. 그리고 ‘발 없는 말이 천 리 간다’ 알려 줬어. 나는 다리 네 개인 말인 줄 알았어.'],['mom','laugh','(웃음) 엄마도 처음엔 헷갈렸어.'],['me','smile','이것도 하은이 엄마 말이래.']]}},
 
 // ■ Day 10 — 이건 어른 일이야 (9)
-{title:'이건 어른 일이야',scene:'haeun_09',place:'gatesun',at:[1120,760],
+{title:'이건 어른 일이야',scene:'haeun_09',place:'gatesun',at:[1000,640],
  pre:[
   ['nar','','종례가 끝났다. 하은이가 {@clock|을} 보더니 뛰어나갔다. 2시 50분이 가까웠다. 하준이를 데리러 가야 하는 시간이다. 오늘도 엄마가 오후 조인 날이었다.'],
   {pic:'haeun_09a'},
@@ -949,8 +949,8 @@ EP.haeun=[
   ['me','surprised','하준아, {@forehead} 짚어 봐도 돼?'],
   ['nar','','하준: 「……응.」'],
   {pic:null},
-  {lay:[['forehead',1230,760,46]]},
-  {k:'forehead',goal:'「{x}」 짚어 보기'},
+  {lay:[['forehead','@haeun',95,10,46]]},
+  {k:'forehead',goal:'「{x}」 짚어 보기',tray:true},// Hajun has no map picture: his forehead is picked from pictures (a tiny head by the gate pillar was hard to see, 11/05)
   {clear:['forehead']},
   ['nar','','하준이 {@forehead}에 손등을 댔다. 뜨거웠다. 손등이 화끈했다.'],
   ['me','surprised','뜨거워. 엄청.'],
@@ -1381,7 +1381,7 @@ EP.haeun=[
   common:[['me','smile','하은이가 종이 지갑 접어서 지훈이한테 줬어. 3분 만에. 칸도 두 개고 뚜껑도 있어. 지훈이가 엄청 좋아했어. 반짝이 카드 넣으니까 딱 맞았어.'],['mom','surprised','와.'],['me','laugh','지훈이가 어떻게 만드냐고 알려 달라니까, 하은이가 ‘알려 주면 선물이 아니잖아’ 했어.'],['mom','laugh','(웃음) 그건 맞네.'],['me','smile','나도 하나 접었어. 10분 걸렸어. 칸은 하나야. 이거.'],['mom','surprised','오, 이건 지훈이 줄 거야?'],['me','smile','……{m}, 반짝이 카드 한 장 사서 여기 넣어서 주면 어때? 하은이 지갑이랑 똑같은 건 아니고, 내 지갑에 내 카드.'],['mom','smile','좋다. 엄마가 카드 한 장은 보태 줄게.']]}},
 
 // ■ Day 14 — 엄마가 많이 넣어 줬어 (13)
-{title:'엄마가 많이 넣어 줬어',scene:'haeun_13',place:'gatesun',at:[1120,760],
+{title:'엄마가 많이 넣어 줬어',scene:'haeun_13',place:'gatesun',at:[1000,640],
  pre:[
   ['nar','','종례가 끝났다. 오늘은 엄마가 오후 조인 날이었다. 하은이가 {@clock|을} 보고 먼저 나갔다. 하준이를 데리러 갈 시간이었다. 나는 신발을 갈아 신고 {@school_gate|으로} 나왔다.'],
   {pic:'haeun_13a'},
@@ -1394,7 +1394,7 @@ EP.haeun=[
   ['haeun','smile','집에 가서 밥 먹어. 30분이야.'],
   {pic:null},
   ['nar','','나도 배가 고팠다. 엄마가 오늘 아침에 「하교할 때 먹어.」 하고 간식을 넣어 주셨다. 생각나서 {@bag|을} 열었다.'],
-  {lay:[['bag',960,820,56]]},
+  {lay:[['bag','@haeun',-50,40,56]]},
   {k:'bag',goal:'「{x}」 열기'},
   {clear:['bag']},
   ['nar','','{@bag} 앞주머니를 열었다. 비닐봉지에 {@banana|가} 세 개 들어 있었다.'],
