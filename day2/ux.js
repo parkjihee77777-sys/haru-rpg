@@ -277,3 +277,6 @@ function heroToFloor(){if(!me||!MAP||!grid||me.path)return;if(walkable(me.x,me.y
 const _ldH=load;load=function(){const r=_ldH.apply(this,arguments);heroToFloor();return r};
 setInterval(heroToFloor,500);
 }
+// ===== every 🔊 mark stays inside the map: the blackboard's mark sat above the map's top edge (the blackboard is drawn at the very top), so it never showed =====
+{const _sm=soundMarks;soundMarks=function(){const r=_sm.apply(this,arguments);world.querySelectorAll('.smark').forEach(m=>{const x=parseFloat(m.style.left),y=parseFloat(m.style.top);
+ if(y<16)m.style.top='16px';if(x<16)m.style.left='16px';if(x>MW-16)m.style.left=(MW-16)+'px'});if(typeof hideMarks==='function')hideMarks();return r}}
