@@ -266,7 +266,9 @@ window.feetReport=()=>npcs.filter(n=>!n.seat&&!n.path&&n.h&&!floorOk(n.x,n.y)).m
 // (「텅 비어」「아무도 없」「다 나갔」) sends the other kids off the map. When the scene ends they come back (tidyPeople walks them in).
 {
 const BASE=['class','hall','field','cafe'];const EMPTY=/텅 비|아무도 없|다 나갔|다들 나갔|모두 나갔/;
-function clearOthers(){if(!SCENE_IDS)return;for(const n of npcs.slice()){if(SCENE_IDS.includes(n.id))continue;n.el.style.transition='opacity .5s';n.el.style.opacity=0;const i=npcs.indexOf(n);if(i>=0)npcs.splice(i,1);setTimeout(()=>n.el.remove(),550)}setTimeout(()=>{if(typeof gauges==='function')gauges()},600)}
+const SCENE_KEEP=new Set();{const _mk=moveKid;moveKid=function(m){if(m&&m[3]!=='out')SCENE_KEEP.add(m[0]);return _mk.apply(this,arguments)}}
+{const _tp=tidyPeople;tidyPeople=function(){SCENE_KEEP.clear();return _tp.apply(this,arguments)}}
+function clearOthers(){if(!SCENE_IDS)return;for(const n of npcs.slice()){if(SCENE_IDS.includes(n.id)||SCENE_KEEP.has(n.id))continue;n.el.style.transition='opacity .5s';n.el.style.opacity=0;const i=npcs.indexOf(n);if(i>=0)npcs.splice(i,1);setTimeout(()=>n.el.remove(),550)}setTimeout(()=>{if(typeof gauges==='function')gauges()},600)}
 const _ld=load;load=function(){const r=_ld.apply(this,arguments);if(SCENE_IDS&&!BASE.includes(MAP))setTimeout(clearOthers,60);return r};
 const _adv=advance;advance=function(){const l=queue[0];if(SCENE_IDS&&Array.isArray(l)&&typeof l[2]==='string'&&EMPTY.test(l[2]))clearOthers();return _adv.apply(this,arguments)};
 }
@@ -280,3 +282,9 @@ setInterval(heroToFloor,500);
 // ===== every 🔊 mark stays inside the map: the blackboard's mark sat above the map's top edge (the blackboard is drawn at the very top), so it never showed =====
 {const _sm=soundMarks;soundMarks=function(){const r=_sm.apply(this,arguments);world.querySelectorAll('.smark').forEach(m=>{const x=parseFloat(m.style.left),y=parseFloat(m.style.top);
  if(y<16)m.style.top='16px';if(x<16)m.style.left='16px';if(x>MW-16)m.style.left=(MW-16)+'px'});if(typeof hideMarks==='function')hideMarks();return r}}
+// ===== the school gate (gatesun): its two gate leaves and pillars are not floor (Jihoon stood floating on the right leaf, 11/05) =====
+if(MAPS.gatesun){MAPS.gatesun.block=(MAPS.gatesun.block||[]).concat([R(1025,540,1215,775),R(1190,535,1320,800),R(725,640,880,915),R(600,690,735,941)])}
+
+// ===== Hajun (Haeun's little brother, 1st grade): his own walk sheet now exists (walk/hajun.png); a little shorter than the 5th graders =====
+NAME.hajun='하준';SZ.hajun=[0.968,0.988,0.8];
+{const TN={en:'Hajun',vi:'Hajun',zh:'夏俊',ja:'ハジュン',ru:'Хаджун',id:'Hajun'};for(const u in TN){T[u]=T[u]||{};if(!T[u]['하준'])T[u]['하준']=TN[u]}}

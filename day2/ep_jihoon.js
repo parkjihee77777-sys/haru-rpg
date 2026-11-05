@@ -102,7 +102,7 @@ EP.jihoon=[
   common:[['me','smile','그리고 들어올 때 지훈이가 {@shadow} {@photo} 보여 줬어. 나랑 지훈이 {@shadow}. {@shadow} 찍어도 되냐고 물어봤어.'],['mom','smile','{@shadow}도 물어봤구나.'],['me','smile','응. 근데 그건 안 올린대. 하트 0개래. 근데 자기 거 중에 좋은 거래.'],['mom','laugh','(웃음) 하트 0개짜리 좋은 사진이네.']]}},
 
 // ■ Day 3 — 하트 두 개 (2)
-{title:'하트 두 개',scene:'jihoon_02',place:'gatesun',at:[1180,700],
+{title:'하트 두 개',scene:'jihoon_02',place:'gatesun',at:[1270,850],
  pre:[
   ['nar','','종례가 끝났다. {@teacher|이} 아침에 걷은 {@phone|을} 돌려주셨다. 아이들이 우르르 신발장으로 갔다.'],
   {pic:'jihoon_02a'},
