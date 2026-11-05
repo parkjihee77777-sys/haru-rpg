@@ -261,3 +261,19 @@ setInterval(()=>{if(!MAP||touring)return;for(const n of npcs){if(n.seat||n.path|
  n.x=p[0];n.y=p[1];draw(n);window.FEET_FIXED=(window.FEET_FIXED||0)+1}},400);
 window.feetReport=()=>npcs.filter(n=>!n.seat&&!n.path&&n.h&&!floorOk(n.x,n.y)).map(n=>[n.id,Math.round(n.x),Math.round(n.y)]);
 }
+// ===== a scene with only its own kids: nobody else in the picture =====
+// a scene that goes to a place of its own (music room, welfare room…) shows only the kids in that scene; a line saying the room is empty
+// (「텅 비어」「아무도 없」「다 나갔」) sends the other kids off the map. When the scene ends they come back (tidyPeople walks them in).
+{
+const BASE=['class','hall','field','cafe'];const EMPTY=/텅 비|아무도 없|다 나갔|다들 나갔|모두 나갔/;
+function clearOthers(){if(!SCENE_IDS)return;for(const n of npcs.slice()){if(SCENE_IDS.includes(n.id))continue;n.el.style.transition='opacity .5s';n.el.style.opacity=0;const i=npcs.indexOf(n);if(i>=0)npcs.splice(i,1);setTimeout(()=>n.el.remove(),550)}setTimeout(()=>{if(typeof gauges==='function')gauges()},600)}
+const _ld=load;load=function(){const r=_ld.apply(this,arguments);if(SCENE_IDS&&!BASE.includes(MAP))setTimeout(clearOthers,60);return r};
+const _adv=advance;advance=function(){const l=queue[0];if(SCENE_IDS&&Array.isArray(l)&&typeof l[2]==='string'&&EMPTY.test(l[2]))clearOthers();return _adv.apply(this,arguments)};
+}
+// ===== the hero too: never placed on a table (the cafeteria's start point was on the middle table, 11/05) =====
+{
+function heroToFloor(){if(!me||!MAP||!grid||me.path)return;if(walkable(me.x,me.y)&&!(typeof onDesk==='function'&&onDesk(MAP,me.x,me.y)))return;
+ const c=nearestCell(me.x,me.y);if(!c)return;me.x=c[0]*C+C/2;me.y=c[1]*C+C/2;draw(me);follow()}
+const _ldH=load;load=function(){const r=_ldH.apply(this,arguments);heroToFloor();return r};
+setInterval(heroToFloor,500);
+}
