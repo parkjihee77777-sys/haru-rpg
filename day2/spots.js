@@ -18,19 +18,33 @@ function clash(id,x,y,placed){if(placed.some(([px,py])=>Math.abs(px-x)<110&&Math
   if(tx>x-55-r*.6&&tx<x+55+r*.6&&ty>y-210-r*.6&&ty<y+15+r*.6)return true;
  const o=OUT[id];return!!(o&&Math.abs(o[0]-x)<120&&Math.abs(o[1]-y)<130)}
 // a kid sitting at a chair covers the desk in front of the chair below (about 110 wide, the 110 above the chair back): no one sits where today's things lie
-function seatHidesThing(id,x,top){for(const[,tx,ty,w]of(THINGS[id]||[])){const r=Math.max(30,(w||56)*.55),cy=ty-(w||56)*.4;
+function seatHidesThing(id,x,top,f){for(const t of(THINGS[id]||[])){if(f&&t.owner===f)continue;const[,tx,ty,w]=t;const r=Math.max(30,(w||56)*.55),cy=ty-(w||56)*.4;
   if(tx>x-55-r*.6&&tx<x+55+r*.6&&cy>top-110-r*.6&&cy<top+20+r*.6)return true}return false}
 // every point on a 20 px grid, nearest first (a ring of 16 directions missed the narrow aisles between the desks)
 function freeSpot(id,x,y,placed){const c=[];for(let dx=-700;dx<=700;dx+=20)for(let dy=-420;dy<=420;dy+=20)c.push([Math.round(x+dx),Math.round(y+dy),Math.hypot(dx,dy/.6)]);
  c.sort((a,b)=>a[2]-b[2]);for(const[cx,cy]of c)if(footOk(id,cx,cy)&&!clash(id,cx,cy,placed))return[cx,cy];return null}
+// a friend's own things (a scene's things lying near where that friend stands in the script) go with them: when the friend is seated
+// at another desk, the things move onto that desk's other half (the friend's back covers the half in front of them)
+// and no one else sits there. Each thing keeps its first spot (t.o0), so placing again starts from the script.
+{const _sdOwn=setDay;setDay=function(n){_sdOwn(n);for(const f of D2IDS){const e=epNext(f,EPIDX[f]);if(!e)continue;
+  for(const[m,ts]of Object.entries(e.things||{}))for(const t of ts){if(!t.o0)t.o0=[t[1],t[2]];t[1]=t.o0[0];t[2]=t.o0[1];
+   t.owner=(e.place===m&&e.at&&Math.hypot(t.o0[0]-e.at[0],t.o0[1]-e.at[1])<240)?f:null}}}}
+function ownThings(id,f,seat,taken){const S=SEATS[id];if(!S)return;const mine=(THINGS[id]||[]).filter(t=>t.owner===f);if(!mine.length)return;
+ const[x,top]=seat,row=S.find(r=>r[0]===top);if(!row)return;const i=row[1].indexOf(x),mate=row[1][i%2?i-1:i+1];
+ if(mate==null||taken.some(([tx,tt])=>tt===top&&Math.abs(tx-mate)<40))return;
+ // already on this desk and clear of the friend's back: leave it
+ if(mine.every(t=>Math.abs(t[2]-top)<40&&Math.abs(t[1]-(x+mate)/2)<150&&Math.abs(t[1]-x)>55+Math.max(30,(t[3]||56)*.55)*.6))return;
+ const n=mine.length,gap=Math.min(60,130/n);mine.forEach((t,j)=>{t[1]=Math.round(mate+(j-(n-1)/2)*gap+(mate>x?10:-10));t[2]=top});
+ taken.push([mate,top])}
 const _d2PeopleSpots=d2People;
 d2People=function(id){const ps=_d2PeopleSpots(id).map(p=>p.slice());const S=SEATS[id];
  if(S){const taken=ps.filter(p=>p[3]).map(p=>[p[1],p[3].top]);
   // a friend whose scene is here today picks a seat first, so the kid pushed off a seat by today's things never takes theirs
   const here=f=>(SCENE_IDS||[]).includes(f)?0:(D2IDS.includes(f)&&(epNext(f,EPIDX[f])||{}).place===id)?1:2;
   for(const p of ps.filter(p=>!p[3]&&p[4]!=='stand'&&SEATED_ART.has(p[0])).sort((a,b)=>here(a[0])-here(b[0]))){let best=null,bd=1e9;
-   for(const[top,xs]of S)for(const x of xs){if(taken.some(([tx,tt])=>tt===top&&Math.abs(tx-x)<40)||seatHidesThing(id,x,top))continue;const d=Math.hypot(x-p[1],top+150-p[2]);if(d<bd){bd=d;best=[x,top]}}
-   if(best){p[1]=best[0];p[2]=0;p[3]={top:best[1]};taken.push(best)}}}
+   for(const[top,xs]of S)for(const x of xs){if(taken.some(([tx,tt])=>tt===top&&Math.abs(tx-x)<40)||seatHidesThing(id,x,top,p[0]))continue;const d=Math.hypot(x-p[1],top+150-p[2]);if(d<bd){bd=d;best=[x,top]}}
+   if(best){p[1]=best[0];p[2]=0;p[3]={top:best[1]};taken.push(best)}
+   if(best)ownThings(id,p[0],best,taken)}}
  const placed=ps.filter(p=>p[3]).map(spotOf);
  for(const p of ps){if(p[3])continue;if(!footOk(id,p[1],p[2])||clash(id,p[1],p[2],placed)){const c=freeSpot(id,p[1],p[2],placed);if(c){p[1]=c[0];p[2]=c[1]}}placed.push([p[1],p[2]])}
  return ps};
