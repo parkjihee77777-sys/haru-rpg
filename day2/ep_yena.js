@@ -1274,7 +1274,8 @@ EP.yena=[
   common:[['me','smile','{m}, 예나가 이거 다른 애들한테 비밀이래. 일요일 노래.'],['mom','smile','그럼 엄마도 비밀.'],['me','sad','응. 엄마, 근데 예나는 {@pencil} 드럼 칠 때는 하나도 안 떨잖아. 트라이앵글 할 때도. 근데 가만히 서야 되니까 떨렸어.'],['mom','sad','자기 방법을 못 쓰니까 그랬나 보다.'],['me','smile','응. 가만히 있으라는 건 예나한테 제일 어려운 거야.']]}},
 
 // ■ Day 15 — 내가 두드렸다 (14)
-{title:'내가 두드렸다',scene:'yena_14',place:'class',at:[760,860],with:[['siwoo',764,590]],
+{title:'내가 두드렸다',scene:'yena_14',place:'class',at:[760,860],with:[['siwoo',764,0,{top:448}]],// Siwoo sits at his desk during the test (standing there he looked on top of the desk, 11/05)
+
  pre:[
   ['nar','','2교시 수학. 단원평가 날이었다.'],
   ['nar','','선생님: 「{@desk} 위에는 {@pencil} 하나, {@eraser} 하나만 두세요. 시험 중엔 말하지 않아요. 30분이에요.」'],

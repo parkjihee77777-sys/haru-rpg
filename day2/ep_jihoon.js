@@ -825,7 +825,7 @@ EP.jihoon=[
 // ■ Day 11 — 하트 스티커 세 장 (10)
 {title:'하트 스티커 세 장',scene:'jihoon_10',place:'class',at:[1250,300],with:[['jiho',1060,330]],
  pre:[
-  {lay:[['teacher',880,250,150]]},
+  {lay:[['teacher',660,290,150]]},// beside the teacher's desk (at 880,250 she stood on it, 11/05)
   {lay:[['sticker',985,265,44,'sticker_heart']]},
   {pic:'jihoon_10a'},
   ['nar','','3교시가 끝났다. {@teacher|이} 하트 {@sticker|를} 나눠 주셨다. 한 사람에 세 장. 빨간 하트.'],
@@ -1057,7 +1057,7 @@ EP.jihoon=[
    ['jihoon','smile','……응.']]}],
  post:[
   {go:'class'},
-  {lay:[['teacher',880,250,150]]},
+  {lay:[['teacher',660,290,150]]},// beside the teacher's desk (at 880,250 she stood on it, 11/05)
   {only:['A'],lines:[['nar','','선생님: 「어, 그 {@photo} 누가 뗐어요?」'],['jihoon','smile','(문 앞에서, 작게) ……제가 떼 달라고 했어요.']]},
   {only:['B'],lines:[{move:['jihoon',980,390]},['nar','','지훈이가 혼자 교실로 들어가 교탁 앞으로 갔다. 나는 조금 있다가 따라가서 지훈이 옆에 섰다.']]},
   {only:['C','D'],lines:[{move:['jihoon',980,390]},['nar','','우리는 교탁 앞으로 갔다. 나는 지훈이 옆에 섰다.']]},
@@ -1086,7 +1086,7 @@ EP.jihoon=[
   common:[['me','smile','지훈이가 {@photo|은} 공책 사이에 끼웠어. 구겨지지 않게. 나중에 붙일지도 모른대.'],['mom','smile','그건 지훈이가 정하면 되겠다.'],['me','smile','응. 엄마, 근데 지훈이가 그랬어. 멀리서 찍어서 {@grandma} {@hand|이} 안 보인대. {@grandma} {@hand|이} 제일 예쁜데.'],['mom','smile','지훈이는 {@hand|을} 보는구나.']]}},
 
 // ■ Day 14 — 안 올린 거 (13)
-{title:'안 올린 거',scene:'jihoon_13',place:'gatesun',at:[1120,540],
+{title:'안 올린 거',scene:'jihoon_13',place:'gatesun',at:[1000,640],
  pre:[
   {pic:'jihoon_13a'},
   ['nar','','종례가 끝났다. {@school_gate} 앞 화단 턱에 지훈이가 앉아 있었다. {@grandma|를} 기다린다고 했다. 오늘은 방앗간이 바빠서 조금 늦으신대.'],
@@ -1258,7 +1258,7 @@ EP.jihoon=[
   common:[['me','smile','그리고 잔디에 누워 있는데, 내가 지훈이한테 말했어. 너는 {@sun|가} 어디 있는지 제일 먼저 본다고. 남들이 못 보는 거 본다고. 그건 {@camera} 없어도 있다고.'],['mom','surprised','지훈이가 뭐래?'],['me','smile','자기 엄마가 한 말이랑 비슷하대. 그 {@camera} 지훈이 엄마가 옛날에 쓰던 거래. 지훈이 어릴 때 엄청 찍었는데 다 흔들렸대. 근데 지훈이 엄마가 흔들린 게 제일 지훈이 같대.'],['mom','smile','……좋은 말씀이다.'],['me','laugh','응. 지훈이가 {@eye} 감고 웃었어.']]}},
 
 // ■ Day 16R — 빛이 딱 좋아 (15)
-{title:'빛이 딱 좋아',scene:'jihoon_15',place:'gatesun',at:[1240,780],taps:{gatesun:[['shadow',1040,745,80]]},
+{title:'빛이 딱 좋아',scene:'jihoon_15',place:'gatesun',at:[1000,640],taps:{gatesun:[['shadow',1040,745,80]]},
  pre:[
   {pic:'jihoon_15a'},
   ['nar','','종례가 끝났다. {@school_gate|을} 나서는데 {@sun|가} 낮게 내려와 있었다. {@school_gate} 앞 길이 노랗게 물들었다. 그림자들이 길게 늘어났다.'],
