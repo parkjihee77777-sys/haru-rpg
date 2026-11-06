@@ -113,7 +113,7 @@ EP.hangyeol=[
 
 // ■ Day 4 — 결이 (3)
 {title:'결이',scene:'hangyeol_03',place:'library',at:[890,490],flag:{H04_name:{A:1,D:1}},
- things:{library:[['picture',1045,398,50]]},
+ things:{library:[['picture',935,410,50]]},
  pre:[
   {pic:'hangyeol_03'},
   ['nar','','점심시간. 도서관 구석에서 한결이가 혼자 뭔가를 그리고 있었다. 나는 한결이 맞은편에 앉았다.'],

@@ -6,6 +6,7 @@
 // own picture ({lay:[[k,x,y,w,'picture']]}) counts as well. A picture that is not there yet falls back to the word's own picture,
 // so a scene can name its picture before it is drawn (list: 검수/다시그릴목록_1105.md 「F」).
 const WORDPIC={
+ minho_03:{cat:'cat_yellow'},
  hyeeun_05:{box:'milk_crate'},hyeeun_08:{box:'milk_crate'},minho_12:{box:'milk_crate'},minho_vote:{box:'ballot_box'},
  haram_09:{card:'card_greeting'},seah_08:{card:'cards_play'},
  hangyeol_08:{umbrella:'umbrella_flower'},minho_08:{umbrella:'umbrella_broken'},
@@ -24,7 +25,7 @@ const WORDPIC={
  hangyeol_01:{thread:'thread_floss'},hangyeol_12:{thread:'thread_floss'}};
 // which of those pictures are really there (a list, not a network probe: a missing file would show as a page error).
 // When a new picture from list F is added, put its name here (items = cut-out .png, cards = card .jpg).
-const PIC_ITEM=new Set(['ballot_box', 'cards_play', 'glue_stick', 'milk_crate', 'paper_crumpled', 'water_bottle_pink', 'water_drops']),PIC_CARD=new Set(['ballot_box', 'glue_stick', 'milk_crate', 'paper_crumpled']);
+const PIC_ITEM=new Set(['cat_yellow', 'ballot_box', 'cards_play', 'glue_stick', 'milk_crate', 'paper_crumpled', 'water_bottle_pink', 'water_drops']),PIC_CARD=new Set(['cat_yellow', 'ballot_box', 'glue_stick', 'milk_crate', 'paper_crumpled']);
 let LAYPIC={},LAYPIC_EP=null;const DAYPIC={};
 function picOf(k){if(typeof SCENE_EP==='undefined'||!SCENE_EP)return k;if(LAYPIC_EP!==SCENE_EP){LAYPIC={};LAYPIC_EP=SCENE_EP}
  const w=(WORDPIC[SCENE_EP.scene]||{})[k],v=(w&&PIC_ITEM.has(w)&&w)||LAYPIC[k];if(!v||v===k)return k;DAYPIC[k]=v;PIC_ITEM.add(v);return v}// a laid picture is there (it is on the map)

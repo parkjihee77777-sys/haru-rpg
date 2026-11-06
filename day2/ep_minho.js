@@ -108,7 +108,7 @@ EP.minho=[
 
 // ■ Day 4 — 고양이를 부르는 말 (3)
 {title:'고양이를 부르는 말',place:'flowerbed',scene:'minho_03',at:[1220,660],
- things:{flowerbed:[['cat',1395,650,80]]},
+ things:{flowerbed:[['cat',1395,650,80,'cat_yellow']]},
  pre:[
   {pic:'minho_03a'},
   ['nar','','자전거 보관대 뒤 화단. 민호가 쪼그려 앉아 꼼짝도 안 하고 있었다. 내가 다가가자 민호가 손가락을 입에 댔다.'],
