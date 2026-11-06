@@ -181,8 +181,8 @@ EP.haram=[
   common:[['me','sad','하람이가 그 말 들으면 자기 엄마가 나쁜 사람이 되는 것 같대.'],['dad','sad','……{d}도 그 말 들으면 그럴 것 같다.'],['mom','smile','그래서 ‘사이비’는 사람을 나쁘게 부르는 말이야. 하람이 앞이 아니어도 쓰지 말자.']]}},
 
 // ■ Day 5 — 쉼의 날 (4)
-{title:'쉼의 날',scene:'haram_04',place:'class',at:[600,690],with:[['junho',1050,560],['yena',1050,700]],
- things:{class:[['notebook',760,702,38]]},
+{title:'쉼의 날',scene:'haram_04',place:'class',at:[760,865],meAt:[905,830],with:[['junho',1050,640],['yena',610,620]],
+ things:{class:[['notebook',836,700,38]]},
  pre:[
   ['nar','','사회 시간. 모둠 과제 ‘우리 동네 소개’를 하는 시간이었다. 마감은 내일. 우리 모둠은 나, 하람이, 준호, 예나.'],
   ['nar','','나는 하람이 옆자리에 앉았다. 하람이가 {w|을} 펼쳐 놓고 {@map|를} 그리고 있었다.'],
@@ -1002,3 +1002,7 @@ EP.haram[13].goAt={cafe:[330,880],hall:[420,560]};EP.haram[13].goOff={cafe:['jun
    npcs=npcs.filter(p=>{if(!off.includes(p.id)&&!(a&&p.id==='haram'))return true;p.el.remove();return false});
    if(a)npcs.push(a[2]?sprite('haram',a[0],0,{top:a[2]}):sprite('haram',a[0],a[1]))}
   return r}}
+// 4: Haram sits at her desk (at = the chair 760, its back's top 715, +150) with her notebook open beside her, on the half of the desk where I sit (11/06: it floated in the aisle)
+// meAt:[x,y] = where I go to talk to her: at that chair next to hers (standing just behind it, so I don't cover the notebook), not in the aisle on her other side
+addEventListener('load',()=>{const _apHr=approach;approach=function(n){const e=n&&n.id==='haram'&&epNext('haram',EPIDX.haram);
+ if(e&&e.meAt&&e.place===MAP)return walkTo(e.meAt[0],e.meAt[1],()=>{me.dir=n.x<me.x?'left':'right';me.frame=0;draw(me);talkTo(n.id)});return _apHr(n)}});
