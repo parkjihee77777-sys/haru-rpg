@@ -223,7 +223,7 @@ EP.siwoo=[
   common:[['me','smile','선생님이 애들한테 설명해 주셨어. 사람마다 소리가 크게 들리는 정도가 다르대. 그건 떼쓰는 게 아니래. 근데 시우 이름은 한 번도 안 말씀하셨어.'],['mom','relieved','선생님이 시우를 지켜 주셨네.'],['me','smile','그리고 쉬는 자리 카드 생겼어. 누구든 쓸 수 있대.'],['mom','smile','너도 급식실 힘들면 써도 되겠다.']]}},
 
 // ■ Day 6 — 12일째 (5) ★
-{title:'나비 나오는 날',scene:'siwoo_05',place:'class',at:[310,262],stand:1,with:[['haeun',420,262]],
+{title:'나비 나오는 날',scene:'siwoo_05',place:'class',at:[310,262],stand:1,with:[['haeun',540,270]],
  things:{class:[['milk_carton',150,232,38,'milk_carton_cut'],['butterfly',196,206,40]]},taps:{class:[['window',95,120,70]]},
  pre:[
   {pic:'siwoo_05b'},
@@ -600,7 +600,7 @@ EP.siwoo=[
   common:[['mom','smile','혼자 있는 게 좋은 것과 같이 하는 법을 모르는 건 다를 수 있지.'],['me','smile','응. 물어봐야 알아.']]}},
 
 // ■ Day 13 — 100퍼센트 (12)
-{title:'100퍼센트',scene:'siwoo_12',place:'class',at:[600,770],stand:1,
+{title:'100퍼센트',scene:'siwoo_12',place:'class',at:[500,770],stand:1,
  things:{class:[['notebook',760,702,38]]},
  pre:[
   {pic:'siwoo_12a'},
