@@ -8,7 +8,7 @@
 window.EP=window.EP||{};
 EP.jiho=[
 // ■ Day 2 — 방금 건 연습 판 (1)
-{title:'방금 건 연습 판',scene:'jiho_01',place:'field',at:[900,330],with:[['junho',760,380],['haeun',1050,380]],
+{title:'방금 건 연습 판',scene:'jiho_01',place:'field',at:[900,430],with:[['junho',760,380],['haeun',1050,380]],
  things:{field:[['ball',820,450,42]]},
  pre:[
   {pic:'jiho_01a'},
@@ -840,7 +840,7 @@ EP.jiho=[
   common:[['me','sad','{m}, 지호는 시합 중에 ‘아파’라고 해 본 적이 없대.'],['mom','surprised','한 번도?'],['me','sad','응. 지호 아빠가 패스는 세게 하랬대. 약하면 뺏긴다고.'],['mom','sad','……그렇구나.'],['me','smile','나는 오늘 해 봤어. ‘아파’.'],['mom','smile','어땠어?'],['me','laugh','생각보다 짧았어. 두 글자야.']]}},
 
 // ■ Day 11 — 빨리 먹기 시합 (10)
-{title:'빨리 먹기 시합',scene:'jiho_10',place:'cafe',at:[660,720],with:[['junho',800,760],['haeun',540,760],['yena',900,700]],
+{title:'빨리 먹기 시합',scene:'jiho_10',place:'cafe',at:[660,720],with:[['junho',800,760],['haeun',540,760],['yena',1010,690]],
  things:{cafe:[['milk',1330,700,46]]},
  pre:[
   {pic:'jiho_10c'},
@@ -1289,7 +1289,7 @@ EP.jiho=[
   common:[['me','smile','{m}, 지호 아빠가 후보 많으면 표가 나뉜대.'],['mom','smile','그건 맞는 말이야.'],['me','smile','응. 근데 나뉘어도 셋 다 나가기로 했어.'],['mom','smile','그래. 진짜 판이네.'],['me','laugh','응. 연습 판도 없어.']]}},
 
 // ■ Day 16R — 진짜 판 (15)
-{title:'진짜 판',scene:'jiho_15',place:'field',at:[900,330],with:[['junho',740,380],['haeun',1060,380],['youngmin',1180,450],['yena',620,470],['hyeeun',960,520]],
+{title:'진짜 판',scene:'jiho_15',place:'field',at:[900,430],with:[['junho',740,380],['haeun',1060,380],['youngmin',1180,450],['yena',620,470],['hyeeun',960,520]],
  things:{field:[['ball',1100,560,42]]},
  pre:[
   ['nar','','쉬는 시간. 운동장 가장자리, 처음 지호를 만났던 자리. 지호가 {@ball}을 발밑에 두고 기다리고 있었다.'],
