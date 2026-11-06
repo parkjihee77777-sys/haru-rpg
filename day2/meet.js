@@ -17,9 +17,10 @@ const HOME_NAME={ko:'우리 나라 말',en:'English',id:'bahasa Indonesia',vi:'t
 const _d2People=d2People;
 d2People=function(id){const eps=D2IDS.map(f=>[f,epNext(f,EPIDX[f])]).filter(x=>x[1]);const moved=new Set();
  for(const[f,e]of eps){moved.add(f);(e.with||[]).forEach(w=>moved.add(w[0]))}
- const ps=_d2People(id).filter(p=>!moved.has(p[0]));
+ const gone=(window.GONE&&GONE.day===DAY)?GONE.ids.filter(f=>PICKS.includes(f)):[];// a kid who left school today (Junho to the nurse and home) is not drawn back on the maps
+ const ps=_d2People(id).filter(p=>!moved.has(p[0])&&!gone.includes(p[0]));
  // each kid stands in one spot only: a friend's own scene first, then the kids other scenes here bring along (several scenes may list the same kid)
- const here=new Set();for(const[f,e]of eps)if(e.place===id&&!here.has(f)){here.add(f);ps.push(e.at[2]==='stand'?[f,e.at[0],e.at[1],null,'stand']:[f,e.at[0],e.at[1]])}
+ const here=new Set();for(const[f,e]of eps)if(e.place===id&&!here.has(f)&&!gone.includes(f)){here.add(f);ps.push(e.at[2]==='stand'?[f,e.at[0],e.at[1],null,'stand']:[f,e.at[0],e.at[1]])}
  // a kid whose own story today happens somewhere else (and isn't done yet) stands only there, where it will happen;
  // another friend's scene here that brings them along adds them when that scene starts (d2Talk)
  const ownElsewhere=w=>{const e2=epNext(w,EPIDX[w]);return e2&&e2.place&&e2.place!==id&&!PICKS.includes(w)};
@@ -131,6 +132,8 @@ function runSteps(steps,choice,done){const q=(steps||[]).slice();
    if(s.only||s.flag){q.shift();const ok=s.only?s.only.includes(choice):(+!!FLAGS[s.flag])===s.is;if(ok)q.unshift(...s.lines);continue}
    if('pic' in s){q.shift();const pic=s.pic;lines.push(()=>showPic(pic));continue}
    if(s.lay||s.clear){q.shift();lines.push(()=>layThings(s.lay,s.clear));continue}
+   // {map:'name',tap:[[k,x,y,r]…]} from that line on the map shows maps/name.jpg instead (a version with someone drawn in) and those spots can be tapped; leaving the map undoes both
+   if(s.map){q.shift();const m=s.map,t=s.tap;lines.push(()=>{mapimg.src=`maps/${m}.jpg`;for(const o of t||[]){const a=o.slice();a.laid=1;(OBJ[MAP]=OBJ[MAP]||[]).push(a)}tagAll()});continue}
    // {move:[id,x,y]} a kid walks to that spot from that line on (comes in from the door if not on this map); {move:[id,x,y,'out']} walks out and leaves
    if(s.move){q.shift();const m=s.move;lines.push(()=>moveKid(m));continue}
    // {me:[x,y]} I walk there from that line on, even while the lines go on (to my own seat when the scene says I am at it)
