@@ -362,7 +362,7 @@ EP.hyeeun=[
  taps:{hall:[['door',1058,232,45]]},
  pre:[
   ['nar','','체육이 끝났다. 반 아이들이 한꺼번에 교실 앞문으로 몰려들었다. 다들 땀에 젖어 물을 마시러 가려고 서둘렀다.'],
-  {lay:[['box',1430,650,58,'milk_crate'],['box',1500,700,58,'milk_crate']]},
+  {lay:[['box',1395,822,58,'milk_crate_empty','stay'],['box',1468,872,58,'milk_crate_empty','stay']]},// on the floor in front of the door, empty crates (they floated on the door, full of milk; owner 11/06)
   ['nar','','앞문 바로 앞 복도에는 빈 우유 {@box} 두 개가 놓여 있었다. 아침에 우유 당번이 두고 간 것이었다. 앞{@door|에는} 손가락 두 마디쯤 되는 문턱도 있었다.'],
   ['nar','','뒷{@door|은} 늘 잠겨 있었다. 복도 소리가 들어온다고 아침마다 잠가 두었다.'],
   ['nar','','혜은이는 줄 맨 뒤에 있었다. 다른 아이들처럼 차례를 기다리고 있었다.'],
