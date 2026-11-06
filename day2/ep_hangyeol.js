@@ -452,9 +452,10 @@ EP.hangyeol=[
  post:[
   {k:'stairs',goal:'「{x}」 피해서 걷기'},
   ['nar','','5학년들이 내려간 {@stairs} 반대쪽 복도로 교실에 갔다.'],
-  {go:'class'},{pic:'hangyeol_09b'},
+  {go:'class'},
   ['nar','','교실. 나는 담임 선생님께 본 걸 말씀드렸다.'],
-  {only:['A','C'],lines:[['nar','','한결이도 옆에 있었다.']]},
+  // 09b shows Hangyeol beside the hero, so only when he came along (A, C)
+  {only:['A','C'],lines:[{pic:'hangyeol_09b'},['nar','','한결이도 옆에 있었다.']]},
   {only:['B','D'],lines:[['nar','','한결이 없이, 나 혼자 말씀드렸다. 아까 일이 계속 생각났다.']]},
   ['me','sad','5학년 애들이 한결이한테 남자냐 여자냐, 치마 입어 보라고 놀렸어요. {@hair_tie}도 잡으려고 했어요.'],
   ['nar','','선생님: 「말해 줘서 고마워. 몇 명이었는지, 얼굴 기억나니?」'],
