@@ -32,7 +32,7 @@ const NATIVE_BY={2:{
   ['hoodie',1405,675,38],['curtain',1600,230,60]].concat(BAGS),
  hall:[['bag',645,255,30],['radio',720,548,30],['battery',700,588,12],['umbrella',210,620,40],['ice',1175,585,26],['ice',1130,610,18],['locker',1240,470,80],['locker',970,195,40],['bench',655,320,50],['bench',715,560,60]],
  field:[['ball',460,540,24],['flag',1595,325,28],['whistle',1385,278,16],['stopwatch',1385,770,16],['bandage',1415,752,16],['cup',78,718,14],['bench',1400,778,50],['bench',60,728,50],['bench',790,150,40],['bench',900,135,40]],
- cafe:[['tray',440,625,34],['chopsticks',487,660,16],['trash_can',1440,570,40],['milk_carton',1505,500,18],['bread',1655,540,20],['cart',195,775,60],['straw',222,735,14],['milk_carton',175,770,14],
+ cafe:[['tray',440,625,34],['chopsticks',487,660,16],['trash_can',1440,570,40],['bread',1655,540,20],['cart',195,775,60],['straw',222,735,14],
   ['cup',840,505,16],['apple',1175,355,16],['table',390,600,100],['table',760,470,100],['table',1040,355,80],['table',1350,740,110]]}};
 const NATIVE={};
 // tapping a person while finding: Hyeeun's wheelchair (upper part) or its wheel (lower part)
