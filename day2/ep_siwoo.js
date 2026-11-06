@@ -157,7 +157,7 @@ EP.siwoo=[
   common:[['me','smile','2번은 내가 적어야 돼. {m}, 이상한 말 하나 알려 줘.'],['mom','smile','음…… ‘발이 넓다’?'],['me','surprised','……발이 크다는 거야?'],['mom','smile','그거 2번으로 적어.'],['dad','smile','{d}도 하나 줄게. ‘귀가 얇다.’']]}},
 
 // ■ Day 5 — 숟가락 소리 (4)
-{title:'숟가락 소리',scene:'siwoo_04',place:'cafe',at:[1010,700],sit:[1210,705],
+{title:'숟가락 소리',scene:'siwoo_04',place:'cafe',at:[1202,726],sit:[1202,722,165],
  things:{cafe:[['earmuffs',1085,770,46]]},
  pre:[
   ['nar','','점심시간 급식실. 시끄러웠다. 수백 명이 한꺼번에 떠들고, {@tray}이 부딪치고, {@chair}가 끌렸다.'],
@@ -168,12 +168,12 @@ EP.siwoo=[
   {pic:'siwoo_04d'},
   ['nar','','쨍그랑—!'],
   ['nar','','바로 뒷자리에서 누가 쇠 {@tray}을 떨어뜨렸다. {@spoon}이 바닥에서 튀었다.'],
-  {lay:[['spoon',940,745,40]]},
+  {lay:[['spoon',895,692,60]]},
   {k:'spoon',goal:'「{x}」 줍기'},
   {clear:['spoon']},
   {pic:'siwoo_04'},
   ['nar','','{@spoon}을 줍고 고개를 들었다. 시우가 없었다.'],
-  ['nar','','시우는 {@desk} 밑에 있었다. 두 손으로 귀를 꽉 막고, 무릎에 얼굴을 묻은 채 몸을 앞뒤로 흔들고 있었다.'],
+  ['nar','','시우는 {@table} 밑에 있었다. 두 손으로 귀를 꽉 막고, 무릎에 얼굴을 묻은 채 몸을 앞뒤로 흔들고 있었다.'],
   ['siwoo','sad','……소리…… 커…… 아파…… 아파……'],
   ['nar','','주변 아이들이 하나둘 일어나 몰려들었다.'],
   ['nar','','아이: 「시우 왜 저래?」'],
@@ -188,15 +188,15 @@ EP.siwoo=[
    ['me','smile','다들 조금만 떨어져 줘. 조용히. 시우 지금 소리 때문에 힘들어.'],['nar','','아이: 「소리 때문에?」'],['me','smile','응. 쳐다보지 말고 자리로 가 줘.'],
    {pic:'siwoo_04e'},
    ['nar','','몇 명이 머뭇거리다 자리로 돌아갔다. 몇 명은 더 서 있었다. 그래도 시우 주변이 조금 넓어졌다.'],
-   ['nar','','나는 시우가 볼 수 있게 내 {@tray}을 조금 밀어서 {@desk} 위 30센티 바깥에 두었다. 그리고 그 자리에 가만히 앉아 있었다.']]},
+   ['nar','','나는 시우가 볼 수 있게 내 {@tray}을 조금 밀어서 {@table} 위 30센티 바깥에 두었다. 그리고 그 자리에 가만히 앉아 있었다.']]},
   {k:'B',text:'시우 옆에 쪼그려 앉아 어깨를 감싸 준다. 「괜찮아, 괜찮아.」',pts:{siwoo:0},r:[
-   ['nar','','나는 {@desk} 밑으로 들어가 시우 어깨를 감싸 안았다.'],['me','smile','괜찮아, 괜찮아.'],['nar','','시우가 몸을 더 웅크렸다. 흔들림이 더 커졌다.'],
+   ['nar','','나는 {@table} 밑으로 들어가 시우 어깨를 감싸 안았다.'],['me','smile','괜찮아, 괜찮아.'],['nar','','시우가 몸을 더 웅크렸다. 흔들림이 더 커졌다.'],
    ['siwoo','sad','……만지…… 지 마…… 아파……'],['nar','','나는 깜짝 놀라 손을 뗐다.'],['think','sad','(위로하려고 한 건데…… 더 힘들게 했어. 만져도 되냐고 물어봤어야 했어.)']]},
   {k:'C',text:'급식실 앞에 계신 선생님께 뛰어간다.',pts:{siwoo:2},r:[
    {pic:'siwoo_04f'},
-   ['nar','','나는 급식실 입구에 계신 담임 선생님께 뛰어갔다.'],['me','surprised','선생님! 시우가 {@desk} 밑에 있어요. 귀 막고 있어요. 애들이 몰려들어요.'],
+   ['nar','','나는 급식실 입구에 계신 담임 선생님께 뛰어갔다.'],['me','surprised','선생님! 시우가 {@table} 밑에 있어요. 귀 막고 있어요. 애들이 몰려들어요.'],
    ['nar','','선생님: 「알려 줘서 고마워. 같이 가자.」']]},
-  {k:'D',text:'{@desk} 밑을 들여다보며 계속 말을 건다. 「시우야, 나와. 이제 괜찮아. 나와 봐.」',pts:{siwoo:1},r:[
+  {k:'D',text:'{@table} 밑을 들여다보며 계속 말을 건다. 「시우야, 나와. 이제 괜찮아. 나와 봐.」',pts:{siwoo:1},r:[
    ['me','smile','시우야, 나와. 이제 괜찮아. 소리 끝났어. 나와 봐.'],['nar','','시우는 대답하지 않았다. 나는 계속 불렀다.'],['me','surprised','시우야, 시우야.'],
    ['siwoo','sad','……말…… 하지 마……'],['think','sad','(내 목소리도 시우한테는 소리였구나.)']]}],
  post:[
@@ -217,7 +217,7 @@ EP.siwoo=[
   ['nar','','선생님: 「몰려들지 않기. 쳐다보지 않기. 큰 소리로 부르지 않기. 그게 제일 큰 도움이에요.」'],
   ['nar','','선생님: 「그리고 오늘부터 교실 뒤에 ‘쉬는 자리 카드’를 둘게요. 소리 때문이든, 기분 때문이든, 누구든 힘들면 카드를 들고 조용한 자리에 가서 쉬어도 돼요.」'],
   ['nar','','선생님은 끝까지 시우 이름을 말씀하지 않으셨다.']],
- eve:{lead:[['me','sad','{m}, 오늘 급식실에서 누가 {@tray}을 떨어뜨렸는데, 시우가 {@desk} 밑으로 들어갔어. 귀 막고 몸을 막 흔들었어.'],['mom','sad','……많이 놀랐겠다. 시우도, 너도.'],['me','sad','애들이 떼쓰는 거냐고, 아기 같다고 했어.']],
+ eve:{lead:[['me','sad','{m}, 오늘 급식실에서 누가 {@tray}을 떨어뜨렸는데, 시우가 {@table} 밑으로 들어갔어. 귀 막고 몸을 막 흔들었어.'],['mom','sad','……많이 놀랐겠다. 시우도, 너도.'],['me','sad','애들이 떼쓰는 거냐고, 아기 같다고 했어.']],
   A:[['me','smile','나는 애들한테 떨어져 달라고, 쳐다보지 말라고 했어. 몇 명은 갔어.'],['mom','surprised','그 말 하기 쉽지 않았겠다.'],['me','sad','나도 급식실은 시끄러워서 좀 힘들거든. 시우는 그게 훨씬 큰가 봐.']],
   B:[['me','sad','시우 어깨를 감싸 줬는데, 시우가 더 힘들어했어. 만지지 말래.'],['mom','smile','위로하고 싶었구나.'],['me','sad','응. 근데 그게 시우한텐 더 힘든 거였어.'],['mom','smile','사람마다 편한 위로가 다르지. 그래서 만지기 전에 먼저 물어보는 거야. 이제 시우한텐 어떤 게 좋은지 하나 알았네.']],
   C:[['me','smile','선생님께 바로 뛰어갔어. 선생님이 {@earmuffs} 갖고 오셨어.'],['mom','relieved','선생님이 오셔서 다행이다.'],['me','smile','응. 선생님은 시우 바로 앞에 안 앉고 좀 떨어져서 기다리셨어.']],
@@ -840,7 +840,7 @@ window.EP_WORDS_SW={
 
 // ---- what Siwoo's scenes need from the engine (on top of meet.js, ep_sua.js, ep_hangyeol.js) ----
 {const add=window.EP_WORDS_SW;for(const[k,w]of Object.entries(add))if(!D2WORDS[k])D2WORDS[k]=w;d2Merge()}
-for(const k of Object.keys(EP_WORDS_SW))CARDS_HAVE.add(k);
+for(const k of Object.keys(EP_WORDS_SW).concat(['table']))CARDS_HAVE.add(k);// table: the cafeteria table card (cards/table.jpg, cut from maps/cafe.jpg 11/06)
 // the music room (Day 15), drawn for Siwoo's scenes
 Object.assign(EXTRA_MAPS,{
  music:{name:'음악실',img:'maps/music.jpg',walk:[[[290,370],[700,290],[1000,260],[1240,360],[1400,580],[1520,660],[1500,941],[700,941],[640,780],[570,720],[560,560],[420,470],[170,440]]],block:[R(660,380,1330,780)],start:[1000,860],out:[240,400]}});
@@ -855,9 +855,9 @@ for(const id of ['music']){const m=EXTRA_MAPS[id];MAPS[id]={img:m.img,walk:m.wal
   setDay(day);PICKS=['siwoo'];EPIDX.siwoo=k-1;TODAYEP.siwoo=EP.siwoo[k-1];MEET.siwoo=k;D2CHOICE.siwoo='C';
   stage='d2_after';load('class');useDoor()},90)}
 // stand:1 = he stands where his scene says (meetings 1, 5, 15: at the window; 12: just outside 30 cm of the hero's desk), not at a desk; spots.js seats every kid with sitting art, so this runs after it
-// sit:[x,top] = he sits at that chair (top = the chair back's top) where the classroom seats don't reach: the cafeteria table (4), the music room desk (14)
+// sit:[x,top,h?] = he sits at that chair (x = his middle, top = the chair back's top, where his cut-off back ends; h = a smaller sprite for the cafeteria's smaller drawn chairs, 11/06) where the classroom seats don't reach: the cafeteria table (4), the music room desk (14)
 addEventListener('load',()=>{const _dpSw=d2People;d2People=function(id){const ps=_dpSw(id),e=epNext('siwoo',EPIDX.siwoo);
- if(e&&e.place===id){const p=ps.find(p=>p[0]==='siwoo');if(p&&e.stand){p[1]=e.at[0];p[2]=e.at[1];p.length=3}else if(p&&e.sit){p[1]=e.sit[0];p[2]=0;p[3]={top:e.sit[1]}}}return ps}});
+ if(e&&e.place===id){const p=ps.find(p=>p[0]==='siwoo');if(p&&e.stand){p[1]=e.at[0];p[2]=e.at[1];p.length=3}else if(p&&e.sit){p[1]=e.sit[0];p[2]=0;p[3]={top:e.sit[1],h:e.sit[2]}}}return ps}});
 
 // eve lines may hold {flag,is,lines} blocks (meeting 5 commonIf, W02_ask); dinner does not run them through runSteps, so unwrap here
 addEventListener('load',()=>{const _epSw=evePart;evePart=function(id){const ls=_epSw(id);if(id!=='siwoo')return ls;const out=[];const ex=a=>a.forEach(s=>{if(s&&!Array.isArray(s)&&typeof s==='object'&&'flag' in s){if((+!!FLAGS[s.flag])===s.is)ex(s.lines)}else out.push(s)});ex(ls);return out}});
