@@ -384,7 +384,7 @@ EP.seah=[
   ['think','smile','(제일 먼저 봤어. 영민이 {@spoon} 떨어진 거.)'],
   ['think','sad','(자리 맡으려고 가져온 {@spoon|이었}는데.)'],
   ['nar','','밥을 다 먹고 {@milk|를} 땄다. 오늘 {@milk|는} 딸기 맛이었다.'],
-  {lay:[['milk',1300,520,30]]},
+  {lay:[['milk',1340,722,30]]},// on the table top, not the floor (owner 11/06)
   {k:'milk',goal:'「{x}」 마시기'},
   ['nar','','{@milk|를} 열어 마셨다.'],
   {clear:['milk']},
