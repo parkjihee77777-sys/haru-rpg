@@ -5,7 +5,7 @@
 window.EP=window.EP||{};
 EP.haram=[
 // ■ Day 2 — 30초 노래 (1)
-{title:'30초 노래',scene:'haram_01',place:'cafe',at:[660,720],
+{title:'30초 노래',scene:'haram_01',place:'cafe',at:[520,850],
  things:{cafe:[['tofu',530,640,34]]},
  pre:[
   {pic:'haram_d02_arrive'},['nar','','점심시간 급식실. 나는 {@tray|을} 들고 빈자리를 찾았다. 창가 자리에 하람이가 혼자 앉아 있었다.'],
@@ -116,8 +116,8 @@ EP.haram=[
   D:[['me','smile','뭐 하는지 먼저 물어봤어. 손님은 노래 안 해도 된대. 하람이 이모부도 안 한대. 그냥 국 먹고 {@moon} 본대.'],['mom','surprised','자세히 물어봤구나. 하람이 동생은?'],['me','laugh','맨날 고기 안 나와서 고마웠다고 한대.'],['mom','laugh','엄마가 하람이 엄마랑 통화해 볼게. 괜찮으면 다녀와.']]}},
 
 // ■ Day 4 — 끌려간대 (3)
-{title:'끌려간대',scene:'haram_03',place:'hall',at:[820,420],with:[['haeun',880,640]],
- things:{hall:[['note',900,730,30],['pencil',640,380,30]]},
+{title:'끌려간대',scene:'haram_03',place:'hall',at:[920,520],with:[['haeun',1120,600]],
+ things:{hall:[['note',900,730,40],['pencil',640,380,30]]},
  pre:[
   {pic:'haram_03'},
   ['nar','','쉬는 시간. 하람이한테 가려고 복도로 나왔다. 그런데 하은이가 「잠깐만!」 하고 나를 불러 세웠다.'],
@@ -242,7 +242,7 @@ EP.haram=[
   common:[['mom','sad','미리 말하고 자기 몫을 하면 무임승차가 아니야. 하람이한테 그 말은 억울했겠다.'],['me','smile','하람이가 오늘 보름달 엄청 클 거래. 나도 보래.'],['mom','smile','그럼 밥 먹고 같이 보자.']]}},
 
 // ■ Day 6 — 반 전체 노래? (5) ★
-{title:'반 전체 노래?',scene:'haram_05',place:'cafe',at:[660,720],with:[['yena',540,760],['junho',800,760]],flag:{R06_D:{D:1}},
+{title:'반 전체 노래?',scene:'haram_05',place:'cafe',at:[520,850],with:[['yena',400,880],['junho',600,880]],flag:{R06_D:{D:1}},
  things:{cafe:[['spoon',600,650,38]],class:[['clock',1040,186,46]]},
  pre:[
   ['nar','','점심시간. 하람이랑 같은 테이블에 앉았다. 하람이가 감사 노래를 마치고 눈을 떴다.'],
@@ -314,7 +314,7 @@ EP.haram=[
   common:[['me','surprised','{m}, 할머니가 밥 먹기 전에 뭐라고 하셨는지 알아냈어?'],['mom','smile','응. 전화로 여쭤봤지. 들어 봐.'],['nar','','{m|가} {HL}로 짧게 말씀하셨다. 할머니 목소리랑 똑같았다.']]}},
 
 // ■ Day 7 — 한 입만 (6)
-{title:'한 입만',scene:'haram_06',place:'cafe',at:[660,720],with:[['junho',800,760]],
+{title:'한 입만',scene:'haram_06',place:'cafe',at:[520,850],with:[['junho',600,880]],
  things:{cafe:[['ladle',560,300,44],['tofu',610,650,34]]},
  pre:[
   ['nar','','점심시간. 오늘 반찬은 불고기였다. 급식 줄 맨 끝에서 하람이가 조리사 선생님께 따로 작은 그릇을 받고 있었다.'],
@@ -982,6 +982,13 @@ for(const id of ['rooftop']){const m=EXTRA_MAPS[id];MAPS[id]={img:m.img,walk:m.w
   const e=EP.haram[n-1];walk(e.pre||[]);walk(e.post||[]);for(const c of e.choices)walk(c.r||[]);if(!hit)console.warn('haram: no line',n,sub)};
  at(10,'예나가 {@book|을} 탁 덮고 도서관을 나가',kidOff('yena'));            // A: Yena walks out of the library
  at(11,'그때 하은이가 신발장 앞으로 왔다',kidOn('haeun',800,560),true);      // Haeun comes to the shoe lockers later
+ // 3: Haeun stops me before I reach Haram, so Haram waits at the far end of the hallway and only comes over when a line says she came (11/06 check)
+ {const hrNear=()=>({clear:[...kidOff('haram').clear,...kidOn('haram',960,440).clear]});
+  at(3,'쉬는 시간. 하람이한테 가려고 복도로',kidOff('haram'),true);
+  at(3,'복도 끝에서 하람이가 우리 쪽으로',kidOn('haram',900,260));
+  at(3,'그때 하람이가 왔다',hrNear());
+  at(3,'하람아, 너네 집 사이비야?',hrNear(),true);
+  at(3,'하람이 퀴즈 {@paper|와} 같이',hrNear(),true)}
  at(11,'하은이가 먼저 나갔다',kidOff('haeun'));
  at(13,'오늘은 {HC} 명절이었다',kidOff('haram'),true);                       // I sit alone on the rooftop; Haram looks in at the stair window later
  at(13,'하람이가 옆에 앉았다',kidOn('haram',720,640),true)}
@@ -989,7 +996,7 @@ for(const id of ['rooftop']){const m=EXTRA_MAPS[id];MAPS[id]={img:m.img,walk:m.w
 // (3 C: the classroom without Haeun; 10 A·B: the classroom at closing time; 11: the shoe lockers, then the sunny front gate (gatesun, drawn for Hyeeun) without Haeun; 14 A: Haram alone at another cafeteria table)
 EP.haram[2].goOff={class:['haeun']};
 EP.haram[10].goAt={hall:[980,700],gatesun:[780,510]};EP.haram[10].goOff={hall:['haeun'],gatesun:['haeun']};
-EP.haram[13].goAt={cafe:[1210,760],hall:[420,560]};EP.haram[13].goOff={cafe:['junho']};
+EP.haram[13].goAt={cafe:[330,880],hall:[420,560]};EP.haram[13].goOff={cafe:['junho']};
 {const _loadHr=load;load=function(m,x){const r=_loadHr(m,x),e=SCENE_EP;
   if(e&&SCENE_IDS&&SCENE_IDS[0]==='haram'){const off=(e.goOff&&e.goOff[m])||[],a=e.goAt&&e.goAt[m];
    npcs=npcs.filter(p=>{if(!off.includes(p.id)&&!(a&&p.id==='haram'))return true;p.el.remove();return false});
