@@ -871,7 +871,10 @@ function josa(w,p){const c=w.charCodeAt(w.length-1)-0xAC00;if(c<0||c>11171)retur
  const P={'을':['을','를'],'은':['은','는'],'이':['이','가'],'이라고':['이라고','라고'],'이랑':['이랑','랑'],'으로':['으로','로'],'아':['아','야']}[p];if(!P)return p;
  if(p==='으로'&&jong===8)return'로';return jong?P[0]:P[1]}
 {const _tr3=tr;tr=function(s){const t=_tr3(s);if(t==null||t.indexOf('{')<0)return t;const ko=UI==='ko',H=ko?(HERO_HOME[LANG]||HERO_HOME.vi).ko:(HERO_HOME[UI]||HERO_HOME.vi).ui||HERO_HOME.vi.ui,g=HERO==='hero_m'?0:1;
- return t.replace(/\{HC\}/g,H[0]).replace(/\{HL\}/g,H[1]).replace(/\{(HN|SN)(?:\|([^}]*))?\}/g,(m,k,p)=>{const w=(k==='HN'?H[2]:H[3])[g];return p&&ko?w+josa(w,p):w})}}
+ return t.replace(/\{HC\}/g,H[0]).replace(/\{HL\}/g,H[1]).replace(/\{(HN|SN)(?:\|([^}]*))?\}/g,(m,k,p,o,all)=>{let w=(k==='HN'?H[2]:H[3])[g];
+  // a Korean first name ending in a consonant takes 이 before a particle, as people say it (미린이한테, 미린이도, 미린이는); not before 입니다 or when calling (미린아)
+  if(ko&&k==='SN'&&p!=='아'&&(w.charCodeAt(w.length-1)-0xAC00)%28&&(p||/^[가-힣]/.test(all.slice(o+m.length))&&!/^입/.test(all.slice(o+m.length))))w+='이';
+  return p&&ko?w+josa(w,p):w})}}
 // test shortcuts: #hg5 = the morning of the day you meet Hangyeol the 5th time (Day 6); #hg5eve = that evening;
 // #hgm5eve = Minho and Hangyeol the same day, #hgs5eve = Sua and Hangyeol; #hg13b = Day 14 with H04_name off
 {const h=location.hash.match(/^#hg([ms]?)(\d+)(eve|b)?$/);
