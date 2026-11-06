@@ -226,7 +226,7 @@ EP.siwoo=[
 
 // ■ Day 6 — 12일째 (5) ★
 {title:'나비 나오는 날',scene:'siwoo_05',place:'class',at:[310,262],stand:1,with:[['haeun',540,270]],
- things:{class:[['milk_carton',150,232,38,'milk_carton_cut'],['butterfly',196,206,40]]},taps:{class:[['window',95,120,70]]},
+ things:{class:[['milk_carton',172,236,38,'milk_carton_cut','stay'],['butterfly',176,188,40,null,'stay']]},taps:{class:[['window',95,120,70]]},
  pre:[
   {pic:'siwoo_05b'},
   ['nar','','아침. 교실에 들어서자 시우가 창가에 서 있었다. 꼼짝도 하지 않고 {@milk_carton}만 보고 있었다. 손만 작게 펄럭였다.'],
