@@ -63,7 +63,7 @@ EP.minho=[
   common:[['mom','sad','이름 글자를 지렁이라고 하는 건 장난이 아니라 놀림이야. 네 이름은 네 이름이야.'],['mom','smile','이름표, {m|가} 새로 써 줄까?'],['me','smile','아니. 이거 그냥 쓸래.']]}},
 
 // ■ Day 3 — 세 번째 공 (2)
-{title:'세 번째 공',scene:'minho_02',place:'field',at:[560,600],with:[['youngmin',700,650]],
+{title:'세 번째 공',scene:'minho_02',place:'field',at:[560,600],with:[['youngmin',430,670]],
  pre:[
   {pic:'minho_02a'},['nar','','운동장 구석에서 민호가 {@ball|을} 발로 굴리고 있었다. 내가 다가가자 민호가 손을 흔들었다.'],
   ['minho','laugh','어, 전학생! 너 {@ball} 찰 줄 알아?'],
@@ -153,7 +153,7 @@ EP.minho=[
   common:[['dad','smile','그 {@cat}, 이름은 있어?'],['me','smile','아직 없어.']]}},
 
 // ■ Day 5 — 봉투는 누가? (4)
-{title:'봉투는 누가?',scene:'minho_04',place:'class',at:[330,262],
+{title:'봉투는 누가?',scene:'minho_04',place:'class',at:[330,262,'stand'],
  things:{class:[['envelope',680,192,56]]},// at the foot of the wall under the blackboard's left end (「칠판 아래 좁은 틈」), clear of the wall clock and the blackboard tap
  pre:[
   {pic:'minho_04'},
@@ -196,8 +196,8 @@ EP.minho=[
   ['minho','angry','……거봐.'],
   ['nar','','선생님: 「민호가 억울했겠다. 그리고 다들, 확인하기 전에 누구라고 정하지 말자. 민호도 마찬가지야. {SN}한테 교탁 얘기했지?」'],
   ['minho','sad','……네.'],
-  ['nar','','민호는 사과하지 않았다. 대신 내 옆을 지나가며 작게 말했다.'],
   ['nar','','선생님: 「그리고 아까 「열어 봐」 하고 한 사람한테 몰려든 것도 하지 말자. {@bag|은} 본인이 보여 주고 싶을 때만이야.」'],
+  ['nar','','민호는 사과하지 않았다. 대신 내 옆을 지나가며 작게 말했다.'],
   ['minho','relieved','찾아서 다행이다.'],
   ['think','sad','(증거도 없이 의심받는 거, 진짜 싫다. 오늘 처음 알았어.)']],
  eve:{lead:[['me','sad','{m}, 오늘 알뜰장터 돈 {@envelope|가} 없어졌어. 애들이 민호가 가져갔다고 수군거렸어.'],['mom','surprised','민호가 그랬대?'],['me','sad','아니. 근데 민호가 나보고 너도 교탁 정리했잖아, 그러는 거야. 오늘 내가 당번이었거든.'],['mom','surprised','어머, 너까지 의심받았어?']],
@@ -208,7 +208,7 @@ EP.minho=[
   common:[['me','smile','{@envelope}, 내가 찾았어. {@blackboard} 아래 틈에서.'],['mom','laugh','어머, 우리 탐정이네.']]}},
 
 // ■ Day 6 — 저눈 반장 손거 (5) ★
-{title:'다시 한 번 말할게',place:'class',scene:'minho_05',at:[1300,262],
+{title:'다시 한 번 말할게',place:'class',scene:'minho_05',at:[1300,262,'stand'],
  things:{class:[['notebook',1250,300,40]]},
  pre:[
   ['nar','','다음 국어 시간에 「나의 꿈」을 한 문장씩 발표해야 했다. 민호가 사물함 앞에 서 있어서 나는 그쪽으로 갔다.'],
@@ -258,7 +258,7 @@ EP.minho=[
   common:[['mom','surprised','근데 진짜 반장 선거 나가?'],['me','smile','응. 이제 반 애들 다 알아.'],['mom','laugh','그럼 이제 진짜네.']]}},
 
 // ■ Day 7 — 청소 당번 땡땡이 (6)
-{title:'청소 당번 땡땡이',scene:'minho_06',place:'class',at:[1380,330],
+{title:'청소 당번 땡땡이',scene:'minho_06',place:'class',at:[1380,330,'stand'],
  things:{class:[['ball',1205,282,34],['broom',1450,450,90]]},// the broom lies on the floor by the shelf, clear of Minho (the poles behind the plant were not clearly a broom)
  pre:[
   {pic:'minho_06a'},['nar','','청소 시간. 내 당번 구역은 교실 뒤쪽이었다. 민호도 같은 당번인데, 사물함 옆에서 {@ball}만 튕기고 있었다.'],
@@ -500,7 +500,7 @@ EP.minho=[
   D:[['me','sad','나도 안 했다고 거짓말했어. 근데 숙제 낼 때 들켰어.'],['mom','surprised','민호가 뭐래?'],['me','sad','했잖아! 하고 소리쳤어. 엄청 어색했어.'],['dad','sad','그냥 싫다고 하는 것보다 더 어색해졌네.'],['me','sad','……응.']]}},
 
 // ■ Day 13 — 초코우유 (12)
-{title:'초코우유',scene:'minho_12',place:'class',at:[1060,800],
+{title:'초코우유',scene:'minho_12',place:'class',at:[1060,800,'stand'],
  things:{class:[['milk',930,830,92,'milk_crate']]},
  pre:[
   {pic:'minho_12a'},
@@ -536,7 +536,7 @@ EP.minho=[
 
 // ■ Day 14 — 내 그림 지붕의 뿔 (13)
 {title:'내 그림 지붕의 뿔',scene:'minho_13',place:'hall',at:[430,430],
- taps:{hall:[['picture',115,215,55],['picture',185,330,45],['picture',60,420,45]]},
+ taps:{hall:[['picture',185,330,45],['picture',60,420,45]]},
  things:{hall:[['tape',330,560,32]]},
  pre:[
   {pic:'minho_13a'},['nar','','복도 게시판에 미술 시간에 그린 「우리 동네」 {@picture|이} 붙어 있었다. 내 {@picture}도 있었다. 할머니네 집 지붕을 그린 {@picture}이었다.'],
