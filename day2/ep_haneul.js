@@ -535,7 +535,7 @@ EP.haneul=[
    ['mom','smile','응. 엄마한테도 안 보여 줘도 돼.']]}},
 
 // ■ Day 6 — 방송에 나온 이름 (5)
-{title:'방송에 나온 이름',scene:'haneul_05',place:'class',at:[1405,860],with:[['jiho',1120,830],['jihoon',1180,700],['yena',1060,600]],goAlone:{hall:['A','B','C','D'],class:['A','B','C','D']},things:{class:[['tv',1275,225,120]]},
+{title:'방송에 나온 이름',scene:'haneul_05',place:'class',at:[1405,860],with:[['jiho',1120,830],['jihoon',1180,700],['yena',1060,600]],goAlone:{hall:['A','B','C','D'],class:['A','B','C','D']},things:{class:[['tv',1290,122,80]]},
  pre:[
   ['nar','','아침 방송 시간. 선생님이 교실 앞 {@tv|을} 켜셨다.'],
   ['teacher','smile','선생님 교무실에 잠깐 다녀올게요. 자리에서 방송 봐요. 금방 와요.'],
