@@ -376,7 +376,7 @@ EP.jiho=[
 
 // ■ Day 6 — 지붕 위의 공 (5) ★
 {title:'지붕 위의 공',scene:'jiho_05',place:'field',at:[1400,430],with:[['junho',1250,470],['haeun',1180,560]],flag:{J06_stop:{A:1,C:1}},
- taps:{field:[['roof',1628,182,48]]},// the ball is laid, kicked away, then sits on the roof (it stayed on the ground all along, owner 11/06)
+ taps:{field:[['roof',1545,95,55]]},// the ball is laid, kicked away, then sits on the roof (it stayed on the ground all along, owner 11/06)
 
  pre:[
   {lay:[['ball',1290,520,42]]},
@@ -391,10 +391,10 @@ EP.jiho=[
   {clear:['ball']},
   ['nar','','퉁. 퉁. ……데구루루.'],
   ['nar','','{@ball}이 창고 {@roof} 위에서 몇 번 튀다가 멈췄다.'],
-  {lay:[['ball',1622,168,24,null,'stay']]},
+  {lay:[['ball',1545,98,24,null,'stay']]},
   ['nar','','아이들: 「아아아—!」'],
   {k:'roof',goal:'「{x}」 올려다보기'},
-  ['nar','','창고 {@roof} 가장자리에 {@ball}이 걸려 있었다. 어른 키의 두 배쯤 높았다.'],
+  ['nar','','창고 {@roof} 가장자리에 {@ball}이 걸려 있었다. 어른 키보다 훨씬 높았다.'],
   ['junho','surprised','{@ball} 그거 하나밖에 없는데!'],
   {pic:'jiho_05'},
   ['nar','','지호가 창고 벽을 올려다봤다.'],
