@@ -21,7 +21,7 @@ const WORDPIC={
  minho_07:{ball:'ball_dodge'},siwoo_11:{ball:'ball_dodge'},hangyeol_04:{ball:'ball_dodge'},
  jiho_09:{ice:'ice_pack'},junho_05:{ice:'ice_pack'},
  sua_11:{glue:'glue_stick'},yuna_08:{glue:'glue_stick'},yuna_10:{glue:'glue_stick'},haram_09:{card:'card_greeting',glue:'glue_stick'},
- haneul_08:{notebook:'notebook_blue'},haneul_10:{notebook:'notebook_blue'},
+ haneul_08:{notebook:'notebook_blue'},haneul_10:{notebook:'notebook_gray'},
  hangyeol_01:{thread:'thread_floss'},hangyeol_12:{thread:'thread_floss'}};
 // which of those pictures are really there (a list, not a network probe: a missing file would show as a page error).
 // When a new picture from list F is added, put its name here (items = cut-out .png, cards = card .jpg).
