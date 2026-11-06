@@ -93,7 +93,7 @@ en: {
  '(엄마가 부엌에 있어. 바닥을 눌러 걸어가 보자.)':'(Mom is in the kitchen. Tap the floor to walk there.)',
  // screens
  '전학생 반장되기':'The New Kid Runs for Class President',
- '말 한마디 못 하는 전학생, 반장 선거에 나가다':'A new student who can’t speak a word runs for class president',
+ '한국말이 아직 서툰 전학생, 반장 선거에 나가다':'A new student still learning Korean runs for class president',
  '누구로 할까요?':'Who will you play?',
  '모드 설명':'Learn Korean · Everything is in English, only the words you learn are Korean',
  '엄마가 말한 「{w}」는 어느 거?':'Which one is the “{w}” Mom said?',
@@ -194,7 +194,7 @@ id: {
  '이사 온 다음 날 아침. 아직 풀지 못한 상자들이 쌓여 있다.':'Pagi setelah pindahan. Kardus-kardus yang belum dibongkar masih menumpuk.',
  '(엄마가 부엌에 있어. 바닥을 눌러 걸어가 보자.)':'(Ibu ada di dapur. Ketuk lantai untuk berjalan ke sana.)',
  '전학생 반장되기':'Murid Baru Jadi Ketua Kelas',
- '말 한마디 못 하는 전학생, 반장 선거에 나가다':'Murid baru yang belum bisa berbahasa Korea ikut pemilihan ketua kelas',
+ '한국말이 아직 서툰 전학생, 반장 선거에 나가다':'Murid baru yang bahasa Koreanya masih terbata-bata ikut pemilihan ketua kelas',
  '누구로 할까요?':'Mau main sebagai siapa?',
  '모드 설명':'Belajar bahasa Korea · Semua dalam bahasa Indonesia, hanya kata yang dipelajari dalam bahasa Korea',
  '엄마가 말한 「{w}」는 어느 거?':'Yang mana “{w}” yang Ibu ucapkan?',
@@ -295,7 +295,7 @@ vi: {
  '이사 온 다음 날 아침. 아직 풀지 못한 상자들이 쌓여 있다.':'Buổi sáng sau hôm chuyển nhà. Những thùng đồ chưa mở vẫn chất đống.',
  '(엄마가 부엌에 있어. 바닥을 눌러 걸어가 보자.)':'(Mẹ đang ở bếp. Chạm vào sàn để đi tới đó.)',
  '전학생 반장되기':'Học sinh mới chuyển trường ứng cử lớp trưởng',
- '말 한마디 못 하는 전학생, 반장 선거에 나가다':'Học sinh mới chưa nói được câu nào ra ứng cử lớp trưởng',
+ '한국말이 아직 서툰 전학생, 반장 선거에 나가다':'Học sinh mới còn chưa thạo tiếng Hàn ra ứng cử lớp trưởng',
  '누구로 할까요?':'Bạn muốn chơi nhân vật nào?',
  '모드 설명':'Học tiếng Hàn · Mọi thứ bằng tiếng Việt, chỉ từ cần học là tiếng Hàn',
  '엄마가 말한 「{w}」는 어느 거?':'“{w}” mà mẹ nói là cái nào?',
@@ -533,7 +533,7 @@ window.T.zh = {
  '아직 없음':'还没有',
  '이사 온 다음 날 아침. 아직 풀지 못한 상자들이 쌓여 있다.':'搬家后的第二天早上。还没拆开的箱子堆在一旁。',
  '전학생 반장되기':'转学生竞选班长',
- '말 한마디 못 하는 전학생, 반장 선거에 나가다':'一句话也说不出的转学生，去竞选班长',
+ '한국말이 아직 서툰 전학생, 반장 선거에 나가다':'韩语还不太流利的转学生，去竞选班长',
  '누구로 할까요?':'你想当谁？',
  '모드 설명':'学韩语 · 全部是中文，只有要学的词是韩语',
  '1일차 끝 — 반장 선거 출마 결심!':'第1天结束——决定竞选班长！',
@@ -602,10 +602,10 @@ Object.assign(window.T.zh,{'👆 화면을 끌어서 둘러볼 수 있어요':'�
 window.T.ja=window.T.ja||{};window.T.ja['👆 화면을 끌어서 둘러볼 수 있어요']='👆 がめんをドラッグして見まわせるよ';
 window.T.ru=window.T.ru||{};window.T.ru['👆 화면을 끌어서 둘러볼 수 있어요']='👆 Проведи по экрану, чтобы осмотреться';
 
-Object.assign(window.T.en,{'말 한마디 못 하는 전학생,<br>반장 선거에 나가다.':'A new student who can’t speak a word<br>runs for class president.'});
-Object.assign(window.T.id,{'말 한마디 못 하는 전학생,<br>반장 선거에 나가다.':'Murid baru yang belum bisa bicara sepatah kata pun<br>ikut pemilihan ketua kelas.'});
-Object.assign(window.T.vi,{'말 한마디 못 하는 전학생,<br>반장 선거에 나가다.':'Học sinh mới chưa nói được câu nào<br>ra ứng cử lớp trưởng.'});
-Object.assign(window.T.zh,{'말 한마디 못 하는 전학생,<br>반장 선거에 나가다.':'一句话也说不出的转学生，<br>去竞选班长。'});
+Object.assign(window.T.en,{'한국말이 아직 서툰 전학생,<br>반장 선거에 나가다.':'A new student still learning Korean<br>runs for class president.'});
+Object.assign(window.T.id,{'한국말이 아직 서툰 전학생,<br>반장 선거에 나가다.':'Murid baru yang bahasa Koreanya masih terbata-bata<br>ikut pemilihan ketua kelas.'});
+Object.assign(window.T.vi,{'한국말이 아직 서툰 전학생,<br>반장 선거에 나가다.':'Học sinh mới còn chưa thạo tiếng Hàn<br>ra ứng cử lớp trưởng.'});
+Object.assign(window.T.zh,{'한국말이 아직 서툰 전학생,<br>반장 선거에 나가다.':'韩语还不太流利的转学生，<br>去竞选班长。'});
 
 // --- 2026-10-21 talk-again lines
 Object.assign(window.T.en,{'얼른 다녀와~ 늦겠다.':'Off you go~ You’ll be late.','오늘 많이 피곤하지? 푹 쉬어.':'You must be tired today. Get some rest.','용건 있으면 짧게. 나 할 일 많아.':'If you need something, make it quick. I’m busy.','또 뭐야? 볼일 없으면 저리 가.':'What now? If you’ve got nothing, go away.','왜, 할 말 더 있어? 없으면 나 간다~':'What, something else? If not, I’m off~','어, 또 왔네… 혹시 내가 뭐 잘못했어?':'Oh, you’re back… did I do something wrong?','왜? 나 지금 몸 풀어야 돼. 이따 보자!':'What? I need to warm up now. See you later!','나 이제 동생 챙기러 가 봐야 해. 다음에 얘기하자~':'I have to go look after my little brother. Let’s talk next time~','딴따라… 아, 또 너야? 이 노래 끝나면 얘기하자~':'Dan-da-ra… oh, you again? Let’s talk after this song~','잠깐, 지금 빛 좋은데… 다음에 얘기해!':'Wait, the light is great right now… talk to me later!'});
