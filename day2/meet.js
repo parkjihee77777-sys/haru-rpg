@@ -116,7 +116,7 @@ function followKids(lay){const e=SCENE_EP;if(!e||!lay.length)return lay;const S=
   if(!a||Math.hypot(t[1]-a.ax,t[2]-a.ay)<bd)return t;const c=t.slice();c[1]=Math.round(t[1]+a.ax-a.ex);c[2]=Math.round(t[2]+a.ay-a.ey);return c})}
 // a thing can lie next to a kid wherever spots.js put them: [k,'@id',dx,dy,w,picture] (Yena's file also turns picture '-' into a tap spot only)
 function layThings(lay,clear){lay=(lay||[]).map(t=>{if(typeof t[1]!=='string'||t[1][0]!=='@')return t;const n=npcs.find(p=>p.id===t[1].slice(1));const[k,,dx,dy,w,img]=t;const[nx,ny]=n?kidSpot(n):[800,700];return[k,Math.round(nx+(dx||0)),Math.round(ny+(dy||0)),w,img]});lay=followKids(lay);for(const k of clear||[]){world.querySelectorAll('.laid').forEach(e=>{if(e.dataset.k===k)e.remove()});OBJ[MAP]=(OBJ[MAP]||[]).filter(o=>!(o.laid&&o[0]===k))}
- for(const[k,x,y,w,img,pin]of lay||[]){const it=document.createElement('img');it.className='item thing laid';if(pin==='stay')it.dataset.moved='0,0';// 'stay': declutter leaves it where the scene put itit.dataset.k=k;it.src=`items/${img||k}.png`;
+ for(const[k,x,y,w,img,pin]of lay||[]){const it=document.createElement('img');it.className='item thing laid';if(pin==='stay')it.dataset.moved='0,0';it.dataset.k=k;it.src=`items/${img||k}.png`;
   it.style.cssText=`position:absolute;width:${w||56}px;left:${x}px;top:${y}px;transform:translate(-50%,-100%);z-index:${Math.round(y)+1};pointer-events:none;filter:drop-shadow(0 2px 2px rgba(0,0,0,.25))`;world.appendChild(it);
   const o=[k,x,y-(w||56)*.4,Math.max(30,(w||56)*.55)];o.laid=1;(OBJ[MAP]=OBJ[MAP]||[]).push(o)}
  tagAll()}
