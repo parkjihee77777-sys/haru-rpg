@@ -747,7 +747,7 @@ EP.haneul=[
    ['mom','smile','그게 오늘은 축하였겠다.']]}},
 
 // ■ Day 7 — 나란히 (6)
-{title:'나란히',scene:'haneul_06',place:'cafe',at:[250,480],sit:[405,650,165],with:[['haeun',1100,560],['jihoon',1300,560]],
+{title:'나란히',scene:'haneul_06',place:'cafe',at:[250,480],sit:[703,392,150,'front'],with:[['haeun',1100,560],['jihoon',1300,560]],
  pre:[
   ['nar','','점심시간. 나는 손을 씻느라 늦었다. 급식실에 왔을 때 줄이 거의 다 빠져 있었다.'],
   ['nar','','줄 맨 끝에 남색 후드가 있었다. 하늘이였다.'],
@@ -793,6 +793,7 @@ EP.haneul=[
   {k:'C',text:'하늘이 옆자리에 앉는다. 같은 쪽을 보고. 아무 말 없이 먹는다.',pts:{haneul:2},r:[
    {pic:'haneul_06_C'},
    ['nar','','나는 하늘이 옆자리에 {@tray|을} 놓았다. 하늘이와 같은 줄, 같은 쪽. 내 등 뒤도 기둥 옆 벽이었다. 하늘이랑 같은 쪽을 봤다.'],
+   ()=>{if(me){me.el.style.visibility='hidden';window._heroSit=seatSprite(HERO,763,{top:407,h:150,front:1})}},// I sit beside Haneul with my back to the pillar wall (owner 11/07)
    ['nar','','앞에는 급식실이 다 보였다. 국 흘리는 지호, 노래하는 예나, 밥을 산처럼 쌓은 준호. 아무도 우리를 안 봤다.'],
    ['nar','','우리는 말없이 먹었다. 하늘이 숟가락이 조금씩 빨라졌다.'],
    ['nar','','반쯤 먹었을 때, 옆에서 목소리가 났다. 아주 작게.'],
@@ -808,6 +809,7 @@ EP.haneul=[
    ['nar','','「한 칸 더 와도 됨.」'],
    {pic:'haneul_06_C'},
    ['nar','','나는 한 칸 옮겨서 하늘이 바로 옆에 앉았다. 등 뒤는 기둥 옆 벽. 같은 쪽을 보고.'],
+   ()=>{if(me){me.el.style.visibility='hidden';window._heroSit=seatSprite(HERO,763,{top:407,h:150,front:1})}},// I sit beside Haneul with my back to the pillar wall (owner 11/07)
    ['nar','','하늘이가 냅킨에 또 썼다. 「지호 국 오늘 2번. 3번 나올 듯.」'],
    ['nar','','우리는 지호를 봤다. 지호가 국그릇을 들었다. 기울었다.'],
    ['me','smile','(작게) ……3번.'],
@@ -2195,7 +2197,7 @@ EP.haneul=[
 // sit:[x,top] = Haneul sits at that chair (top = the chair back's top) where the classroom seats don't reach: the cafeteria table by his tray (7)
 // stand:1 = he stands where his scene says, not at a desk: frozen just inside the front door when he comes back (11); spots.js seats every kid with sitting art, so this runs after it
 addEventListener('load',()=>{const _dpHn=d2People;d2People=function(id){const ps=_dpHn(id),e=epNext('haneul',EPIDX.haneul);
- if(e&&e.place===id){const p=ps.find(p=>p[0]==='haneul');if(p&&e.stand){p[1]=e.at[0];p[2]=e.at[1];p.length=3}else if(p&&e.sit){p[1]=e.sit[0];p[2]=0;p[3]={top:e.sit[1],h:e.sit[2]}}}return ps}});
+ if(e&&e.place===id){const p=ps.find(p=>p[0]==='haneul');if(p&&e.stand){p[1]=e.at[0];p[2]=e.at[1];p.length=3}else if(p&&e.sit){p[1]=e.sit[0];p[2]=0;p[3]={top:e.sit[1],h:e.sit[2],front:e.sit[3]==='front'}}}return ps}});
 // the new words in Haneul's scenes (door, paper, window, chair, cup, water, note, water_bottle, tray, chopsticks, pencil, notebook, blackboard, book, colored_pencil, bag, chalk, hat, tape are already in the game)
 window.EP_WORDS_HN={
  pocket:{ko:'주머니',en:'pocket',id:'saku',vi:'túi áo',zh:'口袋',ja:'ポケット',ru:'карман'},
@@ -2227,3 +2229,6 @@ for(const id of ['science']){const m=EXTRA_MAPS[id];MAPS[id]={img:m.img,walk:m.w
 
 // pictures where Haneul drew me (or my back shows): a boy and a girl version; a version not drawn yet is skipped (01a: both being redrawn - Haneul sits at the desk, not crouching on the floor)
 for(const n of ['haneul_01a','haneul_15','haneul_05_A','haneul_01p','haneul_15a','haneul_15y','haneul_15s'])HEROPIC.add(n);// 01p: being redrawn too (I pass the worksheet back over my shoulder without looking; only Haneul's hand behind)
+
+// the hero gets up again when the map changes (after sitting beside Haneul)
+{const _ld=load;load=function(){if(window._heroSit){window._heroSit.el.remove();window._heroSit=null;if(me)me.el.style.visibility=''}return _ld.apply(this,arguments)}}
