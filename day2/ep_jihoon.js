@@ -387,7 +387,7 @@ EP.jihoon=[
   ['nar','','{@school_gate|을} 지나 인도로 나갔다.'],
   {pic:'jihoon_05b'},
   ['nar','','{@school_gate} 바로 앞, 횡단보도 옆에 {@grandma} 한 분이 서 계셨다. 꽃무늬 모자를 쓰셨다. 바퀴 달린 장바구니를 끌고 계셨다. 장바구니에서 고소한 냄새가 났다.'],
-  {lay:[['grandma',1330,820,130]]},
+  {map:'gatesun_grandma',tap:[['grandma',1210,750,80]]},// drawn into the map (owner 11/06), not laid on top
   ['grandma','smile','지훈아~! 할매 왔데이~!'],
   ['nar','','목소리가 컸다. {@school_gate} 앞 아이들이 다 돌아봤다.'],
   ['jiho','smile','누구야? 너네 {@grandma|야}? ‘왔데이’? 말투 웃기다.'],
@@ -1143,7 +1143,7 @@ EP.jihoon=[
  flag:{H14_self:{B:1},H14_print:{D:1},H14_none:{A:1,C:1}},
  post:[
   ['grandma','smile','지훈아~ 늦었데이~!'],
-  {lay:[['grandma',1330,820,130]]},
+  {map:'gatesun_grandma',tap:[['grandma',1210,750,80]]},// same drawn-in grandma as meeting 6 (owner 11/06)
   {pic:'jihoon_13c'},
   ['nar','','{@school_gate} 앞에 {@grandma|가} 오셨다. 장바구니가 오늘은 가벼워 보였다.'],
   ['nar','','지훈이가 일어났다. 이번엔 걸음을 빨리 하지 않았다. {@grandma}한테 {@hand|을} 흔들었다. 크지는 않게. 그래도 흔들었다.'],
