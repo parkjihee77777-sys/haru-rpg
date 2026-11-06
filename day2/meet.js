@@ -110,7 +110,8 @@ function followKids(lay){const e=SCENE_EP;if(!e||!lay.length)return lay;const S=
   if(n.seat&&S){let best=null,bd=1e9;for(const[top,xs]of S)for(const sx of xs){const d=Math.hypot(sx-x,top+150-y);if(d<bd){bd=d;best=[sx,top+4]}}if(best){ex=best[0];ey=best[1]}}
   if(Math.hypot(ax-ex,ay-ey)>30)anchors.push({ex,ey,ax,ay})}
  if(!anchors.length)return lay;
- return lay.map(t=>{if(typeof t[1]!=='number')return t;let a=null,bd=220;for(const q of anchors){const d=Math.hypot(t[1]-q.ex,t[2]-q.ey);if(d<bd){bd=d;a=q}}
+ return lay.map(t=>{if(typeof t[1]!=='number'||t[5]==='stay')return t;// 'stay' = left behind where its kid sat (Haneul's water bottle)
+ let a=null,bd=220;for(const q of anchors){const d=Math.hypot(t[1]-q.ex,t[2]-q.ey);if(d<bd){bd=d;a=q}}
   if(!a||Math.hypot(t[1]-a.ax,t[2]-a.ay)<bd)return t;const c=t.slice();c[1]=Math.round(t[1]+a.ax-a.ex);c[2]=Math.round(t[2]+a.ay-a.ey);return c})}
 // a thing can lie next to a kid wherever spots.js put them: [k,'@id',dx,dy,w,picture] (Yena's file also turns picture '-' into a tap spot only)
 function layThings(lay,clear){lay=(lay||[]).map(t=>{if(typeof t[1]!=='string'||t[1][0]!=='@')return t;const n=npcs.find(p=>p.id===t[1].slice(1));const[k,,dx,dy,w,img]=t;const[nx,ny]=n?kidSpot(n):[800,700];return[k,Math.round(nx+(dx||0)),Math.round(ny+(dy||0)),w,img]});lay=followKids(lay);for(const k of clear||[]){world.querySelectorAll('.laid').forEach(e=>{if(e.dataset.k===k)e.remove()});OBJ[MAP]=(OBJ[MAP]||[]).filter(o=>!(o.laid&&o[0]===k))}

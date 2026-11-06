@@ -630,7 +630,7 @@ EP.haneul=[
   {pic:'haneul_05w'},
   ['nar','','선생님과 하늘이가 교실 {@door|으로} 나갔다. 선생님이 교실 쪽, 하늘이가 벽 쪽. 반 아이들 눈이 하늘이에게 닿기 전에 선생님 등에 먼저 닿았다.'],
   {move:['haneul',0,0,'out']},
-  {lay:[['water_bottle',1475,730,34]]},
+  {lay:[['water_bottle',1305,682,34,null,'stay']]},// on Haneul's own desk, not following him to the door (owner 11/06)
   {k:'water_bottle',goal:'「{x}」 갖다주기'},
   {clear:['water_bottle']},
   {go:'hall'},
