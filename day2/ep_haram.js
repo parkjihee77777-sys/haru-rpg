@@ -6,7 +6,7 @@ window.EP=window.EP||{};
 EP.haram=[
 // ■ Day 2 — 30초 노래 (1)
 {title:'30초 노래',scene:'haram_01',place:'cafe',at:[520,850],
- things:{cafe:[['tofu',530,640,34]]},
+ things:{cafe:[['tofu',470,228,34,null,'stay']]},
  pre:[
   {pic:'haram_d02_arrive'},['nar','','점심시간 급식실. 나는 {@tray|을} 들고 빈자리를 찾았다. 창가 자리에 하람이가 혼자 앉아 있었다.'],
   ['nar','','하람이 맞은편이 비어 있었다.'],
@@ -315,7 +315,7 @@ EP.haram=[
 
 // ■ Day 7 — 한 입만 (6)
 {title:'한 입만',scene:'haram_06',place:'cafe',at:[520,850],with:[['junho',600,880]],
- things:{cafe:[['ladle',560,300,44],['tofu',610,650,34]]},
+ things:{cafe:[['ladle',600,226,44,null,'stay'],['tofu',505,228,34,null,'stay']]},
  pre:[
   ['nar','','점심시간. 오늘 반찬은 불고기였다. 급식 줄 맨 끝에서 하람이가 조리사 선생님께 따로 작은 그릇을 받고 있었다.'],
   {k:'ladle',goal:'「{x}」 보기'},

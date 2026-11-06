@@ -528,8 +528,7 @@ EP.seah=[
   {flag:'O06_tell',is:0,lines:[['nar','','지난번 그 일은, 그날 종례 끝나고 교실에 다시 올라가서 선생님께 따로 말씀드렸다. 다른 애들이 다 간 다음에. 선생님은 끝까지 들으시고 「말해 줘서 고마워. 도와 달라고 한 거지?」 하셨다. 그 뒤로 교실이 조금 달라졌다.']]},
   {pic:'seah_06a'},
   ['nar','','선생님은 반 앞에서 누구 이름도 말씀하지 않으셨다. 대신 아침 활동 시간에 {@blackboard} 구석에 두 줄을 쓰셨다. 그 두 줄은 지금도 그대로 있다.'],
-  ['nar','','「끼워 달라고 하면 → 「응」 아니면 「다음 판에」」'],
-  ['nar','','「누구랑 말하지 말자는 약속 → 우리 반에서는 하지 않기」'],
+  ()=>seahBoard(),// the two rules as a chalkboard card (owner 11/07: the two narration lines were hard to read)
   ['nar','','규칙 3번은 그 뒤로 아무도 말하지 않았다. 세아는 다시 내 말에 대답했다. 짧게. 그래도 대답했다.'],
   ['nar','','그리고 체육 팀은 이제 늘 번호로 정한다. 홀수 번호 한 팀, 짝수 번호 한 팀.'],
   ['nar','','선생님: 「2교시 체육이에요. 운동장으로. {@shoes} 갈아 신고 나와요.」'],
@@ -1543,3 +1542,9 @@ for(const k of ['water_bottle','desk','chair','window'])CARDS_HAVE.add(k);
   if(h[2]!=='eve'){startDay(day);return}
   setDay(day);PICKS=['seah'];EPIDX.seah=k-1;TODAYEP.seah=EP.seah[k-1];MEET.seah=k;D2CHOICE.seah='B';
   stage='d2_after';load('class');useDoor()},103)}
+
+// the class promises written on the blackboard (Day 7): a chalkboard card over the scene; a tap closes it
+function seahBoard(){const L=['우리 반 약속','1. 친구가 「같이 하자」고 하면,','「응!」이나 「다음 판에 같이 하자!」로 대답해요.','2. 「누구랑 말하지 말자」는 약속은','우리 반에서는 하지 않아요.'].map(t=>tr(t));
+ const d=document.createElement('div');d.style.cssText='position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;background:#0005';
+ d.innerHTML=`<div style="width:min(92vw,480px);background:#2f5d46;border:10px solid #8a5a32;border-radius:14px;box-shadow:0 8px 24px #0006;padding:20px 22px;color:#f7f3e8;font-size:20px;line-height:1.5;font-family:inherit"><div style="text-align:center;font-size:24px;font-weight:800;margin-bottom:10px">${L[0]}</div><div>${L[1]}<br>&nbsp;&nbsp;${L[2]}</div><div style="margin-top:10px">${L[3]}<br>&nbsp;&nbsp;${L[4]}</div></div>`;
+ const close=e=>{e.stopPropagation();e.preventDefault();d.remove()};d.addEventListener('pointerdown',close,true);document.body.appendChild(d)}
