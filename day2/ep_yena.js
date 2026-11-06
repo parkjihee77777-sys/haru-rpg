@@ -82,7 +82,7 @@ EP.yena=[
   ['nar','','선생님: 「자, 시간 다 됐어요. 학습지 앞으로 보내 주세요.」'],
   ['nar','','학습지가 앞으로 넘어갔다.'],
   {only:['A','C'],lines:[['nar','','예나 학습지는 열두 칸이 다 차 있었다. 나는 아홉 칸이었다. 준호는 여덟 칸.']]},
-  {only:['B','D'],lines:[['nar','','예나 학습지는 일곱 칸에서 멈춰 있었다. 선생님이 학습지를 받으시다가 예나를 보셨다.'],['nar','','선생님: 「예나는 여기까지 했구나. 괜찮아요. 남은 건 쉬는 시간에 해도 돼요.」'],['yena','smile','……네.']]},
+  {only:['B','D'],lines:[['nar','','예나 학습지는 7번에서 멈춰 있었다. 선생님이 학습지를 받으시다가 예나를 보셨다.'],['nar','','선생님: 「예나는 여기까지 했구나. 괜찮아요. 남은 건 쉬는 시간에 해도 돼요.」'],['yena','smile','……네.']]},
   ['nar','','종이 울렸다. 쉬는 시간이었다. 준호가 {@chair|를} 뒤로 젖히며 예나를 봤다.'],
   ['junho','smile','예나야, 아까 산만하다고 해서 미안. 나 숫자가 날아가서 짜증 났어.'],
   ['yena','sad','괜찮아~ 나도 미안. 나 원래 그래.'],
@@ -102,7 +102,7 @@ EP.yena=[
   A:[['me','smile','그래서 내가 {@knee}에 해 보라고 했어. 작게. {@knee|은} 소리 안 나잖아.'],['mom','surprised','예나가 해 봤어?'],['me','smile','응. {@desk} 밑에서 {@knee|을} 톡톡 쳤어. 그러니까 다시 풀었어. 열두 개 다. 준호는 몰랐어.'],['mom','smile','준호도 풀고, 예나도 풀고.'],['me','smile','응. 예나가 나 보고 웃었어. 진짜 웃는 거.']],
   B:[['me','smile','그래서 내가 준호한테 말했어. 예나 아까 두드릴 때 엄청 빨리 풀었다고.'],['mom','surprised','준호가 뭐래?'],['me','smile','그럼 자기는 못 풀어도 되냐고. ……그건 맞는 말이었어.'],['mom','smile','그렇네. 둘 다 맞는 말이네.'],['me','sad','응. 그리고 예나가 ‘내가 그만할게’ 하고 {@hand|을} 깔고 앉았어. 얼굴 빨개져서. 예나 편 든 건데.'],['mom','smile','네 마음은 예나 편이었는데, 예나는 더 꼼짝 못 하게 됐구나.']],
   C:[['me','smile','그래서 내가 {@desk} 밑에서 {@finger} 접는 거 보여 줬어. 나 셀 때 {HL}로 세면서 {@finger} 접잖아.'],['mom','laugh','(웃음) 너 어릴 때부터 그랬지.'],['me','smile','예나가 그게 무슨 말이냐고 해서 {HL} 숫자라고 했어. 그러니까 예나가 손바닥 위에서 {@finger|으로} 드럼을 쳤어. 소리 없이. {@finger} 드럼이래.'],['mom','surprised','그래서 풀었어?'],['me','smile','응. 다 풀었어. 나보다 빨리.']],
-  D:[['me','smile','나는 그냥 내 거 풀었어. 준호 말도 맞잖아. 조용히 하는 시간이니까.'],['mom','surprised','조용하니까 잘 풀렸어?'],['me','smile','응. 나는 잘 풀렸어. 근데 예나는 일곱 개에서 멈췄어. 창밖만 봤어.'],['mom','smile','……너는 조용해서 잘 됐고, 예나는 조용해서 안 됐구나.'],['me','surprised','응. 이상하지?'],['mom','smile','이상하진 않아. 사람마다 생각이 잘 되는 방법이 다르니까.']],
+  D:[['me','smile','나는 그냥 내 거 풀었어. 준호 말도 맞잖아. 조용히 하는 시간이니까.'],['mom','surprised','조용하니까 잘 풀렸어?'],['me','smile','응. 나는 잘 풀렸어. 근데 예나는 7번에서 멈췄어. 창밖만 봤어.'],['mom','smile','……너는 조용해서 잘 됐고, 예나는 조용해서 안 됐구나.'],['me','surprised','응. 이상하지?'],['mom','smile','이상하진 않아. 사람마다 생각이 잘 되는 방법이 다르니까.']],
   common:[['me','smile','근데 쉬는 시간엔 예나가 같이 치자고 했어. 내가 {@desk|을} 치니까 예나가 그 위에 칠단 노래를 불렀어. 준호도 같이 쳤어.'],['mom','smile','쉬는 시간엔 다 같이 드럼이네.'],['me','smile','응. 칠 일은 칠~ 칠 이 십사~'],['mom','smile','(따라 흥얼거린다) 칠 삼 이십일~'],['me','laugh','(웃음) 엄마도 알아?'],['mom','laugh','이제 알았지. 예나 노래로.']]}},
 
 // ■ Day 3 — 알림장 노래 (2)
@@ -687,9 +687,9 @@ EP.yena=[
    ['think','smile','(‘다’라고 해 버렸어.)']]}],
  flag:{S08_line:{A:1,C:1}},
  post:[
-  {only:['A','C'],lines:[['nar','','예나가 {@paper|를} {@desk}에 펴고 넷째 줄을 봤다.']]},
-  {only:['B'],lines:[['nar','','예나가 접었던 {@paper|를} 다시 펴더니 넷째 줄을 봤다.']]},
-  {only:['D'],lines:[['nar','','예나가 주머니에서 {@paper|를} 다시 꺼냈다. 넷째 줄을 봤다.']]},
+  {only:['A','C'],lines:[['nar','','예나가 {@paper|를} {@desk}에 펴고 첫째 줄을 봤다.']]},
+  {only:['B'],lines:[['nar','','예나가 접었던 {@paper|를} 다시 펴더니 첫째 줄을 봤다.']]},
+  {only:['D'],lines:[['nar','','예나가 주머니에서 {@paper|를} 다시 꺼냈다. 첫째 줄을 봤다.']]},
   ['yena','smile','어, 여기 틀렸다. ‘들어왔내’. 내 아니고 네. ……{@eraser} 좀 빌려줘. 나 또 잃어버렸어.'],
   {k:'eraser',goal:'「{x}」 빌려주기',bag:['pcase','pencil','eraser','notebook','ruler']},
   ['nar','','나는 내 {@eraser|를} 예나에게 건넸다.'],
@@ -1071,9 +1071,9 @@ EP.yena=[
   ['nar','','다 쓰고 나서, 예나가 {@hand|을} 위로 쭉 뻗었다.'],
   ['yena','smile','아이고, {@hand} 저려! 40분 깔고 있었더니 {@hand|이} 잠들었어.'],
   {k:'hand',goal:'「{x}」 털기',bag:['finger','knee','hand','foot','ear']},
-  ['nar','','나는 예나를 따라 두 {@hand|을} 털어 저린 {@hand|을} 깨웠다.'],
+  ['nar','','나는 예나를 따라 두 {@hand|을} 털었다.'],
   {only:['D'],lines:[['nar','','나도 {@hand|을} 털었다. 1분 깔았던 내 {@hand}도 저렸다. 예나가 「가만히 짝꿍 해체!」 하고 웃었다.']]},
-  {only:['A','B','C'],lines:[['nar','','나도 같이 털었다. {@hand|을} 털면서 예나가 박자를 붙였다. 「털어요~ 털어요~ {@hand|이} 깨요~」']]},
+  {only:['A','B','C'],lines:[['nar','','{@hand|을} 털면서 예나가 박자를 붙였다. 「털어요~ 털어요~ {@hand|이} 깨요~」']]},
   {pic:'yena_11e'},
   ['nar','','예나가 {@notebook|을} 보여 줬다. 바꾼 끝이었다.'],
   ['nar','','「토끼는 낮잠을 안 잤다. 노래를 불렀다. 거북이가 그 노래 박자에 맞춰 걸었다. 토끼가 기다려 주니까 거북이가 빨라졌다. 둘이 같이 들어왔다. 아무도 안 이겼다. 둘 다 이겼다.」'],
@@ -1103,7 +1103,7 @@ EP.yena=[
   {pic:'yena_12b'},
   ['nar','','예나가 앉았던 자리에 가 봤다. {@desk} 위엔 없었다.'],
   ['yena','smile','어디 갔지? 분명 여기서 노래 쓰고 있었는데…….'],
-  {lay:[['pcase',1365,530,40]]},
+  {lay:[['pcase',1365,530,40,'pcase_pink']]},
   {k:'pcase',goal:'「{x}」 찾기'},
   {clear:['pcase']},
   ['nar','','실로폰 책상 밑 바닥에서 나는 예나의 {@pcase|을} 찾아 주웠다.'],
@@ -1156,7 +1156,7 @@ EP.yena=[
  flag:{S13_song:{D:1}},
  post:[
   ['nar','','이제 {@water_bottle|이었}다. 예나 {@water_bottle|은} 분홍색이었다. 음악실 어딘가에 있을 거였다.'],
-  {lay:[['water_bottle',1262,238,48,'water_bottle_pink']]},
+  {lay:[['water_bottle',1258,284,48,'water_bottle_pink']]},
   {k:'water_bottle',goal:'「{x}」 챙기기'},
   {clear:['water_bottle']},
   ['nar','','나는 음악실 창틀 위에서 예나의 분홍 {@water_bottle|을} 찾아 들었다.'],
@@ -1204,7 +1204,7 @@ EP.yena=[
   ['yena','sad','다른 애들은 다 가만히 서서 잘 불러. 나만 {@hand|이} 근질근질해. 성가대 선생님 앞에서 {@hand} 움직이면…….'],
   ['nar','','예나가 말을 멈췄다. 그 뒤에 무슨 말이 올지 알 것 같았다. ‘가만히 좀 있어.’'],
   ['yena','sad','……일요일에 날아가면 어떡하지.'],
-  ['think','smile','(예나가 떠는 거 처음 봐. {@pencil} 드럼 칠 때도, 트라이앵글 칠 때도 안 떨었는데.)'],
+  ['think','smile','(예나 목소리가 떨리는 거 처음 봐. {@pencil} 드럼 칠 때도, 칠단 노래 부를 때도 신나기만 했는데.)'],
   ['think','smile','(가만히 서서 불러야 하는데, 가만히 있으면 노래가 날아가.)']],
  ask:'어떻게 할까?',
  choices:[
@@ -1271,7 +1271,7 @@ EP.yena=[
   B:[['me','smile','그래서 그냥 {@hand} 움직이면서 부르라고 했어. 괜찮을 거라고.'],['mom','surprised','예나가 뭐래?'],['me','smile','안 된대. 성가대는 다 똑같이 서야 된대. 나만 {@hand} 움직이면 이상하대. 그리고 또 셋째 줄에서 끊겼어.'],['mom','smile','음…… 예나는 왜 안 되는지 말했구나.'],['me','smile','응. 근데 나는 그냥 괜찮을 거라고만 했어. 예나가 다른 데를 찾아본대.'],['mom','smile','다른 데. {@hand} 말고.'],['me','smile','……{@hand} 말고 다른 데. 생각해 볼래.']],
   C:[['me','smile','그래서 한 번 불러 보라고 했어. 처음부터 끝까지. 틀려도 안 끊고 듣겠다고.'],['mom','surprised','끊었어?'],['me','sad','아니. 창밖 보면서 들었어. 예나 덜 떨리라고. 셋째 줄에서 흔들렸는데, 안 끊겼어. 끝까지 갔어.'],['mom','smile','끝까지.'],['me','smile','응. 그리고 끝나고 보니까 예나 {@indoor_shoes} 앞코가 까딱까딱했어. 발가락으로 박자 세고 있었어. 예나는 몰랐대. 무서워서 {@foot|이} 혼자 했대.'],['mom','laugh','(웃음) {@foot|이} 혼자?'],['me','smile','응. 누가 안 끊으니까 끝까지 갔대.']],
   D:[['me','sad','떨리면 안 하면 되잖아, 했어. 편하라고.'],['mom','surprised','예나가 뭐래?'],['me','sad','하고 싶대. 처음으로 혼자 하는 거라서, 떨려도 할 거래. 나 똑바로 보고 말했어.'],['mom','smile','……예나 멋있다.'],['me','smile','응. 나 편하라고 한 거 안대. 근데 할 거래.'],['mom','smile','네 마음도 알고, 자기 마음도 알았네.']],
-  common:[['me','smile','{m}, 예나가 이거 다른 애들한테 비밀이래. 일요일 노래.'],['mom','smile','그럼 엄마도 비밀.'],['me','sad','응. 엄마, 근데 예나는 {@pencil} 드럼 칠 때는 하나도 안 떨잖아. 트라이앵글 할 때도. 근데 가만히 서야 되니까 떨렸어.'],['mom','sad','자기 방법을 못 쓰니까 그랬나 보다.'],['me','smile','응. 가만히 있으라는 건 예나한테 제일 어려운 거야.']]}},
+  common:[['me','smile','{m}, 예나가 이거 다른 애들한테 비밀이래. 일요일 노래.'],['mom','smile','그럼 엄마도 비밀.'],['me','sad','응. 엄마, 근데 예나는 {@pencil} 드럼 칠 때는 하나도 안 떨잖아. 노래 부를 때도. 근데 가만히 서야 되니까 떨렸어.'],['mom','sad','자기 방법을 못 쓰니까 그랬나 보다.'],['me','smile','응. 가만히 있으라는 건 예나한테 제일 어려운 거야.']]}},
 
 // ■ Day 15 — 내가 두드렸다 (14)
 {title:'내가 두드렸다',scene:'yena_14',place:'class',at:[760,860],with:[['siwoo',764,0,{top:448}]],// Siwoo sits at his desk during the test (standing there he looked on top of the desk, 11/05)
@@ -1457,13 +1457,13 @@ EP.yena=[
   {only:['D'],lines:[['nar','','「학교 종이 땡땡땡~」 아이들이 「학교 종이다!」 하고 같이 불렀다. 예나가 웃으며 나를 봤다. 「다음엔 네 얘기 넣자. 틀려도.」']]},
   ['nar','','종이 울리기 직전이었다. 예나가 {@paper|를} 접어 나에게 줬다.'],
   ['yena','smile','이거 네 거야. 가져가.'],
-  {k:'notebook',goal:'「{x}」에 붙이기',bag:['pcase','notebook','textbook','eraser','water_bottle']},
+  {k:'notebook',goal:'「{x}」에 끼우기',bag:['pcase','notebook','textbook','eraser','water_bottle']},
   ['nar','','나는 노래 종이를 {@notebook} 맨 앞, 첫날 밤 친구 이름을 적었던 쪽 옆에 끼워 넣었다.'],
   ['nar','','{@notebook} 맨 앞쪽. 전학 온 첫날 밤, 내가 아는 친구 이름을 적었던 쪽이었다. 몇 명밖에 없었다. 그 옆에 「우리 반 노래」를 끼웠다. 우리 반이 다 있었다.'],
   {flag:'S08_line',is:1,lines:[['yena','smile','아, 그리고 「{SN} 노래」 있잖아. 둘째 줄 바꾼 거. 그것도 여기 넣을까 하다가, 그건 따로 둘래. 그건 너 하나만의 노래니까.']]},
   {flag:'S08_line',is:0,lines:[['yena','smile','아, 그리고 「{SN} 노래」 둘째 줄. 아직 안 고쳤어. 그건 네가 정해 줘. 다음에.'],['me','smile','……응. 다음에 같이 고치자.']]},
   {flag:'S14_toe',is:1,lines:[['yena','sad','그리고 비밀 하나. 일요일에 독창 했어. 구두 속에서 발가락으로 셌어. 셋째 줄 안 날아갔어. 아무도 몰랐어.']]},
-  {flag:'S14_toe',is:0,lines:[['yena','smile','그리고 비밀 하나. 일요일에 독창 했어. 셋째 줄에서 한 번 흔들렸는데, 끝까지 했어. 발가락 말고 다른 데 찾아봐야지.']]},
+  {flag:'S14_toe',is:0,lines:[['yena','smile','그리고 비밀 하나. 일요일에 독창 했어. 셋째 줄에서 한 번 흔들렸는데, 끝까지 했어. 다음엔 손 말고 박자 셀 데를 찾아볼 거야.']]},
   ['nar','','예나가 실로폰 채를 내려놓았다. 그리고 {@finger|으로} 실로폰 테두리를 톡톡 쳤다.'],
   ['yena','smile','딴-딴-따라-! ……아, 미안. 머릿속 노래가 안 멈춰서.'],
   ['nar','','처음 들었을 때랑 똑같은 말이었다. 나는 대답했다.'],
@@ -1516,6 +1516,15 @@ const ZOFF_YN={};
 // stand:1 = she stands where her scene says (meeting 13: alone by the window), not at a desk; spots.js seats every kid with sitting art, so this runs after it
 addEventListener('load',()=>{const _dpYn=d2People;d2People=function(id){const ps=_dpYn(id),e=epNext('yena',EPIDX.yena);
  if(e&&e.stand&&e.place===id){const p=ps.find(p=>p[0]==='yena');if(p){p[1]=e.at[0];p[2]=e.at[1];p.length=3}}return ps}});
+// meetings 9 and 13 happen in an empty classroom (everyone went to the music room / is still out after lunch): while the scene runs there,
+// the other kids on that map are not seen; they are back when the scene ends or the map changes
+const EMPTY_YN=new Set([8,12]);
+function emptyYn(){const e=SCENE_EP,i=e?EP.yena.indexOf(e):-1,on=EMPTY_YN.has(i)&&MAP===e.place;
+ for(const n of npcs)if(n.el)n.el.style.visibility=on&&!(SCENE_IDS||[]).includes(n.id)?'hidden':''}
+{const _sayYn=say;say=function(lines,done){emptyYn();return _sayYn(lines,done)}}
+{const _tidyYn=tidyPeople;tidyPeople=function(){const r=_tidyYn.apply(this,arguments);emptyYn();return r}}
+// meeting 12: only Yena and I go to the music room for her things; Jiho stays in the classroom
+{const _loadYn=load;load=function(m,x){if(SCENE_IDS&&m==='music'&&SCENE_EP===EP.yena[11])SCENE_IDS=SCENE_IDS.filter(i=>i!=='jiho');return _loadYn(m,x)}}
 // test shortcuts: #yn5 = the morning of the day you meet Yena the 5th time (Day 6); #yn5eve = that evening; #yn15b = Day 16R with the flags off
 {const h=location.hash.match(/^#yn(\d+)(eve|b)?$/);
  if(h)setTimeout(()=>{const k=+h[1];HEART_D1={};FOUND.add('handkerchief');MEET={yena:k-1};
