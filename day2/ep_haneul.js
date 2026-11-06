@@ -747,7 +747,7 @@ EP.haneul=[
    ['mom','smile','그게 오늘은 축하였겠다.']]}},
 
 // ■ Day 7 — 나란히 (6)
-{title:'나란히',scene:'haneul_06',place:'cafe',at:[250,480],sit:[390,640],with:[['haeun',1100,560],['jihoon',1300,560]],
+{title:'나란히',scene:'haneul_06',place:'cafe',at:[250,480],sit:[405,650,165],with:[['haeun',1100,560],['jihoon',1300,560]],
  pre:[
   ['nar','','점심시간. 나는 손을 씻느라 늦었다. 급식실에 왔을 때 줄이 거의 다 빠져 있었다.'],
   ['nar','','줄 맨 끝에 남색 후드가 있었다. 하늘이였다.'],
@@ -2194,7 +2194,7 @@ EP.haneul=[
 // sit:[x,top] = Haneul sits at that chair (top = the chair back's top) where the classroom seats don't reach: the cafeteria table by his tray (7)
 // stand:1 = he stands where his scene says, not at a desk: frozen just inside the front door when he comes back (11); spots.js seats every kid with sitting art, so this runs after it
 addEventListener('load',()=>{const _dpHn=d2People;d2People=function(id){const ps=_dpHn(id),e=epNext('haneul',EPIDX.haneul);
- if(e&&e.place===id){const p=ps.find(p=>p[0]==='haneul');if(p&&e.stand){p[1]=e.at[0];p[2]=e.at[1];p.length=3}else if(p&&e.sit){p[1]=e.sit[0];p[2]=0;p[3]={top:e.sit[1]}}}return ps}});
+ if(e&&e.place===id){const p=ps.find(p=>p[0]==='haneul');if(p&&e.stand){p[1]=e.at[0];p[2]=e.at[1];p.length=3}else if(p&&e.sit){p[1]=e.sit[0];p[2]=0;p[3]={top:e.sit[1],h:e.sit[2]}}}return ps}});
 // the new words in Haneul's scenes (door, paper, window, chair, cup, water, note, water_bottle, tray, chopsticks, pencil, notebook, blackboard, book, colored_pencil, bag, chalk, hat, tape are already in the game)
 window.EP_WORDS_HN={
  pocket:{ko:'주머니',en:'pocket',id:'saku',vi:'túi áo',zh:'口袋',ja:'ポケット',ru:'карман'},
