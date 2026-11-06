@@ -538,7 +538,7 @@ EP.haeun=[
  flag:{A06_join:{A:1},A06_quiet:{B:1},A06_teacher:{C:1},A06_warn:{D:1}},
  post:[
   ['nar','','교실이 웅성거렸다. 누군가 상자를 건드렸는지 {@coin} 하나가 굴러 내 책상 밑에서 멈췄다.'],
-  {lay:[['coin',330,635,24]]},
+  {lay:[['coin',600,700,40,null,'stay']]},// on the floor right by Haeun, big enough to see (it hid under a desk, owner 11/06)
   {k:'coin',goal:'「{x}」 주워 돌려주기'},
   {clear:['coin']},
   {only:['A','B','D'],lines:[['nar','','책상 밑 {@coin|을} 주워 예나에게 돌려주었다.']]},

@@ -6,7 +6,7 @@ window.EP=window.EP||{};
 EP.siwoo=[
 // ■ Day 2 — 30센티 (1)
 {title:'30센티',scene:'siwoo_01',place:'class',at:[310,262],stand:1,flag:{W02_dist:{A:1,D:1},W02_ask:{A:1}},
- things:{class:[['milk_carton',150,232,38,'milk_carton_cut'],['ruler',196,214,74]]},taps:{class:[['window',95,120,70]]},
+ things:{class:[['milk_carton',172,236,38,'milk_carton_cut','stay'],['ruler',196,214,74]]},taps:{class:[['window',95,120,70]]},
  pre:[
   ['nar','','아침. 시우가 창가에 서 있었다. 창틀 위에 {@milk_carton} 하나가 놓여 있었다. 윗부분을 잘라 내고 {@tissue}를 깐 {@milk_carton}이었다.'],
   ['think','surprised','(첫날 깨진 관찰 통 대신인가 봐.)'],
@@ -761,7 +761,7 @@ EP.siwoo=[
 
 // ■ Day 16R — 몇 센티? (15)
 {title:'몇 센티?',scene:'siwoo_15',place:'class',at:[310,262],stand:1,
- things:{class:[['milk_carton',150,232,38,'milk_carton_cut'],['ruler',196,214,74],['butterfly',70,110,44]]},
+ things:{class:[['milk_carton',172,236,38,'milk_carton_cut','stay'],['ruler',196,214,74],['butterfly',70,110,44]]},
  pre:[
   {pic:'siwoo_15b'},
   ['nar','','방과 후. 창가에 시우가 서 있었다. 처음 말 걸었던 날처럼. 창틀 위에 새 {@milk_carton}이 있었다. 안에 새 {@cocoon}가 있었다.'],
