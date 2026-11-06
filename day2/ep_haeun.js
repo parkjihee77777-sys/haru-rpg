@@ -228,7 +228,7 @@ EP.haeun=[
   common:[['me','smile','하준이가 하은이한테 엄마 같대. 하은이는 ‘엄마 아니야, 누나야’ 했어.'],['mom','smile','하은이 말이 맞네. 하은이는 누나지. 엄마 일은 엄마랑 어른들이 하는 거고.'],['me','smile','응. 근데 내가 첫째라고 할 때 턱을 들었어. 자랑하는 것 같았어.'],['mom','smile','첫째인 게 좋은가 보다. 그래도 동생 둘 시간 맞추는 건 어른한테도 힘든 일이야.'],['me','smile','응. 시간도 다 외우고. ……하은이는 언제 놀아?'],['mom','sad','그러게. 하은이도 놀 시간이 있어야 하는데.']]}},
 
 // ■ Day 4 — 천근만근 (3)
-{title:'천근만근',scene:'haeun_03',place:'class',at:[405,720],with:[['jiho',300,880],['yena',420,880]],
+{title:'천근만근',scene:'haeun_03',place:'class',at:[405,720],with:[['jiho',300,880],['yena',540,880]],
  pre:[
   ['nar','','오늘은 모둠 자리였다. 하은이가 내 옆자리였다. 뒤에는 지호와 예나.'],
   ['nar','','3교시 국어. 선생님이 {@blackboard} 쪽으로 돌아서셨다.'],
@@ -717,7 +717,7 @@ EP.haeun=[
   common:[['me','smile','{m}, 하은이 {@indoor_shoes} 새거였어. 교육복지실에서 받았대. 자기가 말해 줬어. 내가 안 물어봤는데.'],['mom','surprised','하은이가 먼저?'],['me','smile','응. 거기 원래 있는 거래. 학교 물건이래. 나만 받는 거 아니래. 그래서 「갚을 거」에 안 적었대.'],['mom','smile','그렇구나.'],['me','laugh','근데 {@cup|은} 자기가 씻는대. 갈 때마다. 나는 내 {@cup} 씻었어. 같이.'],['mom','laugh','(웃음) 그건 하은이 방식이네.'],['me','smile','응. 그리고 거기 선생님이 하은이한테 요리 교실 자리 있다고 했어. 근데 하은이는 수요일에 하준이 데리러 가야 된대.'],['mom','surprised','요리 교실 하고 싶어 했어?'],['me','sad','……모르겠어. 근데 대답을 바로 안 했어. 얼굴이 조금 아쉬워 보였어.']]}},
 
 // ■ Day 8 — 공기 장군 (7)
-{title:'공기 장군',scene:'haeun_07',place:'class',at:[405,720],with:[['hyeeun',600,860],['yena',420,880]],
+{title:'공기 장군',scene:'haeun_07',place:'class',at:[405,720],with:[['hyeeun',660,860],['yena',540,880]],
  pre:[
   {pic:'haeun_07c'},
   ['nar','','점심을 먹고 교실로 돌아왔다. 교실 뒤 책상 하나에 혜은이와 예나가 있었다. 책상 위에 알록달록한 공깃돌 다섯 개.'],
@@ -1071,7 +1071,7 @@ EP.haeun=[
   common:[['me','smile','보건 선생님이 하은이한테 그랬어. 아이가 아파서 학교에서 연락하는 건 엄마가 혼날 일 아니래. 하은이가 혼날 일도 아니래. 아픈 동생 데리고 가는 건 어른 일이래.'],['mom','smile','맞는 말씀이네.'],['me','smile','하율이는 아랫집 할머니가 봐 주신대. 하은이 엄마가 40분이면 온대. 전화로 하은이한테 잘했다고 했어. 선생님한테 말한 거 잘했다고.'],['mom','relieved','다행이다. 정말.'],['me','sad','{m}, 하은이가 ‘오늘 진짜 무서웠어’ 했어. 그런 말 처음 했어.'],['mom','sad','그 말 하기 쉽지 않았겠다.'],['me','sad','응. 나도 무서웠다고 했어.'],['mom','smile','엄마도 하나만 말할게. 엄마는 오늘 네가 하은이 옆에 있었던 게 고마워. 그리고 어른이 알게 된 것도.'],['me','smile','……응.'],['mom','smile','하준이 금방 괜찮아지려나.'],['me','smile','모르겠어. 다음에 하은이 보면 물어볼래.'],['mom','surprised','뭐라고 물어볼 건데?'],['me','smile','‘아침 먹었어?’'],['mom','laugh','(웃음) 하은이 인사로?']]}},
 
 // ■ Day 11 — 고개 숙여 (10)
-{title:'고개 숙여',scene:'haeun_10',place:'class',at:[405,720],things:{class:[['clock',1040,186,46]]},with:[['jiho',300,880],['yena',420,880]],
+{title:'고개 숙여',scene:'haeun_10',place:'class',at:[405,720],things:{class:[['clock',1040,186,46]]},with:[['jiho',300,880],['yena',540,880]],
  pre:[
   ['nar','','2교시 뒤 쉬는 시간. 나는 공책에 낱말 카드 낱말을 옮겨 적고 있었다. 하은이가 옆에서 「그거 받침 틀렸어.」 하고 손가락으로 짚었다.'],
   {flag:'A10_with',is:1,lines:[['haeun','smile','하준이 이제 다 나았어. 엄마가 하루 쉬고 병원 데려갔어. 너한테 말하래.']]},
@@ -1184,7 +1184,7 @@ EP.haeun=[
   common:[['me','smile','하은이가 외우라고 했어. 코피 나면 고개 숙이고, 콧볼 꾹, 10분, 입으로 숨. 안 멈추면 보건실. 내가 다 말하니까 ‘통과’ 했어.'],['mom','laugh','하준이한테 하는 말투로?'],['me','laugh','응. 똑같았어.'],['mom','smile','엄마한테도 해 봐. 코피 나면?'],['me','smile','고개 숙이고, 콧볼 꾹, 10분, 입으로 숨.'],['mom','laugh','(웃음) 통과.'],['mom','smile','{d}한테도 알려 줘야겠다. {d}는 아직 고개 젖히는 줄 알걸.'],['me','laugh','내가 알려 줄게. 통과 받을 때까지.']]}},
 
 // ■ Day 12 — 하은이가 너 엄마야? (11)
-{title:'이건 내가 쓸게',scene:'haeun_11',place:'class',at:[405,720],with:[['jihoon',300,880],['jiho',420,880]],
+{title:'이건 내가 쓸게',scene:'haeun_11',place:'class',at:[405,720],with:[['jihoon',300,880],['jiho',540,880]],
  pre:[
   ['nar','','6교시가 끝났다. 선생님이 칠판에 내일 알림을 쓰셨다.'],
   ['nar','','선생님: 「{@notice_book} 꺼내서 받아 적어요. 1번, 가정통신문 회신. 2번, 국어 익힘책.」'],
@@ -1287,6 +1287,7 @@ EP.haeun=[
   ['yena','laugh','땡큐~ 딴-딴-따라-!'],
   {pic:'haeun_12b'},
   ['nar','','예나가 {@gift|을} 다시 가져갔다. 그때 지훈이가 교실 앞에서 종이 뭉치를 흔들었다.'],
+  {pic:'haeun_12c'},
   ['jihoon','laugh','얘들아! 내 생일 초대장! 이번 주 토요일 2시, 학교 앞 키즈카페!'],
   ['nar','','지훈이가 반 아이들 몇 명에게 초대장을 나눠 주었다. 나한테도 줬다. 하은이한테도 줬다. 초대장에는 지훈이가 그린 케이크와 카메라가 있었다.'],
   ['jihoon','smile','{@gift|은} 아무거나! 진짜 아무거나. ……근데 나 요즘 반짝이 카드 모아.'],
@@ -1434,7 +1435,6 @@ EP.haeun=[
    ['me','smile','세 개야. 나, 너, 하준이. 셋이잖아.'],
    ['nar','','하은이가 손가락으로 셌다. 나. 자기. 하준이. 셋.'],
    ['haeun','smile','……계산 맞네.'],
-   {pic:'haeun_13b'},
    ['nar','','하은이가 {@banana|를} 받았다. 그리고 그걸 하준이에게 주지 않고, 자기가 껍질을 깠다. 한 입 먹었다.'],
    ['haeun','smile','하준. 너는 저거. 누나 친구한테 고맙습니다 하고.'],
    ['nar','','하준: 「고맙습니다!」'],
@@ -1473,6 +1473,7 @@ EP.haeun=[
   ['nar','','{@banana} 꼭지를 톡 꺾어 껍질을 반쯤 까서 하준이에게 주었다.'],
   ['nar','','하준: 「누나 친구 잘 깐다!」'],
   ['haeun','smile','그건 누구나 잘 까.'],
+  {only:['B'],lines:[{pic:'haeun_13b'}]},
   {pic:'haeun_13c'},
   ['nar','','하준이가 {@banana|를} 먹었다. 볼이 불룩해졌다. 하은이가 {@clock|을} 봤다.'],
   ['haeun','smile','3시 20분. 하율이.'],
@@ -1704,7 +1705,7 @@ EP.haeun=[
 ];
 
 // pictures not drawn yet are skipped (HA_HAVE = the scenes/haeun_*.jpg that exist); add a name here when its picture is added
-const HA_HAVE=new Set(["haeun_01", "haeun_02", "haeun_03", "haeun_04", "haeun_05", "haeun_05a", "haeun_05b", "haeun_06", "haeun_07", "haeun_07a", "haeun_07b", "haeun_07c", "haeun_08", "haeun_08b", "haeun_08c", "haeun_08d", "haeun_09", "haeun_09a", "haeun_09b", "haeun_09c", "haeun_09d", "haeun_09e", "haeun_10", "haeun_10a", "haeun_10b", "haeun_10c", "haeun_10d", "haeun_11", "haeun_11a", "haeun_11b", "haeun_11c", "haeun_12", "haeun_12a", "haeun_12b", "haeun_12d", "haeun_12e", "haeun_13", "haeun_13a", "haeun_13b", "haeun_01b", "haeun_01d", "haeun_03a", "haeun_03c", "haeun_02b", "haeun_03b", "haeun_04a", "haeun_04c", "haeun_01a", "haeun_01c", "haeun_04d", "haeun_02a", "haeun_02c", "haeun_02d", "haeun_02e", "haeun_05d", "haeun_05c", "haeun_04b", "haeun_06c", "haeun_06b", "haeun_06a", "haeun_05e", "haeun_13c", "haeun_07e", "haeun_07d", "haeun_14a", "haeun_14", "haeun_06d", "haeun_14d", "haeun_14c", "haeun_13d", "haeun_15b", "haeun_15", "haeun_15d", "haeun_14b", "haeun_15c"]);
+const HA_HAVE=new Set(["haeun_01", "haeun_12c", "haeun_02", "haeun_03", "haeun_04", "haeun_05", "haeun_05a", "haeun_05b", "haeun_06", "haeun_07", "haeun_07a", "haeun_07b", "haeun_07c", "haeun_08", "haeun_08b", "haeun_08c", "haeun_08d", "haeun_09", "haeun_09a", "haeun_09b", "haeun_09c", "haeun_09d", "haeun_09e", "haeun_10", "haeun_10a", "haeun_10b", "haeun_10c", "haeun_10d", "haeun_11", "haeun_11a", "haeun_11b", "haeun_11c", "haeun_12", "haeun_12a", "haeun_12b", "haeun_12d", "haeun_12e", "haeun_13", "haeun_13a", "haeun_13b", "haeun_01b", "haeun_01d", "haeun_03a", "haeun_03c", "haeun_02b", "haeun_03b", "haeun_04a", "haeun_04c", "haeun_01a", "haeun_01c", "haeun_04d", "haeun_02a", "haeun_02c", "haeun_02d", "haeun_02e", "haeun_05d", "haeun_05c", "haeun_04b", "haeun_06c", "haeun_06b", "haeun_06a", "haeun_05e", "haeun_13c", "haeun_07e", "haeun_07d", "haeun_14a", "haeun_14", "haeun_06d", "haeun_14d", "haeun_14c", "haeun_13d", "haeun_15b", "haeun_15", "haeun_15d", "haeun_14b", "haeun_15c"]);
 HEROPIC.add('haeun_04d');// Haeun ties the hero's own shoelace: the hero's foot shows, so a boy and a girl version
 {const strip=a=>{if(!Array.isArray(a))return a;return a.filter(x=>!(x&&!Array.isArray(x)&&typeof x.pic==='string'&&!HA_HAVE.has(x.pic))).map(x=>{if(x&&!Array.isArray(x)&&x.lines)x.lines=strip(x.lines);return x})};
  for(const e of EP.haeun){if(e.scene&&!HA_HAVE.has(e.scene))delete e.scene;e.pre=strip(e.pre);e.post=strip(e.post);for(const o of e.choices)o.r=strip(o.r)}}

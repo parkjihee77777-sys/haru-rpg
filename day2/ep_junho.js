@@ -197,7 +197,7 @@ EP.junho=[
   {go:'gym'},
   ['nar','','체육관 안. 선생님이 준비 운동을 시키셨다.'],
   ['nar','','선생님: 「목 돌리기, 어깨 돌리기. 이제 {@ankle} 돌리기. 한 {@foot} 들고, 발끝으로 동그라미.」'],
-  {k:'ankle',goal:'「{x}」 돌리기',bag:['ankle','foot','knee','wrist','hand']},
+  {k:'ankle',goal:'「{x}」 돌리기',bag:['ankle','knee','wrist','hand','finger']},
   ['nar','','나는 {@ankle|을} 돌렸다. 오른쪽, 그다음 왼쪽.'],
   {pic:'junho_02b'},
   ['nar','','준호도 돌렸다. 오른쪽 {@ankle}만. 왼쪽 차례가 되자 준호는 허리를 숙여 {@shoes} 끈을 만지는 척했다.'],
@@ -309,7 +309,7 @@ EP.junho=[
   common:[['me','smile','{m}, 준호 곧 대회래. 그거만 뛰고 쉰대.'],['mom','surprised','대회까지 그 {@ankle|으로}?'],['me','smile','응. 오늘은 두 박자 늦었어.'],['dad','smile','……박자를 세고 있었구나.'],['me','smile','응. 나도 모르게.']]}},
 
 // ■ Day 5 — 깽깽이 사진 (4)
-{title:'깽깽이 사진',scene:'junho_04',place:'hall',at:[900,240],with:[['jihoon',980,300]],taps:{hall:[['stairs',725,75,70]]},
+{title:'깽깽이 사진',scene:'junho_04',place:'hall',at:[900,240],with:[['jihoon',770,180]],taps:{hall:[['stairs',725,75,70]]},
  pre:[
   {pic:'junho_04a'},
   ['nar','','종례가 끝났다. 선생님이 아침에 걷어 간 핸드폰을 돌려주셨다. 아이들이 {@bag|을} 메고 우르르 복도로 나갔다.'],
@@ -1309,7 +1309,7 @@ EP.junho=[
  pre:[
   ['nar','','체육 시간. 오늘은 모둠별 패스 놀이였다. 네 명이 한 모둠. {@ball|을} 떨어뜨리지 않고 패스를 많이 하는 모둠이 이긴다. 우리 모둠은 나, 준호, 하은, 영민이였다.'],
   ['nar','','선생님: 「준비 운동부터. 제자리에서 {@foot} 구르기, 열 번!」'],
-  {k:'foot',goal:'「{x}」 구르기',bag:['foot','hand','knee','ankle','finger']},
+  {k:'foot',goal:'「{x}」 구르기',bag:['foot','hand','knee','wrist','finger']},
   ['nar','','제자리에서 {@foot|을} 쿵쿵 굴렀다. 열 번.'],
   {pic:'junho_13a'},
   ['nar','','{@foot|을} 구르는데 준호가 옆에서 작게 말했다.'],
