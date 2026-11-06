@@ -377,7 +377,7 @@ EP.jihoon=[
   common:[['me','smile','엄마. 지훈이는 웃는 {@photo|이} 하나도 없대. 자기는 찍는 사람이래.'],['mom','smile','찍는 사람은 {@photo}에 잘 안 나오지.'],['me','smile','응. 근데 지훈이 {@photo|은} 다 똑같아. 턱 내리고 {@eye} 크게. 그게 제일 안 촌스럽대.'],['mom','surprised','촌스럽다는 게 뭘까?'],['me','surprised','……몰라. 남들이 이상하게 볼 것 같은 거?'],['mom','smile','음. 그렇구나.']]}},
 
 // ■ Day 6 — 교문 앞 할머니 (5)
-{title:'교문 앞 할머니',scene:'jihoon_05',place:'gatesun',at:[1060,520],with:[['jiho',840,530]],taps:{gatesun:[['school_gate',970,690,110]]},
+{title:'교문 앞 할머니',scene:'jihoon_05',place:'gatesun',at:[1060,520],with:[['jiho',840,530]],taps:{gatesun:[['school_gate',670,800,95],['school_gate',800,750,105],['school_gate',970,690,120],['school_gate',1110,640,105],['school_gate',1245,630,95]]},
  pre:[
   ['nar','','종례가 끝났다. {@phone|을} 돌려받고 {@shoes|을} 갈아 신었다. 지훈이, 지호, 나는 같이 {@school_gate|으로} 걸었다.'],
   ['jihoon','smile','오늘 {@cloud} 없다. 재미없어.'],
