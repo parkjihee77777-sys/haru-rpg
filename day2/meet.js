@@ -192,6 +192,10 @@ end2=function(){const n=DAY,next=n+1,hasNext=dayHasContent(next);DAY=hasNext?nex
  if(hasNext){DAYHEART[next]={...HEART};delete DAYMEET[next];document.getElementById('gonext').onclick=()=>startDay(next)}};
 // a scene that walks on to another place ({go}) brings its friend along; ep.goAlone = {map:[choices]} when the hero goes there alone
 {const _load=load;load=function(m,x){if(SCENE_IDS){const al=SCENE_EP&&SCENE_EP.goAlone&&SCENE_EP.goAlone[m];GOWITH=al&&al.includes(D2CHOICE[SCENE_IDS[0]])?null:{map:m,ids:SCENE_IDS}}return _load(m,x)}}
+// ep.empty = {map:1} the class went out: that map shows only this scene's kids (no one at the desks) until the scene ends; {map:[ids]} only those kids (Yena 12: Jiho stays behind)
+{const keep=m=>{const e=SCENE_EP,v=SCENE_IDS&&!PICKS.includes(SCENE_IDS[0])&&e&&e.empty&&e.empty[m];return v?(Array.isArray(v)?v:SCENE_IDS):null};
+ const _dp=d2People;d2People=function(id){const k=keep(id);return k?_dp(id).filter(p=>k.includes(p[0])):_dp(id)};
+ const _dt=d2Talk;d2Talk=function(id){const r=_dt(id),k=keep(MAP);if(k)for(const n of npcs.slice())if(!k.includes(n.id)){npcs.splice(npcs.indexOf(n),1);n.el.style.transition='opacity .5s';n.el.style.opacity=0;setTimeout(()=>n.el.remove(),550)}return r}}
 // no leaving through the way out while a friend's find is running (the find's thing is on this map; leaving lost the scene and the day got stuck)
 {const _pickPlace=pickPlace;pickPlace=function(){if(FIND&&['d2_class','d2_after'].includes(stage)){say([['think','surprised','(먼저 이 미션부터 끝내자.)']]);return}return _pickPlace()};
  const L={en:'(Let me finish this mission first.)',id:'(Aku selesaikan misi ini dulu.)',vi:'(Làm xong nhiệm vụ này trước đã.)',zh:'（先把这个任务做完吧。）',ja:'（まずこのミッションを終わらせよう。）',ru:'(Сначала закончу это задание.)'};
