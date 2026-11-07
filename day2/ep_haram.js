@@ -117,7 +117,7 @@ EP.haram=[
 
 // ■ Day 4 — 끌려간대 (3)
 {title:'끌려간대',scene:'haram_03',place:'hall',at:[920,520],with:[['haeun',1120,600]],
- things:{hall:[['note',900,730,40],['pencil',640,380,30]]},
+ things:{hall:[['note',900,730,52],['pencil',640,380,30]]},
  pre:[
   {pic:'haram_03'},
   ['nar','','쉬는 시간. 하람이한테 가려고 복도로 나왔다. 그런데 하은이가 「잠깐만!」 하고 나를 불러 세웠다.'],
@@ -231,7 +231,7 @@ EP.haram=[
   ['nar','','종이 울렸다. 하람이가 모둠 자료를 내 {@bag}에 넣어 주려고 했다. 내일 내가 대신 내기로 했다.'],
   {k:'bag',goal:'「{x}」에 넣기',bag:['pcase','bag','notebook','water_bottle','handkerchief']},
   {pic:'haram_d05_bag'},{only:['B','D'],lines:[['haram','smile','내일 이거 대신 내 줘. 발표는 내가 할게.'],['junho','laugh','대신 잘해라!']]},
-  {only:['A'],lines:[['haram','smile','고마워. 근데 그 길은 내가 아는데. 남은 건 내가 지금 그릴게.'],['nar','','하람이가 {w|을} 다시 가져가 쉬는 시간 내내 그렸다.']]},
+  {only:['A'],lines:[['haram','smile','고마워. 근데 그 길은 내가 아는데. 남은 건 내가 지금 그릴게.'],{pic:'haram_d05_draw'},['nar','','하람이가 {w|을} 다시 가져가 쉬는 시간 내내 그렸다.']]},
   {only:['C'],lines:[['haram','sad','……미리 말했는데.'],['me','sad','……응. 미안. 알았는데.'],['nar','','하람이는 그래도 {w|을} 내 {@bag}에 넣었다.']]},
   ['haram','smile','오늘 저녁 보름달 엄청 클 거야. 너도 봐.']],
  eve:{lead:[['me','smile','{m}, 하람이 내일 학교 안 온대. 쉼의 날이래. 보름 다음 날은 가족이랑 보낸대.'],['mom','surprised','그런 날이 있구나.'],['me','sad','근데 내일이 모둠 과제 마감이야. 준호가 하람이 무임승차래.']],
@@ -243,7 +243,7 @@ EP.haram=[
 
 // ■ Day 6 — 반 전체 노래? (5) ★
 {title:'반 전체 노래?',scene:'haram_05',place:'cafe',at:[520,850],with:[['yena',400,880],['junho',600,880]],flag:{R06_D:{D:1}},
- things:{cafe:[['spoon',522,603,38]],class:[['clock',1040,186,46]]},
+ things:{cafe:[['spoon',522,603,50]],class:[['clock',1040,186,46]]},
  pre:[
   ['nar','','점심시간. 하람이랑 같은 테이블에 앉았다. 하람이가 감사 노래를 마치고 눈을 떴다.'],
   ['nar','','요즘은 옆 테이블 애들도 웃지 않았다. 가끔 쳐다보기만 했다.'],
@@ -315,7 +315,7 @@ EP.haram=[
 
 // ■ Day 7 — 한 입만 (6)
 {title:'한 입만',scene:'haram_06',place:'cafe',at:[520,850],with:[['junho',600,880]],
- things:{cafe:[['ladle',600,226,44,null,'stay'],['tofu',505,228,34,null,'stay']]},
+ things:{cafe:[['ladle',600,226,44,null,'stay'],['tofu',505,228,48,null,'stay']]},
  pre:[
   ['nar','','점심시간. 오늘 반찬은 불고기였다. 급식 줄 맨 끝에서 하람이가 조리사 선생님께 따로 작은 그릇을 받고 있었다.'],
   {k:'ladle',goal:'「{x}」 보기'},
