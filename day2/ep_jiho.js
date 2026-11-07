@@ -289,7 +289,7 @@ EP.jiho=[
   common:[['me','smile','지호한테 반장 왜 나가냐니까, 1등 하려고래. 투표 1등.'],['mom','laugh','(웃음) 솔직하네. 너는 뭐라고 했어?'],['me','smile','친구들 얘기 잘 들어 주고 싶다고.'],['dad','smile','둘이 이유가 다르네.'],['me','laugh','응. 그리고 지호 손 엄청 세. 악수했는데 아팠어.'],['dad','surprised','지금은 괜찮아?']]}},
 
 // ■ Day 5 — 아프대 (4)
-{title:'아프대',scene:'jiho_04',place:'class',at:[520,880],with:[['youngmin',395,865]],taps:{class:[['desk',1290,545,55]]},
+{title:'아프대',scene:'jiho_04',place:'class',at:[520,880],with:[['youngmin',395,865]],
  pre:[
   {pic:'jiho_04b'},
   ['nar','','쉬는 시간. 비가 와서 운동장에 나갈 수 없었다. 교실 뒤에 아이들이 몰려 있었다.'],
@@ -299,7 +299,7 @@ EP.jiho=[
   ['jiho','smile','너는 봐주기 없잖아. 멀리뛰기 때 봤어.'],
   ['nar','','지호가 팔꿈치를 {@desk}에 올렸다. 그런데 {@desk}이 덜컹 흔들렸다. 다리 하나가 짧았다.'],
   ['jiho','angry','아, 흔들려. {@desk} 하나 더 붙여 줘.'],
-  {k:'desk',goal:'「{x}」 붙이기'},
+  {k:'desk',goal:'「{x}」 붙이기',bag:['chair','desk','book','locker','blackboard']},
   ['nar','','{@desk} 두 개가 나란히 붙어 흔들리지 않았다.'],
   {pic:'jiho_04'},
   ['nar','','여덟 번째 도전자는 영민이였다. 영민이는 말이 느리고 순했지만, 한번 잡으면 끝까지 놓지 않는 아이였다.'],
@@ -669,7 +669,7 @@ EP.jiho=[
   common:[['me','sad','{m}, 지호는 2등도 말하기 싫대.'],['dad','sad','……그렇구나.'],['me','surprised','{d}는 내가 꼴찌면 싫어?'],['dad','surprised','꼴찌인 너?'],['nar','','{d}가 {@spoon}을 내려놓고 생각하는 척했다.'],['dad','laugh','{d}는 1초 얘기가 더 재밌는데?'],['me','laugh','(웃음) 1초 얘기만 세 번째야.']]}},
 
 // ■ Day 9 — 이긴 쪽 (8)
-{title:'이긴 쪽',scene:'jiho_08',place:'gym',at:[760,560],with:[['jihoon',980,600],['hangyeol',1250,420]],
+{title:'이긴 쪽',scene:'jiho_08',place:'gym',at:[760,560],with:[['jihoon',980,600],['hangyeol',1250,420]],taps:{stands:[['water',250,650,70]]},
  things:{gym:[['jump_rope',880,660,56],['water',600,760,46]]},
  pre:[
   ['nar','','체육 시간. 오늘은 {@jump_rope} 오래 뛰기를 했다. 두 명씩 짝이 돼서 서로 횟수를 세 줬다. 내 짝은 또 지호였다.'],
@@ -740,7 +740,7 @@ EP.jiho=[
    ['jiho','smile','……61.'],
    ['nar','','지호가 숫자를 작게 따라 말했다.'],{pic:null}]}],
  post:[
-  {pic:'jiho_08c'},
+  {go:'stands'},// the taps by the stands (the map shows the drawn tap; boss 11/07: not the gym, no cup of water)
   ['nar','','체육 시간이 끝나고 수돗가에 갔다. 땀이 뚝뚝 떨어졌다. 지호가 내 옆에 섰다.'],
   {k:'water',goal:'「{x}」로 세수하기'},
   ['nar','','수도꼭지를 틀어 시원한 {@water}로 얼굴을 씻었다.'],
@@ -856,7 +856,7 @@ EP.jiho=[
  pre:[
   {pic:'jiho_10c'},
   ['nar','','점심시간. 오늘 급식은 카레였다. 내가 좋아하는 거였다. 나는 지호, 준호, 하은, 예나와 같은 식탁에 앉았다.'],
-  {k:'tray',goal:'「{x}」 내려놓기'},
+  {k:'tray',goal:'「{x}」 내려놓기',bag:['spoon','cup','tray','milk','chopsticks']},
   ['nar','','카레가 담긴 {@tray}을 식탁에 조심히 내려놓았다.'],
   ['jiho','laugh','시합하자! 누가 {@tray} 제일 먼저 비우나!'],
   ['junho','laugh','콜!'],
@@ -1131,13 +1131,12 @@ EP.jiho=[
 
 // ■ Day 14 — 진 사람이 먼저 (13)
 {title:'진 사람이 먼저',scene:'jiho_13',place:'hall',at:[1120,480],
- taps:{hall:[['window',1280,235,55]]},
  pre:[
   {pic:'jiho_13a'},
   ['nar','','쉬는 시간. 복도 창가에 지호가 혼자 서 있었다. 메모지에 볼펜으로 뭔가를 쓰고 있었다. 숫자 「1」.'],
   ['nar','','복도가 덥고 답답했다.'],
   ['jiho','sad','{@window} 좀 열어 줘. 나 손에 볼펜 잉크 묻었어.'],
-  {k:'window',goal:'「{x}」 열기'},
+  {k:'window',goal:'「{x}」 열기',bag:['door','window','locker','clock','curtain']},
   ['nar','','{@window}을 드르륵 열었다. 시원한 바람이 들어왔다.'],
   ['nar','','지호가 바람을 맞으며 한참 말이 없었다. 지호가 이렇게 조용한 건 처음이었다.'],
   ['jiho','sad','애들이 다 수아 찍는대.'],
