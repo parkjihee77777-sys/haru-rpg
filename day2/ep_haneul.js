@@ -1029,9 +1029,7 @@ EP.haneul=[
 {title:'다 봤어',scene:'haneul_08',place:'class',at:[263,860],with:[['jihoon',488,700],['jiho',548,830]],
  pre:[
   ['nar','','5교시는 국어. {@notebook|이} 필요했다. 첫날 엄마가 챙겨 준 그 {@notebook}. 첫날 밤 친구 이름을 적은 {@notebook}.'],
-  {lay:[['drawer',240,604,52]]},
-  {k:'drawer',goal:'「{x}」 열기'},
-  {clear:['drawer']},
+  {k:'drawer',goal:'「{x}」 열기',bag:['drawer','desk','chair','pcase','locker']},// my own drawer: picked from cards, not a spot on the map (owner 11/07)
   ['nar','','내 책상 {@drawer|을} 열었다. {@textbook|와} 필통뿐이었다. {@notebook|이} 없었다.'],
   ['think','surprised','(없어. {@bag|에도} 없어. 어디 갔지?)'],
   {pic:'haneul_08s'},
