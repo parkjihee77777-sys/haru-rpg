@@ -556,14 +556,13 @@ EP.hyeeun=[
 // ■ Day 8 — 맨 위 칸 (7)
 {title:'맨 위 칸',scene:'hyeeun_07',place:'class',at:[1000,860],
  pre:[
-  {lay:[['locker',1120,800,80,'locker_wood','stay']]},// a tall locker at the back of the room (the drawn one by the blackboard is low; her top shelf is above my shoulder); 'stay' keeps it off the desks
   ['nar','','쉬는 시간. 다음 시간은 체육이었다. 아이들이 교실 뒤 {@locker}에서 {@gym_clothes|을} 꺼내고 있었다.'],
   ['nar','','{@locker|은} 번호순이었다. 혜은이는 23번. 맨 위 칸이었다.'],
   ['nar','','혜은이가 {@locker} 아래에서 고개를 젖히고 위를 올려다보고 있었다. 손에는 긴 집게가 들려 있었다. 끝을 오므리면 물건을 집을 수 있는 집게였다.'],
   ['hyeeun','smile','이 집게로 웬만한 건 다 꺼내. 근데 {@gym_clothes|이} 안쪽으로 밀려 들어갔어.'],
   ['nar','','혜은이가 나를 봤다.'],
   ['hyeeun','smile','맨 위 칸에서 {@gym_clothes} 좀 꺼내 줄래? 파란 주머니.'],
-  {k:'locker',goal:'「{x}」 열기'},
+  {k:'locker',goal:'「{x}」 열기',bag:['bag','locker','pcase','notebook','water_bottle']},// the lockers are at the back of the room, off this map: pick the card
   ['nar','','23번 {@locker} 문이 열렸다.'],
   ['nar','','{@locker} 안은 뒤죽박죽이었다. 리코더, 미술 도구 상자, 구겨진 학습지, 과자 봉지. 파란 {@gym_clothes} 주머니는 맨 안쪽에 있었다.'],
   ['think','surprised','(와, 엉망이다. 정리해 주면 혜은이가 편하지 않을까?)'],
@@ -613,7 +612,7 @@ EP.hyeeun=[
    ['hyeeun','sad','……네.'],
    ['think','sad','(맞는 말이었는데. 다들 혜은이를 봤어. 혜은이가 말하려던 걸 내가 먼저 했어.)']]}],
  post:[
-  {lay:[['gym_clothes',1090,860,60,null,'stay']]},
+  {lay:[['gym_clothes','@hyeeun',75,-70,60]]},
   ['nar','','나는 꺼낸 {@gym_clothes|을} 혜은이에게 건넸다.'],
   {k:'gym_clothes',goal:'「{x}」 건네기'},
   {clear:['gym_clothes']},

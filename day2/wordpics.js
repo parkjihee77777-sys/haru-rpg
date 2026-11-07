@@ -7,7 +7,7 @@
 // so a scene can name its picture before it is drawn (list: 검수/다시그릴목록_1105.md 「F」).
 const WORDPIC={
  minho_03:{cat:'cat_yellow'},hangyeol_10:{magnet:'magnet_board'},
- hyeeun_05:{box:'milk_crate'},hyeeun_08:{box:'milk_crate'},minho_12:{box:'milk_crate'},minho_vote:{box:'ballot_box'},
+ hyeeun_05:{box:'milk_crate'},hyeeun_08:{box:'milk_crate'},hyeeun_07:{locker:'locker_grid'},minho_12:{box:'milk_crate'},minho_vote:{box:'ballot_box'},
  haram_09:{card:'card_greeting'},seah_08:{card:'cards_play'},
  hangyeol_08:{umbrella:'umbrella_flower'},minho_08:{umbrella:'umbrella_broken'},
  hyeeun_02:{glove:'glove_wheel'},hyeeun_03:{glove:'glove_wheel'},hyeeun_15:{glove:'glove_wheel'},junho_09:{glove:'glove_goalie'},
@@ -26,7 +26,7 @@ const WORDPIC={
  hangyeol_01:{thread:'thread_floss'},hangyeol_12:{thread:'thread_floss'}};
 // which of those pictures are really there (a list, not a network probe: a missing file would show as a page error).
 // When a new picture from list F is added, put its name here (items = cut-out .png, cards = card .jpg).
-const PIC_ITEM=new Set(['stairs_down','magnet_board', 'cat_yellow', 'ballot_box', 'cards_play', 'glue_stick', 'milk_crate', 'paper_crumpled', 'water_bottle_pink', 'water_drops', 'glove_wheel', 'glove_goalie', 'wheel_chair', 'card_greeting', 'ball_dodge', 'ice_pack', 'umbrella_flower', 'umbrella_broken', 'eraser_cloud', 'milk_strawberry', 'bag_gym', 'water_tap', 'notebook_blue', 'notebook_gray', 'thread_floss']),PIC_CARD=new Set(['stairs_down','magnet_board', 'cat_yellow', 'ballot_box', 'glue_stick', 'milk_crate', 'paper_crumpled', 'cards_play', 'water_bottle_pink', 'water_drops', 'photo_cam', 'glove_wheel', 'glove_goalie', 'wheel_chair', 'card_greeting', 'ball_dodge', 'ice_pack', 'umbrella_flower', 'umbrella_broken', 'eraser_cloud', 'milk_strawberry', 'bag_gym', 'water_tap', 'notebook_blue', 'notebook_gray', 'thread_floss']);
+const PIC_ITEM=new Set(['locker_grid','stairs_down','magnet_board', 'cat_yellow', 'ballot_box', 'cards_play', 'glue_stick', 'milk_crate', 'paper_crumpled', 'water_bottle_pink', 'water_drops', 'glove_wheel', 'glove_goalie', 'wheel_chair', 'card_greeting', 'ball_dodge', 'ice_pack', 'umbrella_flower', 'umbrella_broken', 'eraser_cloud', 'milk_strawberry', 'bag_gym', 'water_tap', 'notebook_blue', 'notebook_gray', 'thread_floss']),PIC_CARD=new Set(['stairs_down','magnet_board', 'cat_yellow', 'ballot_box', 'glue_stick', 'milk_crate', 'paper_crumpled', 'cards_play', 'water_bottle_pink', 'water_drops', 'photo_cam', 'glove_wheel', 'glove_goalie', 'wheel_chair', 'card_greeting', 'ball_dodge', 'ice_pack', 'umbrella_flower', 'umbrella_broken', 'eraser_cloud', 'milk_strawberry', 'bag_gym', 'water_tap', 'notebook_blue', 'notebook_gray', 'thread_floss']);
 let LAYPIC={},LAYPIC_EP=null;const DAYPIC={};
 function picOf(k){if(typeof SCENE_EP==='undefined'||!SCENE_EP)return k;if(LAYPIC_EP!==SCENE_EP){LAYPIC={};LAYPIC_EP=SCENE_EP}
  const w=(WORDPIC[SCENE_EP.scene]||{})[k],v=(w&&PIC_ITEM.has(w)&&w)||LAYPIC[k];if(!v||v===k)return k;DAYPIC[k]=v;PIC_ITEM.add(v);return v}// a laid picture is there (it is on the map)
