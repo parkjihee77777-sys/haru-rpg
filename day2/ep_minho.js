@@ -269,7 +269,7 @@ EP.minho=[
   ['me','surprised','나도?'],
   ['minho','laugh','그래. 너 반장 나간다며. 반장 하려면 놀 줄도 알아야 표 받지.'],
   ['nar','','민호가 {@ball|을} 내 쪽으로 툭 던졌다.'],
-  ()=>{world.querySelectorAll('.thing').forEach(e=>{if(/items\/ball\.png/.test(e.src)&&!e.classList.contains('laid'))e.remove()});OBJ[MAP]=(OBJ[MAP]||[]).filter(t=>!(t[0]==='ball'&&!t.laid))},{lay:[['ball',1405,365,34,null,'stay']]},// the thrown ball lands on the floor between Minho and the broom (owner 11/07)
+  ()=>{world.querySelectorAll('.thing').forEach(e=>{if(/items\/ball\.png/.test(e.src))e.remove()});OBJ[MAP]=(OBJ[MAP]||[]).filter(t=>t[0]!=='ball')},{lay:[['ball',1405,365,34,null,'stay']]},// the thrown ball lands on the floor between Minho and the broom (owner 11/07)
   {k:'ball',goal:'「{x}」 받기'},
   {pic:'minho_06b'},['nar','','한 손에는 {@broom}, 한 손에는 {@ball}. 교실 뒤에서 같은 당번 친구가 쓰레받기를 든 채 우리를 보고 있었다.'],
   ['minho','laugh','빨리. 5분만 하고 오면 돼. 아무도 몰라.'],
