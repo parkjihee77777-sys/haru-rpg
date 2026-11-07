@@ -449,18 +449,18 @@ EP.siwoo=[
 
 // ■ Day 10 — 매미 허물 (9)
 {title:'매미 허물',scene:'siwoo_09',place:'backyard',at:[1180,690],
- things:{backyard:[['tissue',1050,750,56],['box',1130,770,60]]},
+ things:{},// tissue and box are Siwoo's own (he holds them): picked as cards, not lying on the ground (owner 11/07)
  pre:[
   {pic:'siwoo_09b'},
   ['nar','','점심시간. 시우가 뒤뜰 나무 아래에서 뭔가를 찾고 있었다. 나는 시우 쪽으로 갔다.'],
   ['siwoo','smile','……기다려.'],
   {pic:'siwoo_09a'},
   ['nar','','시우가 나무줄기를 한참 들여다보더니 조심조심 뭔가를 떼어 냈다. 그리고 작은 {@box}에 {@tissue}를 깔고 넣었다.'],
-  {k:'tissue',goal:'「{x}」 깔기'},
+  {k:'tissue',goal:'「{x}」 깔기',bag:['tissue','handkerchief','paper','notebook']},
   {pic:'siwoo_09'},
   ['nar','','시우가 {@box}를 내 쪽으로 쭉 내밀었다. 팔을 다 펴서, 30센티 넘게.'],
   ['siwoo','smile','줄게.'],
-  {k:'box',goal:'「{x}」 열어 보기'},
+  {k:'box',goal:'「{x}」 열어 보기',bag:['box','bag','pcase','notebook']},
   {pic:'siwoo_09c'},
   ['nar','','{@box} 안에 갈색의 바삭한 껍질이 있었다. 다리가 달려 있었다. 등이 갈라져 있었다. 꼭 벌레가 그대로 있는 것 같았다.'],
   ['think','surprised','(으…… 이게 뭐야.)'],
