@@ -118,7 +118,7 @@ EP.junho=[
   common:[['me','smile','{m}, 준호가 ‘왼발은 오늘 휴가’래.'],['mom','surprised','휴가?'],['me','smile','안 쓴다는 뜻이래. 웃지도 않고 그래.'],['mom','laugh','(웃음) 웃기는 친구네.'],['me','smile','응. 웃긴데 안 웃어.']]}},
 
 // ■ Day 3 — 양말 끝까지 (2)
-{title:'양말 끝까지',scene:'junho_02',place:'hall',at:[1250,700],
+{title:'양말 끝까지',scene:'junho_02',place:'hall',at:[1120,640],
  pre:[
   ['nar','','3교시는 체육이었다. 체육관에 들어가기 전에 신발장 앞에서 실내화를 체육관 운동화로 갈아 신어야 했다.'],
   {pic:'junho_02a'},
@@ -313,6 +313,7 @@ EP.junho=[
  pre:[
   {pic:'junho_04a'},
   ['nar','','종례가 끝났다. 선생님이 아침에 걷어 간 핸드폰을 돌려주셨다. 아이들이 {@bag|을} 메고 우르르 복도로 나갔다.'],
+  {pic:null},// on the way to the stairs, not the phone basket any more (AI check 11/07)
   ['nar','','우리 교실은 3층이었다. 신발장은 1층. 나는 {@stairs|으로} 갔다.'],
   {k:'stairs',goal:'「{x}」 내려가기'},
   ['nar','','난간 옆으로 한 칸씩 {@stairs|을} 내려갔다.'],
@@ -431,6 +432,7 @@ EP.junho=[
   {pic:'junho_05f'},
   ['nar','','{@ball|이} 높이 날아왔다. 준호가 받으려고 뛰어올랐다. 오른발로 뛰었다. 그런데 내려올 때, 왼발이 먼저 땅에 닿았다.'],
   ['nar','','툭.'],
+  {pic:'junho_05'},// he is down from this line (the jump picture stayed up)
   ['nar','','준호 {@ankle|이} 안쪽으로 꺾였다. 준호가 옆으로 쓰러졌다.'],
   ['nar','','{@ball|은} 저쪽 끝으로 굴러갔다. 아이들은 {@ball|을} 따라 우르르 뛰어갔다. 아무도 뒤를 안 봤다. {@goal} 근처에 있던 건 나 하나였다.'],
   ['me','smile','준호야!'],
@@ -520,6 +522,7 @@ EP.junho=[
    ['me','smile','응. 보건 선생님.'],
    {pic:'junho_05e'},
    ['nar','','나는 보건실로 뛰었다. 1층 끝, 빨간 십자가. 보건 선생님이 붕대를 챙겨 바로 나오셨다. 당번 선생님도 같이 오셨다.'],
+   {pic:null},// back behind the goal: the map (the nurse-in-the-hallway picture would not match)
    ['nar','','보건 선생님: 「일으켜 줄게. 잡아도 되지?」'],
    ['junho','smile','……네.'],
    ['nar','','{@goal} 뒤에서 두 선생님이 준호를 부축해 일으켰다. 아이들은 아직 {@ball|을} 쫓고 있었다. 하은이만 멀리서 {@hand|을} 흔들었다.'],
