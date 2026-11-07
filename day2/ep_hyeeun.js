@@ -554,9 +554,9 @@ EP.hyeeun=[
   common:[['me','laugh','혜은이 진짜 잘 던져. 다섯 개 중에 네 개.'],['mom','surprised','너는?'],['me','sad','……두 개.'],['mom','laugh','(웃음) 다음엔 혜은이한테 던지는 법 물어봐.']]}},
 
 // ■ Day 8 — 맨 위 칸 (7)
-{title:'맨 위 칸',scene:'hyeeun_07',place:'class',at:[960,880],
- things:{class:[['locker',1210,935,76]]},// a tall locker at the back of the room (the drawn one by the blackboard is low; her top shelf is above my shoulder)
+{title:'맨 위 칸',scene:'hyeeun_07',place:'class',at:[1000,860],
  pre:[
+  {lay:[['locker',1120,800,80,null,'stay']]},// a tall locker at the back of the room (the drawn one by the blackboard is low; her top shelf is above my shoulder); 'stay' keeps it off the desks
   ['nar','','쉬는 시간. 다음 시간은 체육이었다. 아이들이 교실 뒤 {@locker}에서 {@gym_clothes|을} 꺼내고 있었다.'],
   ['nar','','{@locker|은} 번호순이었다. 혜은이는 23번. 맨 위 칸이었다.'],
   ['nar','','혜은이가 {@locker} 아래에서 고개를 젖히고 위를 올려다보고 있었다. 손에는 긴 집게가 들려 있었다. 끝을 오므리면 물건을 집을 수 있는 집게였다.'],
@@ -613,7 +613,7 @@ EP.hyeeun=[
    ['hyeeun','sad','……네.'],
    ['think','sad','(맞는 말이었는데. 다들 혜은이를 봤어. 혜은이가 말하려던 걸 내가 먼저 했어.)']]}],
  post:[
-  {lay:[['gym_clothes',1140,915,54]]},
+  {lay:[['gym_clothes',1090,860,60,null,'stay']]},
   ['nar','','나는 꺼낸 {@gym_clothes|을} 혜은이에게 건넸다.'],
   {k:'gym_clothes',goal:'「{x}」 건네기'},
   {clear:['gym_clothes']},
@@ -633,15 +633,15 @@ EP.hyeeun=[
   common:[['me','smile','혜은이가 부탁할 때 제일 좋은 사람은 부탁한 만큼만 해 주는 사람이래. 더 하지도 덜 하지도 않고.'],['dad','smile','그거 어렵다.'],['me','surprised','왜?'],['dad','laugh','{d}는 너 도와줄 때 자꾸 더 하게 되거든.'],['me','laugh','(웃음) 알아.']]}},
 
 // ■ Day 9 — 창고 아니야 (8)
-{title:'창고 아니야',scene:'hyeeun_08',place:'hall',at:[930,430],
+{title:'창고 아니야',scene:'hyeeun_08',place:'hall',at:[880,520],
  pre:[
-  {lay:[['box',1240,770,58,'milk_crate']]},
+  {lay:[['box',1200,720,80,'milk_crate','stay']]},
   ['nar','','오늘은 내가 우유 당번이었다. 쉬는 시간에, 빈 우유 {@box|을} 1층 우유 보관함에 갖다 놓으러 갔다.'],
   {k:'box',goal:'「{x}」 보관함에 넣기'},
   {clear:['box']},
   ['nar','','빈 우유 {@box|을} 1층 보관함 칸에 넣었다.'],
   ['nar','','돌아서는데, 복도 끝에 혜은이가 보였다.'],
-  {lay:[['toilet',1058,262,70],['cart',1010,400,96],['box',1110,388,44],['box',1110,352,40]]},
+  {lay:[['toilet',1066,333,82,null,'stay'],['cart',1010,400,96,null,'stay'],['box',1110,388,44,null,'stay'],['box',1110,352,40,null,'stay'],['box',1072,372,42,null,'stay']]},
   ['nar','','복도 끝에는 {@toilet|이} 셋 있었다. 그중 문이 넓고, 문에 휠체어 그림이 붙은 {@toilet|이} 하나 있었다. 혜은이가 쓰는 {@toilet|이었}다.'],
   ['nar','','그 문 앞을 청소 수레가 막고 있었다. 수레 옆에는 대걸레 통, 그 위에는 택배 {@box} 세 개가 쌓여 있었다.'],
   ['nar','','혜은이가 한 손으로 수레를 밀어 보고 있었다. 수레는 꿈쩍도 안 했다. 바퀴가 잠겨 있었다.'],
@@ -887,7 +887,7 @@ EP.hyeeun=[
  taps:{gatesun:[['school_gate',970,690,110]]},
  pre:[
   ['nar','','종례가 끝났다. 과학 시간에 키운 강낭콩 {@flowerpot|을} 집에 가져가는 날이었다.'],
-  {lay:[['flowerpot',1245,420,62]]},
+  {lay:[['flowerpot',1290,445,72,null,'stay']]},
   ['nar','','혜은이 {@flowerpot|은} 컸다. 흙이 꽉 차 있었다. 본관 현관 신발장 위에 놓여 있었다.'],
   ['hyeeun','smile','저 {@flowerpot} 좀 내 무릎에 올려 줄래? 신발장이 높아.'],
   {k:'flowerpot',goal:'「{x}」 무릎에 올려 주기'},
@@ -971,7 +971,7 @@ EP.hyeeun=[
 // ■ Day 13 — 별점 지도 (12)
 {title:'별점 지도',scene:'hyeeun_12',place:'class',at:[870,880],
  pre:[
-  {lay:[['map',905,745,90]]},
+  {lay:[['map',1240,690,100,null,'stay']]},
   ['nar','','쉬는 시간. 혜은이가 책상 위에 커다란 종이를 펼쳐 놓고 있었다. 학교 그림이었다. 1층, 2층, 3층, 운동장, 급식실.'],
   ['nar','','곳곳에 별이 그려져 있었다. 하나짜리, 셋짜리, 다섯짜리.'],
   ['me','surprised','이거 뭐야?'],
@@ -1039,7 +1039,7 @@ EP.hyeeun=[
   common:[['me','smile','근데 혜은이가 건의서를 농담 하나도 없이 썼대. 엄청 어려웠대.'],['mom','surprised','왜 어려웠을까?'],['me','sad','농담이 없으면 자기 말이 너무 무거워 보일까 봐. 다들 ‘아이고’ 할까 봐.'],['mom','sad','……그랬구나.'],['mom','smile','그럼 그 건의서, 엄청 용감하게 쓴 거네.'],['me','smile','응. 목소리도 평소보다 작았어.']]}},
 
 // ■ Day 14 — 착해 보이는 사진 (13)
-{title:'착해 보이는 사진',scene:'hyeeun_13',place:'stands',at:[700,830],with:[['jihoon',900,800]],
+{title:'착해 보이는 사진',scene:'hyeeun_13',place:'stands',at:[760,800],with:[['jihoon',900,800]],
  pre:[
   ['nar','','쉬는 시간. 운동장 스탠드 맨 아래 평평한 자리에 혜은이가 있었다. 계단이 없는 유일한 자리였다. 나는 그 옆 첫 번째 칸에 앉았다.'],
   ['hyeeun','smile','스탠드, 별 둘. 맨 아래 한 줄만 내 자리야. 대신 공이 제일 잘 보여.'],
@@ -1047,7 +1047,7 @@ EP.hyeeun=[
   ['jihoon','laugh','{SN|아}! 반장 선거 나간다며?'],
   ['me','surprised','……응.'],
   ['jihoon','smile','그럼 {@photo} 있어야 돼. 착해 보이는 거. 작년 반장도 이런 거 찍었어. 봐 봐.'],
-  {lay:[['photo',990,760,44]]},
+  {lay:[['photo',990,760,64,null,'stay']]},
   {k:'photo',goal:'「{x}」 보기'},
   {clear:['photo']},
   ['nar','','카메라 화면에 작년 반장이 1학년 아이의 가방을 들어 주며 웃는 {@photo|이} 보였다.'],
@@ -1313,7 +1313,7 @@ window.EP_WORDS_HE={
 
 // ---- what Hyeeun's scenes need from the engine (on top of meet.js and the other per-friend files) ----
 // situation pictures (art/scenes/hyeeun/pics2.json): over a choice's reaction (meeting index → choice → picture), and from a line on in pre/post ([meeting index, 'pre'|'post', start of the line, picture])
-{const RP={"0": {"B": "hyeeun_01b", "A": "hyeeun_01d", "C": "hyeeun_01d"}, "1": {"A": "hyeeun_02", "B": "hyeeun_02", "C": "hyeeun_02", "D": "hyeeun_02"}, "2": {"D": "hyeeun_03c", "C": "hyeeun_03d"}, "3": {"D": "hyeeun_04"}, "4": {"A": "hyeeun_05b", "D": "hyeeun_05c", "B": "hyeeun_05", "C": "hyeeun_05"}, "5": {"A": "hyeeun_06c", "D": "hyeeun_06d"}, "6": {"C": "hyeeun_07a", "A": "hyeeun_07b", "D": "hyeeun_07c"}, "7": {"A": "hyeeun_08c", "C": "hyeeun_08", "D": "hyeeun_08"}, "8": {"C": "hyeeun_09a", "A": "hyeeun_09b", "D": "hyeeun_09c", "B": "hyeeun_09"}, "9": {"B": "hyeeun_10b", "C": "hyeeun_10c", "D": "hyeeun_10d"}, "10": {"A": "hyeeun_11", "B": "hyeeun_11d", "C": "hyeeun_11"}, "11": {"C": "hyeeun_12a"}, "12": {"A": "hyeeun_13d"}, "13": {"D": "hyeeun_14b", "B": "hyeeun_14b", "C": "hyeeun_14b"}, "14": {"A": "hyeeun_15a", "B": "hyeeun_15", "C": "hyeeun_15", "D": "hyeeun_15"}};
+{const RP={"0": {"B": "hyeeun_01b", "A": "hyeeun_01d", "C": "hyeeun_01d"}, "1": {"A": "hyeeun_02", "B": "hyeeun_02", "C": "hyeeun_02", "D": "hyeeun_02"}, "2": {"D": "hyeeun_03c", "C": "hyeeun_03d"}, "3": {"D": "hyeeun_04"}, "4": {"A": "hyeeun_05b", "D": "hyeeun_05c", "B": "hyeeun_05", "C": "hyeeun_05"}, "5": {"A": "hyeeun_06c", "D": "hyeeun_06d"}, "6": {"C": "hyeeun_07a", "A": "hyeeun_07b", "D": "hyeeun_07c"}, "7": {"A": "hyeeun_08c", "D": "hyeeun_08"}, "8": {"C": "hyeeun_09a", "A": "hyeeun_09b", "D": "hyeeun_09c", "B": "hyeeun_09"}, "9": {"B": "hyeeun_10b", "C": "hyeeun_10c", "D": "hyeeun_10d"}, "10": {"A": "hyeeun_11", "B": "hyeeun_11d", "C": "hyeeun_11"}, "11": {"C": "hyeeun_12a"}, "12": {"A": "hyeeun_13d"}, "13": {"D": "hyeeun_14b", "B": "hyeeun_14b", "C": "hyeeun_14b"}, "14": {"A": "hyeeun_15a", "B": "hyeeun_15", "C": "hyeeun_15", "D": "hyeeun_15"}};
  const AN=[[0, "pre", "나도 {@bag|을} 의자 옆 바닥에 내려놓았다.", "hyeeun_01c"], [1, "pre", "쉬는 시간. 나는 {@cup|을} 들고 복도 정수기로 갔다.", "hyeeun_02c"], [1, "post", "혜은이가 젖은 {@glove|을} 꼭 짰다.", "hyeeun_02b"], [2, "pre", "나는 접은 {@umbrella|을} 들고 혜은이 옆으로 갔다.", "hyeeun_03b"], [3, "post", "그때 교무실 문이 열리고 과학 선생님이 나오셨다.", "hyeeun_04b"], [3, "post", "윤 선생님이 {@key} 하나를 빼서 나에게 내미셨다.", "hyeeun_04c"], [3, "post", "잠시 뒤, 3층에 올라갔던 반 아이들이 투덜거리며 내려왔다.", "hyeeun_04d"], [4, "post", "쉬는 시간이 끝나 갈 때, 혜은이가 내 자리 옆으로 왔다.", "hyeeun_05d"], [5, "pre", "선생님: 「던지는 선은 하나예요.", "hyeeun_06b"], [6, "post", "혜은이가 {@gym_clothes|을} 무릎에 올리고 바퀴를 굴렸다.", "hyeeun_07d"], [7, "pre", "오늘은 내가 우유 당번이었다.", "hyeeun_08b"], [7, "post", "우리는 교무실 앞에서 담임 선생님을 만났다.", "hyeeun_08d"], [8, "post", "혜은이가 미역국을 한 숟가락 떠먹었다.", "hyeeun_09d"], [9, "pre", "도서관 문에는 낮은 문턱이 있었다.", "hyeeun_10a"], [10, "pre", "혜은이 {@flowerpot|은} 컸다.", "hyeeun_11c"], [11, "post", "혜은이가 건의서 끝을 마저 썼다.", "hyeeun_12b"], [11, "post", "혜은이가 건의서를 반으로 접었다.", "hyeeun_12c"], [12, "pre", "그때 지훈이가 카메라를 들고 뛰어왔다.", "hyeeun_13b"], [12, "pre", "카메라 화면에 작년 반장이", "hyeeun_13c"], [13, "post", "우리는 교실 앞에 도착했다.", "hyeeun_14c"], [14, "pre", "꼬마 2가 휠체어 뒤를 힐끗 봤다.", "hyeeun_15b"], [14, "post", "혜은이가 {@glove|을} 꼈다.", "hyeeun_15c"], [14, "post", "혜은이가 교실 쪽으로 바퀴를 굴렸다.", "hyeeun_15d"]];
  for(const[i,m]of Object.entries(RP))for(const o of EP.hyeeun[i].choices)if(m[o.k])o.r=[{pic:m[o.k]}].concat(o.r||[],[{pic:null}]);
  const put=(a,txt,pic)=>{for(let j=0;j<a.length;j++){const x=a[j];if(Array.isArray(x)&&typeof x[2]==='string'&&x[2].startsWith(txt)){a.splice(j,0,{pic});return true}if(x&&x.lines&&put(x.lines,txt,pic))return true}return false};
