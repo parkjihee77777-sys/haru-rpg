@@ -11,7 +11,6 @@ EP.hyeeun=[
  pre:[
   {me:[830,805]},
   ['nar','','쉬는 시간. 교실 뒤쪽이 시끄러웠다. 아이들이 {@bag|을} 책상 옆 바닥에 내려놓고 떠들고 있었다.'],
-  {lay:[['bag',915,866,54]]},
   ['nar','','나도 {@bag|을} 의자 옆 바닥에 내려놓았다. 책상 옆 고리에 거는 걸 깜빡했다.'],
   ['think','surprised','(첫날 자기소개 할 때 「천천히 해도 돼」 해 준 애가 있었는데. 누구였지?)'],
   ['nar','','그때 뒤에서 목소리가 들렸다.'],
@@ -22,7 +21,7 @@ EP.hyeeun=[
   ['think','surprised','(반은 농담? 그럼 반은 진짜라는 거야?)'],
   ['nar','','혜은이가 턱으로 바닥을 가리켰다. 휠체어 앞, 작은 앞{@wheel} 바로 앞에 내 {@bag}끈이 늘어져 있었다.'],
   ['hyeeun','smile','농담은 ‘길 막지 마’의 ‘마~’ 부분. {@bag|은} 진짜 치워 줘.'],
-  {k:'bag',goal:'「{x}」 들어 올리기'},
+  {k:'bag',goal:'「{x}」 들어 올리기',bag:['bag','pcase','notebook','umbrella','water_bottle']},
   {clear:['bag']},
   {lay:[['bag',700,830,46],['bag',770,826,46]]},
   ['nar','','내 {@bag|은} 들었다. 그런데 통로에는 {@bag|이} 두 개 더 있었다. 주인들은 교실 앞쪽에서 떠들고 있었다.'],
@@ -101,10 +100,9 @@ EP.hyeeun=[
 // ■ Day 3 — 바퀴는 네 개 (2)
 {title:'바퀴는 네 개',scene:'hyeeun_02',place:'hall',at:[470,430],
  pre:[
-  {lay:[['cup',372,352,30]]},
   ['nar','','쉬는 시간. 나는 {@cup|을} 들고 복도 정수기로 갔다. 혜은이가 먼저 와서 물을 받고 있었다.'],
   ['hyeeun','smile','줄 서. 정수기는 별 셋. 물은 맛있는데 줄이 길어.'],
-  {k:'cup',goal:'「{x}」에 물 받기'},
+  {k:'cup',goal:'「{x}」에 물 받기',bag:['cup','water_bottle','bowl','pcase','handkerchief']},
   {clear:['cup']},
   ['nar','','내 {@cup}에 물이 찼다.'],
   {pic:'hyeeun_02a'},
@@ -332,10 +330,9 @@ EP.hyeeun=[
   ['nar','','선생님이 실험 상자를 내려다보시고, 잠깐 생각하셨다.'],
   ['nar','','선생님: 「그럼 오늘은 과학실이 1층으로 내려오면 되겠다. 1층 다목적실에서 하자. 실험 도구는 수레에 실어 오면 돼.」'],
   ['nar','','윤 선생님: 「다목적실 {@key} 여기 있어요.」'],
-  {lay:[['key',1500,520,30]]},
   ['nar','','윤 선생님이 {@key} 하나를 빼서 나에게 내미셨다.'],
   ['nar','','윤 선생님: 「먼저 가서 문 좀 열어 줄래?」'],
-  {k:'key',goal:'「{x}」로 문 열기'},
+  {k:'key',goal:'「{x}」로 문 열기',bag:['key','pencil','eraser','pcase','umbrella']},
   {clear:['key']},
   ['nar','','다목적실 문이 열렸다.'],
   ['nar','','잠시 뒤, 3층에 올라갔던 반 아이들이 투덜거리며 내려왔다.'],
@@ -359,7 +356,7 @@ EP.hyeeun=[
 
 // ■ Day 6 — 비키지 말고 비워 (5) ★
 {title:'비키지 말고 비워',scene:'hyeeun_05',place:'hall',at:[1290,780],with:[['jihoon',1150,700],['junho',1060,620]],flag:{E06_way:{A:1,D:1},E06_push:{B:1}},
- taps:{hall:[['door',1058,232,45]]},
+
  pre:[
   ['nar','','체육이 끝났다. 반 아이들이 한꺼번에 교실 앞문으로 몰려들었다. 다들 땀에 젖어 물을 마시러 가려고 서둘렀다.'],
   {lay:[['box',1395,822,58,'milk_crate_empty','stay'],['box',1468,872,58,'milk_crate_empty','stay']]},// on the floor in front of the door, empty crates (they floated on the door, full of milk; owner 11/06)
@@ -442,7 +439,7 @@ EP.hyeeun=[
   ['nar','','선생님: 「빈 우유 {@box|은} 이제 복도 말고 교실 안 창가에 둬요. 그리고 뒷{@door|은} 쉬는 시간마다 열어 둬요. 복도 소리가 조금 들려도요.」'],
   ['nar','','선생님: 「{@door|이} 두 개 다 열리면, 다 같이 빨리 들어와요. 우유 당번도 {@box} 들고 다니기 편하고요.」'],
   ['nar','','선생님: 「지금 뒷{@door} 열어 둘 사람?」'],
-  {k:'door',goal:'「{x}」 열어 두기'},
+  {k:'door',goal:'「{x}」 열어 두기',bag:['door','desk','trash_can','umbrella','chair']},
   ['nar','','뒷{@door|을} 끝까지 열고 바닥 받침을 내려 고정했다.'],
   ['nar','','쉬는 시간이 끝나 갈 때, 혜은이가 내 자리 옆으로 왔다.'],
   {only:['A','D'],lines:[
@@ -475,9 +472,8 @@ EP.hyeeun=[
  pre:[
   ['nar','','체육 시간. 오늘은 체육관에서 ‘{@basket}에 {@ball} 넣기’를 했다. 번호 홀수 팀과 짝수 팀. 나와 혜은이, 준호는 같은 홀수 팀이었다.'],
   ['nar','','선생님: 「던지는 선은 하나예요. 서서 던져도 되고, 앉아서 던져도 돼요. 다섯 개씩 던져서 많이 넣는 팀이 이겨요.」'],
-  {lay:[['basket',980,800,64]]},
   ['nar','','선생님: 「{SN|아}, 홀수 팀은 던지는 순서를 네가 정해 볼래? 그리고 {@basket} 좀 저기 표시한 자리에 놓아 줘.」'],
-  {k:'basket',goal:'「{x}」 놓기'},
+  {k:'basket',goal:'「{x}」 놓기',bag:['basket','ball','jump_rope','whistle','water_bottle']},
   {clear:['basket']},
   {lay:[['basket',1150,470,64]]},
   ['nar','','바닥의 노란 표시 위에 {@basket|을} 놓았다.'],
@@ -531,9 +527,8 @@ EP.hyeeun=[
   ['nar','','선생님: 「자, 2판! 이번엔 모두 한 번씩 꼭 던져요.」'],
   ['nar','','혜은이가 바퀴를 굴려 선 앞에 멈췄다. 바퀴 옆 손잡이를 내렸다. 딸깍.'],
   {clear:['ball']},
-  {lay:[['ball',900,730,34,'ball_soft']]},
   ['hyeeun','smile','{@ball} 하나 굴려 줘. 내 쪽으로.'],
-  {k:'ball',goal:'「{x}」 굴려 주기'},
+  {k:'ball',goal:'「{x}」 굴려 주기',bag:['ball','basket','jump_rope','whistle','water_bottle']},
   {clear:['ball']},
   ['nar','','{@ball|이} 혜은이 바퀴 옆에서 멈췄다.'],
   {pic:'hyeeun_06a'},
@@ -612,9 +607,8 @@ EP.hyeeun=[
    ['hyeeun','sad','……네.'],
    ['think','sad','(맞는 말이었는데. 다들 혜은이를 봤어. 혜은이가 말하려던 걸 내가 먼저 했어.)']]}],
  post:[
-  {lay:[['gym_clothes','@hyeeun',75,-70,60]]},
   ['nar','','나는 꺼낸 {@gym_clothes|을} 혜은이에게 건넸다.'],
-  {k:'gym_clothes',goal:'「{x}」 건네기'},
+  {k:'gym_clothes',goal:'「{x}」 건네기',bag:['gym_clothes','bag','pcase','notebook','water_bottle']},
   {clear:['gym_clothes']},
   ['nar','','파란 {@gym_clothes} 주머니가 혜은이 무릎 위에 놓였다.'],
   ['hyeeun','smile','고마워. 이거 들고 체육관까진 내가 갈게.'],
@@ -633,14 +627,14 @@ EP.hyeeun=[
 
 // ■ Day 9 — 창고 아니야 (8)
 {title:'창고 아니야',scene:'hyeeun_08',place:'hall',at:[880,520],
+ taps:{halltoilet:[['toilet',1205,160,48]]},
  pre:[
-  {lay:[['box',1200,720,80,'milk_crate','stay']]},
   ['nar','','오늘은 내가 우유 당번이었다. 쉬는 시간에, 빈 우유 {@box|을} 1층 우유 보관함에 갖다 놓으러 갔다.'],
-  {k:'box',goal:'「{x}」 보관함에 넣기'},
+  {k:'box',goal:'「{x}」 보관함에 넣기',bag:['box','bag','umbrella','water_bottle','trash_can']},
   {clear:['box']},
   ['nar','','빈 우유 {@box|을} 1층 보관함 칸에 넣었다.'],
   ['nar','','돌아서는데, 복도 끝에 혜은이가 보였다.'],
-  {lay:[['toilet',1066,333,82,null,'stay'],['cart',1010,400,96,null,'stay'],['box',1110,388,44,null,'stay'],['box',1110,352,40,null,'stay'],['box',1072,372,42,null,'stay']]},
+  {go:'halltoilet'},// the end of the corridor, drawn with its doors, the cart and three boxes (owner 11/07: no doors or carts laid on the hall)
   ['nar','','복도 끝에는 {@toilet|이} 셋 있었다. 그중 문이 넓고, 문에 휠체어 그림이 붙은 {@toilet|이} 하나 있었다. 혜은이가 쓰는 {@toilet|이었}다.'],
   ['nar','','그 문 앞을 청소 수레가 막고 있었다. 수레 옆에는 대걸레 통, 그 위에는 택배 {@box} 세 개가 쌓여 있었다.'],
   ['nar','','혜은이가 한 손으로 수레를 밀어 보고 있었다. 수레는 꿈쩍도 안 했다. 바퀴가 잠겨 있었다.'],
@@ -689,6 +683,7 @@ EP.hyeeun=[
    ['nar','','수레가 비켜났다. 혜은이가 {@toilet|으로} 들어갔다. 나는 우유 보관함 쪽으로 돌아갔다.'],
    ['think','sad','(기다리는 동안 혜은이는 시계만 봤어. 2분이 엄청 길었겠다.)']]}],
  post:[
+  {go:'hall'},
   ['nar','','혜은이가 나왔다. 나는 우유 보관함 앞에서 손을 흔들었다. 혜은이가 바퀴를 굴려 왔다.'],
   ['hyeeun','smile','선생님한테 말할 거야. 이번이 세 번째니까.'],
   ['hyeeun','smile','같이 봤으니까 같이 가 줄래? 말은 내가 할게.'],
@@ -723,8 +718,7 @@ EP.hyeeun=[
   ['nar','','점심시간. 나는 배식 줄에서 혜은이 바로 뒤에 섰다.'],
   ['nar','','혜은이 무릎 위에는 얇은 판이 깔려 있었다. 바닥이 고무로 된, 안 미끄러지는 판이었다. 혜은이가 그 위에 {@tray|을} 올렸다.'],
   ['hyeeun','smile','이거 내 식탁. 휴대용. 농담 아니야, 진짜 그렇게 불러.'],
-  {lay:[['tray',330,350,56]]},
-  {k:'tray',goal:'「{x}」 받기'},
+  {k:'tray',goal:'「{x}」 받기',bag:['tray','spoon','bowl','cup','chopsticks']},
   {clear:['tray']},
   ['nar','','내 {@tray}에 밥과 반찬이 담겼다.'],
   ['nar','','배식대 앞. 조리사님이 혜은이 {@tray}에 밥을 담아 주시며 크게 말씀하셨다.'],
@@ -776,9 +770,8 @@ EP.hyeeun=[
    ['me','surprised','진짜?'],
    ['hyeeun','smile','보통은 ‘아니’가 먼저 나와. 입이 빨라서. 농담 아니야.']]}],
  post:[
-  {lay:[['soup',1000,395,44]]},
   ['nar','','우리는 식탁에 앉았다. 나는 {@soup}그릇을 식탁 위에 내려놓았다.'],
-  {k:'soup',goal:'「{x}」 내려놓기'},
+  {k:'soup',goal:'「{x}」 내려놓기',bag:['soup','tray','spoon','bowl','cup']},
   {clear:['soup']},
   {only:['D'],lines:[['nar','','혜은이 {@soup|을} 혜은이 {@tray} 옆에 내려놓았다.']]},
   {only:['A','B','C'],lines:[['nar','','{@soup}그릇이 식탁 위에 놓였다.']]},
@@ -799,13 +792,13 @@ EP.hyeeun=[
 
 // ■ Day 11 — 운동장 열 바퀴 (10)
 {title:'운동장 열 바퀴',scene:'hyeeun_10',place:'library',at:[1080,705],with:[['yena',1250,690],['haeun',960,700]],flag:{E11_say:{B:1,C:1}},
- taps:{library:[['chair',1150,575,36]]},things:{library:[['book',1030,520,46]]},
+ 
  pre:[
   ['nar','','국어 시간. 오늘은 도서관에서 모둠끼리 이야기{@book|을} 소리 내어 읽었다. 한 사람이 한 쪽씩.'],
   ['nar','','도서관 문에는 낮은 문턱이 있었다. 혜은이가 앞바퀴를 살짝 들어 문턱을 넘었다. 휙.'],
   ['hyeeun','laugh','도서관 문턱, 별 셋. 내가 잘해서 셋이고, 원래는 하나야.'],
   ['nar','','우리 모둠은 혜은이, 예나, 하은이, 나였다. 창가 둥근 책상에 모였다.'],
-  {k:'book',goal:'「{x}」 펼치기'},
+  {k:'book',goal:'「{x}」 펼치기',bag:['book','notebook','pcase','pencil','bookshelf']},
   ['nar','','모둠 {@book|의} 첫 장이 펼쳐졌다.'],
   ['nar','','예나가 먼저 읽었다. 노래하듯 술술. 하은이도 빨랐다. 혜은이는 목소리가 커서 사서 선생님이 「쉿」 하셨다.'],
   ['nar','','내 차례였다.'],
@@ -860,7 +853,7 @@ EP.hyeeun=[
  post:[
   ['nar','','종이 울렸다. 사서 선생님이 말씀하셨다.'],
   ['nar','','사서 선생님: 「자, {@chair|은} 책상 밑으로 넣고 나가요.」'],
-  {k:'chair',goal:'「{x}」 넣기'},
+  {k:'chair',goal:'「{x}」 넣기',bag:['chair','desk','bookshelf','bag','trash_can']},
   ['nar','','내 {@chair|를} 책상 밑으로 쏙 밀어 넣었다.'],
   ['think','smile','({@chair} 넣는 건 이제 저절로 돼. 통로가 넓어지니까.)'],
   ['nar','','도서관 문 앞에서 혜은이가 앞바퀴를 들어 문턱을 넘었다. 그리고 돌아봤다.'],
@@ -886,10 +879,9 @@ EP.hyeeun=[
  taps:{gatesun:[['school_gate',970,690,110]]},
  pre:[
   ['nar','','종례가 끝났다. 과학 시간에 키운 강낭콩 {@flowerpot|을} 집에 가져가는 날이었다.'],
-  {lay:[['flowerpot',1290,445,72,null,'stay']]},
   ['nar','','혜은이 {@flowerpot|은} 컸다. 흙이 꽉 차 있었다. 본관 현관 신발장 위에 놓여 있었다.'],
   ['hyeeun','smile','저 {@flowerpot} 좀 내 무릎에 올려 줄래? 신발장이 높아.'],
-  {k:'flowerpot',goal:'「{x}」 무릎에 올려 주기'},
+  {k:'flowerpot',goal:'「{x}」 무릎에 올려 주기',bag:['flowerpot','bag','umbrella','water_bottle','book']},
   {clear:['flowerpot']},
   ['nar','','강낭콩 {@flowerpot|이} 혜은이 무릎 위, 안 미끄러지는 판 위에 놓였다.'],
   ['nar','','혜은이가 두 팔로 {@flowerpot|을} 감싸 안았다. 그러자 바퀴를 밀 손이 없었다.'],
@@ -970,12 +962,11 @@ EP.hyeeun=[
 // ■ Day 13 — 별점 지도 (12)
 {title:'별점 지도',scene:'hyeeun_12',place:'class',at:[870,880],
  pre:[
-  {lay:[['map',1240,690,100,null,'stay']]},
   ['nar','','쉬는 시간. 혜은이가 책상 위에 커다란 종이를 펼쳐 놓고 있었다. 학교 그림이었다. 1층, 2층, 3층, 운동장, 급식실.'],
   ['nar','','곳곳에 별이 그려져 있었다. 하나짜리, 셋짜리, 다섯짜리.'],
   ['me','surprised','이거 뭐야?'],
   ['hyeeun','smile','내 별점 {@map}. 1학년 때부터 그렸어.'],
-  {k:'map',goal:'「{x}」 들여다보기'},
+  {k:'map',goal:'「{x}」 들여다보기',bag:['map','notebook','book','paper','photo']},
   ['nar','','별점 {@map|의} 글씨가 눈에 들어왔다.'],
   ['nar','','혜은의 {@map}: 「급식실 경사로 — ★ → ★★★ (미끄럼 띠 붙음)」 「우리 반 앞문 — ★★★★ (뒷문도 열림)」 「1층 휠체어 화장실 — ★★★ (표지 붙음. 지켜보는 중)」'],
   ['nar','','「도서관 문턱 — ★ (내가 잘해서 ★★★)」 「3층 과학실 — 엘리베이터 고장 나면 별 없음」 「교문 옆 경사 — ★ (자전거)」 「2층 방화문 — ★★ (무거움)」'],
@@ -1046,8 +1037,7 @@ EP.hyeeun=[
   ['jihoon','laugh','{SN|아}! 반장 선거 나간다며?'],
   ['me','surprised','……응.'],
   ['jihoon','smile','그럼 {@photo} 있어야 돼. 착해 보이는 거. 작년 반장도 이런 거 찍었어. 봐 봐.'],
-  {lay:[['photo',990,760,64,null,'stay']]},
-  {k:'photo',goal:'「{x}」 보기'},
+  {k:'photo',goal:'「{x}」 보기',bag:['photo','map','book','paper','notebook']},
   {clear:['photo']},
   ['nar','','카메라 화면에 작년 반장이 1학년 아이의 가방을 들어 주며 웃는 {@photo|이} 보였다.'],
   ['jihoon','laugh','그러니까 너는 이거! 네가 혜은이 휠체어 미는 {@photo}. 운동장 배경으로. 우리 반 {@photo}첩에 올리면 하트 엄청 받아.'],
@@ -1119,7 +1109,7 @@ EP.hyeeun=[
 
 // ■ Day 15 — 무거운 문 (14)
 {title:'무거운 문',scene:'hyeeun_14',place:'hall',at:[1000,600],
- taps:{hall:[['door',1480,560,55]]},
+
  pre:[
   ['nar','','쉬는 시간. 나는 2층 끝 화장실에 갔다가 교실로 돌아가는 길이었다.'],
   {pic:'hyeeun_14a'},
@@ -1179,7 +1169,7 @@ EP.hyeeun=[
    ['hyeeun','laugh','‘아니’를 한 번에 알아들었네. 별 넷.']]}],
  post:[
   ['nar','','우리는 교실 앞에 도착했다. 앞{@door|은} 활짝 열려 있었다. 우유 상자는 창가에 있었다. 그래도 {@door} 한쪽이 바람에 반쯤 닫혀 있었다.'],
-  {k:'door',goal:'「{x}」 열기'},
+  {k:'door',goal:'「{x}」 열기',bag:['door','desk','chair','umbrella','trash_can']},
   ['nar','','교실 앞{@door|이} 끝까지 열렸다.'],
   ['hyeeun','smile','우리 반 {@door|은} 별 다섯. 2층 방화문은 별 하나.'],
   ['nar','','혜은이가 학습지를 선생님 책상에 내려놓았다. 그리고 말했다.'],
@@ -1204,10 +1194,9 @@ EP.hyeeun=[
 // ■ Day 16R — 그건 내 얘기라서 (15)
 {title:'그건 내 얘기라서',scene:'hyeeun_15',place:'hall',at:[470,430],
  pre:[
-  {lay:[['cup',372,352,30]]},
   ['nar','','쉬는 시간. 나는 {@cup|을} 들고 복도 정수기로 갔다. 혜은이가 먼저 와서 물을 받고 있었다. 전에 꼬마들을 만났던 그 자리였다.'],
   ['hyeeun','smile','줄 서. 정수기는 여전히 별 셋.'],
-  {k:'cup',goal:'「{x}」에 물 받기'},
+  {k:'cup',goal:'「{x}」에 물 받기',bag:['cup','water_bottle','bowl','pcase','handkerchief']},
   {clear:['cup']},
   ['nar','','내 {@cup}에 물이 찼다.'],
   ['nar','','혜은이가 물을 마시려고 {@glove|을} 벗어 무릎에 올려 두었다.'],
@@ -1336,9 +1325,10 @@ const RAMP_WALK=[[[0,500],[260,470],[400,615],[1000,520],[1010,330],[1100,330],[
 // two places drawn for Hyeeun's scenes: the outdoor ramp to the cafeteria just after rain (Day 4) and the front gate on a sunny afternoon (Day 12; same layout as the rainy gate)
 Object.assign(EXTRA_MAPS,{
  ramp:{name:'급식실 가는 경사로',img:'maps/ramp.jpg',walk:RAMP_WALK,block:[R(400,330,1000,600)],start:[900,760],out:[120,590]},
+ halltoilet:{name:'복도 끝 화장실 앞',img:'maps/hall_toilet.jpg',walk:[[[380,410],[1490,410],[1672,640],[1672,941],[0,941],[0,870],[130,780],[330,450]]],block:[R(850,280,1140,470)],start:[760,760],out:[200,880]},
  gatesun:{name:'교문',img:'maps/gatesun.jpg',walk:[[[0,470],[400,390],[900,250],[1672,70],[1672,180],[1100,440],[1060,520],[1100,560],[880,560],[700,600],[620,560],[0,560]],[[700,600],[1150,560],[1260,700],[1672,640],[1672,941],[740,941],[700,800]]],start:[900,480],out:[420,440]}});
-for(const id of ['ramp','gatesun']){const m=EXTRA_MAPS[id];MAPS[id]={img:m.img,walk:m.walk,rects:[],block:m.block||[],start:m.start};OUT[id]=m.out;PLACE[id]=id}
-{const P={'급식실 가는 경사로':['ramp to the cafeteria','jalan landai ke kantin','dốc lên nhà ăn','去食堂的坡道','きゅうしょくしつへの スロープ','пандус к столовой']};
+for(const id of ['ramp','gatesun','halltoilet']){const m=EXTRA_MAPS[id];MAPS[id]={img:m.img,walk:m.walk,rects:[],block:m.block||[],start:m.start};OUT[id]=m.out;PLACE[id]=id}
+{const P={'급식실 가는 경사로':['ramp to the cafeteria','jalan landai ke kantin','dốc lên nhà ăn','去食堂的坡道','きゅうしょくしつへの スロープ','пандус к столовой'],'복도 끝 화장실 앞':['the restrooms at the end of the hall','toilet di ujung lorong','nhà vệ sinh cuối hành lang','走廊尽头的洗手间','ろうかの つきあたりの トイレ','туалеты в конце коридора']};
  ['en','id','vi','zh','ja','ru'].forEach((u,i)=>{T[u]=T[u]||{};for(const[k,v]of Object.entries(P))if(!(k in T[u]))T[u][k]=v[i]})}
 // test shortcuts: #he5 = the morning of the day you meet Hyeeun the 5th time (Day 6); #he5eve = that evening; #he15b = Day 16R with the flags off
 {const h=location.hash.match(/^#he(\d+)(eve|b)?$/);
