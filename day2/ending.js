@@ -52,11 +52,11 @@ function edBoard(rows,done){const m=document.getElementById('modal'),c=document.
 const edRow=id=>[id==='me'?edName('me'):tr(id==='sua'?'양수아':'백지호'),ED.n[id]];
 // ---- the 종례 ----
 function edElection(){stage='d2_elect';setGoal('');ED=edResult();FLAGS.ED=ED;const L=EDL;
- const open=L.open.concat(edM('jiho')>=4?L.jiho4:[],L.sua,edM('sua')>=7?L.sua7:[],L.me);
+ const P=n=>()=>showPic(n),X=()=>showPic(null);const open=[P('ed_open')].concat(L.open,edM('jiho')>=4?L.jiho4:[],L.sua,edM('sua')>=7?L.sua7:[],[P('ed_speech')],L.me);
  fade(()=>{if(MAP!=='class')load('class');bgm('day');scene('lesson_3',open,()=>ask('어떻게 할까?',L.choices,o=>{sceneEl.classList.remove('on');ED.speech=o.k;FLAGS.ED=ED;
   runSteps(o.r.concat(L.close),null,edVote)}),true)})}
 function edVote(){const L=EDL,v=EP.minho_vote;
- const rest=()=>runSteps(L.line.concat(edM('hyeeun')>=1?L.hyeeun:[]),null,edCountUp);
+ const rest=()=>runSteps([()=>showPic('ed_vote')].concat(L.line,edM('hyeeun')>=1?L.hyeeun:[]),null,edCountUp);
  if(v&&edM('minho')>=4&&!FLAGS.minho_vote){SCENE_EP=v;SCENE_IDS=['minho'];layThings((v.things||{}).class||[]);
   runSteps(v.pre,null,()=>{const go=()=>ask(v.ask||'어떻게 할까?',v.choices,o=>{sceneEl.classList.remove('on');FLAGS.minho_vote=1;
    runSteps((o.r||[]).concat(v.post||[]),o.k,()=>{Object.entries(o.pts||{}).forEach(([p,n])=>heart(p,n));SCENE_EP=null;SCENE_IDS=null;rest()})});
@@ -71,16 +71,17 @@ function edPlace(map,kids,lines,done){if(map===MAP&&map==='class'){edSay(lines,d
   kids.forEach((id,i)=>npcs.push(sprite(id,st[0]+(i%2?-1:1)*120*(1+(i>>1)),st[1]+10)));setTimeout(tagAll,300);edSay(lines,done)})}
 function edScene(){const R=ED,L=EDL,e=R.ed,iWon=R.rank===1,f=R.f1,fr=f[0]?edFr(f[0]):[],home=()=>{fade(d2Home)};
  const pair=R.order.slice(0,2).find(x=>x!=='me');
- if(e===1){edSay(L.ED1[pair].concat(fr,L.ED1.end),home);return}
- if(e===4||e===6){const S=e===4?L.ED4:L.ED6;edPlace(S.map,S.kids,S.pre.concat(iWon?S.me:S.them,S.post,fr,S.end),home);return}
+ const P=n=>()=>showPic(n),X=()=>showPic(null);
+ if(e===1){edSay([P(pair==='sua'?'ed_1s':'ed_1j')].concat(L.ED1[pair],[X],fr,L.ED1.end),home);return}
+ if(e===4||e===6){const S=e===4?L.ED4:L.ED6;edPlace(S.map,S.kids,[P(e===4?'ed_4':'ed_6')].concat(S.pre,iWon?S.me:S.them,[X],S.post,fr,S.end),home);return}
  if(e===2){const b=R.bffs[0];if(b==='sua'){FLAGS.WIN_sua=true;const s=EP.sua_result,bl=(s.post.find(x=>x.only&&x.only[0]==='bff_sua')||{}).lines||[];
    edPlace('hall',['sua'],[],()=>runSteps(s.pre.concat(bl),'bff_sua',home));return}
-  edPlace(MAPS.gatesun?L.ED2.map:'gate',[b],L.ED2.pre.concat(b==='jiho'?L.ED2.jiho:EDL.FR[b]?EDL.FR[b][edM(b)>=15?2:1]:[],L.ED2.end),home);return}
+  edPlace(MAPS.gatesun?L.ED2.map:'gate',[b],[P('ed_2')].concat(L.ED2.pre,[X],b==='jiho'?L.ED2.jiho:EDL.FR[b]?EDL.FR[b][edM(b)>=15?2:1]:[],L.ED2.end),home);return}
  if(e===3){const[b1,b2]=R.bffs,k=R.bffs.find(x=>EDL.FR[x]),line=k?EDL.FR[k][edM(k)>=15?2:1]:R.bffs.includes('jiho')?L.ED2.jiho:[];
-  const lib=()=>edPlace('library',[b1,b2],L.ED3.pre.concat(line,L.ED3.end),home);
+  const lib=()=>edPlace('library',[b1,b2],[P('ed_3')].concat(L.ED3.pre,[X],line,L.ED3.end),home);
   if(R.bffs.includes('sua'))edPlace('hall',['sua'],L.suaShort,lib);else lib();return}
- if(e===5){edSay(L.ED5.pre.concat(fr,f[1]?edFr(f[1]):[],L.ED5.end),home);return}
- edSay(L.ED7.pre.concat(fr,L.ED7.end),home)}
+ if(e===5){edSay([P('ed_5')].concat(L.ED5.pre,[X],fr,f[1]?edFr(f[1]):[],L.ED5.end),home);return}
+ edSay([P('ed_7')].concat(L.ED7.pre,[X],fr,L.ED7.end),home)}
 // ---- the evening: the two friends one line each (their part's first line of mine), then the election, then the speech ----
 {const _d=dinner2;dinner2=function(){if(DAY!==ED_DAY||!FLAGS.ED)return _d.apply(this,arguments);ED=FLAGS.ED;const L=EDL,R=ED,e=R.ed,iWon=R.rank===1;
  let ls=L.eve.slice();for(const id of PICKS){const l=evePart(id).find(x=>Array.isArray(x)&&x[0]==='me');if(l)ls.push(l)}
@@ -111,3 +112,6 @@ function edCard(){const R=ED,m=document.getElementById('modal'),c=document.getEl
   setDay(ED_DAY);load('home_pm');edCard();return}
  if(s&&s.day>ED_DAY){s={...s,day:ED_DAY};delete s.mid}return _c.call(this,s)}}
 {const _sd=startDay;startDay=function(n){if(n===ED_DAY){ED=null;if(FLAGS)delete FLAGS.ED}const r=_sd.apply(this,arguments);if(n===ED_DAY&&FLAGS)delete FLAGS.ED;return r}}
+
+// ending pictures (drawn 11/07 with the Gemini API); the ones that show me have a boy and a girl version
+for(const n of ['ed_open','ed_speech','ed_1s','ed_1j','ed_4','ed_6','ed_5'])HEROPIC.add(n);
