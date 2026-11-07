@@ -703,11 +703,11 @@ EP.junho=[
   common:[['me','smile','{m}, 준호 오늘 보호대를 {@sock} 밖에 찼어. 처음 봤어. 다 보였어.'],['mom','surprised','보호대 때문일까?'],['me','smile','몰라. 근데 숨기는 얼굴은 아니었어. 그냥 덤덤했어.'],['mom','smile','그렇구나.'],['me','smile','그리고 회복 도장이 열 개쯤 찍힌대. 준호가 ‘이렇게 많은 회복 처음 봐’ 했어.'],['mom','laugh','(웃음) 엄마도 처음 들어 봐. 많은 회복.']]}},
 
 // ■ Day 8 — 종이 공 (7)
-{title:'종이 공',scene:'junho_07',place:'class',at:[400,500],empty:{class:1},with:[['haeun',1380,420]],taps:{class:[['desk',830,425,60]]},
+{title:'종이 공',scene:'junho_07',place:'class',at:[400,500],empty:{class:1},with:[['haeun',1380,420]],
  pre:[
   {pic:'junho_07a'},
   ['nar','','점심을 먹고 교실로 돌아왔다. 5교시 책을 꺼내 놓으려고 {@desk} 서랍을 열었다. 서랍 안이 엉망이었다.'],
-  {k:'desk',goal:'「{x}」 정리하기'},
+  {k:'desk',goal:'「{x}」 정리하기',bag:['desk','chair','bag','textbook','notebook']},
   ['nar','','{@desk} 서랍에 공책과 교과서를 가지런히 넣고, 5교시 책을 {@desk} 위에 꺼내 두었다.'],
   ['nar','','정리를 끝내고 고개를 드니 교실이 거의 비어 있었다. 아이들은 다 운동장에 나갔다.'],
   {pic:'junho_07'},
@@ -1122,10 +1122,10 @@ EP.junho=[
   common:[['me','smile','{m}, 준호가 나 반장 나가냐고 물었어.'],['mom','surprised','뭐라고 했어?'],['me','smile','생각 중이라고. 근데 준호가 반장 되면 애들이 이런 거 나한테 말할 거래. 아픈 거, 싫은 거.'],['mom','smile','……그렇겠다.'],['me','surprised','엄마. 반장은 다 들어 줘야 돼?'],['mom','surprised','글쎄. 너는 어떻게 생각해?'],['me','smile','다 들어 줄 수는 있어. 근데 다 정해 줄 수는 없어.'],['mom','smile','……응. 엄마도 그렇게 생각해.']]}},
 
 // ■ Day 12 — 얼음 대러 (11)
-{title:'얼음 대러',scene:'junho_11',place:'class',at:[1300,560],with:[['haeun',800,560],['jiho',920,420],['jihoon',1150,700]],taps:{class:[['window',100,170,75]]},
+{title:'얼음 대러',scene:'junho_11',place:'class',at:[1300,560],with:[['haeun',800,560],['jiho',920,420],['jihoon',1150,700]],
  pre:[
   ['nar','','점심시간이 끝나고 교실로 들어왔다. 체육복 {@bag|이} 땀에 젖어 있었다. 나는 {@bag|을} {@desk} 옆 고리에 걸었다.'],
-  {k:'bag',goal:'「{x}」 걸기'},
+  {k:'bag',goal:'「{x}」 걸기',bag:['bag','pcase','water_bottle','umbrella','notebook']},
   ['nar','','{@desk} 옆 고리에 {@bag|을} 걸었다.'],
   ['nar','','준호 자리는 비어 있었다. 점심 축구가 끝나고 준호는 보건실에 갔다. 보건 선생님이 뛰고 나서 {@ankle|이} 뻐근하면 {@ice|을} 대러 오라고 하셨다고 했다. 오늘은 조금 뻐근하다고 했다.'],
   {pic:'junho_11b'},
@@ -1204,7 +1204,7 @@ EP.junho=[
   {pic:'junho_11f'},
   ['nar','','5교시 종이 울리기 직전. {@window|으로} 바람이 세게 들어왔다. 준호 {@desk} 위 학습지가 날아갈 뻔했다.'],
   ['junho','smile','{@window} 좀. 네가 가까워.'],
-  {k:'window',goal:'「{x}」 닫기'},
+  {k:'window',goal:'「{x}」 닫기',bag:['window','door','curtain','locker','blackboard']},
   ['nar','','{@window|을} 드르륵 닫았다. 바람이 멈췄다.'],
   ['nar','','내가 자리로 돌아가는데 준호가 작게 말했다.'],
   ['junho','smile','{@ankle|이} 무슨 풍선이야? 터지게.'],
