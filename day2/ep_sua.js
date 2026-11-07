@@ -67,7 +67,6 @@ EP.sua=[
 
 // ■ Day 3 — 기어가라는 게 아니고 (2)
 {title:'기어가라는 게 아니고',scene:'sua_02',place:'library',at:[880,560],
- things:{library:[['paper',1000,520,48],['colored_pencil',1095,525,34]]},
  pre:[
   {pic:'sua_02a'},
   ['nar','','도서관 구석 {@desk}. 수아가 큰 {@paper}를 펼쳐 놓고 있었다. 나는 수아 맞은편에 앉았다.'],
@@ -77,8 +76,8 @@ EP.sua=[
   ['me','surprised','……그거 좋다.'],
   ['sua','smile','같이 할래? 내가 글 쓰고, 넌 {@picture}.'],
   ['me','smile','좋아.'],
-  {k:'paper',goal:'「{x}」 펼치기'},
-  {k:'colored_pencil',goal:'「{x}」 고르기'},
+  {k:'paper',goal:'「{x}」 펼치기',bag:['paper','notebook','book','pencil','box']},
+  {k:'colored_pencil',goal:'「{x}」 고르기',bag:['colored_pencil','pencil','eraser','highlighter','scissors']},
   ['nar','','수아는 정말 빨랐다. 순식간에 문장 다섯 개를 써 내려갔다.'],
   ['nar','','1번, 3번, 5번은 읽을 수 있었다. 그런데 7번 아래 새로 쓴 문장 하나가 걸렸다.'],
   ['nar','','{@paper}에 쓰인 글: 「연기가 나면 몸을 낮추고 벽을 짚으며 이동한다.」'],
@@ -166,13 +165,12 @@ EP.sua=[
 
 // ■ Day 5 — 누가 발표해? (4)
 {title:'누가 발표해?',scene:'sua_04',place:'class',at:[690,340],
- things:{class:[['notebook',800,428,40],['clock',1040,186,46]]},
  pre:[
   {pic:'sua_04a'},
   ['nar','','점심시간. 수아가 학급회의 {w}을 펴 놓고 있었다. 나는 수아 옆에 앉았다.'],
   ['sua','smile','다음 학급회의 때 놀이 발표하잖아. 준비하자.'],
-  {k:'notebook',goal:'「{x}」 펼치기'},
-  {k:'clock',goal:'「{x}」 보기'},
+  {k:'notebook',goal:'「{x}」 펼치기',bag:['notebook','paper','pencil','book','bag']},
+  {k:'clock',goal:'「{x}」 보기',bag:['clock','window','blackboard','door','desk']},
   ['sua','smile','학급회의는 한 사람이 2분 안에 말해야 해. 규칙 12번.'],
   ['sua','smile','그래서 생각해 봤는데, 발표는 내가 할게.'],
   ['me','surprised','……네가?'],
@@ -207,7 +205,6 @@ EP.sua=[
 
 // ■ Day 6 — 그 말이 생각 안 나 (5) ★
 {title:'그 말이 생각 안 나',scene:'sua_05',place:'class',at:[600,262],
- things:{class:[['hand',780,482,58]]},
  pre:[
   {pic:'sua_05a'},
   ['nar','','학급회의 시간. 두 번째 안건은 내 놀이였다. 나는 앞으로 나가기 전에 수아 자리로 갔다.'],
@@ -219,7 +216,7 @@ EP.sua=[
   {pic:'sua_05'},['nar','','나는 {@blackboard} 앞에 섰다. 아이들 얼굴이 한꺼번에 보였다.'],
   ['me','smile','동그랗게 앉아요. 술래가 {@handkerchief}을 뒤에 놓아요.'],
   ['nar','','{@hand}을 든 아이가 있었다.'],
-  {k:'hand',goal:'「{x}」 든 친구 가리키기'},
+  {k:'hand',goal:'「{x}」 든 친구 가리키기',bag:['hand','foot','ear','eye','desk']},
   {pic:'sua_05'},['nar','','아이: 「근데 잡히면 어떻게 돼? 술래 되는 거야?」'],
   ['me','surprised','아니요. 잡히면…… 잡히면…….'],
   ['nar','','머릿속이 하얘졌다. {HL}로는 바로 떠오르는데, 한국어 낱말이 생각나지 않았다.'],
@@ -299,12 +296,11 @@ EP.sua=[
 
 // ■ Day 8 — 그거 우리가 같이 만든 건데 (7)
 {title:'그거 우리가 같이 만든 건데',scene:'sua_07',place:'class',at:[690,340],
- things:{class:[['pencil',885,436,30],['paper',800,428,48]]},
  pre:[
   {pic:'sua_07a'},
   ['nar','','쉬는 시간. 수아가 자기 자리에서 공약을 쓰고 있었다. 나도 공약을 쓰던 {@pencil}을 들고 수아 쪽으로 갔다.'],
-  {k:'pencil',goal:'「{x}」 내려놓기'},
-  {k:'paper',goal:'「{x}」 들여다보기'},
+  {k:'pencil',goal:'「{x}」 내려놓기',bag:['pencil','eraser','notebook','pcase','scissors']},
+  {k:'paper',goal:'「{x}」 들여다보기',bag:['paper','notebook','box','picture','book']},
   ['nar','','수아의 공약 {@paper}: 「공약 1. 전학 온 친구를 위한 {@picture} 규칙표를 모든 반에 붙이겠습니다.」'],
   ['nar','','나는 그대로 굳었다. 내 {w} 첫 줄에도 거의 같은 말이 쓰여 있었다.'],
   ['sua','smile','이거 좋지? 우리가 만든 규칙표, 반응 좋았잖아.'],
@@ -336,11 +332,10 @@ EP.sua=[
 
 // ■ Day 9 — 왜 경쟁자를 도와? (8)
 {title:'왜 경쟁자를 도와?',scene:'sua_08',place:'class',at:[690,340],
- things:{class:[['box',800,432,62]]},
  pre:[
   {pic:'sua_08'},['nar','','쉬는 시간. 수아가 교실을 바쁘게 돌아다니고 있었다. 오늘 종례까지 체험학습 신청서를 다 걷어야 한다고 했다.'],
   ['nar','','나는 수아 {@desk}으로 갔다. {@desk} 위에 신청서 {@box}가 있었다.'],
-  {k:'box',goal:'「{x}」 들여다보기'},
+  {k:'box',goal:'「{x}」 들여다보기',bag:['box','bag','desk','paper','bowl']},
   ['nar','','{@box} 안에 신청서가 꽤 차 있었다. 그래도 빈자리가 보였다.'],
   ['sua','sad','여덟 명 남았어. 종례까지.'],
   ['me','smile','도와줄까?'],
@@ -374,12 +369,11 @@ EP.sua=[
 
 // ■ Day 10 — 안 되는 이유 (9)
 {title:'안 되는 이유',scene:'sua_09',place:'class',at:[690,340],
- things:{class:[['bowl',800,430,52]]},
  pre:[
   {pic:'sua_09a'},['nar','','오늘은 내 생일이었다. {m}가 새벽부터 {HC} 간식을 만들어 {@bowl}에 담아 주셨다. 반 친구들이랑 나눠 먹으라고.'],
   {pic:null},['nar','','나는 {@bowl}을 안고 수아에게 갔다.'],
   ['me','laugh','수아야! 오늘 내 생일이야. 이거 언제 나눠 주면 돼?'],
-  {k:'bowl',goal:'「{x}」 뚜껑 열기'},
+  {k:'bowl',goal:'「{x}」 뚜껑 열기',bag:['bowl','box','bag','cup','water']},
   ['nar','','{@bowl} 안에 {HC} 간식이 가득했다.'],
   ['sua','laugh','와, 생일 축하해! 근데…….'],
   ['nar','','수아가 {@bowl}을 보더니 표정이 바뀌었다.'],
@@ -412,7 +406,7 @@ EP.sua=[
 
 // ■ Day 11 — 혼자 가 볼래? (10)
 {title:'혼자 가 볼래?',scene:'sua_10',place:'class',at:[600,262],goAlone:{hall:['A','C']},
- things:{hall:[['picture',1250,705,60]]},
+ 
  pre:[
   ['nar','','점심시간. 수아가 급하게 {@bag}을 챙기고 있었다. 나는 수아에게 갔다.'],
   ['sua','smile','마침 잘 왔다.'],
@@ -434,7 +428,7 @@ EP.sua=[
   ['nar','','옆 반 앞.'],
   {k:'door',goal:'「{x}」 두드리기',bag:['door','window','picture','clock','box']},
   {pic:'sua_10b'},['nar','','똑똑. 옆 반 {@door}이 열렸다.'],
-  {k:'picture',goal:'「{x}」 펼치기'},
+  {k:'picture',goal:'「{x}」 펼치기',bag:['picture','paper','notebook','box','book']},
   {only:['A'],lines:[{pic:'sua_10c'},['nar','','낯선 얼굴 스무 개가 나를 봤다. 다리가 떨렸다. 그래도 {@picture}을 가리켰다.'],['me','smile','이건 규칙 7번이에요. 연기가 나면 몸을 낮추고, 벽을 짚어요.'],['nar','','옆 반 아이: 「벽은 왜 짚어요?」'],
    ['me','smile','연기 때문에 앞이 안 보여요. 벽을 따라가면 길을 안 잃어요.'],['nar','','옆 반 선생님: 「설명 잘하는구나. {@picture}도 네가 그렸니?」'],['me','laugh','네!']]},
   {only:['B'],lines:[{pic:'sua_10d'},['nar','','회의가 끝나고 둘이 갔을 때는 벌써 수업이 시작되어 있었다.'],['nar','','옆 반 선생님: 「아, 지금은 좀 그렇고…… 내일 다시 와 줄래?」'],['nar','','수아가 나를 힐끗 봤다. 나는 시선을 피했다.']]},
@@ -454,12 +448,11 @@ EP.sua=[
 
 // ■ Day 12 — 넌 반장 안 해 봐서 몰라 (11)
 {title:'넌 반장 안 해 봐서 몰라',scene:'sua_11',place:'class',at:[690,340],
- things:{class:[['glue',800,428,30]]},
  pre:[
   ['nar','','쉬는 시간. 옆 반 아이들이 우리 규칙표를 따라 만들기로 했다는 소식을 들었다. 나는 신이 나서 수아 자리로 갔다.'],
   {pic:'sua_11a'},
   ['nar','','수아는 학급 게시물을 붙이고 있었다. {@desk} 위에 뚜껑 열린 {@glue}이 굴러다녔다.'],
-  {k:'glue',goal:'「{x}」 뚜껑 닫기'},
+  {k:'glue',goal:'「{x}」 뚜껑 닫기',bag:['glue','pencil','eraser','paper','scissors']},
   ['me','laugh','수아야! 옆 반이 우리 규칙표 따라 만든대!'],
   ['sua','sad','…….'],
   ['me','smile','옆 반 선생님이 {@picture} 좋다고…….'],
@@ -492,13 +485,12 @@ EP.sua=[
 
 // ■ Day 13 — 이거 내 거랑 똑같은데? (12)
 {title:'이거 내 거랑 똑같은데?',scene:'sua_12',place:'library',at:[880,560],
- things:{library:[['notebook',1020,522,40]]},
  pre:[
   {pic:'sua_12a'},['nar','','도서관. 선거 연설문을 쓰다가 막혔다. 마침 수아가 건너편 책상에 앉아 있었다. 나는 {w}을 들고 수아에게 갔다.'],
   ['me','smile','수아야, 내 연설문 처음 부분만 봐 줄래?'],
   ['sua','surprised','경쟁자 연설문을?'],
   ['me','smile','처음 부분만.'],
-  {k:'notebook',goal:'「{x}」 펼치기'},
+  {k:'notebook',goal:'「{x}」 펼치기',bag:['notebook','paper','pencil','book','colored_pencil']},
   ['nar','','내 {w}: 「안녕하세요. 저는 규칙을 잘 지키는 반장이 되겠습니다. 규칙 3번, 교실에서 뛰지 않기. 규칙 5번, 친구 밀지 않기. 규칙은 누구나 지키는 것입니다. 예외는 없습니다.」'],
   ['nar','','수아가 읽다가 고개를 들었다.'],
   ['sua','surprised','……이거 나잖아.'],
@@ -533,12 +525,11 @@ EP.sua=[
 
 // ■ Day 14 — 무슨 말인지 모르겠어 (13)
 {title:'무슨 말인지 모르겠어',scene:'sua_13',place:'class',at:[690,340],
- things:{class:[['clock',1040,186,46],['water',885,436,28]]},
  pre:[
   {pic:'sua_13a'},
   ['nar','','수아와 서로 연설을 들어 주기로 했다. 교실에 들어서자 수아가 먼저 와 있었다.'],
   ['sua','smile','나 먼저 할게. 시간 재 줘.'],
-  {k:'clock',goal:'「{x}」로 시간 재기'},
+  {k:'clock',goal:'「{x}」로 시간 재기',bag:['clock','window','door','blackboard','water']},
   {pic:'sua_13b'},['nar','','수아의 연설은 1분 40초. 막힘이 없었다.'],
   ['me','smile','좋아. 근데 중간에 너무 빨라. 공약 2번에서 숨 한 번 쉬어.'],
   ['sua','surprised','……알았어. 숨 쉬기.'],
@@ -549,7 +540,7 @@ EP.sua=[
   ['sua','angry','무슨 말인지 모르겠어. 너무 길고, 끝에 그래서 뭘 하겠다는 건지 안 나와.'],
   ['sua','smile','그리고 ‘괜찮아?’ 부분, 좋은데 너무 빨리 지나가.'],
   ['think','sad','(밤새 고친 건데.)'],
-  {k:'water',goal:'「{x}」 한 모금 마시기'}],
+  {k:'water',goal:'「{x}」 한 모금 마시기',bag:['water','cup','bowl','bag','pencil']}],
  ask:'어떻게 할까?',
  choices:[
   {k:'A',text:'「너 이기려고 일부러 그러는 거지?」',pts:{sua:0},r:[
@@ -575,15 +566,13 @@ EP.sua=[
 
 // ■ Day 15 — 번호순이냐, 물어보기냐 (14)
 {title:'번호순이냐, 물어보기냐',scene:'sua_14',place:'class',at:[600,262],
- things:{class:[['chair',600,640,64]]},taps:{class:[
-  ['chair',375,355,30],['chair',470,355,30],['chair',770,355,30],['chair',885,355,30],['chair',1185,355,30],['chair',1290,355,30],['chair',340,470,30],['chair',445,470,30],['chair',750,475,30],['chair',1195,480,30],['chair',290,600,30],['chair',405,600,30],['chair',1210,605,30],['chair',250,750,30]]},
  pre:[
   {pic:'sua_14'},['nar','','창체 시간. 선생님이 수아와 나를 앞으로 부르셨다.'],
   ['nar','','선생님: 「오늘 자리 바꾸기는 반장 후보 둘이 같이 진행해 볼래요? 연습이라고 생각하고.」'],
   ['nar','','나는 수아 옆에 섰다. 수아가 작게 말했다.'],
   ['sua','smile','번호 뽑기로 하자. 빠르고 공평해.'],
   {k:'desk',goal:'「{x}」 줄 맞추기',bag:['desk','chair','blackboard','box','clock']},
-  {k:'chair',goal:'「{x}」 넣기'},
+  {k:'chair',goal:'「{x}」 넣기',bag:['chair','desk','blackboard','box','clock']},
   {pic:'sua_14'},['nar','','그런데 맨 뒤에 앉은 친구가 {@blackboard}을 보느라 눈을 찡그리고 있었다. 지난번 자리 바꿀 때 뒤로 갔던 친구였다.'],
   ['think','surprised','(번호 뽑기면…… 또 뒤로 갈 수도 있잖아.)'],
   ['me','smile','수아야, 맨 뒤에 앉은 애, {@blackboard}이 잘 안 보이나 봐.'],
@@ -615,14 +604,14 @@ EP.sua=[
 
 // ■ Day 16R — 내가 반장이 되면 (15)
 {title:'내가 반장이 되면',scene:'sua_15',place:'hall',at:[1000,400],
- things:{hall:[['paper',1060,432,40]]},
+ 
  pre:[
   ['nar','','복도 창가에 수아가 서 있었다. 나는 수아 옆으로 갔다.'],
   {k:'window',goal:'「{x}」 열기',bag:['window','door','paper','bag','stairs']},
   ['nar','','{@window}이 열리고 운동장 소리가 들어왔다.'],
   ['sua','smile','이거 기억나?'],
   ['nar','','수아가 {@bag}에서 접힌 {@paper}를 꺼냈다.'],
-  {k:'paper',goal:'「{x}」 펼치기'},
+  {k:'paper',goal:'「{x}」 펼치기',bag:['paper','notebook','picture','bag','window']},
   {pic:'sua_02'},['nar','','처음 도서관에서 그린 규칙표 연습장이었다. 귀퉁이에 수아가 그린 빨래판 {@stairs}도 그대로 있었다.'],
   {pic:null},['me','surprised','이거 아직 갖고 있었어?'],
   ['sua','smile','응. 버리기 아까워서.'],
