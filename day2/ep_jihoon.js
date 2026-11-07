@@ -1408,5 +1408,7 @@ if(typeof HEROPIC!=='undefined')HEROPIC.add('jihoon_01f');
   if(h[2]!=='eve'){startDay(day);return}
   setDay(day);PICKS=['jihoon'];EPIDX.jihoon=k-1;TODAYEP.jihoon=EP.jihoon[k-1];MEET.jihoon=k;D2CHOICE.jihoon='B';
   stage='d2_after';load('class');useDoor()},103)}
-// Day 7 (meeting 6, 형 점퍼): on the map Jihoon wears his brother's green jumper, as in that day's pictures (walk/jihoon_jumper.png, 11/07)
-setInterval(()=>{const n=typeof npcs!=='undefined'&&npcs.find(q=>q.id==='jihoon');if(!n||!n.el)return;const u=`url("walk/jihoon${SCENE_EP===EP.jihoon[5]?'_jumper':''}.png")`;if(n.el.style.backgroundImage!==u)n.el.style.backgroundImage=u},400);
+// Day 7 (meeting 6, 형 점퍼): on the map Jihoon walks in his brother's green jumper, as in that day's pictures (walk/jihoon_jumper[_nobag].png, 11/07).
+// Through the engine's walkSrc, so his seated picture (seat/) is never touched (11/07: the whole walk sheet showed at his desk)
+{const _wsJn=walkSrc;walkSrc=function(id){const s=_wsJn(id);return id==='jihoon'&&typeof SCENE_EP!=='undefined'&&SCENE_EP&&SCENE_EP===EP.jihoon[5]?s.replace('walk/jihoon','walk/jihoon_jumper').replace('_jumper_pe','_jumper'):s}
+ setInterval(()=>{if(typeof npcs==='undefined')return;const n=npcs.find(q=>q.id==='jihoon'&&!q.seat&&q.el);if(!n)return;const u=`url("${walkSrc('jihoon')}")`;if(n.el.style.backgroundImage!==u)n.el.style.backgroundImage=u},400)}
