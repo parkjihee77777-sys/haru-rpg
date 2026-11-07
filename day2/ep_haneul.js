@@ -1320,6 +1320,7 @@ EP.haneul=[
   {k:'blackboard',goal:'「{x}」 지우기'},
   {pic:'haneul_10b'},
   ['nar','','{@chalk} 가루가 날렸다. {@blackboard|을} 반쯤 지웠을 때, 교실 뒤에서 큰 소리가 났다.'],
+  {me:[560,620]},
   {pic:null},
   ['jiho','laugh','야! 이거 나잖아!'],
   ['nar','','돌아보니 지호가 {@notebook} 한 권을 들고 있었다. 회색 표지. 하늘이 {@notebook|이었}다. 하늘이 자리는 비어 있었다. 화장실에 간 것 같았다. {@notebook|이} 책상에서 떨어져 바닥에 펼쳐져 있던 걸 지호가 주웠다고 했다.'],
@@ -1397,6 +1398,7 @@ EP.haneul=[
   ['jiho','smile','……찢지는 마. 신발 2등은 웃기니까.'],
   {pic:'haneul_10n'},
   ['nar','','지호가 {@pencil|을} 꺼내 {@note} 밑에 썼다. 「대신 다음엔 물어봐. 그리고 나 1등 크게.」'],
+  {pic:null},
   {flag:'N09_witness',is:1,lines:[['think','sad','(하늘이는 다 봐. {@notebook} 찾을 때는 그게 나를 도와줬어. 오늘은 그게 지호를 창피하게 했어.)']]},
   {flag:'N09_witness',is:0,lines:[['think','sad','({@notebook} 찾던 날, 하늘이가 본 걸 내가 애들이 듣는 데서 말했지. 그때 애들이 하늘이를 돌아봤어. 오늘은 지호가 창피했어.)']]},
   {pic:'haneul_note'},
@@ -1550,7 +1552,7 @@ EP.haneul=[
  post:[
   ['nar','','포스터에 색을 칠할 차례였다. 하은이가 {@colored_pencil} 통을 열었다.'],
   ['haeun','smile','{@colored_pencil} 나눠. 너는 하늘색. 하늘색 많이 써.'],
-  {lay:[['colored_pencil',1050,540,46]]},
+  {lay:[['colored_pencil',1050,540,64]]},
   {k:'colored_pencil',goal:'「{x}」 칠하기'},
   {clear:['colored_pencil']},
   ['nar','','하늘색을 칠하는데, 도서관 끝 창가에서 {@paper|가} 사르륵 넘어가는 소리가 들렸다. 하늘이가 {@book|을} 읽는 소리였다.'],
@@ -1654,8 +1656,8 @@ EP.haneul=[
    ['jihoon','laugh','휴지 여기!'],
    {pic:'haneul_12_B'},
    ['nar','','다들 예나 책상을 봤다. 흘린 {@water|을} 닦느라 바빴다. 하늘이 쪽을 보는 사람이 없어졌다.'],
-   ['nar','','하늘이 손이 후드 앞에서 멈췄다. 그리고 내려왔다. 하늘이는 다시 그림을 그렸다. 후드는 반쯤 내려간 그대로였다.'],
-   {pic:null}]},
+   {pic:null},
+   ['nar','','하늘이 손이 후드 앞에서 멈췄다. 그리고 내려왔다. 하늘이는 다시 그림을 그렸다. 후드는 반쯤 내려간 그대로였다.']]},
   {k:'C',text:'「와, 하늘아 후드 내리니까 좋다! 계속 내리고 있어.」 하고 말한다.',pts:{haneul:0},r:[
    ['me','smile','와, 하늘아 후드 내리니까 좋다! 계속 내리고 있어.'],
    ['nar','','진짜 좋아 보였다. 그래서 말했다.'],
@@ -1749,6 +1751,7 @@ EP.haneul=[
  pre:[
   ['teacher','smile','오늘 끝! 이번 주 {@window} 당번, {@window} 닫고 가요. 안녕!'],
   ['nar','','이번 주 {@window} 당번은 나였다. 종례 인사가 끝나자 아이들이 한꺼번에 일어났다. {@chair} 소리, {@bag} 소리. 복도가 금방 꽉 찼다.'],
+  ()=>{for(const n of npcs.slice())if(!['haneul','yena','haeun'].includes(n.id))moveKid([n.id,0,0,'out'])},// everyone else goes home (11/07 check: the room looked full)
   {k:'bag',goal:'「{x}」 메기'},
   ['nar','','나는 책상 옆에 걸린 {@bag|을} 멨다.'],
   ['nar','','하늘이는 일어나지 않았다. {@notebook|을} 펴고 그림을 그렸다. {@bag|은} 아직 책상 옆에 걸려 있었다.'],
@@ -1792,6 +1795,8 @@ EP.haneul=[
   {k:'D',text:'하늘이 옆에 앉아서 「왜 맨날 늦게 가? 언제부터 그랬어? 작년에도?」 하고 물어본다.',pts:{haneul:0},r:[
    ['me','smile','예나야, 먼저 가! 나 {@window} 당번이야.'],
    ['nar','','나는 하늘이 옆 빈 {@chair|에} 앉았다.'],
+   {me:[395,815]},
+   ()=>{if(me){me.el.style.visibility='hidden';window._heroSit=seatSprite(HERO,395,{top:715})}},// I sit beside Haneul (11/07 check: I was standing)
    ['me','surprised','하늘아, 왜 맨날 늦게 가? 언제부터 그랬어? 작년에도? 엄마는 알아? 안 답답해?'],
    ['nar','','궁금한 게 한꺼번에 나왔다. 하늘이가 하나씩 {@notebook|에} 썼다.'],
    ['nar','','「복도 꽉 차서.」 「작년부터.」 「응.」 「엄마 앎.」 「조금.」'],
@@ -1799,7 +1804,8 @@ EP.haneul=[
    ['me','sad','……아, 미안.'],
    ['think','sad','(궁금해서 물어본 건데. 하늘이한테는 질문도 쳐다보는 거랑 비슷하구나.)']]}],
  post:[
-  {only:['A','C'],lines:[['nar','','나는 계단을 반쯤 내려가다 멈췄다. {@window}. {@window} 당번. 안 닫고 왔다.'],['me','smile','예나야, 먼저 가! 나 {@window} 안 닫았어!'],['nar','','다시 올라왔다. 그사이 복도가 텅 비어 있었다. 교실에는 하늘이가 {@bag|을} 메고 서 있었다.']]},
+  ()=>{if(window._heroSit){window._heroSit.el.remove();window._heroSit=null;if(me)me.el.style.visibility=''}},
+  {only:['A','C'],lines:[['nar','','나는 계단을 반쯤 내려가다 멈췄다. {@window}. {@window} 당번. 안 닫고 왔다.'],['me','smile','예나야, 먼저 가! 나 {@window} 안 닫았어!'],{move:['haneul',263,815]},['nar','','다시 올라왔다. 그사이 복도가 텅 비어 있었다. 교실에는 하늘이가 {@bag|을} 메고 서 있었다.']]},
   {only:['B','D'],lines:[['nar','','시계 긴바늘이 한 칸 갔다. 복도가 조용해졌다. 발소리가 하나도 안 났다. 하늘이가 {@notebook|을} 덮고 {@bag|을} 멨다.']]},
   ['nar','','{@window|을} 닫을 차례였다.'],
   {k:'window',goal:'「{x}」 닫기'},
