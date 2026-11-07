@@ -727,7 +727,7 @@ EP.haeun=[
   ['nar','','점심을 먹고 교실로 돌아왔다. 교실 뒤 책상 하나에 혜은이와 예나가 있었다. 책상 위에 알록달록한 공깃돌 다섯 개.'],
   ['hyeeun','smile','공기 할 사람! 넷이 해야 재밌는데 둘이야.'],
   ['yena','laugh','딴-딴-따라-! 공기 하실 분~'],
-  {lay:[['stone',700,860,26]]},
+  {lay:[['stone',800,905,34]]},
   ['nar','','나는 공기를 해 본 적이 없었다. 그래도 궁금했다. 가까이 가는데 공깃돌 하나가 책상에서 굴러떨어졌다. 내 발 앞까지 왔다.'],
   {k:'stone',goal:'「{x}」 주워 주기'},
   {clear:['stone']},
@@ -941,7 +941,7 @@ EP.haeun=[
   common:[['me','smile','그리고 하은이가 내 {@note|를} 엄청 작게 접어 줬어. 안 잃어버리게. 이거 봐.'],['mom','surprised','와, 이렇게 작게?'],['me','smile','응. 하은이는 하준이 {@notice_book}에 이렇게 {@note|를} 넣어 준대. ‘숙제 3번 해’, ‘우유 마셔’. 엄마 대신.'],['mom','smile','……하은이가 {@note|를} 쓰는구나.'],['me','laugh','응. 그리고 ‘발 없는 말이 천 리 간다’ 알려 줬어. 나는 다리 네 개인 말인 줄 알았어.'],['mom','laugh','(웃음) 엄마도 처음엔 헷갈렸어.'],['me','smile','이것도 하은이 엄마 말이래.']]}},
 
 // ■ Day 10 — 이건 어른 일이야 (9)
-{title:'이건 어른 일이야',scene:'haeun_09',place:'gatesun',at:[1000,640],
+{title:'이건 어른 일이야',scene:'haeun_09',place:'gatesun',at:[880,620],with:[['hajun',790,645]],
  pre:[
   ['nar','','종례가 끝났다. 하은이가 {@clock|을} 보더니 뛰어나갔다. 2시 50분이 가까웠다. 하준이를 데리러 가야 하는 시간이다. 오늘도 엄마가 오후 조인 날이었다.'],
   {pic:'haeun_09a'},
@@ -953,7 +953,7 @@ EP.haeun=[
   ['me','surprised','하준아, {@forehead} 짚어 봐도 돼?'],
   ['nar','','하준: 「……응.」'],
   {pic:null},
-  {lay:[['forehead','@haeun',95,10,46]]},
+  {lay:[['forehead','@hajun',40,-30,46]]},
   {k:'forehead',goal:'「{x}」 짚어 보기',tray:true},// Hajun has no map picture: his forehead is picked from pictures (a tiny head by the gate pillar was hard to see, 11/05)
   {clear:['forehead']},
   ['nar','','하준이 {@forehead}에 손등을 댔다. 뜨거웠다. 손등이 화끈했다.'],
@@ -1031,7 +1031,7 @@ EP.haeun=[
   ['nar','','보건실. 보건 선생님이 하준이를 침대에 눕히고 체온계를 귀에 대셨다.'],
   ['nar','','보건 선생님: 「38도 6부. 열이 많이 나네. 하준아, 여기 누워 있자. 춥구나. {@blanket} 덮자.」'],
   ['nar','','보건 선생님: 「친구야, 저기 선반에 {@blanket} 하나만 줄래?」'],
-  {lay:[['blanket',1300,620,60]]},
+  {lay:[['blanket',700,352,58]]},
   {k:'blanket',goal:'「{x}」 덮어 주기'},
   {clear:['blanket']},
   ['nar','','선반에서 {@blanket|을} 꺼내 보건 선생님께 드렸다. 선생님이 하준이에게 덮어 주셨다. 하준이가 {@blanket|을} 턱까지 끌어당겼다.'],
@@ -1281,7 +1281,7 @@ EP.haeun=[
   common:[['me','smile','근데 마지막에 내 소매에 지우개 가루가 남아 있었어. 하은이 손이 나오다가 멈췄어. 그리고 ‘털어’ 했어.'],['mom','surprised','네가 털었어?'],['me','smile','응. 내 손으로.'],['dad','smile','하은이가 손을 멈췄구나.'],['me','smile','응. 하은이한테는 그게 어려웠을 거야. 손이 먼저 나가니까.'],['mom','smile','……그런 것 같네. 이 사인은 엄마가 할게. 엄마 손으로.'],['me','laugh','(웃음) 응.'],['mom','smile','그리고 ‘엄마 둘이네’는 놀리는 말이야. 하은이가 챙겨 준 것도, 네가 도움받은 것도 웃을 일이 아니야.'],['me','sad','하은이는 ‘애들은 원래 그래’ 했어.'],['mom','smile','원래 그런 건 없어. 놀리면 놀린 거지. 또 그러면 ‘그거 놀리는 거야’ 하고 말해도 돼. 선생님한테 말해도 되고.']]}},
 
 // ■ Day 13 — 선물은 아무거나 (12)
-{title:'선물은 아무거나',scene:'haeun_12',place:'class',at:[405,720],with:[['yena',560,640],['jihoon',885,700]],
+{title:'선물은 아무거나',scene:'haeun_12',place:'class',at:[405,720],with:[['yena',700,640],['jihoon',885,700]],
  pre:[
   ['nar','','1교시 뒤 쉬는 시간. 예나가 신발 끈을 묶으려고 쪼그려 앉았다. 손에 작은 상자를 들고 있었다. 반짝이는 포장지에 리본이 달려 있었다.'],
   {lay:[['gift',620,660,44]]},
@@ -1378,7 +1378,7 @@ EP.haeun=[
   ['haeun','smile','알았어. 다음 생일엔 갈 수도 있어. 토요일 아니면.'],
   {pic:null},
   {only:['D'],lines:[{pic:'haeun_12e'},['nar','','3교시가 시작되기 전, 예나가 생일 노래를 시작했다. 반 아이들이 다 따라 불렀다. 지훈이가 의자 위에 서려다 선생님께 「내려와요.」 소리를 들었다. 하은이도 불렀다. 크게.']]},
-  ['nar','','하은이가 자리로 돌아왔다. 얼굴이 조금 빨갰다. 화나서가 아니었다. 기분 좋은 얼굴이었다.'],
+  {pic:null},['nar','','하은이가 자리로 돌아왔다. 얼굴이 조금 빨갰다. 화나서가 아니었다. 기분 좋은 얼굴이었다.'],
   ['haeun','laugh','봤지? {@gift|은} 아무거나랬잖아.']],
  eve:{lead:[['me','smile','{m}, 나 생일 초대 받았어. 지훈이. 토요일 2시, 학교 앞 키즈카페.'],['mom','surprised','어머, 키즈카페! 가고 싶어?'],['me','smile','응. 한 번도 안 가 봤어. 근데 하은이는 못 간대. 토요일에 아랫집 할머니랑 하율이 봐야 된대. 하은이 엄마 토요일도 일하신대.'],['mom','smile','그렇구나.'],['me','smile','지훈이가 ‘또? 저번 예나 생일 때도 안 왔잖아’ 했어. 하은이가 입술을 꼭 다물었어. 나중에 지훈이가 미안하다고 했어. 그리고 하은이가 나한테 ‘너는 가?’ 물어봤어.']],
   A:[['me','sad','너 안 가면 나도 안 간다고 했어.'],['mom','surprised','하은이가 뭐래?'],['me','sad','왜 자기 때문에 안 가냐고. 가래. 자기 핑계 대지 말래. 자기는 하율이 봐서 못 가는 거고 나는 갈 수 있잖아, 했어.'],['mom','smile','하은이 혼자 빠지지 않게 하고 싶었구나.'],['me','sad','응. 근데 하은이는 자기가 내 이유가 되는 게 싫은가 봐.'],['mom','smile','그럼 너는 어떻게 할 거야?'],['me','smile','……가 볼래. 하은이가 가라고 했으니까.']],
@@ -1388,7 +1388,7 @@ EP.haeun=[
   common:[['me','smile','하은이가 종이 지갑 접어서 지훈이한테 줬어. 3분 만에. 칸도 두 개고 뚜껑도 있어. 지훈이가 엄청 좋아했어. 반짝이 카드 넣으니까 딱 맞았어.'],['mom','surprised','와.'],['me','laugh','지훈이가 어떻게 만드냐고 알려 달라니까, 하은이가 ‘알려 주면 선물이 아니잖아’ 했어.'],['mom','laugh','(웃음) 그건 맞네.'],['me','smile','나도 하나 접었어. 10분 걸렸어. 칸은 하나야. 이거.'],['mom','surprised','오, 이건 지훈이 줄 거야?'],['me','smile','……{m}, 반짝이 카드 한 장 사서 여기 넣어서 주면 어때? 하은이 지갑이랑 똑같은 건 아니고, 내 지갑에 내 카드.'],['mom','smile','좋다. 엄마가 카드 한 장은 보태 줄게.']]}},
 
 // ■ Day 14 — 엄마가 많이 넣어 줬어 (13)
-{title:'엄마가 많이 넣어 줬어',scene:'haeun_13',place:'gatesun',at:[1000,640],
+{title:'엄마가 많이 넣어 줬어',scene:'haeun_13',place:'gatesun',at:[880,620],with:[['hajun',790,645]],
  pre:[
   ['nar','','종례가 끝났다. 오늘은 엄마가 오후 조인 날이었다. 하은이가 {@clock|을} 보고 먼저 나갔다. 하준이를 데리러 갈 시간이었다. 나는 신발을 갈아 신고 {@school_gate|으로} 나왔다.'],
   {pic:'haeun_13a'},
@@ -1473,7 +1473,7 @@ EP.haeun=[
   ['nar','','하준: 「누나, 안 까져.」'],
   {only:['A','B'],lines:[['haeun','smile','누나 친구한테 부탁해. 누나 손은 지금 {@banana} 들고 있어.']]},
   {only:['C','D'],lines:[['haeun','smile','누나 친구한테 까 달라고 해. 누나 친구 거니까.']]},
-  {lay:[['banana',1180,800,44]]},
+  {lay:[['banana','@hajun',38,-30,50]]},
   {k:'banana',goal:'「{x}」 껍질 까 주기'},
   {clear:['banana']},
   ['nar','','{@banana} 꼭지를 톡 꺾어 껍질을 반쯤 까서 하준이에게 주었다.'],
@@ -1506,6 +1506,7 @@ EP.haeun=[
   ['haeun','smile','오늘은 일 있어. 내일 해.'],
   {pic:'haeun_14a'},
   ['nar','','유나가 고개를 끄덕이고 갔다. 하은이가 내 책상 앞에 섰다. 손에 {@notice_book|을} 들고 있었다. 맨 뒷장이 아니라 그 앞장을 펼쳐 들고.'],
+  {move:['yuna',0,0,'out']},
   ['haeun','smile','너 지금 바빠?'],
   ['me','smile','아니.'],
   ['haeun','smile','교육복지실 같이 가 줄래?'],
@@ -1590,6 +1591,7 @@ EP.haeun=[
   ['haeun','laugh','너는 적을게. 「{SN} — 따라와 준 거 1」.'],
   {only:['B','C'],lines:[['haeun','smile','옆에 있어서 다 말했어. 다음에 너 말 막히면, 내가 옆에 있을게. 말은 네가 해.']]},
   {only:['A','D'],lines:[['haeun','smile','다음에 또 데려오면, 그냥 옆에만 있어. 진짜 그냥.'],['me','smile','응. 진짜 그냥.']]},
+  {pic:null},
   ['nar','','교육복지 선생님: 「{SN|아}, 먼저 올라갈래? 하은이랑 하나만 더 이야기할게.」'],
   ['me','smile','네.'],
   ['nar','','나는 복도로 나왔다. 안에서 하는 말은 들리지 않았다. 조금 뒤 하은이가 나왔다.'],
@@ -1755,7 +1757,7 @@ MAPS.hall1f={img:'maps/hall1f.jpg',walk:MAPS.hall.walk,rects:[],block:MAPS.hall.
   setDay(day);PICKS=['haeun'];EPIDX.haeun=k-1;TODAYEP.haeun=EP.haeun[k-1];MEET.haeun=k;D2CHOICE.haeun='B';
   stage='d2_after';load('class');useDoor()},97)}
 // when a meeting walks on ({go}) to the welfare room or the nurse's office, Haeun comes too and stands where the talk happens (10/27 picture check: in the nurse's office she was missing)
-EP.haeun[5].goAt={hall1f:[1330,770],welfare:[1160,660]};EP.haeun[8].goAt={nurse:[960,660]};EP.haeun[13].goAt={hall1f:[1330,770],welfare:[1160,660]};
+EP.haeun[5].goAt={hall1f:[1330,770],welfare:[1160,660]};EP.haeun[8].goAt={nurse:[720,740]};EP.haeun[13].goAt={hall1f:[1330,770],welfare:[1160,660]};
 {const _loadHa=load;load=function(m,x){const r=_loadHa(m,x),e=SCENE_EP;
   if(e&&e.goAt&&e.goAt[m]&&SCENE_IDS&&SCENE_IDS[0]==='haeun'){npcs=npcs.filter(p=>{if(p.id!=='haeun')return true;p.el.remove();return false});npcs.push(sprite('haeun',e.goAt[m][0],e.goAt[m][1]))}
   return r}}
