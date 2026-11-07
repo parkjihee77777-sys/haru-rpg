@@ -370,11 +370,12 @@ EP.hangyeol=[
 
 // ■ Day 9 — 이발소 (8)
 {title:'이발소',scene:'hangyeol_08',place:'gate',at:[960,650],
- things:{gate:[['umbrella',1060,690,64]]},
+ things:{gate:[['umbrella',990,770,64]]},
  pre:[
   {pic:'hangyeol_08a'},
   ['nar','','하교 시간. 비가 조금 왔다. 교문 앞에서 한결이가 할머니를 기다리고 있었다. 나는 한결이 옆에 섰다.'],
   ['hangyeol','laugh','우리 할머니 오신다. 엄청 귀여우셔.'],
+  {map:'gate_grandma',tap:[['grandma',1060,790,80]]},// Hangyeol's grandma drawn into the rainy gate map (11/07), not laid on top
   ['nar','','꽃무늬 {@umbrella}을 쓴 할머니가 오셨다. 한결이를 보자마자 웃으셨다.'],
   ['nar','','할머니: 「아이고, 우리 강아지!」'],
   {k:'umbrella',goal:'「{x}」 받아 들기'},{pic:'hangyeol_08'},
