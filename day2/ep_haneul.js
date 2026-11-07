@@ -8,12 +8,12 @@
 window.EP=window.EP||{};
 EP.haneul=[
 // ■ Day 2 — 돌아보지 않은 한 명 (1)
-{title:'돌아보지 않은 한 명',scene:'haneul_01',place:'class',at:[263,860],with:[['yena',478,700]],taps:{class:[['door',1490,140,55]]},
+{title:'돌아보지 않은 한 명',scene:'haneul_01',place:'class',at:[263,860],with:[['yena',478,700]],
  pre:[
   ['nar','','아침. 나는 방금 교실에 들어왔다. 등 뒤에서 {@door|이} 닫혔다.'],
   ['think','smile','(전학 온 첫날, 이 {@door} 열었을 때 다들 한꺼번에 나를 돌아봤지.)'],
   ['think','sad','(다리가 굳어서 한 발도 못 움직였어.)'],
-  {k:'door',goal:'「{x}」 보기'},
+  {k:'door',goal:'「{x}」 보기',bag:['door','blackboard','desk','locker','clock']},
   ['nar','','오늘은 두세 명만 돌아봤다. 유나가 손을 흔들었다. 나머지는 자기 일을 했다.'],
   ['nar','','그런데 생각났다. 전학 온 첫날에도 한 명은 안 돌아봤다.'],
   ['nar','','맨 뒤 구석. 등 뒤가 벽인 자리. 큰 남색 후드를 눌러쓴 아이. 귀에 이어폰. 오늘도 고개를 숙이고 {@notebook|에} 뭔가를 그리고 있었다.'],
@@ -140,7 +140,7 @@ EP.haneul=[
    ['me','sad','응. 그게 이상하게 안 싫었어.']]}},
 
 // ■ Day 3 — 아무 데도 안 꽂힌 줄 (2)
-{title:'아무 데도 안 꽂힌 줄',scene:'haneul_02',place:'class',at:[263,860],with:[['jihoon',488,700],['jiho',548,830]],taps:{class:[['window',60,260,35],['chair',292,640,30]]},
+{title:'아무 데도 안 꽂힌 줄',scene:'haneul_02',place:'class',at:[263,860],with:[['jihoon',488,700],['jiho',548,830]],taps:{class:[['window',60,260,35]]},
  pre:[
   ['nar','','2교시가 끝났다. 교실 공기가 답답했다.'],
   ['teacher','smile','뒤쪽 {@window} 좀 열어 줄래요? 제일 가까운 사람.'],
@@ -204,7 +204,7 @@ EP.haneul=[
   ['nar','','아이들이 자리로 돌아갔다.'],
   {only:['A','B','C'],lines:[['nar','','지훈이가 자리로 가다가 돌아봤다. 「하늘아, 아까 미안. 다음엔 물어볼게.」']]},
   ['nar','','나도 내 자리에 앉았다.'],
-  {k:'chair',goal:'「{x}」에 앉기'},
+  {k:'chair',goal:'「{x}」에 앉기',bag:['chair','desk','bag','locker','blackboard']},
   {pic:'haneul_note'},
   ['nar','','앉자마자, 어깨 너머로 네 번 접힌 {@paper|가} 넘어왔다. 끝에 작은 {@cloud}.'],
   {only:['A','C'],lines:[['nar','','「줄 끝은 원래 {@pocket|에서} 끝나. 음악 없음. 비밀은 아님.」'],['nar','','「그냥…… 끼고 있으면 애들이 말을 덜 걸어. 반만.」'],['nar','','「고양이 상자에 끼인 거 나도 봤음. 진짜 웃김.」'],['think','sad','(음악이 아니었어. 말을 덜 걸어오게 하는 거였어.)']]},
@@ -263,12 +263,12 @@ EP.haneul=[
    ['mom','laugh','(웃음) 그 친구는 보는 게 남다르네.']]}},
 
 // ■ Day 4 — 앞으로 나와 볼래요? (3)
-{title:'앞으로 나와 볼래요?',scene:'haneul_03',place:'science',at:[330,870],with:[['haeun',520,870],['jiho',700,870]],taps:{science:[['cup',940,268,50]]},
+{title:'앞으로 나와 볼래요?',scene:'haneul_03',place:'science',at:[330,870],with:[['haeun',520,870],['jiho',700,870]],
  pre:[
   ['nar','','3교시 과학. 과학실은 책상이 크고 넓었다. 네 명씩 모둠으로 앉았다. 우리 모둠은 하은이, 지호, 하늘이, 나.'],
   ['nar','','하늘이는 벽 쪽 끝자리에 앉았다. 하은이가 아무 말 없이 그 자리를 비워 두었다.'],
   ['nar','','과학 선생님: 「오늘은 {@water|에} 뜨는 것, 가라앉는 것 실험이에요. 모둠마다 {@cup|을} 하나씩 가져가세요.」'],
-  {k:'cup',goal:'「{x}」 가져오기'},
+  {k:'cup',goal:'「{x}」 가져오기',bag:['cup','water','pencil','eraser','paper']},
   {pic:'haneul_03e'},
   ['nar','','{@cup|에} {@water|을} 받아 왔다. 지호가 물건을 하나씩 넣었다. 지우개, 클립, 병뚜껑, 나뭇조각.'],
   ['jiho','laugh','뜬다! 가라앉는다! 뜬다! 나 이거 맞혔어. 3 대 1!'],
@@ -755,7 +755,7 @@ EP.haneul=[
   ['think','smile','(하늘이는 늘 맨 마지막에 오는구나. 줄이 다 빠질 때까지 교실에 있다가.)'],
   {pic:'haneul_06l'},
   ['nar','','나는 하늘이 뒤에 섰다. 한 걸음 떨어져서.'],
-  {k:'tray',goal:'「{x}」 들기'},
+  {k:'tray',goal:'「{x}」 들기',bag:['tray','spoon','chopsticks','milk','cup']},
   ['nar','','하늘이가 먼저 받았다. 밥, 국, 반찬 두 가지. 그리고 급식실 안쪽, 큰 기둥 옆 자리로 갔다.'],
   ['nar','','기둥을 등지고 앉았다. 거기서는 급식실이 다 보였다. 등 뒤에는 아무도 없었다.'],
   ['think','smile','(교실 자리랑 똑같아. 뒤가 막힌 자리. 앞이 다 보이는 자리.)'],
@@ -1753,7 +1753,7 @@ EP.haneul=[
   ['teacher','smile','오늘 끝! 이번 주 {@window} 당번, {@window} 닫고 가요. 안녕!'],
   ['nar','','이번 주 {@window} 당번은 나였다. 종례 인사가 끝나자 아이들이 한꺼번에 일어났다. {@chair} 소리, {@bag} 소리. 복도가 금방 꽉 찼다.'],
   ()=>{for(const n of npcs.slice())if(!['haneul','yena','haeun'].includes(n.id))moveKid([n.id,0,0,'out'])},// everyone else goes home (11/07 check: the room looked full)
-  {k:'bag',goal:'「{x}」 메기'},
+  {k:'bag',goal:'「{x}」 메기',bag:['bag','notebook','pencil','book','chair']},
   ['nar','','나는 책상 옆에 걸린 {@bag|을} 멨다.'],
   ['nar','','하늘이는 일어나지 않았다. {@notebook|을} 펴고 그림을 그렸다. {@bag|은} 아직 책상 옆에 걸려 있었다.'],
   ['nar','','하늘이가 가끔 고개를 들어 복도 쪽 창을 봤다. 복도에 아이들이 지나갈 때마다 하늘이 {@pencil|이} 멈췄다.'],
@@ -2037,11 +2037,11 @@ EP.haneul=[
    ['me','smile','응. ‘아, 진짜……’ 했어.']]}},
 
 // ■ Day 16R — 붙여도 돼? (15)
-{title:'붙여도 돼?',scene:'haneul_15',place:'class',at:[263,860],with:[['yena',478,700]],goAlone:{hall:[void 0],class:[void 0]},taps:{hall:[['door',1058,232,45]]},
+{title:'붙여도 돼?',scene:'haneul_15',place:'class',at:[263,860],with:[['yena',478,700]],goAlone:{hall:[void 0],class:[void 0]},
  pre:[
   {go:'hall'},
   ['nar','','아침. 나는 교실 앞에 섰다.'],
-  {k:'door',goal:'「{x}」 열기'},
+  {k:'door',goal:'「{x}」 열기',bag:['door','locker','clock','bag','book']},
   {go:'class'},
   {pic:'haneul_15e'},
   ['nar','','{@door|을} 열었다. 몇 명이 돌아봤다. 유나가 손을 흔들었다. 지호가 「안녕!」 했다.'],
