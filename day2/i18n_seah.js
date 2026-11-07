@@ -36,3 +36,9 @@ T.vi=T.vi||{};Object.assign(T.vi,{"첫 판이 끝났다. 한결이가 꼬리를 
 T.zh=T.zh||{};Object.assign(T.zh,{"첫 판이 끝났다. 한결이가 꼬리를 흔들며 일어나서 달려왔다.": "第一局结束了。韩杰站起来，甩着尾巴跑了过来。"});
 T.ja=T.ja||{};Object.assign(T.ja,{"첫 판이 끝났다. 한결이가 꼬리를 흔들며 일어나서 달려왔다.": "最初のゲームが終わった。ハンギョルが起き上がって、しっぽをふりながら走ってきた。"});
 T.ru=T.ru||{};Object.assign(T.ru,{"첫 판이 끝났다. 한결이가 꼬리를 흔들며 일어나서 달려왔다.": "Первый раунд закончился. Хангёль встаёт и подбегает, размахивая хвостиком."});
+// 11/07 AI review: Minho looks over at Sua (the picture shows her side)
+T.en=T.en||{};Object.assign(T.en,{"민호가 {@locker}에서 쿵 내려왔다. 수아 쪽을 보며 입을 비죽였다.": "Minho jumped down from the {@locker} with a thud. He looked over at Sua and pouted."});
+T.vi=T.vi||{};Object.assign(T.vi,{"민호가 {@locker}에서 쿵 내려왔다. 수아 쪽을 보며 입을 비죽였다.": "Minho nhảy phịch xuống khỏi {@locker}. Cậu nhìn về phía Sua rồi bĩu môi."});
+T.zh=T.zh||{};Object.assign(T.zh,{"민호가 {@locker}에서 쿵 내려왔다. 수아 쪽을 보며 입을 비죽였다.": "敏浩从{@locker}上咚地跳了下来。他朝秀雅那边看着，撇了撇嘴。"});
+T.ja=T.ja||{};Object.assign(T.ja,{"민호가 {@locker}에서 쿵 내려왔다. 수아 쪽을 보며 입을 비죽였다.": "ミンホが{@locker}からドンとおりてきた。スアのほうを見て、口をとがらせた。"});
+T.ru=T.ru||{};Object.assign(T.ru,{"민호가 {@locker}에서 쿵 내려왔다. 수아 쪽을 보며 입을 비죽였다.": "Минхо с грохотом спрыгивает с {@locker}. Смотрит в сторону Суа и кривит губы."});
