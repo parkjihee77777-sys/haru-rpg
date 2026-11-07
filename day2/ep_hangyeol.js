@@ -267,7 +267,7 @@ EP.hangyeol=[
 
 // ■ Day 7 — 누이 역 (6)
 {title:'누이 역',scene:'hangyeol_06',place:'class',at:[1300,262],
- things:{class:[['rice_cake',790,205,46],['mask',905,205,58]]},
+ things:{class:[['basket',800,214,84,null,'stay'],['rice_cake',800,196,40,'rice_cake_paper','stay'],['mask',905,205,58]]},// the paper rice cake sits in the props basket (owner 11/07)
  pre:[
   ['nar','','학예회 연극은 「해님 달님」으로 정해졌다. {@blackboard}에 역할이 적혔다. 오빠, 누이, 엄마, 호랑이, 나무꾼.'],
   ['nar','','나는 한결이 자리로 갔다. 한결이는 {@blackboard}을 뚫어지게 보고 있었다.'],
