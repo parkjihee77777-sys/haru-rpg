@@ -50,6 +50,9 @@ const ADD={
  '지금까지 한 것이 모두 지워져요.':{en:'Everything you have played so far will be erased.',vi:'Mọi thứ bạn đã chơi sẽ bị xóa.',zh:'到现在为止的进度都会被删除。',ja:'いままでのきろくが ぜんぶ きえるよ。',ru:'Весь пройденный путь сотрётся.',id:'Semua yang sudah kamu mainkan akan terhapus.'},
  '네, 지울래요':{en:'Yes, erase it',vi:'Có, xóa đi',zh:'是的，删除',ja:'うん、けす',ru:'Да, стереть',id:'Ya, hapus'},
  '아니요':{en:'No',vi:'Không',zh:'不要',ja:'ううん',ru:'Нет',id:'Tidak'},
+ '(오늘은 벌써 이야기했어. 다른 친구를 찾아보자.)':{en:'(We already talked today. Let me look for another friend.)',vi:'(Hôm nay nói chuyện rồi. Đi tìm bạn khác thôi.)',zh:'（今天已经聊过了。去找别的朋友吧。）',ja:'（きょうは もう 話したよ。ほかの友だちを さがそう。）',ru:'(Сегодня мы уже поговорили. Поищу другого друга.)',id:'(Hari ini sudah ngobrol. Ayo cari teman lain.)'},
+ '(오늘은 친구를 충분히 만났어.)':{en:'(I have met enough friends today.)',vi:'(Hôm nay gặp đủ bạn rồi.)',zh:'（今天见的朋友已经够多了。）',ja:'（きょうは もう じゅうぶん 友だちに 会ったよ。）',ru:'(Сегодня я уже повидал достаточно друзей.)',id:'(Hari ini sudah cukup bertemu teman.)'},
+ '(오늘은 이 친구와 할 이야기가 없나 봐. 다른 친구를 찾아보자.)':{en:'(Looks like there is nothing to talk about with this friend today. Let me look for another friend.)',vi:'(Hôm nay chắc không có chuyện gì với bạn này. Đi tìm bạn khác thôi.)',zh:'（今天好像没什么要和这个朋友说的。去找别的朋友吧。）',ja:'（きょうは この子とは 話すことが ないみたい。ほかの友だちを さがそう。）',ru:'(Похоже, сегодня с этим другом говорить не о чем. Поищу другого.)',id:'(Sepertinya hari ini tidak ada yang perlu dibicarakan dengan teman ini. Ayo cari teman lain.)'},
  '(다른 친구를 찾아보자.)':{en:'(Let me look for another friend.)',vi:'(Đi tìm bạn khác thôi.)',zh:'（去找别的朋友吧。）',ja:'（ほかの友だちを さがそう。）',ru:'(Поищу другого друга.)',id:'(Ayo cari teman lain.)'},
  '지호':{ja:'ジホ',id:'Jiho'},'세아':{ja:'セア',id:'Seah'},'하늘':{ja:'ハヌル',id:'Haneul'},'하람':{ja:'ハラム',id:'Haram'},'영민':{ja:'ヨンミン',id:'Youngmin'},'한결':{ja:'ハンギョル',id:'Hangyeol'},
  '오늘은 여기까지':{vi:'Hôm nay đến đây thôi',id:'Cukup untuk hari ini'}};
@@ -154,7 +157,7 @@ arrow.onclick=e=>{e.stopPropagation();if(!arrowAt)return;const s=cam.s,W=innerWi
 // a friend already met (or with nothing new today) says their line once; more taps get one short thought
 const againN={};
 {const _t=d2Talk;d2Talk=function(id){const e=epNext(id,EPIDX[id]);
- if(stage==='d2_class'&&(!e||PICKS.includes(id)||PICKS.length>=needToday())&&(e||!DD()[id])){againN[id]=(againN[id]||0)+1;if(againN[id]>1){say([['think','smile','(다른 친구를 찾아보자.)']]);return}}
+ if(stage==='d2_class'&&(!e||PICKS.includes(id)||PICKS.length>=needToday())&&(e||!DD()[id])){againN[id]=(againN[id]||0)+1;if(againN[id]>1){const m=PICKS.includes(id)?'(오늘은 벌써 이야기했어. 다른 친구를 찾아보자.)':(e&&PICKS.length>=needToday())?'(오늘은 친구를 충분히 만났어.)':'(오늘은 이 친구와 할 이야기가 없나 봐. 다른 친구를 찾아보자.)';say([['think','smile',m]]);return}}// say why (owner 11/07: the old line came up for a friend I had not talked to)
  return _t(id)}}
 {const _sd=startDay;startDay=function(n){for(const k in againN)delete againN[k];return _sd(n)}}
 // the same word started twice within a moment (handkerchief): play it once
