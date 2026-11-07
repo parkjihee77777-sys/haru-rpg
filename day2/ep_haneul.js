@@ -2236,7 +2236,7 @@ for(const id of ['science']){const m=EXTRA_MAPS[id];MAPS[id]={img:m.img,walk:m.w
   stage='d2_after';load('class');useDoor()},99)}
 
 // pictures where Haneul drew me (or my back shows): a boy and a girl version; a version not drawn yet is skipped (01a: both being redrawn - Haneul sits at the desk, not crouching on the floor)
-for(const n of ['haneul_01a','haneul_15','haneul_05_A','haneul_01p','haneul_15a','haneul_15y','haneul_15s'])HEROPIC.add(n);// 01p: being redrawn too (I pass the worksheet back over my shoulder without looking; only Haneul's hand behind)
+for(const n of ['haneul_01a','haneul_07a','haneul_15','haneul_05_A','haneul_01p','haneul_15a','haneul_15y','haneul_15s'])HEROPIC.add(n);// 01p: being redrawn too (I pass the worksheet back over my shoulder without looking; only Haneul's hand behind)
 
 // the hero gets up again when the map changes (after sitting beside Haneul)
 {const _ld=load;load=function(){if(window._heroSit){window._heroSit.el.remove();window._heroSit=null;if(me)me.el.style.visibility=''}return _ld.apply(this,arguments)}}
