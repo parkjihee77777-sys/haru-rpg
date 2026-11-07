@@ -63,7 +63,7 @@ const OUT={class:[1440,262],hall:[1460,820],field:[330,440],cafe:[640,385]};
 const PLACES=[['class','교실'],['hall','복도'],['field','운동장'],['cafe','급식실']];
 // who is where on Day 2 — most kids sit at their desks; seat = {top: chair-back top on the map}
 const PLACE_BY={2:{
- class:[['yena',1190,0,{top:333}],['hangyeol',760,0,{top:572}],['jihoon',885,0,{top:572}],['youngmin',395,0,{top:715}],['siwoo',895,0,{top:715}],['haneul',1405,0,{top:715}],['minho',640,600],['sua',600,262]],
+ class:[['yena',1190,0,{top:333}],['hangyeol',760,0,{top:572}],['jihoon',885,0,{top:572}],['youngmin',395,0,{top:715}],['siwoo',895,0,{top:715}],['haneul',263,0,{top:715}],['minho',640,600],['sua',600,262]],
  hall:[['hyeeun',760,880],['seah',1100,640]],
  field:[['junho',1300,745],['jiho',1200,380]],
  cafe:[['haram',515,470],['haeun',1360,565],['yuna',330,860]]}};

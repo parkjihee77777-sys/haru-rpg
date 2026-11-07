@@ -3,12 +3,12 @@
 // Haneul hides in a big hood with earphones (nothing plugged in) and is scared of eyes on him; he sees everything and draws four-panel comics.
 // Flags: N02_look (Day 2 A·D), N03_quiet (Day 3 A·C), N04_front (Day 4 B·D), N05_take (Day 5 B·C), N06_back/close/quiet/loud (Day 6 A/B/C/D),
 // N09_witness (Day 9 B·D), N11_both (Day 11 B·C).
-// Places: the classroom (Haneul's seat = back right corner by the window, the hero's desk right in front), the hall (the classroom door, Day 2 and 16R;
+// Places: the classroom (Haneul's seat = back left corner by the outside windows, the hero's desk right in front), the hall (the classroom door, Day 2 and 16R;
 // the nurse's room door, Day 6; the empty hall, Day 14), a science room drawn for Day 4, the cafeteria (Day 7), the library (Day 12).
 window.EP=window.EP||{};
 EP.haneul=[
 // ■ Day 2 — 돌아보지 않은 한 명 (1)
-{title:'돌아보지 않은 한 명',scene:'haneul_01',place:'class',at:[1405,860],with:[['yena',1190,700]],taps:{class:[['door',1490,140,55]]},
+{title:'돌아보지 않은 한 명',scene:'haneul_01',place:'class',at:[263,860],with:[['yena',478,700]],taps:{class:[['door',1490,140,55]]},
  pre:[
   ['nar','','아침. 나는 방금 교실에 들어왔다. 등 뒤에서 {@door|이} 닫혔다.'],
   ['think','smile','(전학 온 첫날, 이 {@door} 열었을 때 다들 한꺼번에 나를 돌아봤지.)'],
@@ -18,11 +18,11 @@ EP.haneul=[
   ['nar','','그런데 생각났다. 전학 온 첫날에도 한 명은 안 돌아봤다.'],
   ['nar','','맨 뒤 구석. 등 뒤가 벽인 자리. 큰 남색 후드를 눌러쓴 아이. 귀에 이어폰. 오늘도 고개를 숙이고 {@notebook|에} 뭔가를 그리고 있었다.'],
   ['nar','','그 아이 자리는 내 자리 바로 뒤였다. 그런데 지금까지 등 뒤에서 소리가 난 적이 거의 없었다. 말을 걸어 본 적도 없었다. 책상 모서리에 이름표가 붙어 있었다. 「문하늘」.'],
-  {me:[1090,600]},
+  {me:[560,620]},
   {pic:'haneul_01w'},
   ['nar','','내 자리에 {@bag|을} 내려놓을 때였다. 열린 {@window|으로} 바람이 들어왔다.'],
   ['nar','','하늘이 {@notebook|에서} 찢어 둔 {@paper} 한 장이 날아올랐다. 그리고 내 발 앞에 떨어졌다.'],
-  {lay:[['paper',1050,650,40,'picture']]},
+  {lay:[['paper',618,650,40,'picture']]},
   ['nar','','나는 그걸 주웠다. 그림이었다.'],
   {clear:['paper']},
   {pic:'haneul_01a'},
@@ -140,7 +140,7 @@ EP.haneul=[
    ['me','sad','응. 그게 이상하게 안 싫었어.']]}},
 
 // ■ Day 3 — 아무 데도 안 꽂힌 줄 (2)
-{title:'아무 데도 안 꽂힌 줄',scene:'haneul_02',place:'class',at:[1405,860],with:[['jihoon',1180,700],['jiho',1120,830]],taps:{class:[['window',1640,380,35],['chair',1349,640,30]]},
+{title:'아무 데도 안 꽂힌 줄',scene:'haneul_02',place:'class',at:[263,860],with:[['jihoon',488,700],['jiho',548,830]],taps:{class:[['window',60,260,35],['chair',292,640,30]]},
  pre:[
   ['nar','','2교시가 끝났다. 교실 공기가 답답했다.'],
   ['teacher','smile','뒤쪽 {@window} 좀 열어 줄래요? 제일 가까운 사람.'],
@@ -170,9 +170,9 @@ EP.haneul=[
    ['me','smile','지훈아, 고양이 보여 준다며. 보여 줘.'],
    ['jihoon','laugh','아, 맞다! 이거 봐. 얘가 상자에 들어갔다가 못 나와.'],
    {pic:'haneul_02_A'},
-   ['nar','','지훈이가 사진을 펼치며 내 자리 쪽으로 왔다. 지호도 따라왔다. 상자에 끼인 고양이였다. 진짜 웃겼다.'],
+   ['nar','','지훈이가 사진을 펼치며 교실 앞쪽으로 갔다. 나랑 지호도 따라갔다. 상자에 끼인 고양이였다. 진짜 웃겼다.'],
    ['jiho','laugh','와, 얘 바보다! 하하.'],
-   ['nar','','웃음이 이번엔 고양이 쪽으로 갔다. 등 뒤에서 {@chair|가} 아주 작게 끼익 했다. 하늘이가 어깨를 내리는 소리 같았다.'],
+   ['nar','','웃음이 이번엔 고양이 쪽으로 갔다. 교실 뒤 구석에서 {@chair|가} 아주 작게 끼익 했다. 하늘이가 어깨를 내리는 소리 같았다.'],
    {pic:null}]},
   {k:'B',text:'하늘이에게 「아무것도 안 들으면 왜 껴?」 하고 묻는다.',pts:{haneul:0},r:[
    ['me','surprised','아무것도 안 들으면 왜 껴?'],
@@ -397,7 +397,7 @@ EP.haneul=[
    ['mom','smile','좋은 선생님이시네. 모르셨던 거니까.']]}},
 
 // ■ Day 5 — 뭐가 그렇게 웃겨요? (4)
-{title:'뭐가 그렇게 웃겨요?',scene:'haneul_04',place:'class',at:[1405,860],with:[['jiho',1120,830]],
+{title:'뭐가 그렇게 웃겨요?',scene:'haneul_04',place:'class',at:[263,860],with:[['jiho',548,830]],
  pre:[
   ['nar','','4교시 수학. 선생님이 {@blackboard|에} 분수 문제를 쓰셨다.'],
   ['nar','','똑.'],
@@ -406,7 +406,7 @@ EP.haneul=[
   ['nar','','똑.'],
   ['nar','','또 부러졌다. 반에서 몇 명이 킥킥 웃었다. 선생님이 {@chalk|을} 한참 노려보셨다.'],
   ['nar','','그때 어깨 너머로 {@paper|가} 넘어왔다. 네 번 접혀 있었다.'],
-  {lay:[['note',1440,548,40]]},
+  {lay:[['note',250,548,40]]},
   {k:'note',goal:'「{x}」 펴기'},
   {clear:['note']},
   {pic:'haneul_04a'},
@@ -535,7 +535,7 @@ EP.haneul=[
    ['mom','smile','응. 엄마한테도 안 보여 줘도 돼.']]}},
 
 // ■ Day 6 — 방송에 나온 이름 (5)
-{title:'방송에 나온 이름',scene:'haneul_05',place:'class',at:[1405,860],with:[['jiho',1120,830],['jihoon',1180,700],['yena',1060,600]],goAlone:{hall:['A','B','C','D'],class:['A','B','C','D']},things:{class:[['tv',1290,122,80]]},
+{title:'방송에 나온 이름',scene:'haneul_05',place:'class',at:[263,860],with:[['jiho',548,830],['jihoon',488,700],['yena',608,600]],goAlone:{hall:['A','B','C','D'],class:['A','B','C','D']},things:{class:[['tv',1290,122,80]]},
  pre:[
   ['nar','','아침 방송 시간. 선생님이 교실 앞 {@tv|을} 켜셨다.'],
   ['teacher','smile','선생님 교무실에 잠깐 다녀올게요. 자리에서 방송 봐요. 금방 와요.'],
@@ -630,7 +630,7 @@ EP.haneul=[
   {pic:'haneul_05w'},
   ['nar','','선생님과 하늘이가 교실 {@door|으로} 나갔다. 선생님이 교실 쪽, 하늘이가 벽 쪽. 반 아이들 눈이 하늘이에게 닿기 전에 선생님 등에 먼저 닿았다.'],
   {move:['haneul',0,0,'out']},
-  {lay:[['water_bottle',1305,682,34,null,'stay']]},// on Haneul's own desk, not following him to the door (owner 11/06)
+  {lay:[['water_bottle',363,682,34,null,'stay']]},// on Haneul's own desk, not following him to the door (owner 11/06)
   {k:'water_bottle',goal:'「{x}」 갖다주기'},
   {clear:['water_bottle']},
   {go:'hall'},
@@ -641,7 +641,7 @@ EP.haneul=[
   {pic:null},
   {go:'class'},
   ['nar','','교실에 오니 방송은 끝나 있었다. 선생님이 돌아오셔서 1교시를 시작하셨다. 선생님은 하늘이 이야기를 한마디도 안 하셨다. 아이들 몇 명이 하늘이 빈자리를 흘끔 봤다가, 곧 수업으로 돌아갔다.'],
-  {move:['haneul',1405,870]},
+  {move:['haneul',263,870]},
   {pic:'haneul_05r'},
   ['nar','','2교시가 시작될 때, 하늘이가 교실 {@door|으로} 조용히 들어왔다. 얼굴에 색이 돌아와 있었다. 아무도 박수 치지 않았다. 아무도 노래하지 않았다.'],
   {pic:'haneul_note'},
@@ -675,7 +675,7 @@ EP.haneul=[
    ['me','smile','나는 일어나서 하늘이한테 등을 대고 섰어. 애들 쪽 보고, 다들 자리 가자고, 방송 아직 안 끝났다고 했어.'],
    ['mom','surprised','애들이 갔어?'],
    ['me','smile','응. 지훈이만 남아서 내 어깨 너머로 보려고 했는데, 내가 옆으로 움직였어. 그래서 지훈이도 갔어.'],
-   ['mom','smile','네 등이 {@door|이} 됐네.'],
+   ['mom','smile','네 등이 가림막이 됐네.'],
    ['me','smile','응. 하늘이가 {@note|에} 썼어. 내 등만 보였대. 다른 눈은 하나도 안 보여서 숨 쉬었대.'],
    ['me','smile','선생님은 하늘이 앞에 안 서셨어. 옆에 서셨어. 같은 쪽 보고. 그리고 ‘넷 셀 동안 들이쉬고, 넷 셀 동안 내쉬고’ 하고 같이 세셨어.'],
    ['mom','smile','선생님이 잘 아시는구나.'],
@@ -885,7 +885,7 @@ EP.haneul=[
    ['me','laugh','(웃음) 엄마는 괜찮아.']]}},
 
 // ■ Day 8 — 눈싸움 (7)
-{title:'눈싸움',scene:'haneul_07',place:'class',at:[1405,860],with:[['minho',820,620],['jiho',960,640],['jihoon',1180,700],['yena',700,600]],
+{title:'눈싸움',scene:'haneul_07',place:'class',at:[263,860],with:[['minho',820,620],['jiho',960,640],['jihoon',488,700],['yena',700,600]],
  pre:[
   ['nar','','점심을 먹고 교실에 왔다. 5교시 전 쉬는 시간이 아직 길게 남아 있었다.'],
   ['nar','','나는 {@pencil|이} 뭉툭해서 깎으려고 꺼냈다.'],
@@ -919,7 +919,7 @@ EP.haneul=[
    ['nar','','아이들 눈이 다 선생님에게 갔다. 선생님은 4초 만에 깜빡이셨다. 「선생님 약하다!」 다들 웃었다.'],
    ['nar','','그 사이 맨 뒤에서 {@pencil|이} {@notebook} 위에 가로로 누웠다. 선생님이 민호를 보신 채로 고개만 작게 끄덕이셨다. 하늘이가 교실 {@door|으로} 조용히 나가 {@door} 바로 옆 복도 {@chair|에} 앉았다. 선생님이 교실 {@door|을} 반쯤 열어 두셨다.'],
    {move:['haneul',0,0,'out']},
-   {move:['haneul',1405,870]},
+   {move:['haneul',263,870]},
    ['nar','','종이 치기 조금 전, 하늘이가 돌아와 앉았다. 얼굴에 색이 돌아와 있었다.'],
    {pic:null}]},
   {k:'B',text:'「눈싸움 말고 이거 하자. {@chair} 등 맞대고 앉아서, 한 사람이 말하고 한 사람이 그리기.」',pts:{haneul:2},r:[
@@ -964,7 +964,7 @@ EP.haneul=[
   {only:['B','C','D'],lines:[['me','smile','민호야, 하늘이야. ‘후드’ 아니고.'],['minho','smile','……알았어. 하늘이.']]},
   ['nar','','나도 앉았다.'],
   ['nar','','어깨 너머로 {@paper} 한 장이 넘어왔다. 접지 않은 {@paper|였}다.'],
-  {lay:[['paper',1440,548,44]]},
+  {lay:[['paper',250,548,44]]},
   {k:'paper',goal:'「{x}」 받기'},
   {clear:['paper']},
   {pic:'haneul_07b'},
@@ -1025,10 +1025,10 @@ EP.haneul=[
    ['dad','smile','많이 늘었네.']]}},
 
 // ■ Day 9 — 다 봤어 (8)
-{title:'다 봤어',scene:'haneul_08',place:'class',at:[1405,860],with:[['jihoon',1180,700],['jiho',1120,830]],
+{title:'다 봤어',scene:'haneul_08',place:'class',at:[263,860],with:[['jihoon',488,700],['jiho',548,830]],
  pre:[
   ['nar','','5교시는 국어. {@notebook|이} 필요했다. 첫날 엄마가 챙겨 준 그 {@notebook}. 첫날 밤 친구 이름을 적은 {@notebook}.'],
-  {lay:[['drawer',1448,604,52]]},
+  {lay:[['drawer',240,604,52]]},
   {k:'drawer',goal:'「{x}」 열기'},
   {clear:['drawer']},
   ['nar','','내 책상 {@drawer|을} 열었다. {@textbook|와} 필통뿐이었다. {@notebook|이} 없었다.'],
@@ -1098,7 +1098,7 @@ EP.haneul=[
    {pic:null}]}],flag:{N09_witness:{B:1,C:1,D:1}},
  post:[
   ['nar','','{@notebook|이} 돌아왔다. 겉표지 귀퉁이에 노란 {@paints|이} 한 방울 말라 있었다. 하늘이 말대로였다.'],
-  {lay:[['notebook',1440,548,42]]},
+  {lay:[['notebook',250,548,42]]},
   {k:'notebook',goal:'「{x}」 펴기'},
   {clear:['notebook']},
   ['nar','','첫 장. 첫날 밤에 적은 이름들. 유나, 준호, 하은, 시우. 그 뒤로 내가 만난 친구들 이름이 몇 개 더 있었다. 다 그대로였다.'],
@@ -1172,7 +1172,7 @@ EP.haneul=[
    ['mom','sad','……그렇네. 다 보는 친구랑 지내는 법이네.']]}},
 
 // ■ Day 10 — 다시 말해 봐 (9)
-{title:'다시 말해 봐',scene:'haneul_09',place:'class',at:[1405,860],with:[['jihoon',1180,700]],
+{title:'다시 말해 봐',scene:'haneul_09',place:'class',at:[263,860],with:[['jihoon',488,700]],
  pre:[
   ['nar','','2교시 사회. 오늘은 「우리 고장의 옛이야기」를 배우는 날이었다.'],
   ['teacher','smile','{@textbook} 펴요. 번호 순서대로 한 문장씩 읽어 볼게요. 일어나서 읽어요.'],
@@ -1246,7 +1246,7 @@ EP.haneul=[
   {flag:'N05_take',is:0,lines:[['nar','','「오늘은 내가 {@cloud} 하나 준 거야. {@cloud|은} 안 쳐다봄.」']]},
   {pic:'haneul_09q'},
   ['nar','','나는 책상 위에 손가락으로 네모를 그려 봤다. 하나, 둘, 셋, 넷. 들이쉬고. 하나, 둘, 셋, 넷. 내쉬고. 숨이 정말 조금 느려졌다.'],
-  {lay:[['cloud',1440,548,44]]},
+  {lay:[['cloud',250,548,44]]},
   {k:'cloud',goal:'「{x}」 끼워 두기'},
   {clear:['cloud']},
   ['nar','','{@cloud|이} 그려진 {@note|를} 사회 {@textbook} 앞표지 안쪽에 끼워 두었다.'],
@@ -1313,7 +1313,7 @@ EP.haneul=[
    ['mom','smile','네모는 삐뚤어도 숨은 쉬어져.']]}},
 
 // ■ Day 11 — 너 나 그렸지? (10)
-{title:'너 나 그렸지?',scene:'haneul_10',place:'class',at:[1530,345],stand:1,with:[['jiho',1120,830],['jihoon',1180,700],['yena',1060,600]],
+{title:'너 나 그렸지?',scene:'haneul_10',place:'class',at:[1530,345],stand:1,with:[['jiho',548,830],['jihoon',488,700],['yena',608,600]],
  pre:[
   {move:['haneul',0,0,'out']},
   ['nar','','2교시가 끝났다. 오늘 {@blackboard} 지우기는 내 차례였다.'],
@@ -1384,7 +1384,7 @@ EP.haneul=[
    {move:['haneul',0,0,'out']},
    ['think','sad','(사과하는 게 맞았어. 근데 다들 보는 데서, 지금 말로 하라고 했어. 하늘이가 제일 못 하는 방법으로.)']]}],flag:{N11_both:{B:1,C:1}},
  post:[
-  {move:['haneul',1405,870]},
+  {move:['haneul',263,870]},
   ['nar','','3교시 종이 치기 전. 하늘이가 자리로 돌아왔다.'],
   {pic:'haneul_10t'},
   ['nar','','담임 선생님이 3교시 준비를 하러 들어오셨다. 선생님은 하늘이 얼굴을 한 번 보셨다. 그리고 맨 뒤로 와서 하늘이 옆에 서셨다. 같은 쪽을 보고.'],
@@ -1407,7 +1407,7 @@ EP.haneul=[
   ['nar','','나는 그 밑에 썼다. 「응. 근데 나 읽다 틀린 건 그리지 마.」'],
   ['nar','','금방 답이 왔다. 「OK. 예시야기 금지.」'],
   ['nar','','나는 웃음을 꾹 참았다. 그리고 하늘이 {@notebook|을} 돌려줄 차례였다.'],
-  {lay:[['notebook',1440,548,42]]},
+  {lay:[['notebook',250,548,42]]},
   {k:'notebook',goal:'「{x}」 돌려주기'},
   {clear:['notebook']},
   ['nar','','덮인 회색 {@notebook|을} 어깨 너머로 하늘이에게 건넸다. 하늘이 손이 아주 가볍게 받았다.'],
@@ -1554,7 +1554,8 @@ EP.haneul=[
   {k:'colored_pencil',goal:'「{x}」 칠하기'},
   {clear:['colored_pencil']},
   ['nar','','하늘색을 칠하는데, 도서관 끝 창가에서 {@paper|가} 사르륵 넘어가는 소리가 들렸다. 하늘이가 {@book|을} 읽는 소리였다.'],
-  {only:['A','B'],lines:[['nar','','도서관 시간이 끝날 때, 하늘이가 내 옆을 지나가며 {@note|를} 떨어뜨렸다. 「같이 하자는 말 고마워. 근데 같이 하자는 말도 눈이야. 다음엔 애들 데려오기 전에 나한테 먼저 물어봐.」 끝에 {@cloud}.']]},
+  {only:['A'],lines:[['nar','','도서관 시간이 끝날 때, 하늘이가 내 옆을 지나가며 {@note|를} 떨어뜨렸다. 「같이 하자는 말 고마워. 근데 같이 하자는 말도 눈이야. 다음엔 애들 데려오기 전에 나한테 먼저 물어봐.」 끝에 {@cloud}.']]},
+  {only:['B'],lines:[['nar','','도서관 시간이 끝날 때, 하늘이가 내 옆을 지나가며 {@note|를} 떨어뜨렸다. 「잘 그린다고 말해 준 거 고마워. 근데 그 말이 예나를 데려왔어. 다음엔 애들한테 말하기 전에 나한테 먼저 물어봐.」 끝에 {@cloud}.']]},
   {only:['C'],lines:[['nar','','도서관 시간이 끝날 때, 하늘이가 내 옆을 지나가며 {@note|를} 떨어뜨렸다. 「하늘색 칠한 거 봤음. {@cloud|은} 하얗게 남겨 둬. 칠하지 말고 남기면 {@cloud} 됨.」'],['nar','','나는 하늘색 사이에 하얀 구멍을 남겼다. 진짜 {@cloud|이} 됐다. 아무도 누가 알려 줬는지 묻지 않았다.']]},
   {only:['D'],lines:[['nar','','도서관 시간이 끝날 때, 하늘이가 내 옆을 지나가며 {@note|를} 떨어뜨렸다. 「{@book} 두께 합격. 안 불러 줘서 고마워. 근데 불렀어도 ‘안 해’ 했을 거야. 물어보는 건 괜찮아.」']]}],
  eve:{
@@ -1610,14 +1611,14 @@ EP.haneul=[
    ['me','sad','……하늘이가 정해야지.']]}},
 
 // ■ Day 13 — 반쯤 내린 후드 (12)
-{title:'반쯤 내린 후드',scene:'haneul_12',place:'class',at:[1405,860],with:[['yena',1190,700],['jihoon',1060,600]],
+{title:'반쯤 내린 후드',scene:'haneul_12',place:'class',at:[263,860],with:[['yena',478,700],['jihoon',608,600]],
  pre:[
   ['nar','','5교시 미술. 오늘은 {@paints|으로} 「내가 좋아하는 곳」을 그리는 날이었다.'],
   ['nar','','나는 {@chair|를} 돌려 하늘이 책상 쪽으로 앉았다. 물통을 같이 쓰기로 했다. 하늘이 책상 모서리에 물통 하나.'],
-  {lay:[['paints',1410,640,44]]},
+  {lay:[['paints',258,640,44]]},
   {k:'paints',goal:'「{x}」 짜기'},
   {clear:['paints']},
-  ['nar','','나는 팔레트에 파란 {@paints|을} 짰다.'],
+  ['nar','','나는 팔레트에 남은 파란 {@paints|을} 다 짰다.'],
   ['nar','','하늘이는 도서관 창가를 그렸다. 책장 두 개 사이, 1인용 {@chair}, 창밖 {@cloud}. 나는 우리 집 부엌을 그렸다. 상자가 아직 몇 개 남아 있는 부엌.'],
   ['nar','','하늘이가 물통에 {@paintbrush|을} 헹구려고 몸을 숙였다. 그때 후드 끝이 물통에 퐁 빠졌다. 파란 {@water|이} 후드 끝에 스며들었다.'],
   ['nar','','하늘이가 후드를 봤다. 그리고 그림을 봤다. 후드가 자꾸 눈앞을 가렸다.'],
@@ -1674,7 +1675,7 @@ EP.haneul=[
    {pic:null}]}],
  post:[
   ['nar','','미술 시간이 끝나 갔다. {@paintbrush|을} 헹굴 차례였다. 하늘이와 나는 물통 하나를 가운데 두고 나란히 {@paintbrush|을} 헹궜다.'],
-  {lay:[['paintbrush',1410,640,46]]},
+  {lay:[['paintbrush',258,640,46]]},
   {k:'paintbrush',goal:'「{x}」 헹구기'},
   {clear:['paintbrush']},
   {pic:'haneul_12r'},
@@ -1744,7 +1745,7 @@ EP.haneul=[
    ['me','sad','……비밀이야.']]}},
 
 // ■ Day 14 — 복도가 빌 때까지 (13)
-{title:'복도가 빌 때까지',scene:'haneul_13',place:'class',at:[1405,860],with:[['yena',1480,330],['haeun',1380,330]],taps:{class:[['window',1640,380,35]]},
+{title:'복도가 빌 때까지',scene:'haneul_13',place:'class',at:[263,860],with:[['yena',1480,330],['haeun',1380,330]],taps:{class:[['window',60,260,35]]},
  pre:[
   ['teacher','smile','오늘 끝! 이번 주 {@window} 당번, {@window} 닫고 가요. 안녕!'],
   ['nar','','이번 주 {@window} 당번은 나였다. 종례 인사가 끝나자 아이들이 한꺼번에 일어났다. {@chair} 소리, {@bag} 소리. 복도가 금방 꽉 찼다.'],
@@ -1892,7 +1893,7 @@ EP.haneul=[
    ['mom','smile','0개짜리 친구네.']]}},
 
 // ■ Day 15 — 모자 벗자 (14)
-{title:'모자 벗자',scene:'haneul_14',place:'class',at:[1405,860],with:[['jihoon',1180,700],['jiho',1120,830]],
+{title:'모자 벗자',scene:'haneul_14',place:'class',at:[263,860],with:[['jihoon',488,700],['jiho',548,830]],
  pre:[
   {pic:'haneul_14s'},
   ['nar','','3교시. 담임 선생님이 출장을 가셔서 처음 보는 선생님이 들어오셨다.'],
@@ -1966,7 +1967,7 @@ EP.haneul=[
   ['jihoon','smile','이거 네 옆 고리에 좀 걸어 줘.'],
   {k:'hat',goal:'「{x}」 걸어 주기',bag:['hat','pencil','notebook','eraser','paper']},
   ['nar','','나는 지훈이 야구 {@hat|를} 교실 옆 고리에 걸었다.'],
-  {move:['haneul',1405,870]},
+  {move:['haneul',263,870]},
   ['nar','','몇 분 뒤, 하늘이가 교실 {@door|으로} 돌아와 앉았다. 얼굴에 색이 돌아와 있었다.'],
   ['nar','','3교시가 끝날 때, 보결 선생님이 교실을 나가기 전에 맨 뒤 책상 옆에 잠깐 서셨다. 하늘이 옆에. 같은 쪽을 보고.'],
   ['nar','','보결 선생님: 「(작게) 하늘아, 아까 미안해요. 선생님이 메모를 늦게 봤어요. 후드도 이어폰도 그대로 해요.」'],
@@ -2029,7 +2030,7 @@ EP.haneul=[
    ['me','smile','응. ‘아, 진짜……’ 했어.']]}},
 
 // ■ Day 16R — 붙여도 돼? (15)
-{title:'붙여도 돼?',scene:'haneul_15',place:'class',at:[1405,860],with:[['yena',1190,700]],goAlone:{hall:[void 0],class:[void 0]},taps:{hall:[['door',1058,232,45]]},
+{title:'붙여도 돼?',scene:'haneul_15',place:'class',at:[263,860],with:[['yena',478,700]],goAlone:{hall:[void 0],class:[void 0]},taps:{hall:[['door',1058,232,45]]},
  pre:[
   {go:'hall'},
   ['nar','','아침. 나는 교실 앞에 섰다.'],
@@ -2077,11 +2078,11 @@ EP.haneul=[
    ['nar','','아이들이 「뭐야~」 하고 돌아갔다. 나는 앉았다. 등 뒤가 조용했다. 아주 조용했다.'],
    ['nar','','{@note|가} 왔다. 「쉬는 시간에. 애들 운동장 나가면.」'],
    ['think','sad','(좋아서 그랬어. 근데 하늘이가 정할 때를 내가 먼저 말해 버렸어.)']]},
-  {k:'D',text:'「붙이는 건 좋아. 근데 둘째 칸 내 얼굴은 뒷모습으로 해 줄래? 나도 다들 쳐다보면 좀 그래.」라고 써서 넘긴다.',pts:{haneul:2},r:[
+  {k:'D',text:'「붙이는 건 좋아. 근데 둘째 칸 {@door} 앞에 걸어가는 나는 뒷모습으로 해 줄래? 나도 다들 쳐다보면 좀 그래.」라고 써서 넘긴다.',pts:{haneul:2},r:[
    ['nar','','나는 {@note} 밑에 썼다.'],
-   ['nar','','「붙이는 건 좋아. 근데 둘째 칸 내 얼굴은 뒷모습으로 해 줄래? 나도 다들 쳐다보면 좀 그래.」'],
+   ['nar','','「붙이는 건 좋아. 근데 둘째 칸 {@door} 앞에 걸어가는 나는 뒷모습으로 해 줄래? 나도 다들 쳐다보면 좀 그래.」'],
    ['nar','','쓰고 나니 조금 이상했다. 하늘이한테 쳐다보는 게 싫다고 말하다니.'],
-   ['nar','','금방 답이 왔다. {@paper|가} 다시 넘어왔다. 둘째 칸의 나는 이제 뒤를 보고 있었다. 지우개 자국 위에 새로 그린 뒷모습.'],
+   ['nar','','금방 답이 왔다. {@paper|가} 다시 넘어왔다. 둘째 칸 {@door} 앞의 나는 이제 뒤를 보고 걸어가고 있었다. 지우개 자국 위에 새로 그린 뒷모습.'],
    ['nar','','「뒷모습 = 내 전문.」'],
    ['nar','','「말해 줘서 고마워. 너도 싫은 거 말하니까 좋다.」'],
    ['nar','','「지금 붙일래. 애들 아직 덜 왔을 때.」']]}],
@@ -2179,7 +2180,7 @@ EP.haneul=[
    ['me','sad','……오래 안 봤어. 그냥 그림 봤어.'],
    ['mom','smile','그래. 그게 좋겠다.']],
   D:[
-   ['me','smile','나는 붙이는 건 좋은데, 내 얼굴은 뒷모습으로 해 달라고 했어. 나도 다들 쳐다보면 좀 그렇다고.'],
+   ['me','smile','나는 붙이는 건 좋은데, {@door} 앞에 걸어가는 나는 뒷모습으로 해 달라고 했어. 나도 다들 쳐다보면 좀 그렇다고.'],
    ['mom','sad','……하늘이한테 그 말을 했어?'],
    ['me','sad','응. 좀 이상했어. 하늘이한테 쳐다보는 게 싫다고 하는 거. 근데 하늘이가 바로 뒷모습으로 고쳐 줬어. 뒷모습이 자기 전문이래.'],
    ['mom','laugh','(웃음) 전문가네.'],
