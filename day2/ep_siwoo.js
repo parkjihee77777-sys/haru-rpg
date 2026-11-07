@@ -88,7 +88,7 @@ EP.siwoo=[
    ['me','laugh','여섯!'],['siwoo','smile','여섯. 모든 곤충.'],['nar','','하은이가 고개를 갸웃했다.'],['haeun','surprised','시우 화난 거 아니었어?'],['me','smile','아니. 정확한 거 좋아하는 거야.']]}],
  post:[
   {only:['B'],lines:[['nar','','나는 접었던 {@picture}을 다시 폈다.']]},
-  {k:'eraser',goal:'「{x}」로 다리 지우기'},
+  {k:'eraser',goal:'「{x}」로 다리 지우기',bag:['eraser','pencil','ruler','pcase','notebook']},
   {pic:'siwoo_02a'},
   ['nar','','모둠 {@picture}이 완성됐다. 내 나비는 다리가 여섯 개였다.'],
   ['nar','','활동이 끝나고 시우가 자기 {@desk}으로 돌아가다가 멈췄다. 나를 보지 않고 말했다.'],
@@ -391,7 +391,7 @@ EP.siwoo=[
 
 // ■ Day 9 — 나비 손 (8)
 {title:'나비 손',scene:'siwoo_08',place:'class',at:[262,262],
- things:{class:[['handkerchief',440,328,36],['mirror',1560,600,64]]},
+ things:{class:[['handkerchief',440,328,36]]},
  pre:[
   {pic:'siwoo_08b'},
   ['nar','','쉬는 시간. 시우가 창가에서 이상한 말 사전을 정리하다가 새 낱말을 찾았는지 두 손을 빠르게 펄럭였다. 나비처럼.'],
@@ -433,7 +433,7 @@ EP.siwoo=[
   ['nar','','선생님: 「다 다르죠? 기쁠 때도, 긴장할 때도, 사람마다 몸이 하는 게 달라요. 다리를 떠는 사람도 있고, 머리카락을 꼬는 사람도 있고요.」'],
   ['nar','','선생님: 「남이 하는 걸 흉내 내서 웃으면, 그 사람은 그걸 숨기게 돼요. 그럼 그 사람은 기쁠 때 기쁜 걸 못 하겠죠? 그건 우리 반에서 안 하기로 해요.」'],
   ['nar','','선생님은 시우 쪽을 보지 않으셨다. 아이들 몇이 자기 다리를 내려다봤다. 다리를 떨고 있었다.'],
-  {k:'mirror',goal:'「{x}」 보기'},
+  {k:'mirror',goal:'「{x}」 보기',bag:['mirror','window','door','blackboard','clock']},// the wall mirror at the back of the room is not on the map (its back wall is off screen), so it is picked as a card (owner 11/07)
   {pic:'siwoo_08e'},
   ['nar','','교실 뒤 {@mirror}에 내 모습이 비쳤다. 손가락이 손톱을 만지고 있었다.'],
   ['think','surprised','(나도 긴장하면 손톱 만지는구나.)'],
