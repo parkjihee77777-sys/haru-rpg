@@ -320,7 +320,7 @@ EP.hangyeol=[
   common:[['me','smile','근데 누가 남자가 누이를 하냐고 웃었는데, 선생님이 호랑이도 꼭 호랑이가 하는 거 아니라고 하셨어.'],['mom','smile','맞아. 역할은 하고 싶은 사람이 하는 거지. 선생님 재치 있으시다.']]}},
 
 // ■ Day 8 — 상자 두 개 (7)
-{title:'상자 두 개',scene:'hangyeol_07',place:'class',at:[1020,330,'stand'],
+{title:'상자 두 개',scene:'hangyeol_07',place:'class',at:[1020,262,'stand'],
  pre:[
   {pic:'hangyeol_07a'},
   ['nar','','금요일은 칭찬 {@sticker}를 상품으로 바꾸는 날이었다. {@sticker} 판을 들고 {@line}을 섰다. 바로 앞이 한결이였다.'],

@@ -812,7 +812,7 @@ EP.jihoon=[
   common:[['me','smile','그다음에 지훈이가 찍히는 쪽 되니까 알겠대. 갑자기 찍히면 심장이 쿵 한대. 이상하게 나왔을까 봐.'],['mom','surprised','지훈이가 그렇게 말했어?'],['me','smile','응. 그리고 나 손가락으로 찍어도 되냐고 물어봤어. 손가락은 된다고 했어.'],['mom','laugh','(웃음) 손가락 {@photo|은} 몇 장이든 괜찮겠다.']]}},
 
 // ■ Day 11 — 하트 스티커 세 장 (10)
-{title:'하트 스티커 세 장',scene:'jihoon_10',place:'class',at:[1250,300],with:[['jiho',1060,330]],
+{title:'하트 스티커 세 장',scene:'jihoon_10',bag:0,place:'class',at:[1250,300],with:[['jiho',1060,330]],
  pre:[
   {pic:'jihoon_10a'},
   ['nar','','3교시가 끝났다. {@teacher|이} 하트 {@sticker|를} 나눠 주셨다. 한 사람에 세 장. 빨간 하트.'],
@@ -978,7 +978,7 @@ EP.jihoon=[
   common:[['me','smile','지훈이가 제목 썼어. ‘찾은 사람’ 칸에 내 {@name}. ‘찍은 사람’은 배지훈.'],['dad','smile','같이 만든 사진이네.'],['me','smile','응. 그리고 지훈이 바지 무릎 다 젖고 흙 묻었는데, 신경도 안 썼어. 거미줄이 더 좋대.'],['mom','laugh','(웃음) 찍을 때는 다른 게 안 보이나 보다.']]}},
 
 // ■ Day 13 — 내려 주세요 (12)
-{title:'내려 주세요',scene:'jihoon_12',place:'class',at:[1420,330],with:[['jiho',1100,320],['yena',1250,300]],goAlone:{hall:['A','B','C','D'],class:['A','B','C','D']},
+{title:'내려 주세요',scene:'jihoon_12',place:'class',at:[1420,330],with:[['jiho',1100,320],['yena',1250,300]],goAlone:{hall:[undefined,'A','B','C','D'],class:['A','B','C','D']},
  pre:[
   {pic:'jihoon_12a'},
   ['nar','','1교시가 끝났다. 교실 뒤 게시판 앞이 시끄러웠다.'],
@@ -1010,6 +1010,7 @@ EP.jihoon=[
  ask:'어떻게 할까?',
  choices:[
   {k:'A',text:'쉬는 시간 끝나기 전에 몰래 떼어 준다. 지훈이 부탁이니까.',pts:{jihoon:1},r:[
+   {go:'class'},{move:['jiho',1100,320]},
    ['nar','','나는 교실로 들어갔다. 애들이 자리로 흩어질 때를 기다렸다. 그리고 게시판에서 {@photo|을} 뗐다.'],
    ['jiho','surprised','어? {SN}, 그거 왜 떼?'],
    ['me','smile','……지훈이가.'],

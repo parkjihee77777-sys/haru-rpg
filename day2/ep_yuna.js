@@ -196,7 +196,7 @@ EP.yuna=[
   common:[['me','laugh','근데 웃긴 거. 선생님이 제목 지훈이가 썼냐고 물어보니까, 지훈이가 ‘제가 불러 줬어요’ 했어.'],['mom','smile','불러 준 것도 일이긴 하지.'],['me','smile','선생님이 그때 유나를 한 번 봤어. 아무 말 안 했어.'],['mom','smile','그렇구나.']]}},
 
 // ■ Day 4 — 1인 1역 셋 (3)
-{title:'1인 1역 셋',scene:'yuna_03',place:'class',at:[200,600,'stand'],
+{title:'1인 1역 셋',scene:'yuna_03',place:'class',at:[300,815,'stand'],
  things:{class:[['trash_can',1127,226,58]]},
  pre:[
   ['nar','','종례가 끝났다. 1인 1역 시간. 교실 뒤 게시판에 각자 맡은 일이 붙어 있었다.'],

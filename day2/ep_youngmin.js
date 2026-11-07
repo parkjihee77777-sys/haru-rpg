@@ -93,7 +93,7 @@ EP.youngmin=[
   common:[['me','smile','근데 엄마, 영민이가 {@blackboard} 지워도 된다고 했어. 그래서 내가 마저 지웠어.'],['mom','smile','다 쓴 사람이 지워도 된다고 하고 지웠네.'],['me','smile','응. 그게 좋았어.'],['mom','smile','다음에 영민이 글씨 엄마도 한번 보고 싶다.'],['me','smile','진짜 반듯해. 나도 그렇게 쓰고 싶어.']]}},
 
 // ■ Day 3 — 세 번만 톡톡톡 (2)
-{title:'세 번만 톡톡톡',scene:'youngmin_02',place:'class',at:[220,420],with:[['yena',420,300],['jihoon',520,250]],
+{title:'세 번만 톡톡톡',scene:'youngmin_02',place:'class',at:[330,262],with:[['yena',580,330],['jihoon',660,250]],
  pre:[
   ['nar','','1교시 전. 교실 창가에 작은 어항이 있었다. 나는 가까이 가 봤다.'],
   {k:'fish',goal:'「{x}」 들여다보기',bag:['fish','bucket','cup','water_bottle','book']},
@@ -1002,7 +1002,7 @@ EP.youngmin=[
   common:[['me','smile','{m}, 기다리는 거랑 쳐다보는 거랑 다른 거야.'],['mom','smile','그렇네.'],['me','smile','나도 한국어로 글 쓸 때 누가 옆에서 보면 싫어. 근데 기다릴 때는 그걸 까먹었어.'],['mom','smile','기다리는 쪽이 되면 까먹기 쉽지.'],['me','smile','응. 다음엔 다른 거 하고 있을래.'],['dad','smile','{d}도 오늘 기다렸는데, 안 쳐다봤다.']]}},
 
 // ■ Day 13 — 붓는 건 천천히 (12)
-{title:'붓는 건 천천히',scene:'youngmin_12',place:'class',at:[220,420],with:[['sua',800,262],['haeun',920,262],['yena',470,300],['junho',600,340],['jiho',600,450]],
+{title:'붓는 건 천천히',scene:'youngmin_12',place:'class',at:[330,262],with:[['sua',800,262],['haeun',920,262],['yena',520,262],['junho',600,340],['jiho',600,450]],
  pre:[
   {pic:'youngmin_12a'},
   ['nar','','5교시. 선생님이 교실 앞에 {@bucket|를} 놓으셨다.'],
