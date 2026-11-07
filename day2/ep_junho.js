@@ -1398,6 +1398,7 @@ EP.junho=[
   {k:'hand',goal:'「{x}」 마주치기',bag:['hand','foot','finger','wrist','knee']},
   {pic:'junho_13g'},
   ['nar','','하은이, 영민이, 준호와 차례로 {@hand|을} 마주쳤다. 짝, 짝, 짝.'],
+  {pic:null},// walking back in: not on the field with the high-fives any more (AI check 11/07)
   ['nar','','교실로 들어가는 길에 준호가 옆에서 걸었다.'],
   ['junho','smile','비밀도 종류가 있네.'],
   ['me','smile','응.'],
