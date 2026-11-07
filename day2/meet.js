@@ -150,11 +150,11 @@ d2Talk=function(id){const e=epNext(id,EPIDX[id]);
  {let k=0;for(const w of e.with||[]){const n=npcs.find(x=>x.id===w[0]);if(!n){npcs.push(comeOver(w,k++));continue}
   // already on this map (their own story is here too): they go over to where this scene has them (stand up and walk, or fade in at the desk)
   if(Math.hypot(n.x-w[1],n.y-w[2])>60){const at=[n.x,n.y];n.el.remove();npcs.splice(npcs.indexOf(n),1);npcs.push(comeOver(w,k++,at))}}}// the kids this scene brings along come over now (walk in from the school door, no popping up)
- setGoal('');for(const m of JSON.stringify(e).matchAll(/"(?:pic|scene)":"(\w+)"/g))picProbe(heroPic(m[1]));const hs=heroPic(e.scene),pic=!!e.scene&&PICOK[hs]!==false;SCENE_IDS=[id].concat((e.with||[]).map(w=>w[0]));SCENE_EP=e;GOWITH=null;
+ setGoal('');for(const m of JSON.stringify(e).matchAll(/"(?:pic|scene)":"(\w+)"/g))picProbe(heroPic(m[1]));const hs=heroPic(e.scene),pic=!!e.scene&&PICOK[hs]!==false;SCENE_IDS=[id].concat((e.with||[]).map(w=>w[0]));SCENE_EP=e;GOWITH=null;if(typeof bagRefresh==='function')bagRefresh();
  runSteps(e.pre,null,()=>{const choose=()=>ask(e.ask||'어떻게 할까?',choiceOrder(id,EPIDX[id]||0,e.choices),o=>{D2CHOICE[id]=o.k;sceneEl.classList.remove('on');
   for(const[f,v]of Object.entries(e.flag||{}))FLAGS[f]=!!v[o.k];
   if(e.vote)FLAGS[id+'_vote']=1;else MEET[id]=(MEET[id]||0)+1;TODAYEP[id]=e;
-  const r=o.r||[],thenPost=()=>runSteps(e.post,o.k,()=>{Object.entries(o.pts||{}).forEach(([p,n])=>heart(p,n));PICKS.push(id);TALKED.add(id);tidyPeople();SCENE_IDS=null;SCENE_EP=null;GOWITH=null;
+  const r=o.r||[],thenPost=()=>runSteps(e.post,o.k,()=>{Object.entries(o.pts||{}).forEach(([p,n])=>heart(p,n));PICKS.push(id);TALKED.add(id);tidyPeople();SCENE_IDS=null;SCENE_EP=null;GOWITH=null;if(typeof bagRefresh==='function')bagRefresh();
    setTimeout(()=>lessons(PICKS.length>=needToday()?'pm':'am'),500)});
   // a reaction with showPic functions in it (Siwoo) still plays as plain lines; one with {pic}/{lay}/{only} steps plays through runSteps
   if(r.some(x=>typeof x==='function'))say(r,thenPost);else runSteps(r,o.k,thenPost)});
