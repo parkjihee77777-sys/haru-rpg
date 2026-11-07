@@ -202,8 +202,9 @@ EP.yena=[
   common:[['me','smile','근데 웃긴 거. 예나는 노래로는 다 외우는데, 자기 {@notice_book|은} {@desk}에 두고 갔어. 내가 뛰어가서 줬어.'],['mom','laugh','(웃음) 노래 속엔 다 있는데, {@notice_book|은} 두고 갔구나.'],['me','smile','예나 아빠가 냉장고에 ‘{@notice_book}!’이라고 붙여 놨대.'],['mom','smile','우리도 하나 붙일까? ‘체육복!’'],['me','smile','체육복은 금요일이야. 노래에 있어.']]}},
 
 // ■ Day 4 — 쉼표 신호 (3)
-{title:'쉼표 신호',scene:'yena_03',place:'music',at:[860,760],with:[['jiho',1000,740]],
+{title:'쉼표 신호',scene:'yena_03',place:'music',at:[880,880],with:[['jiho',1010,880]],
  pre:[
+  {map:'music_full'},// music class: the rest of the class sits at the desks (boss 11/07: the music room looked empty)
   ['nar','','3교시 음악. 음악실 {@desk}마다 실로폰이 하나씩 놓여 있었다.'],
   ['nar','','선생님: 「오늘은 짝이랑 실로폰 하나예요. 「학교 종」 여덟 마디. 앞 네 마디는 한 사람, 뒤 네 마디는 다른 사람. 10분 연습하고 짝마다 한 번씩 들어 볼게요.」'],
   ['nar','','선생님이 {@blackboard}에 「학교 종」 악보를 붙이셨다. 그리고 그 옆에 꼬불꼬불한 기호를 하나 그리셨다.'],
@@ -403,8 +404,9 @@ EP.yena=[
   common:[['me','smile','근데 선생님이 반 전체한테 말씀하셨어. 수업 시간 박자는 {@knee}에 하래. 다 같이 {@knee} 쳤어. 우리 반 모두. 아무 소리도 안 나는데 다 박자 맞춰서.'],['mom','laugh','(웃음) 조용한 박수네.'],['me','smile','응! 그리고 시우가 예나한테 와서 ‘{@knee} 소리 0번, 정확해’ 했어. 그리고 귀뚜라미는 {@ear|가} 앞다리에 있대.'],['mom','surprised','앞다리에?'],['me','smile','응. 예나가 그럼 귀뚜라미는 {@knee|으로} 듣냐고, 그거 노래 된대.'],['mom','laugh','(웃음) 다음엔 귀뚜라미 노래가 나오겠네.']]}},
 
 // ■ Day 6 — 박자 지킴이 (5)
-{title:'박자 지킴이',scene:'yena_05',place:'music',at:[860,760],with:[['youngmin',990,735],['jiho',1120,705]],
+{title:'박자 지킴이',scene:'yena_05',place:'music',at:[880,880],with:[['youngmin',1000,880],['jiho',1120,870]],
  pre:[
+  {map:'music_full'},// music class: the rest of the class sits at the desks (boss 11/07: the music room looked empty)
   ['nar','','2교시 음악. 음악실 {@desk} 위에 종이컵 탑이 있었다.'],
   ['nar','','선생님: 「오늘은 {@cup} 리듬이에요. 네 명씩 모둠. {@cup} 하나씩.」'],
   {pic:'yena_05a'},
@@ -708,8 +710,9 @@ EP.yena=[
   common:[['me','smile','그리고 예나도 첫째 줄에 ‘들어왔내’라고 썼어. 내 {@eraser|로} 고쳤어.'],['mom','smile','예나도 맞춤법 틀리는구나.'],['me','smile','응. 예나 또 {@eraser} 잃어버렸대.'],['mom','smile','노래 만드는 사람은 {@eraser|를} 잘 잃어버리나 봐.']]}},
 
 // ■ Day 9 — 트라이앵글 두 번 (8)
-{title:'트라이앵글 두 번',scene:'yena_08',place:'music',at:[860,760],with:[['junho',1000,740]],
+{title:'트라이앵글 두 번',scene:'yena_08',place:'music',at:[880,880],with:[['junho',1010,880]],
  pre:[
+  {map:'music_full'},// music class: the rest of the class sits at the desks (boss 11/07: the music room looked empty)
   ['nar','','3교시 음악. 반 전체가 한 곡을 같이 하는 날이었다. 「작은 별」.'],
   ['nar','','선생님: 「실로폰, 소고, 캐스터네츠, 트라이앵글로 나눌게요. 트라이앵글은 한 명이에요.」'],
   {pic:'yena_08a'},
@@ -854,16 +857,17 @@ EP.yena=[
   {k:'D',text:'먼저 음악실에 가서 선생님께 말씀드린다. 「예나가 아직 교실에 있어요. 노래 쓰고 있어요.」',pts:{yena:2},r:[
    ['think','sad','(내가 부르면 못 들을 거야. 선생님께 말씀드리자.)'],
    {go:'music'},
+   {map:'music_full'},
    ['nar','','나는 계단을 올라 음악실로 갔다. 선생님은 실로폰을 꺼내고 계셨다.'],
    ['me','smile','선생님, 예나가 아직 교실에 있어요. 노래 쓰고 있어요. 불러도 못 들을 것 같아서요.'],
    ['nar','','선생님: 「아, 알려 줘서 고마워요. 선생님이 가 볼게요.」'],
    {pic:'yena_09e'},
    ['nar','','선생님이 교실로 내려가셨다. 종이 울릴 때쯤 음악실 {@door|이} 열렸다. 선생님과 예나가 같이 들어왔다. 선생님은 아무 말 없이 실로폰 앞으로 가셨다.'],
-   {move:['yena',860,760]},
+   {move:['yena',880,880]},
    ['think','smile','(선생님께 말하길 잘했어. 예나 혼자 두지 않았어.)']]}],
  post:[
   {clear:['clock']},
-  {only:['A','B','C'],lines:[{go:'music'},['nar','','우리는 계단을 올라갔다. 종이 울리기 직전, 음악실에 들어갔다. 우리가 맨 마지막이었다. 복도에서 다른 반 소리가 들어왔다.'],['nar','','선생님: 「마지막에 들어온 사람, {@door} 좀 닫아 줄래요? 소리가 복도로 나가요.」']]},
+  {only:['A','B','C'],lines:[{go:'music'},{map:'music_full'},['nar','','우리는 계단을 올라갔다. 종이 울리기 직전, 음악실에 들어갔다. 우리가 맨 마지막이었다. 복도에서 다른 반 소리가 들어왔다.'],['nar','','선생님: 「마지막에 들어온 사람, {@door} 좀 닫아 줄래요? 소리가 복도로 나가요.」']]},
   {only:['D'],lines:[['nar','','선생님과 예나가 맨 마지막이었다. {@door|이} 열린 채였다. {@door} 옆자리는 나였다.'],['nar','','선생님: 「{@door} 옆에 있는 사람, {@door} 좀 닫아 줄래요? 소리가 복도로 나가요.」']]},
   {k:'door',goal:'「{x}」 닫기'},
   ['nar','','나는 음악실 {@door|을} 닫았다. 복도 소리가 끊겼다.'],
@@ -886,8 +890,9 @@ EP.yena=[
   common:[['me','smile','{m}, {@cup} 리듬 때 선생님이 깊이 들어가는 것도 집중이라고 했잖아. 근데 오늘은 깊이 들어가서 혼자 남았어.'],['mom','smile','그러네. 깊이 들어가는 게 좋을 때도 있고, 곤란할 때도 있구나.'],['me','smile','응. 그래서 옆에 누가 있으면 좋겠어. 끊는 사람 말고. 알려 주는 사람.'],['mom','smile','……알려 주는 사람.'],['me','smile','응. 오늘은 내가 했어.']]}},
 
 // ■ Day 11 — 귀뚜라미 (10)
-{title:'귀뚜라미',scene:'yena_10',place:'music',at:[860,760],with:[['junho',990,735],['siwoo',1190,700]],
+{title:'귀뚜라미',scene:'yena_10',place:'music',at:[880,880],with:[['junho',1000,880],['siwoo',1200,870]],
  pre:[
+  {map:'music_full'},// music class: the rest of the class sits at the desks (boss 11/07: the music room looked empty)
   ['nar','','2교시 음악. 선생님이 {@blackboard}에 「여덟 박 리듬 만들기」라고 쓰셨다.'],
   ['nar','','선생님: 「모둠마다 여덟 박짜리 리듬을 만들어요. 악기를 써도 되고, 몸으로 내는 소리도 돼요. 손뼉, {@knee}, {@foot}. 10분 뒤에 들어 볼게요.」'],
   ['nar','','우리 모둠은 나, 예나, 시우, 준호였다. 시우는 모둠 {@desk} 맨 끝에 앉았다. 우리랑 30센티쯤 떨어져서.'],
@@ -1368,8 +1373,9 @@ EP.yena=[
   common:[['me','sad','예나가 그랬어. 나도 박자로 생각하는 줄 몰랐대. 나도 몰랐어. 떨려서 그랬나 봐.'],['mom','sad','떨리면 {@hand|이} 먼저 움직이지.'],['me','sad','예나가 ‘산만해서가 아니라 떨려서’래. 자기도 그럴 때 있대.'],['mom','surprised','……예나가 그 말을 했어?'],['me','smile','응. 그리고 시우가 나한테 딱따구리 얘기 해 줬어. 하루에 만 번 두드려도 머리 안 아프대.'],['mom','laugh','(웃음) 그거 괜찮다는 거지?'],['me','smile','응. 예나가 시우는 괜찮을 때 곤충 얘기 한대. 딱따구리는 새지만.']]}},
 
 // ■ Day 16R — 우리 반 노래 (15)
-{title:'우리 반 노래',scene:'yena_15',place:'music',at:[1180,640],with:[['junho',1060,660],['siwoo',1460,720],['youngmin',940,690],['jihoon',1310,690]],
+{title:'우리 반 노래',scene:'yena_15',place:'music',at:[1360,640],with:[['junho',1240,830],['siwoo',1470,770],['youngmin',1110,860],['jihoon',1370,850]],
  pre:[
+  {map:'music_full'},// music class: the rest of the class sits at the desks (boss 11/07: the music room looked empty)
   ['nar','','4교시 음악. 선생님이 {@clock|를} 보셨다.'],
   ['nar','','선생님: 「오늘은 남은 10분 자유 연주예요. 실로폰 쳐도 되고, 노래해도 되고. 소고 칠 사람은 {@ear} 신호 잊지 말고요.」'],
   {pic:'yena_15a'},
