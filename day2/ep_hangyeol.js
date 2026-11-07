@@ -62,7 +62,6 @@ EP.hangyeol=[
 
 // ■ Day 3 — 맨 뒤 줄 (2)
 {title:'맨 뒤 줄',scene:'hangyeol_02',place:'gym',at:[760,560],
- things:{gym:[['line',1010,720,190]]},
  pre:[
   {pic:'hangyeol_02a'},
   ['nar','','강당. 외부에서 오신 강사 선생님이 안전교육을 하러 오셨다. 담임 선생님은 출석을 확인하러 잠깐 교무실에 가셨다.'],
@@ -102,7 +101,7 @@ EP.hangyeol=[
   ['nar','','안전교육이 끝나고 나갈 때, 한결이가 내 팔찌를 톡 쳤다.'],
   ['hangyeol','smile','매듭 괜찮아? A/S 필요하면 말해.'],
   ['think','smile','(아까 일은 묻지 않기로 했다. 한결이가 먼저 말하면 그때 듣지, 뭐.)'],
-  {k:'line',goal:'「{x}」 서기'},
+  {k:'line',goal:'「{x}」 서기',bag:['line','chair','door','ball','flag']},
   ['nar','','번호순 한 {@line}로 강당을 나갔다.']],
  eve:{lead:[['me','smile','{m}, 오늘 강당에서 안전교육 받았는데 강사 선생님이 남자 한 {@line}, 여자 한 {@line} 서래.'],['mom','smile','그렇게 서는 데도 있지.'],['me','sad','근데 강사 선생님이 한결이 보고 머리 묶었다고 여자 {@line}로 가래. 애들이 웃었어.'],['mom','sad','……한결이 속상했겠다.']],
   A:[['me','sad','혼날까 봐 내가 한결이 등 떠밀어서 {@line} 맨 뒤로 보냈어. 근데 한결이가 내내 조용했어.'],['mom','smile','혼날까 봐 걱정한 거구나.'],['me','sad','응. 근데 한결이는 거기 가기 싫었던 것 같아.'],['mom','smile','그럴 수도 있겠다. 다음엔 밀기 전에 먼저 물어보고, 한결이가 어떻게 하고 싶은지 조금 기다려 봐도 되고.']],
@@ -164,7 +163,6 @@ EP.hangyeol=[
 
 // ■ Day 5 — 남자 대 여자 (4)
 {title:'남자 대 여자',scene:'hangyeol_04',place:'field',at:[800,500],with:[['junho',960,520]],
- things:{field:[['hat',700,570,46]]},
  pre:[
   {pic:'hangyeol_04a'},
   ['nar','','점심시간 운동장. 반 아이들이 피구를 하려고 모였다. 나는 한결이 옆으로 갔다.'],
@@ -196,7 +194,7 @@ EP.hangyeol=[
    ['nar','','한결이가 나를 봤다. 팔찌 돌리던 손가락이 멈췄다.'],['hangyeol','laugh','……좋아! 그럼 생일로! 1월부터 6월 생일 이쪽, 7월부터 12월 저쪽!'],
    ['nar','','아이들: 「오, 그거 처음 해 본다!」'],['nar','','한결이가 친구들 생일을 하나하나 다 외워서 불렀다. 아이들이 감탄했다.']]}],
  post:[
-  {k:'hat',goal:'「{x}」 쓰기'},
+  {k:'hat',goal:'「{x}」 쓰기',bag:['hat','ball','flag','water','shoes']},
   {pic:'hangyeol_04c'},
   ['nar','','우리 팀 표시로 {@hat}를 썼다.'],
   {pic:'hangyeol_04b'},
@@ -266,7 +264,6 @@ EP.hangyeol=[
 
 // ■ Day 7 — 누이 역 (6)
 {title:'누이 역',scene:'hangyeol_06',place:'class',at:[1300,262],
- things:{class:[['basket',800,214,84,null,'stay'],['rice_cake',800,196,40,'rice_cake_paper','stay'],['mask',905,205,58]]},// the paper rice cake sits in the props basket (owner 11/07)
  pre:[
   ['nar','','학예회 연극은 「해님 달님」으로 정해졌다. {@blackboard}에 역할이 적혔다. 오빠, 누이, 엄마, 호랑이, 나무꾼.'],
   ['nar','','나는 한결이 자리로 갔다. 한결이는 {@blackboard}을 뚫어지게 보고 있었다.'],
@@ -274,7 +271,7 @@ EP.hangyeol=[
   ['hangyeol','smile','……누이. 마지막에 해님 되는 거.'],
   ['think','surprised','(어, 나도 누이 하고 싶은데.)'],
   ['think','smile','(누이는 마지막에 하늘로 올라가잖아. 제일 멋있어.)'],
-  {k:'rice_cake',goal:'「{x}」 소품 들기'},
+  {k:'rice_cake',goal:'「{x}」 소품 들기',bag:['rice_cake','mask','chalk','paper','box']},
   ['nar','','소품 바구니에서 {@paper}로 만든 {@rice_cake}을 들었다.'],
   ['nar','','선생님: 「하고 싶은 역할에 이름 쓰세요. 두 명 이상이면 오디션으로 정할게요.」'],
   {pic:'hangyeol_06'},
@@ -308,7 +305,7 @@ EP.hangyeol=[
   ['nar','','선생님: 「누이는 한결이. 그리고……」'],
   ['nar','','선생님이 나를 보셨다.'],
   ['nar','','선생님: 「아까 쉬는 시간에 호랑이 흉내 낸 사람? 어흥 소리가 교실 끝까지 들리던데. 호랑이 해 볼래?」'],
-  {k:'mask',goal:'「{x}」 써 보기'},
+  {k:'mask',goal:'「{x}」 써 보기',bag:['mask','hat','rice_cake','paper','basket']},
   {pic:'hangyeol_06d'},
   ['nar','','호랑이 {@mask}을 썼다.'],
   ['me','laugh','……어흥.'],
@@ -324,14 +321,13 @@ EP.hangyeol=[
 
 // ■ Day 8 — 상자 두 개 (7)
 {title:'상자 두 개',scene:'hangyeol_07',place:'class',at:[1020,330,'stand'],
- things:{class:[['box',780,210,66],['box',905,210,66]]},
  pre:[
   {pic:'hangyeol_07a'},
   ['nar','','금요일은 칭찬 {@sticker}를 상품으로 바꾸는 날이었다. {@sticker} 판을 들고 {@line}을 섰다. 바로 앞이 한결이였다.'],
   ['hangyeol','laugh','나 {@sticker} 열 개. 오늘 뭐 고를지 일주일 내내 생각했어.'],
   {k:'sticker',goal:'「{x}」 판 꺼내기',bag:['notebook','pcase','sticker','handkerchief','eraser']},
   ['nar','','{@sticker} 판에 {@sticker}가 열 개 붙어 있었다.'],
-  {k:'box',goal:'「{x}」 들여다보기'},{pic:'hangyeol_07'},
+  {k:'box',goal:'「{x}」 들여다보기',bag:['box','basket','bag','sticker','paper']},{pic:'hangyeol_07'},
   ['nar','','교탁 위에 {@box}가 두 개 있었다. 파란 {@paper}에 ‘남자’, 분홍 {@paper}에 ‘여자’라고 쓰여 있었다.'],
   ['nar','','남자 {@box}에는 미니카, 딱지, 축구 카드. 여자 {@box}에는 머리핀, {@sticker}북, 반짝이 볼펜.'],
   ['nar','','선생님: 「이번 상품은 학부모회에서 보내 주셨어요. 하나씩 고르세요.」'],
@@ -369,7 +365,6 @@ EP.hangyeol=[
 
 // ■ Day 9 — 이발소 (8)
 {title:'이발소',scene:'hangyeol_08',place:'gate',at:[960,650],
- things:{gate:[['umbrella',990,770,64]]},
  pre:[
   {pic:'hangyeol_08a'},
   ['nar','','하교 시간. 비가 조금 왔다. 교문 앞에서 한결이가 할머니를 기다리고 있었다. 나는 한결이 옆에 섰다.'],
@@ -377,7 +372,7 @@ EP.hangyeol=[
   {map:'gate_grandma',tap:[['grandma',1060,790,80]]},// Hangyeol's grandma drawn into the rainy gate map (11/07), not laid on top
   ['nar','','꽃무늬 {@umbrella}을 쓴 할머니가 오셨다. 한결이를 보자마자 웃으셨다.'],
   ['nar','','할머니: 「아이고, 우리 강아지!」'],
-  {k:'umbrella',goal:'「{x}」 받아 들기'},{pic:'hangyeol_08'},
+  {k:'umbrella',goal:'「{x}」 받아 들기',bag:['umbrella','bag','hat','shoes','water']},{pic:'hangyeol_08'},
   ['nar','','할머니가 건네신 작은 {@umbrella}을 한결이가 받았다.'],
   ['nar','','할머니: 「근데 한결아, 머리가 또 이렇게 자랐네. 눈 찔리겠다.」'],
   ['nar','','할머니: 「내일 할머니랑 이발소 가자. 시원하게 깎자.」'],
@@ -526,7 +521,6 @@ EP.hangyeol=[
 
 // ■ Day 12 — 어른이 된 나 (11) — 교실에서 시작해 수련회 밤을 떠올린다
 {title:'어른이 된 나',scene:'hangyeol_11',place:'class',at:[330,262],also:{triproom:[640,450]},
- things:{triproom:[['flashlight',600,470,40],['paper',690,480,68]]},
  pre:[
   {pic:'hangyeol_11a'},
   ['nar','','쉬는 시간. 창가에서 한결이가 수련회 사진을 보고 있었다. 선생님이 뽑아서 나눠 주신 사진이었다. 나는 한결이 옆으로 갔다.'],
@@ -536,10 +530,10 @@ EP.hangyeol=[
   ['hangyeol','smile','그날 내가 {@picture} 보여 줬잖아. 기억나?'],
   {fx:'past'},{go:'triproom'},
   ['nar','','수련회 밤, 레크리에이션 뒤 자유 시간. 로비 구석 소파에서 담요를 뒤집어쓴 채 {@flashlight}을 켰다.'],
-  {k:'flashlight',goal:'「{x}」 켜기'},
+  {k:'flashlight',goal:'「{x}」 켜기',bag:['flashlight','pillow','blanket','cup','book']},
   ['nar','','담요 속이 노랗게 밝아졌다.'],
   ['hangyeol','smile','있잖아. 오늘 활동지에 ‘어른이 된 나 그리기’ 있었잖아. 나 그거 다 못 그려서 여기서 마저 그렸어.'],
-  {k:'paper',goal:'「{x}」 펼치기'},
+  {k:'paper',goal:'「{x}」 펼치기',bag:['paper','book','notebook','blanket','flashlight']},
   ['nar','','한결이의 {@picture}이 펼쳐졌다.'],
   ['nar','','{@picture} 속 어른은 긴 머리를 하나로 묶고, 보라색 나비 머리핀을 하고 있었다. 큰 가게 앞에 서 있었다.'],
   {flag:'H04_name',is:1,lines:[['nar','','간판에는 「결이 공방」.']]},
@@ -633,12 +627,11 @@ EP.hangyeol=[
 
 // ■ Day 14 — 결이라고 불러 줘 (13)
 {title:'결이라고 불러 줘',scene:'hangyeol_13',place:'cafe',at:[700,710],with:[['yena',860,720],['junho',560,860]],
- things:{cafe:[['spoon',520,668,30]]},
  pre:[
   {pic:'hangyeol_13'},
   ['nar','','점심시간 급식실. 한결이 옆자리에 앉았다. 맞은편에는 예나와 준호가 있었다.'],
   ['nar','','한결이가 밥은 안 먹고 {@chopsticks}만 만지작거렸다.'],
-  {k:'spoon',goal:'「{x}」 집기'},
+  {k:'spoon',goal:'「{x}」 집기',bag:['spoon','chopsticks','tray','cup','milk']},
   {k:'chopsticks',goal:'「{x}」 집기',bag:['spoon','chopsticks','tray','cup','milk']},{pic:'hangyeol_13'},
   ['hangyeol','smile','있잖아, 얘들아.'],
   ['nar','','한결이가 {@chopsticks}을 내려놓았다.'],
@@ -739,12 +732,11 @@ EP.hangyeol=[
 
 // ■ Day 16R — 이어달리기 (15)
 {title:'이어달리기',scene:'hangyeol_15',place:'field',at:[800,500],also:{stands:[640,540]},
- things:{field:[['flag',900,560,50],['water',760,575,40]]},
  pre:[
   {pic:'hangyeol_15c'},
   ['nar','','체육 시간. 다음 달 운동회에 나갈 이어달리기 연습 경기를 했다. 운동회 규칙대로 한 팀에 네 명.'],
   ['nar','','나는 세 번째, 한결이는 마지막 주자였다.'],
-  {k:'flag',goal:'「{x}」 흔들기'},
+  {k:'flag',goal:'「{x}」 흔들기',bag:['flag','ball','hat','water','towel']},
   ['nar','','우리 팀 {@flag}을 흔들었다.'],
   {pic:'hangyeol_15a'},
   ['nar','','탕!'],
@@ -752,7 +744,7 @@ EP.hangyeol=[
   ['nar','','한결이가 달렸다. 묶은 머리가 바람에 날렸다. 한 명, 두 명. 결승선 바로 앞에서 1등을 앞질렀다.'],
   ['nar','','아이들: 「한결! 한결! 한결!」'],
   ['nar','','1등이었다.'],
-  {k:'water',goal:'「{x}」 건네주기'},
+  {k:'water',goal:'「{x}」 건네주기',bag:['water','towel','flag','ball','hat']},
   {go:'stands'},{pic:'hangyeol_15'},
   ['nar','','경기가 끝나고 한결이와 스탠드 끝에 앉았다. 한결이가 {@water}을 벌컥벌컥 마셨다.'],
   ['hangyeol','laugh','대박 사건. 진짜 대박 사건.'],
