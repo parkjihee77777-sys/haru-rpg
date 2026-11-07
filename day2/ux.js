@@ -294,6 +294,6 @@ NAME.hajun='하준';SZ.hajun=[0.968,0.988,0.8];
 // ===== no backpack inside school (11/07): my own sprite follows the map too (index.html walkSrc); PE below wins in the gym =====
 {const _ldNB=load;load=function(m){const r=_ldNB.apply(this,arguments);try{if(me&&me.el&&typeof walkSrc==='function'){const src=walkSrc(HERO),o=me,put=()=>{if(o.w)o.el.style.backgroundImage=`url(${src})`;else setTimeout(put,60)};put()}}catch(e){}return r}}
 // ===== PE class (owner 11/07): in the gym, and on the field when the meeting's opening says 「체육 시간」, I wear the PE uniform (walk/<hero>_pe.png) - no school uniform, no backpack =====
-{const PE={hero_m:true,hero_f:true};// hero PE on (cut-outs redone 11/07)
+{const PE={};// PE off (owner 11/07: 평상복)// hero PE on (cut-outs redone 11/07)
  const isPE=m=>m==='gym'||(m==='field'&&SCENE_EP&&SCENE_EP.place==='field'&&JSON.stringify(SCENE_EP.pre||[]).includes('체육 시간'));
  const _ldPE=load;load=function(m){const r=_ldPE.apply(this,arguments);try{if(me&&me.el&&PE[HERO]&&isPE(m)){const o=me,t0=Date.now(),put=()=>{if(o.w)o.el.style.backgroundImage=`url(walk/${HERO}_pe.png)`;else if(Date.now()-t0<4000)setTimeout(put,40)};put()}}catch(e){}return r}}// the sheet sets its own picture when it loads, so wait for that first
