@@ -83,9 +83,9 @@ EP.jihoon=[
   ['nar','','아이들이 현관으로 들어갔다. 나도 들어갔다. 현관 계단 앞에서 지훈이가 뛰어와 내 옆에 섰다. {@camera|를} 케이스에 넣기 직전이었다.'],
   ['jihoon','smile','야, 전학생. 마지막으로 하나만 찍어도 돼? 얼굴은 안 나와. {@shadow}만.'],
   ['me','smile','응. {@shadow|는} 괜찮아.'],
-  {lay:[['photo',900,600,56,'photo_cam']]},
+  {lay:[['photo',1060,520,60,'photo_cam']]},
   ['nar','','찰칵.'],
-  {k:'photo',goal:'「{x}」 보기'},
+  {k:'photo',goal:'「{x}」 보기',tray:true},
   {pic:'jihoon_01f'},
   ['nar','','내 {@shadow|와} 지훈이 {@shadow|였}다. {@sun|가} 뒤에 있어서 둘 다 길었다. 지훈이 {@shadow} 머리에는 거꾸로 쓴 모자 챙이 삐죽 나와 있었다.'],
   ['jihoon','smile','이건 안 올려. 하트 0개야. 근데 내 거 중에 좋은 거.'],
@@ -102,7 +102,7 @@ EP.jihoon=[
   common:[['me','smile','그리고 들어올 때 지훈이가 {@shadow} {@photo} 보여 줬어. 나랑 지훈이 {@shadow}. {@shadow} 찍어도 되냐고 물어봤어.'],['mom','smile','{@shadow}도 물어봤구나.'],['me','smile','응. 근데 그건 안 올린대. 하트 0개래. 근데 자기 거 중에 좋은 거래.'],['mom','laugh','(웃음) 하트 0개짜리 좋은 사진이네.']]}},
 
 // ■ Day 3 — 하트 두 개 (2)
-{title:'하트 두 개',scene:'jihoon_02',place:'gatesun',at:[1270,850],
+{title:'하트 두 개',scene:'jihoon_02',place:'gatesun',at:[1270,740],
  pre:[
   ['nar','','종례가 끝났다. {@teacher|이} 아침에 걷은 {@phone|을} 돌려주셨다. 아이들이 우르르 신발장으로 갔다.'],
   {pic:'jihoon_02a'},
@@ -170,7 +170,7 @@ EP.jihoon=[
   {only:['A','D'],lines:[['jihoon','smile','사진첩에서는 내릴게. 애들이 보니까. 근데 {@phone}에는 남겨 둘래. ‘안 올린 거’ 폴더에.'],['me','surprised','‘안 올린 거’ 폴더?'],['jihoon','smile','응. 좋은데 안 올리는 거 모아 두는 데. 아무한테도 안 보여 줬어.']]},
   {only:['B','C'],lines:[['nar','','사진첩에서 물고기 {@cloud|이} 사라졌다. 하트 두 개도 같이 사라졌다.']]},
   ['nar','','그때 {@school_gate} 위로 {@cloud|이} 하나 지나갔다. 이번엔 물고기 모양이 아니었다. 길쭉하고 끝이 동그랬다.'],
-  {lay:[['cloud',1300,120,170,'cloud_long']]},
+  {lay:[['cloud',1300,175,170,'cloud_long']]},
   {k:'cloud',goal:'「{x}」 가리키기'},
   ['nar','','{@school_gate} 위 길쭉한 {@cloud|을} 손가락으로 가리켰다.'],
   ['me','surprised','저건 뭐 같아?'],
@@ -188,15 +188,15 @@ EP.jihoon=[
   common:[['me','surprised','{m}, 창밖에 {@cloud} 있어?'],['mom','surprised','노을 쪽에 하나 있네. 저건 뭐 같아?'],['me','smile','음…… 양말. 지훈이가 아까 짝 잃어버린 양말 같다고 했어.'],['mom','laugh','(웃음) 짝 잃어버린 양말이라니.']]}},
 
 // ■ Day 4 — 포즈 끝나고 (3)
-{title:'포즈 끝나고',scene:'jihoon_03',place:'flowerbed',at:[1270,560],with:[['youngmin',470,660]],
+{title:'포즈 끝나고',scene:'jihoon_03',place:'flowerbed',at:[1270,560],with:[['youngmin',1060,640]],
  pre:[
   {pic:'jihoon_03a'},
   ['nar','','점심시간. 화단 앞 낮은 담에 지훈이가 앉아 있었다.'],
   ['jihoon','smile','전학생, 이리 와. 오늘은 네가 찍어 봐.'],
   ['me','surprised','내가?'],
   ['jihoon','sad','응. 끈은 손목에 두 번 감아. 엄마가 떨어뜨리면 안 된대.'],
-  {lay:[['camera',1210,600,40]]},
-  {k:'camera',goal:'「{x}」 빌리기'},
+  {lay:[['camera',1210,600,54]]},
+  {k:'camera',goal:'「{x}」 빌리기',tray:true},
   {clear:['camera']},
   ['nar','','{@camera} 끈을 손목에 두 번 감았다.'],
   ['nar','','{@camera|는} 생각보다 가벼웠다. 단추가 많았다. 지훈이가 하나만 가르쳐 줬다. 위에 있는 동그란 단추.'],
@@ -1412,3 +1412,5 @@ if(typeof HEROPIC!=='undefined')HEROPIC.add('jihoon_01f');
   if(h[2]!=='eve'){startDay(day);return}
   setDay(day);PICKS=['jihoon'];EPIDX.jihoon=k-1;TODAYEP.jihoon=EP.jihoon[k-1];MEET.jihoon=k;D2CHOICE.jihoon='B';
   stage='d2_after';load('class');useDoor()},103)}
+// Day 7 (meeting 6, 형 점퍼): on the map Jihoon wears his brother's green jumper, as in that day's pictures (walk/jihoon_jumper.png, 11/07)
+setInterval(()=>{const n=typeof npcs!=='undefined'&&npcs.find(q=>q.id==='jihoon');if(!n||!n.el)return;const u=`url("walk/jihoon${SCENE_EP===EP.jihoon[5]?'_jumper':''}.png")`;if(n.el.style.backgroundImage!==u)n.el.style.backgroundImage=u},400);
