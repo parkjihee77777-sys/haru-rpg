@@ -904,6 +904,7 @@ EP.junho=[
 // ■ Day 10 — 오늘은 골키퍼만 (9)
 {title:'오늘은 골키퍼만',scene:'junho_09',place:'field',at:[1330,330],with:[['jiho',1100,450],['youngmin',1000,540],['jihoon',1180,560],['haeun',1460,440]],taps:{field:[['goal',1355,195,75]]},
  pre:[
+  {pic:null},// the title picture shows a later moment (2단계 AI 검수 11/08): the map first
   ['nar','','점심시간. 운동장에 나가니 준호가 {@goal} 앞에 있었다. 그물을 {@hand|으로} 한 번 잡았다.'],
   {pic:'junho_09a'},
   ['junho','smile','출석. 2주 만에.'],
@@ -927,6 +928,7 @@ EP.junho=[
   {pic:'junho_09'},
   ['nar','','준호가 {@glove|을} 끼었다. 그리고 {@goal} 앞에 섰다.'],
   ['junho','smile','오늘은 골키퍼만.'],
+  {pic:'junho_09'},
   ['jiho','surprised','뭐? 준호 공격 안 해?'],
   ['junho','surprised','안 해.'],
   ['jiho','smile','에이, 준호 공격 와! 골키퍼 준호는 재미없어! 너랑 붙어야 시합이지!'],

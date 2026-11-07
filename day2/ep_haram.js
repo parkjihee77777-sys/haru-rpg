@@ -315,6 +315,7 @@ EP.haram=[
 // ■ Day 7 — 한 입만 (6)
 {title:'한 입만',scene:'haram_06',place:'cafe',at:[520,850],with:[['junho',600,880]],
  pre:[
+  {pic:null},// the title picture shows a later moment (2단계 AI 검수 11/08): the map first
   ['nar','','점심시간. 오늘 반찬은 불고기였다. 급식 줄 맨 끝에서 하람이가 조리사 선생님께 따로 작은 그릇을 받고 있었다.'],
   {k:'ladle',goal:'「{x}」 보기',bag:['ladle','spoon','chopsticks','tray','cup']},
   {pic:'haram_d07_bowl'},['nar','','조리사 선생님이 하람이 그릇에 {@ladle|로} 따로 반찬을 덜어 주셨다.'],

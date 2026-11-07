@@ -490,6 +490,7 @@ EP.yuna=[
 {title:'오늘은 좀',scene:'yuna_06',place:'class',at:[300,722],
  things:{class:[['clock',1040,186,46]]},
  pre:[
+  {pic:null},// the title picture shows a later moment (2단계 AI 검수 11/08): the map first
   ['nar','','점심시간. 밥을 먹고 교실에 돌아왔다. 칠판에 「5교시 국어: 한 사람씩 한 문단 읽기」라고 쓰여 있었다.'],
   ['think','surprised','(한 문단. 소리 내서. 반 앞에서.)'],
   ['nar','','나는 국어 {@textbook|를} 꺼냈다.'],
@@ -497,6 +498,7 @@ EP.yuna=[
   ['nar','','국어 {@textbook|를} 펼쳐 내가 읽을 문단을 찾았다.'],
   ['nar','','내 문단에는 모르는 낱말이 두 개 있었다. ‘어리둥절’과 ‘부랴부랴’. 소리 내서 읽어 보면 혀가 꼬였다.'],
   {pic:'yuna_06a'},
+  {pic:'yuna_06'},
   ['nar','','내 앞자리에서 유나가 {@book|을} 읽고 있었다. 도서관에서 새로 빌린 {@book}. 표지에 고양이 탐정이 그려져 있었다. 유나는 책장을 넘기면서 혼자 작게 웃었다.'],
   ['nar','','나는 앞자리 유나를 불렀다.'],
   ['me','smile','유나야, 내 읽기 좀 들어 줄래? 5교시에 읽는 거.'],
@@ -654,8 +656,9 @@ EP.yuna=[
   common:[['me','smile','그리고 유나가 바로 {@pencil|을} 주려고 했어. 받으면 뭘 꼭 줘야 할 것 같대.'],['dad','surprised','그래서?'],['me','smile','빌리기만 했어. 내 {@pencil} 심 부러져서. 3교시 끝나고 돌려줬어.'],['me','laugh','그리고 내가 전에 유나 {@eraser} 빌렸었잖아. 그 얘기 하니까 유나가 {@pencil} 목소리로 ‘우리 비긴 거예요’ 했어.'],['mom','laugh','(웃음) 비겼네.']]}},
 
 // ■ Day 9 — 다 같이 했다고 해 줘 (8)
-{title:'다 같이 했다고 해 줘',scene:'yuna_08',place:'class',at:[1218,722],with:[['jihoon',1480,820],['yena',1340,800,null,'stand']],
+{title:'다 같이 했다고 해 줘',scene:'yuna_08',place:'class',at:[1218,722],
  pre:[
+  {pic:null},// the title picture shows a later moment (2단계 AI 검수 11/08): the map first
   ['nar','','아침. 1교시 전에 모둠 신문을 붙여서 내야 했다. 우리 모둠은 지난번 국어 모둠과 같았다. 유나, 지훈, 예나, 나. 지난번 종례 때 정했다. 각자 기사 한 칸씩 써 오고, 오늘 아침에 큰 {@drawing_paper|에} 같이 붙이기로.'],
   ['nar','','나는 내 기사를 써 왔다. 「우리 학교 그네」. 다섯 줄. 집에서 엄마한테 맞춤법을 두 개 물어봤다.'],
   ['nar','','유나가 먼저 와 있었다. 눈 밑이 조금 어두웠다. 하품을 했다.'],
@@ -678,9 +681,11 @@ EP.yuna=[
   {k:'glue',goal:'「{x}」 칠하기',bag:['pcase','glue','notebook','scissors','pencil']},
   ['nar','','내 기사 뒷면에 {@glue|을} 칠해 빈칸에 붙였다.'],
   {pic:'yuna_08b'},
+  {move:['jihoon',1430,360]},{move:['yena',1290,262]},
   ['nar','','그때 지훈이랑 예나가 들어왔다. 신문을 보고 눈이 커졌다.'],
   ['jihoon','laugh','오, 다 됐네! 유나 최고!'],
   ['yena','laugh','와, 노래 순위 내 거랑 똑같아! 1등 맞아!'],
+  {pic:'yuna_08'},
   ['nar','','그리고 선생님이 들어오셨다. 모둠마다 돌아보시다가 우리 책상 앞에서 멈추셨다.'],
   ['nar','','선생님: 「와, 이 모둠 벌써 다 했네? 그림도 예쁘다. 누가 어느 칸 했는지 말해 볼래?」'],
   ['nar','','선생님이 내 쪽을 보셨다. 내가 제일 앞에 있었다.'],
@@ -754,12 +759,14 @@ EP.yuna=[
 // ■ Day 10 — 너 원래 주잖아 (9)
 {title:'너 원래 주잖아',scene:'yuna_09',place:'cafe',at:[600,360],with:[['junho',820,320],['jiho',1300,330]],
  pre:[
+  {pic:null},// the title picture shows a later moment (2단계 AI 검수 11/08): the map first
   ['nar','','점심시간. 급식실. 오늘 반찬 옆 칸에 {@tangerine|이} 하나씩 있었다.'],
   {k:'tray',goal:'「{x}」 받기',bag:['tray','chopsticks','spoon','cup','milk']},
   ['nar','','{@tray|을} 받아 배식 줄로 갔다.'],
   {pic:'yuna_09a'},
   ['nar','','나는 유나 맞은편에 앉았다. 유나가 {@tangerine|을} {@tray} 맨 구석에 놓았다. 그리고 가끔 봤다. 반찬을 먹으면서 한 번, 국을 먹으면서 한 번.'],
   ['think','smile','(유나, {@tangerine} 좋아하나 봐.)'],
+  {pic:'yuna_09'},
   ['nar','','그때 준호가 {@tray|을} 들고 왔다.'],
   ['junho','laugh','유나야, {@tangerine}!'],
   {pic:'yuna_09b'},

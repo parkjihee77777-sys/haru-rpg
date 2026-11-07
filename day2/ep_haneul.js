@@ -746,6 +746,7 @@ EP.haneul=[
 // ■ Day 7 — 나란히 (6)
 {title:'나란히',scene:'haneul_06',place:'cafe',at:[250,480],sit:[703,392,150,'front'],with:[['haeun',1100,560],['jihoon',1300,560]],
  pre:[
+  {pic:null},// the title picture shows a later moment (2단계 AI 검수 11/08): the map first
   {map:'cafe2_lunch'},// lunchtime: kids from other classes at the tables (11/07 check: 'six kids at the big table' on an empty map)
   ['nar','','점심시간. 나는 손을 씻느라 늦었다. 급식실에 왔을 때 줄이 거의 다 빠져 있었다.'],
   ['nar','','줄 맨 끝에 남색 후드가 있었다. 하늘이였다.'],
@@ -753,6 +754,7 @@ EP.haneul=[
   {pic:'haneul_06l'},
   ['nar','','나는 하늘이 뒤에 섰다. 한 걸음 떨어져서.'],
   {k:'tray',goal:'「{x}」 들기',bag:['tray','spoon','chopsticks','milk','cup']},
+  {pic:'haneul_06'},
   ['nar','','하늘이가 먼저 받았다. 밥, 국, 반찬 두 가지. 그리고 급식실 안쪽, 큰 기둥 옆 자리로 갔다.'],
   ['nar','','기둥을 등지고 앉았다. 거기서는 급식실이 다 보였다. 등 뒤에는 아무도 없었다.'],
   ['think','smile','(교실 자리랑 똑같아. 뒤가 막힌 자리. 앞이 다 보이는 자리.)'],
@@ -1023,6 +1025,7 @@ EP.haneul=[
 // ■ Day 9 — 다 봤어 (8)
 {title:'다 봤어',scene:'haneul_08',place:'class',at:[263,860],with:[['jihoon',488,700],['jiho',548,830]],
  pre:[
+  {pic:null},// the title picture shows a later moment (2단계 AI 검수 11/08): the map first
   ['nar','','5교시는 국어. {@notebook|이} 필요했다. 첫날 엄마가 챙겨 준 그 {@notebook}. 첫날 밤 친구 이름을 적은 {@notebook}.'],
   {k:'drawer',goal:'「{x}」 열기',bag:['drawer','desk','chair','pcase','locker']},// my own drawer: picked from cards, not a spot on the map (owner 11/07)
   ['nar','','내 책상 {@drawer|을} 열었다. {@textbook|와} 필통뿐이었다. {@notebook|이} 없었다.'],
@@ -1041,6 +1044,7 @@ EP.haneul=[
   ['jihoon','surprised','{@notebook}? 아니? 내가 왜 네 {@notebook|을} 가져가?'],
   ['nar','','지훈이는 진짜 모르는 얼굴이었다. 깔고 쓴 걸 잊어버린 것 같았다.'],
   ['jiho','surprised','증거 있어? 누가 봤는데?'],
+  {pic:'haneul_08'},
   ['nar','','지호 목소리가 컸다. 근처 아이들이 모여들었다. 「뭐야, 뭐 없어졌어?」 「누가 가져갔대?」'],
   ['jihoon','surprised','야, 나 아니라니까. 누가 봤대? 말해 봐.'],
   ['nar','','다들 나를 봤다. 내가 누구 이름을 말할지 기다렸다.'],

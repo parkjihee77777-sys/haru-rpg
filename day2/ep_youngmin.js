@@ -504,6 +504,7 @@ EP.youngmin=[
 // ■ Day 7 — 그 책 너네 집이냐 (6)
 {title:'그 책 너네 집이냐',scene:'youngmin_06',place:'library',at:[700,420],with:[['jiho',860,560]],
  pre:[
+  {pic:null},// the title picture shows a later moment (2단계 AI 검수 11/08): the map first
   ['nar','','4교시는 도서관 수업이었다. 다 읽은 {@book|을} 반납하고, 새 {@book|을} 빌리는 시간.'],
   ['nar','','사서 선생님: 「반납할 {@book|은} 이쪽 상자에, 새로 빌릴 사람은 {@bookshelf}에서 골라 와요.」'],
   ['nar','','나는 {@bag}에서 지난번에 빌린 {@book|을} 꺼냈다. 그림이 많은 동물 {@book|이었}다.'],
@@ -518,6 +519,7 @@ EP.youngmin=[
   ['nar','','영민이가 독서 기록장을 폈다. 반듯한 글씨로 같은 제목이 두 줄 있었다. 「우주로 간 거북이」. 「우주로 간 거북이」.'],
   {pic:'youngmin_06b'},
   ['nar','','그때 지호가 {@bookshelf} 사이로 들어왔다. 영민이 독서 기록장을 봤다.'],
+  {pic:'youngmin_06'},
   ['jiho','surprised','어? 영민아, 그 {@book} 또 빌려? 그 {@book} 너네 집이냐~ 맨날 거기 살아?'],
   ['nar','','옆 칸에 있던 아이 둘이 킥킥 웃었다.'],
   ['jiho','smile','그거 2학년 {@book} 아니야? 표지에 거북이 있잖아.'],
@@ -591,6 +593,7 @@ EP.youngmin=[
 // ■ Day 8 — 문제가 다섯 개 (7)
 {title:'문제가 다섯 개',scene:'youngmin_07',place:'class',at:[400,870],with:[['jiho',600,760]],
  pre:[
+  {pic:null},// the title picture shows a later moment (2단계 AI 검수 11/08): the map first
   ['nar','','3교시 수학. 선생님이 한 사람씩 이름을 보고 {@worksheet|를} {@desk}에 놓아 주셨다.'],
   ['nar','','선생님: 「10분 동안 풀어요. {@clock} 긴바늘이 4에 오면 끝.」'],
   {k:'worksheet',goal:'「{x}」 받기',bag:['worksheet','paper','notebook','book','notice_book']},
@@ -606,6 +609,7 @@ EP.youngmin=[
   ['nar','','5분쯤 지났을 때였다. 지호가 몸을 옆으로 기울였다. 영민이 {@worksheet|를} 봤다.'],
   ['jiho','surprised','어? 영민이 거 문제 다섯 개밖에 없어!'],
   ['nar','','지호 목소리가 컸다. 앞줄 아이들이 돌아봤다.'],
+  {pic:'youngmin_07'},
   ['jiho','smile','왜 영민이만 다섯 개야? 나도 다섯 개 할래! 불공평해!'],
   ['nar','','영민이가 {@worksheet|를} 팔로 가렸다. 얼굴이 빨개졌다. {@pencil|이} 멈췄다.'],
   ['nar','','아이: 「진짜? 다섯 개?」'],

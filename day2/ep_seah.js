@@ -522,6 +522,7 @@ EP.seah=[
 // ■ Day 7 — 번호로 (6)
 {title:'번호로',scene:'seah_06',place:'hall',at:[1080,640],
  pre:[
+  {pic:null},// the title picture shows a later moment (2단계 AI 검수 11/08): the map first
   {flag:'O06_tell',is:1,lines:[['nar','','지난번에 복도에서 선생님께 말씀드린 일. 그 뒤로 교실이 조금 달라졌다.']]},
   {flag:'O06_tell',is:0,lines:[['nar','','지난번 그 일은, 그날 종례 끝나고 교실에 다시 올라가서 선생님께 따로 말씀드렸다. 다른 애들이 다 간 다음에. 선생님은 끝까지 들으시고 「말해 줘서 고마워. 도와 달라고 한 거지?」 하셨다. 그 뒤로 교실이 조금 달라졌다.']]},
   {pic:'seah_06a'},
@@ -542,6 +543,7 @@ EP.seah=[
   ['hangyeol','smile','아! 대박 사건! {@hand|이} 그냥 지훈이한테 갔어!'],
   ['nar','','다들 웃었다. 누가 어느 팀인지 자꾸 헷갈렸다.'],
   ['nar','','두 번째 판. {@ball|이} 세아에게 갔다. 그때 상대 팀 쪽에서 민호가 {@hand|을} 흔들었다.'],
+  {pic:'seah_06'},
   ['minho','smile','세아! 여기!'],
   {pic:'seah_06c'},
   ['nar','','세아 {@hand|이} 먼저 움직였다. {@ball|이} 민호한테 갔다. 민호가 그대로 받아서 지훈이에게, 지훈이가 훌라후프에. 상대 팀 1점.'],
@@ -711,6 +713,7 @@ EP.seah=[
 // ■ Day 9 — 원카드는 다섯 명도 돼 (8)
 {title:'원카드는 다섯 명도 돼',scene:'seah_08',place:'class',at:[1150,285],with:[['minho',1260,280],['jiho',990,285]],
  pre:[
+  {pic:null},// the title picture shows a later moment (2단계 AI 검수 11/08): the map first
   ['nar','','비가 왔다. 점심시간에 운동장에 못 나갔다. 급식실에서 교실로 오는 길은 지붕이 없는 곳이 조금 있었다.'],
   ['nar','','교실에 들어오니 {@umbrella}에서 {@water|이} 뚝뚝 떨어졌다.'],
   {k:'umbrella',goal:'「{x}」 접어서 걸기',bag:['bag','umbrella','water_bottle','handkerchief','pencil']},
@@ -732,6 +735,7 @@ EP.seah=[
   {pic:'seah_08b'},
   {move:['haram',1020,430]},
   ['nar','','첫 판이 거의 끝났을 때, 누가 우리 옆에 와서 쪼그려 앉았다. 하람이었다.'],
+  {pic:'seah_08'},
   ['haram','surprised','오늘 문제! ……아, 아니다. 문제 말고. 나도 해도 돼?'],
   ['minho','smile','인원 찼어. 넷이 딱이야.'],
   ['nar','','민호가 하람이를 안 보고 말했다. {@card}만 봤다. 그리고 나를 봤다.'],

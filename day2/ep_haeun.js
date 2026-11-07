@@ -595,6 +595,7 @@ EP.haeun=[
 {title:'누구나 오는 방',scene:'haeun_06',place:'class',at:[405,720],
  taps:{hall1f:[['door',1488,560,60]]},
  pre:[
+  {pic:null},// the title picture shows a later moment (2단계 AI 검수 11/08): the map first
   ['nar','','2교시 뒤 쉬는 시간. 선생님이 나를 부르셨다.'],
   ['nar','','선생님: 「1층 교육복지실에 한국어 그림 낱말 카드가 있어요. 보드게임도 있고요. 쉬는 시간에 가서 빌려 와도 돼요. 도서관 옆이에요.」'],
   ['me','surprised','교육……복지실요?'],
@@ -607,6 +608,7 @@ EP.haeun=[
   ['nar','','나는 아무 말도 하지 않았다. 하은이도 아무 말도 하지 않았다.'],
   {go:'hall'},
   {move:['jiho',760,210]},{move:['jihoon',690,210]},
+  {pic:'haeun_06'},
   ['nar','','계단을 내려가는데 아래에서 지호와 지훈이가 올라왔다.'],
   ['jihoon','smile','오, 하은이 새 {@indoor_shoes|네}!'],
   ['haeun','smile','응.'],
@@ -946,6 +948,7 @@ EP.haeun=[
 // ■ Day 10 — 이건 어른 일이야 (9)
 {title:'이건 어른 일이야',scene:'haeun_09',place:'gatesun',at:[880,620],with:[['hajun',745,700]],
  pre:[
+  {pic:null},// the title picture shows a later moment (2단계 AI 검수 11/08): the map first
   ['nar','','종례가 끝났다. 하은이가 {@clock|을} 보더니 뛰어나갔다. 2시 50분이 가까웠다. 하준이를 데리러 가야 하는 시간이다. 오늘도 엄마가 오후 조인 날이었다.'],
   {pic:'haeun_09a'},
   ['nar','','내가 {@school_gate}에 나왔을 때, 하은이는 {@school_gate} 기둥 옆에 쪼그려 앉아 있었다. 하준이가 기둥에 기대 서 있었다. 하준이는 오늘 조용했다. 목소리가 큰 하준이가.'],
