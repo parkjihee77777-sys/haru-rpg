@@ -302,6 +302,7 @@ EP.minho=[
 // ■ Day 8 — 너 때문에 졌잖아 (7)
 {title:'너 때문에 졌잖아',scene:'minho_07',place:'gym',at:[760,560],
  pre:[
+  {map:'gym_busy'},// PE class: classmates in PE clothes drawn along the walls and the stage (boss 11/07); the court stays clear
   {pic:'minho_07a'},['nar','','체육 시간. 피구 팀을 나눴는데 나는 민호와 같은 팀이 됐다.'],
   ['minho','laugh','오, {SN}. 너 피할 줄은 알지?'],
   ['me','smile','……열심히 할게.'],
