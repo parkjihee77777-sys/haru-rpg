@@ -6,7 +6,7 @@ window.EP=window.EP||{};
 EP.siwoo=[
 // ■ Day 2 — 30센티 (1)
 {title:'30센티',scene:'siwoo_01',place:'class',at:[310,262],stand:1,flag:{W02_dist:{A:1,D:1},W02_ask:{A:1}},
- things:{class:[['milk_carton',172,236,38,'milk_carton_cut','stay'],['ruler',196,214,74]]},taps:{class:[['window',95,120,70]]},
+ things:{class:[['milk_carton',172,236,38,'milk_carton_cut','stay'],['ruler',205,232,92]]},taps:{class:[['window',95,120,70]]},
  pre:[
   ['nar','','아침. 시우가 창가에 서 있었다. 창틀 위에 {@milk_carton} 하나가 놓여 있었다. 윗부분을 잘라 내고 {@tissue}를 깐 {@milk_carton}이었다.'],
   ['think','surprised','(첫날 깨진 관찰 통 대신인가 봐.)'],
@@ -104,7 +104,7 @@ EP.siwoo=[
 
 // ■ Day 4 — 간이 콩알만 해 (3)
 {title:'간이 콩알만 해',scene:'siwoo_03',place:'class',at:[600,690],with:[['haeun',1050,690]],flag:{W04_D:{D:1}},
- things:{class:[['bean',990,670,26],['notebook',760,702,38]]},
+ things:{class:[['bean',990,666,44],['notebook',760,702,38]]},
  pre:[
   {pic:'siwoo_03b'},
   ['nar','','받아쓰기 시험 직전 쉬는 시간. 시우가 자리에 앉아 곤충 도감을 보고 있었다. 나는 30센티 떨어진 옆자리에 앉았다.'],
@@ -168,7 +168,7 @@ EP.siwoo=[
   {pic:'siwoo_04d'},
   ['nar','','쨍그랑—!'],
   ['nar','','바로 뒷자리에서 누가 쇠 {@tray}을 떨어뜨렸다. {@spoon}이 바닥에서 튀었다.'],
-  {lay:[['spoon',895,692,60]]},
+  {lay:[['spoon',895,692,82]]},
   {k:'spoon',goal:'「{x}」 줍기'},
   {clear:['spoon']},
   {pic:'siwoo_04'},
@@ -226,7 +226,7 @@ EP.siwoo=[
 
 // ■ Day 6 — 12일째 (5) ★
 {title:'나비 나오는 날',scene:'siwoo_05',place:'class',at:[310,262],stand:1,with:[['haeun',540,270]],
- things:{class:[['milk_carton',172,236,38,'milk_carton_cut','stay'],['butterfly',176,188,40,null,'stay']]},taps:{class:[['window',95,120,70]]},
+ things:{class:[['milk_carton',172,236,38,'milk_carton_cut','stay'],['butterfly',218,226,52,null,'stay']]},taps:{class:[['window',95,120,70]]},
  pre:[
   {pic:'siwoo_05b'},
   ['nar','','아침. 교실에 들어서자 시우가 창가에 서 있었다. 꼼짝도 하지 않고 {@milk_carton}만 보고 있었다. 손만 작게 펄럭였다.'],
@@ -343,12 +343,13 @@ EP.siwoo=[
 
 // ■ Day 8 — 사마귀 10분 (7)
 {title:'사마귀 10분',scene:'siwoo_07',place:'class',at:[600,690],
- things:{class:[['hourglass',800,700,34]]},
+ things:{class:[['hourglass',900,192,40,null,'stay']]},// the hourglass waits on the teacher's desk (교탁); after the find it stands on our desk (owner 11/07)
  pre:[
   {pic:'siwoo_07a'},
   ['nar','','국어 시간. 짝과 ‘요즘 내가 좋아하는 것’을 서로 이야기하는 활동이었다. 오늘 내 짝은 시우였다.'],
   ['nar','','선생님: 「한 사람씩 돌아가며 이야기하세요. 15분 줄게요. {@hourglass} 필요한 모둠은 가져다 써도 돼요.」'],
   {k:'hourglass',goal:'「{x}」 {@desk}에 놓기'},
+  ()=>{world.querySelectorAll('.thing').forEach(e=>{if(/items\/hourglass\.png/.test(e.src)&&!e.classList.contains('laid'))e.remove()});OBJ[MAP]=(OBJ[MAP]||[]).filter(t=>!(t[0]==='hourglass'&&!t.laid))},{lay:[['hourglass',800,700,34,null,'stay']]},
   ['nar','','3분짜리 {@hourglass}가 {@desk} 귀퉁이에 놓였다. 아직 아무도 뒤집지 않았다.'],
   ['siwoo','smile','사마귀.'],
   {pic:'siwoo_07'},
@@ -448,7 +449,7 @@ EP.siwoo=[
 
 // ■ Day 10 — 매미 허물 (9)
 {title:'매미 허물',scene:'siwoo_09',place:'backyard',at:[1180,690],
- things:{backyard:[['tissue',1050,760,40],['box',1130,775,50]]},
+ things:{backyard:[['tissue',1050,750,56],['box',1130,770,60]]},
  pre:[
   {pic:'siwoo_09b'},
   ['nar','','점심시간. 시우가 뒤뜰 나무 아래에서 뭔가를 찾고 있었다. 나는 시우 쪽으로 갔다.'],
@@ -558,6 +559,7 @@ EP.siwoo=[
  pre:[
   {pic:'siwoo_11a'},
   ['nar','','점심시간 운동장. 반 아이들이 술래잡기를 했다. 나도 뛰다가 숨을 고르려고 멈췄다.'],
+  {pic:'siwoo_11'},
   ['nar','','운동장 가장자리, 철봉 옆에 시우가 서 있었다. 30센티 {@ruler}를 손가락으로 톡톡 두드리며. 시우는 놀이 쪽을 보고 있었다. 벌써 세 판째.'],
   ['nar','','나는 시우 쪽으로 갔다.'],
   {pic:'siwoo_11d'},
@@ -565,7 +567,7 @@ EP.siwoo=[
   {k:'ball',goal:'「{x}」 피하기'},
   ['nar','','나는 시우 앞에서 {@ball}을 막아 옆으로 보냈다.'],
   ['nar','','술래 정할 때 쓰던 {@whistle}가 철봉 아래 떨어져 있었다.'],
-  {lay:[['whistle',230,700,28]]},
+  {lay:[['whistle',150,850,42]]},
   {k:'whistle',goal:'「{x}」 줍기'},
   {clear:['whistle']},
   ['junho','laugh','(멀리서) 야, 빨리 와! 다음 판 술래 정한다!'],
@@ -686,8 +688,8 @@ EP.siwoo=[
   {k:'A',text:'못 들은 척 계속 읽는다. 다들 재밌어하니까.',pts:{siwoo:0},r:[
    ['nar','','나는 계속 읽었다. 15번, 18번, 21번. 웃음이 점점 커졌다.'],{pic:'siwoo_13e'},['nar','','다 읽고 옆을 보니 시우가 귀를 막고 있었다. 몸이 조금 흔들렸다.'],['think','sad','(웃음소리만 생각하고 시우 귀는 생각 못 했어.)'],['think','sad','(그리고 그 말도 못 들은 척했어.)']]},
   {k:'B',text:'잠깐 멈추고 말한다. 「다들 웃어 줘서 좋은데, 조금 작게 웃어 줄래? 시우랑 나는 큰 소리가 좀 힘들어.」',pts:{siwoo:2},r:[
-   ['me','smile','다들 웃어 줘서 좋은데, 조금만 작게 웃어 줄래? 큰 소리 힘든 사람도 있어. 나도 좀 그래.'],{pic:'siwoo_13d'},['nar','','아이들이 서로 쳐다보더니 키득키득, 작게 웃었다.'],
-   ['junho','laugh','(속삭이며) 작게 웃는 게 더 웃겨.'],['nar','','시우의 손이 귀에서 내려왔다. 그리고 내가 읽기 전에 시우가 먼저 말했다.'],['siwoo','smile','……19번은 내가 읽을게.']]},
+   ['me','smile','다들 웃어 줘서 좋은데, 조금만 작게 웃어 줄래? 큰 소리 힘든 사람도 있어. 나도 좀 그래.'],['nar','','아이들이 서로 쳐다보더니 키득키득, 작게 웃었다.'],
+   ['junho','laugh','(속삭이며) 작게 웃는 게 더 웃겨.'],{pic:'siwoo_13d'},['nar','','시우의 손이 귀에서 내려왔다. 그리고 내가 읽기 전에 시우가 먼저 말했다.'],['siwoo','smile','……19번은 내가 읽을게.']]},
   {k:'C',text:'뒷자리 아이에게 말한다. 「시우가 틀린 게 아니야. 이 말이 이상한 거야. 나도 몰랐어.」',pts:{siwoo:2},r:[
    ['me','smile','시우가 틀린 게 아니야. 간은 진짜 1.5킬로그램이야. 이 말이 이상한 거야.'],['me','smile','나도 처음엔 몰랐어. 너희도 외국어 배우면 똑같을걸.'],['nar','','아이: 「……아, 그건 맞네.」'],
    ['nar','','선생님: 「맞아요. 그래서 이 사전 이름이 ‘이상한 말 사전’이죠.」'],['nar','','시우가 {w}을 펼쳐 무언가를 적었다.']]},
