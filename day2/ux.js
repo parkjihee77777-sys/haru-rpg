@@ -288,6 +288,8 @@ if(MAPS.gatesun){MAPS.gatesun.block=(MAPS.gatesun.block||[]).concat([R(1025,540,
 // ===== Hajun (Haeun's little brother, 1st grade): his own walk sheet now exists (walk/hajun.png); a little shorter than the 5th graders =====
 NAME.hajun='하준';SZ.hajun=[0.968,0.988,0.8];
 {const TN={en:'Hajun',vi:'Hajun',zh:'夏俊',ja:'ハジュン',ru:'Хаджун',id:'Hajun'};for(const u in TN){T[u]=T[u]||{};if(!T[u]['하준'])T[u]['하준']=TN[u]}}
+// ===== no backpack inside school (11/07): my own sprite follows the map too (index.html walkSrc); PE below wins in the gym =====
+{const _ldNB=load;load=function(m){const r=_ldNB.apply(this,arguments);try{if(me&&me.el&&typeof walkSrc==='function'){const src=walkSrc(HERO),o=me,put=()=>{if(o.w)o.el.style.backgroundImage=`url(${src})`;else setTimeout(put,60)};put()}}catch(e){}return r}}
 // ===== PE class (owner 11/07): in the gym, and on the field when the meeting's opening says 「체육 시간」, I wear the PE uniform (walk/<hero>_pe.png) - no school uniform, no backpack =====
 {const PE={hero_m:true,hero_f:true};
  const isPE=m=>m==='gym'||(m==='field'&&SCENE_EP&&SCENE_EP.place==='field'&&JSON.stringify(SCENE_EP.pre||[]).includes('체육 시간'));
