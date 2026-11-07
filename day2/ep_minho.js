@@ -7,7 +7,6 @@ window.EP=window.EP||{};
 EP.minho=[
 // ■ Day 2 — 지렁이 글자 (1)
 {title:'지렁이 글자',scene:'minho_01',place:'class',at:[640,600],
- taps:{class:[['desk',830,425,60],['desk',400,425,55],['desk',1290,545,55],['desk',300,745,50]]},
  pre:[
   {pic:'minho_01a'},
   ['nar','','쉬는 시간. 민호가 자기 {@desk}에 걸터앉아 다리를 흔들고 있었다.'],
@@ -29,7 +28,7 @@ EP.minho=[
   ['nar','','주변에서 몇 명이 킥킥 웃었다. 민호는 {@pcase|을} 머리 위로 들고 흔들었다.'],
   ['think','angry','(내 이름을 지렁이래. {@pcase}도 안 줘.)'],
   ['think','sad','(일단 {@pencil}부터 줍자.)'],
-  {k:'desk',goal:'「{x}」 밑 살피기'},
+  {k:'desk',goal:'「{x}」 밑 살피기',bag:['desk','chair','bag','locker','window']},// many desks on the map: picked from pictures (boss 11/07)
   ['nar','','{@desk} 밑에 굴러간 {@pencil} 한 자루가 보였다.'],
   {k:'pencil',goal:'「{x}」 줍기'},
   {clear:['pencil']},
@@ -347,7 +346,6 @@ EP.minho=[
 
 // ■ Day 9 — 뒤집힌 우산 (8)
 {title:'뒤집힌 우산',scene:'minho_08',place:'gate',at:[960,650],
- taps:{gate:[['umbrella',782,185,32]]},
  things:{gate:[['umbrella',1060,690,84]]},
  pre:[
   {pic:'minho_08'},
