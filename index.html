@@ -119,14 +119,14 @@ body,button{word-break:keep-all;overflow-wrap:break-word}
 <div id="fader"></div>
 <script>
 // same address, newest version: if the page this phone has kept is older than the one online, fetch the new one and reopen
-const BUILD='1107123504';
+const BUILD='1107123811';
 try{fetch(location.pathname,{cache:'no-store'}).then(r=>r.text()).then(t=>{const m=t.match(/const BUILD='(\d+)'/);if(m&&m[1]!==BUILD&&sessionStorage.getItem('upd')!==m[1]){sessionStorage.setItem('upd',m[1]);fetch(location.pathname,{cache:'reload'}).then(()=>location.reload())}}).catch(()=>{})}catch(e){}
 </script>
-<script src="i18n.js?v=1107123504"></script>
-<script src="i18n_prologue_v2.js?v=1107123504"></script>
-<script src="day2/i18n_engine.js?v=1107123504"></script>
-<script src="day2/data.js?v=1107123504"></script>
-<script src="day3/data.js?v=1107123504"></script>
+<script src="i18n.js?v=1107123811"></script>
+<script src="i18n_prologue_v2.js?v=1107123811"></script>
+<script src="day2/i18n_engine.js?v=1107123811"></script>
+<script src="day2/data.js?v=1107123811"></script>
+<script src="day3/data.js?v=1107123811"></script>
 <script>
 // ---------- data ----------
 const MW=1672,MH=941,KID=180;
@@ -237,7 +237,14 @@ function seatSprite(id,x,s){const el=document.createElement('div');el.className=
 // no backpacks inside school (owner 11/07: 「등하교길 아니면 애들이 가방을 메고 있을 필요가 없지 않아?」): walk/<id>_nobag.png on every map
 // except the way in and out (gate, home); a kid whose no-bag sheet is not drawn yet keeps the old one. Add ids to NOBAG as sheets are drawn.
 const NOBAG=new Set(['hero_f','hero_m']),BAG_MAPS=/^(gate|home|route)/;
-function walkSrc(id){return NOBAG.has(id)&&!BAG_MAPS.test(typeof MAP==='string'?MAP:'')?`walk/${id}_nobag.png`:`walk/${id}.png`}
+// the story decides first (owner 11/07: 「무조건 그렇게 바꾸지 말고 이야기에 따라」): a meeting with bag:1 / bag:0 says so; otherwise a meeting
+// whose opening lines are about going home / arriving / wearing a bag keeps the bags on; otherwise inside school = no bag
+const BAG_WORDS=/가방을? ?메|가방 ?끈|멜빵|하교|하굣길|등굣길|집에 가|집으로 가|종례가 끝|교문을 나|교문으로 들어|학교에 왔|아침에 학교/;
+function sceneBag(){const e=typeof SCENE_EP!=='undefined'?SCENE_EP:null;if(!e)return null;if(e.bag!==undefined)return !!e.bag;
+ if(e._bagAuto===undefined){const t=JSON.stringify(e.pre||[]);e._bagAuto=BAG_WORDS.test(t)}return e._bagAuto}
+function walkSrc(id){if(!NOBAG.has(id))return `walk/${id}.png`;const b=sceneBag();if(b!==null)return b?`walk/${id}.png`:`walk/${id}_nobag.png`;
+ return !BAG_MAPS.test(typeof MAP==='string'?MAP:'')?`walk/${id}_nobag.png`:`walk/${id}.png`}
+function bagRefresh(){for(const o of [me].concat(typeof npcs!=='undefined'?npcs:[])){if(!o||!o.el||o.seat||!NOBAG.has(o.id))continue;if(/_pe\.png/.test(o.el.style.backgroundImage||''))continue;o.el.style.backgroundImage=`url(${walkSrc(o.id)})`}}
 function sprite(id,x,y,seat){if(seat&&typeof seat==='object')return seatSprite(id,x,seat);let ws=walkSrc(id);const el=document.createElement('div');el.className='sp';world.appendChild(el);
  const o={id,el,x,y,dir:seat?'up':'down',frame:0,t:0,w:0,h:0,path:null,onArrive:null,seat:!!seat};
  const z=SZ[id]||[.95,.98,1];const im=new Image();im.onload=()=>{const ch=im.height/4,cw=im.width/3,dh=KID*z[2]/z[0],k=dh/ch;o.w=cw*k;o.rowH=ch*k;
@@ -559,34 +566,34 @@ function pickHero(){const m=document.getElementById('modal'),c=document.getEleme
  c.innerHTML=`<h2>${tr('전학생 반장되기')}</h2><p>${tr('한국말이 아직 서툰 전학생,<br>반장 선거에 나가다.')}</p><p style="margin-top:14px">${tr('누구로 할까요?')}</p>${(()=>{const s=loadSave();return s&&s.day>=2&&s.mode===UI+'-'+LANG?`<p><button class="big" id="cont">${tr('{n}일차부터 이어 하기').replace('{n}',s.day)}</button></p>`:''})()}<div class="pick heroes"><button data-h="hero_f"><img src="faces/hero_f_smile.jpg" alt="여자 주인공">${heroName(1)}</button><button data-h="hero_m"><img src="faces/hero_m_smile.jpg" alt="남자 주인공">${heroName(0)}</button></div>`;
  m.classList.add('on');{const cb=document.getElementById('cont');if(cb)cb.onclick=()=>{const s=loadSave();HERO=s.hero;Object.assign(HEART,s.heart||{});(s.found||[]).forEach(k=>FOUND.add(k));HEART_D1={...HEART};chime();(typeof contGame==='function'?contGame(s):startDay(Math.min(s.day,Object.keys(window.D3||{}).length?3:2)))}}c.querySelectorAll('.pick button').forEach(b=>b.onclick=()=>{HERO=b.dataset.h;m.classList.remove('on');chime();bgm('day');load('home_am');say([['nar','','이사 온 다음 날 아침. 아직 풀지 못한 상자들이 쌓여 있다.'],['think','sad','(오늘부터 새 학교야. 여기 말도 아직 서툰데…….)'],['think','smile','({m}한테 인사하고 학교 가야지.)']],morning)})}
 </script>
-<script src="day2/engine.js?v=1107123504"></script>
-<script src="day2/ep_minho.js?v=1107123504"></script>
-<script src="day2/meet.js?v=1107123504"></script>
-<script src="day2/ep_sua.js?v=1107123504"></script>
-<script src="day2/ep_hangyeol.js?v=1107123504"></script>
-<script src="day2/ep_siwoo.js?v=1107123504"></script>
-<script src="day2/ep_haram.js?v=1107123504"></script>
-<script src="day2/ep_jiho.js?v=1107123504"></script>
-<script src="day2/ep_hyeeun.js?v=1107123504"></script>
-<script src="day2/ep_haneul.js?v=1107123504"></script>
-<script src="day2/ep_junho.js?v=1107123504"></script>
-<script src="day2/ep_yuna.js?v=1107123504"></script>
-<script src="day2/ep_yena.js?v=1107123504"></script>
-<script src="day2/ep_haeun.js?v=1107123504"></script>
-<script src="day2/ep_youngmin.js?v=1107123504"></script>
-<script src="day2/ep_seah.js?v=1107123504"></script>
-<script src="day2/ep_jihoon.js?v=1107123504"></script>
-<script src="words_ja_ru.js?v=1107123504"></script>
-<script src="day2/mybag.js?v=1107123504"></script>
-<script src="day2/wordpics.js?v=1107123504"></script>
-<script src="day2/spots.js?v=1107123504"></script>
-<script src="day2/textfit.js?v=1107123504"></script>
-<script src="day2/tester.js?v=1107123504"></script>
-<script src="day2/ux.js?v=1107123504"></script>
-<script src="day2/tapword.js?v=1107123504"></script>
-<script src="day2/review.js?v=1107123504"></script>
-<script src="day2/ep_ending.js?v=1107123504"></script>
-<script src="day2/ending.js?v=1107123504"></script>
+<script src="day2/engine.js?v=1107123811"></script>
+<script src="day2/ep_minho.js?v=1107123811"></script>
+<script src="day2/meet.js?v=1107123811"></script>
+<script src="day2/ep_sua.js?v=1107123811"></script>
+<script src="day2/ep_hangyeol.js?v=1107123811"></script>
+<script src="day2/ep_siwoo.js?v=1107123811"></script>
+<script src="day2/ep_haram.js?v=1107123811"></script>
+<script src="day2/ep_jiho.js?v=1107123811"></script>
+<script src="day2/ep_hyeeun.js?v=1107123811"></script>
+<script src="day2/ep_haneul.js?v=1107123811"></script>
+<script src="day2/ep_junho.js?v=1107123811"></script>
+<script src="day2/ep_yuna.js?v=1107123811"></script>
+<script src="day2/ep_yena.js?v=1107123811"></script>
+<script src="day2/ep_haeun.js?v=1107123811"></script>
+<script src="day2/ep_youngmin.js?v=1107123811"></script>
+<script src="day2/ep_seah.js?v=1107123811"></script>
+<script src="day2/ep_jihoon.js?v=1107123811"></script>
+<script src="words_ja_ru.js?v=1107123811"></script>
+<script src="day2/mybag.js?v=1107123811"></script>
+<script src="day2/wordpics.js?v=1107123811"></script>
+<script src="day2/spots.js?v=1107123811"></script>
+<script src="day2/textfit.js?v=1107123811"></script>
+<script src="day2/tester.js?v=1107123811"></script>
+<script src="day2/ux.js?v=1107123811"></script>
+<script src="day2/tapword.js?v=1107123811"></script>
+<script src="day2/review.js?v=1107123811"></script>
+<script src="day2/ep_ending.js?v=1107123811"></script>
+<script src="day2/ending.js?v=1107123811"></script>
 <script>
 // the goal shows big for a few seconds, then folds into a small pill (tap it to open it again)
 {const g=document.getElementById('goal');let t=null;const big=()=>{g.classList.remove('mini');clearTimeout(t);t=setTimeout(()=>g.classList.add('mini'),4000)};
