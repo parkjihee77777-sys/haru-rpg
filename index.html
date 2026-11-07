@@ -119,14 +119,14 @@ body,button{word-break:keep-all;overflow-wrap:break-word}
 <div id="fader"></div>
 <script>
 // same address, newest version: if the page this phone has kept is older than the one online, fetch the new one and reopen
-const BUILD='1107155142';
+const BUILD='1107155316';
 try{fetch(location.pathname,{cache:'no-store'}).then(r=>r.text()).then(t=>{const m=t.match(/const BUILD='(\d+)'/);if(m&&m[1]!==BUILD&&sessionStorage.getItem('upd')!==m[1]){sessionStorage.setItem('upd',m[1]);fetch(location.pathname,{cache:'reload'}).then(()=>location.reload())}}).catch(()=>{})}catch(e){}
 </script>
-<script src="i18n.js?v=1107155142"></script>
-<script src="i18n_prologue_v2.js?v=1107155142"></script>
-<script src="day2/i18n_engine.js?v=1107155142"></script>
-<script src="day2/data.js?v=1107155142"></script>
-<script src="day3/data.js?v=1107155142"></script>
+<script src="i18n.js?v=1107155316"></script>
+<script src="i18n_prologue_v2.js?v=1107155316"></script>
+<script src="day2/i18n_engine.js?v=1107155316"></script>
+<script src="day2/data.js?v=1107155316"></script>
+<script src="day3/data.js?v=1107155316"></script>
 <script>
 // ---------- data ----------
 const MW=1672,MH=941,KID=180;
@@ -230,10 +230,10 @@ const SEAT_H=237,SEAT_CUT=.45;
 const CLASS_CHAIRS={333:[375,490,775,890,1185,1295],448:[345,460,765,890,1205,1320],572:[300,420,755,890,1230,1360],715:[250,385,745,895,1260,1400]},SEAT_UP=65;
 function seatSprite(id,x,s){const el=document.createElement('div');el.className='sp';world.appendChild(el);
  const snap=!s.front&&!s.h&&CLASS_CHAIRS[s.top]&&/^class/.test(typeof MAP==='string'?MAP:'class');
- const o={id,el,x,y:s.top+4-(snap?SEAT_UP:0),w:0,h:0,seat:true};
+ const o={id,el,x,y:s.top+4,w:0,h:0,seat:true};// .sp is drawn from its bottom centre (translate -50%,-100%): x = chair centre, y = chair-back top
  const H=s.h||SEAT_H;// s.h: a smaller kid for chairs drawn smaller than the classroom's (the cafeteria)
  const src=s.front?`sit/${id}.png`:`seat/${id}.png`,cut=s.front?(s.cut||.6):SEAT_CUT;// s.front: sitting on the far side of a table, facing us (sit/<id>.png, the table hides the rest)
- const im=new Image();im.onload=()=>{const k=H/im.height,w=im.width*k;o.w=w;o.h=cut*H;if(snap){const C0=CLASS_CHAIRS[s.top],c=C0.some(q=>Math.abs(q-x)<30)?x:x+w/2,T=window._seatTaken||(window._seatTaken=new Set()),free=CLASS_CHAIRS[s.top].filter(q=>!T.has(s.top+':'+q)),cs=free.length?free:CLASS_CHAIRS[s.top],n=cs.reduce((p,q)=>Math.abs(q-c)<Math.abs(p-c)?q:p);T.add(s.top+':'+n);x=Math.round(n-w/2);o.x=x}/* one kid per chair: the nearest FREE chair (11/07: two kids on one chair) */el.style.cssText+=`;width:${w}px;height:${o.h}px;left:${x}px;top:${o.y}px;z-index:${Math.round(o.y)};background:url(${src}) 0 0/${w}px ${H}px no-repeat`};im.src=src;return o}
+ const im=new Image();im.onload=()=>{const k=H/im.height,w=im.width*k;o.w=w;o.h=cut*H;if(snap){const c=x,T=window._seatTaken||(window._seatTaken=new Set()),free=CLASS_CHAIRS[s.top].filter(q=>!T.has(s.top+':'+q)),cs=free.length?free:CLASS_CHAIRS[s.top],n=cs.reduce((p,q)=>Math.abs(q-c)<Math.abs(p-c)?q:p);T.add(s.top+':'+n);x=n;o.x=x}/* one kid per chair: the nearest FREE chair (11/07: two kids on one chair) */el.style.cssText+=`;width:${w}px;height:${o.h}px;left:${x}px;top:${o.y}px;z-index:${Math.round(o.y)};background:url(${src}) 0 0/${w}px ${H}px no-repeat`};im.src=src;return o}
 // no backpacks inside school (owner 11/07: 「등하교길 아니면 애들이 가방을 메고 있을 필요가 없지 않아?」): walk/<id>_nobag.png on every map
 // except the way in and out (gate, home); a kid whose no-bag sheet is not drawn yet keeps the old one. Add ids to NOBAG as sheets are drawn.
 const NOBAG=new Set(['hero_f','hero_m','minho','sua','yuna','junho','haeun','jihoon','yena','haram','haneul','youngmin','seah','hangyeol','jiho','siwoo']),BAG_MAPS=/^(gate|home|route)/;
@@ -569,35 +569,35 @@ function pickHero(){const m=document.getElementById('modal'),c=document.getEleme
  c.innerHTML=`<h2>${tr('전학생 반장되기')}</h2><p>${tr('한국말이 아직 서툰 전학생,<br>반장 선거에 나가다.')}</p><p style="margin-top:14px">${tr('누구로 할까요?')}</p>${(()=>{const s=loadSave();return s&&s.day>=2&&s.mode===UI+'-'+LANG?`<p><button class="big" id="cont">${tr('{n}일차부터 이어 하기').replace('{n}',s.day)}</button></p>`:''})()}<div class="pick heroes"><button data-h="hero_f"><img src="faces/hero_f_smile.jpg" alt="여자 주인공">${heroName(1)}</button><button data-h="hero_m"><img src="faces/hero_m_smile.jpg" alt="남자 주인공">${heroName(0)}</button></div>`;
  m.classList.add('on');{const cb=document.getElementById('cont');if(cb)cb.onclick=()=>{const s=loadSave();HERO=s.hero;Object.assign(HEART,s.heart||{});(s.found||[]).forEach(k=>FOUND.add(k));HEART_D1={...HEART};chime();(typeof contGame==='function'?contGame(s):startDay(Math.min(s.day,Object.keys(window.D3||{}).length?3:2)))}}c.querySelectorAll('.pick button').forEach(b=>b.onclick=()=>{HERO=b.dataset.h;m.classList.remove('on');chime();bgm('day');load('home_am');say([['nar','','이사 온 다음 날 아침. 아직 풀지 못한 상자들이 쌓여 있다.'],['think','sad','(오늘부터 새 학교야. 여기 말도 아직 서툰데…….)'],['think','smile','({m}한테 인사하고 학교 가야지.)']],morning)})}
 </script>
-<script src="day2/engine.js?v=1107155142"></script>
-<script src="day2/ep_minho.js?v=1107155142"></script>
-<script src="day2/meet.js?v=1107155142"></script>
-<script src="day2/ep_sua.js?v=1107155142"></script>
-<script src="day2/ep_hangyeol.js?v=1107155142"></script>
-<script src="day2/ep_siwoo.js?v=1107155142"></script>
-<script src="day2/ep_haram.js?v=1107155142"></script>
-<script src="day2/ep_jiho.js?v=1107155142"></script>
-<script src="day2/ep_hyeeun.js?v=1107155142"></script>
-<script src="day2/ep_haneul.js?v=1107155142"></script>
-<script src="day2/ep_junho.js?v=1107155142"></script>
-<script src="day2/ep_yuna.js?v=1107155142"></script>
-<script src="day2/ep_yena.js?v=1107155142"></script>
-<script src="day2/ep_haeun.js?v=1107155142"></script>
-<script src="day2/ep_youngmin.js?v=1107155142"></script>
-<script src="day2/ep_seah.js?v=1107155142"></script>
-<script src="day2/ep_jihoon.js?v=1107155142"></script>
-<script src="words_ja_ru.js?v=1107155142"></script>
-<script src="day2/mybag.js?v=1107155142"></script>
-<script src="day2/wordpics.js?v=1107155142"></script>
-<script src="day2/spots.js?v=1107155142"></script>
-<script src="day2/textfit.js?v=1107155142"></script>
-<script src="day2/tester.js?v=1107155142"></script>
-<script src="day2/ux.js?v=1107155142"></script>
-<script src="day2/tapword.js?v=1107155142"></script>
-<script src="day2/review.js?v=1107155142"></script>
-<script src="day2/plane.js?v=1107155142"></script>
-<script src="day2/ep_ending.js?v=1107155142"></script>
-<script src="day2/ending.js?v=1107155142"></script>
+<script src="day2/engine.js?v=1107155316"></script>
+<script src="day2/ep_minho.js?v=1107155316"></script>
+<script src="day2/meet.js?v=1107155316"></script>
+<script src="day2/ep_sua.js?v=1107155316"></script>
+<script src="day2/ep_hangyeol.js?v=1107155316"></script>
+<script src="day2/ep_siwoo.js?v=1107155316"></script>
+<script src="day2/ep_haram.js?v=1107155316"></script>
+<script src="day2/ep_jiho.js?v=1107155316"></script>
+<script src="day2/ep_hyeeun.js?v=1107155316"></script>
+<script src="day2/ep_haneul.js?v=1107155316"></script>
+<script src="day2/ep_junho.js?v=1107155316"></script>
+<script src="day2/ep_yuna.js?v=1107155316"></script>
+<script src="day2/ep_yena.js?v=1107155316"></script>
+<script src="day2/ep_haeun.js?v=1107155316"></script>
+<script src="day2/ep_youngmin.js?v=1107155316"></script>
+<script src="day2/ep_seah.js?v=1107155316"></script>
+<script src="day2/ep_jihoon.js?v=1107155316"></script>
+<script src="words_ja_ru.js?v=1107155316"></script>
+<script src="day2/mybag.js?v=1107155316"></script>
+<script src="day2/wordpics.js?v=1107155316"></script>
+<script src="day2/spots.js?v=1107155316"></script>
+<script src="day2/textfit.js?v=1107155316"></script>
+<script src="day2/tester.js?v=1107155316"></script>
+<script src="day2/ux.js?v=1107155316"></script>
+<script src="day2/tapword.js?v=1107155316"></script>
+<script src="day2/review.js?v=1107155316"></script>
+<script src="day2/plane.js?v=1107155316"></script>
+<script src="day2/ep_ending.js?v=1107155316"></script>
+<script src="day2/ending.js?v=1107155316"></script>
 <script>
 // the goal shows big for a few seconds, then folds into a small pill (tap it to open it again)
 {const g=document.getElementById('goal');let t=null;const big=()=>{g.classList.remove('mini');clearTimeout(t);t=setTimeout(()=>g.classList.add('mini'),4000)};
