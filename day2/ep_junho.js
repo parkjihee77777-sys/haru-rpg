@@ -703,7 +703,7 @@ EP.junho=[
   common:[['me','smile','{m}, 준호 오늘 보호대를 {@sock} 밖에 찼어. 처음 봤어. 다 보였어.'],['mom','surprised','보호대 때문일까?'],['me','smile','몰라. 근데 숨기는 얼굴은 아니었어. 그냥 덤덤했어.'],['mom','smile','그렇구나.'],['me','smile','그리고 회복 도장이 열 개쯤 찍힌대. 준호가 ‘이렇게 많은 회복 처음 봐’ 했어.'],['mom','laugh','(웃음) 엄마도 처음 들어 봐. 많은 회복.']]}},
 
 // ■ Day 8 — 종이 공 (7)
-{title:'종이 공',scene:'junho_07',place:'class',at:[400,500],with:[['haeun',1380,420]],taps:{class:[['desk',830,425,60]]},
+{title:'종이 공',scene:'junho_07',place:'class',at:[400,500],empty:{class:1},with:[['haeun',1380,420]],taps:{class:[['desk',830,425,60]]},
  pre:[
   {pic:'junho_07a'},
   ['nar','','점심을 먹고 교실로 돌아왔다. 5교시 책을 꺼내 놓으려고 {@desk} 서랍을 열었다. 서랍 안이 엉망이었다.'],
