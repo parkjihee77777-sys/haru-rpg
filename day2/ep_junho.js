@@ -911,7 +911,7 @@ EP.junho=[
   ['junho','smile','세 번째. 달리기. 조금씩. 축구부 시합은 아직. 병원 선생님이 점심 축구는 골키퍼로 가볍게 해도 된대.'],
   ['nar','','준호가 {@bag}에서 낡은 {@glove} 한 켤레를 꺼냈다. 손바닥 쪽이 두꺼운 {@glove|이었}다.'],
   ['junho','smile','이거 좀 들고 있어. 끈 묶게.'],
-  {k:'glove',goal:'「{x}」 들고 있기',bag:['glove','shoes','towel','bag','vest']},
+  {k:'glove',goal:'「{x}」 들고 있기',bag:['glove:glove_goalie','shoes','towel','bag','vest']},
   ['nar','','준호의 골키퍼 {@glove|을} 받아 들었다. 손바닥이 두껍고 말랑했다.'],
   ['junho','smile','골키퍼 {@glove}. 3학년 때 거.'],
   ['me','surprised','너 골키퍼였어?'],
