@@ -258,13 +258,13 @@ EP.minho=[
 // ■ Day 7 — 청소 당번 땡땡이 (6)
 {title:'청소 당번 땡땡이',scene:'minho_06',place:'class',at:[1380,330,'stand'],
  pre:[
-  {lay:[['ball',1205,282,34,null,'stay'],['broom',1450,450,90,null,'stay']]},// laid for this scene only, cleared at its end (boss 11/07: not left on the class map for other friends' scenes)
+  {lay:[['ball',1205,282,34,null,'stay']]},// laid for this scene only, cleared at its end (boss 11/07: not left on the class map for other friends' scenes)
   {pic:'minho_06a'},['nar','','청소 시간. 내 당번 구역은 교실 뒤쪽이었다. 민호도 같은 당번인데, 사물함 옆에서 {@ball}만 튕기고 있었다.'],
   ['me','smile','민호야, 너도 뒤쪽 당번이지?'],
   ['minho','laugh','응. 근데 안 할 건데?'],
   ['me','surprised','왜?'],
   ['minho','smile','운동장 골대 지금 비었어. 청소 끝나면 6학년이 다 차지해.'],
-  {k:'broom',goal:'「{x}」 들기'},
+  {k:'broom',goal:'「{x}」 들기',bag:['broom','bucket','trash_can','box','tissue']},// picked from pictures, not a thing laid on the map (boss 11/07)
   ['minho','smile','야, 너도 가자.'],
   ['me','surprised','나도?'],
   ['minho','laugh','그래. 너 반장 나간다며. 반장 하려면 놀 줄도 알아야 표 받지.'],
@@ -347,13 +347,12 @@ EP.minho=[
 // ■ Day 9 — 뒤집힌 우산 (8)
 {title:'뒤집힌 우산',scene:'minho_08',place:'gate',at:[960,650],
  pre:[
-  {lay:[['umbrella',1060,690,84,null,'stay']]},// laid for this scene only, cleared at its end (boss 11/07: not left on the gate map for other friends' scenes)
   {pic:'minho_08'},
   ['nar','','하교 시간. 비가 오고 바람이 셌다. 교문 옆에서 민호가 뒤집힌 {@umbrella|과} 씨름하고 있었다. 나는 민호 쪽으로 갔다.'],
   ['minho','angry','아, 진짜! 바람 한 번 불었다고 뒤집히냐?'],
   ['me','surprised','망가졌어?'],
   ['minho','angry','보면 모르냐. 이거 산 지 일주일밖에 안 됐는데.'],
-  {k:'umbrella',goal:'「{x}」 살펴보기'},
+  {k:'umbrella',goal:'「{x}」 살펴보기',bag:['umbrella','bag','shoes','water_bottle','box']},// picked from pictures, not a thing laid on the map (boss 11/07) — Minho is holding it
   {pic:'minho_08b'},['nar','','{@umbrella} 뼈대 하나가 부러져 뾰족하게 튀어나와 있었다. 민호는 그 근처를 맨손으로 꽉 잡고 있었다. 민호 어깨가 점점 젖어 갔다.'],
   ['think','surprised','(저 끝, 날카로워 보여.)'],
   ['think','sad','(근데 민호 지금 엄청 화났어. 뭐라고 하지?)']],
@@ -464,7 +463,7 @@ EP.minho=[
 // ■ Day 12 — 우리 친하잖아 (11)
 {title:'우리 친하잖아',scene:'minho_11',place:'class',at:[640,600],
  pre:[
-  {lay:[['notebook',430,690,36,null,'stay']]},// laid for this scene only, cleared at its end (boss 11/07: not left on the class map for other friends' scenes)
+  {lay:[['notebook',430,690,36,null,'stay']]},// laid for this scene only, cleared at its end (opens as a picture tray, boss 11/07)
   ['nar','','아침. 교실에 들어서자 민호가 내 자리 쪽으로 손짓했다. 나는 {@bag|을} 메고 민호 쪽으로 갔다.'],
   ['minho','smile','야, {SN}. 빨리 와 봐.'],
   {k:'bag',goal:'「{x}」 열기',tray:true},// my own bag: picked from pictures (the bags on the map are other kids')
@@ -583,11 +582,10 @@ EP.minho=[
 {title:'나 같은 애는?',scene:'minho_14',place:'stands',at:[640,540],
  taps:{stands:[['trash_can',22,770,40]]},
  pre:[
-  {lay:[['ball',740,575,36,null,'stay'],['notebook',560,570,38,null,'stay']]},// laid for this scene only, cleared at its end (boss 11/07: not left on the stands map for other friends' scenes)
-  
+  {lay:[['ball',740,575,36,null,'stay']]},// laid for this scene only, cleared at its end (boss 11/07: not left on the stands map for other friends' scenes)
   {pic:'minho_14s'},['nar','','운동장 스탠드. 민호가 혼자 {@ball|을} 발로 굴리고 있었다. 나는 공약을 쓰던 {w|을} 들고 민호 옆에 앉았다.'],
   {k:'ball',goal:'「{x}」 멈추기'},
-  {k:'notebook',goal:'「{x}」 펼치기'},
+  {k:'notebook',goal:'「{x}」 펼치기',bag:['notebook','textbook','pcase','pencil','eraser']},// picked from pictures, not a thing laid on the map (boss 11/07) — the notebook in my hands
   ['minho','smile','그거 뭐야?'],
   ['me','smile','반장 선거 공약. 아직 쓰는 중.'],
   ['minho','smile','보여 줘 봐.'],
@@ -668,13 +666,13 @@ EP.minho=[
 // 특별 장면 — 접힌 종이 (투표일): only on the election day, if Minho was met 4+ times; does not count as a meeting
 EP.minho_vote={title:'접힌 종이',scene:'minho_vote',place:'class',at:[700,330],vote:true,
  pre:[
-  {lay:[['box',1180,262,80,'ballot_box','stay'],['paper',760,350,36,null,'stay']]},// laid for this scene only, cleared at its end (boss 11/07: not left on the class map for other friends' scenes)
+  {lay:[['box',1180,262,80,'ballot_box','stay']]},// laid for this scene only, cleared at its end (boss 11/07: not left on the class map for other friends' scenes)
   {pic:'minho_16a'},['nar','','투표 날. 교실 뒤에 투표함이 놓였다. 나는 후보라서 투표를 먼저 마쳤다. 민호가 줄 뒤쪽에 서 있어서 나는 그쪽으로 갔다.'],
   {k:'box',goal:'「{x}」 찾기'},
   ['minho','smile','야, 연설은 뭐…… 생각보다 괜찮더라.'],
   ['me','smile','……고마워.'],
   ['nar','','민호가 투표용지를 받아 들었다.'],
-  {k:'paper',goal:'「{x}」 접는 것 보기'},
+  {k:'paper',goal:'「{x}」 접는 것 보기',bag:['paper','envelope','pencil','notebook','box']},// picked from pictures, not a thing laid on the map (boss 11/07) — the ballot is in Minho's hands
   ['minho','laugh','내가 누구 찍었는지 궁금하냐? 보여 줄까?'],
   ['nar','','민호가 접은 {@paper|를} 살짝 펴려고 했다.'],
   ['think','surprised','(궁금해. 진짜 궁금해.)']],
