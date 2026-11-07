@@ -13,7 +13,7 @@ const WORDPIC={
  hangyeol_08:{umbrella:'umbrella_flower'},minho_08:{umbrella:'umbrella_broken'},
  hyeeun_02:{glove:'glove_wheel'},hyeeun_03:{glove:'glove_wheel'},hyeeun_15:{glove:'glove_wheel'},junho_09:{glove:'glove_goalie'},
  hyeeun_01:{wheel:'wheel_chair'},hyeeun_13:{wheel:'wheel_chair'},
- yuna_07:{eraser:'eraser_cloud'},
+ yuna_07:{eraser:'eraser_cloud'},yuna_13:{bag:'bag_yuna'},
  yena_12:{water_bottle:'water_bottle_pink'},
  seah_04:{milk:'milk_strawberry'},
  junho_11:{bag:'bag_gym'},
