@@ -211,12 +211,11 @@ EP.hangyeol=[
 
 // ■ Day 6 — 너 친하잖아 (5) ★
 {title:'너 친하잖아',scene:'hangyeol_05',place:'class',at:[1380,330],with:[['jihoon',1130,330,null,'stand']],
- taps:{class:[['locker',1290,180,75]]},
  pre:[
   {pic:'hangyeol_05'},
   ['nar','','쉬는 시간. 한결이를 찾으러 교실 뒤로 갔다. 한결이는 보이지 않았다. {@locker} 앞에 지훈이가 서 있었다.'],
   ['jihoon','smile','어, 마침 잘 왔다. 너 한결이랑 친하지?'],
-  {k:'locker',goal:'「{x}」 열기'},{pic:'hangyeol_05'},
+  {k:'locker',goal:'「{x}」 열기',bag:['door','locker','window','box','blackboard']},{pic:'hangyeol_05'},
   ['jihoon','surprised','궁금한 거 있는데. 한결이는 남자인데 왜 머리 길러?'],
   ['me','surprised','……어?'],
   ['jihoon','smile','팔찌도 분홍이고. 애들이 다 궁금해해. 너 친하잖아. 이유 알지?'],
@@ -422,12 +421,12 @@ EP.hangyeol=[
 
 // ■ Day 10 — 복도의 5학년 (9)
 {title:'복도의 5학년',scene:'hangyeol_09',place:'hall',at:[1060,440],
- taps:{hall:[['window',1290,110,60],['window',1590,200,60],['stairs',725,75,70]]},
+ taps:{hall:[['stairs',725,75,70]]},
  pre:[
   {pic:'hangyeol_09a'},
   ['nar','','쉬는 시간. 한결이랑 2층 {@window} 앞에서 운동장을 보고 있었다. 한결이 머리에 보라색 {@hair_tie}이 있었다.'],
   ['hangyeol','laugh','저기 봐, 준호 또 {@ball} 놓쳤다.'],
-  {k:'window',goal:'「{x}」 밖 보기'},{pic:'hangyeol_09'},
+  {k:'window',goal:'「{x}」 밖 보기',bag:['door','window','stairs','locker','blackboard']},{pic:'hangyeol_09'},
   ['nar','','창밖 운동장이 보였다.'],
   ['nar','','{@stairs}에서 5학년 셋이 올라왔다. 하나가 한결이 앞에 멈췄다.'],
   ['nar','','5학년: 「야, 너 그 머리 뭐야? 남자야 여자야?」'],
@@ -640,7 +639,7 @@ EP.hangyeol=[
   ['nar','','점심시간 급식실. 한결이 옆자리에 앉았다. 맞은편에는 예나와 준호가 있었다.'],
   ['nar','','한결이가 밥은 안 먹고 {@chopsticks}만 만지작거렸다.'],
   {k:'spoon',goal:'「{x}」 집기'},
-  {k:'chopsticks',goal:'「{x}」 집기'},{pic:'hangyeol_13'},
+  {k:'chopsticks',goal:'「{x}」 집기',bag:['spoon','chopsticks','tray','cup','milk']},{pic:'hangyeol_13'},
   ['hangyeol','smile','있잖아, 얘들아.'],
   ['nar','','한결이가 {@chopsticks}을 내려놓았다.'],
   ['hangyeol','smile','나 앞으로…… ‘결이’라고 불러 주면 좋겠어. 그게 더 좋아서.'],
