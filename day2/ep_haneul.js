@@ -81,8 +81,8 @@ EP.haneul=[
   {k:'paper',goal:'「{x}」 뒤로 넘기기',bag:['notebook','paper','pencil','eraser','pcase']},
   {pic:'haneul_01p'},
   ['nar','','나는 돌아보지 않았다. {@paper|만} 어깨 너머로 들어 올렸다. 뒤에서 {@paper|를} 받는 손이 느껴졌다. 아주 가볍게.'],
-  {only:['A','D'],lines:[['nar','','1교시 중간. 선생님이 {@blackboard|에} 쓰실 때, 어깨 너머로 작게 접힌 {@paper|가} 넘어왔다. 네 번 접혀 있었다. 펴 보니 짧은 글이 있었다.'],['nar','','「첫날 {@door} 앞에서 너 다리 굳었지. 그림에 그렇게 그렸어. 미안. 그림 안 쳐다봐 줘서 고마워.」 끝에 작은 {@cloud}.'],['think','sad','(봤구나. 내 다리 굳은 거. 다들 내 얼굴 볼 때, 하늘이는 내 다리를 봤어.)']]},
-  {only:['B','C'],lines:[['nar','','1교시 내내 등 뒤가 조용했다. {@pencil} 소리도 안 났다. 쉬는 시간에 돌아보니 하늘이 {@notebook|은} 덮여 있었다. 그림은 보이지 않았다.'],['think','sad','(그림을 보여 준 게 아니었어. 떨어진 거였어.)']]}],
+  {only:['A','D'],lines:[{pic:'haneul_note'},['nar','','1교시 중간. 선생님이 {@blackboard|에} 쓰실 때, 어깨 너머로 작게 접힌 {@paper|가} 넘어왔다. 네 번 접혀 있었다. 펴 보니 짧은 글이 있었다.'],['nar','','「첫날 {@door} 앞에서 너 다리 굳었지. 그림에 그렇게 그렸어. 미안. 그림 안 쳐다봐 줘서 고마워.」 끝에 작은 {@cloud}.'],['think','sad','(봤구나. 내 다리 굳은 거. 다들 내 얼굴 볼 때, 하늘이는 내 다리를 봤어.)']]},
+  {only:['B','C'],lines:[{pic:null},['nar','','1교시 내내 등 뒤가 조용했다. {@pencil} 소리도 안 났다. 쉬는 시간에 돌아보니 하늘이 {@notebook|은} 덮여 있었다. 그림은 보이지 않았다.'],['think','sad','(그림을 보여 준 게 아니었어. 떨어진 거였어.)']]}],
  eve:{
   lead:[
    ['me','smile','엄마, 우리 반에 맨날 후드 쓰는 애가 있어. 맨 뒤 구석. 내 바로 뒷자리.'],
@@ -332,8 +332,8 @@ EP.haneul=[
   {pic:'haneul_03s'},
   ['nar','','{@water|이} 개수대로 빠져나갔다. 수돗물 소리가 났다. 뒤에서 다른 아이들이 떠들었다. 여기서는 아무도 우리를 안 봤다.'],
   {only:['B','D'],lines:[['haneul','sad','……고마워.'],['nar','','아주 작은 목소리였다. 수돗물 소리에 묻힐 만큼. 하늘이 목소리를 처음 들었다.'],['think','smile','(하늘이가 말했어. 나란히 서 있을 때.)']]},
-  {only:['A'],lines:[['nar','','하늘이가 젖은 손가락으로 개수대 옆 벽 타일에 글자를 썼다. {@water} 글씨였다.'],{pic:'haneul_03t'},['nar','','「괜찮냐고 물으면 괜찮다고 해야 돼서 더 힘들어.」 그리고 바로 손바닥으로 문질러 지웠다.']]},
-  {only:['C'],lines:[['nar','','하늘이가 젖은 손가락으로 개수대 옆 벽 타일에 글자를 썼다. {@water} 글씨였다.'],{pic:'haneul_03t'},['nar','','「응원도 소리야. 소리 나면 다 나를 봐.」 그리고 바로 손바닥으로 문질러 지웠다.']]},
+  {only:['A'],lines:[{pic:'haneul_03t'},['nar','','하늘이가 젖은 손가락으로 개수대 옆 벽 타일에 글자를 썼다. {@water} 글씨였다.'],['nar','','「괜찮냐고 물으면 괜찮다고 해야 돼서 더 힘들어.」 그리고 바로 손바닥으로 문질러 지웠다.']]},
+  {only:['C'],lines:[{pic:'haneul_03t'},['nar','','하늘이가 젖은 손가락으로 개수대 옆 벽 타일에 글자를 썼다. {@water} 글씨였다.'],['nar','','「응원도 소리야. 소리 나면 다 나를 봐.」 그리고 바로 손바닥으로 문질러 지웠다.']]},
   {only:['A','C'],lines:[['think','sad','(그랬구나. 몰랐어.)']]},
   {pic:null},
   ['nar','','과학실을 나갈 때, 과학 선생님이 하늘이를 {@door} 옆에서 조용히 부르셨다. 나는 먼저 나왔다. 문틈으로 선생님 목소리가 조금 들렸다.'],
@@ -749,6 +749,7 @@ EP.haneul=[
 // ■ Day 7 — 나란히 (6)
 {title:'나란히',scene:'haneul_06',place:'cafe',at:[250,480],sit:[703,392,150,'front'],with:[['haeun',1100,560],['jihoon',1300,560]],
  pre:[
+  {map:'cafe2_lunch'},// lunchtime: kids from other classes at the tables (11/07 check: 'six kids at the big table' on an empty map)
   ['nar','','점심시간. 나는 손을 씻느라 늦었다. 급식실에 왔을 때 줄이 거의 다 빠져 있었다.'],
   ['nar','','줄 맨 끝에 남색 후드가 있었다. 하늘이였다.'],
   ['think','smile','(하늘이는 늘 맨 마지막에 오는구나. 줄이 다 빠질 때까지 교실에 있다가.)'],
@@ -819,7 +820,7 @@ EP.haneul=[
   ['jihoon','laugh','{SN|아}! 너 왜 거기 있었어!'],
   ['nar','','하늘이가 깜짝 놀랐다. {@tray} 위 {@chopsticks|이} 굴러서 바닥에 떨어졌다. 하늘이 어깨가 굳었다. 몇 명이 소리 난 쪽을 봤다.'],
   ()=>{OBJ[MAP]=(OBJ[MAP]||[]).filter(t=>!(t[0]==='chopsticks'&&!t.laid));if(typeof soundMarks==='function')soundMarks()},// the dropped pair on the floor is the one to pick up, not the pair drawn on the table (owner 11/07)
-  {lay:[['chopsticks',440,770,50,null,'stay']]},
+  {lay:[['chopsticks',440,770,66,null,'stay']]},
   {k:'chopsticks',goal:'「{x}」 줍기'},
   {clear:['chopsticks']},
   ['nar','','나는 {@chopsticks|을} 주워서 하늘이 {@tray|에} 올려 두었다. 그리고 지훈이 쪽을 보며 손을 흔들었다.'],
