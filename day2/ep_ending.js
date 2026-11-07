@@ -27,6 +27,7 @@ window.EDL={
  count:[['nar','','선생님이 종이를 하나씩 펴서 읽으셨다. 읽을 때마다 칠판의 이름 옆에 한 획씩 그어졌다.'],{k:'blackboard',goal:'「{x}」 보기'}],
  said:[['nar','','백지호 {VJ}. 양수아 {VS}. {SN} {VM}.']],
  runoff:[['teacher','smile','두 사람 표가 같아요. 두 사람만 놓고 한 번 더 할게요.'],['nar','','다시 접고, 다시 넣었다. 칠판에 새 숫자가 적혔다.']],
+ lots:[['teacher','smile','또 같아요. 그럼 제비뽑기로 정할게요.'],['nar','','선생님이 종이 두 장에 두 사람 이름을 써서 접으셨다. 한 장을 뽑아 펴셨다. 「{P1}.」']],// run-off still tied → drawing lots (owner 11/07: real school way + lots)
  r1:[['teacher','smile','반장은 {SN}, 부반장은 {P2}.'],['think','surprised','(……내 이름이야.)']],
  r2:[['teacher','smile','반장은 {P1}, 부반장은 {SN}.'],['think','surprised','(반장은 아니야. ……근데 부반장이야.)']],
  r3:[['teacher','smile','반장은 {P1}, 부반장은 {P2}.'],['think','sad','(3등.)'],['nar','','목이 따끔했다. 나는 {P1:와} {P2:에게} 박수를 쳤다.']],

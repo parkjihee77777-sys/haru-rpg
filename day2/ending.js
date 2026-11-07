@@ -13,12 +13,12 @@ function edVoters(){const known=ED_KIDS.filter(edKnown),mine=new Set(ED_KIDS.fil
  const v={};for(const id of ED_KIDS)v[id]=mine.has(id)?'me':ED_SIDE[id];return v}
 function edCount(){const v=edVoters(),n={me:1,sua:1,jiho:1};for(const id in v)n[v[id]]++;return n}
 // run-off between two: the same votes; a vote whose candidate is out goes to me if that kid is friendly (met, heart ≥ meetings), else to the other;
-// the third candidate: to me if I am their close friend, else to the other one; I (when out) go to the one with more heart. Still tied → the other one (not me; Jiho for Sua–Jiho)
+// the third candidate: to me if I am their close friend, else to the other one; I (when out) go to the one with more heart. Still tied → drawing lots (owner 11/07)
 function edRunoff(a,b){const v=edVoters(),pair=[a,b],n={[a]:1,[b]:1};const other=x=>pair.find(p=>p!==x&&p!=='me')||pair.find(p=>p!==x);
  for(const id in v){let c=v[id];if(!pair.includes(c))c=pair.includes('me')&&edM(id)>=1&&edH(id)>=edM(id)?'me':pair.includes(ED_SIDE[id])?ED_SIDE[id]:other('me');n[c]++}
  const third=['me','sua','jiho'].find(x=>!pair.includes(x));
  if(third==='me')n[edH('sua')>=edH('jiho')?'sua':'jiho']++;else n[pair.includes('me')&&edClose(third)?'me':other('me')]++;
- let win=n[a]>n[b]?a:n[b]>n[a]?b:(a==='me'?b:b==='me'?a:'jiho');return{a,b,va:n[a],vb:n[b],win}}
+ const lots=n[a]===n[b];let win=n[a]>n[b]?a:n[b]>n[a]?b:(Math.random()<.5?a:b);return{a,b,va:n[a],vb:n[b],win,lots}}// still tied → lots (kept in FLAGS.ED)
 function edResult(){const n=edCount();let order=['me','sua','jiho'].sort((x,y)=>n[y]-n[x]||['jiho','sua','me'].indexOf(x)-['jiho','sua','me'].indexOf(y));let run=null;
  for(let i=0;i<2;i++)if(n[order[i]]===n[order[i+1]]){run=edRunoff(order[i],order[i+1]);if(run.win!==order[i])[order[i],order[i+1]]=[order[i+1],order[i]];break}
  const rank=order.indexOf('me')+1,bffs=D2IDS.filter(edBff).sort((x,y)=>edH(y)-edH(x)||edM(y)-edM(x)),met=D2IDS.filter(id=>edM(id)>=1).length;
@@ -64,7 +64,7 @@ function edVote(){const L=EDL,v=EP.minho_vote;
  layThings([['box',1180,262,80,'ballot_box'],['paper',1380,300,36]]);runSteps(L.vote,null,rest)}
 function edCountUp(){const L=EDL,R=ED;runSteps(L.count,null,()=>edBoard(['jiho','sua','me'].map(edRow),()=>{
  const after=()=>{const r=R.rank===1?L.r1:R.rank===2?L.r2:L.r3;edSay(r.concat(L.thanks,edM('siwoo')>=1?L.siwoo:[]),edScene)};
- edSay(L.said,()=>{if(!R.run){after();return}edSay(L.runoff,()=>edBoard([[R.run.a,R.run.va],[R.run.b,R.run.vb]].map(([id,v])=>[id==='me'?edName('me'):tr(id==='sua'?'양수아':'백지호'),v]),after))})}))}
+ edSay(L.said,()=>{if(!R.run){after();return}edSay(L.runoff,()=>edBoard([[R.run.a,R.run.va],[R.run.b,R.run.vb]].map(([id,v])=>[id==='me'?edName('me'):tr(id==='sua'?'양수아':'백지호'),v]),()=>R.run.lots?edSay(L.lots,after):after()))})}))}
 // ---- the ending scene, on its own place with only its kids (no way out there: the day goes home after it) ----
 function edPlace(map,kids,lines,done){if(map===MAP&&map==='class'){edSay(lines,done);return}
  fade(()=>{load(map);world.querySelectorAll('.exitsign').forEach(e=>e.remove());for(const n of npcs)n.el.remove();npcs=[];const st=(MAPS[map]&&MAPS[map].start)||[800,600];
