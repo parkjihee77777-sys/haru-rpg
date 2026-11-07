@@ -11,7 +11,7 @@ EP.haeun=[
 {title:'빵 하나 남는데',scene:'haeun_01',place:'class',at:[405,720],with:[['jihoon',885,700]],
  pre:[
   ['nar','','2교시가 끝났다. 나는 연필을 깎았다. 연필깎이 통에 나무 가루가 가득 찼다. 버려야 했다.'],
-  {lay:[['trash_can',1030,905,60]]},
+  {lay:[['trash_can',1030,850,68]]},
   {k:'trash_can',goal:'「{x}」에 버리기'},
   ['nar','','교실 뒤 {@trash_can} 앞에서 연필깎이 통을 열었다.'],
   {pic:'haeun_01a'},
@@ -101,7 +101,7 @@ EP.haeun=[
   {only:['B','D'],lines:[['haeun','smile','다음에도 아침 먹었냐고 물어볼 거야. ‘조금’은 안 쳐 줘.']]},
   {only:['A','C'],lines:[['haeun','sad','……다음엔 받아. 주는 건 받는 거야.']]},
   ['nar','','딩동댕— 3교시 시작 종이 울렸다.'],
-  {pic:'haeun_01d'},
+  {pic:null},
   ['haeun','smile','너 옷깃 뒤집혔어. 펴 줘도 돼?'],
   ['me','smile','응.'],
   ['nar','','하은이가 내 옷깃을 한 번 툭 펴 주고 자리로 돌아갔다. 나는 뒤집힌 줄도 몰랐다.']],
@@ -320,6 +320,7 @@ EP.haeun=[
   ['nar','','선생님: 「하은아, 잠깐 선생님 책상으로 와 줄래?」'],
   {pic:'haeun_03b'},
   ['nar','','하은이가 선생님께 갔다. 선생님은 하은이에게 몸을 숙이고 뭔가를 조용히 물으셨다. 하은이가 고개를 끄덕였다. 선생님이 하은이 어깨를 한 번 토닥이셨다. 반 아이들은 아무도 무슨 이야기인지 몰랐다. 나도 몰랐다.'],
+  {pic:null},
   ['nar','','하은이가 돌아와 앉았다.'],
   ['haeun','smile','보건실 가서 10분 누워 있다 와도 된대. 안 간다고 했어. 4교시 수학이야.'],
   ['haeun','smile','그리고 선생님이 내 {@notice_book}에 엄마한테 쪽지 쓰신대. 내가 요즘 자주 졸려 보인다고. 혼나는 거 아니래.'],
@@ -602,10 +603,12 @@ EP.haeun=[
   {pic:'haeun_06b'},
   ['nar','','처음 듣는 말이었다. 그때 옆자리에서 하은이가 일어났다.'],
   ['haeun','smile','내가 알아. 데려다줄게.'],
+  {pic:null},
   ['nar','','하은이 발을 봤다. {@indoor_shoes|가} 새거였다. 하얗고, 구멍이 없었다.'],
   ['think','surprised','(하은이 {@indoor_shoes} 새거야.)'],
   ['nar','','나는 아무 말도 하지 않았다. 하은이도 아무 말도 하지 않았다.'],
   {go:'hall'},
+  {move:['jiho',760,210]},{move:['jihoon',690,210]},
   ['nar','','계단을 내려가는데 아래에서 지호와 지훈이가 올라왔다.'],
   ['jihoon','smile','오, 하은이 새 {@indoor_shoes|네}!'],
   ['haeun','smile','응.'],
@@ -658,6 +661,7 @@ EP.haeun=[
    ['haeun','sad','막아 주려고 한 거 알아. 근데 ‘몰라도 돼’ 하면 뭐가 있는 것 같잖아.'],
    ['think','sad','(하은이를 지켜 주려고 했는데. 오히려 지호가 하은이 얘기를 꺼냈어.)']]}],
  post:[
+  {move:['jiho',0,0,'out']},{move:['jihoon',0,0,'out']},
   {go:'hall1f'},
   {pic:'haeun_06a'},
   ['nar','','1층 복도 끝, 도서관 옆. 노란 {@door}에 종이가 붙어 있었다.'],
@@ -667,13 +671,13 @@ EP.haeun=[
   ['nar','','노란 {@door|을} 똑똑똑 세 번 두드렸다.'],
   ['nar','','교육복지 선생님: 「네, 들어와요.」'],
   {go:'welfare'},
-  {pic:'haeun_06c'},
   ['nar','','{@door|을} 열었다. 교실보다 작은 방이었다. 푹신한 {@chair|가} 있고, 책장이 있고, 보드게임 상자가 쌓여 있었다. 창가에 작은 정수기와 {@cup} 선반이 있었다. 보리차 냄새가 났다.'],
   ['nar','','책상에 앉아 계시던 선생님이 일어나셨다. 목소리가 낮았다.'],
   ['nar','','교육복지 선생님: 「하은이 왔구나. 친구는 처음 보네. 이름이 뭐야?」'],
   ['nar','','나는 이름을 말했다.'],
   ['nar','','교육복지 선생님: 「{SN|아}, 어서 와.」'],
   ['haeun','smile','선생님, 얘 담임 선생님이 낱말 카드 빌리러 보냈어요.'],
+  {pic:'haeun_06c'},
   ['nar','','교육복지 선생님: 「아, 그 카드. 잠깐만. 그 전에, 보리차 마실래? 날이 건조해.」'],
   ['haeun','smile','{@cup|은} 저기 둘째 칸이야. 파란 거.'],
   {k:'cup',goal:'「{x}」 꺼내기'},
@@ -1757,7 +1761,7 @@ MAPS.hall1f={img:'maps/hall1f.jpg',walk:MAPS.hall.walk,rects:[],block:MAPS.hall.
   setDay(day);PICKS=['haeun'];EPIDX.haeun=k-1;TODAYEP.haeun=EP.haeun[k-1];MEET.haeun=k;D2CHOICE.haeun='B';
   stage='d2_after';load('class');useDoor()},97)}
 // when a meeting walks on ({go}) to the welfare room or the nurse's office, Haeun comes too and stands where the talk happens (10/27 picture check: in the nurse's office she was missing)
-EP.haeun[5].goAt={hall1f:[1330,770],welfare:[1160,660]};EP.haeun[8].goAt={nurse:[720,740]};EP.haeun[13].goAt={hall1f:[1330,770],welfare:[1160,660]};
+EP.haeun[5].goAt={hall1f:[1180,700],welfare:[1160,660]};EP.haeun[8].goAt={nurse:[720,740]};EP.haeun[13].goAt={hall1f:[1180,700],welfare:[1160,660]};
 {const _loadHa=load;load=function(m,x){const r=_loadHa(m,x),e=SCENE_EP;
   if(e&&e.goAt&&e.goAt[m]&&SCENE_IDS&&SCENE_IDS[0]==='haeun'){npcs=npcs.filter(p=>{if(p.id!=='haeun')return true;p.el.remove();return false});npcs.push(sprite('haeun',e.goAt[m][0],e.goAt[m][1]))}
   return r}}
