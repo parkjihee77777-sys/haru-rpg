@@ -21,7 +21,7 @@ const WORDPIC={
  minho_07:{ball:'ball_dodge'},siwoo_11:{ball:'ball_dodge'},hangyeol_04:{ball:'ball_dodge'},
  jiho_09:{ice:'ice_pack'},junho_05:{ice:'ice_pack'},
  sua_11:{glue:'glue_stick'},yuna_08:{glue:'glue_stick'},yuna_10:{glue:'glue_stick'},haram_09:{card:'card_greeting',glue:'glue_stick'},
- haneul_08:{notebook:'notebook_blue'},haneul_10:{notebook:'notebook_gray'},
+ 
  haram_07:{photo:'photo_grandma'},// Haram asks 'is that your grandma?': the photo shows her (owner 11/07)
  junho_04:{stairs:'stairs_down'},seah_07:{stairs:'stairs_down'},sua_01:{stairs:'stairs_down'},// going DOWN the stairs: a card that looks down the steps (owner 11/07)
  hangyeol_01:{thread:'thread_floss'},hangyeol_12:{thread:'thread_floss'}};
