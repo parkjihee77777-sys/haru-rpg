@@ -52,11 +52,11 @@ function edBoard(rows,done){const m=document.getElementById('modal'),c=document.
 const edRow=id=>[id==='me'?edName('me'):tr(id==='sua'?'양수아':'백지호'),ED.n[id]];
 // ---- the 종례 ----
 function edElection(){stage='d2_elect';setGoal('');ED=edResult();FLAGS.ED=ED;const L=EDL;
- const P=n=>()=>showPic(n),X=()=>showPic(null);const open=[P('ed_open')].concat(L.open,edM('jiho')>=4?L.jiho4:[],L.sua,edM('sua')>=7?L.sua7:[],[P('ed_speech')],L.me);
+ const P=n=>()=>showPic(n),X=()=>showPic(null);const open=L.open.slice(0,3).concat([P('ed_open')],L.open.slice(3),edM('jiho')>=4?L.jiho4:[],L.sua,edM('sua')>=7?L.sua7:[],[P('ed_speech')],L.me);
  fade(()=>{if(MAP!=='class')load('class');bgm('day');scene('lesson_3',open,()=>ask('어떻게 할까?',L.choices,o=>{sceneEl.classList.remove('on');ED.speech=o.k;FLAGS.ED=ED;
   runSteps(o.r.concat(L.close),null,edVote)}),true)})}
 function edVote(){const L=EDL,v=EP.minho_vote;
- const rest=()=>runSteps([()=>showPic('ed_vote')].concat(L.line,edM('hyeeun')>=1?L.hyeeun:[]),null,edCountUp);
+ const rest=()=>runSteps((edM('hyeeun')>=1?[()=>showPic('ed_vote')]:[]).concat(L.line,edM('hyeeun')>=1?L.hyeeun:[]),null,edCountUp);
  if(v&&edM('minho')>=4&&!FLAGS.minho_vote){SCENE_EP=v;SCENE_IDS=['minho'];layThings((v.things||{}).class||[]);
   runSteps(v.pre,null,()=>{const go=()=>ask(v.ask||'어떻게 할까?',v.choices,o=>{sceneEl.classList.remove('on');FLAGS.minho_vote=1;
    runSteps((o.r||[]).concat(v.post||[]),o.k,()=>{Object.entries(o.pts||{}).forEach(([p,n])=>heart(p,n));SCENE_EP=null;SCENE_IDS=null;rest()})});
@@ -73,12 +73,12 @@ function edScene(){const R=ED,L=EDL,e=R.ed,iWon=R.rank===1,f=R.f1,fr=f[0]?edFr(f
  const pair=R.order.slice(0,2).find(x=>x!=='me');
  const P=n=>()=>showPic(n),X=()=>showPic(null);
  if(e===1){edSay([P(pair==='sua'?'ed_1s':'ed_1j')].concat(L.ED1[pair],[X],fr,L.ED1.end),home);return}
- if(e===4||e===6){const S=e===4?L.ED4:L.ED6;edPlace(S.map,S.kids,[P(e===4?'ed_4':'ed_6')].concat(S.pre,iWon?S.me:S.them,[X],S.post,fr,S.end),home);return}
+ if(e===4||e===6){const S=e===4?L.ED4:L.ED6;edPlace(S.map,S.kids,S.pre.concat(iWon?S.me:S.them,[P(e===4?'ed_4':'ed_6')],S.post,[X],fr,S.end),home);return}
  if(e===2){const b=R.bffs[0];if(b==='sua'){FLAGS.WIN_sua=true;const s=EP.sua_result,bl=(s.post.find(x=>x.only&&x.only[0]==='bff_sua')||{}).lines||[];
    edPlace('hall',['sua'],[],()=>runSteps(s.pre.concat(bl),'bff_sua',home));return}
-  edPlace(MAPS.gatesun?L.ED2.map:'gate',[b],[P('ed_2')].concat(L.ED2.pre,[X],b==='jiho'?L.ED2.jiho:EDL.FR[b]?EDL.FR[b][edM(b)>=15?2:1]:[],L.ED2.end),home);return}
+  edPlace(MAPS.gatesun?L.ED2.map:'gate',[b],L.ED2.pre.concat(b==='jiho'?L.ED2.jiho:EDL.FR[b]?EDL.FR[b][edM(b)>=15?2:1]:[],L.ED2.end),home);return}
  if(e===3){const[b1,b2]=R.bffs,k=R.bffs.find(x=>EDL.FR[x]),line=k?EDL.FR[k][edM(k)>=15?2:1]:R.bffs.includes('jiho')?L.ED2.jiho:[];
-  const lib=()=>edPlace('library',[b1,b2],[P('ed_3')].concat(L.ED3.pre,[X],line,L.ED3.end),home);
+  const lib=()=>edPlace('library',[b1,b2],L.ED3.pre.concat(line,L.ED3.end),home);
   if(R.bffs.includes('sua'))edPlace('hall',['sua'],L.suaShort,lib);else lib();return}
  if(e===5){edSay([P('ed_5')].concat(L.ED5.pre,[X],fr,f[1]?edFr(f[1]):[],L.ED5.end),home);return}
  edSay([P('ed_7')].concat(L.ED7.pre,[X],fr,L.ED7.end),home)}
