@@ -8,7 +8,7 @@
 window.EP=window.EP||{};
 EP.seah=[
 // ■ Day 2 — 지금 다섯 명이야 (1)
-{title:'지금 다섯 명이야',scene:'seah_01',place:'field',at:[640,600],with:[['minho',440,560],['jiho',760,560],['jihoon',880,620],['hangyeol',600,470]],taps:{field:[['tree',420,700,90]],stands:[]},
+{title:'지금 다섯 명이야',scene:'seah_01',place:'field',at:[640,600],with:[['minho',440,560],['jiho',600,450],['jihoon',460,440],['hangyeol',330,470]],taps:{field:[['tree',420,700,90]],stands:[]},
  pre:[
   ['nar','','점심시간. 밥을 먹고 운동장에 나왔다. 해가 뜨거웠다.'],
   ['nar','','축구 골대 쪽은 벌써 시끄러웠다. 철봉 쪽에는 1학년들이 매달려 있었다.'],
@@ -120,7 +120,7 @@ EP.seah=[
   ['sua','smile','최민호. {@locker} 위에 앉지 않기. 규칙 6번. 벌점 하나.'],
   {pic:'seah_02a'},
   ['nar','','수아가 형광펜으로 {@notebook}에 뭔가를 쓰고 뚜껑을 딸깍 닫았다. 그리고 앞으로 갔다.'],
-  ['nar','','민호가 {@locker}에서 쿵 내려왔다. 수아 뒷모습을 보며 입을 비죽였다.'],
+  ['nar','','민호가 {@locker}에서 쿵 내려왔다. 수아 쪽을 보며 입을 비죽였다.'],
   ['minho','smile','벌점 기계 또 출동했네.'],
   ['jiho','smile','벌점 기계? 하하!'],
   ['minho','smile','삐- 삐- 벌점 하나. 삐- 벌점 둘. 삐-.'],
@@ -1547,4 +1547,4 @@ for(const k of ['water_bottle','desk','chair','window'])CARDS_HAVE.add(k);
 function seahBoard(){const L=['우리 반 약속','1. 친구가 「같이 하자」고 하면,','「응!」이나 「다음 판에 같이 하자!」로 대답해요.','2. 「누구랑 말하지 말자」는 약속은','우리 반에서는 하지 않아요.'].map(t=>tr(t));
  const d=document.createElement('div');d.style.cssText='position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;background:#0005';
  d.innerHTML=`<div style="width:min(92vw,480px);background:#2f5d46;border:10px solid #8a5a32;border-radius:14px;box-shadow:0 8px 24px #0006;padding:20px 22px;color:#f7f3e8;font-size:20px;line-height:1.5;font-family:inherit"><div style="text-align:center;font-size:24px;font-weight:800;margin-bottom:10px">${L[0]}</div><div>${L[1]}<br>&nbsp;&nbsp;${L[2]}</div><div style="margin-top:10px">${L[3]}<br>&nbsp;&nbsp;${L[4]}</div></div>`;
- const close=e=>{e.stopPropagation();e.preventDefault();d.remove()};d.addEventListener('pointerdown',close,true);document.body.appendChild(d)}
+ const close=e=>{e.stopPropagation();e.preventDefault();d.remove()};d.addEventListener('pointerdown',close,true);d.addEventListener('click',close,true);document.body.appendChild(d)}
