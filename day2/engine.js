@@ -146,8 +146,10 @@ function end2(){const n=DAY,next=n+1,hasNext=next===3&&Object.keys(window.D3||{}
 let HEART_D1=null;
 d2Merge();
 // ---- zoom: tap near a cluster of small things → that part of the picture opens big; tap things there to hear them / "This is …" ----
-function zoomAt(x,y){if(DAY<2)return null;return(ZOOMS[MAP]||[]).find(z=>x>=z[0]&&x<=z[2]&&y>=z[1]&&y<=z[3])}
-function showZoomMarks(){world.querySelectorAll('.zmark').forEach(e=>e.remove());if(DAY<2)return;for(const z of ZOOMS[MAP]||[]){const d=document.createElement('div');d.className='item zmark';d.textContent='🔍';d.style.cssText=`position:absolute;left:${z[2]-6}px;top:${z[1]+6}px;transform:translate(-100%,0);font-size:30px;z-index:4400;pointer-events:none;filter:drop-shadow(0 2px 2px rgba(0,0,0,.35));opacity:.9`;world.appendChild(d)}}
+function zoomAt(x,y){if(DAY<2)return null;return(ZOOMS[MAP]||[]).find(z=>x>=z[0]&&x<=z[2]&&y>=z[1]&&y<=z[3]&&zoomHas(z))}
+// a close-up spot with nothing small lying in it today shows no 🔍 and does not open (owner 11/07: 「돋보기 클릭하면 아무 것도 안 나와」)
+function zoomHas(z){return(OBJ[MAP]||[]).some(o=>o[1]>=z[0]&&o[1]<=z[2]&&o[2]>=z[1]&&o[2]<=z[3]&&o[3]<80)}
+function showZoomMarks(){world.querySelectorAll('.zmark').forEach(e=>e.remove());if(DAY<2)return;for(const z of ZOOMS[MAP]||[]){if(!zoomHas(z))continue;const d=document.createElement('div');d.className='item zmark';d.textContent='🔍';d.style.cssText=`position:absolute;left:${z[2]-6}px;top:${z[1]+6}px;transform:translate(-100%,0);font-size:30px;z-index:4400;pointer-events:none;filter:drop-shadow(0 2px 2px rgba(0,0,0,.35));opacity:.9`;world.appendChild(d)}}
 function openZoom(z){const m=document.getElementById('modal'),c=document.getElementById('mcard');busy=true;closeBubble();
  // the small things lying in that spot (one of each), left to right as they lie on the map
  const seen=new Set();const objs=(OBJ[MAP]||[]).filter(o=>o[1]>=z[0]&&o[1]<=z[2]&&o[2]>=z[1]&&o[2]<=z[3]&&o[3]<80&&!seen.has(o[0])&&seen.add(o[0])).sort((p,q)=>p[1]-q[1]);
