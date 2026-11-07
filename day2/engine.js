@@ -16,7 +16,7 @@ Object.assign(SZ,{"boram":[0.98,0.99,1.0],"doyeon":[0.949,0.978,1.0],"haeun":[0.
 const D2WORDS={handkerchief:{ko:'손수건',en:'handkerchief',id:'sapu tangan',vi:'khăn tay',zh:'手帕',card:'손수건'},
  chalk:{ko:'분필',en:'chalk',id:'kapur',vi:'phấn',zh:'粉笔'},umbrella:{ko:'우산',en:'umbrella',id:'payung',vi:'cái ô',zh:'雨伞'},ball:{ko:'공',en:'ball',id:'bola',vi:'quả bóng',zh:'球'},
  flag:{ko:'깃발',en:'flag',id:'bendera',vi:'lá cờ',zh:'旗子'},cup:{ko:'컵',en:'cup',id:'gelas',vi:'cái cốc',zh:'杯子'},bread:{ko:'빵',en:'bread',id:'roti',vi:'bánh mì',zh:'面包'},
- apple:{ko:'사과',en:'apple',id:'apel',vi:'quả táo',zh:'苹果'},bag:{ko:'가방',en:'bag',id:'tas',vi:'cặp sách',zh:'书包'},bench:{ko:'벤치',en:'bench',id:'bangku',vi:'ghế băng',zh:'长椅'}};
+ apple:{ko:'사과',en:'apple',id:'apel',vi:'quả táo',zh:'苹果'},bag:{ko:'가방',en:'bag',id:'tas',vi:'cặp sách',zh:'书包'},bench:{ko:'벤치',en:'bench',id:'bangku',vi:'ghế băng',zh:'长椅',ja:'ベンチ',ru:'скамейка'}};
 function d2Merge(){for(const src of [window.D2,window.D3])for(const id of ALL_IDS){const d=src&&src[id];if(!d)continue;Object.assign(D2WORDS,d.words||{});
   if(d.again&&!AGAIN[id])AGAIN[id]=d.again;if(d.name&&!NAME[id])NAME[id]=d.name;
   for(const ui of ['en','id','vi','zh']){T[ui]=T[ui]||{};for(const[k,v]of Object.entries((d.tr&&d.tr[ui])||{}))if(!(k in T[ui]))T[ui][k]=v}}
