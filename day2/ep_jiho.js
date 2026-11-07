@@ -9,7 +9,6 @@ window.EP=window.EP||{};
 EP.jiho=[
 // ■ Day 2 — 방금 건 연습 판 (1)
 {title:'방금 건 연습 판',scene:'jiho_01',place:'field',at:[900,430],with:[['junho',760,380],['haeun',1050,380]],
- things:{field:[['ball',820,450,42]]},
  pre:[
   {pic:'jiho_01a'},
   ['nar','','쉬는 시간. 운동장 가장자리에 아이들이 동그랗게 모여 있었다. 가운데에서 지호가 축구{@ball}을 발로 톡톡 차올리고 있었다.'],
@@ -92,7 +91,7 @@ EP.jiho=[
  post:[
   ['nar','','교실로 들어가는 길. {@ball}이 데굴데굴 굴러와 내 발 앞에서 멈췄다.'],
   ['jiho','smile','{@ball} 좀!'],
-  {k:'ball',goal:'「{x}」 굴려 주기'},
+  {k:'ball',goal:'「{x}」 굴려 주기',bag:['shoes','ball','whistle','cup']},
   {pic:'jiho_01c'},
   ['nar','','지호가 {@ball}을 옆구리에 끼더니 주머니에서 꼬깃꼬깃 접은 메모지와 볼펜을 꺼냈다. 그리고 숫자를 썼다. 「34」.'],
   ['me','surprised','그거 뭐야?'],
@@ -109,7 +108,6 @@ EP.jiho=[
 
 // ■ Day 3 — 손 자국 (2)
 {title:'손 자국',scene:'jiho_02',place:'field',at:[1300,620],with:[['haeun',1120,560]],
- things:{field:[['tape_measure',1400,610,46],['hand',1470,700,50]]},
  pre:[
   {pic:'jiho_02c'},
   ['nar','','체육 시간. 오늘은 제자리멀리뛰기 기록을 재는 날이었다. 운동장 모래판 앞에 줄이 섰다.'],
@@ -121,7 +119,7 @@ EP.jiho=[
   ['jiho','laugh','측정이 제일 큰 시합이야. 기록이 남잖아.'],
   ['nar','','내가 먼저 뛰었다. 160센티미터. 지호가 {@tape_measure}를 쭉 당겨 재 줬다.'],
   ['jiho','smile','160. 나쁘지 않아. 이제 내 차례. 네가 재.'],
-  {k:'tape_measure',goal:'「{x}」 당기기'},
+  {k:'tape_measure',goal:'「{x}」 당기기',bag:['ruler','tape_measure','pencil','paper']},
   {pic:'jiho_02a'},
   ['nar','','지호의 첫 번째. 198센티미터.'],
   ['jiho','angry','198? 2미터가 안 돼? 2센티 모자라!'],
@@ -132,7 +130,7 @@ EP.jiho=[
   ['jiho','laugh','봤지?! 2미터 넘었지?!'],
   ['nar','','지호 발꿈치는 205센티미터 근처였다. 그런데 {@hand}이 닿은 곳은 그보다 한참 뒤였다.'],
   ['think','surprised','(손 짚었어. 살짝이지만 짚었어.)'],
-  {k:'hand',goal:'「{x}」 자국 가리키기'},
+  {k:'hand',goal:'「{x}」 자국 가리키기',bag:['foot','hand','knee','finger']},
   ['nar','','모래 위에 손바닥 자국이 있었다. {@tape_measure}로 재니 191센티미터였다.'],
   ['me','surprised','지호야, 여기 {@hand} 자국 있어. 191이야.'],
   ['jiho','angry','{@hand} 안 짚었어! 스친 거야. 스친 건 짚은 거 아니야.'],
@@ -379,7 +377,6 @@ EP.jiho=[
  taps:{field:[['roof',1545,95,55]]},// the ball is laid, kicked away, then sits on the roof (it stayed on the ground all along, owner 11/06)
 
  pre:[
-  {lay:[['ball',1290,520,42]]},
   {pic:'jiho_05d'},
   ['nar','','쉬는 시간 축구. 오늘은 지호가 나를 자기 팀에 넣었다.'],
   ['jiho','laugh','리프팅 하는 애는 무조건 우리 팀.'],
@@ -460,8 +457,7 @@ EP.jiho=[
   {only:['A','C'],lines:[['nar','','선생님: (나를 보며 작게) 「말해 줘서 고마워요.」']]},
   ['nar','','당번 선생님: 「대신 남은 시간은 이 {@ball}으로 해요. {@roof} 쪽으로는 차지 않기.」'],
   {only:['D'],lines:[['nar','','교실 {@ball}은 낡아서 바람이 빠져 있었다. 선생님 {@ball}으로 바꾸기로 했다.']]},
-  {lay:[['ball',1290,520,42]]},
-  {k:'ball',goal:'「{x}」 받기'},
+  {k:'ball',goal:'「{x}」 받기',bag:['ball','whistle','cup','shoes']},
   {pic:'jiho_05e'},
   ['nar','','남은 3분. 지호가 {@ball}을 받자마자 달렸다. 그리고 진짜로 한 골을 넣었다. 3대3.'],
   {only:['C'],lines:[['jiho','laugh','아까 진 건 지붕 공 판이고, 이건 새 공 판이다. 새 판은 무승부!']]},
@@ -494,7 +490,6 @@ EP.jiho=[
 
 // ■ Day 7 — 아무도 못 봤어 (6)
 {title:'아무도 못 봤어',scene:'jiho_06',place:'field',at:[640,380],with:[['yena',820,470]],
- things:{stands:[['water_bottle',760,600,44]]},
  pre:[
   {pic:'jiho_06a'},
   ['nar','','체육 시간. 오늘은 발야구를 했다. 번호 홀수가 한 팀, 짝수가 한 팀. 나와 지호는 같은 팀이 됐다.'],
@@ -559,7 +554,7 @@ EP.jiho=[
   {go:'stands'},
   ['nar','','체육 시간이 끝났다. 지호가 스탠드 계단에 앉아 숨을 몰아쉬었다.'],
   ['jiho','sad','물, 물. 내 {@water_bottle} 거기 있지? 좀 줘.'],
-  {k:'water_bottle',goal:'「{x}」 건네주기'},
+  {k:'water_bottle',goal:'「{x}」 건네주기',bag:['cup','water_bottle','towel','bag']},
   {pic:'jiho_06d'},
   ['nar','','지호가 {@water_bottle}을 받아 벌컥벌컥 마셨다.'],
   {only:['A','B'],lines:[
@@ -670,7 +665,6 @@ EP.jiho=[
 
 // ■ Day 9 — 이긴 쪽 (8)
 {title:'이긴 쪽',scene:'jiho_08',place:'gym',at:[760,560],with:[['jihoon',980,600],['hangyeol',1250,420]],taps:{stands:[['water',250,650,70]]},
- things:{gym:[['jump_rope',880,660,56],['water',600,760,46]]},
  pre:[
   ['nar','','체육 시간. 오늘은 {@jump_rope} 오래 뛰기를 했다. 두 명씩 짝이 돼서 서로 횟수를 세 줬다. 내 짝은 또 지호였다.'],
   ['nar','','체육관 한쪽에서 한결이가 2단 뛰기를 하고 있었다. 아이들이 「와아!」 했다.'],
@@ -678,7 +672,7 @@ EP.jiho=[
   ['me','surprised','너는?'],
   ['jiho','sad','……나는 {@jump_rope} 별로 안 해.'],
   ['nar','','지호가 {@jump_rope}를 대충 집어 들었다. 손잡이가 바닥에 질질 끌렸다. 줄이 지호 키에 비해 너무 길었다.'],
-  {k:'jump_rope',goal:'「{x}」 길이 맞추기'},
+  {k:'jump_rope',goal:'「{x}」 길이 맞추기',bag:['jump_rope','ball','whistle','towel']},
   ['nar','','내 {@jump_rope} 줄을 발로 밟고, 손잡이가 가슴까지 오게 줄였다.'],
   {pic:'jiho_08a'},
   ['nar','','지호가 먼저 뛰었다. 줄이 길어서 자꾸 발에 걸렸다.'],
@@ -765,7 +759,6 @@ EP.jiho=[
 
 // ■ Day 10 — 잠깐 멈춰 (9)
 {title:'잠깐 멈춰',scene:'jiho_09',place:'gym',at:[860,520],with:[['haeun',1080,600]],
- things:{gym:[['ice',1000,720,44]]},
  pre:[
   ['nar','','체육 시간. 모둠별 농구 시합을 했다. 규칙은 하나였다. 패스를 다섯 번 하고 나서 슛하기. 선생님이 모둠을 정해 주셨다. 나와 지호는 같은 모둠이었다.'],
   ['jiho','angry','패스! 패스! 세게! 빨리!'],
@@ -825,7 +818,7 @@ EP.jiho=[
   {pic:'jiho_09d'},
   ['nar','','선생님이 체육관 구급함을 열고 {@ice}주머니를 꺼내셨다.'],
   ['nar','','선생님: 「{@finger}에 대고 있어요. 차가워도 10분은 대고 있어요.」'],
-  {k:'ice',goal:'「{x}」 대기'},
+  {k:'ice',goal:'「{x}」 대기',bag:['bandage','ice','water','towel']},
   ['nar','','{@ice}주머니를 {@finger}에 댔다. 차갑고, 욱신거림이 조금 줄어들었다.'],
   {pic:'jiho_09b'},
   ['nar','','선생님: 「체육 끝나고 보건실 같이 가요. 이번 판은 여기까지 할게요.」'],
@@ -852,7 +845,6 @@ EP.jiho=[
 
 // ■ Day 11 — 빨리 먹기 시합 (10)
 {title:'빨리 먹기 시합',scene:'jiho_10',place:'cafe',at:[660,720],with:[['junho',800,760],['haeun',540,760],['yena',1010,690]],
- things:{cafe:[['milk',1330,700,46]]},
  pre:[
   {pic:'jiho_10c'},
   ['nar','','점심시간. 오늘 급식은 카레였다. 내가 좋아하는 거였다. 나는 지호, 준호, 하은, 예나와 같은 식탁에 앉았다.'],
@@ -920,7 +912,7 @@ EP.jiho=[
   {pic:'jiho_10e'},
   ['nar','','{@tray}을 들고 일어서는데, 조리사님이 우리 식탁을 보며 말씀하셨다.'],
   ['nar','','조리사님: 「{@milk} 안 가져갔지? 하나씩 챙겨 가.」'],
-  {k:'milk',goal:'「{x}」 챙기기'},
+  {k:'milk',goal:'「{x}」 챙기기',bag:['spoon','cup','milk','tray']},
   ['nar','','반납대 옆 바구니에서 {@milk}를 하나 집었다.'],
   {pic:'jiho_10b'},
   ['nar','','교실로 돌아가는 길. 지호가 {@milk} 팩을 흔들며 물었다.'],
@@ -940,7 +932,6 @@ EP.jiho=[
 
 // ■ Day 12 — 심판 (11)
 {title:'심판',scene:'jiho_11',place:'field',at:[820,420],with:[['youngmin',980,470],['junho',660,470]],
- things:{field:[['ball',1000,560,42]]},
  pre:[
   ['nar','','쉬는 시간 축구. 오늘은 사람이 홀수라 한 명이 남았다. 준호가 나를 가리켰다.'],
   ['junho','smile','{SN|이} 심판 해. 지호가 네 말은 듣잖아.'],
@@ -949,7 +940,7 @@ EP.jiho=[
   {pic:'jiho_11a'},
   ['nar','','나는 운동장 당번 선생님께 가서 {@whistle}를 빌렸다.'],
   ['nar','','당번 선생님: 「심판이에요? 판정은 심판이 하는 거예요. 다치는 일만 생기면 선생님 불러요.」'],
-  {k:'whistle',goal:'「{x}」 목에 걸기'},
+  {k:'whistle',goal:'「{x}」 목에 걸기',bag:['whistle','ball','stopwatch','flag']},
   ['nar','','{@whistle} 끈을 목에 걸었다. 한 번 불어 봤다. 삑!'],
   {pic:'jiho_11'},
   ['nar','','1대1. 쉬는 시간이 얼마 남지 않았다. 지호가 {@ball}을 몰고 달렸다. 영민이가 막아섰다.'],
@@ -1011,7 +1002,7 @@ EP.jiho=[
   ['nar','','경기가 다시 시작됐다.'],
   {only:['A','D'],lines:[['nar','','영민이 팀 프리킥. 영민이가 {@ball}을 놓을 자리를 찾았다.']]},
   {only:['B','C'],lines:[['nar','','가운데에서 다시 시작. 내가 {@ball}을 가운데에 놓았다.']]},
-  {k:'ball',goal:'「{x}」 놓기'},
+  {k:'ball',goal:'「{x}」 놓기',bag:['flag','ball','whistle','cup']},
   ['nar','','{@ball}을 정해진 자리에 내려놓았다. {@whistle}를 불었다. 삑!'],
   {only:['C'],lines:[['nar','','쉬는 시간이 끝날 때까지 더는 골이 나지 않았다. 2대1, 지호 팀 승.']]},
   {only:['A','B','D'],lines:[['nar','','쉬는 시간이 끝날 때까지 더는 골이 나지 않았다. 1대1, 무승부.']]},
@@ -1218,13 +1209,12 @@ EP.jiho=[
 
 // ■ Day 15 — 표 합치자 (14)
 {title:'표 합치자',scene:'jiho_14',place:'stands',at:[1100,470],
- things:{stands:[['paper',1000,560,42]]},
  pre:[
   {pic:'jiho_14b'},
   ['nar','','쉬는 시간. 운동장 스탠드 맨 위 칸에 지호가 앉아 있었다. 나를 보더니 손짓했다.'],
   ['jiho','smile','와 봐. 작전 회의.'],
   ['nar','','지호가 반으로 접은 {@paper}를 내밀었다. 연필 자국이 잔뜩 있었다.'],
-  {k:'paper',goal:'「{x}」 펼치기'},
+  {k:'paper',goal:'「{x}」 펼치기',bag:['notebook','paper','pencil','eraser']},
   {pic:'jiho_14'},
   ['nar','','지호의 종이: 「수아 6, 백지호 5, {SN} 4 → 5 + 4 = 9! 수아 이김!」'],
   ['jiho','laugh','애들한테 다 물어봤어. 수아 6, 나 5, 너 4. 우리 둘이 합치면 9야. 수아를 이겨.'],
@@ -1301,7 +1291,6 @@ EP.jiho=[
 
 // ■ Day 16R — 진짜 판 (15)
 {title:'진짜 판',scene:'jiho_15',place:'field',at:[900,430],with:[['junho',740,380],['haeun',1060,380],['youngmin',1180,450],['yena',620,470],['hyeeun',960,520]],
- things:{field:[['ball',1100,560,42]]},
  pre:[
   ['nar','','쉬는 시간. 운동장 가장자리, 처음 지호를 만났던 자리. 지호가 {@ball}을 발밑에 두고 기다리고 있었다.'],
   ['jiho','smile','진짜 판. 오늘은 연습 판 없음. 내가 그 말 안 한다. 약속.'],
@@ -1372,7 +1361,7 @@ EP.jiho=[
   ['nar','','아이들이 흩어지기 시작했다. 저쪽에서 1학년 아이들이 {@ball}을 차다가 우리 쪽을 봤다.'],
   ['nar','','1학년 아이: 「저기요! {@ball} 좀 같이 써도 돼요?」'],
   ['jiho','smile','어. 써.'],
-  {k:'ball',goal:'「{x}」 넘겨주기'},
+  {k:'ball',goal:'「{x}」 넘겨주기',bag:['ball','shoes','sock','bag']},
   ['nar','','{@ball}을 1학년 아이 쪽으로 툭 굴려 줬다.'],
   {pic:'jiho_15b'},
   ['nar','','지호가 메모지와 볼펜을 꺼냈다. 「41」이라고 썼다. 그리고 그 옆에 「38」을 썼다.'],
