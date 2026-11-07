@@ -751,7 +751,7 @@ EP.haram=[
 
 // ■ Day 14 — 같은 달 (13)
 {title:'같은 달',scene:'haram_13',place:'rooftop',at:[820,620],
- taps:{rooftop:[['window',575,250,55]]},things:{rooftop:[['moon',1000,54,44]]},
+ taps:{rooftop:[['window',575,250,55]]},things:{rooftop:[['moon',1000,54,44,'moon_full']]},
  pre:[
   {pic:'haram_d14_alone'},['nar','','방과 후. 오늘은 {HC} 명절이었다. 아침에 할머니랑 영상 통화를 했다. 할머니 뒤로 친척들이 다 모여 있었다. 우리 집만 없었다.'],
   ['nar','','학교에서는 아무도 오늘이 명절인지 몰랐다. 평소랑 똑같은 날이었다.'],
