@@ -346,7 +346,7 @@ EP.minho=[
 // ■ Day 9 — 뒤집힌 우산 (8)
 {title:'뒤집힌 우산',scene:'minho_08',place:'gate',at:[960,650],
  taps:{gate:[['umbrella',782,185,32]]},
- things:{gate:[['umbrella',1060,690,64]]},
+ things:{gate:[['umbrella',1060,690,84]]},
  pre:[
   {pic:'minho_08'},
   ['nar','','하교 시간. 비가 오고 바람이 셌다. 교문 옆에서 민호가 뒤집힌 {@umbrella|과} 씨름하고 있었다. 나는 민호 쪽으로 갔다.'],

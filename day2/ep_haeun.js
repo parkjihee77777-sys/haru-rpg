@@ -594,7 +594,7 @@ EP.haeun=[
 
 // ■ Day 7 — 누구나 오는 방 (6)
 {title:'누구나 오는 방',scene:'haeun_06',place:'class',at:[405,720],
- taps:{hall:[['door',1058,232,45]],welfare:[['cup',930,118,28]]},
+ taps:{hall1f:[['door',1488,560,60]],welfare:[['cup',930,118,28]]},
  pre:[
   ['nar','','2교시 뒤 쉬는 시간. 선생님이 나를 부르셨다.'],
   ['nar','','선생님: 「1층 교육복지실에 한국어 그림 낱말 카드가 있어요. 보드게임도 있고요. 쉬는 시간에 가서 빌려 와도 돼요. 도서관 옆이에요.」'],
@@ -658,6 +658,7 @@ EP.haeun=[
    ['haeun','sad','막아 주려고 한 거 알아. 근데 ‘몰라도 돼’ 하면 뭐가 있는 것 같잖아.'],
    ['think','sad','(하은이를 지켜 주려고 했는데. 오히려 지호가 하은이 얘기를 꺼냈어.)']]}],
  post:[
+  {go:'hall1f'},
   {pic:'haeun_06a'},
   ['nar','','1층 복도 끝, 도서관 옆. 노란 {@door}에 종이가 붙어 있었다.'],
   ['nar','','「교육복지실 — 누구나 쉬어 가는 방」'],
@@ -1498,7 +1499,7 @@ EP.haeun=[
 
 // ■ Day 15 — 말은 내가 할게 (14)
 {title:'말은 내가 할게',scene:'haeun_14',place:'class',at:[405,720],with:[['yuna',560,640]],
- taps:{hall:[['door',1058,232,45]],welfare:[['chair',1350,425,50]]},
+ taps:{hall1f:[['door',1488,560,60]],welfare:[['chair',1350,425,50]]},
  pre:[
   ['nar','','점심을 먹고 교실로 돌아왔다. 유나가 하은이에게 다가왔다.'],
   ['yuna','smile','하은아, 오늘 공기 해? 혜은이가 기다려.'],
@@ -1511,7 +1512,7 @@ EP.haeun=[
   ['nar','','하은이가 나를 똑바로 봤다. 그리고 덧붙였다.'],
   ['haeun','smile','말은 내가 할게. 너는 그냥 옆에 있어.'],
   ['me','smile','응. 갈게.'],
-  {go:'hall'},
+  {go:'hall1f'},
   {pic:'haeun_14b'},
   ['nar','','1층 복도를 걸으면서 하은이 얼굴이 점점 굳었다. 긴장한 얼굴이었다. 하은이가 {@notice_book|을} 펼쳐 보여 줬다. 하은이 글씨로 세 줄이 적혀 있었다.'],
   ['nar','','「1. 수요일 요리 교실 하고 싶어요. 2. 수요일만 하준이 돌봄 한 시간 더 있을 수 있어요? 3. 엄마가 물어봐도 된대요.」'],
@@ -1741,6 +1742,9 @@ const HA_WELFARE_WALK=[[[290,610],[480,600],[660,570],[800,450],[1100,450],[1210
 Object.assign(EXTRA_MAPS,{
  welfare:{name:'교육복지실',img:'maps/welfare.jpg',walk:HA_WELFARE_WALK,block:HA_WELFARE_BLOCK,start:HA_WELFARE_START,out:HA_WELFARE_OUT}});
 for(const id of ['welfare']){const m=EXTRA_MAPS[id];MAPS[id]={img:m.img,walk:m.walk,rects:[],block:m.block||[],start:m.start};OUT[id]=m.out;PLACE[id]=id}
+// 1st-floor corridor with the yellow welfare-room door (11/07 boss: the knock happened at a classroom door upstairs): the hall picture with that door painted yellow, same walk
+EXTRA_MAPS.hall1f={name:'복도',img:'maps/hall1f.jpg',walk:MAPS.hall.walk,block:MAPS.hall.block,start:MAPS.hall.start,out:OUT.hall};
+MAPS.hall1f={img:'maps/hall1f.jpg',walk:MAPS.hall.walk,rects:[],block:MAPS.hall.block||[],start:MAPS.hall.start};OUT.hall1f=OUT.hall;PLACE.hall1f='hall1f';
 {const P={'교육복지실':['education welfare room','ruang kesejahteraan','phòng phúc lợi học đường','教育福利室','きょういくふくしの へや','кабинет соцпедагога'],'보건실':['nurse\'s office','UKS','phòng y tế','医务室','ほけんしつ','медкабинет']};
  ['en','id','vi','zh','ja','ru'].forEach((u,i)=>{T[u]=T[u]||{};for(const[k,v]of Object.entries(P))if(!(k in T[u]))T[u][k]=v[i]})}
 // test shortcuts: #ha5 = the morning of the day you meet Haeun the 5th time (Day 6); #ha5eve = that evening; #ha15b = Day 16R with the flags off
@@ -1751,7 +1755,7 @@ for(const id of ['welfare']){const m=EXTRA_MAPS[id];MAPS[id]={img:m.img,walk:m.w
   setDay(day);PICKS=['haeun'];EPIDX.haeun=k-1;TODAYEP.haeun=EP.haeun[k-1];MEET.haeun=k;D2CHOICE.haeun='B';
   stage='d2_after';load('class');useDoor()},97)}
 // when a meeting walks on ({go}) to the welfare room or the nurse's office, Haeun comes too and stands where the talk happens (10/27 picture check: in the nurse's office she was missing)
-EP.haeun[5].goAt={welfare:[1160,660]};EP.haeun[8].goAt={nurse:[960,660]};EP.haeun[13].goAt={welfare:[1160,660]};
+EP.haeun[5].goAt={hall1f:[1330,770],welfare:[1160,660]};EP.haeun[8].goAt={nurse:[960,660]};EP.haeun[13].goAt={hall1f:[1330,770],welfare:[1160,660]};
 {const _loadHa=load;load=function(m,x){const r=_loadHa(m,x),e=SCENE_EP;
   if(e&&e.goAt&&e.goAt[m]&&SCENE_IDS&&SCENE_IDS[0]==='haeun'){npcs=npcs.filter(p=>{if(p.id!=='haeun')return true;p.el.remove();return false});npcs.push(sprite('haeun',e.goAt[m][0],e.goAt[m][1]))}
   return r}}
