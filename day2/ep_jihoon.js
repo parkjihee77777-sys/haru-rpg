@@ -542,8 +542,7 @@ EP.jihoon=[
  post:[
   ['nar','','지훈이가 점퍼를 입고 {@camera|를} 안쪽 {@pocket}에 넣었다. 그러다 팔 {@pocket|를} 만졌다.'],
   ['jihoon','surprised','어? 여기 뭐 있다. 지퍼가 안 열려. 좀 열어 줘. 나 {@camera} 들고 있어서.'],
-  {lay:[['pocket',1190,660,54,'pocket_jumper']]},
-  {k:'pocket',goal:'「{x}」 열기'},
+  {k:'pocket',goal:'「{x}」 열기',bag:['pocket:pocket_jumper5','camera','umbrella','shoes','sticker']},
   ['nar','','팔 {@pocket} 지퍼를 끝까지 열었다. 안에서 작게 접힌 종이가 나왔다.'],
   ['nar','','오래된 종이였다. 접힌 데가 하얗게 닳아 있었다. 지훈이가 펼쳤다.'],
   ['nar','','「지훈이 줌. {@pocket} 다섯 개. 따뜻함 보장. 촌스러움도 보장. — 형」'],
@@ -568,7 +567,6 @@ EP.jihoon=[
 // ■ Day 8 — 꽥이 (7)
 {title:'꽥이',scene:'jihoon_07',place:'class',at:[900,600],with:[['jiho',620,480],['yena',1070,620]],
  pre:[
-  {lay:[['doll',1080,650,36]]},
   ['nar','','1교시가 끝났다. 나는 책상 옆 고리에 건 {@bag|을} 열었다. 물통을 꺼내려고.'],
   {k:'bag',goal:'「{x}」 열기'},
   ['nar','','{@bag} 지퍼를 열고 물통을 꺼냈다.'],
@@ -633,7 +631,7 @@ EP.jihoon=[
   ['nar','','아이들이 자리로 돌아갔다. 지훈이가 자기 자리로 가다가 돌아봤다.'],
   {only:['A','B','C'],lines:[['nar','','지훈이가 바지 {@pocket}에서 노란 오리를 살짝 꺼내 보였다. 꼬리가 닳아 있었다.'],['jihoon','smile','(작게) ……나도 사실 아직 있어. {@pocket}에.']]},
   {only:['D'],lines:[['nar','','지훈이가 {@pocket} 속 오리를 꺼내 나한테만 보이게 흔들었다.']]},
-  {k:'doll',goal:'「{x}」 누르기'},
+  {k:'doll',goal:'「{x}」 누르기',bag:['doll','pencil','eraser','water_bottle','pcase']},
   {only:['A'],lines:[['nar','','{@bag} 안에서 꽥이가 작게 울었다. {@bag} 천 너머로 눌렀다.']]},
   ['nar','','꽥. {@teacher|이} 칠판 앞에서 돌아보셨다.'],
   ['nar','','선생님: 「누가 오리 키워요?」'],
@@ -648,7 +646,7 @@ EP.jihoon=[
   common:[['me','smile','그리고 수업 시작할 때 꽥이가 꽥 했어. {@teacher|이} 누가 오리 키우냐고 하셨어. 그랬더니 서랍 여기저기서 꽥꽥 했어.'],['mom','smile','(크게 웃음) 다들 서랍에 넣고 누르고 있었구나.'],['me','smile','응. 다 아직 좋아하는 거였어. 지훈이 주머니에서도 꽥 했어.'],['dad','smile','{d}도 회사 서랍에 좋아하는 거 하나 있어.']]}},
 
 // ■ Day 9 — 치즈 말고 (8)
-{title:'치즈 말고',scene:'jihoon_08',place:'field',at:[1290,560],with:[['youngmin',1440,600],['jiho',1320,720],['junho',1580,700],['yena',1160,690],['haram',1610,500]],friend:'youngmin',
+{title:'치즈 말고',scene:'jihoon_08',place:'field',at:[1040,560],with:[['youngmin',1190,600],['jiho',1070,720],['junho',1330,700],['yena',910,690],['haram',1360,500]],friend:'youngmin',
  pre:[
   {pic:'jihoon_08a'},
   ['nar','','점심시간. 철봉 옆 모래밭에 우리 반 아이들이 모여 있었다. 지호, 준호, 예나, 하람, 영민, 그리고 나.'],
@@ -702,7 +700,7 @@ EP.jihoon=[
   ['nar','','그때였다. 지훈이가 한 발 뒤로 물러섰다. 다 나오게 찍으려고. 그런데 발이 모래밭 턱에 걸렸다.'],
   ['jihoon','smile','어, 어, 어—!'],
   ['nar','','지훈이가 엉덩방아를 찧었다. {@sand|가} 확 튀었다. {@camera|는} 손목 끈 덕분에 안 떨어졌다. 그런데 넘어지면서 단추가 눌렸다. 찰칵.'],
-  {lay:[['sand',1290,620,60]]},
+  {lay:[['sand',1040,620,60]]},
   {only:['D'],lines:[['nar','','축구하러 가던 지호랑 준호랑 나도 그 소리에 돌아봤다. 그리고 다시 뛰어왔다.']]},
   ['nar','','다들 웃음이 터졌다. 지호는 {@sand} 위를 굴렀다. 예나는 배를 잡았다. 영민이도 웃었다. 소리를 내서.'],
   ['jihoon','smile','아, 아파! 웃지 마!'],
@@ -971,7 +969,7 @@ EP.jihoon=[
   {only:['A'],lines:[['nar','','지호랑 준호가 가고 나서였다. 지훈이가 화면을 보다가 고개를 들었다.'],['jihoon','smile','근데…… 이거 네가 불렀지? 나 네 목소리 듣고 왔잖아.'],['me','smile','……응.'],['jihoon','smile','그럼 네 {@name}도 써야지. 아까 말하지.'],['think','smile','(말 안 해도 지훈이가 알아챘어. 근데 내가 말할 수도 있었어.)']]},
   ['nar','','지훈이가 {@camera} 렌즈를 봤다. 엎드려 찍느라 물방울이 튀어 있었다.'],
   ['jihoon','surprised','아, 렌즈에 {@water} 묻었다. 휴지 있어?'],
-  {lay:[['water',1200,560,62,'water_drops']]},
+  {lay:[['water','@jihoon',40,-40,62,'water_drops']]},
   ['nar','','내 {@pocket}에 휴지가 한 장 있었다.'],
   {k:'water',goal:'「{x}」 닦기',tray:false},
   {clear:['water']},
@@ -996,10 +994,10 @@ EP.jihoon=[
 // ■ Day 13 — 내려 주세요 (12)
 {title:'내려 주세요',scene:'jihoon_12',place:'class',at:[1420,330],with:[['jiho',1100,320],['yena',1250,300]],goAlone:{hall:['A','B','C','D'],class:['A','B','C','D']},
  pre:[
-  {lay:[['photo',1300,95,46,'photo_grandma']]},
+  {lay:[['photo',1300,110,72,'photo_grandma']]},
   {pic:'jihoon_12a'},
   ['nar','','1교시가 끝났다. 교실 뒤 게시판 앞이 시끄러웠다.'],
-  {k:'photo',goal:'「{x}」 보기'},
+  {k:'photo',goal:'「{x}」 보기',tray:true},
   {pic:'jihoon_12b'},
   ['nar','','「이번 주 우리 반」에 새 {@photo|이} 붙어 있었다. {@school_gate} 앞. 지훈이가 바퀴 달린 장바구니를 끌고 있었다. 옆에 꽃무늬 모자를 쓴 {@grandma}. {@grandma|는} 웃고 계셨다. 지훈이는 땅을 보고 있었다.'],
   ['nar','','밑에 {@teacher} 글씨가 있었다. 「{@grandma|를} 도와드리는 지훈이 ♡」'],
@@ -1014,7 +1012,7 @@ EP.jihoon=[
   ['jihoon','surprised','……잠깐 나와 봐.'],
   ['nar','','지훈이가 복도로 나갔다. 나도 따라 나갔다.'],
   {go:'hall'},
-  {move:['jihoon',1260,700]},
+  {move:['jihoon',980,600]},
   ['jihoon','smile','……저거 떼 줘.'],
   ['me','surprised','어?'],
   ['jihoon','smile','네가 좀 떼 줘. 쉬는 시간 끝나기 전에. 아무도 모르게. 나는 못 해. 내가 떼면 다 쳐다봐.'],
@@ -1149,7 +1147,7 @@ EP.jihoon=[
   ['nar','','지훈이가 일어났다. 이번엔 걸음을 빨리 하지 않았다. {@grandma}한테 {@hand|을} 흔들었다. 크지는 않게. 그래도 흔들었다.'],
   {pic:'jihoon_13d'},
   ['nar','','그때 장바구니 덮개가 들썩였다. 노란 머리가 쏙 나왔다.'],
-  {lay:[['cat',1260,760,64,'cat_basket']]},
+  {lay:[['cat',1120,740,72,'cat_basket']]},
   ['jihoon','surprised','참깨?! {@grandma}, 참깨 데려왔어?'],
   ['grandma','smile','가가 자꾸 따라 나오는 걸 우짜노. ……자꾸 따라 나오는데 어떡하니.'],
   ['jihoon','smile','만져 봐. 근데 물어보고 만져. 참깨는 이마 좋아해.'],
@@ -1175,7 +1173,7 @@ EP.jihoon=[
   ['nar','','점심시간. 골대 뒤 잔디에 지훈이가 앉아 있었다. {@camera} 단추를 계속 눌렀다. 화면이 까맸다.'],
   ['jihoon','smile','배터리 없어. 어제 충전 까먹었어.'],
   ['jihoon','smile','오늘 {@sun} 진짜 좋은데. {@cloud}도 있고. 다 놓치겠어.'],
-  {lay:[['sun',1120,60,90]]},
+  {lay:[['sun',1120,120,96]]},
   {k:'sun',goal:'「{x}」 가리키기'},
   {clear:['sun']},
   ['nar','','한 {@hand|으로} {@eye|을} 가리고, 다른 {@hand|으로} {@sun|가} 있는 쪽을 가리켰다. {@sun|를} 똑바로 보지는 않았다.'],
