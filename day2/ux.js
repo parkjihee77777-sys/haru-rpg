@@ -288,3 +288,7 @@ if(MAPS.gatesun){MAPS.gatesun.block=(MAPS.gatesun.block||[]).concat([R(1025,540,
 // ===== Hajun (Haeun's little brother, 1st grade): his own walk sheet now exists (walk/hajun.png); a little shorter than the 5th graders =====
 NAME.hajun='하준';SZ.hajun=[0.968,0.988,0.8];
 {const TN={en:'Hajun',vi:'Hajun',zh:'夏俊',ja:'ハジュン',ru:'Хаджун',id:'Hajun'};for(const u in TN){T[u]=T[u]||{};if(!T[u]['하준'])T[u]['하준']=TN[u]}}
+// ===== PE class (owner 11/07): in the gym, and on the field when the meeting's opening says 「체육 시간」, I wear the PE uniform (walk/<hero>_pe.png) - no school uniform, no backpack =====
+{const PE={hero_m:true,hero_f:true};
+ const isPE=m=>m==='gym'||(m==='field'&&SCENE_EP&&SCENE_EP.place==='field'&&JSON.stringify(SCENE_EP.pre||[]).includes('체육 시간'));
+ const _ldPE=load;load=function(m){const r=_ldPE.apply(this,arguments);try{if(me&&me.el&&PE[HERO]&&isPE(m)){const o=me,t0=Date.now(),put=()=>{if(o.w)o.el.style.backgroundImage=`url(walk/${HERO}_pe.png)`;else if(Date.now()-t0<4000)setTimeout(put,40)};put()}}catch(e){}return r}}// the sheet sets its own picture when it loads, so wait for that first
