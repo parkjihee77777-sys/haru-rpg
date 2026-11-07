@@ -107,8 +107,8 @@ EP.minho=[
 
 // ■ Day 4 — 고양이를 부르는 말 (3)
 {title:'고양이를 부르는 말',place:'flowerbed',scene:'minho_03',at:[1220,660],
- things:{flowerbed:[['cat',1395,650,110,'cat_yellow']]},
  pre:[
+  {lay:[['cat',1395,650,110,'cat_yellow','stay']]},// laid for this scene only, cleared at its end (boss 11/07: not left on the flowerbed map for other friends' scenes)
   {pic:'minho_03a'},
   ['nar','','자전거 보관대 뒤 화단. 민호가 쪼그려 앉아 꼼짝도 안 하고 있었다. 내가 다가가자 민호가 손가락을 입에 댔다.'],
   ['minho','surprised','쉿.'],
@@ -142,7 +142,7 @@ EP.minho=[
   ['minho','smile','여기 {@cat} 있는 거, 딴 애들한테 막 말하지 마. 애들 몰려오면 얘 안 와.'],
   ['me','smile','알았어.'],
   ['nar','','민호는 대답 없이 먼저 교실로 갔다.'],
-  ['think','surprised','(민호가 {@cat} 앞에서는 저렇게 조용하구나.)']],
+  ['think','surprised','(민호가 {@cat} 앞에서는 저렇게 조용하구나.)'],{clear:['cat']}],
  flag:{M04_word:{A:1,B:0,C:1,D:1}},
  eve:{lead:[['nar','','{d}가 일찍 왔다. 오늘은 내 옆자리에 앉았다.'],['me','smile','{m}, 학교 화단에 노란 {@cat} 있어. 민호가 그거 보고 있었어.'],['mom','surprised','민호? {@pcase} 가져갔던 애?'],['me','smile','응. 근데 {@cat} 앞에서는 엄청 조용했어.']],
   A:[['me','smile','민호가 {HL}로 {@cat|을} 뭐라고 하냐고 물었어. 알려 줬어. 그 전에 지렁이라고 한 거 싫었다고도 했고.'],['dad','surprised','그 말 하기 어렵지 않았어?'],['me','sad','좀. 근데 {@cat} 보고 있으니까 말이 나왔어.'],['mom','smile','민호는 뭐래?'],['me','smile','그냥 한 말이래. 그러고 {HL} 따라 했어.'],['mom','relieved','그랬구나.']],
@@ -153,8 +153,8 @@ EP.minho=[
 
 // ■ Day 5 — 봉투는 누가? (4)
 {title:'봉투는 누가?',scene:'minho_04',place:'class',at:[330,262,'stand'],
- things:{class:[['envelope',680,192,56]]},// at the foot of the wall under the blackboard's left end (「칠판 아래 좁은 틈」), clear of the wall clock and the blackboard tap
  pre:[
+  {lay:[['envelope',680,192,56,null,'stay']]},// laid for this scene only, cleared at its end (boss 11/07: not left on the class map for other friends' scenes)
   {pic:'minho_04'},
   ['nar','','아침부터 교실이 시끄러웠다. 지난 알뜰장터에서 번 돈 {@envelope|가} 없어졌다. 몇몇 아이가 민호 쪽을 힐끔거리며 수군거렸다.'],
   ['nar','','민호는 팔짱을 끼고 창가에 서 있었다. 나는 민호 쪽으로 갔다.'],
@@ -198,7 +198,7 @@ EP.minho=[
   ['nar','','선생님: 「그리고 아까 「열어 봐」 하고 한 사람한테 몰려든 것도 하지 말자. {@bag|은} 본인이 보여 주고 싶을 때만이야.」'],
   ['nar','','민호는 사과하지 않았다. 대신 내 옆을 지나가며 작게 말했다.'],
   ['minho','relieved','찾아서 다행이다.'],
-  ['think','sad','(증거도 없이 의심받는 거, 진짜 싫다. 오늘 처음 알았어.)']],
+  ['think','sad','(증거도 없이 의심받는 거, 진짜 싫다. 오늘 처음 알았어.)'],{clear:['envelope']}],
  eve:{lead:[['me','sad','{m}, 오늘 알뜰장터 돈 {@envelope|가} 없어졌어. 애들이 민호가 가져갔다고 수군거렸어.'],['mom','surprised','민호가 그랬대?'],['me','sad','아니. 근데 민호가 나보고 너도 교탁 정리했잖아, 그러는 거야. 오늘 내가 당번이었거든.'],['mom','surprised','어머, 너까지 의심받았어?']],
   A:[['me','sad','아니라고 내 {@bag} 열어서 보여 줬어. 그랬더니 애들이 민호한테도 열라고 했어.'],['mom','smile','{@bag|은} 네가 보여 주고 싶어서 보여 준 거니까 괜찮아. 근데 그걸 보고 다들 민호한테도 똑같이 하라고 했구나.'],['me','sad','응. 민호가 싫다고 소리 질렀어.'],['mom','smile','민호도 싫다고 할 수 있지. {@envelope|는} 결국 어디 있었어?']],
   B:[['me','smile','증거가 없으니까 {@envelope} 있던 데부터 찾자고 했어.'],['mom','surprised','너도 의심받는 중에 그 말을 했어?'],['me','sad','응. 나도 억울했으니까.'],['mom','relieved','억울한 걸 아니까 그렇게 말할 수 있었나 보다.']],
@@ -257,8 +257,8 @@ EP.minho=[
 
 // ■ Day 7 — 청소 당번 땡땡이 (6)
 {title:'청소 당번 땡땡이',scene:'minho_06',place:'class',at:[1380,330,'stand'],
- things:{class:[['ball',1205,282,34],['broom',1450,450,90]]},// the broom lies on the floor by the shelf, clear of Minho (the poles behind the plant were not clearly a broom)
  pre:[
+  {lay:[['ball',1205,282,34,null,'stay'],['broom',1450,450,90,null,'stay']]},// laid for this scene only, cleared at its end (boss 11/07: not left on the class map for other friends' scenes)
   {pic:'minho_06a'},['nar','','청소 시간. 내 당번 구역은 교실 뒤쪽이었다. 민호도 같은 당번인데, 사물함 옆에서 {@ball}만 튕기고 있었다.'],
   ['me','smile','민호야, 너도 뒤쪽 당번이지?'],
   ['minho','laugh','응. 근데 안 할 건데?'],
@@ -291,7 +291,7 @@ EP.minho=[
    ['nar','','민호가 내 손에서 {@ball|을} 낚아채 혼자 나가 버렸다. 나는 청소를 했다. 그런데 그날 민호는 나를 한 번도 쳐다보지 않았다.']]}],
  post:[
   ['nar','','청소가 끝났다. 창밖 운동장에서 {@ball} 차는 소리가 들렸다.'],
-  ['think','surprised','(다음에 또 같이 놀자고 하면, 뭐라고 하지?)']],
+  ['think','surprised','(다음에 또 같이 놀자고 하면, 뭐라고 하지?)'],{clear:['ball','broom']}],
  eve:{lead:[['me','smile','{m}, 민호가 청소 빼먹고 {@ball} 차러 가자고 했어.'],['mom','surprised','민호가 너한테 같이 놀자고?'],['me','smile','응. 처음이야.'],['mom','smile','오, 그래서?']],
   A:[['me','smile','청소 끝나고 가자고 했어. 민호도 같이 쓸라고 하고.'],['mom','surprised','민호가 했어?'],['me','smile','투덜거리면서 했어. 근데 골대는 6학년이 다 차지했어.'],['mom','laugh','청소는 끝났고 골대는 뺏겼고.'],['me','laugh','그래도 철봉에서 놀았어.']],
   B:[['me','sad','나 청소한다고 했어. 민호가 재미없대.'],['mom','smile','재미없단 소리 들으니까 어땠어?'],['me','sad','좀 서운했어. 그래도 당번 친구가 웃어 줬어.'],['mom','relieved','같이 놀자는 걸 거절하는 게 쉬운 일은 아니지.']],
@@ -346,8 +346,8 @@ EP.minho=[
 
 // ■ Day 9 — 뒤집힌 우산 (8)
 {title:'뒤집힌 우산',scene:'minho_08',place:'gate',at:[960,650],
- things:{gate:[['umbrella',1060,690,84]]},
  pre:[
+  {lay:[['umbrella',1060,690,84,null,'stay']]},// laid for this scene only, cleared at its end (boss 11/07: not left on the gate map for other friends' scenes)
   {pic:'minho_08'},
   ['nar','','하교 시간. 비가 오고 바람이 셌다. 교문 옆에서 민호가 뒤집힌 {@umbrella|과} 씨름하고 있었다. 나는 민호 쪽으로 갔다.'],
   ['minho','angry','아, 진짜! 바람 한 번 불었다고 뒤집히냐?'],
@@ -371,7 +371,7 @@ EP.minho=[
  post:[
   {pic:'minho_08g'},['nar','','민호가 망가진 {@umbrella|을} 접어서 {@bag} 옆에 끼웠다.'],
   ['minho','sad','내일 {m}한테 혼나겠다.'],
-  ['nar','','빗소리가 점점 커졌다.']],
+  ['nar','','빗소리가 점점 커졌다.'],{clear:['umbrella']}],
  eve:{lead:[['me','sad','{m}, 비 올 때 민호 {@umbrella|이} 바람에 뒤집혀서 망가졌어.'],['mom','surprised','어머, 민호는 어떻게 갔어?']],
   A:[['me','smile','부러진 데가 뾰족해서 일단 접자고 했어. 민호가 그걸 맨손으로 잡고 있었거든.'],['mom','relieved','잘 봤네. {@umbrella} 망가진 것보다 손 다치는 게 더 큰일이니까.'],['me','sad','근데 민호는 그다음에 그냥 뛰어갔어.'],['mom','sad','다 젖었겠다.']],
   B:[['me','sad','화낸다고 {@umbrella|이} 고쳐지냐고 했더니 민호가 더 짜증 냈어.'],['mom','smile','그때는 정말 속상했나 보네. 맞는 말이어도 화났을 땐 잘 안 들려.'],['me','sad','응. {@umbrella|을} 더 세게 흔들었어.']],
@@ -423,9 +423,9 @@ EP.minho=[
 
 // ■ Day 11 — 울타리 너머 (10)
 {title:'울타리 너머',scene:'minho_10',place:'backyard',at:[1060,520],
- things:{backyard:[['big_dog',1250,400,130]]},
  taps:{backyard:[['door',1470,300,42],['broom',95,640,26]]},
  pre:[
+  {map:'backyard_dog',tap:[['big_dog',1340,285,75]]},// the big golden dog drawn into the yard behind the fence (maps/backyard_dog.jpg), not a sticker on top (boss 11/07)
   ['nar','','쉬는 시간, 학교 뒤뜰. 민호가 담장 쪽에 서 있어서 그쪽으로 가다가, 나는 멈춰 섰다.'],
   ['nar','','컹! 컹!'],
   {pic:'minho_10a'},['nar','','학교 담장 너머 옆집 마당에 커다란 {@big_dog|가} 있었다.'],
@@ -463,8 +463,8 @@ EP.minho=[
 
 // ■ Day 12 — 우리 친하잖아 (11)
 {title:'우리 친하잖아',scene:'minho_11',place:'class',at:[640,600],
- things:{class:[['notebook',430,690,36]]},
  pre:[
+  {lay:[['notebook',430,690,36,null,'stay']]},// laid for this scene only, cleared at its end (boss 11/07: not left on the class map for other friends' scenes)
   ['nar','','아침. 교실에 들어서자 민호가 내 자리 쪽으로 손짓했다. 나는 {@bag|을} 메고 민호 쪽으로 갔다.'],
   ['minho','smile','야, {SN}. 빨리 와 봐.'],
   {k:'bag',goal:'「{x}」 열기',tray:true},// my own bag: picked from pictures (the bags on the map are other kids')
@@ -492,7 +492,7 @@ EP.minho=[
  post:[
   ['nar','','쉬는 시간. 민호가 내 자리를 지나가며 {w|을} 툭 쳤다.'],
   ['minho','smile','너 수학은 잘하네.'],
-  ['me','smile','한국말이 어려운 거야.']],
+  ['me','smile','한국말이 어려운 거야.'],{clear:['notebook']}],
  eve:{lead:[['dad','smile','오늘은 {d}가 설거지 당번이다. 일찍 왔으니까.'],['me','sad','{m}, 민호가 아침에 수학 숙제 보여 달래. 우리 친하잖아 하면서.'],['dad','surprised','민호가 친하다고 했어?'],['me','smile','응. 처음 들었어.']],
   A:[['me','smile','보여 주는 건 싫고, 1번 푸는 법만 알려 준다고 했어.'],['mom','surprised','그래서?'],['me','smile','민호가 두 문제 풀었어. 「몇 배」가 곱하기인 줄 몰랐대.'],['dad','smile','너도 그거 사전 찾아서 알았잖아.'],['me','smile','응. 그래서 알려 줄 수 있었어.']],
   B:[['me','smile','싫다고 했어. 사전 찾아 가면서 한 시간 걸렸다고.'],['dad','surprised','민호는 뭐래?'],['me','laugh','그건 좀 대단하대. 그러고 그냥 혼나겠대.'],['mom','laugh','친하다고 다 보여 줘야 하는 건 아니지.']],
@@ -501,8 +501,8 @@ EP.minho=[
 
 // ■ Day 13 — 초코우유 (12)
 {title:'초코우유',scene:'minho_12',place:'class',at:[1060,800,'stand'],
- things:{class:[['milk',930,830,92,'milk_crate']]},
  pre:[
+  {lay:[['milk',930,830,92,'milk_crate','stay']]},// laid for this scene only, cleared at its end (boss 11/07: not left on the class map for other friends' scenes)
   {pic:'minho_12a'},
   ['nar','','점심시간이 끝나 갈 무렵. 교실 뒤에 남은 급식 {@milk} {@box|가} 있었다. 선생님이 먹고 싶은 사람은 가져가도 된다고 하셨다.'],
   ['nar','','민호가 {@box} 앞에 쪼그려 앉아 있어서 나는 그쪽으로 갔다.'],
@@ -527,7 +527,7 @@ EP.minho=[
   {k:'D',text:'「고맙긴 한데, 지금 배불러.」 하고 거절한다.',pts:{minho:1},r:[
    ['me','smile','고맙긴 한데, 지금 배불러.'],['minho','laugh','아, 그래? 그럼 내가 두 개 먹지, 뭐.'],['me','sad','미안.'],['minho','smile','네가 미안할 게 뭐 있어.'],{pic:'minho_12f'},['nar','','민호는 초코{@milk} 두 개를 양손에 들고 자리로 갔다.']]}],
  post:[
-  {pic:'minho_12g'},['nar','','5교시 종이 울렸다. {@milk} {@box|는} 텅 비어 있었다.']],
+  {pic:'minho_12g'},['nar','','5교시 종이 울렸다. {@milk} {@box|는} 텅 비어 있었다.'],{clear:['milk']}],
  eve:{lead:[['me','smile','{m}, 민호가 남은 초코{@milk|를} 나한테 하나 줬어.'],['mom','surprised','민호가?'],['me','smile','응. 나 맨날 흰 {@milk} 남기는 거 봤대.'],['mom','surprised','어머, 그걸 봤대?']],
   A:[['me','smile','고맙다고 하고 받았어. 둘이 사물함에 기대서 같이 마셨어.'],['mom','smile','처음엔 좀 어색했겠다.'],['me','laugh','응. 근데 맛있었어.']],
   B:[['me','sad','갑자기 왜 주냐고 물었더니 민호가 도로 가져갔어.'],['mom','smile','평소랑 달라서 놀랐구나.'],['me','sad','응. 근데 좀 미안했어.'],['mom','smile','다음에 또 그러면 일단 고맙다고 받아 봐도 되겠네. 궁금하면 그다음에 물어봐도 되고.']],
@@ -537,8 +537,8 @@ EP.minho=[
 // ■ Day 14 — 내 그림 지붕의 뿔 (13)
 {title:'내 그림 지붕의 뿔',scene:'minho_13',place:'hall',at:[430,430],
  taps:{hall:[['picture',185,330,45],['picture',60,420,45]]},
- things:{hall:[['tape',330,560,32]]},
  pre:[
+  {lay:[['tape',330,560,32,null,'stay']]},// laid for this scene only, cleared at its end (boss 11/07: not left on the hall map for other friends' scenes)
   {pic:'minho_13a'},['nar','','복도 게시판에 미술 시간에 그린 「우리 동네」 {@picture|이} 붙어 있었다. 내 {@picture}도 있었다. 할머니네 집 지붕을 그린 {@picture}이었다.'],
   ['nar','','게시판 앞에 민호가 서 있었다. 나는 민호 쪽으로 갔다. 그런데 분위기가 이상했다.'],
   {k:'picture',goal:'「{x}」 살펴보기'},
@@ -571,7 +571,7 @@ EP.minho=[
   {pic:'minho_13g'},['nar','','게시판 앞이 조용해졌다. 민호가 팔짱을 끼고 내 {@picture|을} 봤다.'],
   ['minho','surprised','근데 이 지붕, 진짜 이렇게 생겼냐?'],
   ['me','smile','응. 우리 할머니 집.'],
-  ['minho','smile','……멋있네.']],
+  ['minho','smile','……멋있네.'],{clear:['tape']}],
  eve:{lead:[['me','angry','{m}, 애들이 복도에 붙은 내 {@picture}에 낙서했어. 할머니 집 지붕에 뿔 그렸어.'],['mom','surprised','뭐? 할머니 집에?'],['me','smile','응. 근데 민호가 그거 보고 걔네를 막고 있었어.'],['mom','surprised','민호가?']],
   A:[['me','sad','나는 그냥 {@picture}만 다시 붙였어. 뭐라고 하기 싫어서.'],['mom','surprised','그럼 뿔은?'],['me','sad','그대로야. 걔네도 그냥 가 버렸어.'],['mom','sad','속상했겠다. 내일이라도 고쳐 달라고 말해 볼 수 있어.']],
   B:[['me','smile','민호한테 고맙다고 하고, 내가 말하겠다고 했어. 민호가 순순히 비켜 줬어.'],['mom','surprised','민호가 네 말을 들었구나.'],['me','smile','응. 걔네가 흰 {@paper|로} 덮어 준대.'],['mom','relieved','네 {@picture} 일을 네가 직접 마무리했네.']],
@@ -582,8 +582,8 @@ EP.minho=[
 // ■ Day 15 — 나 같은 애는? (14)
 {title:'나 같은 애는?',scene:'minho_14',place:'stands',at:[640,540],
  taps:{stands:[['trash_can',22,770,40]]},
- things:{stands:[['ball',740,575,36],['notebook',560,570,38]]},
  pre:[
+  {lay:[['ball',740,575,36,null,'stay'],['notebook',560,570,38,null,'stay']]},// laid for this scene only, cleared at its end (boss 11/07: not left on the stands map for other friends' scenes)
   
   {pic:'minho_14s'},['nar','','운동장 스탠드. 민호가 혼자 {@ball|을} 발로 굴리고 있었다. 나는 공약을 쓰던 {w|을} 들고 민호 옆에 앉았다.'],
   {k:'ball',goal:'「{x}」 멈추기'},
@@ -617,7 +617,7 @@ EP.minho=[
   ['minho','sad','……알았어, 알았어.'],
   ['minho','smile','뭐, 생각은 해 볼게.'],
   ['minho','laugh','근데 「모두가 사이좋은 반」, 그건 빼.'],
-  ['me','sad','……빼야겠다.']],
+  ['me','sad','……빼야겠다.'],{clear:['ball','notebook']}],
  eve:{lead:[['me','surprised','{m}, 민호가 나 반장 되면 자기 같은 애는 어떻게 할 거냐고 물었어.'],['mom','surprised','민호가 그런 걸 물었어?'],['me','smile','응. 장난 아니고 진짜로.']],
   A:[['me','smile','누가 괴롭히면 안 넘어갈 거라고 했어. 민호든 누구든.'],['mom','surprised','민호가 뭐래?'],['me','laugh','자기 맨날 걸리겠대. 그래서 괴롭히면, 이라고 했지.'],['mom','laugh','딱 잘라 말했네.']],
   B:[['me','sad','축구 시간 늘려 준다고 했는데, 민호가 그거 네 마음대로 되냐고 했어.'],['mom','surprised','그래서?'],['me','sad','모르겠다고 했어. 뻥이래.'],['mom','smile','지킬 수 있는 약속인지는 {m}도 궁금하네.']],
@@ -667,8 +667,8 @@ EP.minho=[
 
 // 특별 장면 — 접힌 종이 (투표일): only on the election day, if Minho was met 4+ times; does not count as a meeting
 EP.minho_vote={title:'접힌 종이',scene:'minho_vote',place:'class',at:[700,330],vote:true,
- things:{class:[['box',1180,262,80,'ballot_box'],['paper',760,350,36]]},
  pre:[
+  {lay:[['box',1180,262,80,'ballot_box','stay'],['paper',760,350,36,null,'stay']]},// laid for this scene only, cleared at its end (boss 11/07: not left on the class map for other friends' scenes)
   {pic:'minho_16a'},['nar','','투표 날. 교실 뒤에 투표함이 놓였다. 나는 후보라서 투표를 먼저 마쳤다. 민호가 줄 뒤쪽에 서 있어서 나는 그쪽으로 갔다.'],
   {k:'box',goal:'「{x}」 찾기'},
   ['minho','smile','야, 연설은 뭐…… 생각보다 괜찮더라.'],
@@ -690,7 +690,7 @@ EP.minho_vote={title:'접힌 종이',scene:'minho_vote',place:'class',at:[700,33
    ['me','angry','보여 주지 마. 접어. 비밀이잖아.'],['minho','angry','누가 본다고 내 마음 달라지냐?'],{pic:'minho_16f'},['nar','','민호가 투덜거리면서도 투표용지를 더 단단히 접었다.'],['minho','smile','그럼 너도 남의 거 캐묻지 마라.'],['me','smile','안 물어봐.']]}],
  post:[
   {pic:'minho_16g'},['nar','','민호가 투표용지를 투표함에 넣었다. 툭, 하는 소리가 났다.'],
-  ['think','smile','(민호가 누구를 뽑았는지는 몰라. 앞으로도 모를 거야.)']],
+  ['think','smile','(민호가 누구를 뽑았는지는 몰라. 앞으로도 모를 거야.)'],{clear:['box','paper']}],
  eve:{lead:[['me','smile','{m}, 오늘 투표했어. 민호가 누구 찍었는지 보여 줄까 그러더라.'],['mom','surprised','그래서 봤어?']],
   A:[['me','smile','안 봤어. 대신 나 뽑아 주면 좋겠다고 했어.'],['mom','smile','솔직하게 말했네. 민호는?'],['me','smile','생각해 본대. 그러고 {@paper|를} 가렸어.']],
   B:[['me','smile','누구 뽑을지는 네가 정하는 거라고 했어.'],['mom','smile','궁금했을 텐데.'],['me','laugh','엄청. 근데 그건 민호 거니까.']],
