@@ -270,6 +270,7 @@ EP.minho=[
   ['me','surprised','나도?'],
   ['minho','laugh','그래. 너 반장 나간다며. 반장 하려면 놀 줄도 알아야 표 받지.'],
   ['nar','','민호가 {@ball|을} 내 쪽으로 툭 던졌다.'],
+  ()=>{world.querySelectorAll('.thing').forEach(e=>{if(/items\/ball\.png/.test(e.src)&&!e.classList.contains('laid'))e.remove()});OBJ[MAP]=(OBJ[MAP]||[]).filter(t=>!(t[0]==='ball'&&!t.laid))},{lay:[['ball',1405,365,34,null,'stay']]},// the thrown ball lands on the floor between Minho and the broom (owner 11/07)
   {k:'ball',goal:'「{x}」 받기'},
   {pic:'minho_06b'},['nar','','한 손에는 {@broom}, 한 손에는 {@ball}. 교실 뒤에서 같은 당번 친구가 쓰레받기를 든 채 우리를 보고 있었다.'],
   ['minho','laugh','빨리. 5분만 하고 오면 돼. 아무도 몰라.'],
@@ -286,7 +287,7 @@ EP.minho=[
   {k:'C',text:'「5분만이야.」 하고 {@broom|을} 세워 두고 따라 나간다.',pts:{minho:0},r:[
    {pic:'minho_06f'},['nar','','나는 {@broom|을} 사물함에 기대 두고 민호를 따라 나갔다. 운동장은 정말 신났다.'],{pic:'minho_06g'},['nar','','5분은 금방 20분이 되었다. 돌아와 보니 당번 친구가 혼자 쓸고 있었다.'],['nar','','친구: 「……다 했어.」'],
    ['nar','','선생님: 「뒤쪽 당번 셋 아니었니?」'],['minho','smile','저희 화장실 갔다 왔는데요.'],['nar','','나는 아무 말도 못 했다.'],['think','sad','(재밌긴 했는데…….)']]},
-  {k:'D',text:'다른 친구들한테 들리게 크게 말한다.',pts:{minho:1},r:[
+  {k:'D',text:'반 친구들한테 들리게 「얘들아, 민호 청소 안 하고 놀러 간대!」 하고 크게 말한다.',pts:{minho:1},r:[
    ['me','angry','얘들아, 민호 청소 안 하고 놀러 간대!'],{pic:'minho_06h'},['nar','','아이들이 우리를 돌아봤다. 민호 얼굴이 굳었다.'],['minho','angry','야! 너 진짜……'],
    ['nar','','민호가 내 손에서 {@ball|을} 낚아채 혼자 나가 버렸다. 나는 청소를 했다. 그런데 그날 민호는 나를 한 번도 쳐다보지 않았다.']]}],
  post:[
