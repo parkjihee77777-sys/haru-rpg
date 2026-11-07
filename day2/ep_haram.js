@@ -52,7 +52,7 @@ EP.haram=[
    ['haram','sad','괜찮아. 다들 주문이래.']]}],
  post:[
   {pic:null},
-  {k:'chopsticks',goal:'「{x}」 들기'},
+  {k:'chopsticks',goal:'「{x}」 들기',bag:['chopsticks','spoon','tray','water_bottle','handkerchief']},
   {pic:'haram_d02_tofu'},
   ['nar','','둘이 같이 밥을 먹기 시작했다. 하람이는 {@tofu|를} {@tray} 구석에 남겨 두었다가 맨 마지막에 먹었다.'],
   ['haram','smile','제일 좋은 건 마지막에 먹는 거야. 그것도 우리 집 규칙. ……아니, 그건 그냥 내 규칙.'],
@@ -65,13 +65,13 @@ EP.haram=[
 
 // ■ Day 3 — 보름 초대 (2)
 {title:'보름 초대',scene:'haram_02',place:'class',at:[700,262,'stand'],flag:{R03_ask:{A:1,D:1},R03_visit:{A:1,B:1,D:1}},
- things:{class:[['calendar',1296,108,62],['moon',64,190,80]]},
+ things:{class:[['moon',64,190,80]]},
  pre:[
   {pic:'haram_02'},
   ['nar','','쉬는 시간. 하람이가 교실 앞 {@calendar} 앞에 서 있었다. 손가락으로 허공에 동그라미를 그리고 있었다.'],
   ['me','surprised','뭐 해?'],
   ['haram','smile','오늘 문제! 다음 보름달은 며칠일까?'],
-  {k:'calendar',goal:'「{x}」 보기'},
+  {k:'calendar',goal:'「{x}」 보기',bag:['calendar','clock','poster','board','notice_book']},
   ['nar','','교실 {@calendar}. 사흘 뒤 칸에 작은 동그라미가 그려져 있었다.'],
   ['haram','laugh','정답, 사흘 뒤. {@calendar}에 작게 동그라미 있지? 그거 보름이야.'],
   ['haram','smile','보름 저녁엔 우리 집에서 가족들이 다 모여. {@moon} 보면서 따뜻한 국 먹고, 노래하고, 한 달 동안 고마웠던 거 하나씩 말해.'],
@@ -117,7 +117,7 @@ EP.haram=[
 
 // ■ Day 4 — 끌려간대 (3)
 {title:'끌려간대',scene:'haram_03',place:'hall',at:[920,520],with:[['haeun',1120,600]],
- things:{hall:[['note',900,730,52],['pencil',640,380,30]]},
+ things:{hall:[['pencil',640,380,30]]},
  pre:[
   {pic:'haram_03'},
   ['nar','','쉬는 시간. 하람이한테 가려고 복도로 나왔다. 그런데 하은이가 「잠깐만!」 하고 나를 불러 세웠다.'],
@@ -129,7 +129,7 @@ EP.haram=[
   ['nar','','처음 들어 보는 말이었다. 그래도 하은이 얼굴을 보니 무서운 말인 것 같았다.'],
   ['haeun','sad','이상한 종교래. 우리 엄마가 그랬어. 그런 데 가면 막 끌려가서 못 나온대. 너 전학 온 지 얼마 안 돼서 모를 것 같아서 말해 주는 거야.'],
   ['nar','','하은이가 내 손에 {@note|를} 쥐여 줬다.'],
-  {k:'note',goal:'「{x}」 펴 보기'},
+  {k:'note',goal:'「{x}」 펴 보기',bag:['note','paper','envelope','notebook','sticker']},
   {pic:'haram_d04_note'},['nar','','{@note}에 이렇게 쓰여 있었다. 「하람이네 = 사이비. 가지 마!」'],
   ['think','surprised','(끌려가서 못 나온다고?)'],
   ['think','sad','(하람이는 그냥 국 먹고 {@moon} 본다고 했는데…… 근데 진짜 그러면 어떡하지? 좀 무서워.)'],
@@ -182,11 +182,10 @@ EP.haram=[
 
 // ■ Day 5 — 쉼의 날 (4)
 {title:'쉼의 날',scene:'haram_04',place:'class',at:[760,865],meAt:[905,830],with:[['junho',1050,640],['yena',610,620]],
- things:{class:[['notebook',836,700,38]]},
  pre:[
   ['nar','','사회 시간. 모둠 과제 ‘우리 동네 소개’를 하는 시간이었다. 마감은 내일. 우리 모둠은 나, 하람이, 준호, 예나.'],
   ['nar','','나는 하람이 옆자리에 앉았다. 하람이가 {w|을} 펼쳐 놓고 {@map|를} 그리고 있었다.'],
-  {k:'notebook',goal:'「{x}」 펼치기'},
+  {k:'notebook',goal:'「{x}」 펼치기',bag:['notebook','textbook','paper','pcase','book']},
   ['nar','','하람이 {w}. 표지에 「모둠 — 하람 몫」, 안에 우리 동네 {@map|가} 반쯤 그려져 있었다.'],
   {pic:'haram_d05_announce'},['haram','smile','얘들아, 있잖아. 나 내일 학교 못 와.'],
   ['junho','surprised','내일? 내일 마감인데!'],
@@ -243,11 +242,11 @@ EP.haram=[
 
 // ■ Day 6 — 반 전체 노래? (5) ★
 {title:'반 전체 노래?',scene:'haram_05',place:'cafe',at:[520,850],with:[['yena',400,880],['junho',600,880]],flag:{R06_D:{D:1}},
- things:{cafe:[['spoon',522,603,50]],class:[['clock',1040,186,46]]},
+ things:{class:[['clock',1040,186,46]]},
  pre:[
   ['nar','','점심시간. 하람이랑 같은 테이블에 앉았다. 하람이가 감사 노래를 마치고 눈을 떴다.'],
   ['nar','','요즘은 옆 테이블 애들도 웃지 않았다. 가끔 쳐다보기만 했다.'],
-  {k:'spoon',goal:'「{x}」 들기'},
+  {k:'spoon',goal:'「{x}」 들기',bag:['spoon','chopsticks','tray','cup','water_bottle']},
   ['haram','smile','있잖아. 너 반장 선거 나간다며.'],
   ['me','smile','응.'],
   {pic:'haram_05'},
@@ -315,13 +314,12 @@ EP.haram=[
 
 // ■ Day 7 — 한 입만 (6)
 {title:'한 입만',scene:'haram_06',place:'cafe',at:[520,850],with:[['junho',600,880]],
- things:{cafe:[['ladle',600,226,44,null,'stay'],['tofu',505,228,48,null,'stay']]},
  pre:[
   ['nar','','점심시간. 오늘 반찬은 불고기였다. 급식 줄 맨 끝에서 하람이가 조리사 선생님께 따로 작은 그릇을 받고 있었다.'],
-  {k:'ladle',goal:'「{x}」 보기'},
+  {k:'ladle',goal:'「{x}」 보기',bag:['ladle','spoon','chopsticks','tray','cup']},
   {pic:'haram_d07_bowl'},['nar','','조리사 선생님이 하람이 그릇에 {@ladle|로} 따로 반찬을 덜어 주셨다.'],
   ['nar','','나는 하람이 옆에 {@tray|을} 놓았다.'],
-  {k:'tofu',goal:'「{x}」 찾기'},
+  {k:'tofu',goal:'「{x}」 찾기',bag:['tofu','rice_cake','bread','milk','cup']},
   ['nar','','하람이 {@tray} 한쪽에 {@tofu|가} 있었다.'],
   {pic:'haram_06'},
   ['nar','','감사 노래가 끝나고 하람이가 눈을 떴을 때였다. 건너편의 준호가 자기 불고기를 집어 하람이 {@tray}에 쑥 올렸다.'],
@@ -374,12 +372,11 @@ EP.haram=[
 
 // ■ Day 8 — 오늘 문제! (7)
 {title:'오늘 문제!',scene:'haram_07',place:'class',at:[600,690],
- things:{class:[['photo',700,712,40],['map',850,800,90]]},
  pre:[
   {pic:'haram_d08_photo'},['nar','','쉬는 시간. 나는 {m|가} 보내 준 고향 {@photo|을} 보고 있었다. 할머니 집 앞 골목 {@photo|이었}다.'],
   {pic:null},['nar','','하람이가 와서 내 옆에 앉았다.'],
   ['haram','laugh','오늘 문제! 그거 어디야?'],
-  {k:'photo',goal:'「{x}」 보여 주기'},
+  {k:'photo',goal:'「{x}」 보여 주기',bag:['photo','picture','notebook','paper','phone']},
   ['haram','laugh','와, 그거 {HC}에서 찍은 거야? 저분이 할머니야? 할머니는 너를 뭐라고 불러? 거기서도 보름달 봐? 너네 집은 뭐 믿어? {HL}로 ‘{@moon}’은 뭐야?'],
   ['nar','','하람이 질문은 끝이 없었다.'],
   {pic:'haram_07'},
@@ -387,7 +384,7 @@ EP.haram=[
   ['nar','','아이: 「오, {HC}에서 찍은 {@photo|이}래!」'],
   ['nar','','아이: 「거기도 김치 있어? {HL}로 욕 뭐야? 하하!」'],
   ['haram','surprised','야, 그건 묻지 마. 아, 근데 할머니 집은 어디쯤이야? {@map}에서 찾아 줄 수 있어?'],
-  {k:'map',goal:'「{x}」 찾기'},
+  {k:'map',goal:'「{x}」 찾기',bag:['map','picture','paper','poster','book']},
   ['nar','','{@map}에서 {HC} 자리를 찾았다. 하람이가 {@map|를} 가리키며 또 물었다.'],
   ['nar','','나는 {@map} 앞에 서 있었다. 아이들이 빙 둘러서서 나를 보고 있었다. 꼭 동물원 같았다.'],
   ['think','sad','(할머니 {@photo} 보면서 혼자 조금 그리워하고 있었는데.)'],
@@ -436,12 +433,12 @@ EP.haram=[
 
 // ■ Day 9 — 냄새만 (8)
 {title:'냄새만',scene:'haram_08',place:'backyard',at:[560,600],
- taps:{backyard:[['bench',410,480,70]]},things:{backyard:[['water_bottle',650,640,36]]},
+ taps:{backyard:[['bench',410,480,70]]},
  pre:[
   {pic:'haram_08'},['nar','','쉬는 시간. 뒤뜰 {@bench}에 하람이가 혼자 앉아 있었다. 오늘은 퀴즈를 내지 않았다.'],
   ['nar','','나는 하람이 옆에 앉으려고 {@bench|로} 갔다.'],
   {k:'bench',goal:'「{x}」에 앉기'},
-  {k:'water_bottle',goal:'「{x}」 건네기'},
+  {k:'water_bottle',goal:'「{x}」 건네기',bag:['water_bottle','handkerchief','notebook','pcase','pencil']},
   ['nar','','내 {@water_bottle|을} 하람이에게 건넸다. 하람이가 한 모금 마셨다.'],
   {pic:'haram_08'},
   ['nar','','학교 앞 분식집에서 떡꼬치 냄새, 닭꼬치 냄새가 넘어왔다.'],
@@ -494,12 +491,11 @@ EP.haram=[
 
 // ■ Day 10 — 겨울 카드 (9)
 {title:'겨울 카드',scene:'haram_09',place:'class',at:[600,690],with:[['yena',1050,690]],
- things:{class:[['card',760,706,44],['glue',840,704,30]]},
  pre:[
   {pic:'haram_d10_start'},['nar','','미술 시간. 선생님이 칠판에 썼다.'],
   ['nar','','칠판: 「겨울 {@card} 만들기 — 겨울에 축하하고 싶은 날, 고마운 사람에게」'],
   ['nar','','나는 하람이랑 예나 사이에 앉았다.'],
-  {k:'card',goal:'「{x}」 받기'},
+  {k:'card',goal:'「{x}」 받기',bag:['card','paper','sticker','envelope','picture']},
   ['nar','','빈 {@card|를} 받았다.'],
   {pic:'haram_09'},
   ['nar','','예나는 벌써 크리스마스트리를 그리고 있었다. 노래를 흥얼거리면서.'],
@@ -544,7 +540,7 @@ EP.haram=[
    ['yena','smile','오, 그것도 좋다.']]}],
  post:[
   {pic:null},
-  {k:'glue',goal:'「{x}」 칠하기'},
+  {k:'glue',goal:'「{x}」 칠하기',bag:['glue','scissors','tape','colored_pencil','ruler']},
   ['nar','','{@card}에 색종이를 붙였다.'],
   {pic:'haram_d10_board'},
   ['nar','','선생님이 {@card|를} 걷어 교실 뒤 {@board}에 붙이셨다. 트리, 보름달, 눈사람, {HC} 명절 {@picture}, 그냥 ‘엄마 고마워’라고만 쓴 {@card}도 있었다.'],
@@ -560,12 +556,11 @@ EP.haram=[
 
 // ■ Day 11 — 누가 진짜야 (10)
 {title:'누가 진짜야',scene:'haram_10',place:'library',at:[900,720],with:[['yena',1030,720]],
- taps:{library:[['chair',1150,575,36]]},things:{library:[['book',1030,520,46]]},
  pre:[
   ['nar','','쉬는 시간 도서관. 하람이랑 예나가 같은 책상에 앉아 있었다. 지난번 겨울 {@card} 이후로 둘은 가끔 같이 다녔다.'],
   ['nar','','나는 둘 사이에 앉으려고 {@chair|를} 하나 끌어왔다.'],
-  {k:'chair',goal:'「{x}」 끌어오기'},
-  {k:'book',goal:'「{x}」 펼치기'},
+  {k:'chair',goal:'「{x}」 끌어오기',bag:['chair','desk','book','bag','board']},
+  {k:'book',goal:'「{x}」 펼치기',bag:['book','notebook','textbook','paper','picture']},
   ['nar','','책상 위에 ‘세계의 명절’ {@book|이} 펼쳐져 있었다.'],
   {pic:'haram_10'},
   ['nar','','그런데 분위기가 이상했다. 둘 다 목소리가 커져 있었다.'],
@@ -624,13 +619,12 @@ EP.haram=[
 
 // ■ Day 12 — 가지 말래 (11)
 {title:'가지 말래',scene:'haram_11',place:'class',at:[600,690],with:[['haeun',1050,690]],
- things:{hall:[['shoes',1120,700,50]]},taps:{hall:[['door',520,95,50]]},
  pre:[
   {pic:'haram_d12_invites'},['nar','','하교 시간. 하은이 생일 파티 초대장이 반에 돌았다. 이번 주 일요일, 하은이네 집.'],
   ['nar','','나는 초대장을 받았다. 하람이 책상 위에는 초대장이 없었다.'],
   {go:'hall'},
   ['nar','','신발장 앞에서 하람이가 {@shoes} 끈을 천천히 묶고 있었다. 나는 하람이 옆으로 갔다.'],
-  {k:'shoes',goal:'「{x}」 꺼내기'},
+  {k:'shoes',goal:'「{x}」 꺼내기',bag:['shoes','indoor_shoes','sock','bag','umbrella']},
   {pic:'haram_11'},
   ['nar','','그때 하은이가 신발장 앞으로 왔다. 하람이를 보더니 멈칫했다.'],
   ['haeun','sad','……하람아, 미안. 너한테는 초대장 못 줬어.'],
@@ -672,7 +666,7 @@ EP.haram=[
   {only:['D'],lines:[
    {pic:'haram_d12_know'},{flag:'R03_visit',is:1,lines:[['me','smile','안 부끄러워. 우리 {m|는} 너네 엄마랑 통화도 했고, 나 너네 집 보름 저녁에 가 봤잖아. 국 맛있었어.'],['haram','smile','……그랬지.'],['me','smile','모르는 사람은 무서울 수 있대. 우리 {m|가} 그랬어. 근데 아는 사람은 안 무섭잖아.'],['haram','relieved','……너는 알잖아.'],['me','smile','응. 나는 알아.']]},
    {pic:'haram_d12_know'},{flag:'R03_visit',is:0,lines:[['me','smile','안 부끄러워. 나는 너네 집 아직 안 가 봤지만, 너는 알아. 너는 퀴즈 내고, {@tofu} 마지막에 먹고, 궁금한 거 못 참는 애야.'],['haram','surprised','……그게 다야?'],['me','smile','응. 그거면 돼.']]}]},
-  {k:'door',goal:'「{x}」 열기'},
+  {k:'door',goal:'「{x}」 열기',bag:['door','board','desk','chair','picture']},
   ['nar','','{@door|을} 열고 같이 나갔다.'],
   {go:'gatesun'},{pic:'haram_12a'},
   ['nar','','학교 정문 앞. 하람이가 하늘을 가리켰다. 낮달이 떠 있었다.'],
@@ -690,14 +684,13 @@ EP.haram=[
 
 // ■ Day 13 — 체험학습 (12)
 {title:'체험학습',scene:'haram_12',place:'class',at:[600,690],
- things:{class:[['bus',760,706,56],['photo',850,712,40]]},
  pre:[
   ['nar','','조회 시간. 선생님이 가정통신문을 나눠 주셨다.'],
   {pic:'haram_d13_notice'},['nar','','선생님: 「다음 주 금요일, 과학관 체험학습 가요. {@bus} 타고 가요.」'],
   ['nar','','아이들: 「와아!」'],
   ['nar','','나도 신났다. 과학관은 처음이었다. 하람이 쪽을 봤다. 하람이는 통신문을 보며 손가락으로 {@calendar} 날짜를 세고 있었다.'],
   ['nar','','쉬는 시간에 하람이한테 갔다.'],
-  {k:'bus',goal:'「{x}」 찾기'},
+  {k:'bus',goal:'「{x}」 찾기',bag:['bus','ball','doll','box','camera']},
   ['nar','','가정통신문 {@picture} 속 노란 {@bus}.'],
   ['haram','sad','……금요일 보름 다음 날이야.'],
   ['me','surprised','아.'],
@@ -738,7 +731,7 @@ EP.haram=[
  post:[
   {pic:null},
   ['nar','','종이 울리기 전, 하람이가 가정통신문을 다시 펼쳤다. 뒷면에 과학관 안내 {@photo|이} 있었다.'],
-  {k:'photo',goal:'「{x}」 같이 보기'},
+  {k:'photo',goal:'「{x}」 같이 보기',bag:['photo','picture','phone','camera','paper']},
   {pic:'haram_d13_photo'},
   ['nar','','통신문 뒷면, 천체관 안 커다란 보름달 모형 {@photo|이} 보였다.'],
   {only:['B','D'],lines:[['haram','laugh','이거 봐. 천체관. 보름달 모형이래.'],['me','surprised','엄청 크다. 너네 집에서 보는 거보다 클걸.'],['haram','laugh','에이, 진짜 보름달이 더 커.'],['nar','','하람이가 손가락으로 {@photo} 속 {@moon} 둘레를 따라 그렸다.'],['haram','smile','갔다 와서 이거 앞에서 찍은 {@photo}, 제일 먼저 보여 줘.']]},
@@ -809,13 +802,13 @@ EP.haram=[
 
 // ■ Day 15 — 게시판 낙서 (14)
 {title:'게시판 낙서',scene:'haram_14',place:'hall',at:[420,560],with:[['junho',880,700]],
- taps:{hall:[['board',120,300,90]]},things:{hall:[['paper',180,420,44]]},
+ taps:{hall:[['board',120,300,90]]},
  pre:[
   ['nar','','쉬는 시간. 복도 {@board} 앞에 아이들이 모여 있었다. 나는 하람이랑 같이 그쪽으로 갔다.'],
   {k:'board',goal:'「{x}」 보기'},
   ['nar','','{@board}에 반장 후보 소개 {@paper|가} 붙어 있었다.'],
   ['nar','','내 후보 소개 {@paper} 밑에 누가 {@pencil|로} 작게 써 놓았다.'],
-  {k:'paper',goal:'「{x}」 들여다보기'},
+  {k:'paper',goal:'「{x}」 들여다보기',bag:['paper','poster','notice_book','sticker','note']},
   ['nar','','낙서: 「사이비 집 애랑 노는 후보」'],
   {pic:'haram_14'},
   ['nar','','옆 반 아이 둘이 그 앞에서 킥킥거리고 있었다.'],
@@ -873,14 +866,14 @@ EP.haram=[
 
 // ■ Day 16R — 다음 보름 (15)
 {title:'다음 보름',scene:'haram_15',place:'class',at:[262,262,'stand'],
- things:{class:[['picture',196,230,60],['moon',64,190,80]]},
+ things:{class:[['moon',64,190,80]]},
  pre:[
   {pic:'haram_d16_drawing'},['nar','','쉬는 시간. 하람이가 창가에서 뭔가를 그리고 있었다. 창밖에는 낮달이 떠 있었다. 거의 둥글었다.'],
   ['nar','','나는 하람이 옆으로 갔다.'],
   ['haram','laugh','오늘 문제! 저 {@moon}, 며칠 뒤에 꽉 찰까?'],
   ['me','surprised','……사흘?'],
   ['haram','laugh','정답! 너 이제 {@moon} 박사다.'],
-  {k:'picture',goal:'「{x}」 보기'},
+  {k:'picture',goal:'「{x}」 보기',bag:['picture','paper','notebook','card','colored_pencil']},
   ['nar','','하람이 {@picture}. 둥근 {@moon} 밑에 식탁이 있고, 사람들이 둘러앉아 있었다.'],
   {pic:'haram_15'},
   ['nar','','{@picture} 속 식탁에는 사람이 여러 명 있었다. 하람이, 하람이 엄마, 할머니, 동생. 그리고 한 자리가 비어 있었다.'],
