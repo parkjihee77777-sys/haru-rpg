@@ -30,3 +30,9 @@ T.vi=T.vi||{};Object.assign(T.vi,{"{@door|을} 열었다. 바로 앞이 {@locker
 T.zh=T.zh||{};Object.assign(T.zh,{"{@door|을} 열었다. 바로 앞이 {@locker|이었}다. 민호가 {@locker}에 기대 서 있었다. 지호도 있었다.": "我打开{@door}。正前面就是{@locker}。敏浩靠着{@locker}站着。志浩也在。"});
 T.ja=T.ja||{};Object.assign(T.ja,{"{@door|을} 열었다. 바로 앞이 {@locker|이었}다. 민호가 {@locker}에 기대 서 있었다. 지호도 있었다.": "{@door}を開けた。すぐ前が{@locker}だった。ミンホが{@locker}にもたれて立っていた。ジホもいた。"});
 T.ru=T.ru||{};Object.assign(T.ru,{"{@door|을} 열었다. 바로 앞이 {@locker|이었}다. 민호가 {@locker}에 기대 서 있었다. 지호도 있었다.": "Открываю {@door}. Прямо передо мной — {@locker}. Минхо стоит, прислонившись к {@locker}. Джихо тоже тут."});
+// 11/07 AI review: Hangyeol gets up first (the picture shows him lying down)
+T.en=T.en||{};Object.assign(T.en,{"첫 판이 끝났다. 한결이가 꼬리를 흔들며 일어나서 달려왔다.": "The first round ended. Hangyeol got up and came running over, waving his tail."});
+T.vi=T.vi||{};Object.assign(T.vi,{"첫 판이 끝났다. 한결이가 꼬리를 흔들며 일어나서 달려왔다.": "Ván đầu xong. Hangyeol đứng dậy, vẫy đuôi chạy lại."});
+T.zh=T.zh||{};Object.assign(T.zh,{"첫 판이 끝났다. 한결이가 꼬리를 흔들며 일어나서 달려왔다.": "第一局结束了。韩杰站起来，甩着尾巴跑了过来。"});
+T.ja=T.ja||{};Object.assign(T.ja,{"첫 판이 끝났다. 한결이가 꼬리를 흔들며 일어나서 달려왔다.": "最初のゲームが終わった。ハンギョルが起き上がって、しっぽをふりながら走ってきた。"});
+T.ru=T.ru||{};Object.assign(T.ru,{"첫 판이 끝났다. 한결이가 꼬리를 흔들며 일어나서 달려왔다.": "Первый раунд закончился. Хангёль встаёт и подбегает, размахивая хвостиком."});
