@@ -777,7 +777,7 @@ EP.junho=[
   {only:['A','C'],lines:[['nar','','아이들이 운동장에서 우르르 들어왔다. 땀 냄새가 났다.']]},
   {only:['B'],lines:[['me','smile','3대2! 하은이네가 이겼어. 영민이 {@hand}에 두 번 맞았어.'],['junho','sad','두 번밖에? 오늘 잘 피했네.']]},
   ['nar','','준호가 연습장 한 장을 찢었다. {@hand|으로} 꾹꾹 뭉쳐서 작은 {@paper} {@ball|을} 만들었다. 그리고 교실 앞 쓰레기통을 턱으로 가리켰다.'],
-  {lay:[['paper',980,700,36,'paper_crumpled']]},
+  {lay:[['paper',980,700,58,'paper_crumpled']]},
   ['junho','smile','저기 {@goal}. 던져 봐.'],
   {k:'paper',goal:'「{x}」 공 던지기'},
   {clear:['paper']},
@@ -914,7 +914,7 @@ EP.junho=[
   ['junho','smile','세 번째. 달리기. 조금씩. 축구부 시합은 아직. 병원 선생님이 점심 축구는 골키퍼로 가볍게 해도 된대.'],
   ['nar','','준호가 {@bag}에서 낡은 {@glove} 한 켤레를 꺼냈다. 손바닥 쪽이 두꺼운 {@glove|이었}다.'],
   ['junho','smile','이거 좀 들고 있어. 끈 묶게.'],
-  {lay:[['glove',1230,420,42]]},
+  {lay:[['glove',1240,480,62]]},
   {k:'glove',goal:'「{x}」 들고 있기'},
   {clear:['glove']},
   ['nar','','준호의 골키퍼 {@glove|을} 받아 들었다. 손바닥이 두껍고 말랑했다.'],
@@ -985,6 +985,7 @@ EP.junho=[
    ['junho','sad','나 축구 하고 싶었어. 골키퍼로.'],
    ['think','smile','(애들 소리를 멈추려고 한 건데. 준호가 돌아온 첫날 축구를 없앨 뻔했어.)']]}],
  post:[
+  {pic:null},// the gloves come off here; the keeper picture (gloves on) would not match (AI check 11/07)
   ['nar','','딩동댕—'],
   ['nar','','판이 끝났다. 준호가 {@glove|을} 벗어 나한테 건넸다. {@hand}에 땀이 흥건했다.'],
   ['junho','smile','오늘 출석 두 번 하자.'],
@@ -1011,6 +1012,7 @@ EP.junho=[
  pre:[
   {pic:'junho_10a'},
   ['nar','','점심 축구가 끝났다. 오늘 준호는 처음으로 공격을 했다. 조금만. 판의 반은 골키퍼, 반은 공격.'],
+  {pic:null},// at the taps now: the map shows it (the playing picture would not match)
   ['nar','','아이들이 교실로 들어가고, 나와 준호는 수돗가로 갔다. 얼굴이 땀범벅이었다.'],
   {k:'water',goal:'「{x}」 틀기'},
   ['nar','','수도꼭지를 돌렸다. 차가운 {@water|이} 쏴아 나왔다.'],
@@ -1694,7 +1696,7 @@ const NURSE_WALK=[[[110,745],[300,620],[470,600],[640,560],[760,370],[1000,385],
  const at=(n,sub,f,before)=>{let hit=0;const fn={clear:[f]};const walk=a=>{for(let i=0;i<a.length;i++){const x=a[i];
    if(Array.isArray(x)&&typeof x[2]==='string'&&x[2].includes(sub)){a.splice(before?i:i+1,0,fn);hit++;i++}else if(x&&!Array.isArray(x)&&x.lines)walk(x.lines)}};
   const e=EP.junho[n-1];walk(e.pre||[]);walk(e.post||[]);for(const c of e.choices)walk(c.r||[]);if(!hit)console.warn('junho: no line',n,sub)};
- at(7,'교실이 거의 비어 있었다',onlyKids('junho','haeun'));                 // the others went out to the field
+ at(7,'교실이 거의 비어 있었다',onlyKids('junho','haeun'),true);                 // the others went out to the field
  at(8,'하은이랑 지훈이가 갔다',kidOff('haeun','jihoon'));
  at(11,'준호 자리는 비어 있었다',kidOff('junho'),true);                     // he is at the nurse's office
  at(11,'교실 뒷문이 열렸다',kidOn('junho',1520,430));                       // and comes in at the back door
