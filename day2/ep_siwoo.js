@@ -6,7 +6,7 @@ window.EP=window.EP||{};
 EP.siwoo=[
 // ■ Day 2 — 30센티 (1)
 {title:'30센티',scene:'siwoo_01',place:'class',at:[310,262],stand:1,flag:{W02_dist:{A:1,D:1},W02_ask:{A:1}},
- things:{class:[['milk_carton',172,236,38,'milk_carton_cut','stay'],['ruler',205,232,92]]},taps:{class:[['window',95,120,70]]},
+ things:{class:[['milk_carton',172,236,38,'milk_carton_cut','stay']]},taps:{class:[['window',95,120,70]]},
  pre:[
   ['nar','','아침. 시우가 창가에 서 있었다. 창틀 위에 {@milk_carton} 하나가 놓여 있었다. 윗부분을 잘라 내고 {@tissue}를 깐 {@milk_carton}이었다.'],
   ['think','surprised','(첫날 깨진 관찰 통 대신인가 봐.)'],
@@ -17,7 +17,7 @@ EP.siwoo=[
   ['nar','','나는 멈췄다.'],
   ['think','sad','(나 싫은가?)'],
   ['siwoo','sad','……30센티.'],
-  {k:'ruler',goal:'「{x}」 보기'},
+  {k:'ruler',goal:'「{x}」 보기',bag:['ruler','pencil','eraser','pcase']},
   ['nar','','시우가 필통에서 {@ruler}를 꺼내 창틀에 놓았다. 그리고 손가락으로 {@ruler}의 끝을 툭 쳤다.'],
   ['think','surprised','(30센티…… 이만큼 떨어져 달라는 거야?)'],
   {k:'milk_carton',goal:'「{x}」 들여다보기'},
@@ -53,12 +53,12 @@ EP.siwoo=[
 
 // ■ Day 3 — 다리 6개 (2)
 {title:'다리 6개',scene:'siwoo_02',place:'class',at:[600,690],with:[['haeun',1050,690]],
- things:{class:[['pencil',760,700,34],['picture',820,712,64]]},
+ things:{class:[['picture',820,712,64]]},
  pre:[
   ['nar','','과학 시간. 모둠별로 ‘봄에 볼 수 있는 동물’을 그려야 했다. 나는 시우와 같은 모둠이 됐다. 나는 시우 옆자리, 30센티쯤 떨어진 곳에 앉았다.'],
   {pic:'siwoo_02b'},
   ['nar','','나는 나비를 그리기로 했다. 시우가 생각나서.'],
-  {k:'pencil',goal:'「{x}」 쥐기'},
+  {k:'pencil',goal:'「{x}」 쥐기',bag:['pencil','eraser','ruler','pcase']},
   {pic:'siwoo_02'},
   ['nar','','다 그렸다. 날개도 크게, 색도 예쁘게. 나는 {@picture}을 모둠 가운데 내밀었다.'],
   ['nar','','시우가 {@picture}을 봤다. 아주 오래.'],
@@ -104,7 +104,7 @@ EP.siwoo=[
 
 // ■ Day 4 — 간이 콩알만 해 (3)
 {title:'간이 콩알만 해',scene:'siwoo_03',place:'class',at:[600,690],with:[['haeun',1050,690]],flag:{W04_D:{D:1}},
- things:{class:[['bean',990,666,44],['notebook',760,702,38]]},
+ things:{},
  pre:[
   {pic:'siwoo_03b'},
   ['nar','','받아쓰기 시험 직전 쉬는 시간. 시우가 자리에 앉아 곤충 도감을 보고 있었다. 나는 30센티 떨어진 옆자리에 앉았다.'],
@@ -120,7 +120,7 @@ EP.siwoo=[
   ['nar','','시우가 손가락을 꼼지락거렸다. 왜 웃는지 모르는 얼굴이었다.'],
   ['think','surprised','(……사실 나도 몰랐어. 간이 콩알만 해진다는 게 무슨 뜻이야?)'],
   ['think','sad','(지금 웃으면 나도 아는 척할 수 있어.)'],
-  {k:'bean',goal:'「{x}」 찾기'},
+  {k:'bean',goal:'「{x}」 찾기',bag:['bean','eraser','pencil','pcase']},
   ['nar','','하은이 필통에 {@bean} 모양 지우개가 붙어 있었다. 정말 작았다.']],
  ask:'어떻게 할까?',
  choices:[
@@ -141,7 +141,7 @@ EP.siwoo=[
    {pic:'siwoo_03d'},
    ['nar','','시우가 {w}을 꺼냈다. 첫 장에 또박또박 적었다. 「이상한 말 사전」']]}],
  post:[
-  {k:'notebook',goal:'「{x}」 펼치기'},
+  {k:'notebook',goal:'「{x}」 펼치기',bag:['notebook','paper','pencil','pcase']},
   {pic:'siwoo_03a'},
   ['nar','','받아쓰기 시작 종이 울렸다. 시우가 {w}을 덮다가 나에게 내밀었다.'],
   {only:['A','C'],lines:[['siwoo','smile','……사실 너도 몰랐지?'],['me','sad','……응. 몰랐어.'],['siwoo','smile','그럼 같이 적자. 모르는 말.']]},
@@ -158,7 +158,7 @@ EP.siwoo=[
 
 // ■ Day 5 — 숟가락 소리 (4)
 {title:'숟가락 소리',scene:'siwoo_04',place:'cafe',at:[1202,726],sit:[1202,722,165],
- things:{cafe:[['earmuffs',1085,770,46]]},
+ things:{},
  pre:[
   ['nar','','점심시간 급식실. 시끄러웠다. 수백 명이 한꺼번에 떠들고, {@tray}이 부딪치고, {@chair}가 끌렸다.'],
   {pic:'siwoo_04c'},
@@ -203,7 +203,7 @@ EP.siwoo=[
   {pic:'siwoo_04a'},
   ['nar','','담임 선생님이 오셨다. 선생님은 시우 앞에 바로 앉지 않으셨다. 조금 떨어진 곳에 쪼그려 앉으셨다.'],
   ['nar','','선생님: (아주 작은 목소리로) 「시우야. 선생님이야. 여기 {@earmuffs} 있어. 친구가 네 옆에 놓아 줄 거야.」'],
-  {k:'earmuffs',goal:'「{x}」 건네기'},
+  {k:'earmuffs',goal:'「{x}」 건네기',bag:['earmuffs','handkerchief','tissue','spoon']},
   ['nar','','나는 {@earmuffs}를 시우 손이 닿는 바닥에 살며시 내려놓았다. 손으로 직접 건네지 않았다.'],
   ['nar','','한참 뒤, 시우가 {@earmuffs}를 집어 귀에 끼웠다. 몸의 흔들림이 천천히 줄었다.'],
   ['nar','','선생님: 「준비되면 상담실로 가자. 천천히.」'],
@@ -226,7 +226,7 @@ EP.siwoo=[
 
 // ■ Day 6 — 12일째 (5) ★
 {title:'나비 나오는 날',scene:'siwoo_05',place:'class',at:[310,262],stand:1,with:[['haeun',540,270]],
- things:{class:[['milk_carton',172,236,38,'milk_carton_cut','stay'],['butterfly',218,226,52,null,'stay']]},taps:{class:[['window',95,120,70]]},
+ things:{class:[['milk_carton',172,236,38,'milk_carton_cut','stay'],['butterfly',218,226,52,null,'stay']]},
  pre:[
   {pic:'siwoo_05b'},
   ['nar','','아침. 교실에 들어서자 시우가 창가에 서 있었다. 꼼짝도 하지 않고 {@milk_carton}만 보고 있었다. 손만 작게 펄럭였다.'],
@@ -273,7 +273,7 @@ EP.siwoo=[
   {pic:'siwoo_05g'},
   ['nar','','한 시간 뒤. {@butterfly}의 날개가 다 말랐다. 노란 바탕에 검은 줄무늬. 호랑나비였다.'],
   ['siwoo','smile','……{@window} 열어 줘.'],
-  {k:'window',goal:'「{x}」 열기'},
+  {k:'window',goal:'「{x}」 열기',bag:['window','door','blackboard','clock']},
   {pic:'siwoo_05a'},
   ['nar','','{@butterfly}가 창틀 위에서 날개를 두 번 접었다 폈다. 그리고 날아갔다. 교실 아이들이 작은 목소리로 「와아」 했다.'],
   ['nar','','시우의 두 손이 나비처럼 펄럭였다. 아주 빠르게.'],
@@ -294,7 +294,7 @@ EP.siwoo=[
 
 // ■ Day 7 — 목요일 3교시 (6)
 {title:'목요일 3교시',scene:'siwoo_06',place:'class',at:[600,690],
- things:{class:[['clock',1040,186,46],['calendar',1296,108,62]]},
+ things:{},
  pre:[
   ['nar','','목요일. 아침부터 비가 쏟아졌다. 2교시가 끝나고 선생님이 말씀하셨다.'],
   {pic:'siwoo_06b'},
@@ -308,7 +308,7 @@ EP.siwoo=[
   ['siwoo','sad','목요일 3교시 체육. 시간표에 그렇게 쓰여 있어.'],
   ['think','surprised','(체육이 국어로 바뀐 것뿐인데……)'],
   ['think','sad','(아니야. 시우한텐 ‘뿐’이 아닌가 봐. 시간표는 약속 같은 거니까.)'],
-  {k:'clock',goal:'「{x}」 보기'},
+  {k:'clock',goal:'「{x}」 보기',bag:['clock','calendar','blackboard','window']},
   ['nar','','3교시까지 5분 남았다.']],
  ask:'어떻게 할까?',
  choices:[
@@ -329,7 +329,7 @@ EP.siwoo=[
  post:[
   {pic:'siwoo_06a'},
   ['nar','','3교시 국어가 끝나고 선생님이 교실 {@calendar} 옆에 작은 판 하나를 거셨다.'],
-  {k:'calendar',goal:'「{x}」 넘기기'},
+  {k:'calendar',goal:'「{x}」 넘기기',bag:['calendar','clock','paper','notebook']},
   ['nar','','{@calendar} 다음 장, 다음 주 목요일에 ‘체육’ {@sticker}가 붙어 있었다. 그 옆 새 알림판에는 이렇게 쓰여 있었다. 「오늘 바뀐 것」'],
   ['nar','','선생님: 「앞으로 시간표가 바뀌면 여기에 먼저 적어 둘게요. 바뀐 건 미리 알면 덜 놀라니까요. 누구든.」'],
   {only:['B'],lines:[['nar','','선생님: 「아까 화이트보드에 그려 둔 거, 누가 그린 거예요? 그거 보고 생각났어요.」']]},
@@ -502,13 +502,13 @@ EP.siwoo=[
 
 // ■ Day 11 — 1밀리미터 (10)
 {title:'1밀리미터',scene:'siwoo_10',place:'class',at:[600,690],with:[['junho',1050,560],['haeun',1050,700]],
- things:{class:[['ruler',740,704,74],['map',850,712,80]]},
+ things:{},
  pre:[
   {pic:'siwoo_10b'},
   ['nar','','사회 시간. 모둠별로 ‘우리 학교 주변 {@map}’를 그려야 했다. 40분 안에. 나, 시우, 하은, 준호가 한 모둠이었다.'],
   ['nar','','시우가 {@ruler}를 꺼냈다. 정확히 모둠 {@paper} 가장자리에 댔다.'],
   ['siwoo','smile','학교에서 문구점까지 120미터. {@paper}에선 1센티가 10미터. 그러니까 12센티.'],
-  {k:'ruler',goal:'「{x}」 대기'},
+  {k:'ruler',goal:'「{x}」 대기',bag:['ruler','pencil','eraser','pcase']},
   {pic:'siwoo_10'},
   ['nar','','30분이 지났다. {@map}에는 학교, 문구점, 편의점 세 개만 있었다. 아주 정확하게.'],
   ['junho','angry','시우야! 시간 10분 남았어! 놀이터도 그려야 되고 도서관도 그려야 돼!'],
@@ -520,7 +520,7 @@ EP.siwoo=[
   ['siwoo','sad','……대충은 틀린 거야.'],
   ['think','smile','(시우 {@map}는 진짜 정확해. 그건 장점이야.)'],
   ['think','sad','(근데 10분 안에 다 못 그리면 우리 모둠 다 같이 못 내.)'],
-  {k:'map',goal:'「{x}」 펼치기'},
+  {k:'map',goal:'「{x}」 펼치기',bag:['map','paper','notebook','picture']},
   ['nar','','반쯤 빈 모둠 {@map}가 펼쳐졌다.']],
  ask:'어떻게 할까?',
  choices:[
@@ -564,7 +564,7 @@ EP.siwoo=[
   ['nar','','나는 시우 쪽으로 갔다.'],
   {pic:'siwoo_11d'},
   ['nar','','옆에서 피구 하던 애들의 {@ball}이 굴러왔다.'],
-  {k:'ball',goal:'「{x}」 피하기'},
+  {k:'ball',goal:'「{x}」 피하기',bag:['ball','whistle','bag','shoes']},
   ['nar','','나는 시우 앞에서 {@ball}을 막아 옆으로 보냈다.'],
   ['nar','','술래 정할 때 쓰던 {@whistle}가 철봉 아래 떨어져 있었다.'],
   {lay:[['whistle',150,850,42]]},
@@ -606,12 +606,12 @@ EP.siwoo=[
 
 // ■ Day 13 — 100퍼센트 (12)
 {title:'100퍼센트',scene:'siwoo_12',place:'class',at:[500,770],stand:1,
- things:{class:[['notebook',760,702,38]]},
+ things:{},
  pre:[
   {pic:'siwoo_12a'},
   ['nar','','방과 후. 반장 선거 공약을 쓰고 있는데, 시우가 30센티 밖에 와서 섰다. {w}을 들고 있었다.'],
   ['siwoo','smile','……질문 있어.'],
-  {k:'notebook',goal:'「{x}」 펼치기'},
+  {k:'notebook',goal:'「{x}」 펼치기',bag:['notebook','paper','pencil','pcase']},
   ['nar','','시우의 {w} 새 쪽에 「반장 선거 질문」이라고 적혀 있었다.'],
   ['siwoo','smile','반장은 뭐 해? 정확히.'],
   ['me','smile','음…… 반을 위해서 일해.'],
@@ -654,7 +654,7 @@ EP.siwoo=[
 
 // ■ Day 14 — 이상한 말 사전 발표 (13)
 {title:'이상한 말 사전 발표',scene:'siwoo_13',place:'class',at:[700,262],with:[['haeun',600,470],['junho',1050,470]],
- things:{class:[['paper',880,178,50]]},
+ things:{},
  pre:[
   ['nar','','국어 시간. 주제는 ‘재미있는 우리말 표현’이었다. 선생님이 말씀하셨다.'],
   ['nar','','선생님: 「혹시 모아 둔 표현 있는 사람?」'],
@@ -665,7 +665,7 @@ EP.siwoo=[
   ['me','smile','시우야, 우리 사전 발표할래?'],
   ['siwoo','surprised','……반 앞에서?'],
   ['siwoo','smile','……네가 읽어. 나는 옆에 있을게. 30센티.'],
-  {k:'paper',goal:'「{x}」 나눠 주기'},
+  {k:'paper',goal:'「{x}」 나눠 주기',bag:['paper','notebook','card','map']},
   ['nar','','사전 몇 쪽을 복사한 {@paper}를 반 친구들에게 돌렸다.'],
   {k:'blackboard',goal:'「{x}」에 쓰기'},
   ['nar','','{@blackboard}에 「이상한 말 사전」이라고 썼다.'],
@@ -714,12 +714,12 @@ EP.siwoo=[
 
 // ■ Day 15 — 리코더 합주 (14)
 {title:'리코더 합주',scene:'siwoo_14',place:'music',at:[720,840],sit:[1010,640],with:[['junho',1180,840]],
- things:{music:[['recorder',830,640,64],['card',415,300,44]]},
+ things:{},
  pre:[
   {pic:'siwoo_14a'},
   ['nar','','음악 시간. 오늘은 반 전체 {@recorder} 합주를 하는 날이었다. 우리 반 모두가 동시에.'],
   ['nar','','나는 시우 옆, 30센티 떨어진 자리에 앉았다.'],
-  {k:'recorder',goal:'「{x}」 꺼내기'},
+  {k:'recorder',goal:'「{x}」 꺼내기',bag:['recorder','notebook','pcase','bag']},
   {pic:'siwoo_14'},
   ['nar','','연습이 시작되기 전, 아이들이 제각각 {@recorder}를 불어 봤다. 삑, 삐익, 뿌우. 음악실이 소리로 꽉 찼다.'],
   ['nar','','나는 시우를 봤다. 아무도 눈치채지 못했지만, 나는 알 수 있었다.'],
@@ -728,7 +728,7 @@ EP.siwoo=[
   ['think','surprised','(이거 목요일 3교시 때랑 비슷해. 같은 말 되풀이하는 거.)'],
   ['think','sad','(아직 귀는 안 막았어. 지금이면 시간이 있어.)'],
   ['nar','','선생님: 「자, 이제 다 같이 합주 시작할게요! 셋, 둘……」'],
-  {k:'card',goal:'「{x}」 찾기'},
+  {k:'card',goal:'「{x}」 찾기',bag:['card','paper','notebook','handkerchief']},
   ['nar','','음악실 {@door} 옆에 ‘쉬는 자리 {@card}’가 걸려 있었다.']],
  ask:'어떻게 할까?',
  choices:[
@@ -763,13 +763,13 @@ EP.siwoo=[
 
 // ■ Day 16R — 몇 센티? (15)
 {title:'몇 센티?',scene:'siwoo_15',place:'class',at:[310,262],stand:1,
- things:{class:[['milk_carton',172,236,38,'milk_carton_cut','stay'],['ruler',196,214,74],['butterfly',70,110,44]]},
+ things:{class:[['milk_carton',172,236,38,'milk_carton_cut','stay']]},
  pre:[
   {pic:'siwoo_15b'},
   ['nar','','방과 후. 창가에 시우가 서 있었다. 처음 말 걸었던 날처럼. 창틀 위에 새 {@milk_carton}이 있었다. 안에 새 {@cocoon}가 있었다.'],
   ['nar','','나는 시우 쪽으로 걸어갔다. 30센티 앞에서 멈췄다. 이제 저절로 멈춰졌다.'],
   ['siwoo','smile','……이상한 말 사전 30번.'],
-  {k:'ruler',goal:'「{x}」 보기'},
+  {k:'ruler',goal:'「{x}」 보기',bag:['ruler','pencil','eraser','pcase']},
   ['nar','','시우가 창틀 위에 30센티 {@ruler}를 내려놓았다. 처음 만났을 때처럼.'],
   ['siwoo','smile','30번은 ‘친구’. 이건 이상한 말 아니야. 근데 뜻을 몰라서 적었어.'],
   ['me','surprised','친구 뜻을 몰라?'],
@@ -803,7 +803,7 @@ EP.siwoo=[
    ['nar','','시우가 {w}을 탁 덮었다. 내가 30번의 뜻을 제대로 듣지 않았다는 걸, 시우는 정확하게 알고 있었다.'],['me','surprised','……아. 다시 말해 줄래?'],['siwoo','smile','30센티 안에 들어와도 되는 사람. 너.']]}],
  post:[
   ['nar','','창밖에서 {@butterfly} 한 마리가 날고 있었다.'],
-  {k:'butterfly',goal:'「{x}」 기다리기'},
+  {k:'butterfly',goal:'「{x}」 기다리기',bag:['butterfly','cocoon','milk_carton','window']},
   {pic:'siwoo_15a'},
   ['nar','','우리는 {@milk_carton} 속 {@cocoon}를 함께 봤다.'],
   ['siwoo','smile','이 {@cocoon}는 산호랑나비. 날짜는 몰라.'],
