@@ -146,7 +146,10 @@ function runSteps(steps,choice,done){const q=(steps||[]).slice();
    // {move:[id,x,y]} a kid walks to that spot from that line on (comes in from the door if not on this map); {move:[id,x,y,'out']} walks out and leaves
    if(s.move){q.shift();const m=s.move;lines.push(()=>moveKid(m));continue}
    // {me:[x,y]} I walk there from that line on, even while the lines go on (to my own seat when the scene says I am at it)
-   if(s.me){q.shift();const m=s.me;lines.push(()=>{me.auto=true;walkTo(m[0],m[1],()=>{me.auto=false})});continue}break}
+   if(s.me){q.shift();const m=s.me;lines.push(()=>{let mx=m[0],my=m[1];
+    // the scene's friend may stand elsewhere than the script's at (spots.js moved Hyeeun off a desk): I walk to the same side of where they really are
+    {const e=SCENE_EP,f=SCENE_IDS&&npcs.find(p=>p.id===SCENE_IDS[0]);if(e&&e.at&&e.place===MAP&&f){const[fx,fy]=kidSpot(f);if(Math.hypot(fx-e.at[0],fy-e.at[1])>40){mx+=fx-e.at[0]+(m[0]<e.at[0]?-45:45);my+=fy-e.at[1];if(typeof footOk==='function'&&!footOk(MAP,mx,my)){const c=typeof freeSpot==='function'&&freeSpot(MAP,mx,my,[]);if(c){mx=c[0];my=c[1]}}}}}
+    me.auto=true;walkTo(mx,my,()=>{me.auto=false})});continue}break}
   const go=()=>{showPic(null);if(!q.length){done&&done();return}const f=q.shift();if(f.go){fade(()=>{load(f.go);next()});return}find(f.k,()=>{TODAY.add(f.k);next()},f.goal||'「{x}」 찾기')};
   if(lines.length)say(lines,go);else go()};
  next()}
