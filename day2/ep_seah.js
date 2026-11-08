@@ -1308,8 +1308,8 @@ EP.seah=[
   common:[['me','smile','그리고 지호가 벌칙 바꿨어. 팔굽혀펴기 다섯 개. 세아가 그건 한대. 다섯 개 하고 바닥에 철퍼덕 엎드렸어.'],['mom','laugh','(웃음) 다섯 개 했어?'],['me','smile','응! 민호가 다섯 개 하는 데 1분 걸렸대. 세아가 ‘그래도 다섯 개 했거든’ 했어.'],['mom','laugh','(크게 웃음) 세아가 그렇게 말했어?'],['me','laugh','응. 다들 웃었어. 민호도. 세아 엎드려서 웃었어. 눈까지.'],['mom','smile','……좋은 날이었네.'],['me','smile','응. 세아가 ‘안 할래’ 처음 해 봤대. 민호 있는 데서.'],['mom','surprised','너는 그때 뭐라고 했어?'],['me','smile','아무 말도 안 했어. 고개만 끄덕였어.'],['mom','smile','그래.']]}},
 
 // ■ Day 15 — 다른 식탁 (14)
-// (11/08 owner) Haeun·Hyeeun floated over the chairs at 760,360/950,380: now on the floor at the middle table's end
-{title:'다른 식탁',scene:'seah_14',place:'cafe',at:[620,470],empty:{cafe:['seah','haeun','hyeeun','minho','jiho']},with:[['haeun',400,395],['hyeeun',480,445],['minho',1270,470],['jiho',1350,480]],
+// (11/08 owner) Haeun·Hyeeun floated over the chairs (760,360/950,380); Seah's 620,470 was not floor and got moved onto Hyeeun's wheelchair: three apart on the floor by the counter
+{title:'다른 식탁',scene:'seah_14',place:'cafe',at:[385,410],empty:{cafe:['seah','haeun','hyeeun','minho','jiho']},with:[['haeun',285,425],['hyeeun',478,442],['minho',1270,470],['jiho',1350,480]],
  pre:[
   ['nar','','점심시간. 급식 줄에서 {@tray|을} 받았다.'],
   {k:'tray',goal:'「{x}」 들고 가기',bag:['tray','spoon','chopsticks','cup','milk']},
