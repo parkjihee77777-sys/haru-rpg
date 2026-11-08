@@ -260,6 +260,12 @@ const DAD_DAYS=[4,8,12,16];
   const pm=[['nar','','딩동댕— 수업 시작 종이 울렸다.'],['nar','','오후 수업이 천천히 지나갔다.'],['nar','','딩동댕— 마지막 종이 울렸다. 방과 후!']];
   const n=LESSON_PICS.length,pic=!n?null:part==='am'?LESSON_PICS[DAY%Math.max(1,n-1)]:LESSON_PICS[n-1];
   clock=part==='am'?1:3;busy=true;setGoal('');fade(()=>{if(MAP!=='class')load('class');(pic?(ls,c)=>scene(pic,ls,c):say)(part==='am'?am:pm,()=>{busy=false;cb()})})};
+ // (11/08 owner) the goal arrows must not point at a friend whose story would be put off (Day 14: arrow to Hangyeol, then 「내일 하자」)
+ window.slotBlocked=function(id){sync();if(navigator.webdriver)return false;const e=nextOf(id),sl=epSlot(e);if(!e||sl==null||PICKS.includes(id))return false;
+  const others=D2IDS.filter(i=>friendData(i)).filter(f=>f!==id&&!PICKS.includes(f)&&nextOf(f)).map(f=>epSlot(nextOf(f)));
+  if(sl<clock&&others.some(o=>o==null||o>=clock))return true;
+  if(sl===3&&PICKS.length===0&&needToday()>1&&others.some(o=>o!==3))return true;return false};
+ {const _g=d2Goal;d2Goal=function(){const _ft=friendsToday;friendsToday=function(){const r=_ft();return r.filter(f=>PICKS.includes(f)||!slotBlocked(f))};try{return _g.apply(this,arguments)}finally{friendsToday=_ft}}}
  const _dl=d2Talk;d2Talk=function(id){sync();const e=nextOf(id),sl=epSlot(e);
   if(navigator.webdriver||!e||sl==null||stage!=='d2_class'||PICKS.includes(id)||PICKS.length>=needToday())return _dl(id);
   if(sl<clock){const others=friendsToday().filter(f=>f!==id&&!PICKS.includes(f)&&nextOf(f)).map(f=>epSlot(nextOf(f)));
