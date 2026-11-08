@@ -715,7 +715,8 @@ EP.siwoo=[
   common:[['me','laugh','그리고 하은이가 시우한테 24번 알려 줬어. ‘눈이 높다.’ 시우가 눈 높이는 사람마다 다르대.'],['mom','smile','그것도 맞는 말이다.'],['me','smile','시우도 웃었어. 처음 봤어.']]}},
 
 // ■ Day 15 — 리코더 합주 (14)
-{title:'리코더 합주',scene:'siwoo_14',place:'music',at:[720,840],sit:[1016,630],with:[['junho',1180,840]],
+// (11/08 owner) the classroom-size seated Siwoo was bigger than the music-room chair and off it: smaller (h 178) and centred on the chair
+{title:'리코더 합주',scene:'siwoo_14',place:'music',at:[720,840],sit:[1001,636,178],with:[['junho',1180,840]],
  things:{},
  pre:[
   {pic:'siwoo_14a'},
