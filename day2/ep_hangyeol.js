@@ -531,11 +531,14 @@ EP.hangyeol=[
   ['me','laugh','아, 그날 밤!'],
   ['hangyeol','smile','그날 내가 {@picture} 보여 줬잖아. 기억나?'],
   {fx:'past'},{go:'triproom'},
+  {pic:'hangyeol_11f'},// the camp night itself (owner 11/08: it showed the classroom window picture)
   ['nar','','수련회 밤, 레크리에이션 뒤 자유 시간. 로비 구석 소파에서 담요를 뒤집어쓴 채 {@flashlight}을 켰다.'],
   {k:'flashlight',goal:'「{x}」 켜기',bag:['flashlight','pillow','blanket','cup','book']},
+  {pic:'hangyeol_11f'},// back to the blanket picture after the find
   ['nar','','담요 속이 노랗게 밝아졌다.'],
   ['hangyeol','smile','있잖아. 오늘 활동지에 ‘어른이 된 나 그리기’ 있었잖아. 나 그거 다 못 그려서 여기서 마저 그렸어.'],
   {k:'paper',goal:'「{x}」 펼치기',bag:['paper','book','notebook','blanket','flashlight']},
+  {pic:'hangyeol_11f'},// back to the blanket picture after the find
   ['nar','','한결이의 {@picture}이 펼쳐졌다.'],
   ['nar','','{@picture} 속 어른은 긴 머리를 하나로 묶고, 보라색 나비 머리핀을 하고 있었다. 큰 가게 앞에 서 있었다.'],
   {flag:'H04_name',is:1,lines:[['nar','','간판에는 「결이 공방」.']]},
@@ -877,3 +880,5 @@ function josa(w,p){const c=w.charCodeAt(w.length-1)-0xAC00;if(c<0||c>11171)retur
   if(h[3]!=='eve'){startDay(day);return}
   setDay(day);PICKS=[];for(const f of other?[other,'hangyeol']:['hangyeol']){EPIDX[f]=k-1;TODAYEP[f]=EP[f][k-1];MEET[f]=k;PICKS.push(f);D2CHOICE[f]='C'}
   stage='d2_after';load('class');useDoor()},70)}
+
+for(const n of ['hangyeol_11a','hangyeol_11f','hangyeol_11c'])HEROPIC.add(n);// the camp photo shows me: a boy and a girl version (owner 11/08)
