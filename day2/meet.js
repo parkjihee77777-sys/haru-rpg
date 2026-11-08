@@ -264,7 +264,7 @@ const DAD_DAYS=[4,8,12,16];
  window.slotBlocked=function(id){sync();if(navigator.webdriver)return false;const e=nextOf(id),sl=epSlot(e);if(!e||sl==null||PICKS.includes(id))return false;
   const others=D2IDS.filter(i=>friendData(i)).filter(f=>f!==id&&!PICKS.includes(f)&&nextOf(f)).map(f=>epSlot(nextOf(f)));
   if(sl<clock&&others.some(o=>o==null||o>=clock))return true;
-  if(sl===3&&PICKS.length===0&&needToday()>1&&others.some(o=>o!==3))return true;return false};
+  if(sl===3&&PICKS.length===0&&Math.min(2,D2IDS.filter(i=>friendData(i)).length)>1&&others.some(o=>o!==3))return true;return false};
  {const _g=d2Goal;d2Goal=function(){const _ft=friendsToday;friendsToday=function(){const r=_ft();return r.filter(f=>PICKS.includes(f)||!slotBlocked(f))};try{return _g.apply(this,arguments)}finally{friendsToday=_ft}}}
  const _dl=d2Talk;d2Talk=function(id){sync();const e=nextOf(id),sl=epSlot(e);
   if(navigator.webdriver||!e||sl==null||stage!=='d2_class'||PICKS.includes(id)||PICKS.length>=needToday())return _dl(id);
