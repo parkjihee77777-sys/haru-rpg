@@ -1095,7 +1095,7 @@ EP.hyeeun=[
   ['hyeeun','smile','{@wheel|은} 돼. 물어봐 줘서 고마워. 별 넷.'],
   ['jihoon','smile','네가 찍어. 내가 찍으면 또 이상한 거 찍을 것 같아.'],
   ['nar','','지훈이가 카메라를 나에게 건넸다.'],
-  {k:'wheel',goal:'「{x}」 {@photo} 찍기'},
+  {k:'wheel',goal:'「{x}」 {@photo} 찍기',bag:['wheel:wheel_chair','camera','glove','sun','bag']},
   {pic:'hyeeun_13a'},
   ['nar','','찰칵. 햇빛에 반짝이는 {@wheel}, 그 위에 올린 혜은이 장갑 낀 손이 찍혔다.'],
   ['hyeeun','laugh','그 {@photo|은} 네가 가져. 선거에 써도 돼. {@wheel|은} 공짜야. 농담이야.'],
