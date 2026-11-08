@@ -252,7 +252,7 @@ const DAD_DAYS=[4,8,12,16];
 {const SLOTS=[[3,/^([56]교시가 끝났다|종례|하교|방과 ?후|오늘 끝)/],[2,/^(5교시|6교시|오후)/],[1,/^(점심|4교시가 끝났다|급식)/],[0,/^(아침|1교시|[123]교시가 끝났다|등교|쉬는 시간|중간 놀이)/]];
  window.epSlot=function(e){if(!e)return null;if(e.slot!=null)return e.slot;let n=0;for(const s of e.pre||[]){if(!Array.isArray(s)||typeof s[2]!=='string')continue;const t=s[2].replace(/^[^:]*: 「/,'');const m=SLOTS.find(([,r])=>r.test(t));if(m)return m[0];if(++n>=3)break}return null};
  window.epLate=e=>epSlot(e)===3;
- const nextOf=f=>epNext(f,EPIDX[f]);const isTest=()=>typeof TESTER!=='undefined'&&!!TESTER;// (11/08 owner) tester mode meets all 15 in a day: no time-of-day rules
+ const nextOf=f=>epNext(f,EPIDX[f]);const isTest=()=>(typeof TESTER!=='undefined'&&!!TESTER)||(typeof ED_DAY!=='undefined'&&DAY===ED_DAY);// Day 16 (election at 종례): no time-of-day rules either, the election must always come// (11/08 owner) tester mode meets all 15 in a day: no time-of-day rules
  let clock=0,clockDay=-1;// 0 morning, 1 lunch (morning lessons done), 3 after school (afternoon lessons done)
  const sync=()=>{if(clockDay!==DAY){clockDay=DAY;clock=0}};
  const _ls=lessons;
