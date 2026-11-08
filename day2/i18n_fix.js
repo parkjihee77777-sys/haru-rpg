@@ -6086,3 +6086,16 @@ T.vi=T.vi||{};Object.assign(T.vi,{"(이 이야기는 수업 끝나고 하자. �
 T.zh=T.zh||{};Object.assign(T.zh,{"(이 이야기는 수업 끝나고 하자. 먼저 다른 친구한테 가 볼까?)": "（这个放学以后再说吧。先去找别的朋友？）"});
 T.ja=T.ja||{};Object.assign(T.ja,{"(이 이야기는 수업 끝나고 하자. 먼저 다른 친구한테 가 볼까?)": "（この話は授業が終わってからにしよう。先にほかの友だちのところへ行こうかな？）"});
 T.ru=T.ru||{};Object.assign(T.ru,{"(이 이야기는 수업 끝나고 하자. 먼저 다른 친구한테 가 볼까?)": "(Это лучше после уроков. Может, сначала подойти к другому другу?)"});
+// 11/08 하루 두 만남 시간 순서
+T.en=T.en||{};Object.assign(T.en,{"(이 이야기는 조금 이따가 하자. 먼저 다른 친구한테 가 볼까?)": "(Let's save this for a bit later. Should I go to another friend first?)"});
+T.id=T.id||{};Object.assign(T.id,{"(이 이야기는 조금 이따가 하자. 먼저 다른 친구한테 가 볼까?)": "(Cerita ini nanti saja. Aku ke teman lain dulu, ya?)"});
+T.vi=T.vi||{};Object.assign(T.vi,{"(이 이야기는 조금 이따가 하자. 먼저 다른 친구한테 가 볼까?)": "(Chuyện này để lát nữa nhé. Mình sang bạn khác trước đã?)"});
+T.zh=T.zh||{};Object.assign(T.zh,{"(이 이야기는 조금 이따가 하자. 먼저 다른 친구한테 가 볼까?)": "（这个等一会儿再说吧。先去找别的朋友？）"});
+T.ja=T.ja||{};Object.assign(T.ja,{"(이 이야기는 조금 이따가 하자. 먼저 다른 친구한테 가 볼까?)": "（この話はもう少しあとにしよう。先にほかの友だちのところへ行こうかな？）"});
+T.ru=T.ru||{};Object.assign(T.ru,{"(이 이야기는 조금 이따가 하자. 먼저 다른 친구한테 가 볼까?)": "(Это чуть позже. Может, сначала подойти к другому другу?)"});
+T.en=T.en||{};Object.assign(T.en,{"(그 이야기는 내일 하자. 다른 친구한테 가 볼까?)": "(Let's talk about that tomorrow. Should I go to another friend?)"});
+T.id=T.id||{};Object.assign(T.id,{"(그 이야기는 내일 하자. 다른 친구한테 가 볼까?)": "(Itu besok saja. Aku ke teman lain, ya?)"});
+T.vi=T.vi||{};Object.assign(T.vi,{"(그 이야기는 내일 하자. 다른 친구한테 가 볼까?)": "(Chuyện đó để mai nhé. Mình sang bạn khác nhé?)"});
+T.zh=T.zh||{};Object.assign(T.zh,{"(그 이야기는 내일 하자. 다른 친구한테 가 볼까?)": "（那个明天再说吧。去找别的朋友？）"});
+T.ja=T.ja||{};Object.assign(T.ja,{"(그 이야기는 내일 하자. 다른 친구한테 가 볼까?)": "（その話はあしたにしよう。ほかの友だちのところへ行こうかな？）"});
+T.ru=T.ru||{};Object.assign(T.ru,{"(그 이야기는 내일 하자. 다른 친구한테 가 볼까?)": "(Это завтра. Может, подойти к другому другу?)"});

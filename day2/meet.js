@@ -245,10 +245,18 @@ function teacherLine(l){if(!Array.isArray(l)||l[0]!=='nar'||typeof l[2]!=='strin
 const DAD_DAYS=[4,8,12,16];
 {const _sceneDad=scene;scene=function(img,lines,done,keep){if((img==='dinner'||img==='dinner_m')&&DAD_DAYS.includes(DAY)){const c=UI==='ko'?LANG:UI;
   img=(DINNER_HOME.includes(c)?'dinner_'+c+(HERO==='hero_m'?'_m':'_f'):(HERO==='hero_m'?'dinner_m':'dinner'))+'_dad'}return _sceneDad(img,lines,done,keep)}}
-// (11/08 owner) a meeting that starts after school (「종례가 끝났다」, 「하교 시간」, 「방과 후」…) can't be the day's first meeting while another friend still has a daytime one
-{const LATE_RE=/^([56]교시가 끝났다|종례|하교|방과 ?후|오늘 끝)/;
- window.epLate=function(e){if(!e)return false;let n=0;for(const s of e.pre||[]){if(!Array.isArray(s)||typeof s[2]!=='string')continue;if(LATE_RE.test(s[2].replace(/^[^:]*: 「/,'')))return true;if(++n>=3)break}return false};
- const _dl=d2Talk;d2Talk=function(id){const e=epNext(id,EPIDX[id]);
-  if(!navigator.webdriver&&e&&epLate(e)&&stage==='d2_class'&&!PICKS.includes(id)&&PICKS.length===0&&needToday()>1&&friendsToday().some(f=>f!==id&&!PICKS.includes(f)&&epNext(f,EPIDX[f])&&!epLate(epNext(f,EPIDX[f])))){
-   say([['think','smile','(이 이야기는 수업 끝나고 하자. 먼저 다른 친구한테 가 볼까?)']]);return}
-  return _dl(id)}}
+// (11/08 owner) each meeting's time of day, read from its first lines: 0 morning·break, 1 lunch, 2 afternoon class, 3 after school (none = any time).
+// The day's two meetings play in time order: the first can't be later than another friend's, the second can't be earlier than the first.
+{const SLOTS=[[3,/^([56]교시가 끝났다|종례|하교|방과 ?후|오늘 끝)/],[2,/^(5교시|6교시|오후)/],[1,/^(점심|4교시가 끝났다|급식)/],[0,/^(아침|1교시|[123]교시가 끝났다|등교|쉬는 시간|중간 놀이)/]];
+ window.epSlot=function(e){if(!e)return null;if(e.slot!=null)return e.slot;let n=0;for(const s of e.pre||[]){if(!Array.isArray(s)||typeof s[2]!=='string')continue;const t=s[2].replace(/^[^:]*: 「/,'');const m=SLOTS.find(([,r])=>r.test(t));if(m)return m[0];if(++n>=3)break}return null};
+ window.epLate=e=>epSlot(e)===3;
+ const nextOf=f=>epNext(f,EPIDX[f]);let firstSlot=null;
+ const _dl=d2Talk;d2Talk=function(id){const e=nextOf(id),sl=epSlot(e);
+  if(PICKS.length===0)firstSlot=null;
+  if(!navigator.webdriver&&e&&sl!=null&&stage==='d2_class'&&!PICKS.includes(id)&&PICKS.length<needToday()){
+   const others=friendsToday().filter(f=>f!==id&&!PICKS.includes(f)&&nextOf(f));
+   if(PICKS.length===0&&others.some(f=>{const o=epSlot(nextOf(f));return o!=null&&o<sl})){
+    say([['think','smile',sl===3?'(이 이야기는 수업 끝나고 하자. 먼저 다른 친구한테 가 볼까?)':'(이 이야기는 조금 이따가 하자. 먼저 다른 친구한테 가 볼까?)']]);return}
+   if(PICKS.length>0&&firstSlot!=null&&sl<firstSlot&&others.some(f=>{const o=epSlot(nextOf(f));return o==null||o>=firstSlot})){
+    say([['think','smile','(그 이야기는 내일 하자. 다른 친구한테 가 볼까?)']]);return}}
+  const n=PICKS.length,r=_dl(id);if(n===0&&typeof SCENE_EP!=='undefined'&&SCENE_EP===e)firstSlot=sl;return r}}
