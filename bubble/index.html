@@ -160,7 +160,7 @@ function angleTo(px,py){const[sx,sy]=shooter();let a=Math.atan2(sy-py,px-sx);a=M
 function pt(e){const b=cv.getBoundingClientRect();return[e.clientX-b.left,e.clientY-b.top]}
 // (11/08 owner) slingshot aim: press anywhere, pull DOWN and let go - the bubble flies the opposite way of the pull (no tapping the target directly)
 let pull=null;const pullAim=(x,y)=>{const dx=x-pull.x,dy=y-pull.y;if(dy<R*.6||Math.hypot(dx,dy)<R*1.2)return null;return Math.max(.12,Math.min(Math.PI-.12,Math.atan2(dy,-dx)))};
-cv.addEventListener('pointerdown',e=>{if(!playing||shot||tipWait)return;demoOn=false;lastAct=performance.now();const[px,py]=pt(e),[wx,wy]=waitXY();if((px-wx)**2+(py-wy)**2<(R*1.5)**2){swap();return}cv.setPointerCapture(e.pointerId);pull={x:px,y:py,cx:px,cy:py};aim=null});
+cv.addEventListener('pointerdown',e=>{if(!playing||shot||tipWait||hitNext)return;demoOn=false;lastAct=performance.now();const[px,py]=pt(e),[wx,wy]=waitXY();if((px-wx)**2+(py-wy)**2<(R*1.5)**2){swap();return}cv.setPointerCapture(e.pointerId);pull={x:px,y:py,cx:px,cy:py};aim=null});
 cv.addEventListener('pointermove',e=>{if(!pull)return;const[px,py]=pt(e);pull.cx=px;pull.cy=py;const a=pullAim(px,py);aim=a;if(a!==null)lastAim=a});
 cv.addEventListener('pointerup',e=>{if(!pull)return;const a=pullAim(...pt(e));pull=null;aim=null;lastAct=performance.now();if(a!==null){lastAim=a;fires++;fire(a)}else demoStart()});
 cv.addEventListener('pointercancel',()=>{pull=null;aim=null});
@@ -171,21 +171,21 @@ function hitAt(x,y){if(y<=R)return{ceiling:true};
 function step(s){s.x+=s.vx;s.y+=s.vy;const lo=R*1.25,hi=W-R*.75;let b=false;if(s.x<lo){s.x=lo*2-s.x;s.vx*=-1;b=true}if(s.x>hi){s.x=hi*2-s.x;s.vx*=-1;b=true}if(b&&s===shot)SFX.bounce()}
 function nearestFree(x,y){let best=null,bd=1e9;for(let r=0;r<grid.length+2;r++)for(let c=0;c<rowLen(r);c++){if(at(r,c))continue;const[bx,by]=cellXY(r,c);const d=(bx-x)**2+(by-y)**2;
   if(d<bd&&(r===0||neighbors(r,c).some(([a,b])=>at(a,b)))){bd=d;best=[r,c]}}return best}
-function land(h){const k=shot.k,sx=shot.x,sy=shot.y,wasGold=shot.gold,wasWhite=shot.white;shot=null;
+let hitNext=false;function land(h){const k=shot.k,sx=shot.x,sy=shot.y,wasGold=shot.gold,wasWhite=shot.white;shot=null;
   if(h&&!h.ceiling&&h.k===k){// right picture: pop it with every touching same picture
     const grp=[];{const seen=new Set([h.r+','+h.c]),q=[[h.r,h.c]];while(q.length){const[r,c]=q.pop();grp.push([r,c]);for(const[a,b]of neighbors(r,c))if(at(a,b)===k&&!seen.has(a+','+b)){seen.add(a+','+b);q.push([a,b])}}}
     {const[x,y]=cellXY(h.r,h.c);card(x,y,k)}// the word and its picture together, once more
     popCells(grp,wasGold?3:wasWhite?2:1);mastery[k]=(mastery[k]||0)+1;hits[k]=(hits[k]||0)+1;if(helpLeft[k])helpLeft[k]--;
     if(wasWhite)floatText(W/2,H*.32,'×2','#2fb38a');if(wasGold){SFX.cookie();floatText(W/2,H*.38,'🌈 ×3','#b06bff');shake=6}
     streak++;SFX.pop(grp.length);const fell=dropFloating();if(fell>=3)shake=10;face='yay';faceT=performance.now()+1100;jumpT=performance.now();jumps=grp.length+fell>=4?2:1;if(fell)setTimeout(SFX.fall,150);hud();
-    say(tr(['맞았어!','잘했어!','최고야!'][score%3]));setTimeout(next,500)}
+    say(tr(['맞았어!','잘했어!','최고야!'][score%3]));hitNext=true;setTimeout(()=>{hitNext=false;next()},500)}
   else{// wrong picture (or the ceiling): the shot sticks as that word's picture
     const p=nearestFree(sx,sy);if(p)setAt(p[0],p[1],k);SFX.wrong();streak=0;misses[k]=(misses[k]||0)+1;if(wasWhite||wasGold){helpLeft[k]=2;mastery[k]=Math.max(2,(mastery[k]||0)-1)}{const[a,b]=shooter();card(a,b-PH()*.7,k)}// show which picture this word was
     missNow++;say(tr(missNow>=2?'같은 색 그림을 찾아 봐!':'그림을 잘 봐!'))}
   if(playing&&!kindsLeft().length){win();return}
   if(playing&&reserve>0&&kindsLeft().length&&shots%(ROUNDS[round].every||8)===0){reserve--;pushRow()}
   if(playing&&left<=0){playing=false;show('🫧 0',tr('한 번 더 해 볼까요?'),'↻',startRound,true);return}
-  if(playing)next();checkLose()}
+  if(playing&&!hitNext)next();checkLose()}// (11/08 owner) a hit called next() twice (here and 0.5 s later): the waiting word changed twice and another word was said
 function popCells(cells,mult){let pts=0;cells.forEach(([r,c])=>{const kk=at(r,c);if(!kk)return;const[x,y]=cellXY(r,c);
     fx.push({x,y,k:kk,t:0,kind:'pop'});pts+=(PASTSET.has(kk)?2:1)*mult*10;setAt(r,c,null)});
   score+=pts;if(cells.length){const[x,y]=cellXY(cells[0][0],cells[0][1]);floatText(x,y,'+'+pts,'#ff6fa0')}}
