@@ -715,8 +715,9 @@ EP.siwoo=[
   common:[['me','laugh','그리고 하은이가 시우한테 24번 알려 줬어. ‘눈이 높다.’ 시우가 눈 높이는 사람마다 다르대.'],['mom','smile','그것도 맞는 말이다.'],['me','smile','시우도 웃었어. 처음 봤어.']]}},
 
 // ■ Day 15 — 리코더 합주 (14)
-// (11/08 owner) the classroom-size seated Siwoo was bigger than the music-room chair and off it: smaller (h 178) and centred on the chair
-{title:'리코더 합주',scene:'siwoo_14',place:'music',at:[720,840],sit:[1001,636,178],with:[['junho',1180,840]],
+// (11/08 owner) a sitting sprite never matched the slanted music-room chairs, and the room was empty in a full-class lesson: drawn:[map,x,y] =
+// the map maps/music_siwoo.jpg (music_full with Siwoo drawn at his desk, recorder) is shown while this meeting waits; his sprite stands there invisible, only to be tapped
+{title:'리코더 합주',scene:'siwoo_14',place:'music',at:[720,840],drawn:['music_siwoo',1112,600],with:[['junho',1180,840]],
  things:{},
  pre:[
   {pic:'siwoo_14a'},
@@ -862,7 +863,12 @@ for(const id of ['music']){const m=EXTRA_MAPS[id];MAPS[id]={img:m.img,walk:m.wal
 // stand:1 = he stands where his scene says (meetings 1, 5, 15: at the window; 12: just outside 30 cm of the hero's desk), not at a desk; spots.js seats every kid with sitting art, so this runs after it
 // sit:[x,top,h?] = he sits at that chair (x = his middle, top = the chair back's top, where his cut-off back ends; h = a smaller sprite for the cafeteria's smaller drawn chairs, 11/06) where the classroom seats don't reach: the cafeteria table (4), the music room desk (14)
 addEventListener('load',()=>{const _dpSw=d2People;d2People=function(id){const ps=_dpSw(id),e=epNext('siwoo',EPIDX.siwoo);
- if(e&&e.place===id){const p=ps.find(p=>p[0]==='siwoo');if(p&&e.stand){p[1]=e.at[0];p[2]=e.at[1];p.length=3}else if(p&&e.sit){p[1]=e.sit[0];p[2]=0;p[3]={top:e.sit[1],h:e.sit[2]}}}return ps}});
+ if(id==='music'&&MAPS.music)MAPS.music.img2=(e&&e.place===id&&e.drawn)?`maps/${e.drawn[0]}.jpg`:undefined;
+ if(e&&e.place===id&&e.drawn){const p=ps.find(p=>p[0]==='siwoo');if(p){p[1]=e.drawn[1];p[2]=0;p[3]={top:e.drawn[2],h:178}}}
+ else if(e&&e.place===id){const p=ps.find(p=>p[0]==='siwoo');if(p&&e.stand){p[1]=e.at[0];p[2]=e.at[1];p.length=3}else if(p&&e.sit){p[1]=e.sit[0];p[2]=0;p[3]={top:e.sit[1],h:e.sit[2]}}}return ps}});
 
 // eve lines may hold {flag,is,lines} blocks (meeting 5 commonIf, W02_ask); dinner does not run them through runSteps, so unwrap here
 addEventListener('load',()=>{const _epSw=evePart;evePart=function(id){const ls=_epSw(id);if(id!=='siwoo')return ls;const out=[];const ex=a=>a.forEach(s=>{if(s&&!Array.isArray(s)&&typeof s==='object'&&'flag' in s){if((+!!FLAGS[s.flag])===s.is)ex(s.lines)}else out.push(s)});ex(ls);return out}});
+
+// the drawn Siwoo (meeting 14): his invisible sprite is the tap target over the picture
+addEventListener('load',()=>{const _ldSw=load;load=function(id,extra){try{const e0=epNext('siwoo',EPIDX.siwoo);if(id==='music'&&MAPS.music)MAPS.music.img2=(e0&&e0.place===id&&e0.drawn)?`maps/${e0.drawn[0]}.jpg`:undefined}catch(err){}const r=_ldSw.apply(this,arguments);try{const e=epNext('siwoo',EPIDX.siwoo);if(e&&e.drawn&&id===e.place){const hide=()=>{const n=npcs.find(n=>n.id==='siwoo');if(n&&n.el){n.el.style.transition='none';n.el.style.opacity=0}};hide();let k=0;const t=setInterval(()=>{hide();if(++k>25||MAP!==id)clearInterval(t)},200)}}catch(err){}return r}});
