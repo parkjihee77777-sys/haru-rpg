@@ -119,14 +119,14 @@ body,button{word-break:keep-all;overflow-wrap:break-word}
 <div id="fader"></div>
 <script>
 // same address, newest version: if the page this phone has kept is older than the one online, fetch the new one and reopen
-const BUILD='1108132147';
+const BUILD='1108142151';
 try{fetch(location.pathname,{cache:'no-store'}).then(r=>r.text()).then(t=>{const m=t.match(/const BUILD='(\d+)'/);if(m&&m[1]!==BUILD&&sessionStorage.getItem('upd')!==m[1]){sessionStorage.setItem('upd',m[1]);fetch(location.pathname,{cache:'reload'}).then(()=>location.reload())}}).catch(()=>{})}catch(e){}
 </script>
-<script src="i18n.js?v=1108132147"></script>
-<script src="i18n_prologue_v2.js?v=1108132147"></script>
-<script src="day2/i18n_engine.js?v=1108132147"></script>
-<script src="day2/data.js?v=1108132147"></script>
-<script src="day3/data.js?v=1108132147"></script>
+<script src="i18n.js?v=1108142151"></script>
+<script src="i18n_prologue_v2.js?v=1108142151"></script>
+<script src="day2/i18n_engine.js?v=1108142151"></script>
+<script src="day2/data.js?v=1108142151"></script>
+<script src="day3/data.js?v=1108142151"></script>
 <script>
 // ---------- data ----------
 const MW=1672,MH=941,KID=180;
@@ -510,9 +510,9 @@ function incident(){setGoal('');busy=true;bgm('tense');
   ['minho','angry','아, 뭐야! 누가 이런 걸 여기다 놨어?'],['siwoo','sad','……번데기.'],['minho','surprised','뭐?'],['siwoo','sad','번데기…… 밟지 마.'],['nar','','시우는 귀를 막은 채 바닥에 쪼그려 앉았다. 손을 뻗었다가 다시 거둔다.'],
   ['minho','angry','야, 별것도 아닌 벌레 가지고 왜 그래?'],['siwoo','sad','별것…… 아니야.'],['nar','','시우의 목소리가 가늘게 떨렸다.'],['minho','angry','뭐라고? 잘 안 들려.'],['think','surprised','(민호는 화가 났고, 시우는 움직이지도 못하고 있어. 어떡하지?)']],()=>{busy=true;
   ask('어떻게 할까?',[
-   {k:'A',text:'「시우야, 내가 같이 주워 줄까?」 하고 물은 뒤 대답을 기다린다.',pts:{siwoo:2},r:[['me','smile','시우야, 내가 같이 주워 줄까?'],['siwoo','sad','……'],()=>showPic('pro_a'),['nar','','시우는 한참 뒤 고개를 끄덕인다.'],['siwoo','sad','그거…… 손으로 잡으면 안 돼.'],['me','surprised','그럼 어떻게 해야 해?'],['siwoo','relieved','종이로…… 밑에서 받쳐.'],['nar','','나는 시우가 알려 준 대로 {w} 한 장을 조심히 내밀었다.']]},
-   {k:'B',text:'민호에게 「네가 쳤잖아. 네가 치워.」라고 말한다.',pts:{siwoo:1},r:[['me','angry','네가 쳤잖아. 네가 치워.'],['minho','angry','뭐? 내가 일부러 그랬냐?'],['me','angry','그래도 네가 떨어뜨렸잖아.'],['nar','','민호가 얼굴을 찌푸렸다.'],['minho','angry','아, 알았다고! 치우면 될 거 아냐!'],()=>showPic('pro_b'),['nar','','민호가 바닥의 흙을 성급하게 쓸어 모으려 한다.'],['siwoo','surprised','안 돼! 거기 번데기!'],['nar','','민호의 손이 멈칫한다.']]},
-   {k:'C',text:'「선생님을 모셔올게.」 하고 교실 문 쪽으로 간다.',pts:{siwoo:2},r:[['me','surprised','선생님을 모셔올게.'],['minho','angry','야! 그런 것까지 선생님한테 일러?'],['me','angry','통이 깨졌잖아. 다칠 수도 있어.'],['nar','','나는 깨진 조각을 피해 문 쪽으로 갔다.'],()=>showPic('pro_c'),['nar','','마침 복도에서 오시던 선생님께 통이 깨졌다고 말씀드렸다.'],['nar','','선생님: 「알겠어. 조각에는 손대지 말고, 선생님이 치울게. 친구들한테도 가까이 가지 말라고 전해 줄래?」'],['nar','','나는 교실로 돌아와 친구들에게 조각을 조심하라고 알렸다.']]},
+   {k:'A',text:'「시우야, 내가 같이 주워 줄까?」 하고 물은 뒤 대답을 기다린다.',pts:{siwoo:2},r:[['me','smile','시우야, 내가 같이 주워 줄까?'],['siwoo','sad','……'],()=>showPic('pro_a'),['nar','','시우는 한참 뒤 고개를 끄덕인다.'],['siwoo','sad','그거…… 손으로 잡으면 안 돼.'],['me','surprised','그럼 어떻게 해야 해?'],['siwoo','relieved','종이로…… 밑에서 받쳐.'],['nar','','나는 시우가 알려 준 대로 {w} 한 장을 조심스럽게 내밀었다.']]},
+   {k:'B',text:'민호에게 「네가 쳤잖아. 네가 치워.」라고 말한다.',pts:{siwoo:1},r:[['me','angry','네가 쳤잖아. 네가 치워.'],['minho','angry','뭐? 내가 일부러 그랬냐?'],['me','angry','그래도 네가 떨어뜨렸잖아.'],['nar','','민호가 얼굴을 찌푸렸다.'],['minho','angry','아, 알았다고! 치우면 될 거 아냐!'],()=>showPic('pro_b'),['nar','','민호가 바닥의 흙을 서둘러 쓸어 모으려 한다.'],['siwoo','surprised','안 돼! 거기 번데기!'],['nar','','민호의 손이 멈칫한다.']]},
+   {k:'C',text:'「선생님을 불러올게.」 하고 교실 문 쪽으로 간다.',pts:{siwoo:2},r:[['me','surprised','선생님을 불러올게.'],['minho','angry','야! 그런 것까지 선생님한테 일러?'],['me','angry','통이 깨졌잖아. 다칠 수도 있어.'],['nar','','나는 깨진 조각을 피해 문 쪽으로 갔다.'],()=>showPic('pro_c'),['nar','','마침 복도에서 오시던 선생님께 통이 깨졌다고 말씀드렸다.'],['nar','','선생님: 「알겠어. 조각에는 손대지 말고, 선생님이 치울게. 친구들한테도 가까이 가지 말라고 전해 줄래?」'],['nar','','나는 교실로 돌아와 친구들에게 조각을 조심하라고 알렸다.']]},
    {k:'D',text:'번데기가 밟히기 전에 {w} 종이로 먼저 옮기려 한다.',pts:{siwoo:1},r:[()=>showPic('pro_d'),['nar','','나는 {w}을 펼쳐 한 장을 찢었다. 번데기 밑으로 밀어 넣으려는 순간이었다.'],['siwoo','surprised','잠깐!'],['nar','','나는 손을 멈췄다.'],['siwoo','sad','거기…… 건드리면 안 돼. 아직 붙어 있어.'],['me','sad','아…… 미안. 난 도와주려고……'],['siwoo','relieved','……알아.'],['nar','','시우가 종이를 가리켰다.'],['siwoo','relieved','이쪽으로……']]}
   ],o=>{CHOICE=o.k;sceneEl.classList.remove('on');say(o.r.concat([
    ()=>showPic('pro_clean'),['nar','','깨진 조각 때문에 친구들이 시우 주변으로 다가오지 못한 채 웅성거렸다.'],['nar','','선생님이 조각을 정리하고, 다친 아이가 없는지 확인하셨다.'],
@@ -536,7 +536,7 @@ function dinner(){if(DAY>=2)return dinner2();scene('dinner'+(HERO==='hero_m'?'_m
 const MOM={
  A:[['me','smile','시우한테 같이 주워 줄까 하고 물었어. 한참 있다가 어떻게 해야 하는지 알려 줬어.'],['mom','laugh','시우가 대답할 때까지 기다렸구나. 잘했네.'],['mom','smile','시우는 그 번데기를 아주 소중하게 생각하나 봐. 누굴 도울 때는 먼저 물어보면, 상대가 무엇을 원하는지 알 수 있지.']],
  B:[['me','angry','민호한테 네가 쳤으니까 네가 치우라고 했어.'],['mom','smile','민호가 잘못한 일을 지적한 건 맞는 행동이야.'],['mom','relieved','그런데 깨진 통이랑 번데기는 아무렇게나 치울 수 없었겠지? 시우가 무엇을 걱정하는지도 살폈으면 더 좋았을 거야.']],
- C:[['me','relieved','선생님을 모셔왔어. 깨진 조각에 누가 다칠 수도 있을 것 같아서.'],['mom','laugh','좋은 생각이었네. 깨진 통에 손을 베일 수도 있었잖아.'],['mom','smile','친구를 돕는다고 모든 일을 혼자 해결할 필요는 없어. 위험하거나 어려운 일이 생기면 어른에게 도움을 청하는 게 현명할 때도 있단다.']],
+ C:[['me','relieved','선생님을 불러왔어. 깨진 조각에 누가 다칠 수도 있을 것 같아서.'],['mom','laugh','좋은 생각이었네. 깨진 통에 손을 베일 수도 있었잖아.'],['mom','smile','친구를 돕는다고 모든 일을 혼자 해결할 필요는 없어. 위험하거나 어려운 일이 생기면 어른에게 도와 달라고 하는 게 좋을 때도 있단다.']],
  D:[['me','sad','번데기부터 구해 주려고 했는데, 시우가 그러면 안 된다고 하더라.'],['mom','smile','도와주고 싶었는데 시우가 말려서 당황했겠네.'],['mom','relieved','네가 생각한 방법과 시우가 원하는 방법이 달랐던 거야. 다음에는 어떻게 해 주면 좋을지 먼저 물어보면 좋겠지?']]};
 // quiz: Mom says the word, pick the right picture among three
 const PIC={mom:'faces/mom_smile.jpg',sua:'faces/sua_smile.jpg',yuna:'faces/yuna_smile.jpg',notebook:'cards/notebook.jpg',bag:'cards/bag.jpg',pencil:'cards/pencil.jpg'};
@@ -547,7 +547,7 @@ function quiz(k,done){busy=true;const cards=QUIZ[k].slice().sort(()=>Math.random
  c.querySelectorAll('.pick button').forEach(b=>b.onclick=()=>{if(b.dataset.k===k){b.classList.add('ok');chime();setTimeout(()=>{m.classList.remove('on');speak(k);busy=false;done&&done()},800)}else{b.classList.add('no');buzz();setTimeout(()=>b.classList.remove('no'),400);setTimeout(()=>speak(k),500)}})}
 // the names written in the notebook on the first night: the classmates you actually talked to, in that order
 function metLine(){const ns=[...TALKED].filter(i=>NAME[i]&&i!=='sua').map(nm);if(!ns.length)return null;const J={en:['(',', ','… and ','.)'],id:['(',', ','… dan ','.)'],vi:['(',', ','… và ','.)'],zh:['（','、','……还有','。）'],ja:['（','、','……それから','。）'],ru:['(',', ','… и ','.)']}[UI]||['(',', ','…… 그리고 ','.)'];const last=ns.pop();return J[0]+(ns.length?ns.join(J[1])+J[2]:'')+last+J[3]}
-function night(){setGoal('');bgm('night');scene('night'+(HERO==='hero_m'?'_m':''),[['nar','','밤. 침대에 앉아 {w}을 펼쳤다.'],['think','relieved','(수아는 대단했어. 민호가 그렇게 무서웠는데, 한마디로 물러나게 했잖아.)'],['think','smile','(나도 수아처럼 멋진 반장이 되고 싶어.)'],['nar','','나는 {w}에 오늘 만난 친구들의 이름을 하나씩 적었다.'],['think','smile',metLine()||'(유나, 준호, 하은…… 그리고 시우.)'],['think','sad','(시우는 번데기가 정말 소중했나 봐. 수아가 민호를 막아 준 건 멋졌지만, 시우가 괜찮은지는 아무도 묻지 않았어.)'],['think','relieved','(반장이 되면 친구들 이야기도 잘 들어 주고 싶어. 사람마다 마음도 다르고, 필요한 것도 다를 테니까.)'],['think','surprised','(좋아. 나도 반장 선거에 나가 볼까?)']],end)}
+function night(){setGoal('');bgm('night');scene('night'+(HERO==='hero_m'?'_m':''),[['nar','','밤. 침대에 앉아 {w}을 펼쳤다.'],['think','relieved','(수아는 대단했어. 민호가 그렇게 무서웠는데, 한마디로 물러나게 했잖아.)'],['think','smile','(나도 수아처럼 멋진 반장이 되고 싶어.)'],['nar','','나는 {w}에 오늘 만난 친구들의 이름을 하나씩 적었다.'],['think','smile',metLine()||'(유나, 준호, 하은…… 그리고 시우.)'],['think','sad','(시우는 번데기가 정말 소중했나 봐. 수아가 민호를 막아 준 건 멋졌지만, 시우가 괜찮은지는 신경 쓴 사람이 별로 없었어.)'],['think','relieved','(반장이 되면 친구들 이야기도 잘 들어 주고 싶어. 사람마다 마음도 다르고, 필요한 것도 다를 테니까.)'],['think','surprised','(좋아. 나도 반장 선거에 나가 볼까?)']],end)}
 function end(){const m=document.getElementById('modal'),c=document.getElementById('mcard');const hs=Object.entries(HEART).map(([i,n])=>`${nm(i)} ♥${n}`).join(' · ')||tr('아직 없음');
  c.innerHTML=`<h2>${tr('1일차 끝 — 반장 선거 출마 결심!')}</h2><p>${tr('오늘 배운 낱말')}</p><div class="pick">${['mom','notebook'].map(k=>`<button onclick="speak('${k}')"><img src="${PIC[k]}" alt=""><span class="word" style="display:block;margin:6px 0 0">${wordOf(k)} 🔊</span></button>`).join('')}</div><p>${tr('친해진 친구')}: ${hs}</p><p style="color:#8a7a6a">${tr('2일차부터는 하루에 두 친구를 골라 만나요.')}</p><button class="big" id="go2">${tr('2일차 시작')}</button> <button class="big" id="re">${tr('처음부터 다시')}</button>`;m.classList.add('on');document.getElementById('re').onclick=()=>location.reload();
  DAY=1;HEART_D1={...HEART};DAY=2;saveDay();DAY=1;document.getElementById('go2').onclick=()=>startDay2()}
@@ -569,35 +569,36 @@ function pickHero(){const m=document.getElementById('modal'),c=document.getEleme
  c.innerHTML=`<h2>${tr('전학생 반장되기')}</h2><p>${tr('한국말이 아직 서툰 전학생,<br>반장 선거에 나가다.')}</p><p style="margin-top:14px">${tr('누구로 할까요?')}</p>${(()=>{const s=loadSave();return s&&s.day>=2&&s.mode===UI+'-'+LANG?`<p><button class="big" id="cont">${tr('{n}일차부터 이어 하기').replace('{n}',s.day)}</button></p>`:''})()}<div class="pick heroes"><button data-h="hero_f"><img src="faces/hero_f_smile.jpg" alt="여자 주인공">${heroName(1)}</button><button data-h="hero_m"><img src="faces/hero_m_smile.jpg" alt="남자 주인공">${heroName(0)}</button></div>`;
  m.classList.add('on');{const cb=document.getElementById('cont');if(cb)cb.onclick=()=>{const s=loadSave();HERO=s.hero;Object.assign(HEART,s.heart||{});(s.found||[]).forEach(k=>FOUND.add(k));HEART_D1={...HEART};chime();(typeof contGame==='function'?contGame(s):startDay(Math.min(s.day,Object.keys(window.D3||{}).length?3:2)))}}c.querySelectorAll('.pick button').forEach(b=>b.onclick=()=>{HERO=b.dataset.h;m.classList.remove('on');chime();bgm('day');load('home_am');say([['nar','','이사 온 다음 날 아침. 아직 풀지 못한 상자들이 쌓여 있다.'],['think','sad','(오늘부터 새 학교야. 여기 말도 아직 서툰데…….)'],['think','smile','({m}한테 인사하고 학교 가야지.)']],morning)})}
 </script>
-<script src="day2/engine.js?v=1108132147"></script>
-<script src="day2/ep_minho.js?v=1108132147"></script>
-<script src="day2/meet.js?v=1108132147"></script>
-<script src="day2/ep_sua.js?v=1108132147"></script>
-<script src="day2/ep_hangyeol.js?v=1108132147"></script>
-<script src="day2/ep_siwoo.js?v=1108132147"></script>
-<script src="day2/ep_haram.js?v=1108132147"></script>
-<script src="day2/ep_jiho.js?v=1108132147"></script>
-<script src="day2/ep_hyeeun.js?v=1108132147"></script>
-<script src="day2/ep_haneul.js?v=1108132147"></script>
-<script src="day2/ep_junho.js?v=1108132147"></script>
-<script src="day2/ep_yuna.js?v=1108132147"></script>
-<script src="day2/ep_yena.js?v=1108132147"></script>
-<script src="day2/ep_haeun.js?v=1108132147"></script>
-<script src="day2/ep_youngmin.js?v=1108132147"></script>
-<script src="day2/ep_seah.js?v=1108132147"></script>
-<script src="day2/ep_jihoon.js?v=1108132147"></script>
-<script src="words_ja_ru.js?v=1108132147"></script>
-<script src="day2/mybag.js?v=1108132147"></script>
-<script src="day2/wordpics.js?v=1108132147"></script>
-<script src="day2/spots.js?v=1108132147"></script>
-<script src="day2/textfit.js?v=1108132147"></script>
-<script src="day2/tester.js?v=1108132147"></script>
-<script src="day2/ux.js?v=1108132147"></script>
-<script src="day2/tapword.js?v=1108132147"></script>
-<script src="day2/review.js?v=1108132147"></script>
-<script src="day2/plane.js?v=1108132147"></script>
-<script src="day2/ep_ending.js?v=1108132147"></script>
-<script src="day2/ending.js?v=1108132147"></script>
+<script src="day2/engine.js?v=1108142151"></script>
+<script src="day2/ep_minho.js?v=1108142151"></script>
+<script src="day2/meet.js?v=1108142151"></script>
+<script src="day2/ep_sua.js?v=1108142151"></script>
+<script src="day2/ep_hangyeol.js?v=1108142151"></script>
+<script src="day2/ep_siwoo.js?v=1108142151"></script>
+<script src="day2/ep_haram.js?v=1108142151"></script>
+<script src="day2/ep_jiho.js?v=1108142151"></script>
+<script src="day2/ep_hyeeun.js?v=1108142151"></script>
+<script src="day2/ep_haneul.js?v=1108142151"></script>
+<script src="day2/ep_junho.js?v=1108142151"></script>
+<script src="day2/ep_yuna.js?v=1108142151"></script>
+<script src="day2/ep_yena.js?v=1108142151"></script>
+<script src="day2/ep_haeun.js?v=1108142151"></script>
+<script src="day2/ep_youngmin.js?v=1108142151"></script>
+<script src="day2/ep_seah.js?v=1108142151"></script>
+<script src="day2/ep_jihoon.js?v=1108142151"></script>
+<script src="words_ja_ru.js?v=1108142151"></script>
+<script src="day2/mybag.js?v=1108142151"></script>
+<script src="day2/wordpics.js?v=1108142151"></script>
+<script src="day2/spots.js?v=1108142151"></script>
+<script src="day2/textfit.js?v=1108142151"></script>
+<script src="day2/tester.js?v=1108142151"></script>
+<script src="day2/ux.js?v=1108142151"></script>
+<script src="day2/tapword.js?v=1108142151"></script>
+<script src="day2/review.js?v=1108142151"></script>
+<script src="day2/plane.js?v=1108142151"></script>
+<script src="day2/bubble.js?v=1108142151"></script>
+<script src="day2/ep_ending.js?v=1108142151"></script>
+<script src="day2/ending.js?v=1108142151"></script>
 <script>
 // the goal shows big for a few seconds, then folds into a small pill (tap it to open it again)
 {const g=document.getElementById('goal');let t=null;const big=()=>{g.classList.remove('mini');clearTimeout(t);t=setTimeout(()=>g.classList.add('mini'),4000)};

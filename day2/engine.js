@@ -96,7 +96,7 @@ const TODAY=new Set();
 const PANG2={home_am:['오늘도 학교 잘 다녀와!','어제보다 더 씩씩해 보여!','친구 이름 하나 더 알아 와. 약속!','모르는 말이 나와도 괜찮아. 하나씩 배우면 돼.','머리 쓰다듬어 주면 하루 종일 힘이 나.','간식 냄새 난다… 아, 아니야. 기분 탓이야.']};
 // ---- morning (per day) ----
 const MORNING={
- 2:{k:'handkerchief',open:[['nar','','이튿날 아침.'],['mom','smile','잘 잤어? 오늘은 바람이 차네.'],['mom','smile','{@handkerchief} 하나 챙겨 가.']],
+ 2:{k:'handkerchief',open:[['nar','','둘째 날 아침.'],['mom','smile','잘 잤어? 오늘은 바람이 차네.'],['mom','smile','{@handkerchief} 하나 챙겨 가.']],
   after:[['mom','laugh','그래, 그 {@handkerchief}! 주머니에 쏙.'],['me','smile','…응. 다녀올게.'],['mom','smile','오늘은 친구 누구랑 이야기했는지 저녁에 들려줘.']]},
  3:{k:'apron',open:[['nar','','셋째 날 아침.'],['mom','surprised','어머, 벌써 시간이…! 내 {@apron} 어디 뒀더라?'],['mom','smile','{@apron} 좀 찾아 줄래?']],
   after:[['mom','laugh','고마워! {@apron} 없으면 요리를 못 하거든.'],['me','smile','…응. 다녀올게.'],['mom','smile','오늘도 저녁에 이야기 들려줘.']]}};
