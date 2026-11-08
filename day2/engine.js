@@ -105,7 +105,7 @@ function startDay(n){const m=document.getElementById('modal');m.classList.remove
   find(M.k,()=>{TODAY.add(M.k);say(M.after,()=>{stage='d2_leave';setGoal('현관으로 나가 학교 가기','door')})},'「{x}」 찾기'))})}
 function startDay2(){startDay(2)}
 // home from Day 2 on: the same things always lie in the same places (drawn into maps/home_am2.jpg, home_pm2.jpg); each day asks for a different one
-const HOME_NATIVE={home_am:[['handkerchief',770,550,28],['apron',1140,560,55],['apple',895,508,18],['bread',950,528,26],['cup',1005,508,20],['umbrella',180,400,40],['notebook',1115,700,24],['bag',1085,745,45]],
+const HOME_NATIVE={home_am:[['handkerchief',770,550,28],['apron',1140,560,55],['apple',895,508,18],['tissue',950,470,26],['bread',950,528,26],['cup',1005,508,20],['umbrella',180,400,40],['notebook',1115,700,24],['bag',1085,745,45]],
  home_pm:[['handkerchief',775,555,28],['apron',1075,425,40],['cup',918,495,18],['apple',957,508,16],['bread',985,522,24],['umbrella',180,400,40],['notebook',1130,640,24],['bag',1120,725,45]]};
 function placeD2Item(){if(!(DAY>=2&&(MAP==='home_am'||MAP==='home_pm')))return;OBJ[MAP]=KITCHEN_OBJ.concat(HOME_NATIVE[MAP])}
 // ---- school ----

@@ -57,9 +57,10 @@ function goPlacesToday(){const ids=new Set();for(const f of D2IDS){const e=epNex
 // a morning for every day: Day 2 and 3 have their own; later days Mom asks for one of the things that always lie in the kitchen
 // Mom's morning errand, a different thing every day (owner 11/07: 「겹치지 않게」; Day 2 handkerchief, Day 3 apron in engine.js MORNING).
 // 11/08 owner: Day 11 Mom asked for the notebook ({w}) while the mission was the banana → Mom always names today's thing; Day 13 was the notebook again (Day 3 dinner already) → spoon.
+// 11/08 owner: Day 15 tissue = the tissue box drawn on the table (HOME_NATIVE), not a small laid bag.
 // Day 9 is the rainy day at the gate (Minho, Hangyeol, Seah) → umbrella. Things not drawn on the home map are laid where they would be.
 const MORNING_BY={4:'apple',5:'bread',6:'cup',7:'water_bottle',8:'pcase',9:'umbrella',10:'sock',11:'banana',12:'milk',13:'spoon',14:'shoes',15:'tissue',16:'bag'};
-const MORNING_LAY={apple:[900,470,34],bread:[985,492,44],cup:[1062,478,30],water_bottle:[1190,248,34],pcase:[1010,505,46],umbrella:[205,470,56],sock:[205,540,36],banana:[1040,468,42],milk:[945,452,28],spoon:[1040,490,90],tissue:[860,470,40],notebook:[1115,700,40],bag:[1085,745,60]};
+const MORNING_LAY={apple:[900,470,34],bread:[985,492,44],cup:[1062,478,30],water_bottle:[1190,248,34],pcase:[1010,505,46],umbrella:[205,470,56],sock:[205,540,36],banana:[1040,468,42],milk:[945,452,28],spoon:[1040,490,90],notebook:[1115,700,40],bag:[1085,745,60]};
 const MORNING_EXTRA={13:[['bowl',900,505,62],['cup',975,528,34]]};// (owner 11/08) the spoon is not alone on the table: breakfast things around it
 const MORNING_KEYS=Object.values(MORNING_BY);const MORNING_SAID=new Set(['apple','bread','cup','umbrella','bag','handkerchief','apron']);
 function morningOf(n){if(MORNING[n])return MORNING[n];const k=MORNING_BY[n]||MORNING_KEYS[(n-4)%MORNING_KEYS.length];
@@ -259,7 +260,7 @@ const DAD_DAYS=[4,8,12,16];
  const play=(part,cb)=>{const am=[['nar','','딩동댕— 수업 시작 종이 울렸다.'],['nar','','선생님: 「자, 교과서 펴세요.」'],['nar','','오전 수업이 하나씩 지나갔다.'],['nar','','딩동댕— 점심시간!']];
   const pm=[['nar','','딩동댕— 수업 시작 종이 울렸다.'],['nar','','오후 수업이 천천히 지나갔다.'],['nar','','딩동댕— 마지막 종이 울렸다. 방과 후!']];
   const n=LESSON_PICS.length,pic=!n?null:part==='am'?LESSON_PICS[DAY%Math.max(1,n-1)]:LESSON_PICS[n-1];
-  clock=part==='am'?1:3;busy=true;setGoal('');fade(()=>{if(MAP!=='class')load('class');(pic?(ls,c)=>scene(pic,ls,c):say)(part==='am'?am:pm,()=>{busy=false;cb()})})};
+  clock=part==='am'?1:3;busy=true;setGoal('');const back=MAP;fade(()=>{if(MAP!=='class')load('class');(pic?(ls,c)=>scene(pic,ls,c):say)(part==='am'?am:pm,()=>{busy=false;if(back!=='class')fade(()=>{load(back);cb()});else cb()})})};// (11/08 owner) Seah's lunch story at the cafeteria ran on the classroom map: after the lessons, back to where the friend is
  // (11/08 owner) the goal arrows must not point at a friend whose story would be put off (Day 14: arrow to Hangyeol, then 「내일 하자」)
  window.slotBlocked=function(id){sync();if(navigator.webdriver||isTest())return false;const e=nextOf(id),sl=epSlot(e);if(!e||sl==null||PICKS.includes(id))return false;
   const others=D2IDS.filter(i=>friendData(i)).filter(f=>f!==id&&!PICKS.includes(f)&&nextOf(f)).map(f=>epSlot(nextOf(f)));
