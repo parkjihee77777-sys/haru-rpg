@@ -70,5 +70,5 @@ function wordReview(done){let fin=false;const end=()=>{if(fin)return;fin=true;co
   next()}catch(e){console.warn('review',e);end()}}
 // after the night notebook, before the day-end card (once per day played)
 const RV_DONE=new Set();
-{const _e2=end2;end2=function(){const a=arguments,self=this;if(DAY>=3&&!RV_DONE.has(DAY)&&!/[?&]norv/.test(location.search)){RV_DONE.add(DAY);wordReview(()=>_e2.apply(self,a));return}return _e2.apply(self,a)}}
+{const _e2=end2;end2=function(){const a=arguments,self=this;if(DAY>=2&&!RV_DONE.has(DAY)&&!/[?&]norv/.test(location.search)){RV_DONE.add(DAY);wordReview(()=>_e2.apply(self,a));return}return _e2.apply(self,a)}}
 {const _sd=startDay;startDay=function(n){RV_DONE.delete(n);return _sd.apply(this,arguments)}}
