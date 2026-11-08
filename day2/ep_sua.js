@@ -6,7 +6,7 @@ window.EP=window.EP||{};
 EP.sua=[
 // ■ Day 2 — 규칙 7번 (1)
 {title:'규칙 7번',scene:'sua_01',place:'class',at:[600,262],
- taps:{hall:[['stairs',725,95,70]]},
+ taps:{hall:[['stairs',525,115,70]]},
  pre:[
   ['nar','','수아가 교실 앞에서 형광펜으로 뭔가를 체크하고 있었다. 나는 수아에게 갔다.'],
   ['me','smile','수아야. 규칙…… 외워 왔어.'],

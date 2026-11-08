@@ -307,7 +307,7 @@ EP.junho=[
   common:[['me','smile','{m}, 준호 곧 대회래. 그거만 뛰고 쉰대.'],['mom','surprised','대회까지 그 {@ankle|으로}?'],['me','smile','응. 오늘은 두 박자 늦었어.'],['dad','smile','……박자를 세고 있었구나.'],['me','smile','응. 나도 모르게.']]}},
 
 // ■ Day 5 — 깽깽이 사진 (4)
-{title:'깽깽이 사진',scene:'junho_04',place:'hall',at:[900,240],with:[['jihoon',770,180]],taps:{hall:[['stairs',725,75,70]]},
+{title:'깽깽이 사진',scene:'junho_04',place:'hall',at:[900,240],with:[['jihoon',770,180]],taps:{hall:[['stairs',525,115,70]]},
  pre:[
   {pic:'junho_04a'},
   ['nar','','종례가 끝났다. 선생님이 아침에 걷어 간 핸드폰을 돌려주셨다. 아이들이 {@bag|을} 메고 우르르 복도로 나갔다.'],
