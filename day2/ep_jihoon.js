@@ -1397,3 +1397,7 @@ if(typeof HEROPIC!=='undefined')HEROPIC.add('jihoon_01f');
 // Through the engine's walkSrc, so his seated picture (seat/) is never touched (11/07: the whole walk sheet showed at his desk)
 {const _wsJn=walkSrc;walkSrc=function(id){const s=_wsJn(id);return id==='jihoon'&&typeof SCENE_EP!=='undefined'&&SCENE_EP&&SCENE_EP===EP.jihoon[5]?s.replace('walk/jihoon','walk/jihoon_jumper').replace('_jumper_pe','_jumper'):s}
  setInterval(()=>{if(typeof npcs==='undefined')return;const n=npcs.find(q=>q.id==='jihoon'&&!q.seat&&q.el);if(!n)return;const u=`url("${walkSrc('jihoon')}")`;if(n.el.style.backgroundImage!==u)n.el.style.backgroundImage=u},400)}
+
+// the gate map's upper path and lower pavement leave a thin gap (a few px) along their seam, so a hero starting at the entrance (900,480) got stuck at its edge and could never walk to a friend standing on the lower pavement (Day 16: Jihoon, 11/08). One bridge polygon across the seam.
+{const bridge=()=>{for(const g of [typeof MAPS!=='undefined'&&MAPS.gatesun&&MAPS.gatesun.walk,typeof EXTRA_MAPS!=='undefined'&&EXTRA_MAPS.gatesun&&EXTRA_MAPS.gatesun.walk])if(g&&!g.some(p=>p._bridge)){const p=[[740,578],[1000,556],[1000,580],[740,612]];p._bridge=1;g.push(p)}};
+ bridge();addEventListener('load',bridge)}
