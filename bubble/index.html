@@ -1,13 +1,12 @@
 <!doctype html>
 <html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>팡팡이랑 방울 톡톡</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&display=swap">
 <style>
 /* end-of-day review inside the main game: opened in a full-screen frame by day2/bubble.js, words and pictures come from the game */
 :root{--sky1:#c8f0e4;--sky2:#ffe2d1;--cream:#fffaf3;--ink:#4b3a55;--pink:#ff8fb6;--butter:#ffd76b;--mint:#6fd3b8;
-  --display:'Jua','Gowun Dodum',system-ui,sans-serif;--body:'Gowun Dodum',system-ui,sans-serif;color-scheme:light}
+  --display:"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR","Noto Sans JP","Noto Sans CJK KR",system-ui,sans-serif;--body:"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR","Noto Sans JP","Noto Sans CJK KR",system-ui,sans-serif;color-scheme:light}
 html,body{height:100%}
-body{background:linear-gradient(170deg,var(--sky1),var(--sky2));color:var(--ink);font-family:var(--body);margin:0;
+body{font-weight:600;background:linear-gradient(170deg,var(--sky1),var(--sky2));color:var(--ink);font-family:var(--body);margin:0;
   padding:max(10px,env(safe-area-inset-top,0px)) max(12px,env(safe-area-inset-right,0px)) max(10px,env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px));
   box-sizing:border-box;display:flex;justify-content:center;overflow:hidden;-webkit-user-select:none;user-select:none}
 .app{width:100%;max-width:520px;height:100%;display:flex;flex-direction:column;gap:8px}
@@ -22,7 +21,7 @@ canvas{display:block;width:100%;height:100%}
 .say.on{opacity:1}
 .overlay{position:absolute;inset:0;background:rgba(255,250,243,.95);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;z-index:9;padding:20px}
 .overlay[hidden]{display:none}
-.overlay h2{font-family:var(--display);font-weight:400;font-size:1.7rem;color:#ffb300;letter-spacing:.06em;margin:0;text-wrap:balance}
+.overlay h2{font-family:var(--display);font-weight:800;font-size:1.7rem;color:#ffb300;letter-spacing:.06em;margin:0;text-wrap:balance}
 .overlay p{margin:0;max-width:32ch;line-height:1.55}
 .btns{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
 .btn{font-family:var(--display);font-size:1.25rem;background:var(--pink);color:#fff;border:0;border-radius:999px;padding:12px 28px;cursor:pointer;box-shadow:0 4px 0 rgba(0,0,0,.25)}
@@ -31,7 +30,7 @@ canvas{display:block;width:100%;height:100%}
 .tipcard{position:absolute;left:50%;top:38%;transform:translate(-50%,-50%);width:min(88%,340px);background:#fff;border-radius:22px;box-shadow:0 8px 0 rgba(75,58,85,.15),0 0 0 4px var(--butter);display:flex;gap:12px;align-items:center;padding:14px;z-index:8}
 .tipcard[hidden]{display:none}
 .tipcard canvas{width:84px;height:84px;flex:none}
-.tipcard b{font-family:var(--display);font-weight:400;font-size:1.3rem;display:block}
+.tipcard b{font-family:var(--display);font-weight:800;font-size:1.3rem;display:block}
 .tipcard p{margin:4px 0 10px;line-height:1.45;font-size:.92rem}
 .btn.small{font-size:1rem;padding:8px 18px}
 .mastery{display:flex;gap:6px;justify-content:center;flex-wrap:wrap}
@@ -43,7 +42,7 @@ canvas{display:block;width:100%;height:100%}
 .quiz[hidden]{display:none}
 .wcard{max-width:92%;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:10px;margin:4px auto 0;min-width:200px;padding:16px 26px;border:0;border-radius:22px;background:#fff;box-shadow:0 5px 0 rgba(75,58,85,.15),0 0 0 4px var(--butter);cursor:pointer;color:var(--ink)}
 .wcard[hidden]{display:none}
-.wcard b{font-family:var(--display);font-weight:400;font-size:2.4rem;white-space:nowrap}
+.wcard b{font-family:var(--display);font-weight:800;font-size:2.4rem;white-space:nowrap}
 .wcard span{font-size:1.4rem}
 .quiz button{width:92px;height:92px;border-radius:50%;border:4px solid #fff;background:#fff8ee;box-shadow:0 4px 0 rgba(75,58,85,.18);cursor:pointer;padding:0;overflow:hidden}
 .quiz button img{width:100%;height:100%;object-fit:cover;display:block}
@@ -117,7 +116,7 @@ const SFX={shoot:()=>tone(520,.12,'triangle',.15,1.8),bounce:()=>tone(900,.05,'s
   fall:()=>tone(400,.35,'triangle',.12,.4),wrong:()=>{tone(220,.18,'sawtooth',.08,.8);tone(180,.22,'sawtooth',.06,.8,.08)},
   ceil:()=>{tone(120,.3,'square',.12,.6)},swap:()=>tone(700,.08,'triangle',.12,1.3),cookie:()=>[880,1175].forEach((f,i)=>tone(f,.12,'sine',.14,1,i*.07)),win:()=>[523,659,784,1047].forEach((f,i)=>tone(f,.22,'triangle',.18,1,i*.12))};
 // word sound: the game's own recording (snd/{language}/{word}.mp3)
-function speak(k){if(!k)return;try{CFG.speak(k)}catch(e){}}
+let voiceFree=0,voiceT=null;function speak(k,now){if(!k)return;const t=performance.now(),wait=now?0:Math.max(0,voiceFree-t);clearTimeout(voiceT);voiceFree=t+wait+1300;const go=()=>{try{CFG.speak(k)}catch(e){}};if(wait)voiceT=setTimeout(go,wait);else go()}
 const word=k=>{try{return CFG.word(k)||k}catch(e){return k}};
 const mastery={},helpLeft={};// after 2 hits the word bubble turns white (read it!); a miss brings the colour back for 2 shots
 const colorOn=k=>(mastery[k]||0)<2||(helpLeft[k]||0)>0;
@@ -192,17 +191,17 @@ function dropFloating(){const keep=new Set(),q=[];for(let c=0;c<rowLen(0);c++)if
   if(n){score+=n*20;floatText(W/2,H*.5,'+'+n*20,'#ff9f1c')}return n}
 function checkLose(){let low=0;grid.forEach((row,r)=>(row||[]).forEach(k=>{if(k)low=Math.max(low,cellXY(r,0)[1])}));
   if(playing&&low+R>deadY()){playing=false;show('😮',tr('한 번 더 해 볼까요?'),'↻',startRound,true)}}
-function win(){playing=false;cur=null;SFX.win();quiz(win2)}
+function win(){playing=false;cur=null;SFX.win();if(round===ROUNDS.length-1)quiz(win2);else win2()}
 function win2(){const last=round===ROUNDS.length-1;const bonus=left*50;score+=bonus;hud();
   for(let i=0;i<Math.min(left,12);i++)setTimeout(()=>{fx.push({x:R*2+Math.random()*(W-R*4),y:H*.2+Math.random()*H*.3,t:0,kind:'firework'});SFX.cookie()},i*120);
   const par=Math.ceil(ROUNDS[round].shots*.55),stars=shots<=par?3:shots<=par*1.45?2:1;
   if(last)show('★'.repeat(stars)+'☆'.repeat(3-stars),'⭐ '+score,'✓',()=>finish(true),false);
   else show('★'.repeat(stars)+'☆'.repeat(3-stars),'⭐ '+score,'▶ '+(round+2)+'/'+ROUNDS.length,()=>{round++;startRound()},true)}
 let quizScore=0;
-function quiz(done){const ks=ROUNDS[round].words.slice();const qs=ks.sort(()=>Math.random()-.5).slice(0,3);let i=0;quizScore=0;const o=$('ov'),box=$('quiz'),wc=$('wcard');
-  function ask(){if(i>=qs.length){box.hidden=true;wc.hidden=true;done();return}const k=qs[i];const opts=[k].concat(ROUNDS[round].words.filter(x=>x!==k).sort(()=>Math.random()-.5).slice(0,2)).sort(()=>Math.random()-.5);
+function quiz(done){const ks=[...new Set(ROUNDS.flatMap(r=>r.words))];const qs=ks.slice().sort(()=>Math.random()-.5).slice(0,Math.min(5,ks.length));let i=0;quizScore=0;const o=$('ov'),box=$('quiz'),wc=$('wcard');
+  function ask(){if(i>=qs.length){box.hidden=true;wc.hidden=true;done();return}const k=qs[i];const opts=[k].concat(ks.filter(x=>x!==k).sort(()=>Math.random()-.5).slice(0,2)).sort(()=>Math.random()-.5);
     $('ovh').textContent='❓ '+(i+1)+'/'+qs.length;$('ovp').textContent=tr('카드를 누르면 소리가 나요. 맞는 그림을 골라요.');
-    {const wb=wc.querySelector('b'),t=word(k);wb.textContent=t;wb.style.fontSize=(t.length>8?1.5:t.length>5?1.9:2.4)+'rem'}wc.hidden=false;wc.onclick=()=>speak(k);let tries=0;
+    {const wb=wc.querySelector('b'),t=word(k);wb.textContent=t;wb.style.fontSize=(t.length>8?1.5:t.length>5?1.9:2.4)+'rem'}wc.hidden=false;wc.onclick=()=>speak(k,1);let tries=0;
     box.innerHTML=opts.map(x=>`<button data-k="${x}"><img src="${CFG.pic(x)}" alt=""></button>`).join('');box.hidden=false;$('start').hidden=true;$('stop').hidden=true;o.hidden=false;speak(k);
     box.querySelectorAll('button').forEach(b=>b.onclick=()=>{const okk=b.dataset.k===k;tries++;b.classList.add(okk?'ok':'no');
       if(okk){quizScore++;score+=tries===1?100:50;SFX.cookie();mastery[k]=(mastery[k]||0)+1;hits[k]=(hits[k]||0)+1}
@@ -230,7 +229,7 @@ function wordBubble(x,y,k,r,isGold){if(!k||!TINT[k])return;
     if(g){['#ff8fb6','#ffcf4a','#7fdc9b','#6cc3ff','#b48cff','#ff8fb6'].forEach((c,i)=>g.addColorStop(i/5,c));ctx.fillStyle=g}else ctx.fillStyle='#b48cff';
     ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill();ctx.beginPath();ctx.arc(x,y,r*.72,0,7);ctx.fillStyle='rgba(255,255,255,.88)';ctx.fill();ctx.lineWidth=3;ctx.strokeStyle='#fff';ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.stroke();for(let i=0;i<3;i++){const a=t*.7+i*2.1;starAt(x+Math.cos(a)*r*1.15,y+Math.sin(a)*r*1.15,r*.18)}}
   else{candy(x,y,r,colorOn(k)?TINT[k]:'#ffffff');shine(x,y,r)}if(PASTSET.has(k))starAt(x+r*.7,y-r*.7,r*.3);
-  ctx.fillStyle='#4b3a55';ctx.textAlign='center';ctx.textBaseline='middle';const t=word(k);let fs=r*.62;ctx.font=`${fs}px Jua, sans-serif`;while(ctx.measureText(t).width>r*1.7&&fs>7){fs-=1;ctx.font=`${fs}px Jua, sans-serif`}ctx.fillText(t,x,y+1)}
+  ctx.fillStyle='#4b3a55';ctx.textAlign='center';ctx.textBaseline='middle';const t=word(k);let fs=r*.62;ctx.font=`bold ${fs}px 'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR','Noto Sans JP','Noto Sans CJK KR',system-ui,sans-serif`;while(ctx.measureText(t).width>r*1.7&&fs>7){fs-=1;ctx.font=`bold ${fs}px 'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR','Noto Sans JP','Noto Sans CJK KR',system-ui,sans-serif`}ctx.fillText(t,x,y+1)}
 // Pangpang at the bubble cannon; shots leave from the nozzle, Pangpang hops when a shot hits
 function cannon(){const[sx,sy]=shooter();pangHop*=.8;const now=performance.now();if(now>faceT)face='cannon';
   let jy=0;const jt=(now-jumpT)/420;if(jt>=0&&jt<jumps)jy=Math.sin(Math.PI*(jt%1))*R*1.4;
@@ -251,7 +250,7 @@ function frame(){if(finished)return;ctx.setTransform(DPR,0,0,DPR,0,0);ctx.clearR
     if(f.kind==='card'){const a=f.t<8?f.t/8:f.t>48?Math.max(0,(60-f.t)/12):1;ctx.globalAlpha=a;const w=R*4.8,h=R*2.6,x=f.x-w/2,y=f.y-h/2-f.t*.3;
       ctx.fillStyle='#fff';ctx.strokeStyle=TINT[f.k];ctx.lineWidth=4;ctx.beginPath();ctx.roundRect(x,y,w,h,R*.6);ctx.fill();ctx.stroke();
       const im=IMG[f.k];if(im&&im.naturalWidth){const sz=h*.76,sc=sz/Math.min(im.naturalWidth,im.naturalHeight);ctx.save();ctx.beginPath();ctx.roundRect(x+R*.3,y+h/2-sz/2,sz,sz,R*.35);ctx.clip();ctx.drawImage(im,x+R*.3+sz/2-im.naturalWidth*sc/2,y+h/2-im.naturalHeight*sc/2,im.naturalWidth*sc,im.naturalHeight*sc);ctx.restore()}
-      const t=word(f.k),tx=x+R*.6+h*.76,tw=w-(tx-x)-R*.3;let fs=R*.95;ctx.font=`${fs}px Jua, sans-serif`;while(ctx.measureText(t).width>tw&&fs>8){fs-=1;ctx.font=`${fs}px Jua, sans-serif`}
+      const t=word(f.k),tx=x+R*.6+h*.76,tw=w-(tx-x)-R*.3;let fs=R*.95;ctx.font=`bold ${fs}px 'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR','Noto Sans JP','Noto Sans CJK KR',system-ui,sans-serif`;while(ctx.measureText(t).width>tw&&fs>8){fs-=1;ctx.font=`bold ${fs}px 'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR','Noto Sans JP','Noto Sans CJK KR',system-ui,sans-serif`}
       ctx.fillStyle='#4b3a55';ctx.textAlign='left';ctx.textBaseline='middle';ctx.fillText(t,tx,y+h/2+1);ctx.globalAlpha=1;return f.t<60}
     if(f.kind==='pop'){ctx.globalAlpha=Math.max(0,1-f.t/14);bubble(f.x,f.y,f.k,R*(.95+f.t*.05),TINT[f.k]);ctx.globalAlpha=1;return f.t<14}
     f.vy+=.6;f.y+=f.vy;bubble(f.x,f.y,f.k,R*.95,TINT[f.k]);return f.y<H+R});
@@ -260,10 +259,10 @@ function frame(){if(finished)return;ctx.setTransform(DPR,0,0,DPR,0,0);ctx.clearR
     cannon();
     if(shot)wordBubble(shot.x,shot.y,shot.k,R*.95,shot.gold);
     else{const[wx,wy]=waitXY();wordBubble(wx,wy,cur,R*1.15,gold);
-      if(gold){const tag='🌈 ×3';ctx.font=`${R*.55}px Jua, sans-serif`;const tw=ctx.measureText(tag).width+R*.6;ctx.fillStyle='#b06bff';ctx.beginPath();ctx.roundRect(wx-tw/2,wy+R*1.2,tw,R*.85,R*.42);ctx.fill();ctx.fillStyle='#fff';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(tag,wx,wy+R*1.63)}
+      if(gold){const tag='🌈 ×3';ctx.font=`bold ${R*.55}px 'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR','Noto Sans JP','Noto Sans CJK KR',system-ui,sans-serif`;const tw=ctx.measureText(tag).width+R*.6;ctx.fillStyle='#b06bff';ctx.beginPath();ctx.roundRect(wx-tw/2,wy+R*1.2,tw,R*.85,R*.42);ctx.fill();ctx.fillStyle='#fff';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(tag,wx,wy+R*1.63)}
       if(nxt){ctx.globalAlpha=.85;wordBubble(wx,wy-R*2.15,nxt,R*.7);ctx.globalAlpha=1}}}
   else cannon();
-  pops=pops.filter(p=>{p.a++;ctx.globalAlpha=Math.max(0,1-p.a/45);ctx.fillStyle=p.col;ctx.font=`${R*.9}px Jua, sans-serif`;ctx.textAlign='center';ctx.lineWidth=4;ctx.strokeStyle='#fff';ctx.strokeText(p.t,p.x,p.y-p.a*.8);ctx.fillText(p.t,p.x,p.y-p.a*.8);ctx.globalAlpha=1;return p.a<45});
+  pops=pops.filter(p=>{p.a++;ctx.globalAlpha=Math.max(0,1-p.a/45);ctx.fillStyle=p.col;ctx.font=`bold ${R*.9}px 'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR','Noto Sans JP','Noto Sans CJK KR',system-ui,sans-serif`;ctx.textAlign='center';ctx.lineWidth=4;ctx.strokeStyle='#fff';ctx.strokeText(p.t,p.x,p.y-p.a*.8);ctx.fillText(p.t,p.x,p.y-p.a*.8);ctx.globalAlpha=1;return p.a<45});
   requestAnimationFrame(frame)}
 $('ovh').textContent=tr('팡팡이랑 방울 톡톡');
 $('ovp').textContent=tr('글자 구슬을 같은 색 그림 구슬에 쏘아요. 구슬을 다 없애면 이겨요.');
@@ -271,7 +270,7 @@ $('start').onclick=()=>{$('ov').hidden=true;ac();if(musicOn)music.play();startRo
 $('stop').hidden=false;
 const musBtn=()=>$('mus').classList.toggle('off',!musicOn);musBtn();
 $('mus').onclick=()=>{musicOn=!musicOn;musBtn();if(musicOn){ac();music.play()}else music.pause()};
-$('ear').onclick=()=>{if(cur)speak(cur)};
+$('ear').onclick=()=>{if(cur)speak(cur,1)};
 addEventListener('resize',resize);try{new ResizeObserver(resize).observe(field)}catch(e){}
 resize();requestAnimationFrame(frame);
 </script>
