@@ -155,9 +155,12 @@ const deadY=()=>shooter()[1]-PH()*1.12*.5165-R*.1;
 // aim: pointer anywhere on the board sets the direction, release fires; tapping the waiting bubble swaps it with the next one
 function angleTo(px,py){const[sx,sy]=shooter();let a=Math.atan2(sy-py,px-sx);a=Math.max(.12,Math.min(Math.PI-.12,a));return a}
 function pt(e){const b=cv.getBoundingClientRect();return[e.clientX-b.left,e.clientY-b.top]}
-cv.addEventListener('pointerdown',e=>{if(!playing||shot||tipWait)return;const[px,py]=pt(e),[wx,wy]=waitXY();if((px-wx)**2+(py-wy)**2<(R*1.5)**2){swap();return}cv.setPointerCapture(e.pointerId);aim=angleTo(px,py)});
-cv.addEventListener('pointermove',e=>{if(aim!==null){aim=angleTo(...pt(e));lastAim=aim}else if(e.pointerType==='mouse'&&!shot)lastAim=angleTo(...pt(e))});
-cv.addEventListener('pointerup',e=>{if(aim===null)return;const a=aim;lastAim=a;aim=null;fire(a)});
+// (11/08 owner) slingshot aim: press anywhere, pull DOWN and let go - the bubble flies the opposite way of the pull (no tapping the target directly)
+let pull=null;const pullAim=(x,y)=>{const dx=x-pull.x,dy=y-pull.y;if(dy<R*.6||Math.hypot(dx,dy)<R*1.2)return null;return Math.max(.12,Math.min(Math.PI-.12,Math.atan2(dy,-dx)))};
+cv.addEventListener('pointerdown',e=>{if(!playing||shot||tipWait)return;const[px,py]=pt(e),[wx,wy]=waitXY();if((px-wx)**2+(py-wy)**2<(R*1.5)**2){swap();return}cv.setPointerCapture(e.pointerId);pull={x:px,y:py,cx:px,cy:py};aim=null});
+cv.addEventListener('pointermove',e=>{if(!pull)return;const[px,py]=pt(e);pull.cx=px;pull.cy=py;const a=pullAim(px,py);aim=a;if(a!==null)lastAim=a});
+cv.addEventListener('pointerup',e=>{if(!pull)return;const a=pullAim(...pt(e));pull=null;aim=null;if(a!==null){lastAim=a;fire(a)}});
+cv.addEventListener('pointercancel',()=>{pull=null;aim=null});
 function fire(a){const[sx,sy]=shooter();const v=Math.max(9,R*.55);shot={x:sx,y:sy,vx:Math.cos(a)*v,vy:-Math.sin(a)*v,k:cur,gold:gold,white:!gold&&!colorOn(cur)};gold=false;shots++;left--;hud();SFX.shoot();recoil=8;pangHop=4;face='fire';faceT=performance.now()+380}
 // the straight path with wall bounces, stopping at the first bubble or the ceiling (shared by the dotted guide and the real flight)
 function hitAt(x,y){if(y<=R)return{ceiling:true};
@@ -254,7 +257,7 @@ function frame(){if(finished)return;ctx.setTransform(DPR,0,0,DPR,0,0);ctx.clearR
       ctx.fillStyle='#4b3a55';ctx.textAlign='left';ctx.textBaseline='middle';ctx.fillText(t,tx,y+h/2+1);ctx.globalAlpha=1;return f.t<60}
     if(f.kind==='pop'){ctx.globalAlpha=Math.max(0,1-f.t/14);bubble(f.x,f.y,f.k,R*(.95+f.t*.05),TINT[f.k]);ctx.globalAlpha=1;return f.t<14}
     f.vy+=.6;f.y+=f.vy;bubble(f.x,f.y,f.k,R*.95,TINT[f.k]);return f.y<H+R});
-  if(playing&&cur){if(!shot&&!tipWait)guide(aim!==null?aim:lastAim,aim!==null);
+  if(playing&&cur){if(!shot&&!tipWait&&aim!==null)guide(aim,true);if(pull&&!shot){const[sx,sy]=shooter(),ox=pull.cx-pull.x,oy=pull.cy-pull.y;ctx.save();ctx.strokeStyle=aim!==null?'rgba(255,111,160,.85)':'rgba(75,58,85,.35)';ctx.lineWidth=5;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(sx,sy);ctx.lineTo(sx+ox,sy+oy);ctx.stroke();ctx.restore()}
     if(shot){for(let i=0;i<2;i++){step(shot);const h=hitAt(shot.x,shot.y);if(h){land(h);break}}}
     cannon();
     if(shot)wordBubble(shot.x,shot.y,shot.k,R*.95,shot.gold);
@@ -265,7 +268,7 @@ function frame(){if(finished)return;ctx.setTransform(DPR,0,0,DPR,0,0);ctx.clearR
   pops=pops.filter(p=>{p.a++;ctx.globalAlpha=Math.max(0,1-p.a/45);ctx.fillStyle=p.col;ctx.font=`bold ${R*.9}px 'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR','Noto Sans JP','Noto Sans CJK KR',system-ui,sans-serif`;ctx.textAlign='center';ctx.lineWidth=4;ctx.strokeStyle='#fff';ctx.strokeText(p.t,p.x,p.y-p.a*.8);ctx.fillText(p.t,p.x,p.y-p.a*.8);ctx.globalAlpha=1;return p.a<45});
   requestAnimationFrame(frame)}
 $('ovh').textContent=tr('팡팡이랑 방울 톡톡');
-$('ovp').textContent=tr('글자 구슬을 같은 색 그림 구슬에 쏘아요. 구슬을 다 없애면 이겨요.');
+$('ovp').textContent=tr('화면을 누른 채 아래로 당겼다가 놓으면 구슬이 반대쪽으로 날아가요. 글자 구슬을 같은 색 그림 구슬에 맞혀서 구슬을 다 없애요.');
 $('start').onclick=()=>{$('ov').hidden=true;ac();if(musicOn)music.play();startRound()};
 $('stop').hidden=false;
 const musBtn=()=>$('mus').classList.toggle('off',!musicOn);musBtn();

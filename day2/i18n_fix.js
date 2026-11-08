@@ -6136,3 +6136,10 @@ T.zh=T.zh||{};Object.assign(T.zh,{"오전 수업이 하나씩 지나갔다.": "�
 T.ja=T.ja||{};Object.assign(T.ja,{"오전 수업이 하나씩 지나갔다.": "午前の授業がひとつずつ過ぎていった。"});
 T.ru=T.ru||{};Object.assign(T.ru,{"오전 수업이 하나씩 지나갔다.": "Утренние уроки проходили один за другим."});
 T.id=T.id||{};Object.assign(T.id,{"오전 수업이 하나씩 지나갔다.": "Pelajaran pagi berlalu satu per satu."});
+// 11/08 방울 톡톡 새총 조준 안내
+T.en=T.en||{};Object.assign(T.en,{"화면을 누른 채 아래로 당겼다가 놓으면 구슬이 반대쪽으로 날아가요. 글자 구슬을 같은 색 그림 구슬에 맞혀서 구슬을 다 없애요.": "Press and pull down, then let go - the bubble flies the other way. Hit the picture bubbles of the same colour as the word bubble and clear them all."});
+T.id=T.id||{};Object.assign(T.id,{"화면을 누른 채 아래로 당겼다가 놓으면 구슬이 반대쪽으로 날아가요. 글자 구슬을 같은 색 그림 구슬에 맞혀서 구슬을 다 없애요.": "Tekan dan tarik ke bawah, lalu lepaskan - gelembung terbang ke arah sebaliknya. Kenai gelembung gambar yang warnanya sama dengan gelembung kata, habiskan semuanya."});
+T.ja=T.ja||{};Object.assign(T.ja,{"화면을 누른 채 아래로 당겼다가 놓으면 구슬이 반대쪽으로 날아가요. 글자 구슬을 같은 색 그림 구슬에 맞혀서 구슬을 다 없애요.": "画面をおしたまま下に引いて、はなすとバブルが反対がわにとぶよ。ことばのバブルを同じ色の絵のバブルに当てて、ぜんぶ消そう。"});
+T.ru=T.ru||{};Object.assign(T.ru,{"화면을 누른 채 아래로 당겼다가 놓으면 구슬이 반대쪽으로 날아가요. 글자 구슬을 같은 색 그림 구슬에 맞혀서 구슬을 다 없애요.": "Нажми и потяни вниз, потом отпусти — пузырь полетит в другую сторону. Попади пузырём со словом в картинки того же цвета и убери все пузыри."});
+T.vi=T.vi||{};Object.assign(T.vi,{"화면을 누른 채 아래로 당겼다가 놓으면 구슬이 반대쪽으로 날아가요. 글자 구슬을 같은 색 그림 구슬에 맞혀서 구슬을 다 없애요.": "Nhấn giữ và kéo xuống rồi thả ra - bóng sẽ bay về phía ngược lại. Bắn bóng chữ vào bóng hình cùng màu để phá hết bóng."});
+T.zh=T.zh||{};Object.assign(T.zh,{"화면을 누른 채 아래로 당겼다가 놓으면 구슬이 반대쪽으로 날아가요. 글자 구슬을 같은 색 그림 구슬에 맞혀서 구슬을 다 없애요.": "按住屏幕往下拉再松开，泡泡会往反方向飞。用单词泡泡打中同颜色的图画泡泡，把泡泡全部消掉。"});
