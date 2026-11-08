@@ -760,13 +760,14 @@ EP.jiho=[
 // ■ Day 10 — 잠깐 멈춰 (9)
 {title:'잠깐 멈춰',scene:'jiho_09',place:'gym',at:[860,520],with:[['haeun',1080,600]],
  pre:[
+  {pic:null},// 2단계 11/08: the hurt-hand title picture only after the hit
   ['nar','','체육 시간. 모둠별 농구 시합을 했다. 규칙은 하나였다. 패스를 다섯 번 하고 나서 슛하기. 선생님이 모둠을 정해 주셨다. 나와 지호는 같은 모둠이었다.'],
   ['jiho','angry','패스! 패스! 세게! 빨리!'],
   {pic:'jiho_09a'},
   ['nar','','지호 패스는 정말 셌다. {@ball}이 퍽 소리를 내며 가슴으로 날아왔다.'],
-  {pic:'jiho_09'},
   ['nar','','6대4. 우리 모둠이 이기고 있었다. 1분쯤 남았을 때, 지호가 나한테 {@ball}을 던졌다. 나는 손을 뻗었다. 그런데 {@ball}이 손바닥이 아니라 {@finger} 끝에 맞았다.'],
   ['nar','','퍽.'],
+  {pic:'jiho_09'},
   ['me','sad','앗!'],
   ['nar','','오른손 가운뎃{@finger}이 뒤로 확 꺾였다. 찌릿했다. {@ball}이 바닥으로 굴러갔다.'],
   {k:'finger',goal:'「{x}」 구부려 보기',bag:['knee','foot','finger','ear','eye']},
@@ -933,6 +934,7 @@ EP.jiho=[
 // ■ Day 12 — 심판 (11)
 {title:'심판',scene:'jiho_11',place:'field',at:[820,420],with:[['youngmin',980,470],['junho',660,470]],
  pre:[
+  {pic:null}, // 2단계 11/08
   ['nar','','쉬는 시간 축구. 오늘은 사람이 홀수라 한 명이 남았다. 준호가 나를 가리켰다.'],
   ['junho','smile','{SN|이} 심판 해. 지호가 네 말은 듣잖아.'],
   {flag:'J06_stop',is:1,lines:[['junho','smile','지붕 때 네가 멈췄잖아.']]},
