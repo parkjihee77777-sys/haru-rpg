@@ -16,7 +16,7 @@ const WORDPIC={
  yuna_07:{eraser:'eraser_cloud'},yuna_13:{bag:'bag_yuna'},
  yena_12:{water_bottle:'water_bottle_pink'},
  seah_04:{milk:'milk_strawberry'},
- junho_11:{bag:'bag_gym'},
+ // junho_11 bag: the plain school bag (owner 11/08: the drawstring gym bag read as a pouch, not 가방)
  junho_10:{water:'water_tap'},jiho_08:{water:'water_tap'},jihoon_11:{water:'water_drops'},
  minho_09:{paper:'paper_crumpled'},junho_07:{paper:'paper_crumpled'},
  minho_07:{ball:'ball_dodge'},siwoo_11:{ball:'ball_dodge'},hangyeol_04:{ball:'ball_dodge'},

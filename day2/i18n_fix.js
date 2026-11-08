@@ -6099,3 +6099,10 @@ T.vi=T.vi||{};Object.assign(T.vi,{"(그 이야기는 내일 하자. 다른 친�
 T.zh=T.zh||{};Object.assign(T.zh,{"(그 이야기는 내일 하자. 다른 친구한테 가 볼까?)": "（那个明天再说吧。去找别的朋友？）"});
 T.ja=T.ja||{};Object.assign(T.ja,{"(그 이야기는 내일 하자. 다른 친구한테 가 볼까?)": "（その話はあしたにしよう。ほかの友だちのところへ行こうかな？）"});
 T.ru=T.ru||{};Object.assign(T.ru,{"(그 이야기는 내일 하자. 다른 친구한테 가 볼까?)": "(Это завтра. Может, подойти к другому другу?)"});
+// 11/08 준호 12일차 가방 그림(주머니 → 책가방)
+T.en=T.en||{};Object.assign(T.en,{"점심시간이 끝나고 교실로 들어왔다. 운동장에서 뛰다 와서 {@bag} 끈이 땀에 젖어 있었다. 나는 {@bag|을} {@desk} 옆 고리에 걸었다.": "Lunchtime was over and I came back into the classroom. I had been running around the playground, so my {@bag} straps were damp with sweat. I hung the {@bag} on the hook beside my {@desk}."});
+T.vi=T.vi||{};Object.assign(T.vi,{"점심시간이 끝나고 교실로 들어왔다. 운동장에서 뛰다 와서 {@bag} 끈이 땀에 젖어 있었다. 나는 {@bag|을} {@desk} 옆 고리에 걸었다.": "Hết giờ ăn trưa, mình vào lớp. Vừa chạy ngoài sân về nên quai {@bag} ướt mồ hôi. Mình treo {@bag} lên móc cạnh {@desk}."});
+T.zh=T.zh||{};Object.assign(T.zh,{"점심시간이 끝나고 교실로 들어왔다. 운동장에서 뛰다 와서 {@bag} 끈이 땀에 젖어 있었다. 나는 {@bag|을} {@desk} 옆 고리에 걸었다.": "午饭时间结束，我回到教室。刚在操场上跑完，{@bag}的背带被汗湿透了。我把{@bag}挂在{@desk}旁边的挂钩上。"});
+T.ja=T.ja||{};Object.assign(T.ja,{"점심시간이 끝나고 교실로 들어왔다. 운동장에서 뛰다 와서 {@bag} 끈이 땀에 젖어 있었다. 나는 {@bag|을} {@desk} 옆 고리에 걸었다.": "昼休みが終わって教室に入った。校庭で走ってきたので、{@bag}のひもが汗でぬれていた。{@bag}を{@desk}の横のフックにかけた。"});
+T.ru=T.ru||{};Object.assign(T.ru,{"점심시간이 끝나고 교실로 들어왔다. 운동장에서 뛰다 와서 {@bag} 끈이 땀에 젖어 있었다. 나는 {@bag|을} {@desk} 옆 고리에 걸었다.": "Обеденная перемена кончилась, захожу в класс. Набегался во дворе, лямки {@bag} мокрые от пота. Вешаю {@bag} на крючок у {@desk}."});
+T.id=T.id||{};Object.assign(T.id,{"점심시간이 끝나고 교실로 들어왔다. 운동장에서 뛰다 와서 {@bag} 끈이 땀에 젖어 있었다. 나는 {@bag|을} {@desk} 옆 고리에 걸었다.": "Jam makan siang selesai dan aku masuk ke kelas. Habis berlari di lapangan, tali {@bag} basah oleh keringat. Aku menggantung {@bag} di kait samping {@desk}."});
