@@ -5,7 +5,7 @@
 // an item written 'key:picture' shows items/<picture>.png for that key (a scene's own look of the thing, e.g. 'lid:lid_screw'); the plain items/<key>.png if that picture is missing
 // 11/08: the tray never shows empty frames or loses cards on a flaky connection: every picture is loaded (retried up to 3 times) before the tray opens
 function bagLoadImg(src){return new Promise(r=>{let n=0;const t=()=>{const im=new Image();im.onload=()=>r(1);im.onerror=()=>{if(++n>=3)return r(0);setTimeout(t,350*n)};im.src=n?src+'?r='+n+Date.now():src};t()})}
-function bagFind(k,items,goalText,done){busy=true;closeBubble();const pic={};let list=items.map(q=>{const[a,b]=q.split(':');if(b)pic[a]=b;return a});list=noLookalike(k,list);
+function bagFind(k,items,goalText,done){busy=true;closeBubble();const pic={};let list=items.map(q=>{const[a,b]=q.split(':');if(b)pic[a]=b;return a});list=noLookalike(k,list);for(let i=list.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[list[i],list[j]]=[list[j],list[i]]}/* (11/09 owner) the thing to find is not always first */
  const src=q=>'items/'+(pic[q]||q)+'.png';
  Promise.race([Promise.all(list.map(q=>bagLoadImg(src(q)))),new Promise(r=>setTimeout(()=>r(null),4500))]).then(()=>bagFind0(k,list.map(q=>pic[q]?q+':'+pic[q]:q),goalText,done))}
 function bagFind0(k,items,goalText,done){busy=true;closeBubble();const pic={};items=items.map(q=>{const[a,b]=q.split(':');if(b)pic[a]=b;return a});items=noLookalike(k,items);const m=document.getElementById('modal'),c=document.getElementById('mcard');
