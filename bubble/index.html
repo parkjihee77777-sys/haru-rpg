@@ -79,12 +79,15 @@ const TINT={};ORDER.forEach((k,i)=>TINT[k]=PALETTE[i%PALETTE.length]);// one col
 const TODAY=CFG.today.slice(0,4);
 const PASTPICK=CFG.past.slice().sort((a,b)=>(b.missed-a.missed)).map(x=>x.k);// missed first, then the oldest (the game sends them oldest first)
 const PASTSET=new Set(PASTPICK);
-const mk=n=>{const w=TODAY.concat(PASTPICK.slice(0,n));return w.length>=3?w:ORDER.slice(0,Math.max(3,w.length))};
+// (11/08 owner) 15 friends a day teach many words, but only 4~6 came up: every round now takes its own next words from the day's list
+const POOL=[...new Set(CFG.today.concat(PASTPICK,ORDER))],SIZES=[4,4,5,5,5];let poolAt=0;
+const mk=i=>{const n=SIZES[i];if(POOL.length<=n)return POOL.slice();const w=[];while(w.length<n){if(poolAt>=POOL.length)poolAt=0;const k=POOL[poolAt++];if(!w.includes(k))w.push(k)}return w};
+POOL.forEach((k,i)=>TINT[k]=PALETTE[i%PALETTE.length]);
 const ROUNDS=[{words:mk(0),rows:4,shots:24,every:6,reserve:2,guide:'full'},
   {words:mk(1),rows:5,shots:27,every:5,reserve:3,guide:'short'},
   {words:mk(2),rows:5,shots:31,every:5,reserve:3,guide:'short'},
-  {words:mk(2),rows:5,shots:37,goldy:true,every:5,reserve:3,guide:'none'},
-  {words:mk(2),rows:6,shots:41,every:4,reserve:4,guide:'none'}];// owner 11/08 「너무 쉽다」: fewer shots, rows come down more often, the dotted aim line shrinks then goes (full → short → none)// reserve = how many new rows can still come down from the top
+  {words:mk(3),rows:5,shots:37,goldy:true,every:5,reserve:3,guide:'none'},
+  {words:mk(4),rows:6,shots:41,every:4,reserve:4,guide:'none'}];// owner 11/08 「너무 쉽다」: fewer shots, rows come down more often, the dotted aim line shrinks then goes (full → short → none)// reserve = how many new rows can still come down from the top
 const COLS=8;
 const IMG={};ORDER.forEach(k=>{const i=new Image();i.src=CFG.pic(k);IMG[k]=i});
 const FACE={};for(const f of ['cannon','fire','yay']){FACE[f]=new Image();FACE[f].src=`../pang/pang_${f}.png`}let face='cannon',faceT=0,jumpT=-9,jumps=1;// Pangpang: idle, squinting as it fires, beaming when a shot hits
@@ -148,7 +151,7 @@ function pushRow(){par^=1;const ks=ROUNDS[round].words,row=[];for(let c=0;c<rowL
 function hud(){mastery_ui();$('score').textContent='⭐ '+score;$('left').textContent='🫧 '+left}
 function kindsLeft(){const s=new Set();grid.forEach(row=>(row||[]).forEach(k=>k&&s.add(k)));return[...s]}
 function pickWord(){const ks=kindsLeft();if(!ks.length)return null;return ks[Math.floor(Math.random()*ks.length)]}
-function next(){if(!playing)return;if(!kindsLeft().length){win();return}const ks=kindsLeft();sinceGold++;gold=shots>=2&&(sinceGold>=(ROUNDS[round].goldy?2:3)||Math.random()<(ROUNDS[round].goldy?.4:.25));cur=(nxt&&ks.includes(nxt))?nxt:pickWord();nxt=pickWord();if(nxt===cur&&ks.length>1)nxt=ks.find(x=>x!==cur);if(gold){sinceGold=0;setTimeout(tipGold,200)}missNow=0;speak(cur)}
+function next(){if(!playing)return;if(!kindsLeft().length){win();return}const ks=kindsLeft();sinceGold++;gold=shots>=2&&(sinceGold>=(ROUNDS[round].goldy?2:3)||Math.random()<(ROUNDS[round].goldy?.4:.25));cur=(nxt&&ks.includes(nxt))?nxt:pickWord();nxt=pickWord();if(nxt===cur&&ks.length>1)nxt=ks.find(x=>x!==cur);if(gold){sinceGold=0;setTimeout(tipGold,200)}missNow=0;speak(cur,1)}
 function swap(){if(!nxt||shot||gold)return;[cur,nxt]=[nxt,cur];SFX.swap();speak(cur)}
 const PH=()=>R*5.4;const waitXY=()=>{const[sx,sy]=shooter(),ph=PH();return[Math.min(W-R*1.4,sx+ph*.62),sy-ph*.05]};const shooter=()=>[W/2,H-PH()*1.12*(1-.5165)-R*.15];
 const deadY=()=>shooter()[1]-PH()*1.12*.5165-R*.1;
@@ -161,7 +164,7 @@ cv.addEventListener('pointerdown',e=>{if(!playing||shot||tipWait)return;const[px
 cv.addEventListener('pointermove',e=>{if(!pull)return;const[px,py]=pt(e);pull.cx=px;pull.cy=py;const a=pullAim(px,py);aim=a;if(a!==null)lastAim=a});
 cv.addEventListener('pointerup',e=>{if(!pull)return;const a=pullAim(...pt(e));pull=null;aim=null;if(a!==null){lastAim=a;fire(a)}});
 cv.addEventListener('pointercancel',()=>{pull=null;aim=null});
-function fire(a){const[sx,sy]=shooter();const v=Math.max(9,R*.55);shot={x:sx,y:sy,vx:Math.cos(a)*v,vy:-Math.sin(a)*v,k:cur,gold:gold,white:!gold&&!colorOn(cur)};gold=false;shots++;left--;hud();SFX.shoot();recoil=8;pangHop=4;face='fire';faceT=performance.now()+380}
+function fire(a){clearTimeout(voiceT);voiceFree=0;try{CFG.hush&&CFG.hush()}catch(e){}/* (11/08 owner) only the word about to be shot is said: firing stops its voice, a hit only plays the hit sound */const[sx,sy]=shooter();const v=Math.max(9,R*.55);shot={x:sx,y:sy,vx:Math.cos(a)*v,vy:-Math.sin(a)*v,k:cur,gold:gold,white:!gold&&!colorOn(cur)};gold=false;shots++;left--;hud();SFX.shoot();recoil=8;pangHop=4;face='fire';faceT=performance.now()+380}
 // the straight path with wall bounces, stopping at the first bubble or the ceiling (shared by the dotted guide and the real flight)
 function hitAt(x,y){if(y<=R)return{ceiling:true};
   for(let r=0;r<grid.length;r++)for(let c=0;c<rowLen(r);c++){const k=at(r,c);if(!k)continue;const[bx,by]=cellXY(r,c);if((bx-x)**2+(by-y)**2<(R*1.8)**2)return{r,c,k}}return null}

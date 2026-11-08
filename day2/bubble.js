@@ -6,15 +6,17 @@ function bbWords(n){const D=DAY,ks=[...FOUND].filter(k=>rvOk(k)&&cardOf(k)),out=
  for(const ago of [3,7]){const c=ks.filter(k=>FDAY[k]<D&&!out.includes(k));if(!c.length)continue;const d=k=>Math.abs(FDAY[k]-(D-ago)),best=Math.min(...c.map(d));bbShuf(c.filter(k=>d(k)===best)).slice(0,2).forEach(add)}
  for(const k of today.concat(typeof TODAY!=='undefined'?bbShuf([...TODAY]):[],ks.slice().sort((a,b)=>(FDAY[b]||0)-(FDAY[a]||0))))add(k);
  return out}
+// (11/08 owner) two words were heard at once: one word's voice at a time, and none while a shot flies
+function bbHush(){try{for(const a of Object.values(SND)){a.pause();a.currentTime=0}}catch(e){}try{speechSynthesis.cancel()}catch(e){}}
 window.bubbleReview=function(done){
- const keys=bbWords(8);if(keys.length<3)return false;
+ const keys=bbWords(23);if(keys.length<3)return false;
  const today=keys.filter(k=>FDAY[k]===DAY),past=keys.filter(k=>FDAY[k]!==DAY).sort((a,b)=>(FDAY[a]||0)-(FDAY[b]||0)).map(k=>({k,missed:RV_AGAIN.includes(k)}));
  busy=true;try{closeBubble&&closeBubble()}catch(e){}setGoal('');
  const was=bgmNow;try{const a=BGM[bgmNow];if(a)a.pause()}catch(e){}
  const fr=document.createElement('iframe');fr.id='bubblegame';fr.title='bubble';fr.allow='autoplay';
  fr.style.cssText='position:fixed;inset:0;width:100%;height:100%;border:0;z-index:950;background:#c8f0e4';
  let fin=false;
- window.BUB_CFG={keys,today,past,muted:!!muted,word:k=>wordOf(k),pic:k=>'../'+cardOf(k),speak:k=>speak(k),tr:s=>tr(s),
+ window.BUB_CFG={keys,today,past,muted:!!muted,word:k=>wordOf(k),pic:k=>'../'+cardOf(k),speak:k=>{bbHush();speak(k)},hush:()=>bbHush(),tr:s=>tr(s),
   done(r){if(fin)return;fin=true;fr.remove();busy=false;
    const missed=new Set((r&&r.missed)||[]),caught=(r&&r.caught)||[];
    RV_AGAIN=[...missed].concat(RV_AGAIN.filter(k=>!missed.has(k)&&!caught.includes(k))).slice(0,8);try{rvStore()}catch(e){}
