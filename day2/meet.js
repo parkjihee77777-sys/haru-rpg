@@ -35,7 +35,7 @@ setDay=function(n){_setDay(NATIVE_BY[n]?n:2);DAY=n;for(const k in THINGS)delete 
  D2PLACE={...D2PLACE};PLACES.length=0;PLACES.push(...BASE_PLACES);for(const id of extraPlacesToday()){D2PLACE[id]=[];PLACES.push([id,EXTRA_MAPS[id].name])}for(const id of goPlacesToday())if(!D2PLACE[id])D2PLACE[id]=[];
  for(const f of D2IDS){const e=epNext(f,EPIDX[f]);if(!e)continue;
   for(const[m,ts]of Object.entries(e.taps||{}))NATIVE[m]=(NATIVE[m]||[]).concat(ts);
-  for(const[m,ts0]of Object.entries(e.things||{})){const ts=ts0.map(t=>t[0]==='clock'&&/^class/.test(m)&&t[1]===1040&&t[2]===186?['clock',860,48,t[3],t[4],'stay']:t);// the classroom clock hangs high at the top of the front wall, not at knee height (owner 11/07)
+  for(const[m,ts0]of Object.entries(e.things||{})){const ts=ts0.map(t=>t[0]==='clock'&&/^class/.test(m)&&t[1]===1040&&t[2]===186?['clock',1431,74,32,t[4],'stay']:t);// the classroom clock hangs high on the strip of wall between the notice board and the door — not at knee height (owner 11/07), not on the blackboard (owner 11/08)
  THINGS[m]=(THINGS[m]||[]).concat(ts.filter(t=>!(THINGS[m]||[]).some(o=>o[0]===t[0]&&Math.hypot(o[1]-t[1],o[2]-t[2])<120)))}}};// two friends on one day may both put the same wall clock etc.: keep one (owner 11/07: two clocks)
 // a thing laid on the map may use its own picture ([k,x,y,w,picture]): a crumpled test paper is still {paper}
 showThings=function(id){world.querySelectorAll('.thing').forEach(e=>e.remove());const things=placeThings(id);
