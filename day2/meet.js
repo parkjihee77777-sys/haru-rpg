@@ -60,9 +60,10 @@ function goPlacesToday(){const ids=new Set();for(const f of D2IDS){const e=epNex
 // Day 9 is the rainy day at the gate (Minho, Hangyeol, Seah) → umbrella. Things not drawn on the home map are laid where they would be.
 const MORNING_BY={4:'apple',5:'bread',6:'cup',7:'water_bottle',8:'pcase',9:'umbrella',10:'sock',11:'banana',12:'milk',13:'spoon',14:'shoes',15:'tissue',16:'bag'};
 const MORNING_LAY={apple:[900,470,34],bread:[985,492,44],cup:[1062,478,30],water_bottle:[1190,248,34],pcase:[1010,505,46],umbrella:[205,470,56],sock:[205,540,36],banana:[1040,468,42],milk:[945,452,28],spoon:[1040,490,90],tissue:[860,470,40],notebook:[1115,700,40],bag:[1085,745,60]};
+const MORNING_EXTRA={13:[['bowl',900,505,62],['cup',975,528,34]]};// (owner 11/08) the spoon is not alone on the table: breakfast things around it
 const MORNING_KEYS=Object.values(MORNING_BY);const MORNING_SAID=new Set(['apple','bread','cup','umbrella','bag','handkerchief','apron']);
 function morningOf(n){if(MORNING[n])return MORNING[n];const k=MORNING_BY[n]||MORNING_KEYS[(n-4)%MORNING_KEYS.length];
- return{k,lay:MORNING_LAY[k]?[[k,...MORNING_LAY[k],null,'stay']]:null,open:[['nar','','아침.'],['mom','smile',`{@${k}} 좀 찾아 줄래?`]],after:[['mom','laugh','고마워!'],['me','smile','…응. 다녀올게.'],['mom','smile','오늘도 저녁에 이야기 들려줘.']]}}
+ return{k,lay:MORNING_LAY[k]?[[k,...MORNING_LAY[k],null,'stay']].concat((MORNING_EXTRA[n]||[]).map(t=>[...t,null,'stay'])):null,open:[['nar','','아침.'],['mom','smile',`{@${k}} 좀 찾아 줄래?`]],after:[['mom','laugh','고마워!'],['me','smile','…응. 다녀올게.'],['mom','smile','오늘도 저녁에 이야기 들려줘.']]}}
 startDay=function(n){const m=document.getElementById('modal');m.classList.remove('on');
  if(DAYMEET[n]){MEET={...DAYMEET[n].meet};FLAGS={...DAYMEET[n].flags}}else DAYMEET[n]={meet:{...MEET},flags:{...FLAGS}};
  for(const k in EPIDX)delete EPIDX[k];for(const k in TODAYEP)delete TODAYEP[k];for(const f of D2IDS)if(window.EP&&EP[f])EPIDX[f]=MEET[f]||0;
