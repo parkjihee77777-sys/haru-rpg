@@ -273,3 +273,8 @@ const DAD_DAYS=[4,8,12,16];
  lessons=function(part){sync();if(part==='am'&&clock>=1){busy=false;d2Goal();return}if(part==='pm'&&clock>=3){busy=false;stage='d2_after';setGoal('방과 후! 나가는 길로 가서 집에 가기','out');return}clock=part==='am'?1:3;return _ls(part)}}
 // (11/08 owner) day 14 at lunch the desks were empty: whenever the "meet one more friend" goal comes up in the classroom, the kids who belong there come back to their seats
 {const _g=d2Goal;d2Goal=function(){try{if(MAP==='class'&&!SCENE_IDS&&typeof tidyPeople==='function')tidyPeople()}catch(e){}return _g.apply(this,arguments)}}
+// (11/08 owner) tapping a kid who only stands here as part of another friend's scene (Haeun in Junho's backyard scene) starts that scene
+{const _t=d2Talk;d2Talk=function(id){try{const own=epNext(id,EPIDX[id]);
+  if(['d2_class','d2_after'].includes(stage)&&!PICKS.includes(id)&&!(own&&own.place===MAP)){
+   const host=D2IDS.find(f=>f!==id&&!PICKS.includes(f)&&(()=>{const e=epNext(f,EPIDX[f]);return e&&e.place===MAP&&(e.with||[]).some(w=>w[0]===id)})());
+   if(host)return _t(host)}}catch(e){}return _t(id)}}
