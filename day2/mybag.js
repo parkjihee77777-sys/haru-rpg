@@ -3,9 +3,14 @@
 // Same find rules: tapping a thing says its name, the button says this mission's action with the target word,
 // the right thing goes on, a wrong one only buzzes. A step {k, goal, bag:[…]} in a scene uses it; so does Mom's notebook review.
 // an item written 'key:picture' shows items/<picture>.png for that key (a scene's own look of the thing, e.g. 'lid:lid_screw'); the plain items/<key>.png if that picture is missing
-function bagFind(k,items,goalText,done){busy=true;closeBubble();const pic={};items=items.map(q=>{const[a,b]=q.split(':');if(b)pic[a]=b;return a});items=noLookalike(k,items);const m=document.getElementById('modal'),c=document.getElementById('mcard');
+// 11/08: the tray never shows empty frames or loses cards on a flaky connection: every picture is loaded (retried up to 3 times) before the tray opens
+function bagLoadImg(src){return new Promise(r=>{let n=0;const t=()=>{const im=new Image();im.onload=()=>r(1);im.onerror=()=>{if(++n>=3)return r(0);setTimeout(t,350*n)};im.src=n?src+'?r='+n+Date.now():src};t()})}
+function bagFind(k,items,goalText,done){busy=true;closeBubble();const pic={};let list=items.map(q=>{const[a,b]=q.split(':');if(b)pic[a]=b;return a});list=noLookalike(k,list);
+ const src=q=>'items/'+(pic[q]||q)+'.png';
+ Promise.race([Promise.all(list.map(q=>bagLoadImg(src(q)))),new Promise(r=>setTimeout(()=>r(null),4500))]).then(()=>bagFind0(k,list.map(q=>pic[q]?q+':'+pic[q]:q),goalText,done))}
+function bagFind0(k,items,goalText,done){busy=true;closeBubble();const pic={};items=items.map(q=>{const[a,b]=q.split(':');if(b)pic[a]=b;return a});items=noLookalike(k,items);const m=document.getElementById('modal'),c=document.getElementById('mcard');
  const goalTr=()=>tr(goalText||'「{x}」 꺼내기');let sel=null;
- c.innerHTML=`<h2>${goalTr().replace('{x}',wordOf(k)+' <button class="spk" id="bagagain">🔊</button>')}</h2><div class="ztray">${items.map(q=>`<button class="zit" data-k="${q}"><img src="items/${pic[q]||q}.png" alt="" onerror="if(!this.dataset.f&&${!!pic[q]}){this.dataset.f=1;this.src='items/${q}.png'}else this.parentNode.remove()"></button>`).join('')}</div><div class="zok"></div>`;
+ c.innerHTML=`<h2>${goalTr().replace('{x}',wordOf(k)+' <button class="spk" id="bagagain">🔊</button>')}</h2><div class="ztray">${items.map(q=>`<button class="zit" data-k="${q}"><img src="items/${pic[q]||q}.png" alt="" onerror="if(!this.dataset.f&&${!!pic[q]}){this.dataset.f=1;this.src='items/${q}.png'}else if((this.dataset.r=+(this.dataset.r||0)+1)<=3){const i=this;setTimeout(()=>{i.src='items/${pic[q]||q}.png?r='+Date.now()},400*i.dataset.r)}else this.parentNode.remove()"></button>`).join('')}</div><div class="zok"></div>`;
  m.classList.add('on');setTimeout(()=>speak(k),350);document.getElementById('bagagain').onclick=()=>speak(k);const okw=c.querySelector('.zok');
  c.querySelectorAll('.zit').forEach(b=>b.onclick=()=>{sel=b.dataset.k;speak(sel);c.querySelectorAll('.zit').forEach(x=>x.classList.toggle('on',x===b));okw.innerHTML='';
   const zb=document.createElement('button');zb.className='bubble';zb.style.cssText='position:static;transform:none;margin:10px auto 0;display:inline-block';zb.textContent=goalTr().replace('{x}',wordOf(k));okw.appendChild(zb);
