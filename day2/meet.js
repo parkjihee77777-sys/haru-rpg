@@ -169,8 +169,8 @@ d2Talk=function(id){const e=epNext(id,EPIDX[id]);
 // ---- lessons: the class at their desks listening to the teacher (a picture over the classroom; the same lines as before) ----
 const LESSON_PICS=['lesson_1','lesson_2','lesson_3'];// morning pictures (scenes/<name>.jpg), the last one is the afternoon; none = lines on the classroom map
 lessons=function(part){setGoal('');busy=true;fade(()=>{if(MAP!=='class')load('class');
- const am=[['nar','','딩동댕— 1교시 시작 종이 울렸다.'],['nar','','선생님: 「자, 교과서 펴세요.」'],['think','smile','(아까 일이 자꾸 생각난다.)'],['nar','','2교시, 3교시, 4교시… 오전 수업이 지나갔다.'],['nar','','딩동댕— 점심시간!']];
- const pm=[['nar','','딩동댕— 5교시 시작 종이 울렸다.'],['nar','','오후 수업이 천천히 지나갔다.'],['nar','','딩동댕— 마지막 종이 울렸다. 방과 후!']];
+ const am=[['nar','','딩동댕— 수업 시작 종이 울렸다.'],['nar','','선생님: 「자, 교과서 펴세요.」'],['think','smile','(아까 일이 자꾸 생각난다.)'],['nar','','오전 수업이 하나씩 지나갔다.'],['nar','','딩동댕— 점심시간!']];
+ const pm=[['nar','','딩동댕— 수업 시작 종이 울렸다.'],['nar','','오후 수업이 천천히 지나갔다.'],['nar','','딩동댕— 마지막 종이 울렸다. 방과 후!']];
  const n=LESSON_PICS.length,pic=!n?null:part==='am'?LESSON_PICS[DAY%Math.max(1,n-1)]:LESSON_PICS[n-1];
  (pic?(ls,cb)=>scene(pic,ls,cb):say)(part==='am'?am:pm,()=>{if(part==='am')d2Goal();else{stage='d2_after';setGoal('방과 후! 나가는 길로 가서 집에 가기','out')}})})};
 // ---- evening: Mom asks, each friend's part follows ----
@@ -247,17 +247,18 @@ const DAD_DAYS=[4,8,12,16];
 {const _sceneDad=scene;scene=function(img,lines,done,keep){if((img==='dinner'||img==='dinner_m')&&DAD_DAYS.includes(DAY)){const c=UI==='ko'?LANG:UI;
   img=(DINNER_HOME.includes(c)?'dinner_'+c+(HERO==='hero_m'?'_m':'_f'):(HERO==='hero_m'?'dinner_m':'dinner'))+'_dad'}return _sceneDad(img,lines,done,keep)}}
 // (11/08 owner) each meeting's time of day, read from its first lines: 0 morning·break, 1 lunch, 2 afternoon class, 3 after school (none = any time).
-// The day's two meetings play in time order: the first can't be later than another friend's, the second can't be earlier than the first.
+// The day runs: 1st friend → morning lessons → lunch → 2nd friend → afternoon lessons → after school.
+// So the 1st meeting should be a morning one, the 2nd one from lunch on; an after-school 2nd meeting skips the afternoon lessons (it already ended the day).
 {const SLOTS=[[3,/^([56]교시가 끝났다|종례|하교|방과 ?후|오늘 끝)/],[2,/^(5교시|6교시|오후)/],[1,/^(점심|4교시가 끝났다|급식)/],[0,/^(아침|1교시|[123]교시가 끝났다|등교|쉬는 시간|중간 놀이)/]];
  window.epSlot=function(e){if(!e)return null;if(e.slot!=null)return e.slot;let n=0;for(const s of e.pre||[]){if(!Array.isArray(s)||typeof s[2]!=='string')continue;const t=s[2].replace(/^[^:]*: 「/,'');const m=SLOTS.find(([,r])=>r.test(t));if(m)return m[0];if(++n>=3)break}return null};
  window.epLate=e=>epSlot(e)===3;
- const nextOf=f=>epNext(f,EPIDX[f]);let firstSlot=null;
+ const nextOf=f=>epNext(f,EPIDX[f]);let lastSlot=null;
  const _dl=d2Talk;d2Talk=function(id){const e=nextOf(id),sl=epSlot(e);
-  if(PICKS.length===0)firstSlot=null;
-  if(!navigator.webdriver&&e&&sl!=null&&stage==='d2_class'&&!PICKS.includes(id)&&PICKS.length<needToday()){
-   const others=friendsToday().filter(f=>f!==id&&!PICKS.includes(f)&&nextOf(f));
-   if(PICKS.length===0&&others.some(f=>{const o=epSlot(nextOf(f));return o!=null&&o<sl})){
+  if(!navigator.webdriver&&e&&sl!=null&&stage==='d2_class'&&!PICKS.includes(id)&&PICKS.length<needToday()&&needToday()>1){
+   const others=friendsToday().filter(f=>f!==id&&!PICKS.includes(f)&&nextOf(f)).map(f=>epSlot(nextOf(f)));
+   if(PICKS.length===0&&sl>=1&&others.some(o=>o==null||o===0)){
     say([['think','smile',sl===3?'(이 이야기는 수업 끝나고 하자. 먼저 다른 친구한테 가 볼까?)':'(이 이야기는 조금 이따가 하자. 먼저 다른 친구한테 가 볼까?)']]);return}
-   if(PICKS.length>0&&firstSlot!=null&&sl<firstSlot&&others.some(f=>{const o=epSlot(nextOf(f));return o==null||o>=firstSlot})){
+   if(PICKS.length===1&&sl===0&&others.some(o=>o==null||o>=1)){
     say([['think','smile','(그 이야기는 내일 하자. 다른 친구한테 가 볼까?)']]);return}}
-  const n=PICKS.length,r=_dl(id);if(n===0&&typeof SCENE_EP!=='undefined'&&SCENE_EP===e)firstSlot=sl;return r}}
+  const r=_dl(id);if(typeof SCENE_EP!=='undefined'&&SCENE_EP===e)lastSlot=sl;return r};
+ const _ls=lessons;lessons=function(part){if(part==='pm'&&lastSlot===3){lastSlot=null;busy=false;stage='d2_after';setGoal('방과 후! 나가는 길로 가서 집에 가기','out');return}if(part==='pm')lastSlot=null;return _ls(part)}}
