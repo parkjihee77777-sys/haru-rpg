@@ -878,7 +878,7 @@ EP.hyeeun=[
 
 // ■ Day 12 — 교문까지만 (11)
 {title:'교문까지만',scene:'hyeeun_11',place:'hall',at:[1150,560],
- taps:{gatesun:[['school_gate',970,690,110]]},
+ taps:{gatesun:[['school_gate',670,800,95],['school_gate',800,750,105],['school_gate',970,690,120],['school_gate',1110,640,105],['school_gate',1245,630,95]]},// the whole gate is tappable (owner 11/08), same spots as Jihoon day 6
  pre:[
   ['nar','','종례가 끝났다. 과학 시간에 키운 강낭콩 {@flowerpot|을} 집에 가져가는 날이었다.'],
   ['nar','','혜은이 {@flowerpot|은} 컸다. 흙이 꽉 차 있었다. 본관 현관 신발장 위에 놓여 있었다.'],

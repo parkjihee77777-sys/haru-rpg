@@ -115,7 +115,7 @@ EP.haeun=[
 
 // ■ Day 3 — 2시 50분 (2)
 {title:'2시 50분',scene:'haeun_02',place:'class',at:[405,720],
- things:{class:[['clock',1040,186,46]]},taps:{gatesun:[['school_gate',970,690,110]]},
+ things:{class:[['clock',1040,186,46]]},taps:{gatesun:[['school_gate',670,800,95],['school_gate',800,750,105],['school_gate',970,690,120],['school_gate',1110,640,105],['school_gate',1245,630,95]]},
  pre:[
   ['nar','','6교시가 끝났다. 종례 시간. 선생님이 가정통신문을 나눠 주시고 내일 준비물을 말씀하셨다.'],
   {pic:'haeun_02b'},
