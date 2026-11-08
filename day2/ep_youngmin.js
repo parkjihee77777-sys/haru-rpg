@@ -934,7 +934,7 @@ EP.youngmin=[
   {pic:'youngmin_11a'},
   ['nar','','영민이 독서 기록장에 「우주로 간 거북이」가 또 있었다. 이번엔 그림 칸이었다. 거북이와 별을 그리는 중이었다.'],
   ['youngmin','surprised','……초록 {@colored_pencil} 있어?'],
-  {k:'colored_pencil',goal:'「{x}」 빌려주기',bag:['pencil','colored_pencil','eraser','scissors','ruler']},
+  {k:'colored_pencil',goal:'「{x}」 빌려주기',bag:['pencil','colored_pencil:colored_pencil_green','eraser','scissors','ruler']},
   ['nar','','내 필통에서 초록 {@colored_pencil|을} 꺼내 영민이에게 줬다.'],
   ['nar','','영민이가 거북이 등딱지를 칠했다. 칸 하나씩. 선 밖으로 안 나가게.'],
   {pic:'youngmin_11b'},

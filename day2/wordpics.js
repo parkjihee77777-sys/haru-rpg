@@ -16,6 +16,7 @@ const WORDPIC={
  yuna_07:{eraser:'eraser_cloud'},yuna_13:{bag:'bag_yuna'},
  yena_12:{water_bottle:'water_bottle_pink'},
  seah_04:{milk:'milk_strawberry'},
+ youngmin_11:{colored_pencil:'colored_pencil_green'},// owner 11/08: Youngmin asks for the GREEN one
  // junho_11 bag: the plain school bag (owner 11/08: the drawstring gym bag read as a pouch, not 가방)
  junho_10:{water:'water_tap'},jiho_08:{water:'water_tap'},jihoon_11:{water:'water_drops'},
  minho_09:{paper:'paper_crumpled'},junho_07:{paper:'paper_crumpled'},
@@ -28,7 +29,7 @@ const WORDPIC={
  hangyeol_01:{thread:'thread_floss'},hangyeol_12:{thread:'thread_floss'}};
 // which of those pictures are really there (a list, not a network probe: a missing file would show as a page error).
 // When a new picture from list F is added, put its name here (items = cut-out .png, cards = card .jpg).
-const PIC_ITEM=new Set(['mirror_wall','photo_grandma','locker_grid','stairs_down','magnet_board', 'cat_yellow', 'ballot_box', 'cards_play', 'glue_stick', 'milk_crate', 'paper_crumpled', 'water_bottle_pink', 'water_drops', 'glove_wheel', 'glove_goalie', 'wheel_chair', 'card_greeting', 'ball_dodge', 'ice_pack', 'umbrella_flower', 'umbrella_broken', 'eraser_cloud', 'milk_strawberry', 'bag_gym', 'water_tap', 'notebook_blue', 'notebook_gray', 'thread_floss']),PIC_CARD=new Set(['mirror_wall','photo_grandma','stairs_down','magnet_board', 'cat_yellow', 'ballot_box', 'glue_stick', 'milk_crate', 'paper_crumpled', 'cards_play', 'water_bottle_pink', 'water_drops', 'photo_cam', 'glove_wheel', 'glove_goalie', 'wheel_chair', 'card_greeting', 'ball_dodge', 'ice_pack', 'umbrella_flower', 'umbrella_broken', 'eraser_cloud', 'milk_strawberry', 'bag_gym', 'water_tap', 'notebook_blue', 'notebook_gray', 'thread_floss']);
+const PIC_ITEM=new Set(['colored_pencil_green','mirror_wall','photo_grandma','locker_grid','stairs_down','magnet_board', 'cat_yellow', 'ballot_box', 'cards_play', 'glue_stick', 'milk_crate', 'paper_crumpled', 'water_bottle_pink', 'water_drops', 'glove_wheel', 'glove_goalie', 'wheel_chair', 'card_greeting', 'ball_dodge', 'ice_pack', 'umbrella_flower', 'umbrella_broken', 'eraser_cloud', 'milk_strawberry', 'bag_gym', 'water_tap', 'notebook_blue', 'notebook_gray', 'thread_floss']),PIC_CARD=new Set(['mirror_wall','photo_grandma','stairs_down','magnet_board', 'cat_yellow', 'ballot_box', 'glue_stick', 'milk_crate', 'paper_crumpled', 'cards_play', 'water_bottle_pink', 'water_drops', 'photo_cam', 'glove_wheel', 'glove_goalie', 'wheel_chair', 'card_greeting', 'ball_dodge', 'ice_pack', 'umbrella_flower', 'umbrella_broken', 'eraser_cloud', 'milk_strawberry', 'bag_gym', 'water_tap', 'notebook_blue', 'notebook_gray', 'thread_floss']);
 let LAYPIC={},LAYPIC_EP=null;const DAYPIC={};
 function picOf(k){if(typeof SCENE_EP==='undefined'||!SCENE_EP)return k;if(LAYPIC_EP!==SCENE_EP){LAYPIC={};LAYPIC_EP=SCENE_EP}
  const w=(WORDPIC[SCENE_EP.scene]||{})[k],v=(w&&PIC_ITEM.has(w)&&w)||LAYPIC[k];if(!v||v===k)return k;DAYPIC[k]=v;PIC_ITEM.add(v);return v}// a laid picture is there (it is on the map)
