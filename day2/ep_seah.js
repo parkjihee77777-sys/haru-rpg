@@ -1308,7 +1308,8 @@ EP.seah=[
   common:[['me','smile','그리고 지호가 벌칙 바꿨어. 팔굽혀펴기 다섯 개. 세아가 그건 한대. 다섯 개 하고 바닥에 철퍼덕 엎드렸어.'],['mom','laugh','(웃음) 다섯 개 했어?'],['me','smile','응! 민호가 다섯 개 하는 데 1분 걸렸대. 세아가 ‘그래도 다섯 개 했거든’ 했어.'],['mom','laugh','(크게 웃음) 세아가 그렇게 말했어?'],['me','laugh','응. 다들 웃었어. 민호도. 세아 엎드려서 웃었어. 눈까지.'],['mom','smile','……좋은 날이었네.'],['me','smile','응. 세아가 ‘안 할래’ 처음 해 봤대. 민호 있는 데서.'],['mom','surprised','너는 그때 뭐라고 했어?'],['me','smile','아무 말도 안 했어. 고개만 끄덕였어.'],['mom','smile','그래.']]}},
 
 // ■ Day 15 — 다른 식탁 (14)
-{title:'다른 식탁',scene:'seah_14',place:'cafe',at:[620,470],empty:{cafe:['seah','haeun','hyeeun','minho','jiho']},with:[['haeun',760,360],['hyeeun',950,380],['minho',1270,470],['jiho',1350,480]],
+// (11/08 owner) Haeun·Hyeeun floated over the chairs at 760,360/950,380: now on the floor at the middle table's end
+{title:'다른 식탁',scene:'seah_14',place:'cafe',at:[620,470],empty:{cafe:['seah','haeun','hyeeun','minho','jiho']},with:[['haeun',400,395],['hyeeun',480,445],['minho',1270,470],['jiho',1350,480]],
  pre:[
   ['nar','','점심시간. 급식 줄에서 {@tray|을} 받았다.'],
   {k:'tray',goal:'「{x}」 들고 가기',bag:['tray','spoon','chopsticks','cup','milk']},
@@ -1384,10 +1385,8 @@ EP.seah=[
   ['minho','smile','……어. 다음엔 말해.'],
   ['nar','','그게 다였다. 세아는 {@tray|을} 반납하러 갔다. 민호는 {@spoon|을} {@tray}에 올렸다. 맡아 두었던 {@spoon}. 결국 아무도 안 쓴 {@spoon|이었}다.'],
   ['nar','','{@tray} 반납대 옆, 수저통에 {@spoon|을} 넣는 곳이 있었다.'],
-  {lay:[['spoon',1440,640,34]]},
-  {k:'spoon',goal:'「{x}」 넣기'},
+  {k:'spoon',goal:'「{x}」 넣기',bag:['spoon','chopsticks','cup','milk']},// (11/08 owner) the laid spoon floated in the air: picked as a card instead
   ['nar','','다 쓴 {@spoon|을} 반납 통에 넣었다.'],
-  {clear:['spoon']},
   {only:['B','C'],lines:[['nar','','{@spoon|을} 넣는데 세아가 옆에 있었다. 세아가 아주 작게 말했다. 「……아까 너 안 왔지. 나 부르러. 봤어.」'],['seah','sad','안 와서 좋았어. 오면 나 일어났을 거야.']]},
   {only:['A'],lines:[['nar','','{@spoon|을} 넣는데 세아가 옆에 있었다. 「……아까 와 줬는데 안 가서 미안. 근데 오늘은 여기 앉고 싶었어.」 세아 목소리가 작았다. 그래도 끝까지 말했다.']]},
   {only:['D'],lines:[['nar','','{@spoon|을} 넣는데 세아가 옆에 있었다. 세아는 아무 말도 안 했다. 그러다 갈 때 작게 말했다. 「……나 그냥 밥 먹은 건데.」']]}],
