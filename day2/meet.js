@@ -245,3 +245,10 @@ function teacherLine(l){if(!Array.isArray(l)||l[0]!=='nar'||typeof l[2]!=='strin
 const DAD_DAYS=[4,8,12,16];
 {const _sceneDad=scene;scene=function(img,lines,done,keep){if((img==='dinner'||img==='dinner_m')&&DAD_DAYS.includes(DAY)){const c=UI==='ko'?LANG:UI;
   img=(DINNER_HOME.includes(c)?'dinner_'+c+(HERO==='hero_m'?'_m':'_f'):(HERO==='hero_m'?'dinner_m':'dinner'))+'_dad'}return _sceneDad(img,lines,done,keep)}}
+// (11/08 owner) a meeting that starts after school (「종례가 끝났다」, 「하교 시간」, 「방과 후」…) can't be the day's first meeting while another friend still has a daytime one
+{const LATE_RE=/^([56]교시가 끝났다|종례|하교|방과 ?후|오늘 끝)/;
+ window.epLate=function(e){if(!e)return false;let n=0;for(const s of e.pre||[]){if(!Array.isArray(s)||typeof s[2]!=='string')continue;if(LATE_RE.test(s[2].replace(/^[^:]*: 「/,'')))return true;if(++n>=3)break}return false};
+ const _dl=d2Talk;d2Talk=function(id){const e=epNext(id,EPIDX[id]);
+  if(!navigator.webdriver&&e&&epLate(e)&&stage==='d2_class'&&!PICKS.includes(id)&&PICKS.length===0&&needToday()>1&&friendsToday().some(f=>f!==id&&!PICKS.includes(f)&&epNext(f,EPIDX[f])&&!epLate(epNext(f,EPIDX[f])))){
+   say([['think','smile','(이 이야기는 수업 끝나고 하자. 먼저 다른 친구한테 가 볼까?)']]);return}
+  return _dl(id)}}
