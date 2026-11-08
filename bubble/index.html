@@ -171,11 +171,11 @@ function land(h){const k=shot.k,sx=shot.x,sy=shot.y,wasGold=shot.gold,wasWhite=s
     {const[x,y]=cellXY(h.r,h.c);card(x,y,k)}// the word and its picture together, once more
     popCells(grp,wasGold?3:wasWhite?2:1);mastery[k]=(mastery[k]||0)+1;hits[k]=(hits[k]||0)+1;if(helpLeft[k])helpLeft[k]--;
     if(wasWhite)floatText(W/2,H*.32,'×2','#2fb38a');if(wasGold){SFX.cookie();floatText(W/2,H*.38,'🌈 ×3','#b06bff');shake=6}
-    streak++;SFX.pop(grp.length);const fell=dropFloating();if(fell>=3)shake=10;face='yay';faceT=performance.now()+1100;jumpT=performance.now();jumps=grp.length+fell>=4?2:1;if(fell)setTimeout(SFX.fall,150);hud();speak(k);
+    streak++;SFX.pop(grp.length);const fell=dropFloating();if(fell>=3)shake=10;face='yay';faceT=performance.now()+1100;jumpT=performance.now();jumps=grp.length+fell>=4?2:1;if(fell)setTimeout(SFX.fall,150);hud();
     say(tr(['맞았어!','잘했어!','최고야!'][score%3]));setTimeout(next,500)}
   else{// wrong picture (or the ceiling): the shot sticks as that word's picture
     const p=nearestFree(sx,sy);if(p)setAt(p[0],p[1],k);SFX.wrong();streak=0;misses[k]=(misses[k]||0)+1;if(wasWhite||wasGold){helpLeft[k]=2;mastery[k]=Math.max(2,(mastery[k]||0)-1)}{const[a,b]=shooter();card(a,b-PH()*.7,k)}// show which picture this word was
-    missNow++;speak(k);say(tr(missNow>=2?'같은 색 그림을 찾아 봐!':'그림을 잘 봐!'))}
+    missNow++;say(tr(missNow>=2?'같은 색 그림을 찾아 봐!':'그림을 잘 봐!'))}
   if(playing&&!kindsLeft().length){win();return}
   if(playing&&reserve>0&&kindsLeft().length&&shots%(ROUNDS[round].every||8)===0){reserve--;pushRow()}
   if(playing&&left<=0){playing=false;show('🫧 0',tr('한 번 더 해 볼까요?'),'↻',startRound,true);return}
