@@ -80,11 +80,11 @@ const TODAY=CFG.today.slice(0,4);
 const PASTPICK=CFG.past.slice().sort((a,b)=>(b.missed-a.missed)).map(x=>x.k);// missed first, then the oldest (the game sends them oldest first)
 const PASTSET=new Set(PASTPICK);
 const mk=n=>{const w=TODAY.concat(PASTPICK.slice(0,n));return w.length>=3?w:ORDER.slice(0,Math.max(3,w.length))};
-const ROUNDS=[{words:mk(0),rows:4,shots:28,every:7,reserve:1},
-  {words:mk(1),rows:5,shots:32,every:6,reserve:2},
-  {words:mk(2),rows:5,shots:36,every:7,reserve:2},
-  {words:mk(2),rows:5,shots:44,goldy:true,every:7,reserve:1},
-  {words:mk(2),rows:5,shots:48,every:7,reserve:2}];// reserve = how many new rows can still come down from the top
+const ROUNDS=[{words:mk(0),rows:4,shots:24,every:6,reserve:2,guide:'full'},
+  {words:mk(1),rows:5,shots:27,every:5,reserve:3,guide:'short'},
+  {words:mk(2),rows:5,shots:31,every:5,reserve:3,guide:'short'},
+  {words:mk(2),rows:5,shots:37,goldy:true,every:5,reserve:3,guide:'none'},
+  {words:mk(2),rows:6,shots:41,every:4,reserve:4,guide:'none'}];// owner 11/08 「너무 쉽다」: fewer shots, rows come down more often, the dotted aim line shrinks then goes (full → short → none)// reserve = how many new rows can still come down from the top
 const COLS=8;
 const IMG={};ORDER.forEach(k=>{const i=new Image();i.src=CFG.pic(k);IMG[k]=i});
 const FACE={};for(const f of ['cannon','fire','yay']){FACE[f]=new Image();FACE[f].src=`../pang/pang_${f}.png`}let face='cannon',faceT=0,jumpT=-9,jumps=1;// Pangpang: idle, squinting as it fires, beaming when a shot hits
@@ -236,8 +236,8 @@ function cannon(){const[sx,sy]=shooter();pangHop*=.8;const now=performance.now()
   const im=FACE[face].complete&&FACE[face].naturalWidth?FACE[face]:FACE.cannon;if(!im.complete||!im.naturalWidth)return;
   const ph=PH()*1.12,pw=im.naturalWidth*ph/im.naturalHeight;ctx.drawImage(im,sx-.5*pw,sy-.5165*ph-pangHop-jy,pw,ph)}
 function guide(a,strong){const[sx,sy]=shooter();const s={x:sx,y:sy,vx:Math.cos(a)*4,vy:-Math.sin(a)*4};ctx.fillStyle=strong?'rgba(255,111,160,.9)':'rgba(255,111,160,.45)';let h=null;
-  const shortG=round>=1,vx0=s.vx;// from round 2 the dotted line stops at the first wall bounce
-  for(let i=0;i<600;i++){step(s);h=hitAt(s.x,s.y);if(h)break;if(shortG&&Math.sign(s.vx)!==Math.sign(vx0))break;if(i%5===0){ctx.beginPath();ctx.arc(s.x,s.y,strong?2.8:2.2,0,7);ctx.fill()}}
+  const gm=ROUNDS[round].guide||'full';if(gm==='none')return;const shortG=gm==='short',vx0=s.vx;// short: only a stub in front of the cannon
+  for(let i=0;i<600;i++){step(s);h=hitAt(s.x,s.y);if(h)break;if(shortG&&(i>28||Math.sign(s.vx)!==Math.sign(vx0)))break;if(i%5===0){ctx.beginPath();ctx.arc(s.x,s.y,strong?2.8:2.2,0,7);ctx.fill()}}
   if(shortG)return;
   if(h&&!h.ceiling){const[x,y]=cellXY(h.r,h.c);ctx.lineWidth=3;ctx.strokeStyle=h.k===cur?'#ff6fa0':'rgba(75,58,85,.45)';ctx.beginPath();ctx.arc(x,y,R*1.05,0,7);ctx.stroke()}
   else{ctx.lineWidth=2;ctx.setLineDash([4,4]);ctx.strokeStyle='rgba(75,58,85,.45)';ctx.beginPath();ctx.arc(s.x,s.y,R*.9,0,7);ctx.stroke();ctx.setLineDash([])}}
