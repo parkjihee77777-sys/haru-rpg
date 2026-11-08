@@ -885,7 +885,7 @@ EP.haneul=[
    ['me','laugh','(웃음) 엄마는 괜찮아.']]}},
 
 // ■ Day 8 — 눈싸움 (7)
-{title:'눈싸움',scene:'haneul_07',place:'class',at:[263,860],with:[['minho',820,620],['jiho',960,640],['jihoon',488,700],['yena',700,600]],
+{title:'눈싸움',scene:'haneul_07',place:'class',at:[263,860],with:[['minho',1050,470],['jiho',1050,640],['jihoon',488,700],['yena',600,560]],
  pre:[
   ['nar','','점심을 먹고 교실에 왔다. 5교시 전 쉬는 시간이 아직 길게 남아 있었다.'],
   ['nar','','나는 {@pencil|이} 뭉툭해서 깎으려고 꺼냈다.'],
@@ -1307,8 +1307,9 @@ EP.haneul=[
    ['mom','smile','네모는 삐뚤어도 숨은 쉬어져.']]}},
 
 // ■ Day 11 — 너 나 그렸지? (10)
-{title:'너 나 그렸지?',scene:'haneul_10',place:'class',at:[1530,345],stand:1,with:[['jiho',548,830],['jihoon',488,700],['yena',608,600]],
+{title:'너 나 그렸지?',scene:'haneul_10',place:'class',at:[1530,345],stand:1,with:[['jiho',548,830],['jihoon',488,700],['yena',600,470]],
  pre:[
+  {pic:null}, // 2단계 11/08
   {move:['haneul',0,0,'out']},
   ['nar','','2교시가 끝났다. 오늘 {@blackboard} 지우기는 내 차례였다.'],
   {k:'blackboard',goal:'「{x}」 지우기'},
@@ -1323,6 +1324,7 @@ EP.haneul=[
   ['nar','','첫째 칸. 지호 달리기 1등. 둘째 칸. 신발 한 짝이 날아감. 셋째 칸. 신발이 결승선을 먼저 넘음. 넷째 칸. 「1등 지호. 2등 지호 신발.」'],
   {pic:null},
   ['jiho','surprised','신발이 2등이 뭐야! 물어보지도 않고 그렸어?'],
+  {pic:'haneul_10'}, // 2단계 11/08
   ['nar','','아이들이 몰려왔다. 「뭐야, 뭐야?」 「나도 있어?」 지훈이가 하늘이 {@notebook|을} 휙휙 넘겼다. 하늘이한테 묻지도 않고.'],
   ['jihoon','laugh','나도 있다! 나 고양이 사진 흔드는 거! 야, 우리 반 다 있어!'],
   ['yena','surprised','나도 있어? 나 노래하는 거? ……어, 나 입이 이만해.'],
@@ -1603,7 +1605,7 @@ EP.haneul=[
    ['me','sad','……하늘이가 정해야지.']]}},
 
 // ■ Day 13 — 반쯤 내린 후드 (12)
-{title:'반쯤 내린 후드',scene:'haneul_12',place:'class',at:[263,860],with:[['yena',478,700],['jihoon',608,600]],
+{title:'반쯤 내린 후드',scene:'haneul_12',place:'class',at:[263,860],with:[['yena',600,690],['jihoon',600,520]],
  pre:[
   ['nar','','5교시 미술. 오늘은 {@paints|으로} 「내가 좋아하는 곳」을 그리는 날이었다.'],
   ['nar','','나는 {@chair|를} 돌려 하늘이 책상 쪽으로 앉았다. 물통을 같이 쓰기로 했다. 하늘이 책상 모서리에 물통 하나.'],
@@ -1733,7 +1735,7 @@ EP.haneul=[
    ['me','sad','……비밀이야.']]}},
 
 // ■ Day 14 — 복도가 빌 때까지 (13)
-{title:'복도가 빌 때까지',scene:'haneul_13',place:'class',at:[263,860],with:[['yena',1480,330],['haeun',1380,330]],
+{title:'복도가 빌 때까지',scene:'haneul_13',place:'class',at:[263,860],with:[['yena',1440,390],['haeun',1290,262]],
  pre:[
   ['teacher','smile','오늘 끝! 이번 주 {@window} 당번, {@window} 닫고 가요. 안녕!'],
   ['nar','','이번 주 {@window} 당번은 나였다. 종례 인사가 끝나자 아이들이 한꺼번에 일어났다. {@chair} 소리, {@bag} 소리. 복도가 금방 꽉 찼다.'],
@@ -2022,6 +2024,7 @@ EP.haneul=[
 // ■ Day 16R — 붙여도 돼? (15)
 {title:'붙여도 돼?',scene:'haneul_15',place:'class',at:[263,860],with:[['yena',478,700]],goAlone:{hall:[void 0],class:[void 0]},
  pre:[
+  {pic:null}, // 2단계 11/08
   {go:'hall'},
   ['nar','','아침. 나는 교실 앞에 섰다.'],
   {k:'door',goal:'「{x}」 열기',bag:['door','locker','clock','bag','book']},

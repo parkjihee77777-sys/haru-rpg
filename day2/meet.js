@@ -56,12 +56,13 @@ function extraPlacesToday(){const ids=new Set();for(const f of D2IDS){const e=ep
 function goPlacesToday(){const ids=new Set();for(const f of D2IDS){const e=epNext(f,EPIDX[f]);if(e)for(const m of JSON.stringify(e).matchAll(/"go":"(\w+)"/g))if(EXTRA_MAPS[m[1]])ids.add(m[1])}return[...ids]}
 // a morning for every day: Day 2 and 3 have their own; later days Mom asks for one of the things that always lie in the kitchen
 // Mom's morning errand, a different thing every day (owner 11/07: 「겹치지 않게」; Day 2 handkerchief, Day 3 apron in engine.js MORNING).
+// 11/08 owner: Day 11 Mom asked for the notebook ({w}) while the mission was the banana → Mom always names today's thing; Day 13 was the notebook again (Day 3 dinner already) → spoon.
 // Day 9 is the rainy day at the gate (Minho, Hangyeol, Seah) → umbrella. Things not drawn on the home map are laid where they would be.
-const MORNING_BY={4:'apple',5:'bread',6:'cup',7:'water_bottle',8:'pcase',9:'umbrella',10:'sock',11:'banana',12:'milk',13:'notebook',14:'shoes',15:'tissue',16:'bag'};
-const MORNING_LAY={apple:[900,470,34],bread:[985,492,44],cup:[1062,478,30],water_bottle:[1190,248,34],pcase:[1010,505,46],umbrella:[205,470,56],sock:[205,540,36],banana:[1040,468,42],milk:[945,452,28],notebook:[1115,700,40],bag:[1085,745,60]};
+const MORNING_BY={4:'apple',5:'bread',6:'cup',7:'water_bottle',8:'pcase',9:'umbrella',10:'sock',11:'banana',12:'milk',13:'spoon',14:'shoes',15:'tissue',16:'bag'};
+const MORNING_LAY={apple:[900,470,34],bread:[985,492,44],cup:[1062,478,30],water_bottle:[1190,248,34],pcase:[1010,505,46],umbrella:[205,470,56],sock:[205,540,36],banana:[1040,468,42],milk:[945,452,28],spoon:[990,478,30],tissue:[860,470,40],notebook:[1115,700,40],bag:[1085,745,60]};
 const MORNING_KEYS=Object.values(MORNING_BY);const MORNING_SAID=new Set(['apple','bread','cup','umbrella','bag','handkerchief','apron']);
 function morningOf(n){if(MORNING[n])return MORNING[n];const k=MORNING_BY[n]||MORNING_KEYS[(n-4)%MORNING_KEYS.length];
- return{k,lay:MORNING_LAY[k]?[[k,...MORNING_LAY[k],null,'stay']]:null,open:[['nar','','아침.'],['mom','smile',MORNING_SAID.has(k)?`{@${k}} 좀 찾아 줄래?`:'{w} 좀 찾아 줄래?']],after:[['mom','laugh','고마워!'],['me','smile','…응. 다녀올게.'],['mom','smile','오늘도 저녁에 이야기 들려줘.']]}}
+ return{k,lay:MORNING_LAY[k]?[[k,...MORNING_LAY[k],null,'stay']]:null,open:[['nar','','아침.'],['mom','smile',`{@${k}} 좀 찾아 줄래?`]],after:[['mom','laugh','고마워!'],['me','smile','…응. 다녀올게.'],['mom','smile','오늘도 저녁에 이야기 들려줘.']]}}
 startDay=function(n){const m=document.getElementById('modal');m.classList.remove('on');
  if(DAYMEET[n]){MEET={...DAYMEET[n].meet};FLAGS={...DAYMEET[n].flags}}else DAYMEET[n]={meet:{...MEET},flags:{...FLAGS}};
  for(const k in EPIDX)delete EPIDX[k];for(const k in TODAYEP)delete TODAYEP[k];for(const f of D2IDS)if(window.EP&&EP[f])EPIDX[f]=MEET[f]||0;

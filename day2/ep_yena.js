@@ -890,7 +890,7 @@ EP.yena=[
   common:[['me','smile','{m}, {@cup} 리듬 때 선생님이 깊이 들어가는 것도 집중이라고 했잖아. 근데 오늘은 깊이 들어가서 혼자 남았어.'],['mom','smile','그러네. 깊이 들어가는 게 좋을 때도 있고, 곤란할 때도 있구나.'],['me','smile','응. 그래서 옆에 누가 있으면 좋겠어. 끊는 사람 말고. 알려 주는 사람.'],['mom','smile','……알려 주는 사람.'],['me','smile','응. 오늘은 내가 했어.']]}},
 
 // ■ Day 11 — 귀뚜라미 (10)
-{title:'귀뚜라미',scene:'yena_10',place:'music',at:[880,880],with:[['junho',1000,880],['siwoo',1200,870]],
+{title:'귀뚜라미',scene:'yena_10',place:'music',at:[880,880],with:[['junho',1110,880],['siwoo',1250,870]],
  pre:[
   {map:'music_full'},// music class: the rest of the class sits at the desks (boss 11/07: the music room looked empty)
   ['nar','','2교시 음악. 선생님이 {@blackboard}에 「여덟 박 리듬 만들기」라고 쓰셨다.'],
@@ -1095,6 +1095,7 @@ EP.yena=[
 // ■ Day 13 — 또 두고 갔어 (12)
 {title:'또 두고 갔어',scene:'yena_12',place:'class',at:[760,860],with:[['jiho',895,860]],empty:{music:['yena']},
  pre:[
+  {pic:null}, // 2단계 11/08
   ['nar','','3교시 음악이 끝나고 교실로 돌아왔다. 쉬는 시간이었다. 예나가 가방을 뒤지다가 소리쳤다.'],
   ['yena','surprised','헉! {@pcase}! {@water_bottle}! 음악실에 두고 왔다!'],
   {pic:'yena_12a'},
@@ -1112,6 +1113,7 @@ EP.yena=[
   ['nar','','실로폰 책상 밑 바닥에서 나는 예나의 {@pcase|을} 찾아 주웠다.'],
   ['nar','','실로폰 {@desk} 밑에 {@pcase|이} 떨어져 있었다. 지퍼가 반쯤 열려 있었다. {@pencil} 한 자루가 빠져나와 굴러가 있었다.'],
   ['yena','smile','찾았다! 땡큐! 너 진짜 잘 찾는다.'],
+  {pic:'yena_12'}, // 2단계 11/08
   ['nar','','예나가 {@pcase|을} 꼭 안았다. 그리고 반짝이는 눈으로 나를 봤다.'],
   ['yena','smile','있잖아, 너는 안 까먹잖아. {@notice_book}도 다 쓰고, 교과서도 맨날 챙기고.'],
   ['me','smile','……어, 응.'],
@@ -1201,7 +1203,7 @@ EP.yena=[
   ['nar','','나는 예나 옆에 서서 두 {@foot|을} 나란히 모으고, 손을 몸 옆에 붙였다.'],
   ['nar','','나도 섰다. {@foot|을} 모으고, {@hand|을} 붙이고. 생각보다 어색했다. 몸이 자꾸 흔들리고 싶었다.'],
   ['yena','smile','그치? 근데 {@hand|을} 가만히 두면…… 노래가 머릿속에서 미끄러져. 박자가 없어서. 셋째 줄에서 꼭 날아가.'],
-  {pic:'yena_13b'},
+  {pic:'yena_13a'}, // 2단계 11/08
   ['nar','','예나 목소리가 떨렸다. 처음 보는 얼굴이었다. 입술을 꼭 다물었다가, 다시 말했다.'],
   ['yena','sad','다른 애들은 다 가만히 서서 잘 불러. 나만 {@hand|이} 근질근질해. 성가대 선생님 앞에서 {@hand} 움직이면…….'],
   ['nar','','예나가 말을 멈췄다. 그 뒤에 무슨 말이 올지 알 것 같았다. ‘가만히 좀 있어.’'],
@@ -1280,6 +1282,7 @@ EP.yena=[
 {title:'내가 두드렸다',scene:'yena_14',place:'class',at:[760,860],with:[['siwoo',764,0,{top:448}]],// Siwoo sits at his desk during the test (standing there he looked on top of the desk, 11/05)
 
  pre:[
+  {pic:null}, // 2단계 11/08
   ['nar','','2교시 수학. 단원평가 날이었다.'],
   ['nar','','선생님: 「{@desk} 위에는 {@pencil} 하나, {@eraser} 하나만 두세요. 시험 중엔 말하지 않아요. 30분이에요.」'],
   {k:'pencil',goal:'「{x}」 꺼내 놓기',bag:['pcase','pencil','eraser','notebook','ruler']},
@@ -1291,6 +1294,7 @@ EP.yena=[
   ['nar','','{@hand}에 땀이 났다. {@clock|를} 봤다. 10분 남았다. 다섯 문제가 남았다.'],
   ['nar','','나는 11번을 또 읽었다. 그리고 또.'],
   ['nar','','그런데 어디선가 소리가 났다. 딱. 딱. 딱. 딱.'],
+  {pic:'yena_14'}, // 2단계 11/08
   ['nar','','옆을 보니, 예나가 나를 보고 있었다. 예나 {@hand|은} {@knee} 위에 있었다. 소리는 예나가 아니었다.'],
   {pic:'yena_14b'},
   ['nar','','시우가 보였다. 앞쪽 줄, 시우가 두 {@hand|으로} {@ear|를} 막고 있었다. 입술이 움직였다.'],
@@ -1475,6 +1479,7 @@ EP.yena=[
   ['nar','','예나가 나를 봤다. 그리고 웃었다. 눈까지.'],
   ['yena','surprised','……뭐가 들려?'],
   ['me','smile','칠단 노래. {@notice_book} 노래. 귀뚜라미. 다.'],
+  {pic:'yena_15e'}, // 2단계 11/08
   ['nar','','종이 울렸다. 예나가 음악실 {@door} 앞에서 멈췄다.'],
   {pic:'yena_15e'},
   {flag:'S13_song',is:1,lines:[['nar','','예나가 작게 불렀다. 「{@pcase}~ {@water_bottle}~ 교과서~ 셋 다 들고~ {@door} 닫아요~」 {@hand}에 셋 다 있었다.']]},

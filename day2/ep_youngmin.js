@@ -290,6 +290,7 @@ EP.youngmin=[
 // ■ Day 5 — 반만 낸 건 안 낸 거야 (4)
 {title:'반만 낸 건 안 낸 거야',scene:'youngmin_04',place:'class',at:[400,870],with:[['jihoon',1480,260]],
  pre:[
+  {pic:null}, // 2단계 11/08
   ['nar','','2교시 수학. {@blackboard}에 문제가 여섯 개 있었다. {@notebook}에 풀어서 내는 거였다.'],
   ['nar','','선생님: 「다들 {@notebook} 펴요.」'],
   {k:'notebook',goal:'「{x}」 펴기',bag:['pcase','notebook','notice_book','textbook','water_bottle']},
@@ -302,6 +303,7 @@ EP.youngmin=[
   ['nar','','아이들이 우르르 일어났다. 다들 {@chair|를} {@desk} 밑으로 밀어 넣었다. 나도 일어났다.'],
   {k:'chair',goal:'「{x}」 밀어 넣기',bag:['chair','desk','bag','pcase','water_bottle']},
   ['nar','','{@chair|를} {@desk} 밑으로 밀어 넣었다.'],
+  {pic:'youngmin_04'}, // 2단계 11/08
   ['nar','','영민이는 일어나지 않았다. {@chair}도 그대로였다. {@notebook}에 다섯째 문제를 쓰고 있었다.'],
   ['me','surprised','영민아, 안 나가?'],
   ['youngmin','smile','……이거 끝내고.'],
@@ -1256,6 +1258,7 @@ EP.youngmin=[
 // ■ Day 16R — 지워도 돼 (15)
 {title:'지워도 돼',scene:'youngmin_15',place:'class',at:[400,870],with:[['jiho',600,760],['jihoon',470,890]],
  pre:[
+  {pic:null}, // 2단계 11/08
   ['nar','','6교시가 끝났다. 선생님이 {@blackboard}에 {@notice_book|을} 쓰셨다. 다섯 줄이었다.'],
   ['nar','','선생님: 「{@notice_book} 다 쓴 사람은 {@bag} 싸요. 이번 주 {@blackboard} 당번?」'],
   ['me','smile','저요.'],
@@ -1264,6 +1267,7 @@ EP.youngmin=[
   {k:'notice_book',goal:'「{x}」 꺼내기',bag:['notice_book','notebook','pcase','textbook','water_bottle']},
   ['nar','','새로 쓴 {@notice_book|을} 꺼내 {@desk}에 펼쳤다.'],
   ['nar','','다섯 줄을 썼다. 받침이 많은 줄은 두 번 봤다. 처음보다는 조금 빨랐다. 조금.'],
+  {pic:'youngmin_15'}, // 2단계 11/08
   ['nar','','옆 줄 영민이는 넷째 줄을 쓰고 있었다. 손가락으로 허공에서 줄을 짚으며.'],
   {pic:'youngmin_15b'},
   ['nar','','아이들이 {@bag|을} 쌌다. 몇 명이 나갔다. 지호가 내 옆을 지나가다가 영민이 쪽을 봤다.'],
