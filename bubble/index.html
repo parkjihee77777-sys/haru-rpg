@@ -151,7 +151,8 @@ function pushRow(){par^=1;const ks=ROUNDS[round].words,row=[];for(let c=0;c<rowL
 function hud(){mastery_ui();$('score').textContent='⭐ '+score;$('left').textContent='🫧 '+left}
 function kindsLeft(){const s=new Set();grid.forEach(row=>(row||[]).forEach(k=>k&&s.add(k)));return[...s]}
 function pickWord(){const ks=kindsLeft();if(!ks.length)return null;return ks[Math.floor(Math.random()*ks.length)]}
-function next(){if(!playing)return;if(!kindsLeft().length){win();return}const ks=kindsLeft();sinceGold++;gold=shots>=2&&(sinceGold>=(ROUNDS[round].goldy?2:3)||Math.random()<(ROUNDS[round].goldy?.4:.25));cur=(nxt&&ks.includes(nxt))?nxt:pickWord();nxt=pickWord();if(nxt===cur&&ks.length>1)nxt=ks.find(x=>x!==cur);if(gold){sinceGold=0;setTimeout(tipGold,200)}missNow=0;speak(cur,1)}
+// (11/08 owner) rainbow bubbles (read the word, no colour help) come more often round by round: round 1 now and then, 2~3 about every other shot, 4~5 most shots
+function next(){if(!playing)return;if(!kindsLeft().length){win();return}const ks=kindsLeft();sinceGold++;gold=shots>=2&&(round===0?(sinceGold>=3||Math.random()<.25):round<=2?(sinceGold>=2||Math.random()<.3):(sinceGold>=2||Math.random()<.75));cur=(nxt&&ks.includes(nxt))?nxt:pickWord();nxt=pickWord();if(nxt===cur&&ks.length>1)nxt=ks.find(x=>x!==cur);if(gold){sinceGold=0;setTimeout(tipGold,200)}missNow=0;speak(cur,1)}
 function swap(){if(!nxt||shot||gold)return;[cur,nxt]=[nxt,cur];SFX.swap();speak(cur)}
 const PH=()=>R*5.4;const waitXY=()=>{const[sx,sy]=shooter(),ph=PH();return[Math.min(W-R*1.4,sx+ph*.62),sy-ph*.05]};const shooter=()=>[W/2,H-PH()*1.12*(1-.5165)-R*.15];
 const deadY=()=>shooter()[1]-PH()*1.12*.5165-R*.1;
