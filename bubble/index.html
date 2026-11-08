@@ -138,7 +138,7 @@ function startRound(){const Rd=ROUNDS[round];grid=[];par=0;slide=0;reserve=Rd.re
   const shape=(r,c)=>[()=>true,()=>r<2||c%3!==2,()=>r<1||(r<2&&c%2===0)||(r>=2&&c%4!==3),()=>r<1||(c+r)%4!==3,()=>true][round]();// full, pillars, thin necks, zigzag, full
   for(let r=0;r<Rd.rows;r++)for(let c=0;c<rowLen(r);c++){if(!shape(r,c))continue;// small clumps: often copy the left or upper neighbour
     let k=ks[Math.floor(Math.random()*ks.length)];const nb=neighbors(r,c).filter(([a,b])=>a<r||(a===r&&b<c)).map(([a,b])=>at(a,b)).filter(Boolean);if(nb.length&&Math.random()<.68)k=nb[Math.floor(Math.random()*nb.length)];setAt(r,c,k)}
-  $('round').textContent=(round+1)+'/'+ROUNDS.length;playing=true;hud();next()}
+  $('round').textContent=(round+1)+'/'+ROUNDS.length;playing=true;hud();next();lastAct=performance.now();if(round===0)setTimeout(demoStart,700)}
 const tipSeen=new Set();let tipWait=false;
 function tipGold(){if(tipSeen.has('gold'))return;tipSeen.add('gold');$('tipname').textContent=tr('무지개 구슬');$('tiptext').textContent=tr('색으로는 알 수 없어요. 글자를 읽고 맞는 그림을 맞히면 점수가 3배예요!');
   const c=$('tipcv'),x=c.getContext('2d');x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,120,120);const keep=ctx;ctx=x;wordBubble(60,60,cur,42,true);ctx=keep;
@@ -160,9 +160,9 @@ function angleTo(px,py){const[sx,sy]=shooter();let a=Math.atan2(sy-py,px-sx);a=M
 function pt(e){const b=cv.getBoundingClientRect();return[e.clientX-b.left,e.clientY-b.top]}
 // (11/08 owner) slingshot aim: press anywhere, pull DOWN and let go - the bubble flies the opposite way of the pull (no tapping the target directly)
 let pull=null;const pullAim=(x,y)=>{const dx=x-pull.x,dy=y-pull.y;if(dy<R*.6||Math.hypot(dx,dy)<R*1.2)return null;return Math.max(.12,Math.min(Math.PI-.12,Math.atan2(dy,-dx)))};
-cv.addEventListener('pointerdown',e=>{if(!playing||shot||tipWait)return;const[px,py]=pt(e),[wx,wy]=waitXY();if((px-wx)**2+(py-wy)**2<(R*1.5)**2){swap();return}cv.setPointerCapture(e.pointerId);pull={x:px,y:py,cx:px,cy:py};aim=null});
+cv.addEventListener('pointerdown',e=>{if(!playing||shot||tipWait)return;demoOn=false;lastAct=performance.now();const[px,py]=pt(e),[wx,wy]=waitXY();if((px-wx)**2+(py-wy)**2<(R*1.5)**2){swap();return}cv.setPointerCapture(e.pointerId);pull={x:px,y:py,cx:px,cy:py};aim=null});
 cv.addEventListener('pointermove',e=>{if(!pull)return;const[px,py]=pt(e);pull.cx=px;pull.cy=py;const a=pullAim(px,py);aim=a;if(a!==null)lastAim=a});
-cv.addEventListener('pointerup',e=>{if(!pull)return;const a=pullAim(...pt(e));pull=null;aim=null;if(a!==null){lastAim=a;fire(a)}});
+cv.addEventListener('pointerup',e=>{if(!pull)return;const a=pullAim(...pt(e));pull=null;aim=null;lastAct=performance.now();if(a!==null){lastAim=a;fires++;fire(a)}else demoStart()});
 cv.addEventListener('pointercancel',()=>{pull=null;aim=null});
 function fire(a){clearTimeout(voiceT);voiceFree=0;try{CFG.hush&&CFG.hush()}catch(e){}/* (11/08 owner) only the word about to be shot is said: firing stops its voice, a hit only plays the hit sound */const[sx,sy]=shooter();const v=Math.max(9,R*.55);shot={x:sx,y:sy,vx:Math.cos(a)*v,vy:-Math.sin(a)*v,k:cur,gold:gold,white:!gold&&!colorOn(cur)};gold=false;shots++;left--;hud();SFX.shoot();recoil=8;pangHop=4;face='fire';faceT=performance.now()+380}
 // the straight path with wall bounces, stopping at the first bubble or the ceiling (shared by the dotted guide and the real flight)
@@ -247,6 +247,22 @@ function guide(a,strong){const[sx,sy]=shooter();const s={x:sx,y:sy,vx:Math.cos(a
   if(shortG)return;
   if(h&&!h.ceiling){const[x,y]=cellXY(h.r,h.c);ctx.lineWidth=3;ctx.strokeStyle=h.k===cur?'#ff6fa0':'rgba(75,58,85,.45)';ctx.beginPath();ctx.arc(x,y,R*1.05,0,7);ctx.stroke()}
   else{ctx.lineWidth=2;ctx.setLineDash([4,4]);ctx.strokeStyle='rgba(75,58,85,.45)';ctx.beginPath();ctx.arc(s.x,s.y,R*.9,0,7);ctx.stroke();ctx.setLineDash([])}}
+
+// (11/08 owner) first-time help for the slingshot, without words: a ghost hand presses, pulls DOWN, lets go, and a ghost bubble flies the other way.
+// It plays at the start of the first round until the child has fired twice, again after 5 s without a shot, and again when a pull was too short to fire.
+let fires=0,demoOn=false,demoT0=0,lastAct=0;
+function demoStart(){if(fires<2){demoOn=true;demoT0=performance.now()}}
+function drawDemo(now){if(!playing||shot||tipWait||pull)return;if(!demoOn&&fires<2&&now-lastAct>5000)demoStart();if(!demoOn)return;
+ const[sx,sy]=shooter(),T=2600,p=((now-demoT0)%T)/T,x0=sx-R*.4,y0=sy-R*.6,x1=sx-R*1.7,y1=Math.min(H-R*.5,sy+R*2.1);
+ const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2,q=p<.12?0:p<.55?ease((p-.12)/.43):1,hx=x0+(x1-x0)*q,hy=y0+(y1-y0)*q;
+ const ang=Math.atan2(-(y1-y0),-(x1-x0)),L=R*7;ctx.save();
+ if(p<.62){ctx.globalAlpha=Math.min(1,p/.08)*.9;
+  if(q>0){ctx.strokeStyle='rgba(255,111,160,.9)';ctx.lineWidth=8;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(sx,sy);ctx.lineTo(hx,hy);ctx.stroke();
+   const ex=sx+Math.cos(ang)*L*q,ey=sy+Math.sin(ang)*L*q;ctx.setLineDash([R*.3,R*.3]);ctx.lineWidth=9;ctx.strokeStyle='rgba(75,58,85,.35)';ctx.beginPath();ctx.moveTo(sx,sy);ctx.lineTo(ex,ey);ctx.stroke();ctx.lineWidth=5;ctx.strokeStyle='#fff';ctx.beginPath();ctx.moveTo(sx,sy);ctx.lineTo(ex,ey);ctx.stroke();ctx.setLineDash([]);if(q>.3){const a1=ang+2.6,a2=ang-2.6,hl=R*.8;ctx.fillStyle='#fff';ctx.strokeStyle='rgba(75,58,85,.45)';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(ex+Math.cos(ang)*R*.3,ey+Math.sin(ang)*R*.3);ctx.lineTo(ex+Math.cos(a1)*hl,ey+Math.sin(a1)*hl);ctx.lineTo(ex+Math.cos(a2)*hl,ey+Math.sin(a2)*hl);ctx.closePath();ctx.stroke();ctx.fill()}}
+  ctx.font=`${R*2}px system-ui,'Segoe UI Emoji','Apple Color Emoji',sans-serif`;ctx.textAlign='center';ctx.textBaseline='top';ctx.fillText('👆',hx,hy-R*.2);
+  if(p<.14){ctx.strokeStyle='rgba(255,255,255,.9)';ctx.lineWidth=3;ctx.beginPath();ctx.arc(x0,y0,R*(.4+(p/.14)*.6),0,Math.PI*2);ctx.stroke()}}
+ else{const f=(p-.62)/.38;ctx.globalAlpha=Math.max(0,.8-f*.8);wordBubble(sx+Math.cos(ang)*L*f,sy+Math.sin(ang)*L*f,cur,R*.95,false)}
+ ctx.restore()}
 function frame(){if(finished)return;ctx.setTransform(DPR,0,0,DPR,0,0);ctx.clearRect(0,0,W,H);if(shake>0){shake*=.85;if(shake<.5)shake=0;ctx.translate((Math.random()-.5)*shake,(Math.random()-.5)*shake)}
   if(slide>0){slide=Math.max(0,slide-ROWH/12)}
   ctx.setLineDash([6,6]);ctx.strokeStyle='rgba(255,111,160,.45)';ctx.beginPath();ctx.moveTo(0,deadY());ctx.lineTo(W,deadY());ctx.stroke();ctx.setLineDash([]);
@@ -268,6 +284,7 @@ function frame(){if(finished)return;ctx.setTransform(DPR,0,0,DPR,0,0);ctx.clearR
       if(gold){const tag='🌈 ×3';ctx.font=`bold ${R*.55}px 'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR','Noto Sans JP','Noto Sans CJK KR',system-ui,sans-serif`;const tw=ctx.measureText(tag).width+R*.6;ctx.fillStyle='#b06bff';ctx.beginPath();ctx.roundRect(wx-tw/2,wy+R*1.2,tw,R*.85,R*.42);ctx.fill();ctx.fillStyle='#fff';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(tag,wx,wy+R*1.63)}
       if(nxt){ctx.globalAlpha=.85;wordBubble(wx,wy-R*2.15,nxt,R*.7);ctx.globalAlpha=1}}}
   else cannon();
+  drawDemo(performance.now());
   pops=pops.filter(p=>{p.a++;ctx.globalAlpha=Math.max(0,1-p.a/45);ctx.fillStyle=p.col;ctx.font=`bold ${R*.9}px 'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR','Noto Sans JP','Noto Sans CJK KR',system-ui,sans-serif`;ctx.textAlign='center';ctx.lineWidth=4;ctx.strokeStyle='#fff';ctx.strokeText(p.t,p.x,p.y-p.a*.8);ctx.fillText(p.t,p.x,p.y-p.a*.8);ctx.globalAlpha=1;return p.a<45});
   requestAnimationFrame(frame)}
 $('ovh').textContent=tr('팡팡이랑 방울 톡톡');
