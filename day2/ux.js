@@ -20,7 +20,7 @@ st.textContent=`
 .pick.places button{position:relative}.pick.places button.empty{opacity:.42}
 .pick.places .pc{position:absolute;right:-6px;top:-8px;min-width:30px;height:30px;border-radius:999px;background:var(--mint);color:#fff;font-weight:900;font-size:16px;line-height:30px;padding:0 6px;box-shadow:0 2px 0 #3f9a7c}
 .pick.places .word{white-space:normal!important;font-size:15px!important;line-height:1.25}
-.pick button .word{white-space:nowrap}
+.pick button .word{white-space:nowrap}.pick.dayend button .word{white-space:normal}
 #autoBtn{position:fixed;z-index:26;width:44px;height:44px;border-radius:50%;border:3px solid var(--line);background:var(--paper);box-shadow:0 3px 0 var(--line);font-size:19px;padding:0;display:none;cursor:pointer}
 #autoBtn.on{background:var(--mint);border-color:#3f9a7c;box-shadow:0 3px 0 #3f9a7c}
 .nope{position:fixed;left:50%;top:42%;z-index:60;width:84px;height:84px;margin:-42px 0 0 -42px;border-radius:50%;background:#ff6b6b;color:#fff;font-size:52px;font-weight:900;line-height:84px;text-align:center;pointer-events:none;animation:nope .7s forwards}
@@ -297,3 +297,6 @@ NAME.hajun='하준';SZ.hajun=[0.968,0.988,0.8];
 {const PE={};// PE off (owner 11/07: 평상복)// hero PE on (cut-outs redone 11/07)
  const isPE=m=>m==='gym'||(m==='field'&&SCENE_EP&&SCENE_EP.place==='field'&&JSON.stringify(SCENE_EP.pre||[]).includes('체육 시간'));
  const _ldPE=load;load=function(m){const r=_ldPE.apply(this,arguments);try{if(me&&me.el&&PE[HERO]&&isPE(m)){const o=me,t0=Date.now(),put=()=>{if(o.w)o.el.style.backgroundImage=`url(walk/${HERO}_pe.png)`;else if(Date.now()-t0<4000)setTimeout(put,40)};put()}}catch(e){}return r}}// the sheet sets its own picture when it loads, so wait for that first
+// (11/09 owner) day-end word cards: if a word is still too wide for its card (long Russian/Vietnamese words), shrink its font until it fits
+{const fitWords=()=>{document.querySelectorAll('#mcard .pick.dayend button .word').forEach(w=>{if(w.closest('.places'))return;let f=parseFloat(getComputedStyle(w).fontSize),n=0;while(n++<12&&f>10&&(w.scrollWidth>w.clientWidth+1||w.scrollWidth>w.parentElement.clientWidth)){f-=1;w.style.fontSize=f+'px'}if(w.scrollWidth>w.clientWidth+1)w.style.overflowWrap='anywhere'})};
+ new MutationObserver(()=>setTimeout(fitWords,30)).observe(document.getElementById('mcard')||document.body,{childList:true,subtree:true});addEventListener('resize',fitWords)}
