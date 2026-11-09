@@ -81,7 +81,7 @@ EP.hyeeun=[
   ['hyeeun','surprised','어? 앞{@wheel} 앞에 뭐 있다.'],
   {lay:[['eraser',815,885,50,null,'stay']]},
   ['nar','','혜은이 앞{@wheel} 앞에 작은 지우개 하나가 있었다. 내 거였다. {@bag|을} 들 때 떨어진 모양이었다.'],
-  {k:'wheel',goal:'「{x}」 앞 비우기'},
+  {k:'eraser',goal:'「{x}」 줍기'},
   {clear:['eraser']},
   ['nar','','혜은이 앞{@wheel} 앞에 있던 내 지우개를 주웠다.'],
   ['hyeeun','laugh','오늘 너 두 번 막았다. 길 막지 마~'],
