@@ -872,3 +872,6 @@ addEventListener('load',()=>{const _epSw=evePart;evePart=function(id){const ls=_
 
 // the drawn Siwoo (meeting 14): his invisible sprite is the tap target over the picture
 addEventListener('load',()=>{const _ldSw=load;load=function(id,extra){try{const e0=epNext('siwoo',EPIDX.siwoo);if(id==='music'&&MAPS.music)MAPS.music.img2=(e0&&e0.place===id&&e0.drawn)?`maps/${e0.drawn[0]}.jpg`:undefined}catch(err){}const r=_ldSw.apply(this,arguments);try{const e=epNext('siwoo',EPIDX.siwoo);if(e&&e.drawn&&id===e.place){const hide=()=>{const n=npcs.find(n=>n.id==='siwoo');if(n&&n.el){n.el.style.transition='none';n.el.style.opacity=0}};hide();let k=0;const t=setInterval(()=>{hide();if(++k>25||MAP!==id)clearInterval(t)},200)}}catch(err){}return r}});
+
+// (11/09 owner) the mirror shows me: a girl and a boy version (scenes/siwoo_08e_f.jpg / _m.jpg)
+if(typeof HEROPIC!=='undefined')HEROPIC.add('siwoo_08e');
