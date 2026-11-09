@@ -300,3 +300,11 @@ NAME.hajun='하준';SZ.hajun=[0.968,0.988,0.8];
 // (11/09 owner) day-end word cards: if a word is still too wide for its card (long Russian/Vietnamese words), shrink its font until it fits
 {const fitWords=()=>{document.querySelectorAll('#mcard .pick.dayend button .word').forEach(w=>{if(w.closest('.places'))return;let f=parseFloat(getComputedStyle(w).fontSize),n=0;while(n++<12&&f>10&&(w.scrollWidth>w.clientWidth+1||w.scrollWidth>w.parentElement.clientWidth)){f-=1;w.style.fontSize=f+'px'}if(w.scrollWidth>w.clientWidth+1)w.style.overflowWrap='anywhere'})};
  new MutationObserver(()=>setTimeout(fitWords,30)).observe(document.getElementById('mcard')||document.body,{childList:true,subtree:true});addEventListener('resize',fitWords)}
+// (11/09 owner) choosing friends: a small arrow over every friend you can meet now, not one big arrow over the nearest
+{const pool=[];const _ph=placeHint;placeHint=function(){_ph();let ns=[];
+ if(goal&&!busy&&!FIND&&Array.isArray(goal.target)){const ids=goal.target;ns=npcs.filter(n=>ids.includes(n.id)&&!(goal.skip&&goal.skip(n.id)))}
+ if(ns.length<2){pool.forEach(e=>e.remove());return}
+ hintEl.remove();while(pool.length<ns.length){const e=document.createElement('div');e.className='hint sm';e.textContent='▼';pool.push(e)}
+ pool.forEach((e,i)=>{const n=ns[i];if(!n){e.remove();return}const h=(n.h||KID)+(HEART[n.id]?44:0)+(WORDKEY[n.id]&&FOUND.has(WORDKEY[n.id])?36:0);
+  if(!e.parentNode)world.appendChild(e);e.style.left=n.x+'px';e.style.top=(n.y-h-6)+'px';e.style.zIndex=3000})};
+ const st=document.createElement('style');st.textContent='.hint.sm{font-size:34px;-webkit-text-stroke:2px #7a4a00}';document.head.appendChild(st)}

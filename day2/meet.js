@@ -266,6 +266,9 @@ const DAD_DAYS=[4,8,12,16];
   const n=LESSON_PICS.length,pic=!n?null:part==='am'?LESSON_PICS[DAY%Math.max(1,n-1)]:LESSON_PICS[n-1];
   clock=part==='am'?1:3;busy=true;setGoal('');const back=MAP;fade(()=>{if(MAP!=='class')load('class');(pic?(ls,c)=>scene(pic,ls,c):say)(part==='am'?am:pm,()=>{busy=false;if(back!=='class')fade(()=>{load(back);cb()});else cb()})})};// (11/08 owner) Seah's lunch story at the cafeteria ran on the classroom map: after the lessons, back to where the friend is
  // (11/08 owner) the goal arrows must not point at a friend whose story would be put off (Day 14: arrow to Hangyeol, then 「내일 하자」)
+ // (11/09 owner) a friend you can't meet now says why and when you can talk instead of the hero's thought
+window.busyLines=function(id,sl,tomorrow){const R=["아, 지금 선생님 심부름 가야 해.", "미안, 지금 숙제 마저 해야 돼.", "지금 다른 친구랑 약속이 있어.", "앗, 지금 물 마시러 가던 길이야."],TD=["아침에 얘기하자!", "점심시간에 얘기하자!", "오후에 얘기하자!", "수업 끝나고 얘기하자!"],TM=["내일 아침에 얘기하자!", "내일 점심시간에 얘기하자!", "내일 오후에 얘기하자!", "내일 수업 끝나고 얘기하자!"];
+ let h=DAY;for(const c of id)h+=c.charCodeAt(0);const k=Math.max(0,Math.min(3,sl==null?0:sl));return[[id,'smile',R[h%4]],[id,'smile',(tomorrow?TM:TD)[k]]]};
  window.slotBlocked=function(id){sync();if(navigator.webdriver||isTest())return false;const e=nextOf(id),sl=epSlot(e);if(!e||sl==null||PICKS.includes(id))return false;
   const others=D2IDS.filter(i=>friendData(i)).filter(f=>f!==id&&!PICKS.includes(f)&&nextOf(f)).map(f=>epSlot(nextOf(f)));
   if(sl<clock&&others.some(o=>o==null||o>=clock))return true;
@@ -274,10 +277,10 @@ const DAD_DAYS=[4,8,12,16];
  const _dl=d2Talk;d2Talk=function(id){sync();const e=nextOf(id),sl=epSlot(e);
   if(navigator.webdriver||isTest()||!e||sl==null||stage!=='d2_class'||PICKS.includes(id)||PICKS.length>=needToday())return _dl(id);
   if(sl<clock){const others=friendsToday().filter(f=>f!==id&&!PICKS.includes(f)&&nextOf(f)).map(f=>epSlot(nextOf(f)));
-   if(others.some(o=>o==null||o>=clock)){say([['think','smile','(그 이야기는 내일 하자. 다른 친구한테 가 볼까?)']]);return}
+   if(others.some(o=>o==null||o>=clock)){say(busyLines(id,sl,true));return}
    return _dl(id)}
   // an after-school story can't be the first of two (the day would end with one friend left): wait for it if another friend has an earlier one
-  if(sl===3&&PICKS.length===0&&needToday()>1&&friendsToday().some(f=>f!==id&&nextOf(f)&&epSlot(nextOf(f))!==3)){say([['think','smile','(이 이야기는 수업 끝나고 하자. 먼저 다른 친구한테 가 볼까?)']]);return}
+  if(sl===3&&PICKS.length===0&&needToday()>1&&friendsToday().some(f=>f!==id&&nextOf(f)&&epSlot(nextOf(f))!==3)){say(busyLines(id,3,false));return}
   if(sl>=1&&clock<1)return play('am',()=>d2Talk(id));
   if(sl===3&&clock<3)return play('pm',()=>d2Talk(id));
   return _dl(id)};
@@ -289,3 +292,10 @@ const DAD_DAYS=[4,8,12,16];
   if(['d2_class','d2_after'].includes(stage)&&!PICKS.includes(id)&&!(own&&own.place===MAP)){
    const host=D2IDS.find(f=>f!==id&&!PICKS.includes(f)&&(()=>{const e=epNext(f,EPIDX[f]);return e&&e.place===MAP&&(e.with||[]).some(w=>w[0]===id)})());
    if(host)return _t(host)}}catch(e){}return _t(id)}}
+
+// (11/09 owner) busy friend lines: translations
+(window.T["en"]=window.T["en"]||{});Object.assign(window.T["en"],{"아, 지금 선생님 심부름 가야 해.": "Oh, I have to run an errand for the teacher right now.", "미안, 지금 숙제 마저 해야 돼.": "Sorry, I have to finish my homework now.", "지금 다른 친구랑 약속이 있어.": "I already promised to hang out with another friend now.", "앗, 지금 물 마시러 가던 길이야.": "Oops, I was just on my way to get some water.", "아침에 얘기하자!": "Let's talk in the morning!", "점심시간에 얘기하자!": "Let's talk at lunchtime!", "오후에 얘기하자!": "Let's talk in the afternoon!", "수업 끝나고 얘기하자!": "Let's talk after school!", "내일 아침에 얘기하자!": "Let's talk tomorrow morning!", "내일 점심시간에 얘기하자!": "Let's talk tomorrow at lunchtime!", "내일 오후에 얘기하자!": "Let's talk tomorrow afternoon!", "내일 수업 끝나고 얘기하자!": "Let's talk tomorrow after school!"});
+(window.T["vi"]=window.T["vi"]||{});Object.assign(window.T["vi"],{"아, 지금 선생님 심부름 가야 해.": "À, giờ mình phải đi làm việc cô giáo nhờ.", "미안, 지금 숙제 마저 해야 돼.": "Xin lỗi, giờ mình phải làm nốt bài tập.", "지금 다른 친구랑 약속이 있어.": "Giờ mình có hẹn với bạn khác rồi.", "앗, 지금 물 마시러 가던 길이야.": "Ối, mình đang đi uống nước.", "아침에 얘기하자!": "Sáng mình nói chuyện nhé!", "점심시간에 얘기하자!": "Giờ ăn trưa mình nói chuyện nhé!", "오후에 얘기하자!": "Buổi chiều mình nói chuyện nhé!", "수업 끝나고 얘기하자!": "Tan học mình nói chuyện nhé!", "내일 아침에 얘기하자!": "Sáng mai mình nói chuyện nhé!", "내일 점심시간에 얘기하자!": "Trưa mai mình nói chuyện nhé!", "내일 오후에 얘기하자!": "Chiều mai mình nói chuyện nhé!", "내일 수업 끝나고 얘기하자!": "Mai tan học mình nói chuyện nhé!"});
+(window.T["zh"]=window.T["zh"]||{});Object.assign(window.T["zh"],{"아, 지금 선생님 심부름 가야 해.": "啊，我现在要去帮老师跑腿。", "미안, 지금 숙제 마저 해야 돼.": "对不起，我现在得把作业写完。", "지금 다른 친구랑 약속이 있어.": "我现在和别的朋友约好了。", "앗, 지금 물 마시러 가던 길이야.": "哎呀，我正要去喝水呢。", "아침에 얘기하자!": "早上再聊吧！", "점심시간에 얘기하자!": "午饭时间再聊吧！", "오후에 얘기하자!": "下午再聊吧！", "수업 끝나고 얘기하자!": "放学后再聊吧！", "내일 아침에 얘기하자!": "明天早上再聊吧！", "내일 점심시간에 얘기하자!": "明天午饭时间再聊吧！", "내일 오후에 얘기하자!": "明天下午再聊吧！", "내일 수업 끝나고 얘기하자!": "明天放学后再聊吧！"});
+(window.T["ja"]=window.T["ja"]||{});Object.assign(window.T["ja"],{"아, 지금 선생님 심부름 가야 해.": "あ、いま 先生の おつかいに 行かなきゃ。", "미안, 지금 숙제 마저 해야 돼.": "ごめん、いま しゅくだいの つづきを しなきゃ。", "지금 다른 친구랑 약속이 있어.": "いま ほかの ともだちと やくそくが あるんだ。", "앗, 지금 물 마시러 가던 길이야.": "あっ、いま 水を のみに 行くところ なんだ。", "아침에 얘기하자!": "あさに 話そう！", "점심시간에 얘기하자!": "ひるやすみに 話そう！", "오후에 얘기하자!": "ごごに 話そう！", "수업 끝나고 얘기하자!": "じゅぎょうが おわったら 話そう！", "내일 아침에 얘기하자!": "あしたの あさに 話そう！", "내일 점심시간에 얘기하자!": "あしたの ひるやすみに 話そう！", "내일 오후에 얘기하자!": "あしたの ごごに 話そう！", "내일 수업 끝나고 얘기하자!": "あした じゅぎょうが おわったら 話そう！"});
+(window.T["ru"]=window.T["ru"]||{});Object.assign(window.T["ru"],{"아, 지금 선생님 심부름 가야 해.": "Ой, мне сейчас надо выполнить поручение учителя.", "미안, 지금 숙제 마저 해야 돼.": "Извини, мне сейчас надо доделать домашку.", "지금 다른 친구랑 약속이 있어.": "У меня сейчас встреча с другим другом.", "앗, 지금 물 마시러 가던 길이야.": "Ой, я как раз иду попить воды.", "아침에 얘기하자!": "Давай поговорим утром!", "점심시간에 얘기하자!": "Давай поговорим на обеде!", "오후에 얘기하자!": "Давай поговорим после обеда!", "수업 끝나고 얘기하자!": "Давай поговорим после уроков!", "내일 아침에 얘기하자!": "Давай поговорим завтра утром!", "내일 점심시간에 얘기하자!": "Давай поговорим завтра на обеде!", "내일 오후에 얘기하자!": "Давай поговорим завтра после обеда!", "내일 수업 끝나고 얘기하자!": "Давай поговорим завтра после уроков!"});
