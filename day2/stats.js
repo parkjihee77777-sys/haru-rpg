@@ -1,0 +1,19 @@
+// (11/10 owner) visit stats: where people come from and how many — sent to noveltoeic.com/api/haru, seen at noveltoeic.com/haru-stats
+// sends only a random device id, the source, the chosen language and the day reached. Tester devices and robots are not counted.
+{
+const URL_='https://www.noveltoeic.com/api/haru';
+let off=false;try{off=localStorage.getItem('haru_test')==='1'}catch(e){}
+if(navigator.webdriver||/^(localhost|127\.)/.test(location.hostname)&&!/stattest=1/.test(location.search))off=true;
+let vid='';try{vid=localStorage.getItem('haru_vid')||'';if(!vid){vid=Math.random().toString(36).slice(2)+Date.now().toString(36);localStorage.setItem('haru_vid',vid)}}catch(e){vid='x'+Math.random().toString(36).slice(2)}
+function src(){const q=new URLSearchParams(location.search);const u=q.get('utm_source')||q.get('from')||q.get('src');if(u)return u;
+ try{const r=document.referrer&&new URL(document.referrer).hostname.replace(/^www\./,'');if(r&&r!==location.hostname)return r}catch(e){}return ''}
+function send(o){if(off)return;o.v=vid;const b=JSON.stringify(o);
+ try{fetch(URL_,{method:'POST',headers:{'Content-Type':'application/json'},body:b,keepalive:true,mode:'cors'}).catch(()=>{})}catch(e){}}
+const sent=new Set();function once(e,d){const k=e+d;if(sent.has(k))return;sent.add(k);const o={e,d};if(e==='day'&&d===1)try{o.l=UI+'/'+LANG}catch(x){}send(o)}
+addEventListener('load',()=>setTimeout(()=>send({e:'open',s:src()}),500));
+// day 1 starts when a language is picked; later days through startDay
+document.addEventListener('click',e=>{if(e.target.closest&&e.target.closest('.langs button'))setTimeout(()=>once('day',1),300)},true);
+if(typeof startDay==='function'){const _s=startDay;startDay=function(n){once('day',n);return _s.apply(this,arguments)}}
+if(typeof end2==='function'){const _e=end2;end2=function(){once('end',DAY);return _e.apply(this,arguments)}}
+if(typeof end==='function'){const _f=end;end=function(){once('end',DAY);return _f.apply(this,arguments)}}
+}
