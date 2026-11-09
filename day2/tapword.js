@@ -2,7 +2,7 @@
 // the word gets a dotted underline in the talk panel and in the bubble over the speaker; tapping it plays it and does not move the story on
 {
 const st=document.createElement('style');
-st.textContent=`.tw{text-decoration:underline dotted 2px;text-underline-offset:4px;cursor:pointer;border-radius:4px}.tw:active{background:rgba(0,0,0,.08)}.tw::after{content:"🔊";font-size:.55em;margin-left:.15em;vertical-align:.25em;text-decoration:none;display:inline-block;opacity:.75}`;
+st.textContent=`.say .tw{pointer-events:auto}.tw{text-decoration:underline dotted 2px;text-underline-offset:4px;cursor:pointer;border-radius:4px}.tw:active{background:rgba(0,0,0,.08)}.tw::after{content:"🔊";font-size:.55em;margin-left:.15em;vertical-align:.25em;text-decoration:none;display:inline-block;opacity:.75}`;
 document.head.appendChild(st);
 function wordText(k){return k==='notebook'?(W||LANGS[LANG].words.notebook):LANGS[LANG].words[k]||''}
 function markWords(el,ks){if(!el||!ks||!ks.length)return;const ws=ks.map(k=>[k,wordText(k)]).filter(x=>x[1]).sort((a,b)=>b[1].length-a[1].length);if(!ws.length)return;
