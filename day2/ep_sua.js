@@ -299,7 +299,7 @@ EP.sua=[
  pre:[
   {pic:'sua_07a'},
   ['nar','','쉬는 시간. 수아가 자기 자리에서 공약을 쓰고 있었다. 나도 공약을 쓰던 {@pencil}을 들고 수아 쪽으로 갔다.'],
-  {k:'pencil',goal:'「{x}」 내려놓기',bag:['pencil','eraser','notebook','pcase','scissors']},
+  {k:'pencil',goal:'「{x}」 책상에 놓기',bag:['pencil','eraser','notebook','pcase','scissors']},
   {k:'paper',goal:'「{x}」 들여다보기',bag:['paper','notebook','box','picture','book']},
   ['nar','','수아의 공약 {@paper}: 「공약 1. 전학 온 친구를 위한 {@picture} 규칙표를 모든 반에 붙이겠습니다.」'],
   ['nar','','나는 그대로 굳었다. 내 {w} 첫 줄에도 거의 같은 말이 쓰여 있었다.'],

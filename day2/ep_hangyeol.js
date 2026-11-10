@@ -653,7 +653,7 @@ EP.hangyeol=[
  ask:'어떻게 할까?',
  choices:[
   {k:'A',text:'바로 자연스럽게 부른다. 「결아, 김 좀 줄래?」',pts:{hangyeol:2},r:[
-   ['me','smile','결아, 김 좀 줄래?'],['nar','','한결이가 나를 봤다. 그리고 김을 건넸다.'],['hangyeol','smile','……여기.'],
+   ['me','smile','결아, 김 좀 줄래?'],['nar','','한결이가 나를 봤다. 그리고 김을 건넸다.'],['hangyeol','smile','……여기.{~give}'],
    ['yena','laugh','아, 그렇게 부르는 거구나. 결아, 나도 김.'],['hangyeol','laugh','김 품절입니다~'],['nar','','다들 웃었다. 이름 얘기는 그걸로 끝이었다.']]},
   {k:'B',text:'「나는 원래 그렇게 불렀어!」 하고 자랑한다.',pts:{hangyeol:1},r:[]},
   {k:'C',text:'예나에게 대신 길게 설명한다. 「한결이가 결이라고 하는 건, 그러니까……」',pts:{hangyeol:0},r:[
@@ -697,7 +697,7 @@ EP.hangyeol=[
   ['hangyeol','laugh','이 {@poster}, 우리 학교에서 제일 예쁨. 보장함.'],
   {k:'poster',goal:'「{x}」 펼치기',bag:['notebook','poster','pcase','tape','colored_pencil']},
   ['nar','','내 선거 {@poster}를 폈다.'],
-  {k:'tape',goal:'「{x}」 붙이기',bag:['glue','pcase','tape','notebook','eraser']},
+  {k:'tape',goal:'「{x}」로 붙이기',bag:['glue','pcase','tape','notebook','eraser']},
   ['nar','','{@poster}를 게시판에 붙였다.'],
   {pic:'hangyeol_14'},
   ['nar','','옆 반 아이 둘이 지나가다 내 {@poster} 앞에 멈췄다.'],
