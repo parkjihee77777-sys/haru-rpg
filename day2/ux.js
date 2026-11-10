@@ -286,7 +286,7 @@ setInterval(heroToFloor,500);
 {const _sm=soundMarks;soundMarks=function(){const r=_sm.apply(this,arguments);world.querySelectorAll('.smark').forEach(m=>{const x=parseFloat(m.style.left),y=parseFloat(m.style.top);
  if(y<16)m.style.top='16px';if(x<16)m.style.left='16px';if(x>MW-16)m.style.left=(MW-16)+'px';
   // (11/10 owner) a mark at the very top of the map (the hall stairs) hid under the goal bar on phones: put it on the thing's bottom corner instead
-  if(y<130){const o=(OBJ[MAP]||[]).find(o=>o[0]===m.dataset.o&&Math.abs(o[2]-o[3]*.72-y)<4);if(o){m.style.top=(o[2]+o[3]+36)+'px';m.style.left=o[1]+'px'}}});if(typeof hideMarks==='function')hideMarks();return r}}
+  if(y<130&&innerWidth<700){const o=(OBJ[MAP]||[]).find(o=>o[0]===m.dataset.o&&Math.abs(o[2]-o[3]*.72-y)<4);if(o){m.style.top=(o[2]+o[3]+36)+'px';m.style.left=o[1]+'px'}}});if(typeof hideMarks==='function')hideMarks();return r}}
 // ===== the school gate (gatesun): its two gate leaves and pillars are not floor (Jihoon stood floating on the right leaf, 11/05) =====
 if(MAPS.gatesun){MAPS.gatesun.block=(MAPS.gatesun.block||[]).concat([R(1025,540,1215,775),R(1190,535,1320,800),R(725,640,880,915),R(600,690,735,941)])}
 
