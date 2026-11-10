@@ -20,7 +20,7 @@ st.textContent=`
 .pick.places button{position:relative}.pick.places button.empty{opacity:.42}
 .pick.places .pc{position:absolute;right:-6px;top:-8px;min-width:30px;height:30px;border-radius:999px;background:var(--mint);color:#fff;font-weight:900;font-size:16px;line-height:30px;padding:0 6px;box-shadow:0 2px 0 #3f9a7c}
 .pick.places .word{white-space:normal!important;font-size:15px!important;line-height:1.25}
-.pick button .word{white-space:nowrap}.pick.dayend button .word{white-space:normal}
+.pick button .word{white-space:nowrap}.pick.dayend button .word{white-space:normal}.pick.dayend .tw{text-decoration:none}.pick.dayend .tw::after{display:none}
 #autoBtn{position:fixed;z-index:26;width:44px;height:44px;border-radius:50%;border:3px solid var(--line);background:var(--paper);box-shadow:0 3px 0 var(--line);font-size:19px;padding:0;display:none;cursor:pointer}
 #autoBtn.on{background:var(--mint);border-color:#3f9a7c;box-shadow:0 3px 0 #3f9a7c}
 .nope{position:fixed;left:50%;top:42%;z-index:60;width:84px;height:84px;margin:-42px 0 0 -42px;border-radius:50%;background:#ff6b6b;color:#fff;font-size:52px;font-weight:900;line-height:84px;text-align:center;pointer-events:none;animation:nope .7s forwards}
