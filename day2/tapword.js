@@ -22,3 +22,13 @@ new MutationObserver(ms=>{for(const m of ms){let n=m.type==='characterData'?m.ta
 for(const ev of ['pointerdown','click'])document.addEventListener(ev,e=>{const s=e.target.closest&&e.target.closest('.tw');if(!s)return;if(s.closest('button,.opt,.choice,[onclick]')&&!s.closest('#line,.say')){if(ev==='pointerdown')speak(s.dataset.k);return}e.stopPropagation();e.preventDefault();if(ev==='pointerdown')speak(s.dataset.k)},true);
 const _advance=advance;advance=function(){const r=_advance.apply(this,arguments);const ks=LINEW.slice();markWords(lineEl,ks);if(sayEl)markWords(sayEl.querySelector('span'),ks);return r};
 }
+// (11/10 owner, trial: only with ?pic=1) tapping a foreign word that was already found also shows its picture small above the word for a moment
+{let PICT=false;try{const q=new URLSearchParams(location.search).get('pic');if(q==='1')localStorage.setItem('haru_pic','1');if(q==='0')localStorage.removeItem('haru_pic');PICT=localStorage.getItem('haru_pic')==='1'}catch(e){}
+ if(PICT){const st=document.createElement('style');st.textContent='#twpic{position:fixed;z-index:9000;pointer-events:none;background:#fff;border:3px solid #e8c56a;border-radius:14px;padding:4px;box-shadow:0 4px 12px rgba(0,0,0,.25);transform:translate(-50%,-100%) scale(.6);opacity:0;transition:transform .15s,opacity .15s}#twpic.on{transform:translate(-50%,-100%) scale(1);opacity:1}#twpic img{display:block;width:96px;height:96px;object-fit:contain;border-radius:10px}';document.head.appendChild(st);
+  const box=document.createElement('div');box.id='twpic';box.innerHTML='<img alt="">';document.body.appendChild(box);let tm=0;
+  const picOf=k=>{try{if(typeof PIC!=='undefined'&&PIC[k])return PIC[k];if(typeof cardOf==='function')return cardOf(k)}catch(e){}return null};
+  document.addEventListener('pointerdown',e=>{const s=e.target.closest&&e.target.closest('.tw');if(!s)return;const k=s.dataset.k;
+   if(!(typeof FOUND!=='undefined'&&FOUND.has(k)))return;// not found yet: sound only, so a find's answer is never shown
+   const src=picOf(k);if(!src)return;const r=s.getBoundingClientRect();box.firstChild.src=src;
+   box.style.left=Math.max(60,Math.min(innerWidth-60,r.left+r.width/2))+'px';box.style.top=Math.max(116,r.top-6)+'px';
+   box.classList.add('on');clearTimeout(tm);tm=setTimeout(()=>box.classList.remove('on'),1600)},true)}}
