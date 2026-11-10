@@ -744,7 +744,7 @@ EP.youngmin=[
   {only:['B','D'],lines:[['nar','','영민이가 넷째 {@clock}까지 다 썼다. {@pencil|을} 내려놓았다. 「……끝.」'],['nar','','그리고 교실 앞 {@clock|를} 올려다봤다. 영민이 손가락이 허공에서 짧은 바늘을 짚었다.']]},
   {only:['A','C'],lines:[['nar','','영민이가 익힘책을 {@bag}에 넣었다. 그리고 교실 앞 {@clock|를} 올려다봤다. 한참 봤다.']]},
   {pic:'youngmin_08c'},
-  ['youngmin','surprised','지금 {@clock}, 몇 시인지 읽어 볼래?'],
+  ['youngmin','surprised','지금 {@clock}, 몇 시인지 읽어 봐도 돼?'],
   ['me','smile','응. 읽어 봐.'],
   {k:'clock',goal:'「{x}」 같이 읽기',bag:['clock','calendar','window','blackboard','alarm_clock']},
   ['nar','','교실 앞 {@clock|를} 영민이와 같이 올려다봤다.'],
