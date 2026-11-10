@@ -310,3 +310,8 @@ NAME.hajun='하준';SZ.hajun=[0.968,0.988,0.8];
  pool.forEach((e,i)=>{const n=ns[i];if(!n){e.remove();return}const h=(n.h||KID)+(HEART[n.id]?44:0)+(WORDKEY[n.id]&&FOUND.has(WORDKEY[n.id])?36:0);
   if(!e.parentNode)world.appendChild(e);e.style.left=n.x+'px';e.style.top=(n.y-h-6)+'px';e.style.zIndex=3000})};
  const st=document.createElement('style');st.textContent='.hint.sm{font-size:34px;-webkit-text-stroke:2px #7a4a00}';document.head.appendChild(st)}
+// (11/10 owner) which thing did I tap? a ring flashes around the thing whose word plays (things next to each other on the table: apple, bread, tissue)
+{const st=document.createElement('style');st.textContent='.tapring{position:absolute;border:4px solid #ffd84a;border-radius:50%;box-shadow:0 0 0 3px rgba(122,74,0,.55),0 0 14px rgba(255,216,74,.9);pointer-events:none;z-index:2500;transform:translate(-50%,-50%);animation:tapring .9s ease-out forwards}@keyframes tapring{0%{opacity:0;transform:translate(-50%,-50%) scale(.7)}15%{opacity:1;transform:translate(-50%,-50%) scale(1)}75%{opacity:1}100%{opacity:0}}';document.head.appendChild(st);
+ const _tt=tapThing;tapThing=function(k,x,y){try{const objs=(OBJ[MAP]||[]).filter(o=>o[0]===k);let o=null,bd=1e9;for(const p of objs){const d=Math.hypot(p[1]-x,p[2]-y);if(d<bd){bd=d;o=p}}
+   if(o&&bd<o[3]*1.2+20){world.querySelectorAll('.tapring').forEach(e=>e.remove());const r=document.createElement('div');r.className='tapring';const d=Math.max(36,o[3]*2+10);r.style.cssText+=`;left:${o[1]}px;top:${o[2]}px;width:${d}px;height:${d}px`;world.appendChild(r);setTimeout(()=>r.remove(),950)}}catch(e){}
+  return _tt.apply(this,arguments)}}
