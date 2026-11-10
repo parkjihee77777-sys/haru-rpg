@@ -2,7 +2,8 @@
 // sends only a random device id, the source, the chosen language and the day reached. Tester devices and robots are not counted.
 {
 const URL_='https://www.noveltoeic.com/api/haru';
-let off=false;try{off=localStorage.getItem('haru_test')==='1'}catch(e){}
+// (11/10 owner) tester-mode visits count too (institutions may have the test link), marked 「- 테스트판」; only the owner's own devices (?me=1, remembered; ?me=0 undoes) are left out
+let off=false,tester=false;try{const q=new URLSearchParams(location.search).get('me');if(q==='1')localStorage.setItem('haru_me','1');if(q==='0')localStorage.removeItem('haru_me');off=localStorage.getItem('haru_me')==='1';tester=localStorage.getItem('haru_test')==='1'}catch(e){}
 if(navigator.webdriver||/^(localhost|127\.)/.test(location.hostname)&&!/stattest=1/.test(location.search))off=true;
 let vid='';try{vid=localStorage.getItem('haru_vid')||'';if(!vid){vid=Math.random().toString(36).slice(2)+Date.now().toString(36);localStorage.setItem('haru_vid',vid)}}catch(e){vid='x'+Math.random().toString(36).slice(2)}
 function src(){const q=new URLSearchParams(location.search);const u=q.get('utm_source')||q.get('from')||q.get('src');if(u)return u;
@@ -10,7 +11,7 @@ function src(){const q=new URLSearchParams(location.search);const u=q.get('utm_s
 function send(o){if(off)return;o.v=vid;const b=JSON.stringify(o);
  try{fetch(URL_,{method:'POST',headers:{'Content-Type':'application/json'},body:b,keepalive:true,mode:'cors'}).catch(()=>{})}catch(e){}}
 const sent=new Set();function once(e,d){const k=e+d;if(sent.has(k))return;sent.add(k);const o={e,d};if(e==='day'&&d===1)try{o.l=UI+'/'+LANG}catch(x){}send(o)}
-addEventListener('load',()=>setTimeout(()=>send({e:'open',s:src()}),500));
+addEventListener('load',()=>setTimeout(()=>send({e:'open',s:(src()||'바로 들어옴')+(tester?' - 테스트판':'')}),500));
 // day 1 starts when a language is picked; later days through startDay
 document.addEventListener('click',e=>{if(e.target.closest&&e.target.closest('.langs button'))setTimeout(()=>once('day',1),300)},true);
 if(typeof startDay==='function'){const _s=startDay;startDay=function(n){once('day',n);return _s.apply(this,arguments)}}
