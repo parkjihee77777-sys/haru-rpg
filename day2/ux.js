@@ -315,3 +315,15 @@ NAME.hajun='하준';SZ.hajun=[0.968,0.988,0.8];
  const _tt=tapThing;tapThing=function(k,x,y){try{const objs=(OBJ[MAP]||[]).filter(o=>o[0]===k);let o=null,bd=1e9;for(const p of objs){const d=Math.hypot(p[1]-x,p[2]-y);if(d<bd){bd=d;o=p}}
    if(o&&bd<o[3]*1.2+20){world.querySelectorAll('.tapring').forEach(e=>e.remove());const r=document.createElement('div');r.className='tapring';const d=Math.max(36,o[3]*2+10);r.style.cssText+=`;left:${o[1]}px;top:${o[2]}px;width:${d}px;height:${d}px`;world.appendChild(r);setTimeout(()=>r.remove(),950)}}catch(e){}
   return _tt.apply(this,arguments)}}
+// (11/11 owner) the blackboard's 🔊 still hid on a phone (under the music button, the exit sign or the goal bar): before hiding a big thing's mark, slide it along that thing to a free spot
+{const _hm=hideMarks;hideMarks=function(){_hm();try{const ui=[...document.querySelectorAll('#goal,#bag,#mute,#talk,#toast>*,.panhint,.bubble,.zmark,.exits')].map(e=>e.getBoundingClientRect()).filter(r=>r.width&&r.height);
+ const hit=r=>ui.some(u=>r.left<u.right+4&&r.right>u.left-4&&r.top<u.bottom+4&&r.bottom>u.top-4);
+ world.querySelectorAll('.smark').forEach(m=>{if(m.style.visibility!=='hidden')return;const o=(OBJ[MAP]||[]).find(o=>o[0]===m.dataset.o&&o[3]>=80);if(!o)return;
+  const x0=parseFloat(m.style.left),y0=parseFloat(m.style.top);
+  for(const dy of [0,40,-20,80])for(const dx of [0,-50,50,-100,100,-150,150]){const x=o[1]+dx,y=Math.max(20,y0+dy);if(Math.abs(x-o[1])>o[3]*1.3)continue;m.style.left=x+'px';m.style.top=y+'px';const r=m.getBoundingClientRect();
+   if(r.left>4&&r.right<innerWidth-4&&r.top>4&&r.bottom<innerHeight-4&&!hit(r)){m.style.visibility='';return}}
+  m.style.left=x0+'px';m.style.top=y0+'px'})}catch(e){}}}
+// (11/11 owner) on a phone the morning table's things are too small and close together: tapping the table opens them (and the table) as big choices
+{const PHONE=()=>innerWidth<700,TBL=[740,350,1100,600];
+ const _za=zoomAt;zoomAt=function(x,y){if(PHONE()&&MAP==='home_am'&&DAY>=2&&x>=TBL[0]&&x<=TBL[2]&&y>=TBL[1]&&y<=TBL[3])return TBL;return _za(x,y)};
+ const _oz=openZoom;openZoom=function(z){if(z!==TBL)return _oz(z);const L=OBJ[MAP]||[],t=['table',911,505,60];L.push(t);try{return _oz(z)}finally{const i=L.indexOf(t);if(i>=0)L.splice(i,1)}}}
