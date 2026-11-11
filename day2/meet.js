@@ -61,8 +61,8 @@ function goPlacesToday(){const ids=new Set();for(const f of D2IDS){const e=epNex
 // no second copy laid on top: every thing already drawn (HOME_NATIVE: apple, bread, cup, umbrella, notebook, bag) is found where it is drawn.
 // Day 9 is the rainy day at the gate (Minho, Hangyeol, Seah) → umbrella. Things not drawn on the home map are laid where they would be.
 const MORNING_BY={4:'apple',5:'bread',6:'cup',7:'water_bottle',8:'pcase',9:'umbrella',10:'sock',11:'banana',12:'milk',13:'spoon',14:'shoes',15:'tissue',16:'bag'};
-const MORNING_LAY={water_bottle:[1190,248,34],pcase:[838,512,46],sock:[205,540,36],banana:[1058,558,46],spoon:[1052,556,60]};
-const MORNING_EXTRA={13:[['bowl',995,570,54]]};// (11/11 owner) day 13 things lay on the drawn apple, bread, milk and cup: spoon and bowl go to the empty front-right of the table, no second cup (one is drawn)// (owner 11/08) the spoon is not alone on the table: breakfast things around it
+const MORNING_LAY={};// (11/11 owner) all drawn into maps/home_am2.jpg (HOME_NATIVE): nothing laid on top
+const MORNING_EXTRA={};// (11/11 owner) day 13 things lay on the drawn apple, bread, milk and cup: spoon and bowl go to the empty front-right of the table, no second cup (one is drawn)// (owner 11/08) the spoon is not alone on the table: breakfast things around it
 const MORNING_KEYS=Object.values(MORNING_BY);const MORNING_SAID=new Set(['apple','bread','cup','umbrella','bag','handkerchief','apron']);
 function morningOf(n){if(MORNING[n])return MORNING[n];const k=MORNING_BY[n]||MORNING_KEYS[(n-4)%MORNING_KEYS.length];
  return{k,lay:MORNING_LAY[k]?[[k,...MORNING_LAY[k],null,'stay']].concat((MORNING_EXTRA[n]||[]).map(t=>[...t,null,'stay'])):null,open:[['nar','','아침.'],['mom','smile',`{@${k}} 좀 찾아 줄래?`]],after:[['mom','laugh','고마워!'],['me','smile','…응. 다녀올게.'],['mom','smile','오늘도 저녁에 이야기 들려줘.']]}}

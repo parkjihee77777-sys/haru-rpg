@@ -79,7 +79,7 @@ let DAY=1,PICKS=[],D2CHOICE={};
 function setDay(n){DAY=n;const N=NATIVE_BY[n]||{},Z=ZOOMS_BY[n]||{};for(const k in NATIVE)delete NATIVE[k];Object.assign(NATIVE,N);for(const k in ZOOMS)delete ZOOMS[k];Object.assign(ZOOMS,Z);
  D2PLACE=PLACE_BY[n]||PLACE_BY[2];for(const m of ['class','hall','field','cafe'])MAPS[m].img2=(MAP_DONE[n]||[]).includes(m)?`maps/${m}${n}.jpg`:undefined;
  if(MAPS.cafe.img2)MAPS.cafe.img2='maps/cafe2_lunch.jpg';// lunchtime: children from other classes eat at the tables
- MAPS.home_am.img2='maps/home_am2.jpg';MAPS.home_pm.img2='maps/home_pm2.jpg';ZOOMS.home_am=[[850,470,1060,560]];ZOOMS.home_pm=[[870,470,1040,545]]}
+ MAPS.home_am.img2='maps/home_am2.jpg';MAPS.home_pm.img2='maps/home_pm2.jpg';ZOOMS.home_am=[];/* (11/11 owner) table things are drawn big enough now: each is tapped directly, no 🔍 tray */ZOOMS.home_pm=[[870,470,1040,545]]}
 const MAP_DONE={2:['class','hall','field','cafe']};
 function saveDay(){try{localStorage.setItem('haru_save',JSON.stringify({day:DAY,hero:HERO,heart:HEART,found:[...FOUND],mode:UI+'-'+LANG}))}catch(e){}}
 function loadSave(){try{return JSON.parse(localStorage.getItem('haru_save')||'null')}catch(e){return null}}
@@ -108,7 +108,9 @@ function startDay(n){const m=document.getElementById('modal');m.classList.remove
   find(M.k,()=>{TODAY.add(M.k);say(M.after,()=>{stage='d2_leave';setGoal('현관으로 나가 학교 가기','door')})},'「{x}」 찾기'))})}
 function startDay2(){startDay(2)}
 // home from Day 2 on: the same things always lie in the same places (drawn into maps/home_am2.jpg, home_pm2.jpg); each day asks for a different one
-const HOME_NATIVE={home_am:[['handkerchief',770,550,28],['apron',1140,560,55],['apple',895,508,22],['tissue',950,470,26],['bread',950,528,26],['cup',1081,474,24],['milk',1016,488,28],['umbrella',180,400,40],['notebook',1115,700,24],['bag',1085,745,45]],
+const HOME_NATIVE={home_am:[['handkerchief',770,550,28],['apron',1140,560,55],['apple',895,508,22],['tissue',950,470,26],['bread',950,528,26],['cup',1081,474,24],['milk',1016,488,28],['umbrella',180,400,40],['notebook',1115,700,24],['bag',1085,745,45],
+  // (11/11 owner) every morning errand is drawn into home_am2 now (no item laid on top any more)
+  ['water_bottle',1048,178,30],['pcase',835,398,28],['banana',780,469,26],['bowl',1006,543,22],['spoon',1052,540,18],['sock',272,546,24]],
  home_pm:[['handkerchief',775,555,28],['apron',1075,425,40],['cup',1060,495,24],['milk',1017,462,28],['apple',957,508,16],['bread',985,522,24],['umbrella',180,400,40],['notebook',1130,640,24],['bag',1120,725,45]]};
 function placeD2Item(){if(!(DAY>=2&&(MAP==='home_am'||MAP==='home_pm')))return;OBJ[MAP]=KITCHEN_OBJ.concat(HOME_NATIVE[MAP])}
 // ---- school ----
