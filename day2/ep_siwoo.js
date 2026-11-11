@@ -157,7 +157,7 @@ EP.siwoo=[
   common:[['me','smile','2번은 내가 적어야 돼. {m}, 이상한 말 하나 알려 줘.'],['mom','smile','음…… ‘발이 넓다’?'],['me','surprised','……발이 크다는 거야?'],['mom','smile','그거 2번으로 적어.'],['dad','smile','{d}도 하나 줄게. ‘귀가 얇다.’']]}},
 
 // ■ Day 5 — 숟가락 소리 (4)
-{title:'숟가락 소리',scene:'siwoo_04',place:'cafe',at:[1202,726],sit:[1214,722,200],
+{title:'숟가락 소리',scene:'siwoo_04',place:'cafe',at:[1202,726],sit:[1340,755,200],cafeMap:'cafe2_lunch_siwoo',
  things:{},
  pre:[
   ['nar','','점심시간 급식실. 시끄러웠다. 수백 명이 한꺼번에 떠들고, {@tray}이 부딪치고, {@chair}가 끌렸다.'],
@@ -863,6 +863,8 @@ for(const id of ['music']){const m=EXTRA_MAPS[id];MAPS[id]={img:m.img,walk:m.wal
 // stand:1 = he stands where his scene says (meetings 1, 5, 15: at the window; 12: just outside 30 cm of the hero's desk), not at a desk; spots.js seats every kid with sitting art, so this runs after it
 // sit:[x,top,h?] = he sits at that chair (x = his middle, top = the chair back's top, where his cut-off back ends; h = a smaller sprite for the cafeteria's smaller drawn chairs, 11/06) where the classroom seats don't reach: the cafeteria table (4), the music room desk (14)
 addEventListener('load',()=>{const _dpSw=d2People;d2People=function(id){const ps=_dpSw(id),e=epNext('siwoo',EPIDX.siwoo);
+ // (11/11 owner) the cafeteria day: a map with Siwoo drawn sitting in the chair (his sprite never matched the small drawn chairs); the sprite stays only as the spot you tap
+ if(id==='cafe'&&MAPS.cafe&&MAPS.cafe.img2){if(e&&e.place==='cafe'&&e.cafeMap){MAPS.cafe.img2=`maps/${e.cafeMap}.jpg`;window._swDrawn=1}else{if(/_siwoo/.test(MAPS.cafe.img2))MAPS.cafe.img2='maps/cafe2_lunch.jpg';window._swDrawn=0}}
  if(id==='music'&&MAPS.music)MAPS.music.img2=(e&&e.place===id&&e.drawn)?`maps/${e.drawn[0]}.jpg`:undefined;
  if(e&&e.place===id&&e.drawn){const p=ps.find(p=>p[0]==='siwoo');if(p){p[1]=e.drawn[1];p[2]=0;p[3]={top:e.drawn[2],h:178}}}
  else if(e&&e.place===id){const p=ps.find(p=>p[0]==='siwoo');if(p&&e.stand){p[1]=e.at[0];p[2]=e.at[1];p.length=3}else if(p&&e.sit){p[1]=e.sit[0];p[2]=0;p[3]={top:e.sit[1],h:e.sit[2]}}}return ps}});
@@ -875,3 +877,6 @@ addEventListener('load',()=>{const _ldSw=load;load=function(id,extra){try{const 
 
 // (11/09 owner) the mirror shows me: a girl and a boy version (scenes/siwoo_08e_f.jpg / _m.jpg)
 if(typeof HEROPIC!=='undefined')HEROPIC.add('siwoo_08e');
+
+// hide the Siwoo sprite where he is drawn into the map (tapping his spot still works)
+{const _ld=load;load=function(id){try{if(id==='cafe'&&MAPS.cafe&&MAPS.cafe.img2){const e=epNext('siwoo',EPIDX.siwoo);if(e&&e.place==='cafe'&&e.cafeMap){MAPS.cafe.img2=`maps/${e.cafeMap}.jpg`;window._swDrawn=1}else{if(/_siwoo/.test(MAPS.cafe.img2))MAPS.cafe.img2='maps/cafe2_lunch.jpg';window._swDrawn=0}}}catch(e){}const r=_ld.apply(this,arguments);try{if(id==='cafe'&&window._swDrawn){const hide=()=>{const n=npcs.find(n=>n.id==='siwoo');if(n&&n.el){n.el.style.visibility='hidden'}};hide();setTimeout(hide,60);setTimeout(hide,400)}}catch(e){}return r}}
