@@ -6,7 +6,13 @@ const URL_='https://www.noveltoeic.com/api/haru';
 let off=false,tester=false;try{const q=new URLSearchParams(location.search).get('me');if(q==='1')localStorage.setItem('haru_me','1');if(q==='0')localStorage.removeItem('haru_me');off=localStorage.getItem('haru_me')==='1';tester=localStorage.getItem('haru_test')==='1'}catch(e){}
 if(navigator.webdriver||/^(localhost|127\.)/.test(location.hostname)&&!/stattest=1/.test(location.search))off=true;
 let vid='';try{vid=localStorage.getItem('haru_vid')||'';if(!vid){vid=Math.random().toString(36).slice(2)+Date.now().toString(36);localStorage.setItem('haru_vid',vid)}}catch(e){vid='x'+Math.random().toString(36).slice(2)}
-function src(){const q=new URLSearchParams(location.search);const u=q.get('utm_source')||q.get('from')||q.get('src');if(u)return u;
+// (11/11 owner) some mail programs re-encode a Korean ?from= tag in the old Korean code (EUC-KR), which URLSearchParams turns into garbage (「ٹȭ」 = 외대다문화):
+// read the raw %XX bytes ourselves — UTF-8 if they are valid UTF-8, otherwise EUC-KR
+function param(name){const m=new RegExp('[?&]'+name+'=([^&#]*)').exec(location.search);if(!m)return '';const raw=m[1].replace(/\+/g,' ');
+ try{return decodeURIComponent(raw)}catch(e){}
+ try{const b=[];raw.replace(/%([0-9a-f]{2})|([^%])/gi,(x,h,c)=>{if(h)b.push(parseInt(h,16));else for(const y of new TextEncoder().encode(c))b.push(y);return ''});return new TextDecoder('euc-kr').decode(new Uint8Array(b))}catch(e){}
+ return new URLSearchParams(location.search).get(name)||''}
+function src(){const u=param('utm_source')||param('from')||param('src');if(u)return u;
  try{const r=document.referrer&&new URL(document.referrer).hostname.replace(/^www\./,'');if(r&&r!==location.hostname)return r}catch(e){}return ''}
 function send(o){if(off)return;o.v=vid;const b=JSON.stringify(o);
  try{fetch(URL_,{method:'POST',headers:{'Content-Type':'application/json'},body:b,keepalive:true,mode:'cors'}).catch(()=>{})}catch(e){}}
