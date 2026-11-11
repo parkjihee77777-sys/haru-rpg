@@ -188,11 +188,15 @@ tour=function(){touring=true;busy=true;const s=cam.s,W=innerWidth,H=innerHeight,
   (function step(now){const k=Math.min(1,(now-s0)/600),e=ease(k);pan={x:from.x+(tx-from.x)*e,y:from.y+(ty-from.y)*e};follow();if(k<1)requestAnimationFrame(step);else{pan=null;touring=false;busy=false;follow();while(tourQ.length)tourQ.shift()()}})(s0)}
  (function step(now){const k=Math.max(0,Math.min(1,(now-t0)/sweep)),e=ease(k);pan={x:a.x+(b.x-a.x)*e,y:a.y+(b.y-a.y)*e};follow();if(k<1)requestAnimationFrame(step);else setTimeout(back,200)})(performance.now())};
 // pictures: the first day's people first, the other friends a little later (it fetched about 15 MB at once)
-preload=function(){const ex=['smile','laugh','surprised','sad','angry','relieved'];const L=[];
+const preloadNow=function(){const ex=['smile','laugh','surprised','sad','angry','relieved'];const L=[];
  const first=['hero_f','hero_m','mom','siwoo','minho','sua','yuna','junho','haeun','jihoon','yena','hyeeun'];
  L.push('maps/home_am.jpg','maps/class.jpg','maps/home_pm.jpg','items/notebook.png','cards/pcase.jpg','scenes/jar.jpg','scenes/sua2.jpg','scenes/threat_f.jpg','scenes/threat_m.jpg','scenes/intro_f.jpg','scenes/intro_m.jpg','pang/sit.png','pang/happy.png','scenes/dinner.jpg','scenes/night.jpg','scenes/dinner_m.jpg','scenes/night_m.jpg','cards/notebook.jpg','cards/bag.jpg','cards/pencil.jpg');
  first.forEach(i=>{L.push(`walk/${i}.png`);ex.forEach(e=>L.push(`faces/${i}_${e}.jpg`))});const get=s=>{const im=new Image();im.src=s;PRE.push(im)};L.forEach(get);
- setTimeout(()=>{for(const i of D2IDS)if(!first.includes(i)){get(`walk/${i}.png`);ex.forEach(e=>get(`faces/${i}_${e}.jpg`))}},25000)};
+ // (11/12) the other friends' pictures (about 3 MB) wait until Day 2 starts (or 3 minutes): most robots and quick leavers never need them
+ let rest=false;const loadRest=()=>{if(rest)return;rest=true;for(const i of D2IDS)if(!first.includes(i)){get(`walk/${i}.png`);ex.forEach(e=>get(`faces/${i}_${e}.jpg`))}};window.preloadRest=loadRest;setTimeout(loadRest,180000)};
+// (11/12) nothing is fetched until the first touch or 4 seconds: someone who leaves at once (ads: 2 s) costs almost nothing
+preload=function(){let go=false;const run=()=>{if(go)return;go=true;preloadNow()};addEventListener('pointerdown',run,{once:true,capture:true});addEventListener('keydown',run,{once:true,capture:true});setTimeout(run,4000)};
+{const _sd2=startDay;startDay=function(n){if(n>=2&&window.preloadRest)preloadRest();return _sd2.apply(this,arguments)}}
 // every few frames: arrow, 🔊 size, exit sign out from under the corner buttons
 setInterval(()=>{if(!me||!MAP)return;placeArrow();
  world.style.setProperty('--ms',Math.max(1,26/(22*(cam.s||1))).toFixed(2));
