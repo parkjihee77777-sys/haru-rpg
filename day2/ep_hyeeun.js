@@ -204,7 +204,7 @@ EP.hyeeun=[
   ['think','surprised','(아! 혜은이는 앉아 있어서 내 {@umbrella} 끝이 딱 얼굴 높이구나.)'],
   {k:'umbrella',goal:'「{x}」 끝 아래로 들기',bag:['bag','umbrella','water_bottle','handkerchief','pencil']},
   ['nar','','{@umbrella} 끝이 바닥을 향했다.'],
-  ['hyeeun','laugh','고마워. 별 하나 더 줄 뻔했다. {@umbrella} 때문에.'],
+  ['hyeeun','laugh','고마워. 별 하나 덜 줄 뻔했다. {@umbrella} 때문에.'],
   ['nar','','혜은이가 다시 바퀴를 밀었다. 또 미끄러졌다. 젖은 손바닥이 바퀴 위에서 헛돌았다.'],
   ['nar','','다른 반 아이들이 옆으로 지나갔다. 몇 명이 힐끗 혜은이를 봤다.'],
   ['hyeeun','smile','구경은 무료~ 농담이야. 그냥 가.'],
@@ -267,6 +267,7 @@ EP.hyeeun=[
   ['nar','','선생님: 「이건 혜은이가 조심할 일이 아니라 학교가 고칠 일이네. 행정실에 말해서 미끄럼 막는 띠를 붙여 달라고 할게. 다른 사람도 미끄러질 수 있으니까.」'],
   ['nar','','선생님이 급식실로 들어가셨다. 혜은이가 나를 돌아봤다.'],
   ['hyeeun','laugh','아, 오해하지 마. 별 하나는 경사로 거야. 너 거 아니고.'],
+  ()=>{const i=npcs.findIndex(n=>n.id==='hyeeun');if(i>=0){npcs[i].el.remove();npcs.splice(i,1)}},// (11/11 owner) she went up the ramp into the cafeteria: not left standing at the bottom after the talk
   {pic:null}],
  eve:{lead:[['nar','','오늘은 {d} 우산이 현관에 먼저 세워져 있었다.'],['me','smile','{m}, 비 그치고 나서 급식실 가는 경사로가 엄청 미끄러웠어.'],['mom','surprised','넘어진 사람 없어?'],['me','sad','응. 근데 혜은이 손이 바퀴에서 자꾸 미끄러졌어. 바퀴가 젖어서.'],['dad','smile','손으로 바퀴를 미니까 그렇겠다.']],
   A:[['me','smile','도와줄까 물었더니, 미는 거 말고 {@glove} 꺼내 달래. 그리고 위에 말린 매트 펴 달래.'],['mom','surprised','{@glove|이랑} 매트?'],['me','laugh','응. {@glove} 끼니까 혼자 쭉쭉 올라갔어.'],['dad','smile','혜은이는 뭐가 필요한지 정확히 아네.']],

@@ -1114,7 +1114,7 @@ Object.assign(T.vi=T.vi||{},{
 "휠체어 뒤 손잡이를 잡고 {@bag} 사이로 밀어 준다.": "Nắm tay cầm phía sau xe lăn, đẩy cậu ấy đi qua giữa mấy {@bag}.",
 "혜은이가 대답하기도 전이었다. 꼬마 2가 손잡이를 잡고 확 밀었다.": "Hyeeun còn chưa kịp trả lời. Nhóc 2 đã nắm tay cầm và đẩy mạnh một cái.",
 "그치. 그러니까 손 떼.": "Đúng không? Vậy thì buông tay ra.",
-"고마워. 별 하나 더 줄 뻔했다. {@umbrella} 때문에.": "Cảm ơn. Suýt nữa tớ lại chấm thêm một sao nữa rồi. Vì {@umbrella} đấy.",
+"고마워. 별 하나 덜 줄 뻔했다. {@umbrella} 때문에.": "Cảm ơn. Suýt nữa tớ trừ thêm một sao rồi. Vì {@umbrella} đấy.",
 "……다친 데는 없고?": "...Không ai bị đau chứ?",
 "앞문 바로 앞 복도에는 빈 우유 {@box} 두 개가 놓여 있었다. 아침에 우유 당번이 두고 간 것이었다. 앞{@door|에는} 손가락 두 마디쯤 되는 문턱도 있었다.": "Ngoài hành lang ngay trước lối vào lớp có hai {@box} sữa rỗng. Là bạn trực sữa để lại từ sáng. Ở {@door} trước còn có một cái gờ cao chừng hai đốt ngón tay.",
 "덜컹. 혜은이 앞바퀴가 우유 {@box} 모서리에 부딪혔다. {@box} 옆으로 비켜 가려니 이번엔 문턱이었다. 휠체어가 {@door} 앞에서 멈췄다.": "Cộc. Bánh trước của Hyeeun va vào góc {@box} sữa. Định lách qua {@box} thì lại đến cái gờ. Xe lăn dừng lại trước {@door}.",
