@@ -394,7 +394,7 @@ EP.yuna=[
   ['nar','','아침 활동 시간. 선생님이 교실 뒤를 가리키셨다.'],
   ['nar','','선생님: 「저기 뒤에 있는 {@basket} 좀 앞으로 가져와 줄래? 제일 가까운 사람.」'],
   ['nar','','제일 가까운 사람은 나였다.'],
-  {k:'basket',goal:'「{x}」 앞으로 가져가기',bag:['basket','box','bag','book','trash_can']},
+  {k:'basket',goal:'「{x}」 앞으로 가져가기',bag:['basket:basket_blue','box','bag','book','trash_can']},
   {clear:['basket']},
   ['nar','','교실 뒤 플라스틱 {@basket|을} 선생님 책상 위에 올려놓았다.'],
   {pic:'yuna_05b'},
