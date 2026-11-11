@@ -157,7 +157,7 @@ EP.siwoo=[
   common:[['me','smile','2번은 내가 적어야 돼. {m}, 이상한 말 하나 알려 줘.'],['mom','smile','음…… ‘발이 넓다’?'],['me','surprised','……발이 크다는 거야?'],['mom','smile','그거 2번으로 적어.'],['dad','smile','{d}도 하나 줄게. ‘귀가 얇다.’']]}},
 
 // ■ Day 5 — 숟가락 소리 (4)
-{title:'숟가락 소리',scene:'siwoo_04',place:'cafe',at:[1202,726],sit:[1202,722,165],
+{title:'숟가락 소리',scene:'siwoo_04',place:'cafe',at:[1202,726],sit:[1214,722,200],
  things:{},
  pre:[
   ['nar','','점심시간 급식실. 시끄러웠다. 수백 명이 한꺼번에 떠들고, {@tray}이 부딪치고, {@chair}가 끌렸다.'],
