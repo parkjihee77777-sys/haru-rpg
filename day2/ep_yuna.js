@@ -199,7 +199,7 @@ EP.yuna=[
 
 // ■ Day 4 — 1인 1역 셋 (3)
 {title:'1인 1역 셋',scene:'yuna_03',place:'class',at:[300,815,'stand'],
- things:{class:[['trash_can',1127,226,58]]},
+ taps:{class:[['trash_can',1485,298,42]]},// (11/11 owner) the bin already drawn at the front right, not a second one laid on the map
  pre:[
   ['nar','','종례가 끝났다. 1인 1역 시간. 교실 뒤 게시판에 각자 맡은 일이 붙어 있었다.'],
   ['nar','','내 일은 교실 {@trash_can} 비우기. 유나는 창가 화분 물 주기. 하은이는 칠판 지우기. 지훈이는 창문 닫기였다.'],
