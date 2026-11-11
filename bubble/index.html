@@ -81,7 +81,12 @@ const PASTPICK=CFG.past.slice().sort((a,b)=>(b.missed-a.missed)).map(x=>x.k);// 
 const PASTSET=new Set(PASTPICK);
 // (11/08 owner) 15 friends a day teach many words, but only 4~6 came up: every round now takes its own next words from the day's list
 const POOL=[...new Set(CFG.today.concat(PASTPICK,ORDER))],SIZES=[4,4,5,5,5];let poolAt=0;
-const mk=i=>{const n=SIZES[i];if(POOL.length<=n)return POOL.slice();const w=[];while(w.length<n){if(poolAt>=POOL.length)poolAt=0;const k=POOL[poolAt++];if(!w.includes(k))w.push(k)}return w};
+// (11/11 owner) today's new words came up in round 1 only: now every round has today's words (taking turns when there are many), and the other places rotate through the review words
+const TW=[...new Set(CFG.today)].filter(k=>POOL.includes(k)),RW=POOL.filter(k=>!TW.includes(k));let twAt=0;
+const mk=i=>{const n=SIZES[i];if(POOL.length<=n)return POOL.slice();const w=[];
+ const tn=RW.length?Math.min(TW.length,Math.max(1,n-2)):Math.min(TW.length,n);
+ for(let j=0;j<tn;j++){const k=TW[(twAt+j)%TW.length];if(!w.includes(k))w.push(k)}twAt=(twAt+tn)%Math.max(1,TW.length);
+ let guard=0;while(w.length<n&&guard++<200){const src=RW.length?RW:POOL;if(poolAt>=src.length)poolAt=0;const k=src[poolAt++];if(!w.includes(k))w.push(k)}return w};
 POOL.forEach((k,i)=>TINT[k]=PALETTE[i%PALETTE.length]);
 const ROUNDS=[{words:mk(0),rows:4,shots:24,every:6,reserve:2,guide:'full'},
   {words:mk(1),rows:5,shots:27,every:5,reserve:3,guide:'short'},
