@@ -15,7 +15,7 @@ function param(name){const m=new RegExp('[?&]'+name+'=([^&#]*)').exec(location.s
 function src(){const u=param('utm_source')||param('from')||param('src');if(u)return u;
  try{const r=document.referrer&&new URL(document.referrer).hostname.replace(/^www\./,'');if(r&&r!==location.hostname)return r}catch(e){}return ''}
 function send(o){if(off)return;o.v=vid;const b=JSON.stringify(o);
- try{fetch(URL_,{method:'POST',headers:{'Content-Type':'application/json'},body:b,keepalive:true,mode:'cors'}).catch(()=>{})}catch(e){}}
+ try{fetch(URL_,{method:'POST',headers:{'Content-Type':'text/plain;charset=UTF-8'},body:b,keepalive:true,mode:'cors'}).catch(()=>{})}catch(e){}}
 const sent=new Set();function once(e,d){const k=e+d;if(sent.has(k))return;sent.add(k);const o={e,d};if(e==='day'&&d===1)try{o.l=UI+'/'+LANG}catch(x){}send(o)}
 addEventListener('load',()=>setTimeout(()=>send({e:'open',s:(src()||'바로 들어옴')+(tester?' - 테스트판':'')}),500));
 // day 1 starts when a language is picked; later days through startDay

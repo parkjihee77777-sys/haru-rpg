@@ -22,6 +22,8 @@ window.bubbleReview=function(done){
    RV_AGAIN=[...missed].concat(RV_AGAIN.filter(k=>!missed.has(k)&&!caught.includes(k))).slice(0,8);try{rvStore()}catch(e){}
    try{if(was&&!muted){const a=BGM[was];if(a){a.volume=BGM_VOL;a.play().catch(()=>{})}}}catch(e){}
    done()}};
+ // (11/12) if the frame never loads (offline, blocked) the day must not stay frozen: after 15 s without the game starting, leave it
+ let up=false;fr.onload=()=>{up=true};setTimeout(()=>{if(!up&&!fin)BUB_CFG.done({})},15000);
  fr.src='bubble/index.html?v='+(typeof BUILD!=='undefined'?BUILD:'');document.body.appendChild(fr);
  return true};
 if(typeof wordReview==='function'){const _wr2=wordReview;wordReview=function(done){if(navigator.webdriver||/[?&]noplane/.test(location.search)){_wr2(done);return}// test bots know the old review screen
