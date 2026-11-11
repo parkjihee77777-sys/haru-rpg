@@ -96,7 +96,7 @@ function edSave(){try{saveDay();const s=JSON.parse(localStorage.getItem('haru_sa
 function edCard(){const R=ED,m=document.getElementById('modal'),c=document.getElementById('mcard'),seen=edSeen(),C=EDL.CARD,D=(t,a,b)=>tr(t).replace('{n}',a).replace('{k}',b);
  const hs=Object.entries(HEART).filter(([,v])=>v>0).sort((a,b)=>b[1]-a[1]).map(([i,v])=>`${nm(i)} ♥${v}`).join(' · ')||tr('아직 없음');
  c.className='card edcard';c.innerHTML=`<div id="edCard"><h2>${D('엔딩 {n}',R.ed)} 「${tr(C[R.ed-1][0])}」</h2><p class="edone">${tr(C[R.ed-1][1])}</p>
-  <p class="edstat">${D('만난 친구 {n}명 · 끝까지 만난 친구 {k}명',R.met,R.full)}</p><p class="edstat">${tr('친해진 친구')}: ${hs}</p>
+  <p class="edstat">${D('만난 친구 {n}명 · 끝까지 만난 친구 {k}명',R.met,R.full)}</p>
   <p class="edstat"><b>${D('본 엔딩 {n} / 7',seen.length)}</b></p><div class="edseen">${C.map((x,i)=>`<span class="${seen.includes(i+1)?(i+1===R.ed?'now':''):'no'}">${i+1}. ${tr(x[0])}</span>`).join('')}</div>
   <button class="big" id="edNew">${tr('처음부터 다시 — 다른 친구도 만나 보기')}</button><div class="minor"><button class="ghost" id="edAgain">${D('{n}일차 다시 하기',ED_DAY)}</button></div></div>`;
  m.classList.add('on');busy=true;c.classList.add('lock');setTimeout(()=>c.classList.remove('lock'),1100);
