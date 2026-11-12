@@ -247,9 +247,10 @@ function teacherLine(l){if(!Array.isArray(l)||l[0]!=='nar'||typeof l[2]!=='strin
 // the hero's dad (11/03): {d} in a line, 'dad' as a speaker at dinner (Day 4, 8, 12, 16R)
 {const W={dad:{ko:'아빠',en:'dad',id:'ayah',vi:'bố',zh:'爸爸'}};for(const[k,w]of Object.entries(W))if(!D2WORDS[k])D2WORDS[k]=w;d2Merge();
  if(LANGS.ja)LANGS.ja.words.dad='パパ';if(LANGS.ru)LANGS.ru.words.dad='папа'}
-// on Dad's days (Day 4, 8, 12, 16) dinner shows the picture with Dad at the table (scenes/<dinner picture>_dad.jpg)
-const DAD_DAYS=[4,8,12,16];
-{const _sceneDad=scene;scene=function(img,lines,done,keep){if((img==='dinner'||img==='dinner_m')&&DAD_DAYS.includes(DAY)){const c=UI==='ko'?LANG:UI;
+// Dad is in the dinner picture (scenes/<dinner picture>_dad.jpg) on the evenings he is at the table: when tonight's lines have him speak.
+// (11/12 owner: it went by the date (Day 4, 8, 12, 16), but Dad's evenings belong to each friend's 3rd, 7th, 11th and 15th story, whatever day that story is met — he spoke with no Dad in the picture.)
+const dadTonight=lines=>(lines||[]).some(l=>Array.isArray(l)&&l[0]==='dad')||(typeof PICKS!=='undefined'?PICKS:[]).some(id=>TODAYEP[id]&&JSON.stringify(TODAYEP[id].eve||{}).includes('["dad"'));
+{const _sceneDad=scene;scene=function(img,lines,done,keep){if((img==='dinner'||img==='dinner_m')&&dadTonight(lines)){const c=UI==='ko'?LANG:UI;
   img=(DINNER_HOME.includes(c)?'dinner_'+c+(HERO==='hero_m'?'_m':'_f'):(HERO==='hero_m'?'dinner_m':'dinner'))+'_dad'}return _sceneDad(img,lines,done,keep)}}
 // (11/08 owner) each meeting's time of day, read from its first lines: 0 morning·break, 1 lunch, 2 afternoon class, 3 after school (none = any time).
 // The day's clock only moves forward: picking a later story first plays the lessons in between before it
