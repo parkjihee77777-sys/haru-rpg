@@ -151,7 +151,7 @@ arrow.onclick=e=>{e.stopPropagation();if(!arrowAt)return;const s=cam.s,W=innerWi
  return _ot(e)}}
 // where to go: how many friends are there to meet; places with nobody are pale
 {const _pp=pickPlace;pickPlace=function(){const r=_pp.apply(this,arguments);if(stage!=='d2_class')return r;
- const left=friendsToday().filter(f=>!PICKS.includes(f));
+ const left=friendsToday().filter(f=>!PICKS.includes(f)&&!(window.slotBlocked&&slotBlocked(f)));// (11/12) only friends who can be met now are counted (a kid who says 「내일 얘기하자」 is not)
  document.querySelectorAll('#mcard .pick.places button[data-p]').forEach(b=>{const p=b.dataset.p;let n=0;try{const ps=d2People(p);n=left.filter(f=>ps.some(q=>q[0]===f)).length}catch(e){}
   if(n){const s=document.createElement('b');s.className='pc';s.textContent=n;b.appendChild(s)}else if(p!==MAP)b.classList.add('empty')});return r}}
 // a friend already met (or with nothing new today) says their line once; more taps get one short thought

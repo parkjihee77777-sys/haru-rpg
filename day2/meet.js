@@ -306,3 +306,14 @@ window.busyLines=function(id,sl,tomorrow){const R=["아, 지금 선생님 심부
   if(avail.length&&!here('class')){let bn=0;for(const m of Object.keys(D2PLACE)){if(m==='class'||!MAPS[m])continue;const n=here(m);if(n>bn){bn=n;to=m}}}}catch(e){}
  if(to==='class')return _dc.apply(this,arguments);
  stage='d2_class';load(to);say([['nar','',DAY===2?'둘째 날. 학교에 왔다.':DAY===3?'셋째 날. 학교에 왔다.':'오늘도 학교에 왔다.'],['think','smile','(오늘은 누구한테 말 걸어 볼까? 두 명쯤…)']],pickPlace)}}
+// (11/12 owner) lunch began on a map with nobody to meet (the first friend's lunch story ended at the stands, the gate, the cafeteria…;
+// or the classroom where every kid has a morning story and says 「내일 얘기하자」): the "where to?" card opens by itself, each place showing how many friends can be met there
+{let lunch=false;const _l=lessons;lessons=function(part){if(part==='am')lunch=true;return _l.apply(this,arguments)};
+ const _g=d2Goal;d2Goal=function(){const r=_g.apply(this,arguments);if(!lunch)return r;lunch=false;
+  try{if(stage==='d2_class'&&PICKS.length&&goal&&Array.isArray(goal.target)){const ids=goal.target.filter(f=>!PICKS.includes(f));if(ids.length&&!npcs.some(n=>ids.includes(n.id)))pickPlace()}}catch(e){}return r}}
+// (11/12 owner) Hyeeun went up the ramp into the cafeteria, the story ended — and she stood at the bottom again: the friend just met who left the map
+// during their own story is not put back on that map today (tidyPeople and every later visit); in the classroom they are back at the next lesson
+{const LEFT={};const _tp=tidyPeople;tidyPeople=function(){try{const f=SCENE_IDS&&SCENE_IDS[0];if(f&&PICKS.includes(f)&&!npcs.some(n=>n.id===f)&&!(GOWITH&&GOWITH.ids.includes(f)))LEFT[f]=MAP}catch(e){}return _tp.apply(this,arguments)};
+ const _dp=d2People;d2People=function(id){const ps=_dp(id);return ps.filter(p=>!(LEFT[p[0]]===id&&PICKS.includes(p[0])))};
+ const _sd=startDay;startDay=function(n){for(const k in LEFT)delete LEFT[k];return _sd.apply(this,arguments)};
+ const _l=lessons;lessons=function(){for(const k in LEFT)if(LEFT[k]==='class')delete LEFT[k];return _l.apply(this,arguments)}}
