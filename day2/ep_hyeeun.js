@@ -7,9 +7,11 @@
 window.EP=window.EP||{};
 EP.hyeeun=[
 // ■ Day 2 — 길 막지 마 (1)
-{title:'길 막지 마',scene:'hyeeun_01',place:'class',at:[870,825],with:[['jihoon',1060,860]],
+// (11/13 owner) her seat is at the back end of the aisle and she has to get there THROUGH the aisle: she starts at the front of the aisle beside my chair,
+// the two other bags lie further down it, and she rolls to the back once the way is clear (they all stood in the back row before, the way already behind her)
+{title:'길 막지 마',scene:'hyeeun_01',place:'class',at:[600,370],with:[['jihoon',1060,860]],
  pre:[
-  {me:[830,805]},
+  {me:[612,505]},
   ['nar','','쉬는 시간. 교실 뒤쪽이 시끄러웠다. 아이들이 {@bag|을} 책상 옆 바닥에 내려놓고 떠들고 있었다.'],
   ['nar','','나도 {@bag|을} 의자 옆 바닥에 내려놓았다. 책상 옆 고리에 거는 걸 깜빡했다.'],
   ['think','surprised','(첫날 자기소개 할 때 「천천히 해도 돼」 해 준 애가 있었는데. 누구였지?)'],
@@ -23,7 +25,7 @@ EP.hyeeun=[
   ['hyeeun','smile','농담은 ‘길 막지 마’의 ‘마~’ 부분. {@bag|은} 진짜 치워 줘.'],
   {k:'bag',goal:'「{x}」 들어 올리기',bag:['bag','pcase','notebook','umbrella','water_bottle']},
   {clear:['bag']},
-  {lay:[['bag',700,830,46],['bag',770,826,46]]},
+  {lay:[['bag',588,625,46],['bag',614,725,46]]},
   ['nar','','내 {@bag|은} 들었다. 그런데 통로에는 {@bag|이} 두 개 더 있었다. 주인들은 교실 앞쪽에서 떠들고 있었다.'],
   ['hyeeun','smile','앞{@wheel|이} 작아서 끈 같은 데 잘 걸려. 걸리면 내가 앞으로 쏠려.'],
   ['nar','','혜은이는 담담하게 말했다. 날씨 얘기를 하는 것 같았다.'],
@@ -77,9 +79,11 @@ EP.hyeeun=[
    ['think','sad','(미안한 얼굴을 너무 많이 했나 봐.)']]}],
  flag:{E02_hand:{B:1}},
  post:[
+  {move:['hyeeun',600,818]},
+  {me:[700,815]},
   ['nar','','혜은이가 자리에 도착했다. 그런데 바로 멈췄다.'],
   ['hyeeun','surprised','어? 앞{@wheel} 앞에 뭐 있다.'],
-  {lay:[['eraser',815,885,50,null,'stay']]},
+  {lay:[['eraser',600,872,50,null,'stay']]},
   ['nar','','혜은이 앞{@wheel} 앞에 작은 지우개 하나가 있었다. 내 거였다. {@bag|을} 들 때 떨어진 모양이었다.'],
   {k:'eraser',goal:'「{x}」 줍기'},
   {clear:['eraser']},
