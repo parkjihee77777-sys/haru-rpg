@@ -252,40 +252,57 @@ function teacherLine(l){if(!Array.isArray(l)||l[0]!=='nar'||typeof l[2]!=='strin
 const dadTonight=lines=>(lines||[]).some(l=>Array.isArray(l)&&l[0]==='dad')||(typeof PICKS!=='undefined'?PICKS:[]).some(id=>TODAYEP[id]&&JSON.stringify(TODAYEP[id].eve||{}).includes('["dad"'));
 {const _sceneDad=scene;scene=function(img,lines,done,keep){if((img==='dinner'||img==='dinner_m')&&dadTonight(lines)){const c=UI==='ko'?LANG:UI;
   img=(DINNER_HOME.includes(c)?'dinner_'+c+(HERO==='hero_m'?'_m':'_f'):(HERO==='hero_m'?'dinner_m':'dinner'))+'_dad'}return _sceneDad(img,lines,done,keep)}}
-// (11/08 owner) each meeting's time of day, read from its first lines: 0 morning·break, 1 lunch, 2 afternoon class, 3 after school (none = any time).
-// The day's clock only moves forward: picking a later story first plays the lessons in between before it
-// (a lunch story → the morning lessons first; an after-school story → the afternoon lessons first). Only going back in time is refused, and only when another friend has a fitting story.
-{const SLOTS=[[3,/^([56]교시가 끝났다|종례|하교|방과 ?후|오늘 끝)/],[2,/^(5교시|6교시|오후)/],[1,/^(점심|4교시가 끝났다|급식)/],[0,/^(아침|1교시|[123]교시가 끝났다|등교|쉬는 시간|중간 놀이)/]];
- window.epSlot=function(e){if(!e)return null;if(e.slot!=null)return e.slot;let n=0;for(const s of e.pre||[]){if(!Array.isArray(s)||typeof s[2]!=='string')continue;const t=s[2].replace(/^[^:]*: 「/,'');const m=SLOTS.find(([,r])=>r.test(t));if(m)return m[0];if(++n>=3)break}return null};
+// (11/13 owner) 「몇 교시」를 대사에서 지운 뒤로는 이야기마다 하루 중 때를 표(EP_TIME)로 읽는다. 같은 날 두 이야기가 시간이 거꾸로 가거나 겹치지 않게:
+// 칸 1 등교 직후 · 2 오전 · 3 급식 · 4 점심 놀이 · 5 오후 · 6 종례·방과 후 · 7 하교 길. 표 한 줄 = [가장 이른 칸, 가장 늦은 칸, 지나는 칸 수, 사실].
+// - 하루의 시계는 앞으로만 간다: 다음 이야기는 앞 이야기가 끝난 칸 이후에서 시작(같은 칸은 괜찮다).
+// - 등교·급식·종례·하교 칸은 하루에 한 이야기만(두 번 등교하거나 밥을 두 번 먹지 않게).
+// - 같은 날 부딪치는 사실(비 오는 날↔맑은 날, 요일, 체육이 없는 날↔체육 이야기, 담임 출장↔담임이 있는 이야기)은 함께 나오지 않는다.
+// - 첫 친구를 고를 때 그 뒤에 만날 수 있는 친구가 남아 있어야 한다(혼자 끝나는 날이 없게).
+// - 아무도 맞지 않으면 막지 않는다(그날이 멈추지 않게). 시험 모드는 규칙 없음. 선거 날(ED_DAY)은 결말이 오후에 시작하므로 그 전(점심 놀이)까지만.
+{window.EP_TIME={"haeun":[[2,2,0],[6,6,1],[2,2,0],[3,3,1],[4,4,1],[2,2,0],[4,4,1],[1,1,0],[6,6,1],[2,2,0,["nope"]],[6,6,0],[2,2,0],[6,6,1],[4,4,1],[2,2,0]],"haneul":[[1,1,1],[2,2,0],[2,2,0],[2,2,1],[1,1,1],[3,3,0],[4,4,1],[5,5,0],[2,2,1],[2,2,0],[2,2,0],[5,5,1],[6,6,1],[2,2,0,["noteacher"]],[1,1,1]],"hangyeol":[[2,5,0],[2,5,0],[4,4,1],[4,4,0],[2,5,0],[2,5,0],[2,5,0,["day금"]],[7,7,0,["wet"]],[2,5,0],[2,5,0],[2,5,0],[6,6,0],[3,3,1],[2,5,0],[2,5,0,["pe"]]],"haram":[[3,3,0],[2,5,0],[2,5,0],[2,5,0],[3,3,2],[3,3,0],[2,2,0],[2,5,0],[2,5,0],[2,2,4],[6,6,1],[1,1,1],[6,6,0],[2,2,3],[2,5,0]],"hyeeun":[[2,5,0],[2,5,0],[3,3,0,["wet"]],[2,2,0],[2,5,0,["pe"]],[2,5,0,["pe"]],[2,5,0],[2,2,0],[3,3,0],[2,5,0],[6,6,1],[2,5,0],[2,5,0,["sun"]],[2,5,0,["pe"]],[2,5,0]],"jiho":[[2,5,0],[2,5,0,["pe"]],[2,5,0],[2,5,0,["wet"]],[2,5,0,["wet"]],[2,5,0,["pe"]],[6,6,0,["pe"]],[2,5,0,["pe"]],[2,5,0,["pe"]],[3,3,1],[2,5,0],[2,4,0],[2,5,0,["sun"]],[2,5,0],[2,5,0]],"jihoon":[[4,4,1,["sun"]],[6,6,1],[4,4,0],[2,2,0],[6,6,1,["sun"]],[4,4,0],[2,2,0],[4,4,0],[4,4,0],[2,2,1],[4,4,0,["wet"]],[2,2,0],[6,6,1],[4,4,1,["sun"]],[6,6,1,["sun"]]],"junho":[[4,4,1],[2,2,0,["pe"]],[4,4,1],[6,6,0],[4,4,1],[4,4,0],[4,4,1],[2,2,0],[4,4,1,["teacher"]],[4,4,1],[4,4,1],[4,4,1],[2,5,0,["pe"]],[4,4,0],[4,4,1]],"minho":[[2,5,0],[4,4,1],[1,5,1],[1,1,0],[1,5,1],[6,6,0],[2,5,0,["pe"]],[7,7,0,["wet"]],[2,5,0],[2,5,0],[1,1,1],[4,4,1],[1,6,0],[1,6,0],[2,5,0]],"seah":[[4,4,1,["sun"]],[2,2,0],[2,2,0],[3,3,0],[4,4,3],[2,2,0,["pe"]],[2,2,0],[4,4,0,["wet"]],[2,2,0],[2,2,0],[4,4,1],[2,2,0],[2,2,0],[3,3,0],[4,4,1,["sun"]]],"siwoo":[[1,1,1],[2,5,0],[2,5,0],[3,3,1],[1,1,1],[2,2,0,["wet","day목","nope"]],[2,5,0],[2,5,0],[4,4,1],[2,5,0],[4,4,1],[6,6,0],[2,5,0],[2,5,0],[6,6,0]],"sua":[[1,6,0],[2,5,0],[2,6,0],[3,4,1],[2,5,0],[2,5,0,["pe"]],[2,5,0],[2,5,1],[1,5,1],[4,4,1],[2,2,1],[1,6,0],[1,6,0],[2,5,1],[1,6,0]],"yena":[[2,2,0],[6,6,1],[2,2,0],[2,2,1],[2,2,0],[2,2,0],[2,2,0],[2,2,0],[2,2,1],[2,2,0],[2,2,0],[2,2,0],[4,4,0],[2,2,0],[2,2,0]],"youngmin":[[6,6,0],[1,1,1],[2,2,0],[2,2,0],[5,5,0],[2,2,0],[2,2,0],[4,4,1,["day화"]],[2,2,0],[1,1,1],[4,4,0],[5,5,0],[4,4,0],[6,6,0],[6,6,0,["sun"]]],"yuna":[[1,1,0],[2,2,0],[6,6,0],[4,4,1],[1,1,1],[4,4,2],[2,2,0],[1,1,1],[3,3,1],[5,5,0],[2,2,0],[2,2,0],[6,6,1],[2,2,1,["pe"]],[2,2,0]]};
+ const ONCE=new Set([1,3,6,7]),Z2S=[0,0,0,1,1,2,3,3];
+ const idOf=e=>{if(!e||!window.EP)return null;for(const k in EP)if(Array.isArray(EP[k])&&EP[k].includes(e))return k;return null};
+ const tOf=(id,e)=>{if(!e||e.vote||!window.EP_TIME)return null;const L=EP[id],i=L?L.indexOf(e):-1,r=i>=0&&EP_TIME[id]&&EP_TIME[id][i];return r?{lo:r[0],hi:r[1],sp:r[2],tag:r[3]||[]}:null};
+ window.epTime=e=>{const id=idOf(e);return id?tOf(id,e):null};
+ window.epSlot=function(e){if(!e)return null;if(e.slot!=null)return e.slot;const t=epTime(e);return t?Z2S[t.lo]:null};
  window.epLate=e=>epSlot(e)===3;
- const nextOf=f=>epNext(f,EPIDX[f]);const isTest=()=>(typeof TESTER!=='undefined'&&!!TESTER)||(typeof ED_DAY!=='undefined'&&DAY===ED_DAY);// Day 16 (election at 종례): no time-of-day rules either, the election must always come// (11/08 owner) tester mode meets all 15 in a day: no time-of-day rules
- let clock=0,clockDay=-1;// 0 morning, 1 lunch (morning lessons done), 3 after school (afternoon lessons done)
- const sync=()=>{if(clockDay!==DAY){clockDay=DAY;clock=0}};
+ const nextOf=f=>epNext(f,EPIDX[f]);
+ const isTest=()=>typeof TESTER!=='undefined'&&!!TESTER;
+ const isED=()=>typeof ED_DAY!=='undefined'&&DAY===ED_DAY;
+ let tDay=-1,EFF={},AM=false,PM=false;// EFF[id] = {z: 시작 칸, sp, tag} 오늘 시작한 이야기
+ const sync=()=>{if(tDay!==DAY){tDay=DAY;EFF={};AM=false;PM=false}};
+ const CLASH=(a,b)=>(a.includes('wet')&&b.includes('sun'))||(a.includes('sun')&&b.includes('wet'))||(a.includes('pe')&&b.includes('nope'))||(a.includes('nope')&&b.includes('pe'))
+  ||(a.includes('noteacher')&&b.includes('teacher'))||(a.includes('teacher')&&b.includes('noteacher'))||a.some(x=>/^day/.test(x)&&b.some(y=>/^day/.test(y)&&y!==x));
+ const state=extra=>{let clock=1,used=new Set(),tags=[];const all=Object.values(EFF).concat(extra?[extra]:[]);
+  for(const s of all){const end=s.z+s.sp;clock=Math.max(clock,end);for(let z=s.z;z<end;z++)if(ONCE.has(z))used.add(z);if(s.sp===0&&ONCE.has(s.z))used.add(s.z);if(s.sp>0&&end===7)used.add(7);tags=tags.concat(s.tag)}
+  const am=AM||clock>=3,pm=PM||clock>=6;if(am)clock=Math.max(clock,3);if(pm)clock=Math.max(clock,6);return{clock,used,tags,am,pm}};
+ // 이 이야기를 지금 시작하면 몇 칸에서 시작하나(못 하면 null)
+ const fit=(t,st)=>{if(!t)return 0;if(t.tag.length&&st.tags.length&&CLASH(t.tag,st.tags))return null;const hi=isED()?Math.min(t.hi,4):t.hi;let z=Math.max(st.clock,t.lo);while(z<=hi&&st.used.has(z))z++;return z<=hi?z:null};
+ const cands=except=>D2IDS.filter(i=>friendData(i)).filter(f=>f!==except&&!PICKS.includes(f)&&!EFF[f]&&nextOf(f));
+ // 지금 만날 수 없는 까닭: 'past'(오늘은 지남) / 'later'(이따가) / null(지금 됨)
+ const why=id=>{sync();if(isTest())return null;const e=nextOf(id),t=tOf(id,e);if(!t||PICKS.includes(id)||EFF[id])return null;const st=state(),z=fit(t,st);
+  if(z==null)return 'past';
+  if(PICKS.length===0&&!Object.keys(EFF).length&&D2IDS.filter(i=>friendData(i)).length>1){const after=state({z,sp:t.sp,tag:t.tag});if(!cands(id).some(f=>fit(tOf(f,nextOf(f)),after)!=null))return 'later'}
+  return null};
+ window.slotBlocked=function(id){const w=why(id);if(!w)return false;// 다른 누구도 지금 안 되면 막지 않는다
+  return cands(id).some(f=>!why(f))};
  const _ls=lessons;
  const play=(part,cb)=>{const am=[['nar','','딩동댕— 수업 시작 종이 울렸다.'],['nar','','선생님: 「자, 교과서 펴세요.」'],['nar','','오전 수업이 하나씩 지나갔다.'],['nar','','딩동댕— 점심시간!']];
   const pm=[['nar','','딩동댕— 수업 시작 종이 울렸다.'],['nar','','오후 수업이 천천히 지나갔다.'],['nar','','딩동댕— 마지막 종이 울렸다. 방과 후!']];
   const n=LESSON_PICS.length,pic=!n?null:part==='am'?LESSON_PICS[DAY%Math.max(1,n-1)]:LESSON_PICS[n-1];
-  clock=part==='am'?1:3;busy=true;setGoal('');const back=MAP;fade(()=>{if(MAP!=='class')load('class');(pic?(ls,c)=>scene(pic,ls,c):say)(part==='am'?am:pm,()=>{busy=false;if(back!=='class')fade(()=>{load(back);cb()});else cb()})})};// (11/08 owner) Seah's lunch story at the cafeteria ran on the classroom map: after the lessons, back to where the friend is
- // (11/08 owner) the goal arrows must not point at a friend whose story would be put off (Day 14: arrow to Hangyeol, then 「내일 하자」)
- // (11/09 owner) a friend you can't meet now says why and when you can talk instead of the hero's thought
-window.busyLines=function(id,sl,tomorrow){const R=["아, 지금 선생님 심부름 가야 해.", "미안, 지금 숙제 마저 해야 돼.", "지금 다른 친구랑 약속이 있어.", "앗, 지금 물 마시러 가던 길이야."],TD=["아침에 얘기하자!", "점심시간에 얘기하자!", "오후에 얘기하자!", "수업 끝나고 얘기하자!"],TM=["내일 아침에 얘기하자!", "내일 점심시간에 얘기하자!", "내일 오후에 얘기하자!", "내일 수업 끝나고 얘기하자!"];
- let h=DAY;for(const c of id)h+=c.charCodeAt(0);const k=Math.max(0,Math.min(3,sl==null?0:sl));return[[id,'smile',R[h%4]],[id,'smile',(tomorrow?TM:TD)[k]]]};
- window.slotBlocked=function(id){sync();if(navigator.webdriver||isTest())return false;const e=nextOf(id),sl=epSlot(e);if(!e||sl==null||PICKS.includes(id))return false;
-  const others=D2IDS.filter(i=>friendData(i)).filter(f=>f!==id&&!PICKS.includes(f)&&nextOf(f)).map(f=>epSlot(nextOf(f)));
-  if(sl<clock&&others.some(o=>o==null||o>=clock))return true;
-  if(sl===3&&PICKS.length===0&&Math.min(2,D2IDS.filter(i=>friendData(i)).length)>1&&others.some(o=>o!==3))return true;return false};
+  if(part==='am')AM=true;else{AM=true;PM=true}busy=true;setGoal('');const back=MAP;fade(()=>{if(MAP!=='class')load('class');(pic?(ls,c)=>scene(pic,ls,c):say)(part==='am'?am:pm,()=>{busy=false;if(back!=='class')fade(()=>{load(back);cb()});else cb()})})};
+ window.busyLines=function(id,sl,tomorrow){const R=["아, 지금 선생님 심부름 가야 해.", "미안, 지금 숙제 마저 해야 돼.", "지금 다른 친구랑 약속이 있어.", "앗, 지금 물 마시러 가던 길이야."],TD=["아침에 얘기하자!", "점심시간에 얘기하자!", "오후에 얘기하자!", "수업 끝나고 얘기하자!"],TM=["내일 아침에 얘기하자!", "내일 점심시간에 얘기하자!", "내일 오후에 얘기하자!", "내일 수업 끝나고 얘기하자!"];
+  let h=DAY;for(const c of id)h+=c.charCodeAt(0);const k=Math.max(0,Math.min(3,sl==null?0:sl));return[[id,'smile',R[h%4]],[id,'smile',(tomorrow?TM:TD)[k]]]};
  {const _g=d2Goal;d2Goal=function(){const _ft=friendsToday;friendsToday=function(){const r=_ft();return r.filter(f=>PICKS.includes(f)||!slotBlocked(f))};try{return _g.apply(this,arguments)}finally{friendsToday=_ft}}}
- const _dl=d2Talk;d2Talk=function(id){sync();const e=nextOf(id),sl=epSlot(e);
-  if(navigator.webdriver||isTest()||!e||sl==null||stage!=='d2_class'||PICKS.includes(id)||PICKS.length>=needToday())return _dl(id);
-  if(sl<clock){const others=friendsToday().filter(f=>f!==id&&!PICKS.includes(f)&&nextOf(f)).map(f=>epSlot(nextOf(f)));
-   if(others.some(o=>o==null||o>=clock)){say(busyLines(id,sl,true));return}
-   return _dl(id)}
-  // an after-school story can't be the first of two (the day would end with one friend left): wait for it if another friend has an earlier one
-  if(sl===3&&PICKS.length===0&&needToday()>1&&friendsToday().some(f=>f!==id&&nextOf(f)&&epSlot(nextOf(f))!==3)){say(busyLines(id,3,false));return}
-  if(sl>=1&&clock<1)return play('am',()=>d2Talk(id));
-  if(sl===3&&clock<3)return play('pm',()=>d2Talk(id));
-  return _dl(id)};
- lessons=function(part){sync();if(isTest())return _ls(part);if(part==='am'&&clock>=1){busy=false;d2Goal();return}if(part==='pm'&&clock>=3){busy=false;stage='d2_after';setGoal('방과 후! 나가는 길로 가서 집에 가기','out');return}clock=part==='am'?1:3;return _ls(part)}}
+ const _dl=d2Talk;d2Talk=function(id){sync();const e=nextOf(id),t=tOf(id,e);
+  if(navigator.webdriver||isTest()||!t||stage!=='d2_class'||PICKS.includes(id)||EFF[id]||PICKS.length>=needToday())return _dl(id);
+  if(slotBlocked(id)){const w=why(id);say(busyLines(id,Z2S[t.lo],w==='past'));return}
+  const st=state();let z=fit(t,st);if(z==null)z=Math.max(st.clock,t.lo);// 아무도 안 맞는 날: 막지 않고 그대로
+  if(z>=3&&!st.am)return play('am',()=>d2Talk(id));
+  if(z>=6&&!st.pm)return play('pm',()=>d2Talk(id));
+  EFF[id]={z,sp:t.sp,tag:t.tag};return _dl(id)};
+ lessons=function(part){sync();if(isTest())return _ls(part);const st=state();if(part==='am'&&st.am){busy=false;d2Goal();return}if(part==='pm'&&st.pm){busy=false;stage='d2_after';setGoal('방과 후! 나가는 길로 가서 집에 가기','out');return}if(part==='am')AM=true;else{AM=true;PM=true}return _ls(part)};
+ window.timeState=()=>{sync();return{...state(),EFF:JSON.parse(JSON.stringify(EFF))}}}
 // (11/08 owner) day 14 at lunch the desks were empty: whenever the "meet one more friend" goal comes up in the classroom, the kids who belong there come back to their seats
 {const _g=d2Goal;d2Goal=function(){try{if(MAP==='class'&&!SCENE_IDS&&typeof tidyPeople==='function')tidyPeople()}catch(e){}return _g.apply(this,arguments)}}
 // (11/08 owner) tapping a kid who only stands here as part of another friend's scene (Haeun in Junho's backyard scene) starts that scene

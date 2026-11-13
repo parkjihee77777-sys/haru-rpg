@@ -3,7 +3,7 @@
 // Tokens (ending.js fills them): {P1}/{P2} = 1st/2nd candidate, {B1}/{B2} = best friends, {VJ}/{VS}/{VM} = votes (Jiho, Sua, me),
 // {HW@k} = word k in the hero's own language; {P1:와} = name + particle in Korean (이 after a closed syllable: 혜은이가); other screens: the name.
 window.EDL={
- open:[['nar','','딩동댕— 5교시 시작 종이 울렸다.'],['nar','','오후 수업이 천천히 지나갔다.'],['nar','','딩동댕— 마지막 종이 울렸다. 오늘은 종례가 길다. 반장 선거.'],
+ open:[['nar','','딩동댕— 종이 울렸다.'],['nar','','오후 수업이 천천히 지나갔다.'],['nar','','딩동댕— 마지막 종이 울렸다. 오늘은 종례가 길다. 반장 선거.'],
   ['teacher','smile','투표는 비밀이에요. 누구를 뽑았는지 말하지도, 묻지도 않아요. 제일 많이 받은 사람이 반장, 그다음이 부반장이에요.'],
   ['teacher','smile','후보는 한 사람씩 한두 마디만 해 주세요.'],
   ['jiho','laugh','기호 1번 백지호! 점심시간에 체육관을 열겠습니다.']],

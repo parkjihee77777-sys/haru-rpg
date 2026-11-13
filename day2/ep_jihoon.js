@@ -285,7 +285,7 @@ EP.jihoon=[
 {title:'눈 감은 사진',scene:'jihoon_04',place:'class',at:[1240,290],with:[['jiho',1053,420],['yena',1390,350]],
  pre:[
   {pic:'jihoon_04a'},
-  ['nar','','2교시가 끝났다. 교실 뒤 게시판 앞에 아이들이 모여 있었다.'],
+  ['nar','','쉬는 시간이 됐다. 교실 뒤 게시판 앞에 아이들이 모여 있었다.'],
   ['nar','','게시판 한쪽에 「이번 주 우리 반」 칸이 있다. {@teacher|이} 사진첩에서 몇 장을 뽑아 붙이신다. {@photo} 밑에는 하트 {@sticker|를} 붙이는 빈칸이 있다. 한 사람이 일주일에 세 장씩 붙일 수 있다.'],
   ['yena','smile','딴-딴-따라~ 전학생! 너 나왔어!'],
   ['nar','','나는 게시판 앞으로 갔다.'],
@@ -560,7 +560,7 @@ EP.jihoon=[
 // ■ Day 8 — 꽥이 (7)
 {title:'꽥이',scene:'jihoon_07',place:'class',at:[900,600],with:[['jiho',620,480],['yena',1070,620]],
  pre:[
-  ['nar','','1교시가 끝났다. 나는 책상 옆 고리에 건 {@bag|을} 열었다. 물통을 꺼내려고.'],
+  ['nar','','쉬는 시간이 됐다. 나는 책상 옆 고리에 건 {@bag|을} 열었다. 물통을 꺼내려고.'],
   {k:'bag',goal:'「{x}」 열기',bag:['bag','textbook','eraser','umbrella','notebook']},
   ['nar','','{@bag} 지퍼를 열고 물통을 꺼냈다.'],
   {pic:'jihoon_07a'},
@@ -815,7 +815,7 @@ EP.jihoon=[
 {title:'하트 스티커 세 장',scene:'jihoon_10',bag:0,place:'class',at:[1250,300],with:[['jiho',1060,330]],
  pre:[
   {pic:'jihoon_10a'},
-  ['nar','','3교시가 끝났다. {@teacher|이} 하트 {@sticker|를} 나눠 주셨다. 한 사람에 세 장. 빨간 하트.'],
+  ['nar','','수업이 끝나고 쉬는 시간이 됐다. {@teacher|이} 하트 {@sticker|를} 나눠 주셨다. 한 사람에 세 장. 빨간 하트.'],
   ['nar','','선생님: 「이번 주 「우리 반」 {@photo}이에요. 좋은 {@photo}에 붙여요. 한 {@photo}에 한 사람이 한 장씩만.」'],
   {k:'sticker',goal:'「{x}」 받기',bag:['sticker:sticker_heart','photo','pencil','eraser','notebook']},
   {clear:['sticker']},
@@ -981,7 +981,7 @@ EP.jihoon=[
 {title:'내려 주세요',scene:'jihoon_12',place:'class',at:[1420,330],with:[['jiho',1100,320],['yena',1250,300]],goAlone:{hall:[undefined,'A','B','C','D'],class:['A','B','C','D']},
  pre:[
   {pic:'jihoon_12a'},
-  ['nar','','1교시가 끝났다. 교실 뒤 게시판 앞이 시끄러웠다.'],
+  ['nar','','쉬는 시간이 됐다. 교실 뒤 게시판 앞이 시끄러웠다.'],
   {k:'photo',goal:'「{x}」 보기',bag:['photo:photo_grandma','sticker','pencil','notebook','eraser']},
   {pic:'jihoon_12b'},
   ['nar','','「이번 주 우리 반」에 새 {@photo|이} 붙어 있었다. {@school_gate} 앞. 지훈이가 바퀴 달린 장바구니를 끌고 있었다. 옆에 꽃무늬 모자를 쓴 {@grandma}. {@grandma|는} 웃고 계셨다. 지훈이는 땅을 보고 있었다.'],
@@ -1050,7 +1050,7 @@ EP.jihoon=[
   {only:['D'],lines:[['jihoon','smile','글씨가 제일 싫어요. 그리고 {@grandma} 얘기 나오는 거요.'],['nar','','선생님: 「그렇구나. 그럼 {@photo}도 글씨도 다 내릴게요. 다시 붙이고 싶으면 그때 말해요. 글씨는 지훈이가 정하고.」']]},
   {only:['A'],lines:[['nar','','선생님: 「그랬구나. 이 {@photo|은} 지훈이가 가져요. 다시 붙일지는 지훈이가 정해요.」']]},
   {only:['B','C'],lines:[['nar','','선생님: 「바로 내릴게요. 이 {@photo|은} 지훈이가 가져요. 다시 붙일지는 지훈이가 정해요.」']]},
-  ['nar','','{@teacher|이} {@photo|을} 지훈이 {@hand}에 주셨다. 애들한테는 아무 설명도 안 하셨다. 「자, 2교시 준비해요.」 그뿐이었다.'],
+  ['nar','','{@teacher|이} {@photo|을} 지훈이 {@hand}에 주셨다. 애들한테는 아무 설명도 안 하셨다. 「자, 다음 시간 준비해요.」 그뿐이었다.'],
   {only:['A'],lines:[['nar','','내 {@hand}에 있던 {@photo|이었}다. {@teacher|이} 받아서 지훈이에게 건네셨다.']]},
   {k:'teacher',goal:'「{x}」께 고맙다고 말하기',bag:['teacher','book','pencil','notebook','sticker']},
   {clear:['teacher']},
