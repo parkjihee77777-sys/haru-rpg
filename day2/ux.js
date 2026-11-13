@@ -168,6 +168,8 @@ const againN={};
 const autoBtn=document.createElement('button');autoBtn.id='autoBtn';autoBtn.textContent='⏩';document.body.appendChild(autoBtn);let autoOn=false,autoT=0;
 autoBtn.addEventListener('pointerdown',e=>e.stopPropagation());
 autoBtn.onclick=e=>{e.stopPropagation();autoOn=!autoOn;autoBtn.classList.toggle('on',autoOn);autoT=performance.now();if(autoOn&&talkOn&&!chEl.classList.contains('on'))advance()};
+// (11/14 owner) the ⏩ stayed over the choice cards for up to a quarter second (and in every capture): hide it the moment a choice opens
+new MutationObserver(()=>{if(chEl.classList.contains('on'))autoBtn.style.display='none'}).observe(chEl,{attributes:true,attributeFilter:['class']});
 setInterval(()=>{const asking=chEl.classList.contains('on');
  if(autoOn&&(asking||(!talkOn&&!busy)||FIND)){autoOn=false;autoBtn.classList.remove('on')}
  if(autoOn&&talkOn&&!asking&&!touring&&performance.now()-autoT>1500){autoT=performance.now();advance()}
