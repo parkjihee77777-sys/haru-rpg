@@ -250,7 +250,11 @@ function teacherLine(l){if(!Array.isArray(l)||l[0]!=='nar'||typeof l[2]!=='strin
 // (11/12 owner: it went by the date (Day 4, 8, 12, 16), but Dad's evenings belong to each friend's 3rd, 7th, 11th and 15th story, whatever day that story is met — he spoke with no Dad in the picture.)
 const dadTonight=lines=>(lines||[]).some(l=>Array.isArray(l)&&l[0]==='dad')||(typeof PICKS!=='undefined'?PICKS:[]).some(id=>TODAYEP[id]&&JSON.stringify(TODAYEP[id].eve||{}).includes('["dad"'));
 {const _sceneDad=scene;scene=function(img,lines,done,keep){if((img==='dinner'||img==='dinner_m')&&dadTonight(lines)){const c=UI==='ko'?LANG:UI;
-  img=(DINNER_HOME.includes(c)?'dinner_'+c+(HERO==='hero_m'?'_m':'_f'):(HERO==='hero_m'?'dinner_m':'dinner'))+'_dad'}return _sceneDad(img,lines,done,keep)}}
+  img=(DINNER_HOME.includes(c)?'dinner_'+c+(HERO==='hero_m'?'_m':'_f'):(HERO==='hero_m'?'dinner_m':'dinner'))+'_dad'+(dadPang(lines)?'sit':'')}return _sceneDad(img,lines,done,keep)}}
+// (11/14 owner) 「엄마도 아빠도 일하는데 왜 엄마만 밥을 할까」: on Dad's evenings Dad cooks and brings the food, Mom sits and talks (scenes/*_dad.jpg).
+// Except the evenings Dad is with Pangpang (feeding, playing, walking him): those keep the old picture with Dad sitting at the table (scenes/*_dadsit.jpg).
+function dadPang(lines){const ls=(lines||[]).concat(...(typeof PICKS!=='undefined'?PICKS:[]).map(id=>TODAYEP[id]&&TODAYEP[id].eve&&TODAYEP[id].eve.lead||[]));
+ return ls.some(l=>Array.isArray(l)&&l[0]==='nar'&&/\{d[|}]/.test(l[2]||'')&&(l[2]||'').includes('팡팡이'))}
 // (11/13 owner) 「몇 교시」를 대사에서 지운 뒤로는 이야기마다 하루 중 때를 표(EP_TIME)로 읽는다. 같은 날 두 이야기가 시간이 거꾸로 가거나 겹치지 않게:
 // 칸 1 등교 직후 · 2 오전 · 3 급식 · 4 점심 놀이 · 5 오후 · 6 종례·방과 후 · 7 하교 길. 표 한 줄 = [가장 이른 칸, 가장 늦은 칸, 지나는 칸 수, 사실].
 // - 하루의 시계는 앞으로만 간다: 다음 이야기는 앞 이야기가 끝난 칸 이후에서 시작(같은 칸은 괜찮다).
