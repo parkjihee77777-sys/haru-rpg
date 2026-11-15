@@ -76,7 +76,7 @@ EP.siwoo=[
  choices:[
   {k:'A',text:'「그럼 다리 어디에 그려? 알려 줘.」',pts:{siwoo:2},r:[
    ['me','smile','그럼 다리 어디에 그려? 알려 줘.'],{pic:'siwoo_02_A'},{pic:'siwoo_02c'},['nar','','시우 손가락이 멈췄다.'],['siwoo','smile','가슴. 머리 말고, 배 말고, 가운데. 한쪽에 3개씩.'],
-   ['me','surprised','가슴이 어디야?'],['siwoo','smile','날개가 붙은 데.'],['nar','','나는 고쳐 그렸다. 시우가 {@picture}을 다시 봤다.'],['siwoo','relieved','……정확해.']]},
+   ['me','surprised','가슴이 어디야?'],['siwoo','smile','날개가 붙은 데.'],{pic:'siwoo_02c2'},['nar','','나는 고쳐 그렸다. 시우가 {@picture}을 다시 봤다.'],['siwoo','relieved','……정확해.']]},
   {k:'B',text:'「너 말 진짜 기분 나빠!」 하고 {@picture}을 접는다.',pts:{siwoo:0},r:[
    ['me','angry','너 말 진짜 기분 나빠!'],{pic:'siwoo_02_B'},{pic:'siwoo_02d'},['nar','','나는 {@picture}을 반으로 접었다. 시우가 깜짝 놀라 귀를 반쯤 막았다.'],['siwoo','sad','……틀린 거 말한 거야. 기분 나쁘게 한 거 아니야.'],
    ['haeun','angry','그게 기분 나쁘게 한 거야!'],['nar','','시우는 대답하지 못했다. 손가락만 빠르게 꼼지락거렸다.'],['think','sad','(시우는 정말 뭐가 잘못됐는지 모르는 얼굴이야.)']]},
