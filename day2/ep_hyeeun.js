@@ -79,11 +79,13 @@ EP.hyeeun=[
    ['think','sad','(미안한 얼굴을 너무 많이 했나 봐.)']]}],
  flag:{E02_hand:{B:1}},
  post:[
-  {move:['hyeeun',600,818]},
-  {me:[700,815]},
+  {move:['hyeeun',600,775]},
+  {me:[700,775]},
+  // (11/15 owner) the eraser shows only once she is at her seat, right in front of her front wheels (she was still at the front of the aisle before)
+  ()=>new Promise(r=>{const t0=performance.now(),iv=setInterval(()=>{const n=npcs.find(k=>k.id==='hyeeun');if(!n||!n.path||performance.now()-t0>8000){clearInterval(iv);r()}},100)}),
   ['nar','','혜은이가 자리에 도착했다. 그런데 바로 멈췄다.'],
   ['hyeeun','surprised','어? 앞{@wheel} 앞에 뭐 있다.'],
-  {lay:[['eraser',600,872,50,null,'stay']]},
+  {lay:[['eraser',600,822,50,null,'stay']]},
   ['nar','','혜은이 앞{@wheel} 앞에 작은 지우개 하나가 있었다. 내 거였다. {@bag|을} 들 때 떨어진 모양이었다.'],
   {k:'eraser',goal:'「{x}」 줍기'},
   {clear:['eraser']},

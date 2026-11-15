@@ -157,9 +157,10 @@ EP.siwoo=[
   common:[['me','smile','2번은 내가 적어야 돼. {m}, 이상한 말 하나 알려 줘.'],['mom','smile','음…… ‘발이 넓다’?'],['me','surprised','……발이 크다는 거야?'],['mom','smile','그거 2번으로 적어.'],['dad','smile','{d}도 하나 줄게. ‘귀가 얇다.’']]}},
 
 // ■ Day 5 — 숟가락 소리 (4)
-{title:'숟가락 소리',scene:'siwoo_04',place:'cafe',at:[1202,726],sit:[1340,755,200],cafeMap:'cafe2_lunch_siwoo',
+{title:'숟가락 소리',scene:'siwoo_04',place:'cafe',at:[905,815],sit:[723,800,200],cafeMap:'cafe2_lunch_siwoo',// (11/15 owner) the map redrawn: Siwoo sits at the bottom table in front of where Haram stands, the chair beside him empty
  things:{},
  pre:[
+  {me:[900,812]},
   ['nar','','점심시간 급식실. 시끄러웠다. 수백 명이 한꺼번에 떠들고, {@tray}이 부딪치고, {@chair}가 끌렸다.'],
   {pic:'siwoo_04c'},
   ['nar','','시우는 늘 급식실 맨 끝 벽 쪽 자리에 앉았다. 나는 30센티 떨어진 자리에 {@tray}을 놓았다.'],
@@ -879,4 +880,4 @@ addEventListener('load',()=>{const _ldSw=load;load=function(id,extra){try{const 
 if(typeof HEROPIC!=='undefined')HEROPIC.add('siwoo_08e');HEROPIC.add('siwoo_02a');
 
 // hide the Siwoo sprite where he is drawn into the map (tapping his spot still works)
-{const _ld=load;load=function(id){try{if(id==='cafe'&&MAPS.cafe&&MAPS.cafe.img2){const e=epNext('siwoo',EPIDX.siwoo);if(e&&e.place==='cafe'&&e.cafeMap){MAPS.cafe.img2=`maps/${e.cafeMap}.jpg`;window._swDrawn=1}else{if(/_siwoo/.test(MAPS.cafe.img2))MAPS.cafe.img2='maps/cafe2_lunch.jpg';window._swDrawn=0}}}catch(e){}const r=_ld.apply(this,arguments);try{if(id==='cafe'&&window._swDrawn){const hide=()=>{const n=npcs.find(n=>n.id==='siwoo');if(n&&n.el){n.el.style.visibility='hidden'}};hide();setTimeout(hide,60);setTimeout(hide,400)}}catch(e){}return r}}
+{const _ld=load;load=function(id){try{if(id==='cafe'&&MAPS.cafe&&MAPS.cafe.img2){const e=epNext('siwoo',EPIDX.siwoo);if(e&&e.place==='cafe'&&e.cafeMap){MAPS.cafe.img2=`maps/${e.cafeMap}.jpg`;window._swDrawn=1}else{if(/_siwoo/.test(MAPS.cafe.img2))MAPS.cafe.img2='maps/cafe2_lunch.jpg';window._swDrawn=0}}}catch(e){}const r=_ld.apply(this,arguments);try{if(id==='cafe'&&window._swDrawn){const hide=()=>{const n=npcs.find(n=>n.id==='siwoo');if(n&&n.el){n.el.style.visibility='hidden'}};hide();setTimeout(hide,60);setTimeout(hide,400);clearInterval(window._swHideT);window._swHideT=setInterval(()=>{if(MAP!=='cafe'||!window._swDrawn){clearInterval(window._swHideT);return}hide()},300)}}catch(e){}return r}}

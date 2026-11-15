@@ -660,12 +660,13 @@ EP.hangyeol=[
    ['me','smile','예나야, 한결이가 결이라고 하는 건, 그러니까, 할아버지가…… 아니 {@picture}에도 그렇고……'],{pic:'hangyeol_13_cC'},['hangyeol','surprised','야, 야. 내가 말할게.'],
    ['nar','','한결이가 손을 들어 내 말을 막았다.'],['hangyeol','smile','예나야, 그냥 그게 더 좋아. 이유는 내가 말할게. 할아버지가 그렇게 불렀어.'],['yena','smile','아, 그래? 알았어, 결이.'],
    ['think','sad','(도와주려 했는데, 한결이가 할 말을 내가 막 했네.)']]},
-  {pic:'hangyeol_13_cB'},{k:'D',text:'예나에게 짧게 말한다. 「불리고 싶은 이름으로 불러 주면 좋잖아. 나도 이름이 두 개야.」',pts:{hangyeol:2},r:[
+  {k:'D',text:'예나에게 짧게 말한다. 「불리고 싶은 이름으로 불러 주면 좋잖아. 나도 이름이 두 개야.」',pts:{hangyeol:2},r:[
    ['me','smile','불리고 싶은 이름으로 불러 주면 좋잖아. 나도 이름이 두 개야. {SN|이랑} {HN}.'],['yena','surprised','아, 그렇네. {HN}? 다시 해 봐.'],
    ['nar','','내 이름을 말했다. 예나가 따라 하다가 혀가 꼬였다.'],['yena','laugh','어렵다! 근데 결이는 쉽다. 결이!'],['hangyeol','laugh','결이는 쉽지. 두 글자.'],
    ['nar','','다들 웃었다. 한결이가 다시 {@chopsticks}을 들었다.']]}],
  post:[
   {only:['B'],lines:[
+   {pic:'hangyeol_13_cB'},
    {flag:'H04_name',is:1,lines:[['me','laugh','나는 원래 결이라고 불렀어! 옛날부터!']]},
    {flag:'H04_name',is:0,lines:[['me','laugh','나 그거 알았어! 한결이 {@picture}에 결이 공방이라고 써 있었어!']]},
    ['yena','surprised','뭐? 너만? 언제부터?'],['junho','surprised','왜 너만 알았어?'],
