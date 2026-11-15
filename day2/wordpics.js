@@ -9,7 +9,7 @@ const WORDPIC={
  minho_03:{cat:'cat_yellow'},hangyeol_10:{magnet:'magnet_board'},
  siwoo_08:{mirror:'mirror_wall'},
  hyeeun_05:{box:'milk_crate'},hyeeun_08:{box:'milk_crate'},hyeeun_07:{locker:'locker_grid'},minho_12:{box:'milk_crate'},minho_vote:{box:'ballot_box'},
- haram_09:{card:'card_greeting'},seah_08:{card:'cards_play'},
+ haram_09:{card:'card_greeting'},seah_08:{card:'cards_play'},siwoo_14:{card:'card_rest'},
  hangyeol_08:{umbrella:'umbrella_flower'},minho_08:{umbrella:'umbrella_broken'},
  hyeeun_02:{glove:'glove_wheel'},hyeeun_03:{glove:'glove_wheel'},hyeeun_15:{glove:'glove_wheel'},junho_09:{glove:'glove_goalie'},
  hyeeun_01:{wheel:'wheel_chair'},hyeeun_13:{wheel:'wheel_chair'},
@@ -29,7 +29,7 @@ const WORDPIC={
  hangyeol_01:{thread:'thread_floss'},hangyeol_12:{thread:'thread_floss'}};
 // which of those pictures are really there (a list, not a network probe: a missing file would show as a page error).
 // When a new picture from list F is added, put its name here (items = cut-out .png, cards = card .jpg).
-const PIC_ITEM=new Set(['colored_pencil_green','mirror_wall','photo_grandma','locker_grid','stairs_down','magnet_board', 'cat_yellow', 'ballot_box', 'cards_play', 'glue_stick', 'milk_crate', 'paper_crumpled', 'water_bottle_pink', 'water_drops', 'glove_wheel', 'glove_goalie', 'wheel_chair', 'card_greeting', 'ball_dodge', 'ice_pack', 'umbrella_flower', 'umbrella_broken', 'eraser_cloud', 'milk_strawberry', 'bag_gym', 'water_tap', 'notebook_blue', 'notebook_gray', 'thread_floss']),PIC_CARD=new Set(['mirror_wall','photo_grandma','stairs_down','magnet_board', 'cat_yellow', 'ballot_box', 'glue_stick', 'milk_crate', 'paper_crumpled', 'cards_play', 'water_bottle_pink', 'water_drops', 'photo_cam', 'glove_wheel', 'glove_goalie', 'wheel_chair', 'card_greeting', 'ball_dodge', 'ice_pack', 'umbrella_flower', 'umbrella_broken', 'eraser_cloud', 'milk_strawberry', 'bag_gym', 'water_tap', 'notebook_blue', 'notebook_gray', 'thread_floss']);
+const PIC_ITEM=new Set(['card_rest','colored_pencil_green','mirror_wall','photo_grandma','locker_grid','stairs_down','magnet_board', 'cat_yellow', 'ballot_box', 'cards_play', 'glue_stick', 'milk_crate', 'paper_crumpled', 'water_bottle_pink', 'water_drops', 'glove_wheel', 'glove_goalie', 'wheel_chair', 'card_greeting', 'ball_dodge', 'ice_pack', 'umbrella_flower', 'umbrella_broken', 'eraser_cloud', 'milk_strawberry', 'bag_gym', 'water_tap', 'notebook_blue', 'notebook_gray', 'thread_floss']),PIC_CARD=new Set(['mirror_wall','photo_grandma','stairs_down','magnet_board', 'cat_yellow', 'ballot_box', 'glue_stick', 'milk_crate', 'paper_crumpled', 'cards_play', 'water_bottle_pink', 'water_drops', 'photo_cam', 'glove_wheel', 'glove_goalie', 'wheel_chair', 'card_greeting', 'ball_dodge', 'ice_pack', 'umbrella_flower', 'umbrella_broken', 'eraser_cloud', 'milk_strawberry', 'bag_gym', 'water_tap', 'notebook_blue', 'notebook_gray', 'thread_floss']);
 let LAYPIC={},LAYPIC_EP=null;const DAYPIC={};
 function picOf(k){if(typeof SCENE_EP==='undefined'||!SCENE_EP)return k;if(LAYPIC_EP!==SCENE_EP){LAYPIC={};LAYPIC_EP=SCENE_EP}
  const w=(WORDPIC[SCENE_EP.scene]||{})[k],v=(w&&PIC_ITEM.has(w)&&w)||LAYPIC[k];if(!v||v===k)return k;DAYPIC[k]=v;PIC_ITEM.add(v);return v}// a laid picture is there (it is on the map)
@@ -39,7 +39,8 @@ function picOf(k){if(typeof SCENE_EP==='undefined'||!SCENE_EP)return k;if(LAYPIC
   lay=(lay||[]).map(t=>{const i=typeof t[1]==='string'?5:4;if(t[i]){if(t[i]!=='-')LAYPIC[t[0]]=t[i];return t}const v=picOf(t[0]);if(v===t[0])return t;const c=t.slice();while(c.length<i)c.push(undefined);c[i]=v;return c});
   return _lay(lay,clear)}}
 // picture trays (my bag, close-ups, two-step finds): the scene's picture for each thing
-{const _bag=bagFind;bagFind=function(k,items,goalText,done){const r=_bag(k,items,goalText,done);
+// (11/15) bagFind draws its tiles later (after the pictures load), so the scene's picture goes in as 'key:picture' up front
+{const _bag=bagFind;bagFind=function(k,items,goalText,done){items=(items||[]).map(q=>{if(q.includes(':'))return q;const v=picOf(q);return v&&v!==q?q+':'+v:q});const r=_bag(k,items,goalText,done);
   document.querySelectorAll('#mcard .zit').forEach(b=>{const q=b.dataset.k,v=picOf(q),im=b.querySelector('img');if(v===q||!im||!/items\/\w+\.png$/.test(im.getAttribute('src')||'')||im.getAttribute('src')!==`items/${q}.png`)return;
    im.onerror=()=>{im.onerror=()=>b.remove();im.src=`items/${q}.png`};im.src=`items/${v}.png`});return r}}
 // cards (the day's word cards): the picture the word had today
