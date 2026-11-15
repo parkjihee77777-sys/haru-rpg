@@ -631,7 +631,7 @@ EP.hyeeun=[
   A:[['me','sad','{@gym_clothes} 꺼내면서 안에 엉망인 것도 정리해 줬어. 그랬더니 원래대로 돌려 달래.'],['mom','surprised','왜?'],['me','smile','그게 혜은이 순서래. 리코더가 앞에 있어야 집게로 꺼내고, 무거운 건 뒤에 둔 거래.'],['mom','smile','엉망인 게 아니었구나.'],['me','sad','응. 내 눈에만 엉망이었어.']],
   B:[['me','smile','{@gym_clothes}만 꺼냈어. 안은 엉망이었는데 그냥 뒀어.'],['dad','surprised','정리해 주고 싶지 않았어?'],['me','smile','좀. 근데 혜은이가 안 치워 줘서 고맙대. 그게 자기 순서래.'],['mom','smile','그랬구나. 손 안 댄 게 도움이었네.']],
   C:[['me','smile','내 {@locker|이} 맨 아래 칸이라서 바꿀래? 물어봤어. 혜은이가 선생님한테 직접 말했어.'],['mom','surprised','선생님이 뭐라셨어?'],['me','smile','바꿔도 된대. 그리고 {@locker} 꼭 번호순일 필요 없대. 위 칸 불편한 사람은 따로 말하래. 하은이랑 팔 다친 애도 선생님한테 갔어.'],['mom','surprised','셋이나 있었네.'],['me','smile','응. 다들 말 안 했던 거야.']],
-  D:[['me','sad','나는 선생님한테 큰 소리로 혜은이 {@locker} 너무 높다고 바꿔 달라고 했어. 애들이 다 혜은이를 봤어.'],['mom','surprised','혜은이는?'],['me','sad','자기가 말하려고 했대. 지금 말고.'],['mom','smile','말은 맞았는데, 언제 누가 하느냐가 달랐구나.'],['me','sad','……응. 혜은이 거였어.']],
+  D:[['me','sad','나는 선생님한테 큰 소리로 혜은이 {@locker} 너무 높다고 바꿔 달라고 했어. 애들이 다 혜은이를 봤어.'],['mom','surprised','혜은이는?'],['me','sad','자기가 말하려고 했대. 지금 말고.'],['mom','smile','말은 맞았는데, 언제 누가 하느냐가 달랐구나.'],['me','sad','……응. 혜은이가 해야 할 말이었어.']],
   common:[['me','smile','혜은이가 부탁할 때 제일 좋은 사람은 부탁한 만큼만 해 주는 사람이래. 더 하지도 덜 하지도 않고.'],['dad','smile','그거 어렵다.'],['me','surprised','왜?'],['dad','laugh','{d}는 너 도와줄 때 자꾸 더 하게 되거든.'],['me','laugh','(웃음) 알아.']]}},
 
 // ■ Day 9 — 창고 아니야 (8)
@@ -794,7 +794,7 @@ EP.hyeeun=[
   ['hyeeun','smile','……이건 농담이야. 조리사님 좋은 분이야. 그냥, 나도 그냥 밥 먹는 사람이라는 거.']],
  eve:{lead:[['me','smile','{m}, 오늘 급식에 미역국 나왔어.'],['mom','smile','맛있었어?'],['me','smile','응. 근데 조리사님이 혜은이한테 ‘혼자서도 잘하네, 대단하다!’ 하셨어.'],['mom','surprised','혜은이는 뭐래?'],['me','laugh','밥 받는 건 다들 혼자 한대. 그러고 농담이래.'],['mom','laugh','(웃음) ……재치 있다.']],
   A:[['me','smile','나는 가는 길에 튀어나온 의자 다섯 개를 다 밀어 넣었어. 혜은이가 한 번도 안 멈추고 왔어.'],['mom','surprised','안 멈추는 게 중요해?'],['me','smile','응. 멈추면 {@soup|이} 출렁인대. 그래서 의자가 문제였어.'],['mom','smile','{@soup} 말고 길을 본 거네.']],
-  B:[['me','sad','나는 조리사님한테 혜은이 {@soup} 조금만 달라고 했어. 쏟을까 봐.'],['mom','surprised','그랬더니?'],['me','smile','조리사님이 혜은이한테 물어보셨어. 혜은이는 많이 달래. 미역국 좋아한대.'],['me','sad','그리고 나한테 자기 {@soup} 양은 자기가 정한대. 조리사님 말고 자기한테 물어보래.'],['mom','smile','……걱정돼서 한 말이었는데.'],['me','sad','응. 근데 혜은이 거였어.']],
+  B:[['me','sad','나는 조리사님한테 혜은이 {@soup} 조금만 달라고 했어. 쏟을까 봐.'],['mom','surprised','그랬더니?'],['me','smile','조리사님이 혜은이한테 물어보셨어. 혜은이는 많이 달래. 미역국 좋아한대.'],['me','sad','그리고 나한테 자기 {@soup} 양은 자기가 정한대. 조리사님 말고 자기한테 물어보래.'],['mom','smile','……걱정돼서 한 말이었는데.'],['me','sad','응. 근데 혜은이가 해야 할 말이었어.']],
   C:[['me','sad','내가 혜은이 {@tray} 들어 주려다가 {@soup|이} 손에 튀었어.'],['mom','surprised','어디 봐. 괜찮아?'],['me','smile','응, 조금 빨갰는데 찬물에 대서 괜찮아. 혜은이가 물 줬어.'],['mom','smile','혜은이가 너를 챙겼네.'],['me','smile','응. 혜은이 무릎 위가 제일 안 흔들린대. 안 미끄러지는 판이 있대.'],['mom','smile','그건 몰랐겠다.']],
   D:[['me','smile','{@soup}만 들어 줄까 물어봤는데, 혜은이가 ‘응’ 했어. {@soup}만. 밥은 자기가.'],['mom','surprised','그래서 {@soup}만 들어 줬어?'],['me','smile','응. 혜은이가 ‘{@soup}만 들어 줄까?’에 ‘응’ 한 거 아마 오늘 처음이래.'],['mom','relieved','……‘응’도 ‘아니’만큼 말하기 어려운가 보다.']],
   common:[['me','smile','혜은이가 {@soup} 나오는 날은 늘 고민이래. 부탁하면 들어 준 사람한테는 ‘착하다’ 하고, 자기한테는 ‘아이고’ 한대.'],['mom','sad','……둘 다 별로겠다.'],['me','smile','응. 혜은이도 그렇게 말했어. 그냥 {@soup|인}데.'],['mom','smile','그냥 {@soup}. 맞네.']]}},
@@ -830,8 +830,8 @@ EP.hyeeun=[
    ['me','sad','아니야. 괜찮아.'],
    ['nar','','나는 다시 읽기 시작했다. 아까보다 더 막혔다.'],
    ['think','sad','(괜찮지 않았는데. 괜찮다고 했어.)']]},
-  {k:'B',text:'그 자리에서 말한다. 「농담이라도 그건 아팠어.」',pts:{hyeeun:2},r:[
-   ['me','sad','……농담이라도 그건 아팠어.'],
+  {k:'B',text:'그 자리에서 말한다. 「농담이라도 그건 마음 상했어.」',pts:{hyeeun:2},r:[
+   ['me','sad','……농담이라도 그건 마음 상했어.'],
    ['nar','','웃음이 뚝 그쳤다. 예나가 입을 다물었다. 하은이가 {@book|을} 내려다봤다.'],
    ['nar','','혜은이가 나를 오래 봤다.'],
    ['hyeeun','surprised','……아.'],
@@ -844,7 +844,7 @@ EP.hyeeun=[
   {k:'C',text:'그 자리에선 넘기고, 모둠 읽기가 끝난 뒤 혜은이에게만 말한다.',pts:{hyeeun:2},r:[
    ['nar','','나는 아무 말 없이 계속 읽었다. 천천히. 막히면 다시. 끝까지 읽었다.'],
    ['nar','','모둠 읽기가 끝나고, 다들 {@book|을} 정리하러 갔다. 혜은이만 남았을 때 내가 말했다.'],
-   ['me','sad','혜은아. 아까 운동장 열 바퀴…… 그거 좀 아팠어.'],
+   ['me','sad','혜은아. 아까 운동장 열 바퀴…… 그거 좀 마음 상했어.'],
    ['nar','','혜은이가 바퀴를 멈췄다. 딸깍.'],
    ['hyeeun','surprised','……아.'],
    ['hyeeun','sad','나 그거 진짜 싫어하는데. 남이 나 갖고 웃는 거. 근데 내가 했네.'],
@@ -871,15 +871,15 @@ EP.hyeeun=[
    ['me','smile','응.'],
    ['hyeeun','laugh','그리고 ‘오솔길’. 숲속에 난 좁은 길이야. 내 별점으로는 별 하나. 바퀴가 안 들어가거든.']]},
   {only:['A','D'],lines:[
-   ['hyeeun','sad','아까 내 농담, 아팠지. 미안. 나 맨날 ‘농담이야’ 하고 도망가.'],
-   ['me','sad','……응. 좀 아팠어.'],
+   ['hyeeun','sad','아까 내 농담, 마음 상했지. 미안. 나 맨날 ‘농담이야’ 하고 도망가.'],
+   ['me','sad','……응. 좀 마음 상했어.'],
    ['hyeeun','smile','그치. 다음엔 안 그럴게. ‘오솔길’은 숲속에 난 좁은 길이야. 이건 사과로 알려 주는 거야.']]},
   {only:['A','C','D'],lines:[['yena','sad','아까 ‘열 바퀴’ 따라 해서 미안. 웃을 일 아니었어.']]},
   ['haeun','sad','아까 같이 웃은 거, 미안.']],
  eve:{lead:[['me','smile','{m}, ‘오솔길’이 뭔지 알아?'],['mom','smile','숲속에 난 좁은 길?'],['me','sad','{m|는} 다 알아. 나는 오늘 {@book} 읽다가 그 말에서 막혔어.'],['mom','surprised','소리 내서 읽었어?'],['me','sad','응. 모둠에서 한 쪽씩. 근데 내가 막히니까 혜은이가 ‘너 읽는 속도면 운동장 열 바퀴 돌고 오겠다’ 했어. 농담이라고.'],['mom','sad','……다들 웃었어?'],['me','sad','응. 나만 안 웃었어.']],
-  A:[['me','sad','그래서 나도 같이 웃었어. 입만.'],['mom','surprised','혜은이는?'],['me','sad','내가 입은 웃는데 눈은 안 웃는대. 괜찮다고 했어. 근데 안 괜찮았어.'],['mom','smile','혜은이가 나중에 사과했어?'],['me','smile','응. 아팠지, 미안하다고. 나도 좀 아팠다고 했어.'],['mom','relieved','조금이라도 말했네.']],
-  B:[['me','sad','그 자리에서 ‘농담이라도 그건 아팠어’ 했어.'],['mom','surprised','……애들 앞에서?'],['me','smile','응. 다들 조용해졌어. 혜은이가 미안하대. 자기도 남이 자기 갖고 웃는 거 진짜 싫어하는데 자기가 했대.'],['mom','smile','그 말 하기 어려웠을 텐데.'],['me','smile','응. 근데 그다음에 혜은이가 ‘천천히 해도 돼’ 했어. 첫날처럼.']],
-  C:[['me','smile','그 자리에서는 그냥 읽었어. 끝나고 혜은이한테만 말했어. 아까 그거 아팠다고.'],['mom','surprised','혜은이는 뭐래?'],['me','smile','미안하대. 애들 앞에서 말 안 해 줘서 고맙대. 근데 다음엔 그 자리에서 해도 된대. 그런 거 들어도 안 무너진대.'],['mom','smile','혜은이답다. 그리고 너도, 말 잘했어.']],
+  A:[['me','sad','그래서 나도 같이 웃었어. 입만.'],['mom','surprised','혜은이는?'],['me','sad','내가 입은 웃는데 눈은 안 웃는대. 괜찮다고 했어. 근데 안 괜찮았어.'],['mom','smile','혜은이가 나중에 사과했어?'],['me','smile','응. 마음 상했지, 미안하다고. 나도 좀 마음 상했다고 했어.'],['mom','relieved','조금이라도 말했네.']],
+  B:[['me','sad','그 자리에서 ‘농담이라도 그건 마음 상했어’ 했어.'],['mom','surprised','……애들 앞에서?'],['me','smile','응. 다들 조용해졌어. 혜은이가 미안하대. 자기도 남이 자기 갖고 웃는 거 진짜 싫어하는데 자기가 했대.'],['mom','smile','그 말 하기 어려웠을 텐데.'],['me','smile','응. 근데 그다음에 혜은이가 ‘천천히 해도 돼’ 했어. 첫날처럼.']],
+  C:[['me','smile','그 자리에서는 그냥 읽었어. 끝나고 혜은이한테만 말했어. 아까 그거 마음 상했다고.'],['mom','surprised','혜은이는 뭐래?'],['me','smile','미안하대. 애들 앞에서 말 안 해 줘서 고맙대. 근데 다음엔 그 자리에서 해도 된대. 그런 거 들어도 안 무너진대.'],['mom','smile','혜은이답다. 그리고 너도, 말 잘했어.']],
   D:[['me','sad','나는 그냥 {@book|을} 덮었어. 더 안 읽었어.'],['mom','surprised','혜은이가 알아챘어?'],['me','sad','응. 자기 때문이냐고 물었어. 근데 내가 대답을 못 했어. 그래도 혜은이가 알아채고 미안하대.'],['mom','smile','……지금 {m|한테는} 말했네.'],['me','smile','응. {m}한테는 쉬워.']],
   common:[['me','smile','근데 {m}, 혜은이는 ‘농담이야’ 붙이면 다 괜찮은 줄 알았대.'],['mom','smile','너는 어떻게 생각해?'],['me','smile','……안 괜찮을 때도 있어. 근데 혜은이 농담 대부분은 웃겨.'],['mom','smile','웃긴 건 웃기고, 아픈 건 아프고.'],['me','relieved','응. 둘 다 말해도 되는 거야.']]}},
 
@@ -1229,7 +1229,7 @@ EP.hyeeun=[
   ['nar','','혜은이는 아무 말도 하지 않았다. 나 대신 대답해 주지도 않았다. 그냥 기다렸다. 첫날처럼.'],
   ['think','surprised','(내 얘기다. 내가 정해야 해.)'],
   ['think','surprised','(말해 줄 수도 있고, 안 말해 줄 수도 있어. 어떻게 하지?)'],
-  {flag:'E11_say',is:1,lines:[['think','smile','(도서관에서 혜은이 농담이 아프다고 말했었지. 그때도 내 얘기를 내가 했어.)']]}],
+  {flag:'E11_say',is:1,lines:[['think','smile','(도서관에서 혜은이 농담에 마음 상했다고 말했었지. 그때도 내 얘기를 내가 했어.)']]}],
  ask:'어떻게 할까?',
  choices:[
   {k:'A',text:'내 말로 설명한다. 「나 전에 {HC}에 살았어. 거기선 {HL}로 말했어. 그래서 한국말은 머릿속에서 한 번 고르고 말해.」',pts:{hyeeun:2},r:[
@@ -1310,13 +1310,13 @@ window.EP_WORDS_HE={
 
 // ---- what Hyeeun's scenes need from the engine (on top of meet.js and the other per-friend files) ----
 // situation pictures (art/scenes/hyeeun/pics2.json): over a choice's reaction (meeting index → choice → picture), and from a line on in pre/post ([meeting index, 'pre'|'post', start of the line, picture])
-{const RP={"0": {"B": "hyeeun_01b", "A": "hyeeun_01d", "C": "hyeeun_01d"}, "1": {}, "2": {"D": "hyeeun_03c", "C": "hyeeun_03d"}, "3": {"D": "hyeeun_04"}, "4": {"A": "hyeeun_05b", "D": "hyeeun_05c", "B": "hyeeun_05", "C": "hyeeun_05"}, "5": {"A": "hyeeun_06c", "D": "hyeeun_06d"}, "6": {"A": "hyeeun_07b", "D": "hyeeun_07c"}, "7": {"A": "hyeeun_08c", "C": "hyeeun_08", "D": "hyeeun_08"}, "8": {"C": "hyeeun_09a", "A": "hyeeun_09b", "D": "hyeeun_09c", "B": "hyeeun_09"}, "9": {"B": "hyeeun_10b", "C": "hyeeun_10c", "D": "hyeeun_10d"}, "10": {"A": "hyeeun_11", "B": "hyeeun_11d", "C": "hyeeun_11"}, "11": {"C": "hyeeun_12a"}, "12": {"A": "hyeeun_13d"}, "13": {"D": "hyeeun_14b", "B": "hyeeun_14b", "C": "hyeeun_14b"}, "14": {"A": "hyeeun_15a", "B": "hyeeun_15", "C": "hyeeun_15", "D": "hyeeun_15"}};
+{const RP={"0": {"B": "hyeeun_01b", "A": "hyeeun_01d", "C": "hyeeun_01d"}, "1": {}, "2": {"D": "hyeeun_03c", "C": "hyeeun_03d"}, "3": {"D": "hyeeun_04"}, "4": {"A": "hyeeun_05b", "D": "hyeeun_05c", "B": "hyeeun_05", "C": "hyeeun_05_C"}, "5": {"A": "hyeeun_06c", "D": "hyeeun_06d"}, "6": {"A": "hyeeun_07b", "D": "hyeeun_07c"}, "7": {"A": "hyeeun_08c", "C": "hyeeun_08", "D": "hyeeun_08"}, "8": {"C": "hyeeun_09a", "A": "hyeeun_09b", "D": "hyeeun_09c", "B": "hyeeun_09"}, "9": {"B": "hyeeun_10b", "C": "hyeeun_10c", "D": "hyeeun_10d"}, "10": {"A": "hyeeun_11", "B": "hyeeun_11d", "C": "hyeeun_11"}, "11": {"C": "hyeeun_12a"}, "12": {"A": "hyeeun_13d"}, "13": {"D": "hyeeun_14b", "B": "hyeeun_14b", "C": "hyeeun_14b"}, "14": {"A": "hyeeun_15a", "B": "hyeeun_15", "C": "hyeeun_15", "D": "hyeeun_15"}};
  const AN=[[0, "pre", "나도 {@bag|을} 의자 옆 바닥에 내려놓았다.", "hyeeun_01c"], [1, "pre", "쉬는 시간. 나는 {@cup|을} 들고 복도 정수기로 갔다.", "hyeeun_02c"], [1, "post", "혜은이가 젖은 {@glove|을} 꼭 짰다.", "hyeeun_02b"], [2, "pre", "나는 접은 {@umbrella|을} 들고 혜은이 옆으로 갔다.", "hyeeun_03b"], [3, "post", "그때 교무실 문이 열리고 과학 선생님이 나오셨다.", "hyeeun_04b"], [3, "post", "윤 선생님이 {@key} 하나를 빼서 나에게 내미셨다.", "hyeeun_04c"], [3, "post", "잠시 뒤, 3층에 올라갔던 반 아이들이 투덜거리며 내려왔다.", "hyeeun_04d"], [4, "post", "쉬는 시간이 끝나 갈 때, 혜은이가 내 자리 옆으로 왔다.", "hyeeun_05d"], [5, "pre", "선생님: 「던지는 선은 하나예요.", "hyeeun_06b"], [6, "post", "혜은이가 {@gym_clothes|을} 무릎에 올리고 바퀴를 굴렸다.", "hyeeun_07d"], [7, "pre", "오늘은 내가 우유 당번이었다.", "hyeeun_08b"], [7, "post", "우리는 교무실 앞에서 담임 선생님을 만났다.", "hyeeun_08d"], [8, "post", "혜은이가 미역국을 한 숟가락 떠먹었다.", "hyeeun_09d"], [9, "pre", "도서관 문에는 낮은 문턱이 있었다.", "hyeeun_10a"], [10, "pre", "혜은이 {@flowerpot|은} 컸다.", "hyeeun_11c"], [11, "post", "혜은이가 건의서 끝을 마저 썼다.", "hyeeun_12b"], [11, "post", "혜은이가 건의서를 반으로 접었다.", "hyeeun_12c"], [12, "pre", "그때 지훈이가 카메라를 들고 뛰어왔다.", "hyeeun_13b"], [12, "pre", "카메라 화면에 작년 반장이", "hyeeun_13c"], [13, "post", "우리는 교실 앞에 도착했다.", "hyeeun_14c"], [14, "pre", "꼬마 2가 휠체어 뒤를 힐끗 봤다.", "hyeeun_15b"], [14, "post", "혜은이가 {@glove|을} 꼈다.", "hyeeun_15c"], [14, "post", "혜은이가 교실 쪽으로 바퀴를 굴렸다.", "hyeeun_15d"]];
  for(const[i,m]of Object.entries(RP))for(const o of EP.hyeeun[i].choices)if(m[o.k])o.r=[{pic:m[o.k]}].concat(o.r||[],[{pic:null}]);
  const put=(a,txt,pic)=>{for(let j=0;j<a.length;j++){const x=a[j];if(Array.isArray(x)&&typeof x[2]==='string'&&x[2].startsWith(txt)){a.splice(j,0,{pic});return true}if(x&&x.lines&&put(x.lines,txt,pic))return true}return false};
  for(const[i,w,txt,pic]of AN)if(!put(EP.hyeeun[i][w],txt,pic))console.warn('hyeeun pic: no line',i,w,txt);
  // a choice picture that shows a later moment starts at that line, not at the first line of the reaction (11/06 check)
- const LATE=[[0,'A','나는 {@bag} 두 개를 각자 책상 밑으로'],[4,'D','선생님이 뒷{@door|을} 여셨다.'],[6,'C','그러다 선생님이 반 전체를 보며'],[8,'D','나는 내 {@tray} 위에 혜은이'],[13,'C','혜은이가 학습지를 반으로 나눠'],[13,'D','나는 {@door|을} 잡았다.']];
+ const LATE=[[0,'A','나는 {@bag} 두 개를 각자 책상 밑으로'],[7,'A','문 앞이 비었다.'],[4,'D','선생님이 뒷{@door|을} 여셨다.'],[6,'C','그러다 선생님이 반 전체를 보며'],[8,'D','나는 내 {@tray} 위에 혜은이'],[13,'C','혜은이가 학습지를 반으로 나눠'],[13,'D','나는 {@door|을} 잡았다.']];
  for(const[i,k,txt]of LATE){const o=EP.hyeeun[i].choices.find(c=>c.k===k);const r=o&&o.r;if(!r||!r[0]||typeof r[0].pic!=='string'){console.warn('hyeeun late pic: no pic',i,k);continue}const pic=r.shift().pic;if(!put(r,txt,pic)){r.unshift({pic});console.warn('hyeeun late pic: no line',i,k,txt)}}}
 // pictures not drawn yet are skipped: take a name out of TODO_PICS once scenes/hyeeun_<name>.jpg is in place (prompts: art/scenes/hyeeun/pics2.json)
 {const TODO_PICS=new Set([]);
@@ -1334,7 +1334,7 @@ const RAMP_WALK=[[[0,500],[260,470],[400,615],[1000,520],[1010,330],[1100,330],[
 // two places drawn for Hyeeun's scenes: the outdoor ramp to the cafeteria just after rain (Day 4) and the front gate on a sunny afternoon (Day 12; same layout as the rainy gate)
 Object.assign(EXTRA_MAPS,{
  ramp:{name:'급식실 가는 경사로',img:'maps/ramp.jpg',walk:RAMP_WALK,block:[R(400,330,1000,600)],start:[900,760],out:[120,590]},
- halltoilet:{name:'복도 끝 화장실 앞',img:'maps/hall_toilet.jpg',walk:[[[380,410],[1490,410],[1672,640],[1672,941],[0,941],[0,870],[130,780],[330,450]]],block:[R(850,280,1140,470)],start:[760,760],out:[200,880]},
+ halltoilet:{name:'복도 끝 화장실 앞',img:'maps/hall_toilet.jpg',walk:[[[380,410],[1490,410],[1672,640],[1672,941],[0,941],[0,870],[130,780],[330,450]]],block:[R(965,300,1285,470)],start:[760,760],out:[200,880]},
  gatesun:{name:'교문',img:'maps/gatesun.jpg',walk:[[[0,470],[400,390],[900,250],[1672,70],[1672,180],[1100,440],[1060,520],[1100,560],[880,560],[700,600],[620,560],[0,560]],[[700,600],[1150,560],[1260,700],[1672,640],[1672,941],[740,941],[700,800]]],start:[900,480],out:[420,440]}});
 for(const id of ['ramp','gatesun','halltoilet']){const m=EXTRA_MAPS[id];MAPS[id]={img:m.img,walk:m.walk,rects:[],block:m.block||[],start:m.start};OUT[id]=m.out;PLACE[id]=id}
 {const P={'급식실 가는 경사로':['ramp to the cafeteria','jalan landai ke kantin','dốc lên nhà ăn','去食堂的坡道','きゅうしょくしつへの スロープ','пандус к столовой'],'복도 끝 화장실 앞':['the restrooms at the end of the hall','toilet di ujung lorong','nhà vệ sinh cuối hành lang','走廊尽头的洗手间','ろうかの つきあたりの トイレ','туалеты в конце коридора']};
