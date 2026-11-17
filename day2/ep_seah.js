@@ -188,7 +188,7 @@ EP.seah=[
  post:[
   ['nar','','딩동댕—'],
   ['nar','','선생님: 「자, 자리에 앉아요. {@chair} 소리 나지 않게.」'],
-  {k:'chair',goal:'「{x}」 빼서 앉기',bag:['desk','chair','locker','bench','table']},
+  {k:'chair',goal:'「{x}」 빼서 앉기',bag:['desk','chair','locker','window','table']},
   ['nar','','내 {@chair|를} 조용히 빼서 앉았다.'],
   ['nar','','앉으면서 창가 쪽을 봤다. 세아 자리는 민호 자리 바로 뒤였다.'],
   {only:['A','C'],lines:[['nar','','수업 중간에 세아가 고개를 돌려 나를 봤다. 금방 다시 앞을 봤다. 입꼬리가 아주 조금 올라가 있었다. 이번엔 눈도 같이.'],['think','smile','(세아가 아까보다 덜 굳었어.)']]},
@@ -993,7 +993,7 @@ EP.seah=[
   {only:['C'],lines:[['nar','','세아는 종이 칠 때 돌아왔다. 자기 자리로 바로 갔다. 나도 내 자리로 갔다.']]},
   ['nar','','딩동댕—'],
   ['nar','','선생님: 「들어온 사람, 자리에 앉아요.」'],
-  {k:'chair',goal:'「{x}」 빼서 앉기',bag:['desk','chair','locker','bench','table']},
+  {k:'chair',goal:'「{x}」 빼서 앉기',bag:['desk','chair','locker','window','table']},
   ['nar','','내 {@chair|를} 빼서 앉았다.'],
   {pic:'seah_10e'},
   ['nar','','민호와 지호가 땀을 흘리며 들어왔다. 민호가 세아 자리를 지나가며 말했다.'],

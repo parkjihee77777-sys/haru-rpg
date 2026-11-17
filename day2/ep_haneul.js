@@ -22,7 +22,7 @@ EP.haneul=[
   {pic:'haneul_01w'},
   ['nar','','내 자리에 {@bag|을} 내려놓을 때였다. 열린 {@window|으로} 바람이 들어왔다.'],
   ['nar','','하늘이 {@notebook|에서} 찢어 둔 {@paper} 한 장이 날아올랐다. 그리고 내 발 앞에 떨어졌다.'],
-  {lay:[['paper',618,650,40,'picture']]},
+  {lay:[['paper',618,650,40]]},
   ['nar','','나는 그걸 주웠다. 그림이었다.'],
   {clear:['paper']},
   {pic:'haneul_01a'},

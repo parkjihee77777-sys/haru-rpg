@@ -174,7 +174,7 @@ EP.youngmin=[
   ['youngmin','smile','……‘급해’는 맨날 늦게 먹어. 그래도 다 먹어.'],
   {only:['A'],lines:[['nar','','내가 밥통을 내려놓았다. {@lid|이} 열린 채였다.']]},
   {only:['B','C','D'],lines:[['nar','','영민이가 밥통을 내려놓았다. {@lid|이} 열린 채였다.']]},
-  {k:'lid',goal:'「{x}」 꼭 닫기',bag:['spoon','lid:lid_screw','fish','pencil','water_bottle']},
+  {k:'lid',goal:'「{x}」 꼭 닫기',bag:['spoon','lid','fish','pencil','water_bottle']},
   ['youngmin','smile','끝까지 돌려야 해. 안 그러면 밥이 눅눅해져.'],
   ['nar','','나는 {@lid|을} 끝까지 돌렸다. 딸깍 소리가 났다.'],
   {only:['B','C','D'],lines:[['yena','smile','영민아, 다음엔 내가 ‘톡톡톡’ 해도 돼? 네가 옆에서 봐 줘.'],['youngmin','smile','……응. 세 번만.']]},
