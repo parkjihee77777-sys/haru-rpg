@@ -10,7 +10,8 @@ EP.youngmin=[
 {title:'천천히랑 급해',scene:'youngmin_n_ym01_lid',place:'class',at:[330,262],with:[['yena',580,330],['jihoon',660,250]],
  pre:[
   {pic:'youngmin_n_ym01_count'},['nar','','아침이다. 아직 수업 전이라 교실이 시끌시끌하다.'],['nar','','그런데 창가 쪽만 조용하다. 창가 낮은 장 위에 작은 어항이 있고, 그 앞에 영민이가 서 있다.'],
-  ['youngmin','smile','하나, 둘, 셋, 넷…… 다섯.'],['nar','','영민이는 어항 유리에 손가락을 대고 {@fish|를} 하나씩 짚으며 세고 있었다. 나도 옆에 가서 섰다.'],
+  ['youngmin','smile','하나, 둘, 셋, 넷…… 다섯.'],{k:'finger',goal:'「{x}」 보기',bag:['finger','hand','foot','ear','eye']},{pic:'youngmin_n_ym01_count'}, // (11/26 교육과정 어휘) 초급 찾기 추가
+  ['nar','','영민이는 어항 유리에 손가락을 대고 {@fish|를} 하나씩 짚으며 세고 있었다. 나도 옆에 가서 섰다.'],
   {k:'fish',goal:'「{x}」 들여다보기',bag:['fish','bucket','cup','water_bottle','book']},
   {pic:'youngmin_n_ym01_count'},['me','surprised','네가 {@fish} 당번이야?'],['youngmin','smile','응. 아침마다 다섯 마리 다 있는지 세. 그리고 밥 줘.'],
   ['youngmin','smile','저기 쟤는 「천천히」. 쟤는 「급해」. 꼬리 짧은 애는 아직 이름이 없어.'],
@@ -19,7 +20,7 @@ EP.youngmin=[
   ['nar','','영민이가 {@fish} 밥통을 건넸다. 나는 {@lid|을} 오른쪽으로 힘껏 돌렸다. 꼼짝도 안 한다. 두 손으로 꽉 쥐고 또 돌렸다. 그래도 안 열린다.'],
   {pic:'youngmin_n_ym01_lid'},['youngmin','smile','{@lid|은} 「급해」랑 닮았어. 힘만 주면 안 열려.'],['me','surprised','그럼 천천히 돌려야 돼?'],['youngmin','smile','아니, 거꾸로. 반대로 돌려 봐.'],
   ['nar','','나는 왼쪽으로 돌렸다. 딸깍! 한 번에 열렸다.'],
-  {k:'lid',goal:'「{x}」 열기',bag:['spoon','lid','fish','pencil','water_bottle']},
+  // (11/25 교육과정 어휘 정비) lid 찾기 뺌: 이야기 단어
   {pic:'youngmin_n_ym01_lid'},['me','smile','열렸다! {@lid}까지 거꾸로네!'],['youngmin','smile','밥은 통 옆을 손가락으로 톡톡톡. 딱 세 번만 쳐. 많이 주면 물이 금방 더러워져.']],
  ask:'어떻게 같이 할까?',
  choices:[
@@ -101,7 +102,7 @@ EP.youngmin=[
   {pic:'youngmin_n_ym03_group'},['nar','','과학 시간이다. 오늘은 모둠끼리 {@magnet} 실험을 한다. 우리 모둠은 나, 영민이, 하은이, 준호다.'],
   ['nar','','선생님: 「물건에 {@magnet|을} 대 봐요. 붙으면 「붙는다」 칸에, 안 붙으면 「안 붙는다」 칸에 이름을 써요. 다 한 물건은 바구니에 넣고, 기록지에 모둠 이름을 써서 내요. 시간은 15분이에요.」'],
   ['nar','','선생님은 한 번에 쭉 말씀하시고 모둠마다 물건 여덟 개를 나눠 주셨다.'],
-  {k:'magnet',goal:'「{x}」 집기',bag:['magnet','scissors','eraser','pencil','ruler']},
+  // (11/25 교육과정 어휘 정비) magnet 찾기 뺌: 이야기 단어
   {pic:'youngmin_n_ym03_group'},['nar','','하은이가 {@magnet|을} 집어 클립에 댔다. 철컥! 단번에 붙었다.'],['haeun','smile','클립 붙는다! 영민아, 써!'],
   ['nar','','영민이가 {@pencil|을} 들고 기록지를 내려다봤다.'],['youngmin','smile','잠깐. 「클립」이라고 써, 아니면 「붙는다」라고 써?'],['haeun','smile','아까 선생님이 말했잖아! 「붙는다」 칸에 「클립」이라고!'],
   ['junho','smile','야, 옆 모둠은 벌써 여섯 개나 했대!'],['haeun','smile','우리 완전 늦었어! 내가 다 쓸게, 이리 줘!'],
@@ -126,7 +127,8 @@ EP.youngmin=[
    {pic:'youngmin_03b'},['junho','smile','오, 좋다! 그럼 물건은 내가 건넬게!'],['haeun','smile','그럼 내가 대 보고 부를게.']]}],
  post:[
   {pic:'youngmin_n_ym03_work'},['nar','','하은이가 부르면 영민이가 썼다. 한 번에 하나씩. 기록지가 한 줄씩 차곡차곡 찼다.'],['nar','','그러다 영민이가 {@eraser} 칸에 「붙는다」를 잘못 썼다.'],
-  ['youngmin','smile','어, 내가 틀렸네. {@eraser|는} 안 붙어. 고칠게.'],['nar','','우리 모둠은 다른 모둠보다 조금 늦게 끝났다. 그래도 틀린 칸은 하나도 없었다.'],
+  ['youngmin','smile','어, 내가 틀렸네. {@eraser|는} 안 붙어. 고칠게.'],{k:'eraser',goal:'「{x}」 건네기',bag:['eraser','pencil','scissors','glue','paper']},{pic:'youngmin_n_ym03_work'}, // (11/26 교육과정 어휘) 초급 찾기 추가
+  ['nar','','우리 모둠은 다른 모둠보다 조금 늦게 끝났다. 그래도 틀린 칸은 하나도 없었다.'],
   ['haeun','sad','영민아, 기록지 휙 당긴 거 미안해. 「아까 말했잖아」 한 것도.'],['youngmin','smile','응. 내가 다시 물어보면, 한 번만 더 말해 줘. 그럼 돼.'],['haeun','smile','알았어. 다음엔 시작하기 전에 누가 뭘 할지 정하자.']],
  eve:{lead:[['me','smile','{m}, 과학 시간에 선생님이 실험 방법을 한 번에 쭉 말씀하셨어. 영민이가 뭐라고 쓰냐고 다시 물었는데, 하은이가 「아까 말했잖아!」 하고 기록지를 가져갔어.'],['mom','smile','저런. 영민이는 어떻게 했어?'],
    ['me','smile','영민이는 한꺼번에 들으면 헷갈린대. 그래서 하은이가 부르고 자기가 쓰자고 했어.'],['mom','smile','자기한테 맞는 방법을 알고 말했구나.']],
@@ -210,6 +212,7 @@ EP.youngmin=[
  post:[
   {pic:'youngmin_n_ym05e_brush_junho'},['nar','','나는 동그라미를 하나 쓱 그리고 {@paper|를} 넘겼다.'],
   ['nar','','{@paper|가} 교실을 한 바퀴 도는 동안, 나는 친구들이 읽는 문장을 귀 기울여 들었다. 누군가 「올라왔다」라고 크게 읽었다. 바로 그 낱말이었다!'],
+  {k:'eraser',goal:'「{x}」 꺼내기',bag:['eraser','pencil','pcase','paper','book']},{pic:'youngmin_n_ym05e_brush_junho'}, // (11/26 교육과정 어휘) 초급 찾기 추가
   ['nar','','{@paper|가} 다시 내 앞에 왔다. 나는 동그라미를 {@eraser|로} 쓱쓱 지우고 「올라왔다」를 꼭꼭 눌러 썼다.'],['think','smile','(내가 쓴 거야. 내 글자야!)'],
   ['nar','','영민이와 나는 {@eraser} 가루를 손으로 모아 같이 쓰레기통에 털었다.'],['nar','','{@paper|가} 한 바퀴 더 돌아 영민이 차례가 다시 왔다. 영민이가 {@pencil|을} 멈추고 잠깐 고민했다.'],
   ['me','smile','아까 네가 알려 준 것처럼 빈칸 남기고 나중에 써.'],['youngmin','sad','……응. 그러면 되지.'],['junho','sad','아까 건너뛰자고 해서 미안해.'],
@@ -719,7 +722,7 @@ window.EP_WORDS_YM={
  worksheet:{ko:'학습지',en:'worksheet',id:'lembar kerja',vi:'phiếu bài tập',zh:'练习纸',ja:'プリント',ru:'листок с заданиями'},
  bucket:{ko:'양동이',en:'bucket',id:'ember',vi:'cái xô',zh:'水桶',ja:'バケツ',ru:'ведро'},
  stamp:{ko:'도장',en:'stamp',id:'stempel',vi:'con dấu',zh:'印章',ja:'はんこ',ru:'штамп'},
- water_bottle:{ko:'물병',en:'water bottle',id:'botol minum',vi:'bình nước',zh:'水壶',ja:'すいとう',ru:'бутылка'}};
+ water_bottle:{ko:'물통',en:'water bottle',id:'botol minum',vi:'bình nước',zh:'水壶',ja:'すいとう',ru:'бутылка'}};
 
 // ---- what Youngmin's scenes need from the engine (on top of meet.js and the other per-friend files) ----
 // a choice's reaction (r) is said as plain lines; when it holds {pic}/{lay} steps it plays at the start of post instead (runSteps handles those)

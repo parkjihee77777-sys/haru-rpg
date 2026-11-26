@@ -98,7 +98,8 @@ EP.haram=[
   {flag:'R03_visit',is:0,lines:[['me','surprised','아니, 안 간다고 했어. 근데 왜?']]},
   ['haeun','sad','그거 가지 마. 하람이네 사이비래.'],['me','surprised','……사이비? 그게 뭐야?'],['nar','','처음 듣는 말이었다. 그래도 하은이 표정을 보니 무서운 말 같았다.'],
   ['haeun','sad','이상한 종교래. 우리 엄마가 그랬어. 그런 데 가면 끌려가서 못 나온대. 너 전학 온 지 얼마 안 돼서 모를까 봐 말해 주는 거야.'],['nar','','하은이가 내 손에 {@note|를} 꾹 쥐여 줬다.'],
-  {k:'note',goal:'「{x}」 펴 보기',bag:['note','paper','envelope','notebook','sticker']},
+  {k:'hand',goal:'「{x}」 보기',bag:['hand','finger','foot','pocket','ear']}, // (11/26 교육과정 어휘) 초급 찾기 추가
+  // (11/25 교육과정 어휘 정비) note 찾기 뺌: 이야기 단어
   {pic:'haram_d04_note'},['nar','','{@note}에 「하람이네 = 사이비. 가지 마!」라고 쓰여 있었다.'],['think','sad','(끌려가서 못 나온다고? 하람이는 그냥 국 먹고 {@moon} 본다고 했는데…… 진짜 그러면 어떡하지? 좀 무서워.)'],
   ['nar','','복도 끝에서 하람이가 퀴즈 {@paper|를} 흔들며 걸어오고 있었다.']],
  ask:'어떻게 할까?',
@@ -667,6 +668,7 @@ EP.haram=[
  things:{class:[['moon',64,190,80]]},
  pre:[
   {pic:'haram_d16_drawing'},['nar','','쉬는 시간이다. 하람이가 창가에서 뭔가를 쓱쓱 그리고 있다. 창밖에 낮달이 떠 있다. 거의 둥글다.'],['nar','','나는 하람이 옆으로 걸어갔다.'],
+  {k:'moon',goal:'「{x}」 보기',bag:['moon','sun','cloud','window','picture']},{pic:'haram_d16_drawing'}, // (11/26 교육과정 어휘) 초급 찾기 추가
   ['haram','laugh','오늘 문제! 저 {@moon}, 며칠 뒤에 꽉 찰까?'],['me','surprised','……사흘?'],['haram','laugh','정답! 너 이제 {@moon} 박사다.'],
   {k:'picture',goal:'「{x}」 보기',bag:['picture','paper','notebook','card','colored_pencil']},
   {pic:'haram_d16_drawing'},['nar','','하람이 {@picture}이다. 둥근 {@moon} 밑에 식탁이 있고, 사람들이 둘러앉아 있다.'],
