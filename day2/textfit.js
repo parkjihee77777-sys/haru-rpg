@@ -18,7 +18,9 @@ function fitTokens(el){if(!el)return;const walk=document.createTreeWalker(el,Nod
 // (11/26 owner: 장학사 「문장이 끊긴다」 — 「오늘부터 새 학교야. 여기 / 말도 아직 서툰데……」, 「아침. 아직 풀지 못한 / 상자들이」)
 // each clause (up to the next . , ? ! … 」 etc.) becomes an inline block: a clause that does not fit on the rest of a line starts on a new line
 // instead of being cut in the middle; a clause longer than a whole line still wraps between words inside its block
-function keepPhrases(el){if(!el||el.querySelector('.ph'))return;const walk=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);const ns=[];let full='';const at=[];
+// (11/28 owner: 「단어 문제 카드가 잘못 뜬다」) only a plain line of text: tapword.js also runs this on whole boxes (#modal, #talk, #toast, #scene),
+// and cutting a box with cards in it copied the card window (two #mcard: the title alone in one box, the old cards left on screen next to the new ones)
+function keepPhrases(el){if(!el||el.querySelector('.ph')||el.querySelector('div,p,h1,h2,h3,button,img,ul,li,input,[id]'))return;const walk=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);const ns=[];let full='';const at=[];
  while(walk.nextNode()){const n=walk.currentNode;ns.push(n);for(let i=0;i<n.nodeValue.length;i++)at.push([n,i]);full+=n.nodeValue}
  const cuts=[0];full.replace(/[.?!,…~」』)\]。，！？]+(?=\s)/g,(m,o)=>{cuts.push(o+m.length);return m});cuts.push(full.length);
  const segs=[];for(let k=0;k+1<cuts.length;k++){let a=cuts[k],b=cuts[k+1];while(a<b&&/\s/.test(full[a]))a++;while(b>a&&/\s/.test(full[b-1]))b--;if(b>a)segs.push([a,b])}
